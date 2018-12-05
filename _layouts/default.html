@@ -8,7 +8,7 @@
 
 <!-- Title -->
 
-<title>Joel Shinness</title>
+<title>{{page.title}}</title>
 
 <!-- Favicons -->
 <link rel="shortcut icon" href="/assets/img/favicon.png">
@@ -60,13 +60,59 @@
 </header>
 <!-- Header / End -->
 
+<!-- Content -->
+<div id="content" class="container">
+  {{ content }}
+</div>
+<!-- Content / End -->
 
 
+<!-- Panel -->
+<nav id="panel" class="bg-white">
+  <div class="panel-wrapper">
+    <!-- Photo -->
+    <div class="photo">
+      <img src="/assets/img/avatars/avatar_square.jpg" alt="">
+    </div>
 
+    <!-- Menu -->
+    <div class="menu widget">
+      <h6>Navigation</h6>
+      <ul id="nav-mobile" class="nav nav-panel">
+        <li><a href="#home"><i class="ti-home"></i>Home</a></li>
+        
+        <li>
+          <a href="/#about">
+            <i class="ti-comment-alt"></i>
+            About
+          </a>
+        </li>
+        
+        <li>
+          <a href="/#skills">
+            <i class="ti-stats-up"></i>
+            Skills
+          </a>
+        </li>
+        
+        <li>
+          <a href="/#experience">
+            <i class="ti-time"></i>
+            Experience
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    
+    
+    
 
-
-
-{{ content }}
+    
+  </div>
+</nav>
+<!-- Panel / End -->
+  
 
 <!-- Ajax Modal -->
 <div id="ajax-modal"></div>
