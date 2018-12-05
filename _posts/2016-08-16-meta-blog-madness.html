@@ -1,0 +1,38 @@
+---
+layout: post
+title: How I Made This Very Website
+subtitle: Pt. 1 - Meta-Blog Madness!!!
+thumb_url: art-gallery-thumb.jpg
+bg_url: art-gallery-bg.jpg
+tags: [WebDev, Jekyll]
+---
+
+<p class="lead">Yes, I know writing a blog post about making the blog on with post is hosted is maybe a little bit too meta. But how we do anything that we would associate with ourselves should merit some reflection, and I have to blog about something, right?</p>
+<!--more-->
+<p>It&#8217;s been too long since I blogged.  I was blogging about JavaScript about two years ago at <a href="http://joelcodes.tumblr.com">joelcodes.tumblr.com</a>, and it was a lot of fun.  I was pretty excited about what I&#8217;d learned in JavaScript, like how to use closures and the <code>this</code> keyword, but between work, school, and getting married, I stopped writing.</p>
+<p>Which, you know, <strong>don&#8217;t</strong>.  Never stop never stopping.</p>
+<h2>Fast-forward to now</h2>
+<p>I&#8217;ve grown in the last two years as a software developer, maker, and all-around panda-hatted creative, and I felt that I wanted to have a portfolio / blog website that matched that. My objective was to display my technical abilities, experience, communication skills, and personality in a clear way.  And while I want to show that I <em>care</em> about design, you&#8217;ll notice that &#8220;ability to design a website&#8221; was not on that list.  So I outsourced.  I sifted through dozens and dozens of great <span class="caps">HTML</span> themes on <a href="https://themeforest.net">ThemeForest</a>, and landed on one that I liked, called <a href="https://themeforest.net/item/im-mat-material-personal-resume-cv-vcard-template/15887637?s_rank=14">&#8220;I&#8217;m Mat&#8221;</a>. <span class="caps">HTML</span>/<span class="caps">CSS</span> in hand, it was now up to me to make some content. This is a job for a <span class="caps">CMS</span>!</p>
+<p>(shudders audibly and visibly)</p>
+<p>Don&#8217;t get me wrong, I don&#8217;t think CMS&#8217;s are bad.  I&#8217;ve worked with a lot of them.  It&#8217;s just that, I don&#8217;t want to launch a full web app with a database and server code and the CMS&#8217;s very opinionated way of defining themes and content.  It&#8217;s a great turn-key system if that&#8217;s what you want, but, stated simply, it was gonna be overkill.  I just want <span class="caps">HTML</span> pages that are generated from data content.</p>
+<p>My first attempt was to use Gulp.js and Razor. I&#8217;ve mostly worked at .<span class="caps">NET</span> shops, so I was familiar with Razor&#8217;s native C# incarnation, and there&#8217;s a JavaScript version of it out there that I had managed to make pages with.  It was pretty easy to turn all the pieces into partials and layouts, then load them up with data and generate my home page.  Bam! Unfortunately, I ran into two problems:</p>
+<ol>
+	<li>The data is assigned procedurally within the page, so it&#8217;s not easy to take it and do something like a &#8220;latest posts&#8221; section, and</li>
+	<li>The JS razor template is kinda buggy.  For instance, I could nest <em>for</em> loops, but not <em>for-each</em> loops, resulting in the following hack.</li>
+</ol>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span></span>@for(var i = 0, skill = skills[i]; skill; skill = skills[++i]){
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">h4</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-xs-12&quot;</span><span class="p">&gt;</span>@skill.section<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+  @for(var j = 0, language = skill.languages[j]; language; language = skill.languages[++j]){
+	<span class="c">&lt;!-- Language Markup --&gt;</span>
+  }
+  @for(var j = 0, library = skill.libraries[j]; library; library = skill.libraries[++j]){
+    <span class="c">&lt;!-- Library Markup --&gt;</span>
+  }
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;clearfix&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+}</code></pre></figure><p>Yeah, that&#8217;s how you do a <em>for-each</em> using <em>for</em> syntax.  Gross.</p>
+<h2>Site Generator</h2>
+<p>So, this was good enough to make the static pages, but not the blog, or portfolio.  I needed something better.  It has occurred to me that the greatest successes in our modern age are the product of a smart google search, and I remembered the phrase &#8220;flat file cms&#8221; from all my hours of redditing. A flat file <span class="caps">CMS</span> is like a regular <span class="caps">CMS</span>, but rather than serving up pages on request, it generates the whole site at once. The big appeal for me is NO <span class="caps">DATABASE</span>. I love databases, don&#8217;t get me wrong, but it&#8217;s not the right tool for the job. And since I&#8217;d like to run from a command line interface, it would be better in Ruby or Node. I&#8217;m a little prejudiced against <span class="caps">PHP</span>, truth be told, but I can talk about that later.</p>
+<p>After looking through <a href="https://github.com/ahadb/flat-file-cms">this list</a>, and looking through some of the front runners, I picked Jekyll.  It seemed to have the most plugins and options, and I got it to work.</p>
+<p>That really covers my what, and I&#8217;ll get into the how in the next post.  Thanks for reading!</p>

@@ -54,9 +54,10 @@
 				<a href="/blog">Blog</a>
 			</nav>
 		</div>
-	</div>
-	
-  {% include nav-bar.html %}
+  </div>
+  {% if page.url == '/' %}
+    {% include nav-bar.html %}
+  {% endif %}
 </header>
 <!-- Header / End -->
 

@@ -1,0 +1,154 @@
+---
+layout: post
+title: Promises, Promises Pt. 3
+subtitle: Composing in ES6
+thumb_url: pocket-watch-thumb.jpg
+bg_url: pocket-watch-bg.jpg
+tags: [Promises, JavaScript]
+---
+
+<p class="lead">I don&#8217;t know what your familiarity level is with functional programming, and I&#8217;m not planning to go too far into it. I&#8217;m currently taking a specialization on the subject on Coursera, but if you&#8217;re totally new to the concept, I would really recommend the YouTube channel <a href="https://www.youtube.com/channel/UCO1cgjhGzsSYb1rsB4bFe4Q">Fun Fun Function</a> by Mattias Petter Johansson (a.k.a. mpj).  He breaks down the basics of functional programming reeeeeeaally well.  For now we&#8217;re going to do what functional programming does best: compose.</p>
+
+<!--more-->
+
+<p>Promises are a little like JavaScript Arrays in some ways.  I mean, they&#8217;re both structures that wrap around values, and they both have a lot of what we call &#8220;higher order functions&#8221; that take in smaller functions and produce new structures.  There&#8217;s a couple of functions that it helps to be familiar with: <code>forEach</code> and <code>map</code>.  <code>forEach</code> iterates through the array and <em>does something</em> with each value.</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span></span><span class="kd">var</span> <span class="nx">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+
+<span class="nx">array</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">){</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">val</span> <span class="o">*</span> <span class="mi">2</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// CONSOLE: 0</span>
+<span class="c1">// CONSOLE: 2</span>
+<span class="c1">// CONSOLE: 4</span></code></pre></figure><p>This is very imperative, very performative.  Take the value, do something with it.  <code>map</code> is little more functional, more informative.  it takes in a transformer function that transforms a value into a different kind of value, and returns a new array with all the values passed through that transformer function.</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span></span><span class="c1">// Make an array</span>
+<span class="kd">var</span> <span class="nx">originalArray</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">];</span>
+
+<span class="c1">// Use the map function to create a new transformed array</span>
+<span class="kd">var</span> <span class="nx">transformedArray</span> <span class="o">=</span> <span class="nx">originalArray</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">){</span>
+	<span class="k">return</span> <span class="nx">val</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="c1">// Original array hasn&#39;t changed</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">originalArray</span><span class="p">);</span> 
+<span class="c1">// CONSOLE: [0, 1, 2]</span>
+
+<span class="c1">// New array has the transformation</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">transformedArray</span><span class="p">);</span> 
+<span class="c1">// CONSOLE: [0, 2, 4]</span>
+
+<span class="c1">// Yep, our map function gave us a totally new array.</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">originalArray</span> <span class="o">===</span> <span class="nx">transformedArray</span><span class="p">);</span> 
+<span class="c1">// CONSOLE: false</span></code></pre></figure><p>In this case, I wasn&#8217;t super transparent about the <code>then</code> and <code>catch</code> functions.  In the last post we treated them like the <code>forEach</code> method of JavaScript Arrays, i.e., just use it to access the value and do something with it.  But <code>then</code> can also act like the Array&#8217;s <code>map</code> function, transforming the promise.  Take a look below:</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span></span><span class="c1">// Make a promise</span>
+<span class="kd">var</span> <span class="nx">originalPromise</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+
+<span class="c1">// Use the then function to create a new transformed promise</span>
+<span class="kd">var</span> <span class="nx">transformedPromise</span> <span class="o">=</span> <span class="nx">originalPromise</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">){</span>
+	<span class="k">return</span> <span class="nx">val</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="nx">originalPromise</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">){</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span>
+	<span class="c1">// CONSOLE: 3</span>
+<span class="p">});</span>
+
+<span class="nx">transformedPromise</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">){</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span> 
+	<span class="c1">// CONSOLE: 6</span>
+<span class="p">});</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">originalPromise</span> <span class="o">===</span> <span class="nx">transformedPromise</span><span class="p">);</span> 
+<span class="c1">// CONSOLE: false</span></code></pre></figure><p>So we can use <code>then</code> like a <code>map</code> function!  What about <code>catch</code>?  Can we transform the error?  Let&#8217;s take our <code>luckyPromise</code> from before and switch it, so that when it has a value, that becomes the error, and when it gets an error, that&#8217;s valid.</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span></span><span class="kd">var</span> <span class="nx">newPromise</span> <span class="o">=</span> <span class="nx">luckyPromise</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">){</span>
+	<span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&quot;Wait What? &quot;</span> <span class="o">+</span> <span class="nx">val</span><span class="p">);</span>
+<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">){</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="nx">newPromise</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">){</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span> <span class="c1">// Now only fires where the first promise had an error</span>
+<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">){</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span> <span class="c1">// Will show &quot;Wait What? &quot; and the number.</span>
+<span class="p">});</span></code></pre></figure><p>But wait, there&#8217;s more! There&#8217;s a third function that <code>then</code> acts similar to: <code>flatMap</code>.  Now, I do wish to the gods that JavaScript arrays had the <code>flatMap</code> function.  Seriously, I don&#8217;t know why it&#8217;s not there.  But the idea is that <code>flatMap</code> would take in a function that takes in one of the array values and return a new array. Then <code>flatMap</code> would return a new array that concatenated all those values together. Instead of returning an array of arrays, it just returns an array of values.</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span></span><span class="kd">var</span> <span class="nx">originalArray</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">];</span>
+
+<span class="kd">function</span> <span class="nx">mapperFunction</span><span class="p">(</span><span class="nx">val</span><span class="p">){</span>
+	<span class="k">return</span> <span class="p">[</span><span class="nx">val</span><span class="p">,</span> <span class="nx">val</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">mapped</span> <span class="o">=</span> <span class="nx">originalArray</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">mapperFunction</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">mapped</span><span class="p">);</span>
+<span class="c1">// CONSOLE: [[0, 0], [1, 1], [2, 2]]</span>
+
+<span class="kd">var</span> <span class="nx">flatMapped</span> <span class="o">=</span> <span class="nx">originalArray</span><span class="p">.</span><span class="nx">flatMap</span><span class="p">(</span><span class="nx">mapperFunction</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">flatMapped</span><span class="p">);</span>
+<span class="c1">// CONSOLE: [0, 0, 1, 1, 2, 2]</span></code></pre></figure><p>It may seem a little weird to talk about a function that doesn&#8217;t exist, but it does in lots of other libraries like this.  In fact, it&#8217;s a pretty integral part of the definition of a <strong>monad</strong> which is this big thing in the functional world.  Most other languages with functional collection wrangling have it, like <span class="caps">LINQ</span> (though they call it <code>SelectMany</code>).  Anyway, my point is this: if Promises had a function like that, it would take in a function that returns a promise, but instead of returning a promise of a promise of a value, it just returns a promise of that value.  Well, <code>then</code> and <code>catch</code> do this implicitly!  If the return value of the function is a promise, it just shortens that down.</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span></span><span class="kd">var</span> <span class="nx">firstPromise</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">secondPromise</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">composedPromise</span> <span class="o">=</span> <span class="nx">firstPromise</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">firstVal</span><span class="p">){</span>
+	<span class="kd">var</span> <span class="nx">internalPromise</span> <span class="o">=</span> <span class="nx">secondPromise</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">secondVal</span><span class="p">){</span>
+		<span class="k">return</span> <span class="nx">firstVal</span> <span class="o">*</span> <span class="nx">secondVal</span><span class="p">;</span>
+	<span class="p">});</span>
+
+	<span class="k">return</span> <span class="nx">internalPromise</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="nx">composedPromise</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">composedVal</span><span class="p">){</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">composedVal</span><span class="p">);</span> <span class="c1">// 6</span>
+<span class="p">});</span></code></pre></figure><p>That&#8217;s right!  Your first instinct is that <code>composedVal</code> should be the <code>internalPromise</code>, since that&#8217;s what&#8217;s returned from that function, but promises see that you&#8217;re returning a promise and compose a <code>flatMap</code> instead of a regular <code>map</code>.  One of the great parts of that is that you can use this to compose promises, or even provide a fallback promise.</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span></span><span class="kd">function</span> <span class="nx">getFromLocalCache</span><span class="p">(</span><span class="nx">id</span><span class="p">){</span>
+	<span class="c1">//  returns a promise of the info from cache, or fail if it&#39;s not there</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">getFromApi</span><span class="p">(</span><span class="nx">id</span><span class="p">){</span>
+	<span class="c1">// returns a promise of an API call with a much higher chance of success.</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">getFromAnywhere</span><span class="p">(</span><span class="nx">id</span><span class="p">){</span>
+	<span class="c1">// Try to get this item from local cache.</span>
+	<span class="kd">var</span> <span class="nx">localCachePromise</span> <span class="o">=</span> <span class="nx">getFromLocalCache</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+	<span class="kd">var</span> <span class="nx">combinedPromise</span> <span class="o">=</span> <span class="nx">localCachePromise</span><span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+		<span class="c1">// Okay, we didn&#39;t have it local.  Let&#39;s get it from the API.</span>
+		<span class="kd">var</span> <span class="nx">apiPromise</span> <span class="o">=</span> <span class="nx">getFromApi</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+		<span class="k">return</span> <span class="nx">apiPromise</span><span class="p">;</span>
+	<span class="p">});</span>
+	<span class="k">return</span> <span class="nx">combinedPromise</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure><h2>Combining Promises</h2>
+<p>We can see how to use <code>then</code> to perform some of this combining.  There are two more functions from the Promise <span class="caps">API</span> that I want to point out: <code>Promise.all</code> and <code>Promise.race</code>.</p>
+<h3>All</h3>
+<p><code>Promise.all</code> is a great function that turns an Array of promises into a promise of an Array.  It resolves when all of those promises have resolved, or rejects as soon as any of them rejects.  Let&#8217;s take my nacho example and say that I have sent out two roommates, one for chips and one for cheese.</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span></span><span class="kd">function</span> <span class="nx">getChips</span><span class="p">(){</span>
+	<span class="c1">// returns promise of chips</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">getCheese</span><span class="p">(){</span>
+	<span class="c1">// returns promise of cheese</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">chipsPromise</span> <span class="o">=</span> <span class="nx">getChips</span><span class="p">(),</span>
+	<span class="nx">cheesePromise</span> <span class="o">=</span> <span class="nx">getCheese</span><span class="p">();</span>
+
+<span class="kd">var</span> <span class="nx">chipsAndCheesePromise</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">([</span><span class="nx">chipsPromise</span><span class="p">,</span> <span class="nx">cheesePromise</span><span class="p">]);</span>
+
+<span class="kd">var</span> <span class="nx">nachoPromise</span> <span class="o">=</span> <span class="nx">chipsAndCheesePromise</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">items</span><span class="p">){</span>
+	<span class="kd">var</span> <span class="nx">nachos</span> <span class="o">=</span> <span class="nx">makeNachos</span><span class="p">(</span><span class="nx">trustyPan</span><span class="p">,</span> <span class="nx">items</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">items</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+	<span class="k">return</span> <span class="nx">nachos</span><span class="p">;</span>
+<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">){</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;There will be no nachos today.&quot;</span><span class="p">);</span>
+<span class="p">})</span></code></pre></figure><h3>Race</h3>
+<p>I will be honest that I have not used this one in production yet, but <code>Promise.race</code> is the &#8220;logical or&#8221; to <code>Promise.all</code>&#8217;s &#8220;logical and&#8221;.  If all the items reject, this will reject with an array of their reasons, but if any of the values resolves, this will resolve.</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span></span><span class="kd">var</span> <span class="nx">nachosPromise</span> <span class="o">=</span> <span class="nx">delayer</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span> <span class="k">return</span> <span class="s2">&quot;nachos&quot;</span><span class="p">;</span> <span class="p">},</span> 
+	<span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2000</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">iceCreamPromise</span> <span class="o">=</span> <span class="nx">delayer</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span> <span class="k">return</span> <span class="s2">&quot;ice cream&quot;</span><span class="p">},</span> 
+	<span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2000</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">snackPromise</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">race</span><span class="p">([</span><span class="nx">nachosPromise</span><span class="p">,</span> <span class="nx">iceCreamPromise</span><span class="p">]);</span>
+
+<span class="nx">snackPromise</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">snack</span><span class="p">){</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;I&#39;m eating: &quot;</span> <span class="o">+</span> <span class="nx">snack</span><span class="p">);</span>
+<span class="p">});</span></code></pre></figure><p>I usually found that, if I requested the promise, I probably need it, but this might be a good way of prioritizing content based on when it came back while waiting for the other stuff to show.</p>
+<h2>Summary</h2>
+<p>So, this concludes the ES6 Edition of Promises.  In the following post, I&#8217;ll do the same thing, but for Angular.js syntax, then we&#8217;ll talk about some real world problems I had and how I composed promises to solve them.</p>
+

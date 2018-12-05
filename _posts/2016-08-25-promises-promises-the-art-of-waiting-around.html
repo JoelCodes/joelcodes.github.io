@@ -1,0 +1,105 @@
+---
+layout: post
+title: Promises, Promises Pt. 2
+subtitle: Creating and Listening in ES6
+thumb_url: order-up-thumb.jpg
+bg_url: order-up-bg.jpg
+tags: [Promises, JavaScript]
+---
+
+<p class="lead">In a <a href="/blog/2016-08-22/promises-promises-the-art-of-waiting-around">previous post</a>, I introduced the idea of promises and the purpose they serve, while also delivering an ode to nachos, a paean on a pan, as it were.  This time, I actually want to get to the nitty gritty, and demonstrate how to create, transform, and combine promises in the new ES6 syntax.  I’ll follow up with the same article in the syntax more common to Angular.JS, since that’s where most of my work has been.<br>
+</p>
+<!--more-->
+<h2>Making Promises</h2>
+<p>So, let’s make a simple promise, one that resolves with the numeric value three.  What does that look like?</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span></span><span class="kd">var</span> <span class="nx">promise</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span></code></pre></figure><p>So now we have a promise that resolves with the value 3.  This is very exciting.  What about rejecting? Can we reject with an error?</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span></span><span class="kd">var</span> <span class="nx">badPromise</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="s2">"Boo!"</span><span class="p">);</span></code></pre></figure><p>Welp, that was fun, I guess.  How about this: can we create a promise that takes a random int from 0 to 3, and if it’s equal to 0, reject, and if not, return the val?  Well, that’s pretty easy. The Promise constructor just needs a function that will take a <code>resolve</code> and <code>reject</code> function as parameters, then act accordingly.</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span></span><span class="kd">var</span> <span class="nx">luckyPromise</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">){</span>
+<span class="kd">var</span> <span class="nx">val</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">4</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">val</span> <span class="o">===</span> <span class="mi">0</span><span class="p">){</span>
+<span class="nx">reject</span><span class="p">(</span><span class="s2">"Zero!"</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="nx">resolve</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">});</span></code></pre></figure><p>Because the truth is that stuff happens.  The reason that the promises have rejected states is that sometimes stuff goes wrong, and you have to adjust.  Here’s another way to get the exact same effect:</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span></span><span class="kd">var</span> <span class="nx">luckyPromise</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">){</span>
+<span class="kd">var</span> <span class="nx">val</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">4</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">val</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> 
+<span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">"Zero!"</span><span class="p">);</span>
+
+<span class="nx">resolve</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span>
+<span class="p">});</span></code></pre></figure><p>All right, but one of the big points that I mentioned was asynchrony, and so far, these promises have all been on the same process.  Let’s use setTimeout, and rewrite the last promise so that it will do all this process after two seconds.</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span></span><span class="kd">var</span> <span class="nx">delayedLuckyPromise</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">){</span>
+<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+<span class="kd">var</span> <span class="nx">val</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">4</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">val</span> <span class="o">===</span> <span class="mi">0</span><span class="p">){</span>
+<span class="nx">reject</span><span class="p">(</span><span class="s2">"Zero!"</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="nx">resolve</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">},</span> <span class="mi">2000</span><span class="p">);</span>
+<span class="p">});</span></code></pre></figure><p>You’ll notice that I switched out of the “throw an error” model above.  It’s better to be clearer, I suppose.  But I really like that syntax, and I think I want to keep it, so I’m going to write a utility function.</p>
+<p>I want to make a function that I’ll call <em>delayer</em>, which will take in a function and a delay in milliseconds, then return a new promise.  That promise should:</p>
+<ul>
+<li>Wait the specified delay, then evaluate the function.</li>
+<li>If the function throws an error, the promise should reject with the error.</li>
+<li>If it returns a value successfully, it should resolve with that value.</li>
+</ul>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span></span><span class="kd">function</span> <span class="nx">delayer</span><span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">delay</span><span class="p">){</span>
+<span class="c1">// Return a promise</span>
+<span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">){</span>
+<span class="c1">//Set a timeout</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+<span class="c1">//Try to perform the function</span>
+<span class="k">try</span> <span class="p">{</span>
+<span class="c1">// Get the value of the function, and resolve with it.</span>
+<span class="kd">var</span> <span class="nx">val</span> <span class="o">=</span> <span class="nx">fn</span><span class="p">();</span>
+<span class="nx">resolve</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+<span class="c1">// If there's an error, reject with it.</span>
+<span class="nx">reject</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">},</span> <span class="nx">delay</span> <span class="o">||</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">});</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">newDelayedLuckyPromise</span> <span class="o">=</span> <span class="nx">delayer</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+<span class="kd">var</span> <span class="nx">val</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">4</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">val</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">"Zero!"</span><span class="p">);</span>
+<span class="k">return</span> <span class="nx">val</span><span class="p">;</span>
+<span class="p">},</span> <span class="mi">2000</span><span class="p">);</span></code></pre></figure><p>And boom! We have written a utility function to return promises!  As you can imagine, you could write utility functions like this to do all sorts of things, such as:</p>
+<ul>
+<li>Create a Vanilla.js, cross-platform <span class="caps">AJAX</span> library!</li>
+<li>Listen to keyboard events and run an easter egg if the user types a certain key-combo (like “<span class="caps">JAVASCRIPT</span>”)</li>
+<li>Access LocalStorage or cookies asynchronously</li>
+</ul>
+<p>This is very low-level, of course, but what about jQuery?  After all, jQuery is by far the most commonly used library if you want to make something quick with a little <span class="caps">AJAX</span>, which is ground zero for promises.  You’ll be glad to know that jQuery.ajax returns a <em>jqXHR</em>, which can be treated like a promise.</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span></span><span class="kd">var</span> <span class="nx">good_jqXHR</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">(</span><span class="s2">"/good_file.json"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">bad_jqXHR</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">(</span><span class="s2">"/missing_file.json"</span><span class="p">);</span></code></pre></figure><p>There may be a <em>tiny</em> bit of difference betweent jQuery promises and the new official versions of promises, so if jQuery promises don’t act like you expected, there’s something to put on your suspect list.</p>
+<p>Well, now we’ve created them, how do we respond?</p>
+<h2>Listening to Promises</h2>
+<p>We’ve got these strange little objects that are creating these events with values.  How do we listen to them?  How do we actually do something with those values?  Well, that’s where the <code>then</code> and <code>catch</code> functions come in.</p>
+<p>The <code>then</code> function takes in up to two functions as arguments: the success callback, and maybe the failure callback. The <code>catch</code> function only allows you to attach a failure callback.  You can do whatever combination you want, but in a production setting, for most Promise specifications, there’s a good chance that you should be preparing for errors as well as success.  You don’t want to annoy your users.  Let’s take a look:</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span></span><span class="c1">// Theoretical tweet promise that returns an array of tweets or errors out with an informative message.</span>
+<span class="kd">var</span> <span class="nx">newTweetsPromise</span> <span class="o">=</span> <span class="nx">getNewTweets</span><span class="p">();</span>
+
+<span class="c1">// Theoretical success handler</span>
+<span class="kd">function</span> <span class="nx">tweetSuccessHandler</span><span class="p">(</span><span class="nx">tweets</span><span class="p">){</span>
+<span class="c1">// Adds new tweets to the DOM</span>
+<span class="p">}</span>
+
+<span class="c1">// Theoretical failure handler</span>
+<span class="kd">function</span> <span class="nx">tweetFailureHandler</span><span class="p">(</span><span class="nx">error</span><span class="p">){</span>
+<span class="c1">// Launch Error modal with error message</span>
+<span class="p">}</span>
+
+<span class="c1">// Double Then syntax</span>
+<span class="nx">newTweetsPromise</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">tweetSuccessHandler</span><span class="p">,</span> <span class="nx">tweetFailureHandler</span><span class="p">);</span>
+
+<span class="c1">// Then-Catch syntax</span>
+<span class="nx">newTweetsPromise</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">tweetSuccessHandler</span><span class="p">)</span>
+<span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">tweetFailureHandler</span><span class="p">);</span></code></pre></figure><p>One super-important thing to know about <code>then</code> and <code>catch</code> is this: if you attach them <em>after</em> the promise resolves or rejects, <strong>they will still fire!</strong>  That’s right!  With most situations regarding events, if you attach an event handler after the event fires, you’ve “shut the barn door after the horse has already run off.”  You won’t catch the event that’s already gone.  With promises, you can take a resolved or rejected promise and capture its value as many times as you want.  Isn’t that fantastic?!  You don’t have to check its state first.  In fact, come to think of it, I’ve been coding with all sorts of promises for a few years now in about 4 different frameworks, and I’m pretty sure that <em>I have never checked whether a promise is finished or not</em>.  How cool is that?</p>
+<p>All right, we’ve created promises, and we’ve responded to promises.  Everything we’ve done is asynchronous, but still very imperative; that is, we’re making the request and responding to it.  But one of the strengths of promises is that we can use a few tools to transform them and combine them in a way that’s more like functional programming, and that’s what we’ll get up to in the next post.</p>
+	

@@ -1,0 +1,132 @@
+---
+layout: post
+title: Promises, Promises Pt. 1
+subtitle: The Art of Waiting Around
+thumb_url: waiting-thumb.jpg
+bg_url: waiting.jpg
+tags: [Promises, JavaScript]
+---
+
+<p class="lead">It has been said of history that it&#8217;s &#8220;just one damned thing after another.&#8221; (By the way, that&#8217;s the title of a fantastic book about time travel by Jodi Taylor, and I can&#8217;t recommend it enough).  The way we tell the story of history is often very sequential.  An archduke is shot in Sarajevo, the Central Powers start a war, yada, yada, yada.  But this telling hides a very complicated web of events that encapsulates trade agreements, royal marriages, personal affronts, and a regressive genetic defect called the &#8220;Hapsburg Jaw&#8221;.<br />
+</p>
+<!--more-->
+<p>In web development, as well as history, we deal with a rather complicated set of systems that are talking to each other.  Web servers, databases, APIs, web workers, calls to local storage, animations, and that blasted user who keeps pushing buttons. A lot of software assumes that someone will request a task and the rest of the world will just wait till that task is done, and change nothing in meantime. There may be contexts where that occurs, but web dev isn&#8217;t one of them.</p>
+<p>There&#8217;s a term for this type of problem: &#8220;Asynchronous Programming&#8221;.  It means that you don&#8217;t have everything happening in one long sequence.  You might have things happening in parallel, or requests that might fail and need to be retried till they succeed, or even just really long and burdensome processes that, if we made the core process wait, would turn your app into a pretty brick.  So I want to talk about one of the constructs that JavaScript developers use to solve this problem, and since I am a big proponent of understanding the &#8220;what&#8221; before the &#8220;how&#8221;, let&#8217;s talk nachos.</p>
+<h2>The Epic Tale of Chips &amp; Cheese</h2>
+<p>Now, I&#8217;m not gonna tell you what you should have on your nachos (like pickled jalapeno if you&#8217;re into that sort of thing), but let&#8217;s say you want to make a simple batch of chips with melted cheddar cheese.  And let&#8217;s assume that on your kitchen counter, you already have the perfect amount of chips and shreded cheese. All right, well this is just a pretty linear process. In fact, lets do it in JavaScript!</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span></span><span class="kd">function</span> <span class="nx">makeNachos</span><span class="p">(</span><span class="nx">pan</span><span class="p">,</span> <span class="nx">chips</span><span class="p">,</span> <span class="nx">shreddedCheese</span><span class="p">){</span>
+	<span class="kd">var</span> <span class="nx">chipsOnPan</span> <span class="o">=</span> <span class="nx">spread</span><span class="p">(</span><span class="nx">chips</span><span class="p">,</span> <span class="nx">pan</span><span class="p">);</span>
+	<span class="kd">var</span> <span class="nx">assembledNachos</span> <span class="o">=</span> <span class="nx">spread</span><span class="p">(</span><span class="nx">shreddedCheese</span><span class="p">,</span> <span class="nx">chipsOnPan</span><span class="p">);</span>
+	<span class="kd">var</span> <span class="nx">cookedNachos</span> <span class="o">=</span> <span class="nx">cook</span><span class="p">(</span><span class="nx">assembledNachos</span><span class="p">)</span>
+	<span class="k">return</span> <span class="nx">cookedNachos</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure><p>Mmmmm.  That&#8217;s some tasty JavaScript.  And a nice linear process, with everything in order.  Which is great.  So it&#8217;s nacho time, and you&#8217;re ready to use your make nacho function.  You go the cupboard in your kitchen, and reach for the chips, but oh no!  Your scuzzy roommate has eaten them all!  And your shredded cheese! You confront him, tears in your eyes, and in a rare moment of contrition, he agrees to go to the local convenience store to replace the poached foodstuff.</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span></span><span class="kd">var</span> <span class="nx">suppliesInKitchen</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="nx">chips</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">cheese</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="c1">// Blasted roomate!</span>
+	<span class="nx">pan</span> <span class="o">=</span> <span class="nx">myOldTrustyPan</span> <span class="c1">// At least I have this.</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">isRoommateStillGone</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+<span class="k">while</span><span class="p">(</span><span class="nx">isRoomateStillGone</span><span class="p">){</span>
+	<span class="nx">isRoommateStillGone</span> <span class="o">=</span> <span class="nx">checkForRoommate</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">stuffFromStore</span> <span class="o">=</span> <span class="nx">getStuffFromRoommate</span><span class="p">()</span>
+
+<span class="kd">var</span> <span class="nx">nachos</span> <span class="o">=</span> <span class="nx">makeNachos</span><span class="p">(</span>
+	<span class="nx">suppliesInKitchen</span><span class="p">.</span><span class="nx">pan</span><span class="p">,</span>
+	<span class="nx">stuffFromStore</span><span class="p">.</span><span class="nx">chips</span><span class="p">,</span>
+	<span class="nx">stuffFromStore</span><span class="p">.</span><span class="nx">shreddedCheese</span><span class="p">);</span>
+
+<span class="nx">eat</span><span class="p">(</span><span class="nx">nachos</span><span class="p">);</span></code></pre></figure><p>Now, this isn&#8217;t an entirely healthy approach.  For however long your roommate is gone, you just keep staring at the door waiting for him to come back.  Wouldn&#8217;t you rather be doing stuff?  Listening to music?  Practicing dance moves?  I mean, live your life!  Let&#8217;s create a function called <code>sendRoommateFor()</code> and attach an <code>onReturn</code> event listener that does something with <code>stuffFromStore</code>.</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span></span><span class="kd">var</span> <span class="nx">suppliesInKitchen</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="nx">chips</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">cheese</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="c1">// Blasted roomate!</span>
+	<span class="nx">pan</span> <span class="o">=</span> <span class="nx">myOldTrustyPan</span> <span class="c1">// At least I have this.</span>
+<span class="p">};</span>
+
+<span class="nx">sendRoommateFor</span><span class="p">([</span><span class="s2">&quot;chips&quot;</span><span class="p">,</span> <span class="s2">&quot;shreddedCheese&quot;</span><span class="p">])</span>
+	<span class="p">.</span><span class="nx">onReturn</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">stuffFromStore</span><span class="p">){</span>
+		<span class="kd">var</span> <span class="nx">nachos</span> <span class="o">=</span> <span class="nx">makeNachos</span><span class="p">(</span>
+			<span class="nx">suppliesInKitchen</span><span class="p">.</span><span class="nx">pan</span><span class="p">,</span>
+			<span class="nx">stuffFromStore</span><span class="p">.</span><span class="nx">chips</span><span class="p">,</span>
+			<span class="nx">stuffFromStore</span><span class="p">.</span><span class="nx">shreddedCheese</span><span class="p">);</span>
+
+		<span class="nx">eat</span><span class="p">(</span><span class="nx">nachos</span><span class="p">);</span>
+	<span class="p">});</span></code></pre></figure><p>Well, that&#8217;s better.  You were able to break this into two distinct processes: 1) you sent your roommate for chips and shredded cheese, and then 2) when he came back, you started another process that made and ate the nachos.  In the meantime, you were free to do whatever your heart desired, which may or may not have involved dancing around in the kitchen to Taylor Swift.</p>
+<h2>And now, Promises</h2>
+<p>There is a really easy-to-use, ready-made construct called Promises that has been getting more and more popular in the JavaScript world.  JavaScript devs were using them first to deal with <span class="caps">AJAX</span> requests, but you can use them for all types of asynchronous behavior, including localStorage, animations, and more.  A promise is just a very simple state machine.  It has an initial state and two final states.</p>
+<p><img src="/assets/img/posts/promise1.jpg" alt="" /></p>
+<p>Once a promise has entered either the resolved or rejected state, it cannot change to one of the other states.  It resolves with a value, and rejects with an error.  And for the sake of argument, we can say that if a promise resolves with a certain type, it can be called a promise of that type (e.g. a promise that will resolve with a boolean is a &#8220;promise of type boolean&#8221;.  You can then attach event handlers to the promises. Let&#8217;s make this whole &#8220;going to the store&#8221; thing a Promise (of the ES6 JavaScript variety).</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span></span><span class="kd">var</span> <span class="nx">suppliesInKitchen</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="nx">chips</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">cheese</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="c1">// Blasted roomate!</span>
+	<span class="nx">pan</span> <span class="o">=</span> <span class="nx">myOldTrustyPan</span> <span class="c1">// At least I have this.</span>
+<span class="p">};</span>
+
+<span class="c1">// create Promise of type &quot;{chips: ChipsObject, shreddedCheese: ShreddedCheeseObject}&quot;</span>
+<span class="kd">var</span> <span class="nx">roommatePromise</span> <span class="o">=</span> <span class="nx">sendRoommateFor</span><span class="p">(</span><span class="s2">&quot;chips&quot;</span><span class="p">,</span> <span class="s2">&quot;shreddedCheese&quot;</span><span class="p">);</span>
+
+<span class="nx">roommatePromise</span>
+	<span class="p">.</span><span class="nx">then</span><span class="p">(</span>
+		<span class="c1">// Success function</span>
+		<span class="kd">function</span><span class="p">(</span><span class="nx">stuffFromStore</span><span class="p">){</span>
+			<span class="kd">var</span> <span class="nx">nachos</span> <span class="o">=</span> <span class="nx">makeNachos</span><span class="p">(</span>
+				<span class="nx">suppliesInKitchen</span><span class="p">.</span><span class="nx">pan</span><span class="p">,</span>
+				<span class="nx">stuffFromStore</span><span class="p">.</span><span class="nx">chips</span><span class="p">,</span>
+				<span class="nx">stuffFromStore</span><span class="p">.</span><span class="nx">shreddedCheese</span><span class="p">);</span>
+			<span class="nx">eat</span><span class="p">(</span><span class="nx">nachos</span><span class="p">);</span>
+	<span class="p">},</span> 	<span class="p">);</span></code></pre></figure><p>Now, this doesn&#8217;t seem like much of an improvement over the last, but there are a lot of great combinations we can do here.  Let&#8217;s say that you&#8217;re making nachos for your significant other, who is sitting in the TV room.  She has asked for nachos, but she doesn&#8217;t need to know about this whole roommate drama.  She&#8217;s not even concerned with how long it&#8217;s taking: she can wait forever for these nachos, but she wants nachos.  We can basically hand her a <em>nacho promise</em>, and then she can eat them when they arrive.  Now it looks like this:</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span></span><span class="kd">var</span> <span class="nx">suppliesInKitchen</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="nx">chips</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">cheese</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="c1">// Blasted roomate!</span>
+	<span class="nx">pan</span> <span class="o">=</span> <span class="nx">myOldTrustyPan</span> <span class="c1">// At least I have this.</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">joel</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="nx">makeAndDeliverNachos</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+		<span class="c1">// Get a promise of your shopping list</span>
+		<span class="kd">var</span> <span class="nx">roommatePromise</span> <span class="o">=</span> <span class="nx">roommate</span><span class="p">.</span><span class="nx">sendFor</span><span class="p">([</span><span class="s2">&quot;chips, shreddedCheese&quot;</span><span class="p">]);</span>
+
+		<span class="c1">// Turn that into a promise of type &quot;plate of nachos&quot;</span>
+		<span class="kd">var</span> <span class="nx">nachoPromise</span> <span class="o">=</span> <span class="nx">roomatePromise</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">stuffFromStore</span><span class="p">){</span>
+			<span class="kd">var</span> <span class="nx">nachos</span> <span class="o">=</span> <span class="nx">makeNachos</span><span class="p">(</span>
+				<span class="nx">suppliesInKitchen</span><span class="p">.</span><span class="nx">pan</span><span class="p">,</span>
+				<span class="nx">stuffFromStore</span><span class="p">.</span><span class="nx">chips</span><span class="p">,</span>
+				<span class="nx">stuffFromStore</span><span class="p">.</span><span class="nx">shreddedCheese</span><span class="p">);</span>
+			<span class="k">return</span> <span class="nx">nachos</span><span class="p">;</span>
+		<span class="p">});</span>
+
+		<span class="c1">// return that promise</span>
+		<span class="k">return</span> <span class="nx">nachoPromise</span><span class="p">;</span>
+	<span class="p">}</span>	
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">roommate</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="nx">sendFor</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">shoppingList</span><span class="p">){</span>
+		<span class="cm">/* return promise of type {chips: Object, shreddedCheese: Object} */</span>
+	<span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">significantOtherRequest</span> <span class="o">=</span> <span class="nx">joel</span>
+	<span class="p">.</span><span class="nx">makeAndDeliverNachos</span><span class="p">()</span>
+	<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">nachos</span><span class="p">){</span>
+		<span class="nx">eat</span><span class="p">(</span><span class="nx">nachos</span><span class="p">);</span>
+	<span class="p">});</span>
+	<span class="c1">// which could be further reduced to:</span>
+	<span class="c1">// joel</span>
+	<span class="c1">//	.makeAndDeliverNachos()</span>
+	<span class="c1">// 	.then(eat)</span></code></pre></figure><p>In a nutshell, that&#8217;s the &#8220;what&#8221; of promises.  Promises are asynchronous values that can be produced, transformed, and combined.  Because of this, it&#8217;s really easy to write different pieces of software that perform different functions on these promises:</p>
+<table class="table table-condensed">
+	<tr>
+		<th>Producer (Roommate)</th>
+		<td> Generates the content (via http request, timeouts, etc.) </td>
+	</tr>
+	<tr>
+		<th>Transformer (Me) </th>
+		<td> Takes a  promise and converts the ingredients into something useful </td>
+	</tr>
+	<tr>
+		<th>Consumer (Significant Other) </th>
+		<td> Does something with the transformed content, such as updating a view </td>
+	</tr>
+</table>
+<p>One important principle of writing software is the &#8220;Single Responsibility Principle&#8221;, where each bit of software is responsible for only one job, like interfacing with an <span class="caps">API</span> or updating the view.  Promises let us do that with ease, and if the behavior of one of those pieces changes, for instance, if an application is depending on an <span class="caps">API</span> to behave a certain way and its signature changes, then we can write different transformers to let it meet the consumer&#8217;s specifications instead of expecting the consumer to change.</p>
+<p>Now that we&#8217;ve learned the &#8220;what&#8221;, we&#8217;re ready to learn the &#8220;how&#8221;.  We&#8217;re going to spend the next post creating and combining promises, and after that, we&#8217;re going to step through a few real-life examples.</p>
