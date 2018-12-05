@@ -1,114 +1,7 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<!-- Meta -->
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-<!-- Title -->
-
-<title>Joel Shinness</title>
-
-<!-- Favicons -->
-<link rel="shortcut icon" href="/assets/img/favicon.png">
-<link rel="apple-touch-icon" href="/assets/img/favicon_60x60.png">
-<link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicon_76x76.png">
-<link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicon_120x120.png">
-<link rel="apple-touch-icon" sizes="152x152" href="/assets/img/favicon_152x152.png">
-
-<!-- Google Web Fonts -->
-<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700' rel='stylesheet' type='text/css'>
-
-<!-- CSS Styles -->
-<link rel="stylesheet" href="/assets/css/styles.css" />
-
-<!-- CSS Theme -->
-<link rel="stylesheet" id="theme" href="/assets/css/themes/theme-teal.css" />
-
-<!-- Highlight -->
-<link rel="stylesheet" href="/assets/css/github.css"/>
-
-</head>
-
-<body class="bg-grey">
-<!-- Loader -->
-<div id="page-loader" class="bg-white">
-	 <svg class="loader" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="circle" fill="none" stroke-width="3" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg>
-</div>
-<!-- Loader / End -->
-
-<!-- BG Image -->
-<div class="bg-body bg-image zooming">
-	<img src="/assets/img/photos/bg_frontend.jpg" alt="">
-</div>
-<!-- Header -->
-
-
-<header id="header" class="bg-primary">
-	<div id="top-bar">
-		<div class="container">
-			<nav class="menu module left">
-				<a href="/" class="active">Home</a>
-				<a href="/blog">Blog</a>
-			</nav>
-		</div>
-	</div>
-	
-	<!-- Navigation Bar -->
-	<div id="nav-bar" class="container">
-		<nav>
-			<ul id="nav-primary" class="nav nav-primary">
-				<li class="icon-link">
-					<a href="#home">
-						<i class='fa fa-home'></i>
-					</a>
-				</li>
-				
-				<li>
-					<a href="/#about">
-						About
-					</a>
-				</li>
-				
-				<li>
-					<a href="/#skills">
-						Skills
-					</a>
-				</li>
-				
-				<li>
-					<a href="/#experience">
-						Experience
-					</a>
-				</li>
-				
-				<li class="icon-link">
-					<a href="#" class="panel-toggle" data-toggle="panel">
-						<span><span></span></span>
-					</a>
-				</li>
-			</ul>
-		</nav>
-
-		<div class="mobile-nav clearfix">
-			<div class="owner">
-				<img src="/assets/img/avatars/avatar_square_sm.jpg" alt="">
-				<span class="name">Joel Shinness</span>
-			</div>
-			<a href="#" class="panel-toggle" data-toggle="panel"><span><span></span></span></a>
-		</div>
-	</div>
-	
-</header>
-<!-- Header / End -->
-
-
-
-
-
-
+---
+title: Joel Shinness
+layout: default
+---
 
 <!-- Content -->
 <div id="content" class="container">
@@ -368,153 +261,30 @@
 				<h3 class="text-muted">Education &amp; Jobs</h3>
 				<div class="timeline">
 				
-					<!-- Event-->
-					<div class="timeline-event animated">
+         
+        {% for event in site.data.timeline %}
+        <!-- Event-->
+        <div class="timeline-event animated">
 						<div class="date">
-							<span>02.2017 - present</span>
+							<span>{{event.from}} - {{event.to}}</span>
 						</div>
 						<div class="content">
-							<h3>Web Development Instructor</h3>
-							<span class="caption">Lighthouse Labs, Vancouver, BC</span>
+							<h3>{{event.role}}</h3>
+							<span class="caption">{{event.organization}}, {{event.location}}</span>
 							<ul>
-							
-								<li>Created and delivered lectures in all aspects of full-stack web development</li>
-							
-								<li>Mentored students one-on-one on dev practices, specific technologies, and career prep</li>
-							
-								<li>Built demo HTTP and WebSocket server applications in Node and Rails</li>
-							
-								<li>Built demo JS client applications with jQuery, React, and Redux</li>
-							
-								<li>Built demo data-driven applications with PostgreSQL and MongoDB</li>
-							
-								<li>Coached project teams through the application development lifecycle</li>
-							
-								<li>Coached students and alumni on current technologies, deployment, and career prepß</li>
-							
+                {% for responsibility in event.responsibilities %}
+                <li>{{responsibility}}</li>
+                {% endfor %}
 							</ul>
-							
-							
-								<span class='label label-primary'>JavaScript / ES6</span>
-							
-								<span class='label label-primary'>Ruby</span>
-							
-								<span class='label label-primary'>HTML5</span>
-							
-								<span class='label label-primary'>CSS3</span>
-							
-								<span class='label label-primary'>SASS</span>
-							
-								<span class='label label-primary'>SQL</span>
-							
-
-							
-								<span class='label label-success'>Node</span>
-							
-								<span class='label label-success'>Express</span>
-							
-								<span class='label label-success'>React</span>
-							
-								<span class='label label-success'>Rails</span>
-							
-								<span class='label label-success'>Redux</span>
-							
-								<span class='label label-success'>Bulma</span>
-							
-								<span class='label label-success'>Bootstrap</span>
-							
-								<span class='label label-success'>Socket.io</span>
-							
-								<span class='label label-success'>PostgreSQL</span>
-							
-								<span class='label label-success'>MongoDB</span>
-							
-								<span class='label label-success'>Mocha</span>
-							
-								<span class='label label-success'>git</span>
-							
+              {% for language in event.languages %}
+                <span class="label label-primary">{{language}}</span>
+              {% endfor %}
+              {% for framework in event.frameworks %}
+                <span class="label label-success">{{framework}}</span>
+              {% endfor %}
 						</div>
 					</div>
-				
-					<!-- Event-->
-					<div class="timeline-event animated">
-						<div class="date">
-							<span>03.2014 - 08.2016</span>
-						</div>
-						<div class="content">
-							<h3>Full-Stack Developer</h3>
-							<span class="caption">3AG Systems, Burnaby, BC</span>
-							<ul>
-							
-								<li>Developed front-end applications with Bootstrap, Angular, and jQuery</li>
-							
-								<li>Developed templates with ASP.NET MVC and Razor</li>
-							
-								<li>Developed Web services with ASP.NET Web Api</li>
-							
-								<li>Developed Android mobile client with Bootstrap, Angular and Cordova</li>
-							
-								<li>Prototyped user experience concepts with Bootstrap & Angular</li>
-							
-								<li>Wrote, Maintained, and set standards for Bootstrap themes</li>
-							
-								<li>Integrated existing web applications into new HTML themes and templates to match client branding</li>
-							
-								<li>Wrote CSS with Sass & Compass -Created Databases with SQL</li>
-							
-								<li>Optimized data retrieval in SQL with indexed views and recursive CTE queries</li>
-							
-								<li>Created Microsoft Office plugins with Visual Studio Tools for Office</li>
-							
-								<li>Wrote and presented training materials on CSS, functional programming, client-server and Single Page App architecture, Angular.js, asynchronous programming, best practices in JavaScript and C#, and more</li>
-							
-								<li>Mentored and managed co-op students in web development</li>
-							
-								<li>Wrote OLAP queries in MDX </li>
-							
-								<li>Wrote technical competency tests and evaluated outsource contractors</li>
-							
-								<li>Created work packages for outside contractors that made sure their work matched our product and would integrate easily without exposing the particulars of our product</li>
-							
-								<li>Wrote software design documents that included user interfaces, high level algorithms, communication flows between different systems, and relationship diagrams</li>
-							
-							</ul>
-							
-							
-								<span class='label label-primary'>JavaScript</span>
-							
-								<span class='label label-primary'>CSS3</span>
-							
-								<span class='label label-primary'>HTML5</span>
-							
-								<span class='label label-primary'>C#</span>
-							
-								<span class='label label-primary'>SQL</span>
-							
-								<span class='label label-primary'>MDX</span>
-							
-								<span class='label label-primary'>SVG</span>
-							
-
-							
-								<span class='label label-success'>Angular.js</span>
-							
-								<span class='label label-success'>Bootstrap</span>
-							
-								<span class='label label-success'>jQuery</span>
-							
-								<span class='label label-success'>ASP.NET</span>
-							
-								<span class='label label-success'>VSTO</span>
-							
-								<span class='label label-success'>Cordova</span>
-							
-								<span class='label label-success'>WebSockets</span>
-							
-								<span class='label label-success'>D3</span>
-							
-						</div>
-					</div>
+        {% endfor %}
 				
 					<!-- Event-->
 					<div class="timeline-event animated">
@@ -937,26 +707,3 @@
 	</div>
 </nav>
 <!-- Panel / End -->
-
-
-<!-- Ajax Modal -->
-<div id="ajax-modal"></div>
-<!-- Ajax Loader -->
-<svg id="ajax-loader" class="loader" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="circle" fill="none" stroke-width="3" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg>
-
-<!-- JS Libraries -->
-<script src="/assets/js/jquery-1.12.3.min.js"></script>
-
-<!-- JS Plugins -->
-<script src="/assets/js/plugins.js"></script>
-
-<!-- JS Core -->
-<script src="/assets/js/core.js"></script>
-
-<!-- JS Google Map -->
-<script src="http://maps.google.com/maps/api/js"></script>"index-pl.html"
-
-</body>
-
-<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'}),_trfd.push({'ap':'cpsh'},{'server':'a2plcpnl0604'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script>
-</html>

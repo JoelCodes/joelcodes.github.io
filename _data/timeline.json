@@ -1,0 +1,119 @@
+[
+  {
+    "from": "02.2017", "to": "present",
+    "role": "Web Development Instructor",
+    "organization": "Lighthouse Labs",
+    "location": "Vancouver, BC",
+    "responsibilities": [
+      "Created and delivered lectures in all aspects of full-stack web development",
+      "Mentored students one-on-one on dev practices, specific technologies, and career prep",
+      "Built demo HTTP and WebSocket server applications in Node and Rails",
+      "Built demo JS client applications with jQuery, React, and Redux",
+      "Built demo data-driven applications with PostgreSQL and MongoDB",
+      "Coached project teams through the application development lifecycle",
+      "Coached students and alumni on current technologies, deployment, and career prep"
+    ],
+    "languages": [
+      "JavaScript / ES6", "Ruby", "HTML5", "CSS3", "SASS", "SQL"
+    ],
+    "frameworks": [
+      "Node", "Express", "React", "Rails", "Redux", "Bulma", "Bootstrap", "socket.io", "PostgreSQL", "MongoDB", "Mocha", "git"
+    ]
+  },  {
+    "from": "03.2014", "to": "08.2016",
+    "role": "Full-Stack Developer",
+    "organization": "3AG Systems",
+    "location": "Burnaby, BC",
+    "responsibilities": [
+      "Developed front-end applications with Bootstrap, Angular, and jQuery",
+      "Developed templates with ASP.NET MVC and Razor",
+      "Developed Web services with ASP.NET Web Api",
+      "Developed Android mobile client with Bootstrap, Angular and Cordova",
+      "Prototyped user experience concepts with Bootstrap & Angular",
+      "Wrote, maintained, and set standards for Bootstrap themes",
+      "Integrated existing web applications into new HTML themes and templates to match client branding",
+      "Wrote CSS with Sass & Compass",
+      "Created Databases with SQL",
+      "Optimized data retrieval in SQL with indexed views and recursive CTE queries",
+      "Created Microsoft Office plugins with Visual Studio Tools for Office",
+      "Wrote and presented training materials on CSS, functional programming, client-server and Single Page App architecture, Angular.js, asynchronous programming, best practices in JavaScript and C#, and more",
+      "Mentored and managed co-op students in web development",
+      "Wrote OLAP queries in MDX",
+      "Wrote technical competency tests and evaluated outsource contractors",
+      "Created work packages for outside contractors that made sure their work matched our product and would integrate easily without exposing the particulars of our product",
+      "Wrote software design documents that included user interfaces, high level algorithms, communication flows between different systems, and relationship diagrams"
+    ],
+    "languages": [
+      "JavaScript", "C#", "HTML5", "CSS3", "SASS", "SQL", "MDX"
+    ],
+    "frameworks": [
+      "Angular.js", "Bootstrap", "jQuery", "ASP.NET", "VSTO", "Cordova", "WebSockets", "D3"
+    ]
+  },  {
+    "from": "09.2012", "to": "06.2014",
+    "role": "Bachelor of Technology",
+    "organization": "BCIT",
+    "location": "Burnaby, BC",
+    "responsibilities": [
+      "Wrote 3D and 2D games in XNA for C#",
+      "Simulated physics in Processing",
+      "Prototyped 3D in Processing",
+      "Built 3D games in C++ with OpenGL, as well as with OpenFrameworks",
+      "Built 3D experiences in iOS with Objective-C and OpenGL ES",
+      "Built 3D experiences with WebGL and JavaScript",
+      "Wrote JavaScript library for linear algebra",
+      "Wrote C++ application for audio manipulation"
+    ],
+    "languages": [
+      "C#", "C/C++", "Objective-C", "GLSL", "HLSL", "XML", "Java", "JavaScript"
+    ],
+    "frameworks": [
+      "XNA", "Processing", "OpenFrameworks", "OpenGL", "WebGL", "Cocos2D"
+    ]
+  },  {
+    "from": "06.2013", "to": "08.2013",
+    "role": "Web / Mobile Developer",
+    "organization": "Heritage Christian Online School",
+    "location": "Kelowna, BC",
+    "responsibilities": [
+      "Created assignment scheduling app with jQuery and Moodle",
+      "Developed Adobe AIR Mobile app with Flex and ActionScript 3 to run educational Flash content on mobile devices."
+    ],
+    "languages": [
+      "PHP", "JavaScript", "XML", "ActionScript 3"
+    ],
+    "frameworks": [
+      "jQuery UI", "Moodle", "Apache Flex"
+    ]
+  }, {
+    "from": "03.2012", "to": "01.2013",
+    "role": "Web Developer",
+    "organization": "Wundr",
+    "location": "Vancouver, BC",
+    "responsibilities": [
+      "Developed content templates for ePub that utilized HTML5 semantic elements, and cutting edge CSS3",
+      "Created web site",
+      "Created children’s book with CSS3 animations"
+    ],
+    "languages": [
+      "JavaScript", "CSS3", "HTML5"
+    ],
+    "frameworks": []
+  }, {
+    "from": "03.2011", "to": "02.2012",
+    "role": "ASP.NET and Web Developer",
+    "organization": "Opacity Design Group",
+    "location": "Richmond, BC",
+    "responsibilities": [
+      "Converted Photoshop files to HTML / CSS",
+      "Created web apps with ASP.NET",
+      "Built mobile app with jQuery and PhoneGap (now Cordova)"
+    ],
+    "languages": [
+      "JavaScript", "CSS3", "HTML5", "C#", "SQL"
+    ],
+    "frameworks": [
+      "PhotoShop", "jQuery", "Cordova"
+    ]
+  }
+]

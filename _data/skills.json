@@ -1,0 +1,13 @@
+{
+  "languages": [
+    { "name": "JavaScript / ES6", "pct": 95},
+    { "name": "C#", "pct": 90},
+    { "name": "HTML5", "pct": 82},
+    { "name": "CSS3", "pct": 95},
+    { "name": "SQL", "pct": 95},
+    {"name": "Ruby", "pct": 78}
+  ],
+  "frameworks": [
+    
+  ]
+}
