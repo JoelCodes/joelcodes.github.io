@@ -68,179 +68,35 @@ layout: default
     <section id="skills" class="bg-white">
     <div class="section-content">
       <h3 class="text-muted">
-        My Skills
+        My Skills <sup>*</sup>
+      </h3>
+      <p>
         <small class="bg-primary p-5">Languages</small>
         <small class="bg-success dark p-5">Tools &amp; Libraries</small>
-      </h3>
+      </p>
       
       <div class="row">
-        <h4 class="col-xs-12">Web Development</h4>
-        
+        {% for skill in site.data.skills.languages %}
         <div class="col-sm-6 col-lg-4">
-          <h5 class="mb-5">JavaScript</h5>
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="95"></div>
+            <h5 class="mb-5">{{skill.name}}</h5>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="{{skill.pct}}"></div>
+            </div>
           </div>
-        </div>
-        
-        <div class="col-sm-6 col-lg-4">
-          <h5 class="mb-5">C#</h5>
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="90"></div>
-          </div>
-        </div>
-        
-        <div class="col-sm-6 col-lg-4">
-          <h5 class="mb-5">HTML5</h5>
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="82"></div>
-          </div>
-        </div>
-        
-        <div class="col-sm-6 col-lg-4">
-          <h5 class="mb-5">CSS</h5>
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="92"></div>
-          </div>
-        </div>
-        
-        <div class="col-sm-6 col-lg-4">
-          <h5 class="mb-5">SQL</h5>
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="93"></div>
-          </div>
-        </div>
-        
-        <div class="col-sm-6 col-lg-4">
-          <h5 class="mb-5">Ruby</h5>
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="78"></div>
-          </div>
-        </div>
-        
-        
-        <div class="col-sm-6 col-lg-4">
-          <h5 class="mb-5">Node.js</h5>
-          <div class="progress">
-            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="83"></div>
-          </div>
-        </div>
-        
-        <div class="col-sm-6 col-lg-4">
-          <h5 class="mb-5">ASP.NET</h5>
-          <div class="progress">
-            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="87"></div>
-          </div>
-        </div>
-        
-        <div class="col-sm-6 col-lg-4">
-          <h5 class="mb-5">AngularJS</h5>
-          <div class="progress">
-            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="90"></div>
-          </div>
-        </div>
-        
-        <div class="col-sm-6 col-lg-4">
-          <h5 class="mb-5">React</h5>
-          <div class="progress">
-            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="91"></div>
-          </div>
-        </div>
-        
-        <div class="col-sm-6 col-lg-4">
-          <h5 class="mb-5">Bootstrap</h5>
-          <div class="progress">
-            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="91"></div>
-          </div>
-        </div>
-        
-        <div class="col-sm-6 col-lg-4">
-          <h5 class="mb-5">jQuery</h5>
-          <div class="progress">
-            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="97"></div>
-          </div>
-        </div>
-        
-        <div class="col-sm-6 col-lg-4">
-          <h5 class="mb-5">Rx.JS</h5>
-          <div class="progress">
-            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="54"></div>
-          </div>
-        </div>
-        
-        <div class="col-sm-6 col-lg-4">
-          <h5 class="mb-5">Node.JS</h5>
-          <div class="progress">
-            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="52"></div>
-          </div>
-        </div>
-        
-        <div class="col-sm-6 col-lg-4">
-          <h5 class="mb-5">Gulp</h5>
-          <div class="progress">
-            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="57"></div>
-          </div>
-        </div>
-        
+          {% endfor %}
+          {% for skill in site.data.skills.libraries %}
+          <div class="col-sm-6 col-lg-4">
+              <h5 class="mb-5">{{skill.name}}</h5>
+              <div class="progress">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{skill.pct}}"></div>
+              </div>
+            </div>
+            {% endfor %}
+          
         <div class="clearfix"></div>
       </div>
       
-      <div class="row">
-        <h4 class="col-xs-12">Mobile and Game Development</h4>
-        
-        <div class="col-sm-6 col-lg-4">
-          <h5 class="mb-5">C/C++</h5>
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="56"></div>
-          </div>
-        </div>
-        
-        <div class="col-sm-6 col-lg-4">
-          <h5 class="mb-5">Objective-C</h5>
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="41"></div>
-          </div>
-        </div>
-        
-        <div class="col-sm-6 col-lg-4">
-          <h5 class="mb-5">Java</h5>
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="47"></div>
-          </div>
-        </div>
-        
-        <div class="col-sm-6 col-lg-4">
-          <h5 class="mb-5">GLSL</h5>
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="53"></div>
-          </div>
-        </div>
-        
-        
-        <div class="col-sm-6 col-lg-4">
-          <h5 class="mb-5">Cordova</h5>
-          <div class="progress">
-            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="87"></div>
-          </div>
-        </div>
-        
-        <div class="col-sm-6 col-lg-4">
-          <h5 class="mb-5">XNA</h5>
-          <div class="progress">
-            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="58"></div>
-          </div>
-        </div>
-        
-        <div class="col-sm-6 col-lg-4">
-          <h5 class="mb-5">Processing</h5>
-          <div class="progress">
-            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="68"></div>
-          </div>
-        </div>
-        
-        <div class="clearfix"></div>
-      </div>
-      
+      <p class='text-muted' id='skills-note'>* Percentages are my non-scientific assessments of the question: &ldquo;What percentage of the problems I&apos;m given with this language, library, or tool will I be able to solve?&rdquo;</p>
     </div>
   </section>
 
@@ -283,7 +139,7 @@ layout: default
           </div>
         </div>
       {% endfor %}
-            </div>
+      </div>
     </div>
   </section>
 

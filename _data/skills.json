@@ -4,10 +4,17 @@
     { "name": "C#", "pct": 90},
     { "name": "HTML5", "pct": 82},
     { "name": "CSS3", "pct": 95},
-    { "name": "SQL", "pct": 95},
-    {"name": "Ruby", "pct": 78}
+    { "name": "SQL", "pct": 90},
+    {"name": "Ruby", "pct": 78},
+    {"name": "Haskell", "pct": 65}
   ],
-  "frameworks": [
-    
+  "libraries": [
+    {"name": "Node.js", "pct": 90},
+    {"name": "React", "pct": 92},
+    {"name": "Ruby on Rails", "pct":85 },
+    {"name": "Redux", "pct": 82},
+    {"name": "Express", "pct": 85},
+    {"name": "Rx.js", "pct": 74},
+    {"name": "git", "pct": 84}
   ]
 }
