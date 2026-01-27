@@ -10,28 +10,29 @@ See: .planning/PROJECT.md (updated 2026-01-26)
 ## Current Position
 
 Phase: 2 of 6 (Core Content & Positioning)
-Plan: 0 of TBD in current phase
-Status: Ready to plan
-Last activity: 2026-01-27 — Phase 1 complete (verified), ready for Phase 2
+Plan: 1 of 4 in current phase
+Status: In progress
+Last activity: 2026-01-26 — Completed 02-01-PLAN.md
 
-Progress: [██░░░░░░░░] 16%
+Progress: [███░░░░░░░] 21%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 3
+- Total plans completed: 4
 - Average duration: 3 min
-- Total execution time: 0.15 hours
+- Total execution time: 0.16 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-foundation-design-system | 3 | 9min | 3min |
+| 02-core-content-positioning | 1 | 1min | 1min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (4min), 01-02 (2min), 01-03 (3min)
-- Trend: Stable at ~3min average
+- Last 5 plans: 01-01 (4min), 01-02 (2min), 01-03 (3min), 02-01 (1min)
+- Trend: Phase 2 first plan faster due to simpler component creation
 
 *Updated after each plan completion*
 
@@ -64,6 +65,11 @@ Recent decisions affecting current work:
 - Temporary demonstration content will be replaced in Phase 2
 - Design system verification via comprehensive showcase before building real content
 
+**From 02-01:**
+- Hero section minimum height 80vh to ensure CTA visible without scrolling
+- Three service cards with equal visual weight and no pricing (custom quotes only)
+- Illustrative examples pattern ("Like a custom CRM") clarifies abstract services for non-technical audience
+
 ### Pending Todos
 
 None yet.
@@ -83,10 +89,10 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-01-27
-Stopped at: Completed 01-03-PLAN.md execution (Phase 1 complete)
+Last session: 2026-01-26
+Stopped at: Completed 02-01-PLAN.md
 Resume file: None
-Next phase: Phase 2 - Core Content & Positioning
+Next plan: 02-02-PLAN.md (Process and FAQ components)
 
 ---
 *State initialized: 2026-01-26*
