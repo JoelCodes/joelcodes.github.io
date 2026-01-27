@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-01-26)
 ## Current Position
 
 Phase: 3 of 6 (Portfolio & Case Studies)
-Plan: 2 of 4 in current phase
+Plan: 3 of 4 in current phase
 Status: In progress
-Last activity: 2026-01-27 — Completed 03-02-PLAN.md
+Last activity: 2026-01-27 — Completed 03-03-PLAN.md
 
-Progress: [████░░░░░░] 47%
+Progress: [████░░░░░░] 50%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 9
+- Total plans completed: 10
 - Average duration: 2 min
-- Total execution time: 0.27 hours
+- Total execution time: 0.29 hours
 
 **By Phase:**
 
@@ -29,11 +29,11 @@ Progress: [████░░░░░░] 47%
 |-------|-------|-------|----------|
 | 01-foundation-design-system | 3 | 9min | 3min |
 | 02-core-content-positioning | 4 | 4min | 1min |
-| 03-portfolio-case-studies | 2 | 4min | 2min |
+| 03-portfolio-case-studies | 3 | 6min | 2min |
 
 **Recent Trend:**
-- Last 5 plans: 02-03 (1min), 02-04 (<1min), 03-01 (2min), 03-02 (2min)
-- Trend: Phase 3 progressing steadily - portfolio grid and case study pages complete
+- Last 5 plans: 02-04 (<1min), 03-01 (2min), 03-02 (2min), 03-03 (1min)
+- Trend: Phase 3 progressing efficiently - portfolio feature nearly complete
 
 *Updated after each plan completion*
 
@@ -103,6 +103,11 @@ Recent decisions affecting current work:
 - Case study flow: Problem → Solution → Screenshots → Results
 - Conditional testimonial rendering (only show if exists)
 
+**From 03-03:**
+- Replaced hardcoded cards with projects.map() for data-driven rendering
+- Portfolio navigation link already existed from previous phase
+- Complete visitor journey: Nav → Portfolio grid → Case study pages
+
 ### Pending Todos
 
 None yet.
@@ -124,8 +129,9 @@ None yet.
 **Phase 3 in progress:**
 - ✅ Portfolio grid page complete (03-01)
 - ✅ Case study detail pages complete (03-02)
+- ✅ Portfolio data wiring complete (03-03)
 - Portfolio cards and case studies use placeholder images (real images in later plans)
-- Homepage portfolio preview section next (03-03)
+- Homepage portfolio preview section next (03-04)
 
 **Phase 4 considerations:**
 - Formspree free tier limit is 50 submissions/month — sufficient for early stage but monitor during testing
@@ -133,9 +139,9 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-01-27
-Stopped at: Completed 03-02-PLAN.md
+Stopped at: Completed 03-03-PLAN.md
 Resume file: None
-Next: 03-03-PLAN.md (Homepage portfolio preview section)
+Next: 03-04-PLAN.md (Homepage portfolio preview section)
 
 ---
 *State initialized: 2026-01-26*
