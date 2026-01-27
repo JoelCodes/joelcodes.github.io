@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-01-26)
 ## Current Position
 
 Phase: 3 of 6 (Portfolio & Case Studies)
-Plan: 1 of 4 in current phase
+Plan: 2 of 4 in current phase
 Status: In progress
-Last activity: 2026-01-27 — Completed 03-01-PLAN.md
+Last activity: 2026-01-27 — Completed 03-02-PLAN.md
 
-Progress: [████░░░░░░] 42%
+Progress: [████░░░░░░] 47%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 8
+- Total plans completed: 9
 - Average duration: 2 min
-- Total execution time: 0.23 hours
+- Total execution time: 0.27 hours
 
 **By Phase:**
 
@@ -29,11 +29,11 @@ Progress: [████░░░░░░] 42%
 |-------|-------|-------|----------|
 | 01-foundation-design-system | 3 | 9min | 3min |
 | 02-core-content-positioning | 4 | 4min | 1min |
-| 03-portfolio-case-studies | 1 | 2min | 2min |
+| 03-portfolio-case-studies | 2 | 4min | 2min |
 
 **Recent Trend:**
-- Last 5 plans: 02-02 (2min), 02-03 (1min), 02-04 (<1min), 03-01 (2min)
-- Trend: Phase 3 started - portfolio grid with filtering UI complete
+- Last 5 plans: 02-03 (1min), 02-04 (<1min), 03-01 (2min), 03-02 (2min)
+- Trend: Phase 3 progressing steadily - portfolio grid and case study pages complete
 
 *Updated after each plan completion*
 
@@ -96,6 +96,13 @@ Recent decisions affecting current work:
 - Vanilla JS filtering with no dependencies (zero bundle size impact)
 - 16:9 aspect ratio thumbnails with placeholder icons (real images in later plans)
 
+**From 03-02:**
+- JSON data structure for projects (simpler than Markdown frontmatter)
+- Inline onerror fallback for missing images (placeholder UI with icon)
+- Screenshot lazy loading (below fold performance optimization)
+- Case study flow: Problem → Solution → Screenshots → Results
+- Conditional testimonial rendering (only show if exists)
+
 ### Pending Todos
 
 None yet.
@@ -116,8 +123,9 @@ None yet.
 
 **Phase 3 in progress:**
 - ✅ Portfolio grid page complete (03-01)
-- Portfolio cards currently use placeholder thumbnails (real images in later plans)
-- Case study detail pages next (03-02)
+- ✅ Case study detail pages complete (03-02)
+- Portfolio cards and case studies use placeholder images (real images in later plans)
+- Homepage portfolio preview section next (03-03)
 
 **Phase 4 considerations:**
 - Formspree free tier limit is 50 submissions/month — sufficient for early stage but monitor during testing
@@ -125,9 +133,9 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-01-27
-Stopped at: Completed 03-01-PLAN.md
+Stopped at: Completed 03-02-PLAN.md
 Resume file: None
-Next: 03-02-PLAN.md (Case study detail pages)
+Next: 03-03-PLAN.md (Homepage portfolio preview section)
 
 ---
 *State initialized: 2026-01-26*
