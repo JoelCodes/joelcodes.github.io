@@ -4,7 +4,9 @@
       "numberOfRuns": 3,
       "settings": {
         "preset": "desktop"
-      }
+      },
+      "staticDistDir": "./dist",
+      "url": ["http://localhost/"]
     },
     "assert": {
       "preset": "lighthouse:no-pwa",
