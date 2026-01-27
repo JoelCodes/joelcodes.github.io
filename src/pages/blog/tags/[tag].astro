@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BlogCard from '../../../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+import { readingTime } from 'reading-time-estimator';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog', ({ data }) => {
+    return import.meta.env.PROD ? !data.draft : true;
+  });
+
+  // Get unique tags from all posts
+  const uniqueTags = [...new Set(allPosts.flatMap(post => post.data.tags))];
+
+  return uniqueTags.map(tag => ({
+    params: { tag },
+    props: {
+      tag,
+      posts: allPosts
+        .filter(post => post.data.tags.includes(tag))
+        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    }
+  }));
+}
+
+const { tag, posts } = Astro.props;
+
+// Calculate reading time for each post
+const postsWithMeta = posts.map((post) => {
+  const stats = readingTime(post.body || '', 265);
+  return { ...post, readingTime: Math.ceil(stats.minutes) };
+});
+
+// Format tag for display (capitalize first letter)
+const displayTag = tag.charAt(0).toUpperCase() + tag.slice(1);
+---
+
+<BaseLayout
+  title={`Posts tagged "${displayTag}" | Joel Shinness`}
+  description={`All blog posts about ${displayTag}. Practical insights on automation, AI, and custom software for small businesses.`}
+>
+  <main class="py-16 px-4">
+    <div class="max-w-7xl mx-auto">
+      <!-- Page header -->
+      <header class="text-center mb-12">
+        <nav class="mb-6">
+          <a
+            href="/blog"
+            class="text-accent-teal hover:text-accent-teal-hover transition-colors inline-flex items-center gap-2"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            Back to all posts
+          </a>
+        </nav>
+        <h1 class="font-heading text-4xl md:text-5xl font-bold mb-4">
+          Posts tagged "{displayTag}"
+        </h1>
+        <p class="text-lg text-text-muted-light dark:text-text-muted-dark max-w-2xl mx-auto">
+          {postsWithMeta.length} {postsWithMeta.length === 1 ? 'post' : 'posts'} about {displayTag.toLowerCase()}
+        </p>
+      </header>
+
+      <!-- Blog card grid -->
+      <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {postsWithMeta.map((post) => (
+          <BlogCard
+            title={post.data.title}
+            slug={post.id}
+            pubDate={post.data.pubDate}
+            description={post.data.description}
+            featuredImage={post.data.featuredImage}
+            tags={post.data.tags}
+            readingTime={post.readingTime}
+          />
+        ))}
+      </section>
+
+      <!-- Empty state (shouldn't normally happen) -->
+      {postsWithMeta.length === 0 && (
+        <div class="text-center py-12">
+          <p class="text-text-muted-light dark:text-text-muted-dark">
+            No posts found with this tag.
+          </p>
+          <a
+            href="/blog"
+            class="mt-4 inline-block text-accent-teal hover:text-accent-teal-hover transition-colors"
+          >
+            View all posts
+          </a>
+        </div>
+      )}
+    </div>
+  </main>
+</BaseLayout>
