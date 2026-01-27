@@ -1,81 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Services from '../components/Services.astro';
+import Process from '../components/Process.astro';
+import FAQ from '../components/FAQ.astro';
+import About from '../components/About.astro';
 ---
 
-<BaseLayout title="Joel Shinness | Technology Partner for Small Business">
-  <main class="container mx-auto px-4 py-8">
-    <!-- Hero section -->
-    <section class="text-center py-16">
-      <h1 class="font-heading font-bold text-4xl md:text-5xl lg:text-6xl mb-4">
-        Design System Demo
-      </h1>
-      <p class="font-body text-lg md:text-xl text-text-muted-light dark:text-text-muted-dark max-w-2xl mx-auto">
-        This page demonstrates the foundation and design system for Joel Shinness's website.
-      </p>
-    </section>
-
-    <!-- Typography showcase -->
-    <section class="py-8 border-t border-text-light/10 dark:border-text-dark/10">
-      <h2 class="font-heading font-bold text-2xl md:text-3xl mb-4">Typography</h2>
-      <div class="space-y-4">
-        <h3 class="font-heading font-semibold text-xl">Heading 3 - Poppins</h3>
-        <p class="font-body text-base leading-relaxed">
-          Body text using Inter. This paragraph demonstrates the readable body font at base size with relaxed line height for comfortable reading.
-        </p>
-        <p class="font-body text-text-muted-light dark:text-text-muted-dark">
-          Muted text for secondary information.
-        </p>
-      </div>
-    </section>
-
-    <!-- Color showcase -->
-    <section class="py-8 border-t border-text-light/10 dark:border-text-dark/10">
-      <h2 class="font-heading font-bold text-2xl md:text-3xl mb-4">Colors</h2>
-      <div class="flex flex-wrap gap-4">
-        <button class="bg-accent-yellow hover:bg-accent-yellow-hover text-text-light px-6 py-3 font-body font-medium">
-          Yellow CTA Button
-        </button>
-        <button class="bg-accent-teal hover:bg-accent-teal-hover text-text-dark px-6 py-3 font-body font-medium">
-          Teal Secondary Button
-        </button>
-        <a href="#" class="text-accent-yellow hover:underline font-body">
-          Yellow accent link
-        </a>
-      </div>
-    </section>
-
-    <!-- Image treatment showcase -->
-    <section class="py-8 border-t border-text-light/10 dark:border-text-dark/10">
-      <h2 class="font-heading font-bold text-2xl md:text-3xl mb-4">Image Treatment</h2>
-      <figure class="border border-text-light dark:border-text-dark max-w-md">
-        <img
-          src="https://picsum.photos/800/600"
-          alt="Placeholder demonstrating B&W treatment"
-          class="grayscale w-full h-auto"
-        />
-      </figure>
-      <p class="font-body text-sm text-text-muted-light dark:text-text-muted-dark mt-2">
-        Images display in black & white with a thin border.
-      </p>
-    </section>
-
-    <!-- Responsive layout demo -->
-    <section class="py-8 border-t border-text-light/10 dark:border-text-dark/10">
-      <h2 class="font-heading font-bold text-2xl md:text-3xl mb-4">Responsive Grid</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="bg-bg-dark/5 dark:bg-bg-light/5 p-4">
-          <h3 class="font-heading font-semibold">Card 1</h3>
-          <p class="font-body text-sm">Responsive card that stacks on mobile.</p>
-        </div>
-        <div class="bg-bg-dark/5 dark:bg-bg-light/5 p-4">
-          <h3 class="font-heading font-semibold">Card 2</h3>
-          <p class="font-body text-sm">Two columns on tablet, three on desktop.</p>
-        </div>
-        <div class="bg-bg-dark/5 dark:bg-bg-light/5 p-4">
-          <h3 class="font-heading font-semibold">Card 3</h3>
-          <p class="font-body text-sm">Tests responsive grid behavior.</p>
-        </div>
-      </div>
-    </section>
-  </main>
+<BaseLayout title="Joel Shinness | Custom Software for Small Business">
+  <Hero />
+  <Services />
+  <Process />
+  <FAQ />
+  <About />
 </BaseLayout>
