@@ -98,43 +98,43 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| HOME-01 | TBD | Pending |
-| HOME-02 | TBD | Pending |
-| HOME-03 | TBD | Pending |
-| HOME-04 | TBD | Pending |
-| HOME-05 | TBD | Pending |
-| PORT-01 | TBD | Pending |
-| PORT-02 | TBD | Pending |
-| PORT-03 | TBD | Pending |
-| PORT-04 | TBD | Pending |
-| PORT-05 | TBD | Pending |
-| PORT-06 | TBD | Pending |
-| BLOG-01 | TBD | Pending |
-| BLOG-02 | TBD | Pending |
-| BLOG-03 | TBD | Pending |
-| BLOG-04 | TBD | Pending |
-| CONT-01 | TBD | Pending |
-| CONT-02 | TBD | Pending |
-| CONT-03 | TBD | Pending |
-| CONT-04 | TBD | Pending |
-| DSGN-01 | TBD | Pending |
-| DSGN-02 | TBD | Pending |
-| DSGN-03 | TBD | Pending |
-| DSGN-04 | TBD | Pending |
-| DSGN-05 | TBD | Pending |
-| TECH-01 | TBD | Pending |
-| TECH-02 | TBD | Pending |
-| TECH-03 | TBD | Pending |
-| TECH-04 | TBD | Pending |
-| TECH-05 | TBD | Pending |
-| TECH-06 | TBD | Pending |
-| TECH-07 | TBD | Pending |
+| HOME-01 | Phase 2 | Pending |
+| HOME-02 | Phase 2 | Pending |
+| HOME-03 | Phase 2 | Pending |
+| HOME-04 | Phase 2 | Pending |
+| HOME-05 | Phase 2 | Pending |
+| PORT-01 | Phase 3 | Pending |
+| PORT-02 | Phase 3 | Pending |
+| PORT-03 | Phase 3 | Pending |
+| PORT-04 | Phase 3 | Pending |
+| PORT-05 | Phase 3 | Pending |
+| PORT-06 | Phase 3 | Pending |
+| BLOG-01 | Phase 5 | Pending |
+| BLOG-02 | Phase 5 | Pending |
+| BLOG-03 | Phase 5 | Pending |
+| BLOG-04 | Phase 5 | Pending |
+| CONT-01 | Phase 4 | Pending |
+| CONT-02 | Phase 4 | Pending |
+| CONT-03 | Phase 4 | Pending |
+| CONT-04 | Phase 4 | Pending |
+| DSGN-01 | Phase 1 | Pending |
+| DSGN-02 | Phase 1 | Pending |
+| DSGN-03 | Phase 1 | Pending |
+| DSGN-04 | Phase 1 | Pending |
+| DSGN-05 | Phase 1 | Pending |
+| TECH-01 | Phase 1 | Pending |
+| TECH-02 | Phase 1 | Pending |
+| TECH-03 | Phase 6 | Pending |
+| TECH-04 | Phase 6 | Pending |
+| TECH-05 | Phase 6 | Pending |
+| TECH-06 | Phase 6 | Pending |
+| TECH-07 | Phase 6 | Pending |
 
 **Coverage:**
 - v1 requirements: 31 total
-- Mapped to phases: 0
-- Unmapped: 31 (pending roadmap creation)
+- Mapped to phases: 31
+- Unmapped: 0
 
 ---
 *Requirements defined: 2025-01-26*
-*Last updated: 2025-01-26 after initial definition*
+*Last updated: 2026-01-26 after roadmap creation*
