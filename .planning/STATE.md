@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-01-26)
 
 **Core value:** Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
-**Current focus:** Phase 3 - Portfolio & Case Studies (complete)
+**Current focus:** Phase 4 - Contact & Conversion (in progress)
 
 ## Current Position
 
-Phase: 3 of 6 (Portfolio & Case Studies)
-Plan: 4 of 4 in current phase
-Status: Phase complete
-Last activity: 2026-01-27 — Completed 03-04-PLAN.md (verification)
+Phase: 4 of 6 (Contact & Conversion)
+Plan: 2 of 3 in current phase (04-02 complete)
+Status: In progress
+Last activity: 2026-01-27 — Completed 04-02-PLAN.md (footer social links)
 
-Progress: [█████░░░░░] 50%
+Progress: [██████░░░░] 55%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 11
+- Total plans completed: 12
 - Average duration: 2 min
-- Total execution time: 0.32 hours
+- Total execution time: 0.34 hours
 
 **By Phase:**
 
@@ -30,10 +30,11 @@ Progress: [█████░░░░░] 50%
 | 01-foundation-design-system | 3 | 9min | 3min |
 | 02-core-content-positioning | 4 | 4min | 1min |
 | 03-portfolio-case-studies | 4 | 7min | 2min |
+| 04-contact-conversion | 1 | 1min | 1min |
 
 **Recent Trend:**
-- Last 5 plans: 03-01 (2min), 03-02 (2min), 03-03 (1min), 03-04 (<1min)
-- Trend: Phase 3 complete - all portfolio features verified
+- Last 5 plans: 03-02 (2min), 03-03 (1min), 03-04 (<1min), 04-02 (1min)
+- Trend: Phase 4 in progress - social links complete
 
 *Updated after each plan completion*
 
@@ -115,6 +116,11 @@ Recent decisions affecting current work:
 - Responsive design works on mobile
 - Phase 3 success criteria met
 
+**From 04-02:**
+- Lucide icons via lucide-static package (tree-shakeable, no React required)
+- Icon sizing via scoped CSS targeting .social-link svg
+- External link pattern: target=_blank + rel=noopener noreferrer + aria-label mentioning new tab
+
 ### Pending Todos
 
 None yet.
@@ -147,10 +153,10 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-01-27
-Stopped at: Completed 03-04-PLAN.md (Phase 3 complete)
+Stopped at: Completed 04-02-PLAN.md (footer social links)
 Resume file: None
-Next phase: Phase 4 (Contact & Conversion) - not yet planned
+Next: Continue with 04-01 (contact form) or 04-03 (verification)
 
 ---
 *State initialized: 2026-01-26*
-*Last updated: 2026-01-27 (Phase 3 complete)*
+*Last updated: 2026-01-27 (04-02 complete)*
