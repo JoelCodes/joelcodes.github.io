@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-01-26)
 
 **Core value:** Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
-**Current focus:** Phase 4 - Contact & Conversion (complete)
+**Current focus:** Phase 5 - Blog & Content Marketing (in progress)
 
 ## Current Position
 
-Phase: 4 of 6 (Contact & Conversion)
-Plan: 3 of 3 in current phase
-Status: Phase complete
-Last activity: 2026-01-27 — Completed 04-03-PLAN.md (verification)
+Phase: 5 of 6 (Blog & Content Marketing)
+Plan: 1 of 4 in current phase
+Status: In progress
+Last activity: 2026-01-27 — Completed 05-01-PLAN.md (blog infrastructure)
 
-Progress: [██████░░░░] 67%
+Progress: [███████░░░] 71%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 14
+- Total plans completed: 15
 - Average duration: 2 min
-- Total execution time: 0.40 hours
+- Total execution time: 0.43 hours
 
 **By Phase:**
 
@@ -31,10 +31,11 @@ Progress: [██████░░░░] 67%
 | 02-core-content-positioning | 4 | 4min | 1min |
 | 03-portfolio-case-studies | 4 | 7min | 2min |
 | 04-contact-conversion | 3 | 4min | 1min |
+| 05-blog-content-marketing | 1 | 2min | 2min |
 
 **Recent Trend:**
-- Last 5 plans: 03-04 (<1min), 04-01 (2min), 04-02 (1min), 04-03 (<1min)
-- Trend: Phase 4 complete - all contact features verified
+- Last 5 plans: 04-01 (2min), 04-02 (1min), 04-03 (<1min), 05-01 (2min)
+- Trend: Phase 5 started - blog infrastructure complete
 
 *Updated after each plan completion*
 
@@ -135,6 +136,12 @@ Recent decisions affecting current work:
 - Error handling verified (shows fallback email when Formspree unavailable)
 - Placeholder Formspree ID accepted (configure at deployment)
 
+**From 05-01:**
+- expressiveCode() before mdx() in integrations array (required for code block features)
+- Open-ended tags array with default empty (flexible categorization)
+- featuredImage required field (per CONTEXT.md)
+- Content collection at src/content.config.ts with glob loader pattern
+
 ### Pending Todos
 
 None yet.
@@ -142,40 +149,47 @@ None yet.
 ### Blockers/Concerns
 
 **Phase 1 complete:**
-- ✅ Design system validated on mobile via browser DevTools and human verification
-- ✅ All foundation requirements met (responsive design, mobile nav, dark mode, typography, colors)
+- Design system validated on mobile via browser DevTools and human verification
+- All foundation requirements met (responsive design, mobile nav, dark mode, typography, colors)
 
 **Phase 2 complete:**
-- ✅ All 4 plans executed successfully
-- ✅ All 5 core homepage sections complete and composed
-- ✅ Demo content fully replaced with real homepage
-- ✅ User verified homepage meets expectations
-- ✅ All Phase 2 success criteria validated
+- All 4 plans executed successfully
+- All 5 core homepage sections complete and composed
+- Demo content fully replaced with real homepage
+- User verified homepage meets expectations
+- All Phase 2 success criteria validated
 - Minor placeholder items (About photo, personal paragraph) can be customized anytime
 
 **Phase 3 complete:**
-- ✅ Portfolio grid page with category filtering (03-01)
-- ✅ Case study detail pages with problem/solution/results (03-02)
-- ✅ Portfolio data wiring and navigation (03-03)
-- ✅ Human verification passed (03-04)
-- ✅ All 6 PORT requirements satisfied
+- Portfolio grid page with category filtering (03-01)
+- Case study detail pages with problem/solution/results (03-02)
+- Portfolio data wiring and navigation (03-03)
+- Human verification passed (03-04)
+- All 6 PORT requirements satisfied
 - Portfolio uses placeholder images (real images to be added as available)
 
 **Phase 4 complete:**
-- ✅ Contact form with validation and Formspree submission (04-01)
-- ✅ Social links in footer with accessibility (04-02)
-- ✅ Human verification passed (04-03)
-- ✅ All 4 CONT requirements satisfied
+- Contact form with validation and Formspree submission (04-01)
+- Social links in footer with accessibility (04-02)
+- Human verification passed (04-03)
+- All 4 CONT requirements satisfied
 - Note: Formspree form ID is placeholder (YOUR_FORM_ID) - configure before deployment
 - Formspree free tier limit is 50 submissions/month — sufficient for early stage
+
+**Phase 5 in progress:**
+- Blog infrastructure complete (05-01)
+- Content collection with Zod schema ready
+- MDX + Expressive Code integrations installed
+- Sample blog post available for testing
+- Next: Blog listing page (05-02)
 
 ## Session Continuity
 
 Last session: 2026-01-27
-Stopped at: Completed 04-03-PLAN.md (Phase 4 complete)
+Stopped at: Completed 05-01-PLAN.md (blog infrastructure)
 Resume file: None
-Next phase: Phase 5 (Blog & Content Marketing) - not yet planned
+Next plan: 05-02-PLAN.md (blog listing page)
 
 ---
 *State initialized: 2026-01-26*
-*Last updated: 2026-01-27 (Phase 4 complete)*
+*Last updated: 2026-01-27 (05-01 complete)*
