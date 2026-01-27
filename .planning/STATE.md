@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-01-26)
 ## Current Position
 
 Phase: 5 of 6 (Blog & Content Marketing)
-Plan: 1 of 4 in current phase
+Plan: 3 of 4 in current phase
 Status: In progress
-Last activity: 2026-01-27 — Completed 05-01-PLAN.md (blog infrastructure)
+Last activity: 2026-01-27 - Completed 05-03-PLAN.md (blog post page)
 
-Progress: [███████░░░] 71%
+Progress: [████████░░] 77%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 15
+- Total plans completed: 17
 - Average duration: 2 min
-- Total execution time: 0.43 hours
+- Total execution time: 0.48 hours
 
 **By Phase:**
 
@@ -31,11 +31,11 @@ Progress: [███████░░░] 71%
 | 02-core-content-positioning | 4 | 4min | 1min |
 | 03-portfolio-case-studies | 4 | 7min | 2min |
 | 04-contact-conversion | 3 | 4min | 1min |
-| 05-blog-content-marketing | 1 | 2min | 2min |
+| 05-blog-content-marketing | 3 | 5min | 2min |
 
 **Recent Trend:**
-- Last 5 plans: 04-01 (2min), 04-02 (1min), 04-03 (<1min), 05-01 (2min)
-- Trend: Phase 5 started - blog infrastructure complete
+- Last 5 plans: 04-02 (1min), 04-03 (<1min), 05-01 (2min), 05-02 (~3min), 05-03 (3min)
+- Trend: Phase 5 progressing smoothly
 
 *Updated after each plan completion*
 
@@ -83,7 +83,7 @@ Recent decisions affecting current work:
 - About section positioned last (business-first, then humanize per CONTEXT.md)
 - Credibility stats prominently displayed with teal accent (10+ years, 50+ projects)
 - Two-column layout with image left, content right (woven narrative, not resume)
-- Complete homepage assembled: Hero → Services → Process → FAQ → About
+- Complete homepage assembled: Hero -> Services -> Process -> FAQ -> About
 - Page title updated to "Custom Software for Small Business" for clarity
 
 **From 02-04:**
@@ -102,13 +102,13 @@ Recent decisions affecting current work:
 - JSON data structure for projects (simpler than Markdown frontmatter)
 - Inline onerror fallback for missing images (placeholder UI with icon)
 - Screenshot lazy loading (below fold performance optimization)
-- Case study flow: Problem → Solution → Screenshots → Results
+- Case study flow: Problem -> Solution -> Screenshots -> Results
 - Conditional testimonial rendering (only show if exists)
 
 **From 03-03:**
 - Replaced hardcoded cards with projects.map() for data-driven rendering
 - Portfolio navigation link already existed from previous phase
-- Complete visitor journey: Nav → Portfolio grid → Case study pages
+- Complete visitor journey: Nav -> Portfolio grid -> Case study pages
 
 **From 03-04:**
 - All portfolio features verified by user
@@ -142,6 +142,13 @@ Recent decisions affecting current work:
 - featuredImage required field (per CONTEXT.md)
 - Content collection at src/content.config.ts with glob loader pattern
 
+**From 05-03:**
+- Use render() from astro:content (not entry.render()) for glob loader entries
+- Three-column grid layout with TOC left, content center, empty right for balance
+- TOC hidden on mobile (< lg breakpoint)
+- 65ch max-width for optimal reading experience
+- IntersectionObserver for scroll-aware TOC highlighting
+
 ### Pending Todos
 
 None yet.
@@ -174,22 +181,22 @@ None yet.
 - Human verification passed (04-03)
 - All 4 CONT requirements satisfied
 - Note: Formspree form ID is placeholder (YOUR_FORM_ID) - configure before deployment
-- Formspree free tier limit is 50 submissions/month — sufficient for early stage
+- Formspree free tier limit is 50 submissions/month - sufficient for early stage
 
 **Phase 5 in progress:**
 - Blog infrastructure complete (05-01)
-- Content collection with Zod schema ready
-- MDX + Expressive Code integrations installed
-- Sample blog post available for testing
-- Next: Blog listing page (05-02)
+- Blog listing page with tag filtering complete (05-02)
+- Blog post page with TOC and prose styling complete (05-03)
+- Expressive Code syntax highlighting with copy buttons working
+- Next: Blog footer with sharing and related posts (05-04)
 
 ## Session Continuity
 
 Last session: 2026-01-27
-Stopped at: Completed 05-01-PLAN.md (blog infrastructure)
+Stopped at: Completed 05-03-PLAN.md (blog post page)
 Resume file: None
-Next plan: 05-02-PLAN.md (blog listing page)
+Next plan: 05-04-PLAN.md (blog footer)
 
 ---
 *State initialized: 2026-01-26*
-*Last updated: 2026-01-27 (05-01 complete)*
+*Last updated: 2026-01-27 (05-03 complete)*
