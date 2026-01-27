@@ -48,3 +48,37 @@
     transform: scale(1);
   }
 }
+
+/* Table of Contents styling */
+.toc {
+  position: sticky;
+  top: 6rem; /* Below sticky header */
+  max-height: calc(100vh - 8rem);
+  overflow-y: auto;
+}
+
+.toc a {
+  display: block;
+  padding: 0.25rem 0;
+  color: var(--color-text-muted-light);
+  transition: color 0.2s;
+  text-decoration: none;
+}
+
+.dark .toc a {
+  color: var(--color-text-muted-dark);
+}
+
+.toc a:hover,
+.toc a.active {
+  color: var(--color-accent-teal);
+}
+
+.toc-2 {
+  font-size: 0.875rem;
+}
+
+.toc-3 {
+  padding-left: 1rem;
+  font-size: 0.8125rem;
+}
