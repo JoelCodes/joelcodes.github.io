@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation & Design System** - Set up Astro/Tailwind project with responsive design system
 - [x] **Phase 2: Core Content & Positioning** - Build homepage with value proposition, services, process, and about sections
-- [ ] **Phase 3: Portfolio & Case Studies** - Create portfolio grid and detailed case study pages with business outcomes
+- [x] **Phase 3: Portfolio & Case Studies** - Create portfolio grid and detailed case study pages with business outcomes
 - [ ] **Phase 4: Contact & Conversion** - Implement contact form with Formspree integration and FAQ section
 - [ ] **Phase 5: Blog & Content Marketing** - Build blog listing and post pages with MDX support and category filtering
 - [ ] **Phase 6: Performance & SEO** - Optimize images, implement SEO meta tags, and configure GitHub Pages deployment
@@ -69,10 +69,10 @@ Plans:
 **Plans**: 4 plans in 3 waves
 
 Plans:
-- [ ] 03-01-PLAN.md — Create portfolio page with filterable grid layout
-- [ ] 03-02-PLAN.md — Create case study page template with sample content
-- [ ] 03-03-PLAN.md — Wire portfolio grid to project data and add navigation
-- [ ] 03-04-PLAN.md — Human verification of complete portfolio feature
+- [x] 03-01-PLAN.md — Create portfolio page with filterable grid layout
+- [x] 03-02-PLAN.md — Create case study page template with sample content
+- [x] 03-03-PLAN.md — Wire portfolio grid to project data and add navigation
+- [x] 03-04-PLAN.md — Human verification of complete portfolio feature
 
 ### Phase 4: Contact & Conversion
 **Goal**: Visitors can easily contact Joel with clear success feedback
@@ -128,11 +128,11 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 |-------|----------------|--------|-----------|
 | 1. Foundation & Design System | 3/3 | ✓ Complete | 2026-01-27 |
 | 2. Core Content & Positioning | 4/4 | ✓ Complete | 2026-01-27 |
-| 3. Portfolio & Case Studies | 0/4 | Planned | - |
+| 3. Portfolio & Case Studies | 4/4 | ✓ Complete | 2026-01-27 |
 | 4. Contact & Conversion | 0/TBD | Not started | - |
 | 5. Blog & Content Marketing | 0/TBD | Not started | - |
 | 6. Performance & SEO | 0/TBD | Not started | - |
 
 ---
 *Roadmap created: 2026-01-26*
-*Last updated: 2026-01-27*
+*Last updated: 2026-01-27 (Phase 3 complete)*

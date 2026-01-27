@@ -17,12 +17,12 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Portfolio
 
-- [ ] **PORT-01**: Portfolio page displays case study cards with thumbnail and title
-- [ ] **PORT-02**: Case study page shows screenshots/images of the project
-- [ ] **PORT-03**: Case study page describes the problem that was solved
-- [ ] **PORT-04**: Case study page describes the solution that was built
-- [ ] **PORT-05**: Case study page lists technologies used
-- [ ] **PORT-06**: Case study page shows business results/outcomes
+- [x] **PORT-01**: Portfolio page displays case study cards with thumbnail and title
+- [x] **PORT-02**: Case study page shows screenshots/images of the project
+- [x] **PORT-03**: Case study page describes the problem that was solved
+- [x] **PORT-04**: Case study page describes the solution that was built
+- [x] **PORT-05**: Case study page lists technologies used
+- [x] **PORT-06**: Case study page shows business results/outcomes
 
 ### Blog
 
@@ -103,12 +103,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 | HOME-03 | Phase 2 | Complete |
 | HOME-04 | Phase 2 | Complete |
 | HOME-05 | Phase 2 | Complete |
-| PORT-01 | Phase 3 | Pending |
-| PORT-02 | Phase 3 | Pending |
-| PORT-03 | Phase 3 | Pending |
-| PORT-04 | Phase 3 | Pending |
-| PORT-05 | Phase 3 | Pending |
-| PORT-06 | Phase 3 | Pending |
+| PORT-01 | Phase 3 | Complete |
+| PORT-02 | Phase 3 | Complete |
+| PORT-03 | Phase 3 | Complete |
+| PORT-04 | Phase 3 | Complete |
+| PORT-05 | Phase 3 | Complete |
+| PORT-06 | Phase 3 | Complete |
 | BLOG-01 | Phase 5 | Pending |
 | BLOG-02 | Phase 5 | Pending |
 | BLOG-03 | Phase 5 | Pending |
@@ -137,4 +137,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2025-01-26*
-*Last updated: 2026-01-27 after Phase 2 completion*
+*Last updated: 2026-01-27 after Phase 3 completion*
