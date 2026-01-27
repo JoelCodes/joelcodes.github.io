@@ -66,10 +66,13 @@ Plans:
   3. Each case study describes the problem that was solved
   4. Each case study describes the solution and technologies used
   5. Each case study shows business results or outcomes (metrics preferred)
-**Plans**: TBD
+**Plans**: 4 plans in 3 waves
 
 Plans:
-- [ ] TBD (planning not started)
+- [ ] 03-01-PLAN.md — Create portfolio page with filterable grid layout
+- [ ] 03-02-PLAN.md — Create case study page template with sample content
+- [ ] 03-03-PLAN.md — Wire portfolio grid to project data and add navigation
+- [ ] 03-04-PLAN.md — Human verification of complete portfolio feature
 
 ### Phase 4: Contact & Conversion
 **Goal**: Visitors can easily contact Joel with clear success feedback
@@ -125,7 +128,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 |-------|----------------|--------|-----------|
 | 1. Foundation & Design System | 3/3 | ✓ Complete | 2026-01-27 |
 | 2. Core Content & Positioning | 4/4 | ✓ Complete | 2026-01-27 |
-| 3. Portfolio & Case Studies | 0/TBD | Not started | - |
+| 3. Portfolio & Case Studies | 0/4 | Planned | - |
 | 4. Contact & Conversion | 0/TBD | Not started | - |
 | 5. Blog & Content Marketing | 0/TBD | Not started | - |
 | 6. Performance & SEO | 0/TBD | Not started | - |
