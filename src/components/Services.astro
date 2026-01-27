@@ -1,0 +1,43 @@
+---
+// Services component: Three equal service cards with descriptions and examples
+const services = [
+  {
+    title: "Web Apps",
+    description: "Custom applications built for your exact workflow.",
+    example: "Like a custom CRM for your sales team"
+  },
+  {
+    title: "Automation",
+    description: "Connect your tools and eliminate manual work.",
+    example: "Like syncing orders to your fulfillment system"
+  },
+  {
+    title: "AI Development",
+    description: "Intelligent features that enhance your product.",
+    example: "Like smart document processing for your team"
+  }
+];
+---
+
+<section class="services py-16 px-6">
+  <div class="container max-w-6xl mx-auto">
+    <h2 class="font-heading text-3xl md:text-4xl font-bold text-center mb-12 text-text-light dark:text-text-dark">
+      What I Build
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {services.map(service => (
+        <article class="service-card p-6 border border-text-muted-light/20 dark:border-text-muted-dark/20 rounded-lg bg-bg-light dark:bg-bg-dark">
+          <h3 class="font-heading text-xl md:text-2xl font-semibold mb-3 text-text-light dark:text-text-dark">
+            {service.title}
+          </h3>
+          <p class="font-body text-base mb-3 text-text-light dark:text-text-dark">
+            {service.description}
+          </p>
+          <p class="font-body text-sm italic text-text-muted-light dark:text-text-muted-dark">
+            {service.example}
+          </p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
