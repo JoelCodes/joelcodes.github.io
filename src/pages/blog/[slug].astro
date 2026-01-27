@@ -1,0 +1,105 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TableOfContents from '../../components/TableOfContents.astro';
+import { readingTime } from 'reading-time-estimator';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => {
+    return import.meta.env.PROD ? !data.draft : true;
+  });
+
+  return posts.map(post => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+
+// Calculate reading time from rendered content
+const readTime = readingTime(post.body || '', 200);
+
+// Format date
+const formattedDate = new Date(post.data.pubDate).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <div class="container mx-auto px-4 py-12">
+    <!-- Back link -->
+    <a href="/blog" class="inline-flex items-center gap-2 text-text-muted-light dark:text-text-muted-dark hover:text-accent-teal transition-colors mb-8">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m15 18-6-6 6-6"/>
+      </svg>
+      Back to Blog
+    </a>
+
+    <!-- Three-column grid on desktop -->
+    <div class="grid grid-cols-1 lg:grid-cols-[200px_1fr_200px] gap-8 lg:gap-12">
+      <!-- Left column: TOC (sticky) -->
+      <aside class="hidden lg:block">
+        <TableOfContents headings={headings} />
+      </aside>
+
+      <!-- Center column: Main content -->
+      <article class="max-w-[65ch] mx-auto lg:mx-0">
+        <!-- Post header -->
+        <header class="mb-8">
+          <h1 class="font-heading text-3xl md:text-4xl font-bold mb-4">
+            {post.data.title}
+          </h1>
+
+          <!-- Metadata row -->
+          <div class="flex flex-wrap items-center gap-4 text-sm text-text-muted-light dark:text-text-muted-dark mb-6">
+            <time datetime={post.data.pubDate.toISOString()}>
+              {formattedDate}
+            </time>
+            <span aria-hidden="true">|</span>
+            <span>{readTime.text}</span>
+          </div>
+
+          <!-- Tags -->
+          {post.data.tags && post.data.tags.length > 0 && (
+            <div class="flex flex-wrap gap-2 mb-6">
+              {post.data.tags.map((tag: string) => (
+                <span class="px-3 py-1 text-sm rounded-full bg-accent-teal/10 text-accent-teal">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+
+          <!-- Featured image -->
+          <img
+            src={post.data.featuredImage}
+            alt=""
+            class="w-full rounded-lg mb-8"
+          />
+        </header>
+
+        <!-- MDX content -->
+        <div class="prose">
+          <Content />
+        </div>
+
+        <!-- Back link at bottom -->
+        <div class="mt-12 pt-8 border-t border-text-muted-light/20 dark:border-text-muted-dark/20">
+          <a href="/blog" class="inline-flex items-center gap-2 text-accent-teal hover:underline">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m15 18-6-6 6-6"/>
+            </svg>
+            Back to Blog
+          </a>
+        </div>
+      </article>
+
+      <!-- Right column: Empty (for balance) -->
+      <div class="hidden lg:block"></div>
+    </div>
+  </div>
+</BaseLayout>
