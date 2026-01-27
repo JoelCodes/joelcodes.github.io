@@ -163,6 +163,12 @@ Recent decisions affecting current work:
 - Blog nav link already existed from previous work
 - Human verification passed for all blog features
 
+**From 06-02:**
+- @astrojs/sitemap for sitemap generation with weekly changefreq
+- astro-robots-txt for robots.txt with auto sitemap reference
+- Site URL set to joelshinness.com canonical domain
+- Build generates sitemap-index.xml and robots.txt automatically
+
 **From 06-03:**
 - Hero is text-only (no images) - no eager loading optimization needed
 - dns-prefetch added as fallback for preconnect (fonts.gstatic.com)
@@ -214,13 +220,14 @@ None yet.
 
 **Phase 6 in progress:**
 - SEO component with meta tags and JSON-LD (06-01)
+- Sitemap and robots.txt generation (06-02)
 - Image and font optimization with lazy loading (06-03)
-- Remaining: sitemap/robots.txt (06-02), verification (06-04)
+- Remaining: verification (06-04)
 
 ## Session Continuity
 
 Last session: 2026-01-27
-Stopped at: Completed 06-03-PLAN.md (image and font optimization)
+Stopped at: Completed 06-02-PLAN.md (sitemap and robots.txt)
 Resume file: None
 Next plan: 06-04-PLAN.md (verification)
 
