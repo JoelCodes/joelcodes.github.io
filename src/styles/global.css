@@ -5,9 +5,9 @@
   --color-accent-yellow: oklch(0.85 0.18 85);
   --color-accent-yellow-hover: oklch(0.80 0.20 85);
 
-  /* Teal accent - calm, complementary */
-  --color-accent-teal: oklch(0.65 0.15 180);
-  --color-accent-teal-hover: oklch(0.60 0.17 180);
+  /* Teal accent - calm, complementary (darkened for WCAG AA contrast) */
+  --color-accent-teal: oklch(0.45 0.15 180);
+  --color-accent-teal-hover: oklch(0.40 0.17 180);
 
   /* Backgrounds - pure contrast */
   --color-bg-light: #ffffff;
@@ -72,8 +72,9 @@
   display: block;
   padding: 0.25rem 0;
   color: var(--color-text-muted-light);
-  transition: color 0.2s;
-  text-decoration: none;
+  transition: color 0.2s, text-decoration-color 0.2s;
+  text-decoration: underline;
+  text-decoration-color: transparent;
 }
 
 .dark .toc a {
@@ -81,8 +82,10 @@
 }
 
 .toc a:hover,
+.toc a:focus,
 .toc a.active {
   color: var(--color-accent-teal);
+  text-decoration-color: currentColor;
 }
 
 .toc-2 {
