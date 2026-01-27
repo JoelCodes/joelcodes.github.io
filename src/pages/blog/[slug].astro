@@ -78,11 +78,14 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString('en-US', {
           )}
 
           <!-- Featured image -->
-          <img
-            src={post.data.featuredImage}
-            alt=""
-            class="w-full rounded-lg mb-8"
-          />
+          <div class="bg-gray-200 dark:bg-gray-700 rounded-lg mb-8">
+            <img
+              src={post.data.featuredImage}
+              alt=""
+              class="w-full rounded-lg"
+              loading="lazy"
+            />
+          </div>
         </header>
 
         <!-- MDX content -->
