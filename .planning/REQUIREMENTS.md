@@ -33,10 +33,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Contact
 
-- [ ] **CONT-01**: Contact form with name, email, and message fields
-- [ ] **CONT-02**: Contact form submits to email via Formspree or similar
-- [ ] **CONT-03**: Contact form shows success/error feedback
-- [ ] **CONT-04**: Social links (LinkedIn, GitHub, etc.) displayed in footer/header
+- [x] **CONT-01**: Contact form with name, email, and message fields
+- [x] **CONT-02**: Contact form submits to email via Formspree or similar
+- [x] **CONT-03**: Contact form shows success/error feedback
+- [x] **CONT-04**: Social links (LinkedIn, GitHub, etc.) displayed in footer/header
 
 ### Design & Branding
 
@@ -113,10 +113,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | BLOG-02 | Phase 5 | Pending |
 | BLOG-03 | Phase 5 | Pending |
 | BLOG-04 | Phase 5 | Pending |
-| CONT-01 | Phase 4 | Pending |
-| CONT-02 | Phase 4 | Pending |
-| CONT-03 | Phase 4 | Pending |
-| CONT-04 | Phase 4 | Pending |
+| CONT-01 | Phase 4 | Complete |
+| CONT-02 | Phase 4 | Complete |
+| CONT-03 | Phase 4 | Complete |
+| CONT-04 | Phase 4 | Complete |
 | DSGN-01 | Phase 1 | Complete |
 | DSGN-02 | Phase 1 | Complete |
 | DSGN-03 | Phase 1 | Complete |
@@ -137,4 +137,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2025-01-26*
-*Last updated: 2026-01-27 after Phase 3 completion*
+*Last updated: 2026-01-27 after Phase 4 completion*
