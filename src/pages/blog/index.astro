@@ -18,7 +18,7 @@ const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags))];
 
 // Calculate reading time for each post
 const postsWithMeta = sortedPosts.map((post) => {
-  const stats = readingTime(post.body || '', 265);
+  const stats = readingTime(post.body || '', { wordsPerMinute: 265 });
   return { ...post, readingTime: Math.ceil(stats.minutes) };
 });
 ---

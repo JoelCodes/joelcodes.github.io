@@ -39,7 +39,7 @@ import { Loader2 } from 'lucide-static';
             class="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-text-light dark:text-text-dark font-body focus:outline-none focus:ring-2 focus:ring-accent-teal focus:border-transparent transition-colors"
             placeholder="Your name"
           />
-          <span id="name-error" class="block text-sm text-red-600 mt-1 min-h-[1.25rem]" aria-live="polite"></span>
+          <span id="name-error" class="block text-sm text-red-600 mt-1 min-h-5" aria-live="polite"></span>
         </div>
 
         <!-- Email Field -->
@@ -56,7 +56,7 @@ import { Loader2 } from 'lucide-static';
             class="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-text-light dark:text-text-dark font-body focus:outline-none focus:ring-2 focus:ring-accent-teal focus:border-transparent transition-colors"
             placeholder="you@example.com"
           />
-          <span id="email-error" class="block text-sm text-red-600 mt-1 min-h-[1.25rem]" aria-live="polite"></span>
+          <span id="email-error" class="block text-sm text-red-600 mt-1 min-h-5" aria-live="polite"></span>
         </div>
 
         <!-- Project Type Field (Optional) -->
@@ -91,7 +91,7 @@ import { Loader2 } from 'lucide-static';
             class="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-text-light dark:text-text-dark font-body focus:outline-none focus:ring-2 focus:ring-accent-teal focus:border-transparent transition-colors resize-y"
             placeholder="Tell me about your project..."
           ></textarea>
-          <span id="message-error" class="block text-sm text-red-600 mt-1 min-h-[1.25rem]" aria-live="polite"></span>
+          <span id="message-error" class="block text-sm text-red-600 mt-1 min-h-5" aria-live="polite"></span>
         </div>
 
         <!-- Form Error Message Container -->
@@ -185,6 +185,7 @@ import { Loader2 } from 'lucide-static';
       errorElement: document.getElementById('name-error') as HTMLSpanElement,
       messages: {
         valueMissing: 'Please enter your name.',
+        typeMismatch: '',
         tooShort: 'Name must be at least 2 characters.'
       }
     },
@@ -193,7 +194,8 @@ import { Loader2 } from 'lucide-static';
       errorElement: document.getElementById('email-error') as HTMLSpanElement,
       messages: {
         valueMissing: 'Please enter your email address.',
-        typeMismatch: 'Please enter a valid email address.'
+        typeMismatch: 'Please enter a valid email address.',
+        tooShort: ''
       }
     },
     message: {
@@ -201,6 +203,7 @@ import { Loader2 } from 'lucide-static';
       errorElement: document.getElementById('message-error') as HTMLSpanElement,
       messages: {
         valueMissing: 'Please enter a message.',
+        typeMismatch: '',
         tooShort: 'Message must be at least 10 characters.'
       }
     }
@@ -214,9 +217,9 @@ import { Loader2 } from 'lucide-static';
     if (validity.valueMissing) {
       config.errorElement.textContent = config.messages.valueMissing;
     } else if (validity.typeMismatch) {
-      config.errorElement.textContent = config.messages.typeMismatch || '';
+      config.errorElement.textContent = config.messages.typeMismatch;
     } else if (validity.tooShort) {
-      config.errorElement.textContent = config.messages.tooShort || '';
+      config.errorElement.textContent = config.messages.tooShort;
     } else {
       config.errorElement.textContent = '';
     }
