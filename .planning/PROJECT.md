@@ -2,7 +2,9 @@
 
 ## What This Is
 
-A personal website for Joel Shinness to attract freelance/consulting clients from small businesses. The site communicates expertise in web apps, automation, and AI development, explains his client-friendly process, showcases work through case studies, and makes it easy for potential clients to get in touch.
+A lead-generation focused portfolio website for Joel Shinness targeting small business clients. The site communicates expertise in web apps, automation, and AI development through clear positioning, case study showcase, and blog content.
+
+**Current state:** v1.0 shipped. Live at GitHub Pages (pending deployment).
 
 ## Core Value
 
@@ -12,49 +14,61 @@ Small business owners can understand what Joel does, trust his process, and easi
 
 ### Validated
 
-(None yet — ship to validate)
+*Shipped in v1.0:*
+
+- ✓ Homepage with clear value proposition and services overview — v1.0
+- ✓ Services section explaining web apps, automation, and AI development — v1.0
+- ✓ Process section showing 5-step workflow — v1.0
+- ✓ Portfolio with case study format (screenshots, problem, solution, results) — v1.0
+- ✓ About section on homepage — v1.0
+- ✓ Blog with MDX, tag filtering, and syntax highlighting — v1.0
+- ✓ FAQ section addressing common objections — v1.0
+- ✓ Contact form with Formspree integration — v1.0
+- ✓ Responsive design (mobile, tablet, desktop) — v1.0
+- ✓ Dark mode with persistence — v1.0
+- ✓ B&W photography with yellow/teal accents — v1.0
+- ✓ SEO meta tags and JSON-LD structured data — v1.0
+- ✓ Lighthouse 90+ performance — v1.0 (achieved 92)
 
 ### Active
 
-- [ ] Homepage with clear value proposition and services overview
-- [ ] Services section explaining web apps, automation, and AI development offerings
-- [ ] Process section showing: Discovery → Prototype → Proposal → Build → Handover
-- [ ] Portfolio with case study format (screenshots, problem, solution, technologies)
-- [ ] About page with background and story
-- [ ] Blog section for articles and thought leadership
-- [ ] Testimonials section for social proof
-- [ ] Contact form that emails Joel
-- [ ] Responsive design that works on mobile and desktop
-- [ ] Vibrant visual design: B&W photography, yellow/teal accents, playful fonts
+(None — define in next milestone)
 
 ### Out of Scope
 
-- Booking/calendar integration — contact form is sufficient for v1
+- Booking/calendar integration — contact form sufficient
 - Pricing information — custom work requires conversation
 - CMS backend — Joel can edit code directly
-- Multiple portfolio projects — starting with 1, can add more later
+- Testimonials section — deferred to v1.1 (need real client quotes)
+- Newsletter signup — deferred to v1.1
 
 ## Context
 
 - **Target audience:** Small businesses (non-technical decision makers) needing web apps, automation, or AI solutions
 - **Primary goal:** Lead generation for freelance/consulting work
 - **Differentiator:** Low-risk process with prototype before full commitment
-- **Content status:** Not yet written; will create as site is built
-- **Portfolio:** 1 project to start, case study format
+- **Tech stack:** Astro 5.x, Tailwind CSS 4.x, MDX, TypeScript
+- **Hosting:** GitHub Pages (static, free)
+- **Current LOC:** 2,052 lines across 24 source files
 
 ## Constraints
 
-- **Hosting:** GitHub Pages — free, simple, static-only
-- **Stack:** Static/JAMstack — must work with GitHub Pages static hosting
-- **Design:** Black & white photography + yellow & teal accents + playful but legible typography
+- **Hosting:** GitHub Pages — static-only, no server-side processing
+- **Stack:** Astro/JAMstack — all pages pre-rendered at build time
+- **Design:** B&W photography + yellow/teal accents + Poppins/Inter typography
+- **Forms:** Formspree (50 submissions/month free tier)
 
 ## Key Decisions
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Static site over CMS | Joel can edit code; simpler hosting on GitHub Pages | — Pending |
-| Contact form over booking link | Lower friction, simpler to implement | — Pending |
-| Start with 1 portfolio project | Get site live faster, add more later | — Pending |
+| Static site over CMS | Joel can edit code; simpler hosting | ✓ Good — works well |
+| Contact form over booking | Lower friction for initial contact | ✓ Good — simple UX |
+| Start with 1 portfolio project | Ship faster, add more later | ✓ Good — can expand |
+| Astro + Tailwind v4 | Modern stack, fast builds, great DX | ✓ Good — 1.2s builds |
+| MDX for blog | Rich content with code blocks | ✓ Good — Expressive Code works |
+| Homepage About section | Single-page feel, no separate page | ✓ Good — removed nav link |
+| Formspree for forms | No backend needed, free tier sufficient | — Pending config |
 
 ---
-*Last updated: 2025-01-26 after initialization*
+*Last updated: 2026-01-27 after v1.0 milestone*
