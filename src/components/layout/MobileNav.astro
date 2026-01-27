@@ -1,0 +1,133 @@
+---
+// Mobile navigation with hamburger menu and slide-in panel
+---
+
+<!-- Hamburger button (mobile only) -->
+<button
+  id="menu-toggle"
+  type="button"
+  aria-label="Menu"
+  aria-expanded="false"
+  class="md:hidden relative z-50 w-11 h-11 flex items-center justify-center"
+>
+  <!-- Hamburger icon (3 lines that animate to X) -->
+  <div class="hamburger-icon relative w-6 h-5">
+    <span class="hamburger-line absolute left-0 w-full h-0.5 bg-text-light dark:bg-text-dark transition-all duration-200" style="top: 0;"></span>
+    <span class="hamburger-line absolute left-0 w-full h-0.5 bg-text-light dark:bg-text-dark transition-all duration-200" style="top: 50%; transform: translateY(-50%);"></span>
+    <span class="hamburger-line absolute left-0 w-full h-0.5 bg-text-light dark:bg-text-dark transition-all duration-200" style="bottom: 0;"></span>
+  </div>
+</button>
+
+<!-- Full-screen slide-in panel -->
+<div
+  id="mobile-menu"
+  class="fixed inset-0 z-40 bg-bg-light dark:bg-bg-dark transform translate-x-full transition-transform duration-300 md:hidden"
+>
+  <div class="flex flex-col items-center justify-center h-full space-y-8">
+    <!-- Close button -->
+    <button
+      id="menu-close"
+      type="button"
+      aria-label="Close menu"
+      class="absolute top-4 right-4 w-11 h-11 flex items-center justify-center"
+    >
+      <svg class="w-6 h-6 text-text-light dark:text-text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+
+    <!-- Navigation links -->
+    <nav class="flex flex-col items-center space-y-6 text-2xl">
+      <a href="/" class="font-heading text-text-light dark:text-text-dark hover:text-accent-yellow dark:hover:text-accent-yellow transition-colors">
+        Home
+      </a>
+      <a href="/about" class="font-heading text-text-light dark:text-text-dark hover:text-accent-yellow dark:hover:text-accent-yellow transition-colors">
+        About
+      </a>
+      <a href="/portfolio" class="font-heading text-text-light dark:text-text-dark hover:text-accent-yellow dark:hover:text-accent-yellow transition-colors">
+        Portfolio
+      </a>
+      <a href="/blog" class="font-heading text-text-light dark:text-text-dark hover:text-accent-yellow dark:hover:text-accent-yellow transition-colors">
+        Blog
+      </a>
+      <a href="/contact" class="font-heading text-text-light dark:text-text-dark hover:text-accent-yellow dark:hover:text-accent-yellow transition-colors">
+        Contact
+      </a>
+    </nav>
+  </div>
+</div>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const close = document.getElementById('menu-close');
+  const hamburgerIcon = toggle?.querySelector('.hamburger-icon');
+
+  toggle?.addEventListener('click', () => {
+    const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!isExpanded));
+    menu?.classList.toggle('translate-x-full');
+    menu?.classList.toggle('translate-x-0');
+
+    // Animate hamburger to X
+    if (hamburgerIcon) {
+      if (!isExpanded) {
+        // Open state - transform to X
+        const lines = hamburgerIcon.querySelectorAll('.hamburger-line');
+        lines[0].style.top = '50%';
+        lines[0].style.transform = 'translateY(-50%) rotate(45deg)';
+        lines[1].style.opacity = '0';
+        lines[2].style.bottom = 'auto';
+        lines[2].style.top = '50%';
+        lines[2].style.transform = 'translateY(-50%) rotate(-45deg)';
+      } else {
+        // Closed state - back to hamburger
+        const lines = hamburgerIcon.querySelectorAll('.hamburger-line');
+        lines[0].style.top = '0';
+        lines[0].style.transform = 'none';
+        lines[1].style.opacity = '1';
+        lines[2].style.bottom = '0';
+        lines[2].style.top = 'auto';
+        lines[2].style.transform = 'none';
+      }
+    }
+  });
+
+  close?.addEventListener('click', () => {
+    toggle?.setAttribute('aria-expanded', 'false');
+    menu?.classList.add('translate-x-full');
+    menu?.classList.remove('translate-x-0');
+
+    // Reset hamburger icon
+    if (hamburgerIcon) {
+      const lines = hamburgerIcon.querySelectorAll('.hamburger-line');
+      lines[0].style.top = '0';
+      lines[0].style.transform = 'none';
+      lines[1].style.opacity = '1';
+      lines[2].style.bottom = '0';
+      lines[2].style.top = 'auto';
+      lines[2].style.transform = 'none';
+    }
+  });
+
+  // Close menu when clicking on a nav link
+  const navLinks = menu?.querySelectorAll('nav a');
+  navLinks?.forEach(link => {
+    link.addEventListener('click', () => {
+      toggle?.setAttribute('aria-expanded', 'false');
+      menu?.classList.add('translate-x-full');
+      menu?.classList.remove('translate-x-0');
+
+      // Reset hamburger icon
+      if (hamburgerIcon) {
+        const lines = hamburgerIcon.querySelectorAll('.hamburger-line');
+        lines[0].style.top = '0';
+        lines[0].style.transform = 'none';
+        lines[1].style.opacity = '1';
+        lines[2].style.bottom = '0';
+        lines[2].style.top = 'auto';
+        lines[2].style.transform = 'none';
+      }
+    });
+  });
+</script>

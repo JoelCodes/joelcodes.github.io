@@ -1,0 +1,68 @@
+---
+import MobileNav from './MobileNav.astro';
+---
+
+<header class="sticky top-0 z-30 bg-bg-light dark:bg-bg-dark border-b border-text-light/10 dark:border-text-dark/10">
+  <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+    <!-- Logo / Site name -->
+    <a href="/" class="font-heading text-2xl font-bold text-text-light dark:text-text-dark hover:text-accent-yellow dark:hover:text-accent-yellow transition-colors">
+      Joel Shinness
+    </a>
+
+    <!-- Desktop navigation -->
+    <nav class="hidden md:flex items-center space-x-6">
+      <a href="/" class="text-text-light dark:text-text-dark hover:text-accent-yellow dark:hover:text-accent-yellow transition-colors">
+        Home
+      </a>
+      <a href="/about" class="text-text-light dark:text-text-dark hover:text-accent-yellow dark:hover:text-accent-yellow transition-colors">
+        About
+      </a>
+      <a href="/portfolio" class="text-text-light dark:text-text-dark hover:text-accent-yellow dark:hover:text-accent-yellow transition-colors">
+        Portfolio
+      </a>
+      <a href="/blog" class="text-text-light dark:text-text-dark hover:text-accent-yellow dark:hover:text-accent-yellow transition-colors">
+        Blog
+      </a>
+      <a href="/contact" class="text-text-light dark:text-text-dark hover:text-accent-yellow dark:hover:text-accent-yellow transition-colors">
+        Contact
+      </a>
+
+      <!-- Dark mode toggle -->
+      <button
+        id="theme-toggle"
+        type="button"
+        aria-label="Toggle dark mode"
+        class="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-text-light/5 dark:hover:bg-text-dark/5 transition-colors"
+      >
+        <!-- Sun icon (visible in dark mode) -->
+        <svg class="w-5 h-5 hidden dark:block text-text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+        </svg>
+        <!-- Moon icon (visible in light mode) -->
+        <svg class="w-5 h-5 block dark:hidden text-text-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+        </svg>
+      </button>
+    </nav>
+
+    <!-- Mobile navigation -->
+    <MobileNav />
+  </div>
+</header>
+
+<script>
+  const themeToggle = document.getElementById('theme-toggle');
+
+  themeToggle?.addEventListener('click', () => {
+    const html = document.documentElement;
+    const isDark = html.classList.contains('dark');
+
+    if (isDark) {
+      html.classList.remove('dark');
+      localStorage.theme = 'light';
+    } else {
+      html.classList.add('dark');
+      localStorage.theme = 'dark';
+    }
+  });
+</script>
