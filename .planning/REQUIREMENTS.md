@@ -26,10 +26,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Blog
 
-- [ ] **BLOG-01**: Blog listing page shows all posts with title, date, and excerpt
-- [ ] **BLOG-02**: Individual blog post pages render MDX content
-- [ ] **BLOG-03**: Blog posts can be tagged with categories
-- [ ] **BLOG-04**: Blog listing can be filtered by category
+- [x] **BLOG-01**: Blog listing page shows all posts with title, date, and excerpt
+- [x] **BLOG-02**: Individual blog post pages render MDX content
+- [x] **BLOG-03**: Blog posts can be tagged with categories
+- [x] **BLOG-04**: Blog listing can be filtered by category
 
 ### Contact
 
@@ -109,10 +109,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PORT-04 | Phase 3 | Complete |
 | PORT-05 | Phase 3 | Complete |
 | PORT-06 | Phase 3 | Complete |
-| BLOG-01 | Phase 5 | Pending |
-| BLOG-02 | Phase 5 | Pending |
-| BLOG-03 | Phase 5 | Pending |
-| BLOG-04 | Phase 5 | Pending |
+| BLOG-01 | Phase 5 | Complete |
+| BLOG-02 | Phase 5 | Complete |
+| BLOG-03 | Phase 5 | Complete |
+| BLOG-04 | Phase 5 | Complete |
 | CONT-01 | Phase 4 | Complete |
 | CONT-02 | Phase 4 | Complete |
 | CONT-03 | Phase 4 | Complete |
@@ -137,4 +137,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2025-01-26*
-*Last updated: 2026-01-27 after Phase 4 completion*
+*Last updated: 2026-01-27 after Phase 5 completion*
