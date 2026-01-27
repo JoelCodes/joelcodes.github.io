@@ -100,10 +100,13 @@ Plans:
   2. Individual blog post pages render MDX content correctly
   3. Blog posts can be tagged with categories
   4. Blog listing can be filtered by category tags
-**Plans**: TBD
+**Plans**: 4 plans in 3 waves
 
 Plans:
-- [ ] TBD (planning not started)
+- [ ] 05-01-PLAN.md — Set up content collections with MDX and Expressive Code
+- [ ] 05-02-PLAN.md — Create blog listing page with card grid and tag filtering
+- [ ] 05-03-PLAN.md — Create blog post reading experience with sticky TOC
+- [ ] 05-04-PLAN.md — Create tag pages and human verification
 
 ### Phase 6: Performance & SEO
 **Goal**: Site is optimized for performance and search engine discoverability
@@ -132,9 +135,9 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 2. Core Content & Positioning | 4/4 | ✓ Complete | 2026-01-27 |
 | 3. Portfolio & Case Studies | 4/4 | ✓ Complete | 2026-01-27 |
 | 4. Contact & Conversion | 3/3 | ✓ Complete | 2026-01-27 |
-| 5. Blog & Content Marketing | 0/TBD | Not started | - |
+| 5. Blog & Content Marketing | 0/4 | Planned | - |
 | 6. Performance & SEO | 0/TBD | Not started | - |
 
 ---
 *Roadmap created: 2026-01-26*
-*Last updated: 2026-01-27 (Phase 4 complete)*
+*Last updated: 2026-01-27 (Phase 5 planned)*
