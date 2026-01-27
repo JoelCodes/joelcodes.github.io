@@ -13,7 +13,7 @@ This roadmap delivers a lead-generation focused developer portfolio for Joel Shi
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation & Design System** - Set up Astro/Tailwind project with responsive design system
-- [ ] **Phase 2: Core Content & Positioning** - Build homepage with value proposition, services, process, and about sections
+- [x] **Phase 2: Core Content & Positioning** - Build homepage with value proposition, services, process, and about sections
 - [ ] **Phase 3: Portfolio & Case Studies** - Create portfolio grid and detailed case study pages with business outcomes
 - [ ] **Phase 4: Contact & Conversion** - Implement contact form with Formspree integration and FAQ section
 - [ ] **Phase 5: Blog & Content Marketing** - Build blog listing and post pages with MDX support and category filtering
@@ -51,10 +51,10 @@ Plans:
 **Plans**: 4 plans in 3 waves
 
 Plans:
-- [ ] 02-01-PLAN.md — Create Hero and Services components with value proposition
-- [ ] 02-02-PLAN.md — Create Process and FAQ components for trust and objection handling
-- [ ] 02-03-PLAN.md — Create About component and compose complete homepage
-- [ ] 02-04-PLAN.md — Human verification of homepage content and positioning
+- [x] 02-01-PLAN.md — Create Hero and Services components with value proposition
+- [x] 02-02-PLAN.md — Create Process and FAQ components for trust and objection handling
+- [x] 02-03-PLAN.md — Create About component and compose complete homepage
+- [x] 02-04-PLAN.md — Human verification of homepage content and positioning
 
 ### Phase 3: Portfolio & Case Studies
 **Goal**: Portfolio demonstrates Joel's work with business-outcome focused case studies
@@ -124,7 +124,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Design System | 3/3 | ✓ Complete | 2026-01-27 |
-| 2. Core Content & Positioning | 0/4 | Planned | - |
+| 2. Core Content & Positioning | 4/4 | ✓ Complete | 2026-01-27 |
 | 3. Portfolio & Case Studies | 0/TBD | Not started | - |
 | 4. Contact & Conversion | 0/TBD | Not started | - |
 | 5. Blog & Content Marketing | 0/TBD | Not started | - |
