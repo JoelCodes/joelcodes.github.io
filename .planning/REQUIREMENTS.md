@@ -40,21 +40,21 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Design & Branding
 
-- [ ] **DSGN-01**: Visual design uses black & white photography
-- [ ] **DSGN-02**: Accent colors are yellow and teal
-- [ ] **DSGN-03**: Typography is playful but highly legible
-- [ ] **DSGN-04**: Design is mobile-responsive (works on all screen sizes)
-- [ ] **DSGN-05**: Navigation works on mobile (hamburger menu or similar)
+- [x] **DSGN-01**: Visual design uses black & white photography
+- [x] **DSGN-02**: Accent colors are yellow and teal
+- [x] **DSGN-03**: Typography is playful but highly legible
+- [x] **DSGN-04**: Design is mobile-responsive (works on all screen sizes)
+- [x] **DSGN-05**: Navigation works on mobile (hamburger menu or similar)
 
 ### Technical
 
-- [ ] **TECH-01**: Site built with Astro and Tailwind CSS
-- [ ] **TECH-02**: Site deploys to GitHub Pages via GitHub Actions
-- [ ] **TECH-03**: Images optimized (WebP/AVIF, lazy loading)
-- [ ] **TECH-04**: Lighthouse performance score 90+ on mobile
-- [ ] **TECH-05**: SEO meta tags on all pages (title, description, og:image)
-- [ ] **TECH-06**: Sitemap.xml generated automatically
-- [ ] **TECH-07**: Robots.txt configured properly
+- [x] **TECH-01**: Site built with Astro and Tailwind CSS
+- [x] **TECH-02**: Site deploys to GitHub Pages via GitHub Actions
+- [x] **TECH-03**: Images optimized (WebP/AVIF, lazy loading)
+- [x] **TECH-04**: Lighthouse performance score 90+ on mobile
+- [x] **TECH-05**: SEO meta tags on all pages (title, description, og:image)
+- [x] **TECH-06**: Sitemap.xml generated automatically
+- [x] **TECH-07**: Robots.txt configured properly
 
 ## v2 Requirements
 
@@ -124,11 +124,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DSGN-05 | Phase 1 | Complete |
 | TECH-01 | Phase 1 | Complete |
 | TECH-02 | Phase 1 | Complete |
-| TECH-03 | Phase 6 | Pending |
-| TECH-04 | Phase 6 | Pending |
-| TECH-05 | Phase 6 | Pending |
-| TECH-06 | Phase 6 | Pending |
-| TECH-07 | Phase 6 | Pending |
+| TECH-03 | Phase 6 | Complete |
+| TECH-04 | Phase 6 | Complete |
+| TECH-05 | Phase 6 | Complete |
+| TECH-06 | Phase 6 | Complete |
+| TECH-07 | Phase 6 | Complete |
 
 **Coverage:**
 - v1 requirements: 31 total
@@ -137,4 +137,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2025-01-26*
-*Last updated: 2026-01-27 after Phase 5 completion*
+*Last updated: 2026-01-27 — v1 COMPLETE (all 31 requirements satisfied)*
