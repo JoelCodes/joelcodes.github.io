@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
+    "@astrojs/sitemap": "^3.7.0",
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.16.15",
     "astro-expressive-code": "^0.41.6",
+    "astro-robots-txt": "^1.0.0",
     "lucide-static": "^0.563.0",
     "reading-time-estimator": "^2.1.1",
     "tailwindcss": "^4.1.18"
