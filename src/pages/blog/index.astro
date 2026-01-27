@@ -1,0 +1,148 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+import { readingTime } from 'reading-time-estimator';
+
+// Get published posts, sorted newest first
+const allPosts = await getCollection('blog', ({ data }) => {
+  return import.meta.env.PROD ? !data.draft : true;
+});
+
+const sortedPosts = allPosts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+// Get unique tags from all posts
+const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags))];
+
+// Calculate reading time for each post
+const postsWithMeta = sortedPosts.map((post) => {
+  const stats = readingTime(post.body || '', 265);
+  return { ...post, readingTime: Math.ceil(stats.minutes) };
+});
+---
+
+<BaseLayout
+  title="Blog | Joel Shinness"
+  description="Thoughts on web development, automation, and AI for small businesses. Practical insights to help you work smarter."
+>
+  <main class="py-16 px-4">
+    <div class="max-w-7xl mx-auto">
+      <!-- Page header -->
+      <header class="text-center mb-12">
+        <h1 class="font-heading text-4xl md:text-5xl font-bold mb-4">Blog</h1>
+        <p class="text-lg text-text-muted-light dark:text-text-muted-dark max-w-2xl mx-auto">
+          Practical insights on automation, AI, and custom software for small businesses.
+          Learn how to work smarter, not harder.
+        </p>
+      </header>
+
+      <!-- Filter buttons -->
+      <div class="flex flex-wrap justify-center gap-3 mb-12">
+        <button
+          class="filter-btn active px-6 py-2 rounded-full transition-colors duration-200 bg-accent-yellow hover:bg-accent-yellow-hover text-bg-dark font-medium"
+          onclick="filterSelection('all'); setActiveButton(this)"
+        >
+          All Posts
+        </button>
+        {allTags.map((tag) => (
+          <button
+            class="filter-btn px-6 py-2 rounded-full transition-colors duration-200 bg-text-muted-light/20 dark:bg-text-muted-dark/20 text-text-light dark:text-text-dark hover:bg-text-muted-light/30 dark:hover:bg-text-muted-dark/30 font-medium"
+            onclick={`filterSelection('${tag}'); setActiveButton(this)`}
+          >
+            {tag}
+          </button>
+        ))}
+      </div>
+
+      <!-- Blog card grid -->
+      <section id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {postsWithMeta.map((post, index) => (
+          <BlogCard
+            title={post.data.title}
+            slug={post.id}
+            pubDate={post.data.pubDate}
+            description={post.data.description}
+            featuredImage={post.data.featuredImage}
+            tags={post.data.tags}
+            readingTime={post.readingTime}
+            data-index={index}
+          />
+        ))}
+      </section>
+
+      <!-- Load more button (shown only if more than 9 posts) -->
+      {postsWithMeta.length > 9 && (
+        <div class="text-center mt-12">
+          <button
+            id="load-more-btn"
+            class="px-8 py-3 rounded-full transition-colors duration-200 bg-accent-teal hover:bg-accent-teal-hover text-white font-medium"
+            onclick="loadMorePosts()"
+          >
+            Load More Posts
+          </button>
+        </div>
+      )}
+    </div>
+  </main>
+
+  <script is:inline>
+    // Track how many posts are visible
+    const INITIAL_POSTS = 9;
+    const POSTS_PER_LOAD = 6;
+    let visiblePosts = INITIAL_POSTS;
+    let currentFilter = 'all';
+
+    function filterSelection(tag) {
+      currentFilter = tag;
+      const cards = document.getElementsByClassName('blog-card');
+
+      for (let i = 0; i < cards.length; i++) {
+        cards[i].classList.remove('show');
+
+        const cardTags = cards[i].getAttribute('data-tags');
+        const tagsArray = cardTags ? cardTags.split(',') : [];
+
+        if (tag === 'all' || tagsArray.includes(tag)) {
+          cards[i].classList.add('show');
+        }
+      }
+
+      // Reset load more state when filtering
+      visiblePosts = INITIAL_POSTS;
+      updateLoadMoreVisibility();
+    }
+
+    function setActiveButton(btn) {
+      const buttons = document.getElementsByClassName('filter-btn');
+      for (let i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove('active', 'bg-accent-yellow', 'hover:bg-accent-yellow-hover', 'text-bg-dark');
+        buttons[i].classList.add('bg-text-muted-light/20', 'dark:bg-text-muted-dark/20', 'text-text-light', 'dark:text-text-dark', 'hover:bg-text-muted-light/30', 'dark:hover:bg-text-muted-dark/30');
+      }
+      btn.classList.remove('bg-text-muted-light/20', 'dark:bg-text-muted-dark/20', 'text-text-light', 'dark:text-text-dark', 'hover:bg-text-muted-light/30', 'dark:hover:bg-text-muted-dark/30');
+      btn.classList.add('active', 'bg-accent-yellow', 'hover:bg-accent-yellow-hover', 'text-bg-dark');
+    }
+
+    function loadMorePosts() {
+      visiblePosts += POSTS_PER_LOAD;
+      filterSelection(currentFilter);
+      updateLoadMoreVisibility();
+    }
+
+    function updateLoadMoreVisibility() {
+      const loadMoreBtn = document.getElementById('load-more-btn');
+      if (loadMoreBtn) {
+        const totalCards = document.getElementsByClassName('blog-card').length;
+        if (visiblePosts >= totalCards) {
+          loadMoreBtn.style.display = 'none';
+        } else {
+          loadMoreBtn.style.display = 'inline-block';
+        }
+      }
+    }
+
+    // Initialize with all posts visible
+    filterSelection('all');
+  </script>
+</BaseLayout>
