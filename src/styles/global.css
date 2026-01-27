@@ -26,3 +26,25 @@
 
 /* Dark mode variant for class-based toggle */
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* Portfolio card filtering animations */
+.portfolio-card {
+  display: none;
+  opacity: 0;
+}
+
+.portfolio-card.show {
+  display: block;
+  animation: fadeInScale 300ms ease-in-out forwards;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
