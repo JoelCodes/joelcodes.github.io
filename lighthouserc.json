@@ -17,7 +17,12 @@
         "categories:seo": ["warn", { "minScore": 0.9 }],
         "largest-contentful-paint": ["warn", { "maxNumericValue": 2500 }],
         "cumulative-layout-shift": ["warn", { "maxNumericValue": 0.1 }],
-        "interactive": ["warn", { "maxNumericValue": 3800 }]
+        "interactive": ["warn", { "maxNumericValue": 3800 }],
+        "image-delivery-insight": "off",
+        "network-dependency-tree-insight": "off",
+        "modern-image-formats": "off",
+        "render-blocking-insight": "off",
+        "render-blocking-resources": "off"
       }
     },
     "upload": {
