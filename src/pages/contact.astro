@@ -1,0 +1,173 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Loader2 } from 'lucide-static';
+---
+
+<BaseLayout title="Contact | Joel Shinness" description="Get in touch with Joel Shinness for custom software development, automation, or AI integration projects.">
+  <section class="py-16 px-6">
+    <div class="container max-w-2xl mx-auto">
+      <!-- Headline -->
+      <h1 class="font-heading text-3xl md:text-4xl font-bold mb-4 text-text-light dark:text-text-dark text-center">
+        Let's Build Something Together
+      </h1>
+
+      <!-- Intro paragraph -->
+      <p class="font-body text-lg text-text-muted-light dark:text-text-muted-dark text-center mb-10 max-w-xl mx-auto">
+        Tell me about your project and I'll get back to you within 48 hours with next steps.
+      </p>
+
+      <!-- Contact Form -->
+      <form
+        id="contact-form"
+        action="https://formspree.io/f/YOUR_FORM_ID"
+        method="POST"
+        class="space-y-6"
+        novalidate
+      >
+        <!-- Name Field -->
+        <div>
+          <label for="name" class="block font-body font-medium mb-2 text-text-light dark:text-text-dark">
+            Name <span class="text-red-600">*</span>
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            minlength="2"
+            autocomplete="name"
+            class="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-text-light dark:text-text-dark font-body focus:outline-none focus:ring-2 focus:ring-accent-teal focus:border-transparent transition-colors"
+            placeholder="Your name"
+          />
+          <span id="name-error" class="block text-sm text-red-600 mt-1 min-h-[1.25rem]" aria-live="polite"></span>
+        </div>
+
+        <!-- Email Field -->
+        <div>
+          <label for="email" class="block font-body font-medium mb-2 text-text-light dark:text-text-dark">
+            Email <span class="text-red-600">*</span>
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            autocomplete="email"
+            class="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-text-light dark:text-text-dark font-body focus:outline-none focus:ring-2 focus:ring-accent-teal focus:border-transparent transition-colors"
+            placeholder="you@example.com"
+          />
+          <span id="email-error" class="block text-sm text-red-600 mt-1 min-h-[1.25rem]" aria-live="polite"></span>
+        </div>
+
+        <!-- Project Type Field (Optional) -->
+        <div>
+          <label for="project-type" class="block font-body font-medium mb-2 text-text-light dark:text-text-dark">
+            Project Type
+          </label>
+          <select
+            id="project-type"
+            name="project-type"
+            class="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-text-light dark:text-text-dark font-body focus:outline-none focus:ring-2 focus:ring-accent-teal focus:border-transparent transition-colors"
+          >
+            <option value="">Select a project type (optional)</option>
+            <option value="Web App">Web App</option>
+            <option value="Automation">Automation</option>
+            <option value="AI Development">AI Development</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <!-- Message Field -->
+        <div>
+          <label for="message" class="block font-body font-medium mb-2 text-text-light dark:text-text-dark">
+            Message <span class="text-red-600">*</span>
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            required
+            minlength="10"
+            rows="6"
+            class="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-text-light dark:text-text-dark font-body focus:outline-none focus:ring-2 focus:ring-accent-teal focus:border-transparent transition-colors resize-y"
+            placeholder="Tell me about your project..."
+          ></textarea>
+          <span id="message-error" class="block text-sm text-red-600 mt-1 min-h-[1.25rem]" aria-live="polite"></span>
+        </div>
+
+        <!-- Form Error Message Container -->
+        <div id="form-error" class="hidden p-4 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800" role="alert">
+          <p class="text-red-700 dark:text-red-400 font-body"></p>
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          class="w-full font-heading font-semibold text-lg px-8 py-4 bg-accent-teal hover:bg-accent-teal-hover text-white rounded-lg transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        >
+          <span class="button-text">Send Message</span>
+          <span class="loading-icon hidden">
+            <Fragment set:html={Loader2} />
+          </span>
+        </button>
+
+        <!-- Privacy Reassurance -->
+        <p class="text-sm text-text-muted-light dark:text-text-muted-dark text-center">
+          Your info stays between us. No spam, ever.
+        </p>
+      </form>
+
+      <!-- Alternative Contact -->
+      <div class="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-800 text-center">
+        <p class="font-body text-text-muted-light dark:text-text-muted-dark">
+          Prefer email? Reach me at <a href="mailto:joel@joelshinness.com" class="text-accent-teal hover:text-accent-teal-hover underline">joel@joelshinness.com</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success Message (shown after form submission) -->
+  <template id="success-template">
+    <div class="py-16 px-6">
+      <div class="container max-w-2xl mx-auto">
+        <div class="p-8 rounded-lg border-2 border-green-500 bg-green-50 dark:bg-green-900/20 text-center">
+          <h2 class="font-heading text-2xl md:text-3xl font-bold mb-4 text-green-700 dark:text-green-400">
+            Thanks for reaching out!
+          </h2>
+          <p class="font-body text-lg text-green-600 dark:text-green-300">
+            I'll email you within 48 hours with next steps.
+          </p>
+        </div>
+      </div>
+    </div>
+  </template>
+</BaseLayout>
+
+<style>
+  /* Validation styling - only after user interaction */
+  input:user-invalid,
+  textarea:user-invalid {
+    border-color: #dc2626;
+    border-width: 2px;
+  }
+
+  input:user-valid,
+  textarea:user-valid {
+    border-color: #16a34a;
+  }
+
+  /* Loading spinner animation */
+  .loading-icon svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+</style>
+
+<script>
+  // Form submission and validation logic will be added in Task 2
+</script>
