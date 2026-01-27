@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-01-26)
 
 **Core value:** Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
-**Current focus:** Phase 2 - Core Content & Positioning
+**Current focus:** Phase 3 - Portfolio & Case Studies
 
 ## Current Position
 
-Phase: 2 of 6 (Core Content & Positioning)
-Plan: 4 of 4 in current phase
-Status: Phase complete
-Last activity: 2026-01-27 — Completed 02-04-PLAN.md (verification)
+Phase: 3 of 6 (Portfolio & Case Studies)
+Plan: 1 of 4 in current phase
+Status: In progress
+Last activity: 2026-01-27 — Completed 03-01-PLAN.md
 
-Progress: [███░░░░░░░] 37%
+Progress: [████░░░░░░] 42%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 7
+- Total plans completed: 8
 - Average duration: 2 min
-- Total execution time: 0.19 hours
+- Total execution time: 0.23 hours
 
 **By Phase:**
 
@@ -29,10 +29,11 @@ Progress: [███░░░░░░░] 37%
 |-------|-------|-------|----------|
 | 01-foundation-design-system | 3 | 9min | 3min |
 | 02-core-content-positioning | 4 | 4min | 1min |
+| 03-portfolio-case-studies | 1 | 2min | 2min |
 
 **Recent Trend:**
-- Last 5 plans: 02-01 (1min), 02-02 (2min), 02-03 (1min), 02-04 (<1min)
-- Trend: Phase 2 complete - fast execution with verification-first approach
+- Last 5 plans: 02-02 (2min), 02-03 (1min), 02-04 (<1min), 03-01 (2min)
+- Trend: Phase 3 started - portfolio grid with filtering UI complete
 
 *Updated after each plan completion*
 
@@ -89,6 +90,12 @@ Recent decisions affecting current work:
 - All 5 sections render correctly on desktop and mobile
 - Content tone approved (problem-first, collaborative framing)
 
+**From 03-01:**
+- CSS animations over transitions for filtering (reliable on every interaction)
+- Yellow accent for active filter button (matches CTA pattern)
+- Vanilla JS filtering with no dependencies (zero bundle size impact)
+- 16:9 aspect ratio thumbnails with placeholder icons (real images in later plans)
+
 ### Pending Todos
 
 None yet.
@@ -107,15 +114,20 @@ None yet.
 - ✅ All Phase 2 success criteria validated
 - Minor placeholder items (About photo, personal paragraph) can be customized anytime
 
+**Phase 3 in progress:**
+- ✅ Portfolio grid page complete (03-01)
+- Portfolio cards currently use placeholder thumbnails (real images in later plans)
+- Case study detail pages next (03-02)
+
 **Phase 4 considerations:**
 - Formspree free tier limit is 50 submissions/month — sufficient for early stage but monitor during testing
 
 ## Session Continuity
 
 Last session: 2026-01-27
-Stopped at: Completed 02-04-PLAN.md (Phase 2 complete)
+Stopped at: Completed 03-01-PLAN.md
 Resume file: None
-Next phase: Phase 3 (Portfolio & Case Studies) - not yet planned
+Next: 03-02-PLAN.md (Case study detail pages)
 
 ---
 *State initialized: 2026-01-26*
