@@ -67,9 +67,12 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString('en-US', {
           {post.data.tags && post.data.tags.length > 0 && (
             <div class="flex flex-wrap gap-2 mb-6">
               {post.data.tags.map((tag: string) => (
-                <span class="px-3 py-1 text-sm rounded-full bg-accent-teal/10 text-accent-teal">
+                <a
+                  href={`/blog/tags/${tag}`}
+                  class="px-3 py-1 text-sm rounded-full bg-accent-teal/10 text-accent-teal hover:bg-accent-teal hover:text-bg-dark transition-colors"
+                >
                   {tag}
-                </span>
+                </a>
               ))}
             </div>
           )}
