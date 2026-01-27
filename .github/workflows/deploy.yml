@@ -37,6 +37,7 @@ jobs:
         uses: treosh/lighthouse-ci-action@v12
         with:
           configPath: './lighthouserc.json'
+          staticDistDir: './dist'
           uploadArtifacts: true
           temporaryPublicStorage: true
           runs: 3
