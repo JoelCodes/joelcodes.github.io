@@ -169,5 +169,181 @@ import { Loader2 } from 'lucide-static';
 </style>
 
 <script>
-  // Form submission and validation logic will be added in Task 2
+  // Contact form validation and submission handler
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+  const buttonText = submitButton.querySelector('.button-text') as HTMLSpanElement;
+  const loadingIcon = submitButton.querySelector('.loading-icon') as HTMLSpanElement;
+  const formError = document.getElementById('form-error') as HTMLDivElement;
+  const formErrorText = formError.querySelector('p') as HTMLParagraphElement;
+  const successTemplate = document.getElementById('success-template') as HTMLTemplateElement;
+
+  // Field validation configuration
+  const validationConfig = {
+    name: {
+      element: document.getElementById('name') as HTMLInputElement,
+      errorElement: document.getElementById('name-error') as HTMLSpanElement,
+      messages: {
+        valueMissing: 'Please enter your name.',
+        tooShort: 'Name must be at least 2 characters.'
+      }
+    },
+    email: {
+      element: document.getElementById('email') as HTMLInputElement,
+      errorElement: document.getElementById('email-error') as HTMLSpanElement,
+      messages: {
+        valueMissing: 'Please enter your email address.',
+        typeMismatch: 'Please enter a valid email address.'
+      }
+    },
+    message: {
+      element: document.getElementById('message') as HTMLTextAreaElement,
+      errorElement: document.getElementById('message-error') as HTMLSpanElement,
+      messages: {
+        valueMissing: 'Please enter a message.',
+        tooShort: 'Message must be at least 10 characters.'
+      }
+    }
+  };
+
+  // Show field-level error
+  function showFieldError(fieldName: keyof typeof validationConfig) {
+    const config = validationConfig[fieldName];
+    const validity = config.element.validity;
+
+    if (validity.valueMissing) {
+      config.errorElement.textContent = config.messages.valueMissing;
+    } else if (validity.typeMismatch) {
+      config.errorElement.textContent = config.messages.typeMismatch || '';
+    } else if (validity.tooShort) {
+      config.errorElement.textContent = config.messages.tooShort || '';
+    } else {
+      config.errorElement.textContent = '';
+    }
+  }
+
+  // Clear field error
+  function clearFieldError(fieldName: keyof typeof validationConfig) {
+    validationConfig[fieldName].errorElement.textContent = '';
+  }
+
+  // Setup field validation listeners
+  Object.entries(validationConfig).forEach(([fieldName, config]) => {
+    const field = config.element;
+
+    // Validate on input
+    field.addEventListener('input', () => {
+      if (field.validity.valid) {
+        clearFieldError(fieldName as keyof typeof validationConfig);
+      } else {
+        showFieldError(fieldName as keyof typeof validationConfig);
+      }
+    });
+
+    // Validate on blur
+    field.addEventListener('blur', () => {
+      if (!field.validity.valid) {
+        showFieldError(fieldName as keyof typeof validationConfig);
+      }
+    });
+  });
+
+  // Show form-level error
+  function showFormError(message: string) {
+    formErrorText.textContent = message;
+    formError.classList.remove('hidden');
+  }
+
+  // Hide form-level error
+  function hideFormError() {
+    formError.classList.add('hidden');
+    formErrorText.textContent = '';
+  }
+
+  // Set loading state
+  function setLoadingState(loading: boolean) {
+    submitButton.disabled = loading;
+    if (loading) {
+      buttonText.classList.add('hidden');
+      loadingIcon.classList.remove('hidden');
+    } else {
+      buttonText.classList.remove('hidden');
+      loadingIcon.classList.add('hidden');
+    }
+  }
+
+  // Replace form with success message
+  function showSuccessMessage() {
+    const section = form.closest('section');
+    if (section && successTemplate) {
+      const successContent = successTemplate.content.cloneNode(true);
+      section.replaceWith(successContent);
+    }
+  }
+
+  // Form submission handler
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Hide any previous form errors
+    hideFormError();
+
+    // Validate all fields first
+    let isValid = true;
+    Object.keys(validationConfig).forEach((fieldName) => {
+      const config = validationConfig[fieldName as keyof typeof validationConfig];
+      if (!config.element.validity.valid) {
+        showFieldError(fieldName as keyof typeof validationConfig);
+        isValid = false;
+      }
+    });
+
+    if (!isValid) {
+      return;
+    }
+
+    // Start loading state
+    setLoadingState(true);
+
+    try {
+      const formData = new FormData(form);
+
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      // Must check response.ok explicitly - fetch doesn't reject on HTTP errors
+      if (!response.ok) {
+        let errorMessage = 'Oops! Something went wrong. Email me directly at joel@joelshinness.com';
+
+        try {
+          const data = await response.json();
+          if (data.errors && data.errors.length > 0) {
+            errorMessage = data.errors[0].message || errorMessage;
+          }
+        } catch {
+          // JSON parsing failed, use default error message
+        }
+
+        showFormError(errorMessage);
+        return;
+      }
+
+      // Success - show confirmation message
+      showSuccessMessage();
+
+    } catch (error) {
+      // Network error (no internet, DNS failure, etc.)
+      showFormError('Connection error. Please email me directly at joel@joelshinness.com');
+    } finally {
+      // Re-enable button (if form wasn't replaced)
+      if (submitButton.parentElement) {
+        setLoadingState(false);
+      }
+    }
+  });
 </script>
