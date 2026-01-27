@@ -119,10 +119,14 @@ Plans:
   4. Sitemap.xml is generated automatically
   5. Robots.txt is configured properly
   6. Site deploys automatically to GitHub Pages via GitHub Actions
-**Plans**: TBD
+**Plans**: 5 plans in 3 waves
 
 Plans:
-- [ ] TBD (planning not started)
+- [ ] 06-01-PLAN.md — Create SEO component with meta tags and JSON-LD structured data
+- [ ] 06-02-PLAN.md — Configure sitemap.xml and robots.txt generation
+- [ ] 06-03-PLAN.md — Optimize images with lazy loading and preload fonts
+- [ ] 06-04-PLAN.md — Configure Lighthouse CI and PR preview workflows
+- [ ] 06-05-PLAN.md — Human verification of performance and SEO
 
 ## Progress
 
@@ -136,8 +140,8 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 3. Portfolio & Case Studies | 4/4 | ✓ Complete | 2026-01-27 |
 | 4. Contact & Conversion | 3/3 | ✓ Complete | 2026-01-27 |
 | 5. Blog & Content Marketing | 4/4 | ✓ Complete | 2026-01-27 |
-| 6. Performance & SEO | 0/TBD | Not started | - |
+| 6. Performance & SEO | 0/5 | In Progress | - |
 
 ---
 *Roadmap created: 2026-01-26*
-*Last updated: 2026-01-27 (Phase 5 complete)*
+*Last updated: 2026-01-27 (Phase 6 planned)*
