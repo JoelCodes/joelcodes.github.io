@@ -31,10 +31,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Navigation works on mobile devices (hamburger menu or alternative)
   4. Design system uses black & white photography with yellow/teal accents
   5. Typography is playful but highly legible across all viewports
-**Plans**: TBD
+**Plans**: 3 plans in 3 waves
 
 Plans:
-- [ ] TBD (planning not started)
+- [ ] 01-01-PLAN.md — Initialize Astro project with Tailwind v4 and design tokens
+- [ ] 01-02-PLAN.md — Create layout system with header, footer, and mobile navigation
+- [ ] 01-03-PLAN.md — Create demo homepage and verify responsive design
 
 ### Phase 2: Core Content & Positioning
 **Goal**: Visitors understand what Joel does and how he works
@@ -118,7 +120,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Design System | 0/TBD | Not started | - |
+| 1. Foundation & Design System | 0/3 | Planned | - |
 | 2. Core Content & Positioning | 0/TBD | Not started | - |
 | 3. Portfolio & Case Studies | 0/TBD | Not started | - |
 | 4. Contact & Conversion | 0/TBD | Not started | - |
