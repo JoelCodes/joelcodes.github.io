@@ -10,29 +10,29 @@ See: .planning/PROJECT.md (updated 2026-01-26)
 ## Current Position
 
 Phase: 2 of 6 (Core Content & Positioning)
-Plan: 1 of 4 in current phase
+Plan: 2 of 4 in current phase
 Status: In progress
-Last activity: 2026-01-26 — Completed 02-01-PLAN.md
+Last activity: 2026-01-27 — Completed 02-02-PLAN.md
 
-Progress: [███░░░░░░░] 21%
+Progress: [███░░░░░░░] 26%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 4
-- Average duration: 3 min
-- Total execution time: 0.16 hours
+- Total plans completed: 5
+- Average duration: 2 min
+- Total execution time: 0.18 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-foundation-design-system | 3 | 9min | 3min |
-| 02-core-content-positioning | 1 | 1min | 1min |
+| 02-core-content-positioning | 2 | 3min | 2min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (4min), 01-02 (2min), 01-03 (3min), 02-01 (1min)
-- Trend: Phase 2 first plan faster due to simpler component creation
+- Last 5 plans: 01-02 (2min), 01-03 (3min), 02-01 (1min), 02-02 (2min)
+- Trend: Phase 2 execution remains fast with component-focused work
 
 *Updated after each plan completion*
 
@@ -70,6 +70,12 @@ Recent decisions affecting current work:
 - Three service cards with equal visual weight and no pricing (custom quotes only)
 - Illustrative examples pattern ("Like a custom CRM") clarifies abstract services for non-technical audience
 
+**From 02-02:**
+- Vertical timeline with left border (not horizontal) for scannability
+- Static FAQ list (no JavaScript accordion) for simplicity
+- Teal accent for process timeline (calmer than yellow CTA accent)
+- Collaborative You/Joel framing (not vendor 'I' vs 'you')
+
 ### Pending Todos
 
 None yet.
@@ -89,10 +95,10 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-01-26
-Stopped at: Completed 02-01-PLAN.md
+Last session: 2026-01-27
+Stopped at: Completed 02-02-PLAN.md
 Resume file: None
-Next plan: 02-02-PLAN.md (Process and FAQ components)
+Next plan: 02-03-PLAN.md (About component)
 
 ---
 *State initialized: 2026-01-26*
