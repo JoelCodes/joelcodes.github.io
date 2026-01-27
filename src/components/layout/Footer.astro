@@ -1,5 +1,7 @@
 ---
 // Footer component with copyright and basic info
+import { Github, Linkedin } from 'lucide-static';
+
 const currentYear = new Date().getFullYear();
 ---
 
@@ -17,9 +19,33 @@ const currentYear = new Date().getFullYear();
       </p>
     </div>
 
-    <!-- Placeholder for future social links -->
+    <!-- Social links -->
     <div class="mt-6 flex justify-center gap-6">
-      <!-- Social links will be added in Phase 4 (CONT-04) -->
+      <a
+        href="https://linkedin.com/in/joelshinness"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="LinkedIn (opens in new tab)"
+        class="social-link text-text-muted-light dark:text-text-muted-dark hover:text-accent-teal transition-colors"
+      >
+        <Fragment set:html={Linkedin} />
+      </a>
+      <a
+        href="https://github.com/joelshinness"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="GitHub (opens in new tab)"
+        class="social-link text-text-muted-light dark:text-text-muted-dark hover:text-accent-teal transition-colors"
+      >
+        <Fragment set:html={Github} />
+      </a>
     </div>
   </div>
 </footer>
+
+<style>
+  .social-link svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+</style>
