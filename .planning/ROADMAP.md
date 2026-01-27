@@ -48,10 +48,13 @@ Plans:
   3. Process section shows 5-step workflow: Discovery → Prototype → Proposal → Build → Handover
   4. FAQ section addresses common client questions and objections
   5. About section humanizes Joel and establishes expertise without resume dump
-**Plans**: TBD
+**Plans**: 4 plans in 3 waves
 
 Plans:
-- [ ] TBD (planning not started)
+- [ ] 02-01-PLAN.md — Create Hero and Services components with value proposition
+- [ ] 02-02-PLAN.md — Create Process and FAQ components for trust and objection handling
+- [ ] 02-03-PLAN.md — Create About component and compose complete homepage
+- [ ] 02-04-PLAN.md — Human verification of homepage content and positioning
 
 ### Phase 3: Portfolio & Case Studies
 **Goal**: Portfolio demonstrates Joel's work with business-outcome focused case studies
@@ -121,7 +124,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Design System | 3/3 | ✓ Complete | 2026-01-27 |
-| 2. Core Content & Positioning | 0/TBD | Not started | - |
+| 2. Core Content & Positioning | 0/4 | Planned | - |
 | 3. Portfolio & Case Studies | 0/TBD | Not started | - |
 | 4. Contact & Conversion | 0/TBD | Not started | - |
 | 5. Blog & Content Marketing | 0/TBD | Not started | - |
