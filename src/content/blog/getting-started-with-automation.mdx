@@ -1,0 +1,59 @@
+---
+title: "Getting Started with Business Automation"
+description: "Learn how automation can save your small business hours each week without complex tools or big budgets."
+pubDate: 2026-01-27
+featuredImage: "/images/blog/automation-placeholder.svg"
+tags: ["automation", "small-business", "productivity"]
+draft: false
+---
+
+# Getting Started with Business Automation
+
+Most small business owners think automation requires expensive software or technical expertise. The truth? You can start automating today with tools you already have.
+
+## Why Automate?
+
+Every minute spent on repetitive tasks is a minute you could spend growing your business. Here's what automation can handle:
+
+- **Email responses** - Auto-replies, templates, and scheduling
+- **Invoice reminders** - Automatic follow-ups on unpaid invoices
+- **Data entry** - Moving information between apps automatically
+- **Social media** - Scheduled posts and basic engagement
+
+## Start Simple
+
+The best automation is invisible. Start with one process that:
+
+1. Happens frequently (daily or weekly)
+2. Follows the same steps every time
+3. Doesn't require human judgment
+
+### Example: Invoice Follow-ups
+
+Instead of manually checking who hasn't paid:
+
+```javascript
+// Pseudo-code for invoice automation
+const overdueInvoices = invoices.filter(
+  inv => inv.dueDate < today && !inv.paid
+);
+
+overdueInvoices.forEach(invoice => {
+  sendReminderEmail(invoice.customer);
+  logActivity(`Reminder sent to ${invoice.customer.name}`);
+});
+```
+
+This simple pattern can save hours each week.
+
+## What's Next?
+
+In future posts, we'll cover:
+
+- Setting up your first Zapier automation
+- When to build custom tools vs use existing solutions
+- How AI is changing what's possible for small businesses
+
+---
+
+*Have a process you'd like to automate? [Get in touch](/contact) and let's chat about what's possible.*
