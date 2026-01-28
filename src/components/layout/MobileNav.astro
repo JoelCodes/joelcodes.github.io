@@ -70,7 +70,7 @@
     if (hamburgerIcon) {
       if (!isExpanded) {
         // Open state - transform to X
-        const lines = hamburgerIcon.querySelectorAll('.hamburger-line');
+        const lines = hamburgerIcon.querySelectorAll<HTMLSpanElement>('.hamburger-line');
         lines[0].style.top = '50%';
         lines[0].style.transform = 'translateY(-50%) rotate(45deg)';
         lines[1].style.opacity = '0';
@@ -79,7 +79,7 @@
         lines[2].style.transform = 'translateY(-50%) rotate(-45deg)';
       } else {
         // Closed state - back to hamburger
-        const lines = hamburgerIcon.querySelectorAll('.hamburger-line');
+        const lines = hamburgerIcon.querySelectorAll<HTMLSpanElement>('.hamburger-line');
         lines[0].style.top = '0';
         lines[0].style.transform = 'none';
         lines[1].style.opacity = '1';
@@ -97,7 +97,7 @@
 
     // Reset hamburger icon
     if (hamburgerIcon) {
-      const lines = hamburgerIcon.querySelectorAll('.hamburger-line');
+      const lines = hamburgerIcon.querySelectorAll<HTMLSpanElement>('.hamburger-line');
       lines[0].style.top = '0';
       lines[0].style.transform = 'none';
       lines[1].style.opacity = '1';
@@ -117,7 +117,7 @@
 
       // Reset hamburger icon
       if (hamburgerIcon) {
-        const lines = hamburgerIcon.querySelectorAll('.hamburger-line');
+        const lines = hamburgerIcon.querySelectorAll<HTMLSpanElement>('.hamburger-line');
         lines[0].style.top = '0';
         lines[0].style.transform = 'none';
         lines[1].style.opacity = '1';
