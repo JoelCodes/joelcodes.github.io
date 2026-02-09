@@ -1,0 +1,221 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+import Input from '../components/ui/Input.astro';
+---
+
+<BaseLayout
+  title="Component Demo"
+  description="Visual demonstration of primitive UI components"
+>
+  <div class="max-w-7xl mx-auto px-6 py-12">
+    <h1 class="font-heading text-4xl font-bold uppercase mb-8">
+      Component Demo
+    </h1>
+    <p class="text-text-muted-light dark:text-text-muted-dark mb-12">
+      Visual testing page for primitive components. Toggle dark mode using the header to test both themes.
+    </p>
+
+    <!-- Button Section -->
+    <section class="mb-16">
+      <h2 class="font-heading text-3xl font-bold mb-6">Buttons</h2>
+      <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-6">
+        Hover to see lift effect, click to see press effect, tab for focus ring
+      </p>
+
+      <div class="space-y-8">
+        <!-- Sizes with Yellow variant -->
+        <div>
+          <h3 class="font-heading text-xl font-semibold mb-4">Sizes (Yellow)</h3>
+          <div class="flex flex-wrap gap-4">
+            <Button variant="yellow" size="sm">Small Button</Button>
+            <Button variant="yellow" size="md">Medium Button</Button>
+            <Button variant="yellow" size="lg">Large Button</Button>
+          </div>
+        </div>
+
+        <!-- All Variants (medium size) -->
+        <div>
+          <h3 class="font-heading text-xl font-semibold mb-4">Variants</h3>
+          <div class="flex flex-wrap gap-4">
+            <Button variant="yellow">Yellow Button</Button>
+            <Button variant="turquoise">Turquoise Button</Button>
+            <Button variant="magenta">Magenta Button</Button>
+          </div>
+        </div>
+
+        <!-- Anchor variations -->
+        <div>
+          <h3 class="font-heading text-xl font-semibold mb-4">Link Buttons</h3>
+          <div class="flex flex-wrap gap-4">
+            <Button variant="yellow" href="#yellow">Yellow Link</Button>
+            <Button variant="turquoise" href="#turquoise">Turquoise Link</Button>
+            <Button variant="magenta" href="#magenta">Magenta Link</Button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Card Section -->
+    <section class="mb-16">
+      <h2 class="font-heading text-3xl font-bold mb-6">Cards</h2>
+      <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-6">
+        Cards with thick borders and offset shadows (become glows in dark mode)
+      </p>
+
+      <div class="space-y-8">
+        <!-- Regular Cards -->
+        <div>
+          <h3 class="font-heading text-xl font-semibold mb-4">Regular Cards</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Card variant="yellow">
+              <h4 class="font-heading text-lg font-semibold mb-2">Yellow Card</h4>
+              <p class="text-text-muted-light dark:text-text-muted-dark">
+                This card has a yellow shadow in light mode and a yellow glow in dark mode.
+              </p>
+            </Card>
+            <Card variant="turquoise">
+              <h4 class="font-heading text-lg font-semibold mb-2">Turquoise Card</h4>
+              <p class="text-text-muted-light dark:text-text-muted-dark">
+                This card has a turquoise shadow in light mode and a turquoise glow in dark mode.
+              </p>
+            </Card>
+            <Card variant="magenta">
+              <h4 class="font-heading text-lg font-semibold mb-2">Magenta Card</h4>
+              <p class="text-text-muted-light dark:text-text-muted-dark">
+                This card has a magenta shadow in light mode and a magenta glow in dark mode.
+              </p>
+            </Card>
+          </div>
+        </div>
+
+        <!-- Stacked Cards -->
+        <div>
+          <h3 class="font-heading text-xl font-semibold mb-4">Stacked Cards</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Card variant="yellow" stacked>
+              <h4 class="font-heading text-lg font-semibold mb-2">Stacked Yellow</h4>
+              <p class="text-text-muted-light dark:text-text-muted-dark">
+                Background layers create depth behind this card.
+              </p>
+            </Card>
+            <Card variant="turquoise" stacked>
+              <h4 class="font-heading text-lg font-semibold mb-2">Stacked Turquoise</h4>
+              <p class="text-text-muted-light dark:text-text-muted-dark">
+                Background layers create depth behind this card.
+              </p>
+            </Card>
+            <Card variant="magenta" stacked>
+              <h4 class="font-heading text-lg font-semibold mb-2">Stacked Magenta</h4>
+              <p class="text-text-muted-light dark:text-text-muted-dark">
+                Background layers create depth behind this card.
+              </p>
+            </Card>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Input Section -->
+    <section class="mb-16">
+      <h2 class="font-heading text-3xl font-bold mb-6">Inputs</h2>
+      <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-6">
+        Tab to see WCAG 2.4.13 compliant focus rings (4px total width, high contrast)
+      </p>
+
+      <div class="space-y-8">
+        <!-- All Variants with Labels -->
+        <div>
+          <h3 class="font-heading text-xl font-semibold mb-4">Variants with Labels</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Input
+              variant="yellow"
+              label="Yellow Input"
+              placeholder="Enter text..."
+              type="text"
+            />
+            <Input
+              variant="turquoise"
+              label="Turquoise Input"
+              placeholder="Enter email..."
+              type="email"
+            />
+            <Input
+              variant="magenta"
+              label="Magenta Input"
+              placeholder="Enter password..."
+              type="password"
+            />
+          </div>
+        </div>
+
+        <!-- Error State -->
+        <div>
+          <h3 class="font-heading text-xl font-semibold mb-4">Error State</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Input
+              variant="yellow"
+              label="Email (Required)"
+              error="Email is required"
+              type="email"
+              required
+            />
+            <Input
+              variant="turquoise"
+              label="Phone Number"
+              error="Please enter a valid phone number"
+              type="tel"
+              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+            />
+            <Input
+              variant="magenta"
+              label="Username"
+              error="Username must be at least 3 characters"
+              minlength={3}
+              type="text"
+            />
+          </div>
+        </div>
+
+        <!-- Without Labels -->
+        <div>
+          <h3 class="font-heading text-xl font-semibold mb-4">Without Labels</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Input
+              variant="yellow"
+              placeholder="Yellow placeholder..."
+            />
+            <Input
+              variant="turquoise"
+              placeholder="Turquoise placeholder..."
+            />
+            <Input
+              variant="magenta"
+              placeholder="Magenta placeholder..."
+            />
+          </div>
+        </div>
+
+        <!-- HTML Validation Attributes -->
+        <div>
+          <h3 class="font-heading text-xl font-semibold mb-4">HTML Validation Test</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Input
+              variant="yellow"
+              label="Required Field"
+              placeholder="This field is required"
+              required
+            />
+            <Input
+              variant="turquoise"
+              label="Max Length (10 chars)"
+              placeholder="Type more than 10 characters"
+              maxlength={10}
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
