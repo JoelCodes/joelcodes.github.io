@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-09)
 
 **Core value:** Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
-**Current focus:** Phase 7 - Design System Foundation (v1.1 Design Updates)
+**Current focus:** Phase 8 - Primitive Components (v1.1 Design Updates)
 
 ## Current Position
 
-Phase: 7 of 11 (Design System Foundation)
-Plan: 2 of 3 complete
+Phase: 8 of 11 (Primitive Components)
+Plan: 1 of 3 complete
 Status: In progress
-Last activity: 2026-02-09 — Completed 07-02-PLAN.md (Typography & Density)
+Last activity: 2026-02-09 — Completed 08-01-PLAN.md (Button & Card Primitives)
 
-Progress: [████████████░░░░░░░░] 66% (25 of ~38 total plans complete across v1.0 + v1.1)
+Progress: [████████████░░░░░░░░] 68% (26 of ~38 total plans complete across v1.0 + v1.1)
 
 ## Milestone History
 
@@ -44,6 +44,10 @@ Recent decisions affecting v1.1:
 - **One accent per section** (07-02): Single dominant color per visual group to prevent chaos
 - **Shadows imply importance** (07-02): Reserved for interactive elements and hero sections only
 - **H1 ALL CAPS exclusivity** (07-02): Only H1 uses ALL CAPS for maximum impact and readability
+- **3-layer button technique** (08-01): Shadow/edge/front layers with transform-only animation for 60 FPS mobile performance
+- **Transform-only animation** (08-01): Avoid box-shadow animation (causes 200ms repaints); use hardware-accelerated transforms instead
+- **WCAG 2.4.13 focus states** (08-01): 2px outline with 4px offset meets AAA requirements for keyboard navigation
+- **Card stacking isolation** (08-01): Use isolation: isolate to prevent z-index conflicts with pseudo-element layers
 
 ### Pending Todos
 
@@ -65,8 +69,10 @@ Recent decisions affecting v1.1:
 - Dark mode shadow inversion needs careful testing to maintain visual hierarchy
 - Density guidelines (3/10 constraint) need per-section targets documented
 
-**Phase 8 (Primitive Components):**
-- Box-shadow animation performance must use pseudo-element technique (not direct animation)
+**Phase 9 (Composite Components):**
+- Button + Icon composition patterns need documentation
+- Card + Button integration testing (padding, CTAs)
+- Consider pressed effect for clickable cards
 
 **Phase 11 (Testing & Accessibility):**
 - Manual accessibility testing required (Lighthouse alone insufficient)
@@ -75,9 +81,9 @@ Recent decisions affecting v1.1:
 ## Session Continuity
 
 Last session: 2026-02-09
-Stopped at: Completed 07-02-PLAN.md execution (Typography & Density)
+Stopped at: Completed 08-01-PLAN.md execution (Button & Card Primitives)
 Resume file: None
-Next action: Execute remaining Phase 7 plan (07-03)
+Next action: Execute next Phase 8 plan (08-02 or 08-03)
 
 ---
 *State initialized: 2026-01-26*
