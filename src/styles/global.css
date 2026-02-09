@@ -1,31 +1,106 @@
 @import "tailwindcss";
 
 @theme {
-  /* Yellow accent - warm, energetic for CTAs */
-  --color-accent-yellow: oklch(0.85 0.18 85);
-  --color-accent-yellow-hover: oklch(0.80 0.20 85);
+  /* Primary accent colors */
+  --color-yellow: oklch(0.85 0.18 95);
+  --color-yellow-hover: oklch(0.80 0.20 95);
+  --color-turquoise: oklch(0.70 0.15 195);
+  --color-turquoise-hover: oklch(0.65 0.17 195);
+  --color-magenta: oklch(0.65 0.20 350);
+  --color-magenta-hover: oklch(0.60 0.22 350);
 
-  /* Teal accent - calm, complementary (darkened for WCAG AA contrast) */
-  --color-accent-teal: oklch(0.45 0.15 180);
-  --color-accent-teal-hover: oklch(0.40 0.17 180);
+  /* Dark mode variants (reduced L by 5%, reduced C by 0.02) */
+  --color-yellow-dark: oklch(0.80 0.16 95);
+  --color-turquoise-dark: oklch(0.65 0.13 195);
+  --color-magenta-dark: oklch(0.60 0.18 350);
 
-  /* Backgrounds - pure contrast */
-  --color-bg-light: #ffffff;
-  --color-bg-dark: #0a0a0a;
+  /* Neutral colors (OKLCH format) */
+  --color-bg-light: oklch(1.0 0 0);
+  --color-bg-dark: oklch(0.15 0 0);
+  --color-text-light: oklch(0.2 0 0);
+  --color-text-dark: oklch(0.95 0 0);
+  --color-text-muted-light: oklch(0.5 0 0);
+  --color-text-muted-dark: oklch(0.7 0 0);
 
-  /* Text colors */
-  --color-text-light: #171717;
-  --color-text-dark: #fafafa;
-  --color-text-muted-light: #525252;
-  --color-text-muted-dark: #a3a3a3;
+  /* Border Tokens */
+  --border-neo: 3px;
+  --border-neo-thick: 4px;
 
-  /* Typography */
-  --font-heading: 'Poppins', system-ui, sans-serif;
-  --font-body: 'Inter', system-ui, sans-serif;
+  /* Spacing Tokens (4pt grid) */
+  --spacing-neo-xs: 8px;
+  --spacing-neo-sm: 12px;
+  --spacing-neo-md: 16px;
+  --spacing-neo-lg: 24px;
+  --spacing-neo-xl: 32px;
+  --spacing-neo-2xl: 64px;
+
+  /* Typography - font families */
+  --font-heading: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+
+  /* Typography - font weights */
+  --font-weight-h1: 800;
+  --font-weight-h2: 700;
+  --font-weight-h3: 600;
+  --font-weight-h4: 500;
+  --font-weight-body: 400;
+
+  /* Typography - font sizes (1.25 ratio scale) */
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-base: 1rem;     /* 16px */
+  --text-lg: 1.125rem;   /* 18px */
+  --text-xl: 1.25rem;    /* 20px */
+  --text-2xl: 1.5rem;    /* 24px */
+  --text-3xl: 1.875rem;  /* 30px */
+  --text-4xl: 2.25rem;   /* 36px */
+
+  /* Typography - line heights */
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.75;
 }
 
 /* Dark mode variant for class-based toggle */
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* Shadow utilities for neobrutalist design */
+@layer utilities {
+  .shadow-neo-yellow {
+    box-shadow: 5px 5px 0 var(--color-yellow);
+  }
+  .dark .shadow-neo-yellow {
+    box-shadow: 0 0 20px color-mix(in oklch, var(--color-yellow-dark) 50%, transparent);
+  }
+
+  .shadow-neo-turquoise {
+    box-shadow: 5px 5px 0 var(--color-turquoise);
+  }
+  .dark .shadow-neo-turquoise {
+    box-shadow: 0 0 20px color-mix(in oklch, var(--color-turquoise-dark) 50%, transparent);
+  }
+
+  .shadow-neo-magenta {
+    box-shadow: 5px 5px 0 var(--color-magenta);
+  }
+  .dark .shadow-neo-magenta {
+    box-shadow: 0 0 20px color-mix(in oklch, var(--color-magenta-dark) 50%, transparent);
+  }
+
+  /* Hover states - pressed effect */
+  .shadow-neo-yellow-hover {
+    box-shadow: 3px 3px 0 var(--color-yellow);
+    transform: translate(2px, 2px);
+  }
+  .shadow-neo-turquoise-hover {
+    box-shadow: 3px 3px 0 var(--color-turquoise);
+    transform: translate(2px, 2px);
+  }
+  .shadow-neo-magenta-hover {
+    box-shadow: 3px 3px 0 var(--color-magenta);
+    transform: translate(2px, 2px);
+  }
+}
 
 /* Portfolio card filtering animations */
 .portfolio-card {
