@@ -1,0 +1,107 @@
+# Requirements: Joel Shinness Website
+
+**Defined:** 2026-02-09
+**Core Value:** Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
+
+## v1.1 Requirements
+
+Requirements for Design Updates milestone. Each maps to roadmap phases.
+
+### Design System
+
+- [ ] **DESIGN-01**: Site uses yellow/turquoise/magenta color palette with OKLCH tokens
+- [ ] **DESIGN-02**: Site uses 4-6px hard offset shadows with hover effects
+- [ ] **DESIGN-03**: Site uses Bricolage Grotesque (or similar quirky font) for headings, readable font for body
+- [ ] **DESIGN-04**: Site enforces 3/10 density constraint (documented per-section targets)
+- [ ] **DESIGN-05**: Dark mode adapts colors and inverts shadows for visibility
+
+### Homepage
+
+- [ ] **HOME-01**: Homepage follows narrative structure (Solutions → Process → Tech → About → Contact)
+- [ ] **HOME-02**: Homepage sections have bold borders and shadows
+- [ ] **HOME-03**: Homepage uses asymmetric layouts for visual interest
+- [ ] **HOME-04**: Contact section restyled with neobrutalist form
+
+### Components
+
+- [ ] **COMP-01**: Button component has pressed hover effect (translate + shadow removal)
+- [ ] **COMP-02**: Card component has thick borders and offset shadows
+- [ ] **COMP-03**: Input component has neobrutalist focus states (bold focus rings)
+- [ ] **COMP-04**: Card component supports stacked/layered effects for 3D illusion
+
+### Projects
+
+- [ ] **PROJ-01**: Portfolio page renamed to Projects (URL and navigation)
+- [ ] **PROJ-02**: Projects page uses neobrutalist card grid
+- [ ] **PROJ-03**: Individual projects use narrative case study format (Problem → Solution → Results)
+
+### Blog
+
+- [ ] **BLOG-01**: Blog index page restyled with neobrutalist card grid
+- [ ] **BLOG-02**: Tag pages restyled to match blog index
+- [ ] **BLOG-03**: Blog post headings have subtle neobrutalist accents (body text stays readable)
+
+### Other
+
+- [ ] **OTHER-01**: FAQ relocated from homepage to footer or separate page
+- [ ] **OTHER-02**: Header and Footer restyled with neobrutalist elements
+
+## v1.2 Requirements
+
+Deferred to future release. Tracked but not in current roadmap.
+
+### Differentiators
+
+- **DIFF-01**: Isometric shadows (45° angles) for advanced depth effect
+- **DIFF-02**: Cyclical process diagram (visual, not just text)
+- **DIFF-03**: Testimonials section with client quotes
+- **DIFF-04**: Newsletter signup integration
+
+## Out of Scope
+
+Explicitly excluded. Documented to prevent scope creep.
+
+| Feature | Reason |
+|---------|--------|
+| Individual blog post full redesign | Current design works well, only subtle heading accents needed |
+| Color block sections (full-width backgrounds) | User opted out, asymmetric layouts preferred |
+| Retro UI elements (Windows 98 style) | Could feel gimmicky for professional site |
+| Advanced micro-interactions beyond hover | Low priority, adds complexity |
+| Animation libraries | Pure CSS/Tailwind sufficient, avoids bloat |
+
+## Traceability
+
+Which phases cover which requirements. Updated during roadmap creation.
+
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| DESIGN-01 | Phase 7 | Pending |
+| DESIGN-02 | Phase 7 | Pending |
+| DESIGN-03 | Phase 7 | Pending |
+| DESIGN-04 | Phase 7 | Pending |
+| DESIGN-05 | Phase 7 | Pending |
+| COMP-01 | Phase 8 | Pending |
+| COMP-02 | Phase 8 | Pending |
+| COMP-03 | Phase 8 | Pending |
+| COMP-04 | Phase 8 | Pending |
+| HOME-01 | Phase 9 | Pending |
+| HOME-02 | Phase 9 | Pending |
+| HOME-03 | Phase 9 | Pending |
+| HOME-04 | Phase 9 | Pending |
+| OTHER-01 | Phase 9 | Pending |
+| OTHER-02 | Phase 9 | Pending |
+| PROJ-01 | Phase 10 | Pending |
+| PROJ-02 | Phase 10 | Pending |
+| PROJ-03 | Phase 10 | Pending |
+| BLOG-01 | Phase 10 | Pending |
+| BLOG-02 | Phase 10 | Pending |
+| BLOG-03 | Phase 10 | Pending |
+
+**Coverage:**
+- v1.1 requirements: 21 total
+- Mapped to phases: 21
+- Unmapped: 0 ✓
+
+---
+*Requirements defined: 2026-02-09*
+*Last updated: 2026-02-09 after initial definition*
