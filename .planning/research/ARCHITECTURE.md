@@ -1,7 +1,7 @@
-# Architecture Research
+# Architecture Research: Neobrutalist Design System
 
-**Domain:** Developer Portfolio/Services Website
-**Researched:** 2026-01-26
+**Domain:** Neobrutalist design system for portfolio/blog site
+**Researched:** 2026-02-09
 **Confidence:** HIGH
 
 ## Standard Architecture
@@ -10,41 +10,32 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    Presentation Layer                        │
-│  (Static HTML/CSS/JS - Pre-rendered at build time)          │
+│                    Design Token Layer                        │
+│         (Tailwind 4 @theme directive in global.css)          │
 ├─────────────────────────────────────────────────────────────┤
-│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐       │
-│  │  Hero    │ │ Services │ │Portfolio │ │  About   │       │
-│  │Component │ │Component │ │Component │ │Component │       │
-│  └────┬─────┘ └────┬─────┘ └────┬─────┘ └────┬─────┘       │
-│       │            │            │            │              │
-│  ┌────┴────┐  ┌───┴───┐   ┌────┴────┐  ┌───┴───┐          │
-│  │  Blog   │  │Testi- │   │ Contact │  │ Nav/  │          │
-│  │Component│  │monials│   │ Form    │  │Footer │          │
-│  └─────────┘  └───┬───┘   └────┬────┘  └───────┘          │
-│                    │            │                           │
-├────────────────────┴────────────┴───────────────────────────┤
-│                     Data/Content Layer                       │
-│  (Markdown files, JSON data, or static content)             │
+│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐        │
+│  │  Colors  │ │ Shadows  │ │ Borders  │ │ Typography│       │
+│  │  --color │ │ --shadow │ │ --radius │ │  --font   │       │
+│  └────┬─────┘ └────┬─────┘ └────┬─────┘ └────┬─────┘        │
+│       └────────────┴─────────────┴────────────┘              │
 ├─────────────────────────────────────────────────────────────┤
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
-│  │   Content    │  │   Portfolio  │  │    Site      │      │
-│  │   Markdown   │  │     Data     │  │   Metadata   │      │
-│  │   (Blog)     │  │    (JSON)    │  │   (config)   │      │
-│  └──────────────┘  └──────────────┘  └──────────────┘      │
+│                   Component Layer                            │
+│      (Astro components using Tailwind utilities)             │
 ├─────────────────────────────────────────────────────────────┤
-│                  External Services Layer                     │
-│  (Third-party APIs - called from client browser)            │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
-│  │   Form API   │  │   Comments   │  │  Analytics   │      │
-│  │ (Formspree/  │  │ (Optional:   │  │  (Optional)  │      │
-│  │  FormBold)   │  │  Utterances) │  │              │      │
-│  └──────────────┘  └──────────────┘  └──────────────┘      │
-└─────────────────────────────────────────────────────────────┘
-                             ↓
-┌─────────────────────────────────────────────────────────────┐
-│              Deployment/Hosting Layer                        │
-│  GitHub Pages (Static CDN hosting - HTTPS enabled)          │
+│  ┌───────────┐  ┌───────────┐  ┌───────────┐                │
+│  │  Button   │  │   Card    │  │   Form    │                │
+│  │  Border   │  │  Shadow   │  │   Input   │                │
+│  │  Hover    │  │  Layout   │  │  Focus    │                │
+│  └─────┬─────┘  └─────┬─────┘  └─────┬─────┘                │
+│        │               │               │                     │
+├────────┴───────────────┴───────────────┴─────────────────────┤
+│                    Page Layer                                │
+│       (Existing layouts + pages consume components)          │
+├─────────────────────────────────────────────────────────────┤
+│  ┌──────────────────────────────────────────────────────┐   │
+│  │            BaseLayout.astro                           │   │
+│  │    (Dark mode toggle, font loading, SEO)              │   │
+│  └──────────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -52,624 +43,480 @@
 
 | Component | Responsibility | Typical Implementation |
 |-----------|----------------|------------------------|
-| Hero/Landing | First impression, value proposition, CTA | Full-viewport section with headline, tagline, primary CTA button |
-| Services | Communicate expertise areas (web apps, automation, AI) | Grid or card layout with service descriptions |
-| Portfolio | Showcase case studies with problem/solution narrative | Card grid linking to detailed case study pages |
-| Case Study Page | Deep dive into specific project work | Standalone page with images, metrics, tech stack, outcomes |
-| About | Build trust through personal story and expertise | Bio section with professional photo and background |
-| Blog | Demonstrate expertise through written content | List of posts with pagination, individual post pages |
-| Testimonials | Social proof from previous clients | Quote cards or carousel with client names/companies |
-| Contact Form | Lead capture for potential clients | Form fields (name, email, project description) posting to API |
-| Navigation | Site-wide orientation and access | Sticky header with links to all main sections |
-| Footer | Secondary links, social proof, legal | Copyright, social links, email, additional navigation |
+| **Design Tokens** | Define color, spacing, shadow, border values | Tailwind 4 `@theme` directive with CSS custom properties |
+| **Primitive Components** | Button, Card, Input with neobrutalist styling | Astro components with Tailwind utility classes |
+| **Layout Components** | Header, Footer, Hero with updated styling | Modified existing components with new design tokens |
+| **Theme Provider** | Dark mode toggle, localStorage persistence | Inline script in BaseLayout.astro (existing pattern) |
 
 ## Recommended Project Structure
 
-### Option 1: Flat Structure (For Small Sites - Under 10 Pages)
+### Integration with Existing Structure
 
 ```
-joel-shinness-website/
-├── index.html              # Home page with hero, services overview
-├── about.html              # About page
-├── services.html           # Detailed services page
-├── portfolio.html          # Portfolio grid/list
-├── blog.html               # Blog post list
-├── contact.html            # Contact form
-├── css/
-│   ├── main.css            # Global styles
-│   ├── components.css      # Reusable component styles
-│   └── utilities.css       # Utility classes
-├── js/
-│   ├── main.js             # Global scripts (nav, mobile menu)
-│   ├── form-handler.js     # Contact form submission logic
-│   └── analytics.js        # Optional analytics initialization
-├── images/
-│   ├── portfolio/          # Project screenshots
-│   ├── team/               # Personal photos
-│   └── assets/             # Icons, logos
-├── blog/
-│   └── posts/              # Individual blog post HTML files
-│       ├── post-1.html
-│       └── post-2.html
-└── case-studies/           # Individual case study pages
-    ├── project-1.html
-    └── project-2.html
-```
-
-### Option 2: Component-Based Structure (Recommended for Maintainability)
-
-```
-joel-shinness-website/
-├── src/                    # Source files (if using build process)
-│   ├── pages/              # Page templates
-│   │   ├── index.html
-│   │   ├── about.html
-│   │   ├── portfolio.html
-│   │   └── blog.html
-│   ├── components/         # Reusable HTML fragments
-│   │   ├── header.html     # Site navigation
-│   │   ├── footer.html     # Site footer
-│   │   ├── service-card.html
-│   │   ├── portfolio-card.html
-│   │   └── testimonial.html
-│   ├── styles/
-│   │   ├── base/           # Reset, typography, variables
-│   │   │   ├── _reset.css
-│   │   │   ├── _typography.css
-│   │   │   └── _variables.css
-│   │   ├── components/     # Component-specific styles
-│   │   │   ├── _header.css
-│   │   │   ├── _hero.css
-│   │   │   ├── _service-card.css
-│   │   │   └── _portfolio-card.css
-│   │   ├── layouts/        # Page layout styles
-│   │   │   ├── _home.css
-│   │   │   └── _case-study.css
-│   │   └── main.css        # Import all stylesheets
-│   ├── scripts/
-│   │   ├── components/     # Component-specific JS
-│   │   │   ├── navigation.js
-│   │   │   └── contact-form.js
-│   │   └── main.js         # Entry point
-│   └── data/               # Structured content data
-│       ├── portfolio.json  # Portfolio projects metadata
-│       ├── services.json   # Service offerings
-│       └── testimonials.json
-├── content/                # Markdown content (if using SSG)
-│   └── blog/
-│       ├── 2026-01-15-post-title.md
-│       └── 2026-01-20-another-post.md
-├── public/                 # Build output (what gets deployed)
-│   ├── index.html
-│   ├── css/
-│   ├── js/
-│   └── images/
-├── images/                 # Static assets
-│   ├── portfolio/
-│   ├── headshot.jpg
-│   └── logo.svg
-└── .github/
-    └── workflows/
-        └── deploy.yml      # GitHub Actions for automated deployment
+src/
+├── styles/
+│   └── global.css              # MODIFY: Add @theme tokens, keep existing utilities
+├── components/
+│   ├── primitives/             # NEW: Neobrutalist base components
+│   │   ├── Button.astro       # NEW: Button with border-2, shadow-brutal
+│   │   ├── Card.astro         # NEW: Card with shadow-brutal, rounded-brutal
+│   │   ├── Input.astro        # NEW: Form input with focus states
+│   │   └── Badge.astro        # NEW: Tag/badge component
+│   ├── layout/                # MODIFY: Update existing components
+│   │   ├── Header.astro       # MODIFY: Apply neobrutalist button styles
+│   │   ├── Footer.astro       # MODIFY: Update with new design tokens
+│   │   └── MobileNav.astro    # MODIFY: Update styling
+│   ├── Hero.astro             # MODIFY: Update CTA button
+│   ├── BlogCard.astro         # MODIFY: Add shadow-brutal, border-2
+│   ├── Services.astro         # MODIFY: Update card styling
+│   ├── FAQ.astro              # MODIFY: Update accordion styling
+│   ├── Process.astro          # MODIFY: Update card styling
+│   └── About.astro            # MODIFY: Update styling
+├── layouts/
+│   └── BaseLayout.astro       # MODIFY: Update font imports (Poppins/Inter → quirky/readable)
+└── pages/                     # NO CHANGES: Pages consume updated components
 ```
 
 ### Structure Rationale
 
-**Component-based organization** (Option 2) is recommended because:
-- **Maintainability**: Changes to header/footer happen in one place, not across 10+ pages
-- **Reusability**: Service cards, portfolio cards, testimonials use shared templates
-- **Build optimization**: Enables minification, asset optimization, component bundling
-- **Content management**: Separates content (data/markdown) from presentation (HTML/CSS)
-- **Scalability**: Easy to add new sections without duplicating boilerplate
+- **`primitives/` folder:** NEW folder for reusable neobrutalist components. Separates design system primitives from composed components (Hero, Services, etc.). Follows Astro community pattern of organizing by abstraction level.
 
-**Flat structure** (Option 1) works for:
-- Very small sites (5-10 pages)
-- No build process required
-- Immediate editing and preview
-- Learning/prototyping phase
+- **Modified existing components:** Leverage existing component structure, update with new Tailwind classes. Avoid wholesale rewrites—apply neobrutalist tokens via class swaps.
 
-**For this project**: Start with Option 1 for rapid prototyping, migrate to Option 2 when:
-- Blog has 5+ posts
-- Portfolio has 5+ case studies
-- Adding interactive features (filtering, search)
-- Team collaboration begins
+- **`global.css` as single source of truth:** Tailwind 4's `@theme` directive makes this file both the token definition and utility generator. No separate config file needed.
 
 ## Architectural Patterns
 
-### Pattern 1: JAMstack Architecture
+### Pattern 1: CSS-First Design Tokens with Tailwind 4 @theme
 
-**What:** JavaScript, APIs, and Markup - decouple the presentation layer from data and backend services
+**What:** Define all design tokens (colors, shadows, borders, typography) in `global.css` using Tailwind 4's `@theme` directive. Tokens become both CSS custom properties and Tailwind utility classes.
 
-**When to use:** Static content sites (portfolios, marketing, blogs) where content doesn't change frequently
+**When to use:** For the entire design system—this is the foundation pattern for neobrutalism.
 
 **Trade-offs:**
-- **Pros**: Blazing fast load times (pre-rendered HTML), excellent SEO, free/cheap hosting, simple deployment, high security (no server to hack)
-- **Cons**: Dynamic features require third-party APIs, content updates need rebuild/redeploy, no server-side logic without serverless functions
+- **Pro:** Single source of truth, no JavaScript config, runtime CSS variables for dynamic theming
+- **Pro:** Smaller build output, easier dark mode with semantic color names
+- **Con:** Requires Tailwind 4 (project already uses this via `@tailwindcss/vite`)
 
 **Example:**
-```html
-<!-- Static HTML generated at build time -->
-<section class="portfolio">
-  <h2>Recent Projects</h2>
-  <div class="portfolio-grid">
-    <!-- This gets populated from portfolio.json at build time -->
-    <article class="portfolio-card">
-      <img src="/images/portfolio/project-1.jpg" alt="Project name">
-      <h3>Project Name</h3>
-      <p>Brief description...</p>
-      <a href="/case-studies/project-1.html">Read case study</a>
-    </article>
-  </div>
-</section>
+```css
+/* global.css */
+@import "tailwindcss";
+
+@theme {
+  /* Neobrutalist color palette - high contrast */
+  --color-yellow: oklch(0.90 0.15 95);
+  --color-yellow-dark: oklch(0.85 0.18 95);
+  --color-turquoise: oklch(0.70 0.15 190);
+  --color-magenta: oklch(0.65 0.25 330);
+
+  /* Semantic color mapping */
+  --color-primary: var(--color-yellow);
+  --color-secondary: var(--color-turquoise);
+  --color-accent: var(--color-magenta);
+
+  /* Neobrutalist shadows - solid, offset */
+  --shadow-brutal: 4px 4px 0 0 rgb(0 0 0);
+  --shadow-brutal-lg: 6px 6px 0 0 rgb(0 0 0);
+  --shadow-brutal-inset: inset 4px 4px 0 0 rgb(0 0 0 / 0.1);
+
+  /* Dark mode shadows - lighter color */
+  --shadow-brutal-dark: 4px 4px 0 0 rgb(255 255 255 / 0.2);
+  --shadow-brutal-lg-dark: 6px 6px 0 0 rgb(255 255 255 / 0.2);
+
+  /* Borders - thick and bold */
+  --radius-brutal: 0.5rem;  /* rounded-brutal */
+
+  /* Typography */
+  --font-heading: 'Space Grotesk', system-ui, sans-serif;  /* Example quirky font */
+  --font-body: 'Inter', system-ui, sans-serif;  /* Keeps existing readable font */
+}
+
+/* Dark mode variant */
+@custom-variant dark (&:where(.dark, .dark *));
 ```
 
-### Pattern 2: Data-Driven Components
+### Pattern 2: Component Hover State with Shadow Translation
 
-**What:** Separate content data (JSON/YAML/Markdown) from presentation templates, allowing content updates without touching HTML
+**What:** Neobrutalist buttons/cards have a distinctive "press" effect: on hover, the element translates to match the shadow offset, and the shadow disappears, creating the illusion of the element being pressed into the page.
 
-**When to use:** When you have repeating content structures (portfolio items, blog posts, testimonials) that change frequently
+**When to use:** Buttons, interactive cards, clickable elements.
 
 **Trade-offs:**
-- **Pros**: Content editors don't need HTML knowledge, consistent data structure, easy to add/remove items, can reuse data across pages
-- **Cons**: Requires build process or JavaScript templating, adds complexity for simple sites, learning curve for non-developers
+- **Pro:** Distinctive kinetic feedback, maintains brutalist aesthetic, accessible (visible state change)
+- **Con:** More CSS than simple opacity change, requires coordinated translation values
 
 **Example:**
-```json
-// data/portfolio.json
-{
-  "projects": [
-    {
-      "id": "crm-automation",
-      "title": "CRM Automation Platform",
-      "client": "Acme Corp",
-      "description": "Built custom automation workflows...",
-      "tech": ["Python", "API Integration", "Webhooks"],
-      "image": "/images/portfolio/crm.jpg",
-      "metrics": {
-        "timeSaved": "20 hours/week",
-        "roi": "300%"
-      }
-    }
-  ]
+```astro
+<!-- Button.astro -->
+<button
+  class="
+    border-2 border-black dark:border-white
+    shadow-brutal dark:shadow-brutal-dark
+    bg-primary text-black
+    rounded-brutal
+    px-6 py-3
+    font-heading font-bold
+    transition-all duration-150
+    hover:translate-x-1 hover:translate-y-1
+    hover:shadow-none
+    active:translate-x-1 active:translate-y-1
+    active:shadow-none
+  "
+>
+  <slot />
+</button>
+```
+
+### Pattern 3: Dark Mode with High-Contrast Semantic Colors
+
+**What:** Use semantic color tokens (`--color-primary`, `--color-bg`) that reference different base colors in light vs. dark mode. Neobrutalism requires higher contrast in dark mode to maintain the bold aesthetic.
+
+**When to use:** All color decisions in components—never hardcode color values, always use semantic tokens.
+
+**Trade-offs:**
+- **Pro:** Easy mode switching, accessible contrast ratios, maintainable
+- **Con:** Requires careful color selection to meet WCAG AA (4.5:1 text, 3:1 UI elements)
+
+**Example:**
+```css
+@theme {
+  /* Light mode colors */
+  --color-bg: #ffffff;
+  --color-text: #0a0a0a;
+  --color-border: #0a0a0a;
+
+  /* Dark mode requires custom properties + variant */
+}
+
+/* Approach 1: Dark mode override in @theme */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Then in components, use dark: prefix */
+.card {
+  @apply bg-bg text-text border-border;
+  @apply dark:bg-[#1a1a1a] dark:text-[#fafafa] dark:border-[#fafafa];
+}
+
+/* Approach 2: CSS custom properties with fallback (more flexible) */
+:root {
+  --color-bg-light: #ffffff;
+  --color-bg-dark: #1a1a1a;
+}
+
+.dark {
+  --color-bg: var(--color-bg-dark);
+}
+
+:root:not(.dark) {
+  --color-bg: var(--color-bg-light);
 }
 ```
 
-```javascript
-// scripts/portfolio-renderer.js
-async function renderPortfolio() {
-  const response = await fetch('/data/portfolio.json');
-  const { projects } = await response.json();
+### Pattern 4: Astro Component Composition with Tailwind Utilities
 
-  const grid = document.querySelector('.portfolio-grid');
-  grid.innerHTML = projects.map(project => `
-    <article class="portfolio-card">
-      <img src="${project.image}" alt="${project.title}">
-      <h3>${project.title}</h3>
-      <p>${project.description}</p>
-      <div class="tech-stack">${project.tech.join(', ')}</div>
-    </article>
-  `).join('');
-}
-```
+**What:** Build primitive components (Button, Card, Input) as Astro components that accept props for variants (size, color) but default to neobrutalist styling. Compose into larger components (Hero, BlogCard).
 
-### Pattern 3: Progressive Enhancement
-
-**What:** Build core functionality with HTML/CSS first, then enhance with JavaScript for interactivity
-
-**When to use:** All static sites, especially for accessibility and SEO
+**When to use:** All neobrutalist components—keep them as Astro components (server-rendered) unless interactivity requires client-side JavaScript.
 
 **Trade-offs:**
-- **Pros**: Works without JavaScript, excellent accessibility, better SEO, faster initial render, graceful degradation
-- **Cons**: Requires more thoughtful architecture, some features harder to implement, potential duplicate logic
+- **Pro:** Astro's zero-JS by default, props for flexibility, TypeScript for safety
+- **Con:** No runtime state (use client:* directives if needed, e.g., for accordions)
 
 **Example:**
-```html
-<!-- Works without JavaScript: Static links to all pages -->
-<nav class="main-nav">
-  <ul>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#portfolio">Portfolio</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="/blog.html">Blog</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
+```astro
+---
+// primitives/Button.astro
+interface Props {
+  variant?: 'primary' | 'secondary' | 'neutral';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  class?: string;
+}
 
-<script>
-  // Enhancement: Smooth scrolling for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const target = document.querySelector(link.getAttribute('href'));
-      target.scrollIntoView({ behavior: 'smooth' });
-    });
-  });
+const {
+  variant = 'primary',
+  size = 'md',
+  href,
+  class: className = ''
+} = Astro.props;
+
+const variantClasses = {
+  primary: 'bg-primary text-black border-black dark:border-white',
+  secondary: 'bg-secondary text-black border-black dark:border-white',
+  neutral: 'bg-bg text-text border-border'
+};
+
+const sizeClasses = {
+  sm: 'px-4 py-2 text-sm',
+  md: 'px-6 py-3 text-base',
+  lg: 'px-8 py-4 text-lg'
+};
+
+const baseClasses = `
+  inline-flex items-center justify-center
+  font-heading font-bold
+  border-2 rounded-brutal
+  shadow-brutal dark:shadow-brutal-dark
+  transition-all duration-150
+  hover:translate-x-1 hover:translate-y-1 hover:shadow-none
+  active:translate-x-1 active:translate-y-1 active:shadow-none
+  ${variantClasses[variant]}
+  ${sizeClasses[size]}
+  ${className}
+`;
+
+const Element = href ? 'a' : 'button';
+---
+
+<Element href={href} class={baseClasses}>
+  <slot />
+</Element>
+```
+
+### Pattern 5: Progressive Enhancement for Dark Mode
+
+**What:** Use the existing inline script pattern in BaseLayout.astro to prevent FOUC (flash of unstyled content), setting dark mode class before page renders based on localStorage and system preference.
+
+**When to use:** Keep the existing pattern—it works and is accessible.
+
+**Trade-offs:**
+- **Pro:** No flash, respects system preference, persists choice
+- **Con:** Inline script (not a real con for this use case)
+
+**Example (existing pattern to KEEP):**
+```astro
+<!-- BaseLayout.astro -->
+<script is:inline>
+  document.documentElement.classList.toggle(
+    "dark",
+    localStorage.theme === "dark" ||
+      (!("theme" in localStorage) &&
+       window.matchMedia("(prefers-color-scheme: dark)").matches)
+  );
 </script>
-```
-
-### Pattern 4: Third-Party Service Integration
-
-**What:** Offload dynamic functionality (forms, comments, analytics) to specialized third-party APIs
-
-**When to use:** Static sites that need dynamic features without backend infrastructure
-
-**Trade-offs:**
-- **Pros**: No backend to maintain, often free tier available, professional features (spam protection, email notifications), quick integration
-- **Cons**: Vendor lock-in, external dependencies, potential privacy concerns, limited customization, may require paid tier at scale
-
-**Example:**
-```html
-<!-- Contact form posting to Formspree -->
-<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-  <input type="text" name="name" required placeholder="Your name">
-  <input type="email" name="email" required placeholder="Your email">
-  <textarea name="message" required placeholder="Tell me about your project"></textarea>
-  <input type="hidden" name="_next" value="https://joelshinness.com/thank-you.html">
-  <button type="submit">Send Message</button>
-</form>
 ```
 
 ## Data Flow
 
-### Build-Time Flow (Static Site Generation)
+### Design Token Flow
 
 ```
-[Content Sources]
-  ├── Markdown files (blog/*.md)
-  ├── JSON data (data/*.json)
-  └── Images (images/*)
-         ↓
-   [Build Process]
-   (Optional: SSG like 11ty, Hugo, or simple HTML)
-         ↓
-    [Generate]
-      ├── Parse markdown → HTML
-      ├── Inject data into templates
-      ├── Minify CSS/JS
-      └── Optimize images
-         ↓
-   [Static Files]
-   (public/ or docs/ directory)
-         ↓
-   [Git Push]
-         ↓
-[GitHub Pages Deployment]
-   (Automatic via GitHub Actions)
-         ↓
-    [CDN Serving]
-    (https://joelshinness.com)
+@theme in global.css
+    ↓
+Tailwind generates utilities (bg-primary, shadow-brutal, etc.)
+    ↓
+Astro components use utilities in class attributes
+    ↓
+HTML rendered with inline styles (for static site)
+    ↓
+CSS custom properties available at runtime (for dynamic theming)
 ```
 
-### Runtime Flow (User Interaction)
+### Component Composition Flow
 
 ```
-[User Browser]
+Primitive Component (Button.astro)
+    ↓ props: variant, size
+Component uses props to conditionally apply Tailwind classes
+    ↓ compiles to
+Static HTML with classes
     ↓
-[Request Page]
-    ↓
-[GitHub Pages CDN] → Serves static HTML/CSS/JS
-    ↓
-[Browser Renders]
-    ↓
-[User Fills Contact Form]
-    ↓
-[JavaScript Validates Input]
-    ↓
-[POST to Form API]
-  (e.g., Formspree, FormBold)
-    ↓
-[API Processes]
-  ├── Validates data
-  ├── Checks for spam
-  └── Sends email notification
-    ↓
-[Response to Browser]
-    ↓
-[Show Success/Error Message]
+Browser renders with Tailwind CSS
 ```
 
-### Content Update Flow
+### Dark Mode State Flow
 
 ```
-[Content Author]
+Page Load → Inline Script Runs (before render)
     ↓
-[Edit File Locally]
-  ├── Add blog post (blog/new-post.md)
-  ├── Update portfolio (data/portfolio.json)
-  └── Change copy (edit index.html)
+Check localStorage.theme or system preference
     ↓
-[Commit Changes]
+Add/remove .dark class on <html>
     ↓
-[Push to GitHub]
+Tailwind dark: variant utilities activate
     ↓
-[GitHub Actions Trigger]
-  (if using build process)
+CSS custom properties reference dark mode values
     ↓
-[Build Static Site]
-    ↓
-[Deploy to gh-pages]
-    ↓
-[Live Site Updates]
-  (typically 30-60 seconds)
+User clicks theme toggle → localStorage updates → class toggles → CSS updates
 ```
 
 ### Key Data Flows
 
-1. **Portfolio Display Flow**: JSON data → JavaScript fetch → DOM manipulation → Rendered cards
-2. **Blog Post Flow**: Markdown content → Build process → Static HTML pages → User navigation
-3. **Contact Form Flow**: User input → Client-side validation → Third-party API → Email notification → Success message
-4. **Navigation Flow**: User click → Smooth scroll (JS enhancement) OR page navigation (fallback)
+1. **Token definition to usage:** Tokens defined once in `@theme`, consumed via Tailwind utilities everywhere. No prop drilling, no JavaScript state for colors/shadows.
+
+2. **Component variants:** Props select which Tailwind classes to apply. Composition at template time (Astro build), not runtime (JavaScript).
+
+3. **Dark mode:** Class-based (.dark on html element), controlled by localStorage + script, CSS custom properties respond to class.
 
 ## Scaling Considerations
 
 | Scale | Architecture Adjustments |
 |-------|--------------------------|
-| 0-1,000 visitors/month | Basic static HTML/CSS/JS. GitHub Pages free tier is sufficient. Manual deployment acceptable. Single-page design or simple multi-page. |
-| 1,000-10,000 visitors/month | Add build process for optimization (minification, image compression). Implement component-based structure for maintainability. Set up GitHub Actions for automated deployment. Consider basic analytics (Google Analytics or privacy-focused alternative). |
-| 10,000-100,000 visitors/month | Implement aggressive caching strategies. Use CDN with edge locations (GitHub Pages already provides this). Optimize images with lazy loading and WebP format. Consider static site generator (Eleventy, Hugo) for better build performance. Monitor Core Web Vitals. |
-| 100,000+ visitors/month | Consider migrating to Netlify, Vercel, or Cloudflare Pages for better DDoS protection and edge functions. Implement service worker for offline capability. Use advanced image optimization (responsive images, blur-up placeholders). Consider headless CMS for non-technical content updates. A/B testing infrastructure for conversion optimization. |
+| Current project (portfolio/blog) | Static site generation with Astro is perfect. No backend, no database, no scaling concerns. Design system complexity should remain low. |
+| 10-50 pages | Same architecture. Tailwind purging keeps CSS small. Component library grows slowly. |
+| 100+ components | Consider documenting components with Storybook or similar. May want to extract primitives to separate package if reused across multiple sites. |
 
 ### Scaling Priorities
 
-1. **First bottleneck: Page load speed**
-   - **Symptom**: Slow initial load on mobile or slower connections
-   - **Fix**: Optimize images (compress, lazy load, WebP format), minify CSS/JS, implement critical CSS, reduce third-party scripts
-   - **Prevention**: Set performance budget (target: <100KB initial HTML, <2s LCP)
+1. **First bottleneck:** Build time as components increase. **Solution:** Astro's partial hydration and fast dev server should handle this. If needed, use client:visible for below-fold components.
 
-2. **Second bottleneck: Content management complexity**
-   - **Symptom**: Difficult to add blog posts or portfolio items, fear of breaking site
-   - **Fix**: Implement data-driven components with JSON/Markdown, consider basic SSG (Eleventy, 11ty)
-   - **Prevention**: Separate content from presentation from day one
-
-3. **Third bottleneck: Form submission volume**
-   - **Symptom**: Contact form API rate limits hit, spam overwhelming inbox
-   - **Fix**: Upgrade to paid form service tier, implement honeypot/CAPTCHA, set up form workflow automation
-   - **Prevention**: Start with reputable form service with good spam protection
+2. **Second bottleneck:** Design token management if colors/shadows proliferate. **Solution:** Maintain discipline—limit palette to 5-7 colors, 3 shadow variants. Delete unused tokens.
 
 ## Anti-Patterns
 
-### Anti-Pattern 1: Over-Engineering with Framework Overkill
+### Anti-Pattern 1: Inline Styles or Style Tags
 
-**What people do:** Use React/Vue/Angular for a simple portfolio site with mostly static content
-
-**Why it's wrong:**
-- Adds unnecessary complexity (build process, dependencies, learning curve)
-- Slower initial load due to JavaScript bundle size
-- Harder for non-developers to maintain
-- Overkill for content that rarely changes
-- SEO challenges if not using SSR/SSG correctly
-
-**Do this instead:**
-- Start with vanilla HTML/CSS/JS for truly static sections
-- Use lightweight build tools (Eleventy, Hugo) if you need templating
-- Reserve frameworks for genuinely interactive applications
-- Ask: "Does this content change based on user interaction?" If no, it should be static HTML
-
-### Anti-Pattern 2: Inline Contact Form Backend Logic
-
-**What people do:** Try to implement form submission logic directly in the static site (PHP, Node.js endpoints) or store credentials in client-side code
+**What people do:** Define component-specific styles in `<style>` tags within Astro components or use inline `style=""` attributes for colors/shadows.
 
 **Why it's wrong:**
-- GitHub Pages doesn't support server-side languages (no PHP, no Node.js server)
-- Exposing API keys or email credentials in client JavaScript is a security vulnerability
-- Creating your own backend defeats the purpose of static hosting (complexity, maintenance, security)
+- Breaks the design system—tokens defined in `@theme` aren't used
+- Can't leverage Tailwind's purging or dark mode utilities
+- Creates inconsistency across components
+
+**Do this instead:** Always use Tailwind utility classes referencing design tokens. If you need a one-off style, extend `@theme` with a new token or use Tailwind's arbitrary values (`bg-[#abcdef]`) sparingly.
+
+### Anti-Pattern 2: Over-Componentizing Primitives
+
+**What people do:** Create separate Button.astro, PrimaryButton.astro, SecondaryButton.astro, LargeButton.astro, SmallButton.astro, etc.
+
+**Why it's wrong:**
+- Explosion of files for simple variants
+- Hard to maintain, easy to drift in styling
+- Loses the benefit of props for configuration
+
+**Do this instead:** Single `Button.astro` component with props for `variant` and `size`. Use TypeScript interfaces to constrain valid values.
+
+### Anti-Pattern 3: Hardcoding Shadow Offsets in Components
+
+**What people do:** Write `translate-x-[4px] translate-y-[4px]` in component classes to match shadow offset.
+
+**Why it's wrong:**
+- If shadow offset changes in `@theme`, all components break
+- Magic numbers scattered across codebase
+- Not DRY
 
 **Do this instead:**
-- Use form-as-a-service providers (Formspree, FormBold, Netlify Forms, Web3Forms)
-- These handle spam protection, email notifications, and data storage
-- Keep your site fully static and secure
-- Cost: Usually free for low volume, $10-20/month for higher tiers
+**Option A:** Use Tailwind's default translate utilities that match your shadow offsets (e.g., if shadow is 4px, use `translate-x-1 translate-y-1` which is 0.25rem = 4px at base font size).
 
-**Example:**
-```html
-<!-- WRONG: Exposes credentials -->
-<script>
-  const API_KEY = "sk_live_abc123"; // Visible in browser source!
-</script>
-
-<!-- RIGHT: Use form service -->
-<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-  <!-- No credentials needed in code -->
-</form>
+**Option B (better):** Define custom translate utilities in `@theme`:
+```css
+@theme {
+  --spacing-brutal-offset: 4px;
+  --spacing-brutal-offset-lg: 6px;
+}
 ```
+Then use `translate-x-brutal-offset translate-y-brutal-offset` (requires extending Tailwind with custom utilities, which is more complex—Option A is simpler).
 
-### Anti-Pattern 3: "Flat" HTML Duplication
+**Recommended:** Stick with Option A using Tailwind's default spacing scale aligned to shadow offsets.
 
-**What people do:** Copy-paste the same header/footer/navigation HTML across every page manually
+### Anti-Pattern 4: Using Client-Side JavaScript for Static Theming
 
-**Why it's wrong:**
-- Updating navigation means editing 10+ files
-- High risk of inconsistency (one page gets missed)
-- Makes scaling to more pages painful
-- Violates DRY (Don't Repeat Yourself) principle
-
-**Do this instead:**
-- **Option A (No build process)**: Use JavaScript to inject shared components
-  ```javascript
-  // components/header.js
-  document.getElementById('header').innerHTML = `
-    <nav>...</nav>
-  `;
-  ```
-- **Option B (Recommended)**: Use simple static site generator (Eleventy, Hugo)
-  ```liquid
-  <!-- _includes/header.html (template) -->
-  <nav>...</nav>
-
-  <!-- index.html (uses template) -->
-  {% include "header.html" %}
-  ```
-- **Option C**: Use server-side includes if your host supports it
-
-### Anti-Pattern 4: Premature CMS Integration
-
-**What people do:** Set up WordPress, Contentful, or other CMS for a portfolio site with 5 projects and 3 blog posts
+**What people do:** Import React/Vue components with useState for buttons, cards, or other non-interactive elements just to get styled components.
 
 **Why it's wrong:**
-- Massive overkill for small amount of static content
-- Adds complexity, maintenance burden, potential security issues (WordPress)
-- Monthly costs for headless CMS subscriptions
-- Slower development in early stages
-- You're the only content author - GUI admin interface is unnecessary
+- Ships JavaScript for static content
+- Breaks Astro's zero-JS philosophy
+- Slower page loads, worse Lighthouse scores
 
-**Do this instead:**
-- Start with JSON files for structured data (portfolio, testimonials)
-- Use Markdown files for blog posts
-- Edit directly in VS Code or any text editor
-- Graduate to CMS only when:
-  - Multiple non-technical content authors
-  - 20+ blog posts
-  - Frequent content updates
-  - Client handoff requires non-technical editing
+**Do this instead:** Keep components as Astro (.astro) files. Only use `client:*` directives for truly interactive components (modals, carousels, form validation).
 
-### Anti-Pattern 5: Ignoring Build-Time Optimization
+### Anti-Pattern 5: Skipping Accessibility for Aesthetics
 
-**What people do:** Deploy raw, unoptimized files to GitHub Pages (unminified CSS/JS, uncompressed images)
+**What people do:** Use color combinations that look bold but fail WCAG contrast ratios (e.g., yellow text on white background, or magenta on black failing 4.5:1).
 
 **Why it's wrong:**
-- Slow page loads (especially mobile)
-- Poor SEO rankings (Core Web Vitals matter)
-- Wasted bandwidth
-- Unprofessional user experience
-- Easy wins left on table
+- Unusable for users with visual impairments
+- Fails Lighthouse accessibility audit
+- Legal/compliance issues for some projects
 
 **Do this instead:**
-- Set up basic build pipeline:
-  ```bash
-  # Minify CSS/JS
-  npm run build:css  # or use postcss, cssnano
-  npm run build:js   # or use terser, esbuild
-
-  # Optimize images
-  npm run optimize:images  # or use sharp, imagemin
-  ```
-- Use GitHub Actions to automate build on every push
-- Target performance budgets: <100KB initial HTML, <2s LCP
-- Test with Lighthouse before deploying
-
-### Anti-Pattern 6: Navigation Chaos
-
-**What people do:** Inconsistent navigation across pages, unclear information architecture, or overly complex menu structures
-
-**Why it's wrong:**
-- Users can't find what they need (high bounce rate)
-- Inconsistent UX damages credibility
-- Common for portfolio sites to bury contact form or key services
-- Mobile navigation often overlooked
-
-**Do this instead:**
-- **Keep it simple**: Home, Services, Portfolio, Blog, About, Contact (max 6-7 top-level items)
-- **Consistency**: Same navigation on every page, same order
-- **Clear CTAs**: Contact/Hire Me button prominently placed
-- **Mobile-first**: Test hamburger menu, ensure touch targets are 44px minimum
-- **Active states**: Show current page in navigation
+- Test all color combinations with a contrast checker (WebAIM, Chrome DevTools)
+- Yellow on black: GOOD (high contrast)
+- Yellow on white: BAD (low contrast)—use yellow background with black text instead
+- For dark mode, desaturate bright colors slightly to reduce eye strain while maintaining contrast
+- Document contrast ratios in FEATURES.md or PITFALLS.md
 
 ## Integration Points
 
-### External Services
+### With Existing Codebase
+
+| Component | Integration Strategy | Notes |
+|-----------|---------------------|-------|
+| **global.css** | MODIFY: Replace existing `@theme` block, keep custom utilities (.prose, .toc, etc.) | Existing animations (fadeInScale) can stay—they're orthogonal to design system |
+| **BaseLayout.astro** | MODIFY: Update font imports from Poppins/Inter to new heading/body fonts | Keep dark mode script as-is—it works |
+| **Header.astro** | MODIFY: Replace button/link classes with primitive Button component or updated utility classes | Navigation links get neobrutalist hover states |
+| **BlogCard.astro** | MODIFY: Add `border-2`, `shadow-brutal`, `rounded-brutal` classes | Keep existing props (title, slug, etc.)—only change styling |
+| **Hero.astro** | MODIFY: CTA button becomes `<Button variant="primary">` | Keep existing layout structure |
+
+### External Dependencies
 
 | Service | Integration Pattern | Notes |
 |---------|---------------------|-------|
-| Form Backend (Formspree, FormBold) | HTML form action to API endpoint | Free tier: 50-100 submissions/month. Handles spam filtering, email notifications. No server-side code needed. |
-| Analytics (Plausible, Fathom, Google Analytics) | JavaScript snippet in <head> | Privacy-focused alternatives to GA. Plausible: ~1KB script vs GA's 45KB+. |
-| Comments (Utterances, Giscus) | GitHub Issues-based commenting | Free, uses GitHub OAuth. Good for developer blogs. Requires public repo. |
-| Email Newsletter (ConvertKit, Buttondown) | Embedded signup form | Collect emails for content marketing. GDPR-compliant options available. |
-| Social Proof (Testimonial.to) | Embedded widget or manual JSON | Video testimonials without building custom solution. |
+| **Google Fonts** | Update font URLs in BaseLayout.astro | Example: Replace Poppins with Space Grotesk or DM Sans |
+| **Tailwind CSS 4** | Already integrated via `@tailwindcss/vite` | Verify version is 4.x in package.json |
+| **Astro Expressive Code** | NO CHANGES | Syntax highlighting for blog posts—keep existing theme |
 
 ### Internal Boundaries
 
 | Boundary | Communication | Notes |
 |----------|---------------|-------|
-| Page ↔ Shared Component | HTML import or JS injection | Header/footer/navigation should be centralized. Use templates or client-side includes. |
-| Page ↔ Data Layer | Fetch JSON or build-time template injection | Portfolio items, testimonials, service listings should come from structured data. |
-| Blog Posts ↔ Blog Index | Static generation or manual linking | SSG automatically creates index from posts. Manual approach: maintain list in blog.html. |
-| Case Study ↔ Portfolio Grid | Direct HTML links | Each portfolio card links to dedicated case study page. Use consistent URL structure (/case-studies/project-name.html). |
-| Contact Form ↔ Form API | AJAX POST or standard form submission | Standard submission: full page reload to thank-you page. AJAX: inline success message. |
+| **Design Tokens ↔ Components** | Tailwind utility classes | One-way: tokens defined in CSS, consumed by components |
+| **Primitives ↔ Composed Components** | Astro component imports and slots | Hero imports Button, BlogCard imports Card primitive |
+| **Dark Mode ↔ All Components** | CSS class (.dark on html) + Tailwind dark: variant | Global toggle affects all components via CSS cascade |
 
-## Build Order Dependencies
+## Build Order Recommendation
 
-### Phase 1: Foundation (No dependencies)
-- Set up project structure (folders, Git repo)
-- Create base HTML template with semantic markup
-- Implement global CSS (reset, typography, variables for colors/spacing)
-- Build navigation and footer components
-- Deploy basic "Hello World" to GitHub Pages
+Based on dependency analysis, implement in this order:
 
-### Phase 2: Core Content (Depends on: Phase 1)
-- Build hero section with value proposition
-- Create About section/page
-- Implement Services section with cards
-- Add basic responsive design (mobile-first)
+### Phase 1: Foundation (Design Tokens)
+1. Update `global.css` with neobrutalist `@theme` tokens (colors, shadows, borders, typography)
+2. Update `BaseLayout.astro` with new font imports
+3. Test dark mode still works with new tokens
 
-### Phase 3: Portfolio (Depends on: Phase 2)
-- Create portfolio.json data structure
-- Build portfolio card component
-- Implement portfolio grid layout
-- Create template for case study pages
-- Add 1-2 example case studies
+**Rationale:** All components depend on tokens. Must be first.
 
-### Phase 4: Contact (Depends on: Phase 1)
-- Design contact form UI
-- Integrate form backend service (Formspree setup)
-- Implement client-side validation
-- Create thank-you page
-- Test form submission end-to-end
+### Phase 2: Primitives (Reusable Components)
+4. Create `Button.astro` in `components/primitives/`
+5. Create `Card.astro` in `components/primitives/`
+6. Create `Input.astro` in `components/primitives/`
 
-### Phase 5: Blog (Depends on: Phase 1, ideally Phase 3)
-- Design blog post list page
-- Create blog post template (for individual posts)
-- Write 1-2 initial posts
-- Implement blog navigation/pagination (if needed)
-- Optional: Add RSS feed
+**Rationale:** Composed components (Hero, BlogCard) will use these. Build bottom-up.
 
-### Phase 6: Testimonials (Depends on: Phase 2)
-- Create testimonials.json data structure
-- Build testimonial component
-- Add testimonials section to home page
-- Collect and add real testimonials
+### Phase 3: Update Existing Components
+7. Modify `Hero.astro` to use `<Button>`
+8. Modify `BlogCard.astro` to use neobrutalist classes
+9. Modify `Header.astro` navigation and theme toggle
+10. Modify other components (Services, FAQ, Process, About)
 
-### Phase 7: Polish (Depends on: All previous)
-- Optimize images (compress, lazy load)
-- Minify CSS/JS
-- Implement advanced interactions (smooth scroll, animations)
-- Set up analytics
-- SEO optimization (meta tags, structured data)
-- Cross-browser testing
+**Rationale:** Top-level components depend on primitives and tokens.
 
-### Dependency Notes
+### Phase 4: Validation
+11. Visual regression testing (manual or automated with Percy/Chromatic)
+12. Lighthouse CI—verify accessibility scores stay ≥90
+13. Dark mode testing
 
-**Can be built in parallel:**
-- Services section and About page (both content-focused)
-- Portfolio and Blog (separate features)
-- Contact form and Testimonials (independent features)
-
-**Must be sequential:**
-- Foundation → Everything else (base styles/structure needed first)
-- Portfolio cards → Case study pages (design system should be consistent)
-- Core content → Polish (can't optimize what doesn't exist)
-
-**Recommended order for this project:**
-1. Start with **Phase 1-2** (Foundation + Core Content) - establishes brand and messaging
-2. Then **Phase 4** (Contact) - critical for lead capture early
-3. Then **Phase 3** (Portfolio) - proves expertise
-4. Then **Phase 5** (Blog) - ongoing content marketing
-5. Finally **Phase 6-7** (Testimonials + Polish) - adds social proof and refinement
-
-This order prioritizes getting a functional site live quickly (Phases 1-2-4) that can start generating leads, then builds out proof points (Portfolio, Blog, Testimonials) over time.
+**Rationale:** Catch regressions before considering complete.
 
 ## Sources
 
-- [The Complete Guide to Frontend Architecture Patterns in 2026 - DEV Community](https://dev.to/sizan_mahmud0_e7c3fd0cb68/the-complete-guide-to-frontend-architecture-patterns-in-2026-3ioo)
-- [Research White Paper The Future of Web Architecture: Jamstack and SSGs (2025-2026)](https://www.keencomputer.com/solutions/software-engineering/880-research-white-paper-the-future-of-web-architecture-jamstack-and-static-site-generators-as-the-foundation-of-agile-digital-transformation-2025-2026)
-- [What is Jamstack? - Umbraco](https://umbraco.com/knowledge-base/jamstack/)
-- [JAMstack Official Site](https://jamstack.org/)
-- [Frontend Development Best Practices: Code Structure and Organization - LinkedIn](https://www.linkedin.com/pulse/frontend-development-best-practices-code-structure-adekola-olawale)
-- [20 Best Jamstack Contact Forms | Statichunt](https://statichunt.com/jamstack-forms)
-- [Deploying a Static Site with GitHub Pages: Best Practices Guide - The Protec Blog](https://www.theprotec.com/blog/2025/deploying-a-static-site-with-github-pages-best-practices-guide/)
-- [Configuring a publishing source for GitHub Pages - GitHub Docs](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
-- [A Static Site Folder Structure for Github Pages - mendo.zone](https://mendo.zone/web/github-pages-folder-structure/)
-- [Anti-Patterns In Software Architecture - IT Architecture Insights](https://www.itar.pro/anti-patterns-in-software-architecture/)
+### High Confidence (Official Documentation)
+- [Tailwind CSS v4 @theme Documentation](https://tailwindcss.com/docs/theme) - Theme variables and token syntax
+- [Astro Components Documentation](https://docs.astro.build/en/basics/astro-components/) - Component patterns and props
+- [Astro Template Directives](https://docs.astro.build/en/reference/directives-reference/) - Client directives and hydration
+
+### Medium Confidence (Verified Community Resources)
+- [Neobrutalism Components GitHub](https://github.com/ekmas/neobrutalism-components) - Component patterns (note: no longer maintained but patterns valid)
+- [Neobrutalism.dev Documentation](https://www.neobrutalism.dev/) - Shadow, border, and hover patterns
+- [NN/G Neobrutalism Article](https://www.nngroup.com/articles/neobrutalism/) - Definition and best practices
+- [Tailwind CSS Best Practices 2025-2026](https://www.frontendtools.front/blog/tailwind-css-best-practices-design-system-patterns) - Design token patterns
+
+### Context (Design Philosophy)
+- [Neubrutalism Web Design Trend - Bejamas](https://bejamas.com/blog/neubrutalism-web-design-trend) - Feature overview
+- [Dark Mode Best Practices 2026](https://www.tech-rz.com/blog/dark-mode-design-best-practices-in-2026/) - High contrast and accessibility
+- [Dark Mode UI Best Practices](https://www.designstudiouiux.com/blog/dark-mode-ui-design-best-practices/) - Contrast standards and color desaturation
 
 ---
-*Architecture research for: Developer Portfolio/Services Website*
-*Researched: 2026-01-26*
+*Architecture research for: Neobrutalist Design System*
+*Researched: 2026-02-09*
+*Confidence: HIGH (Tailwind 4 patterns verified with official docs, neobrutalist component patterns cross-referenced across multiple sources)*

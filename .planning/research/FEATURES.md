@@ -1,242 +1,349 @@
-# Feature Research
+# Feature Landscape: Neobrutalist Design & Narrative Homepage
 
-**Domain:** Developer Portfolio/Services Website (Freelance/Consulting Lead Generation)
-**Researched:** 2026-01-26
+**Domain:** Portfolio Website Design (Neobrutalism + Narrative Structure)
+**Researched:** 2026-02-09
+**Context:** Subsequent milestone adding neobrutalist design to existing portfolio site
 **Confidence:** HIGH
 
-## Feature Landscape
+## Executive Summary
 
-### Table Stakes (Users Expect These)
+This research focuses on the NEW features needed for v1.1: transforming an existing minimalist portfolio site into a distinctive neobrutalist design with narrative homepage structure. The existing site already has core functionality (blog, projects, contact, dark mode). This analysis catalogs only the visual design patterns and narrative elements needed for the redesign.
 
-Features users assume exist. Missing these = product feels incomplete or unprofessional.
+**Key findings:**
+- Neobrutalism is defined by thick borders (2-4px), hard offset shadows (4-6px, zero blur), high contrast colors, and asymmetric layouts
+- Implementation via Tailwind is straightforward using border-*, shadow-*, and transform utilities
+- Narrative homepage structure follows problem → solution → process → results pattern
+- Critical risk: balancing bold aesthetics with accessibility (contrast ratios, readable typography)
 
-| Feature | Why Expected | Complexity | Notes |
-|---------|--------------|------------|-------|
-| **Mobile-responsive design** | 50%+ of traffic is mobile; small business decision-makers browse on phones | MEDIUM | Non-negotiable in 2026. Poor mobile UX = immediate bounce |
-| **Clear services description** | Visitors need to know what you offer within seconds | LOW | Must communicate web apps, automation, AI development clearly |
-| **Portfolio/case studies** | Small businesses want proof you can deliver; "show don't tell" | MEDIUM | 3-5 high-quality projects beat 20 mediocre ones. Must include results/metrics |
-| **Contact form** | Primary conversion point; expected on every professional site | LOW | 3-5 fields max (name, email, project type, message). Mobile-optimized |
-| **About section** | Small business clients need to trust who they're hiring | LOW | Must humanize you, explain your approach, establish expertise |
-| **Fast load times** | Performance signals professionalism and technical competence | MEDIUM | Ironically, slow developer portfolios hurt credibility |
-| **Professional domain** | yourname.com signals seriousness vs free hosting | LOW | Table stakes for credibility in 2026 |
-| **Client testimonials** | Social proof is non-negotiable; small businesses rely heavily on it | LOW | Need 3-5 strong testimonials with client names/companies |
-| **Clear CTA (call-to-action)** | Without CTA, portfolio becomes dead end instead of lead gen | LOW | Multiple CTAs throughout (not just one at bottom) |
-| **SEO basics** | Small businesses search "web developer [city]" or "[service] developer" | MEDIUM | Must be findable on Google for passive lead generation |
+## Table Stakes Features
 
-### Differentiators (Competitive Advantage)
+Features users expect from neobrutalist design. Missing these = design feels incomplete or fake.
 
-Features that set the product apart. Not required, but valuable for Joel's specific positioning.
+| Feature | Why Expected | Complexity | Dependencies | Notes |
+|---------|--------------|------------|--------------|-------|
+| **Thick borders (2-4px)** | Core neobrutalist visual identifier | LOW | Tailwind `border-2`, `border-4` | BLACK borders standard, color accents optional |
+| **Hard offset shadows** | Creates depth without gradients | LOW | Tailwind custom shadow config | Typical: `4px 4px 0 0 #000`, zero blur |
+| **High contrast color palette** | Defines neobrutalism vs minimalism | LOW | Tailwind color tokens | Already have yellow/teal/magenta |
+| **Bold, chunky typography** | Visual weight matches border heaviness | MEDIUM | Font selection, weight classes | Need 700-900 weights |
+| **Asymmetric layouts** | Breaks traditional grid, adds personality | MEDIUM | Flexbox/grid with intentional breaks | Avoids perfect symmetry |
+| **Raw, unpolished aesthetic** | Rejects smooth minimalism | LOW | Remove gradients, rounded corners | May keep slight radius for readability |
+| **Interactive hover effects** | Tactile feedback (shadow removal, transform) | LOW | Tailwind hover: utilities | Classic: remove shadow + translate on hover |
+| **Color blocks for sections** | Visual separation without subtlety | LOW | Background color utilities | Yellow/teal/magenta on white/black |
+| **Monospace or geometric fonts** | Reinforces brutalist vibe | LOW | Font family configuration | Consider for headings or accents |
 
-| Feature | Value Proposition | Complexity | Notes |
-|---------|-------------------|------------|-------|
-| **Process explanation (low-risk prototype approach)** | Addresses small business fear of large upfront commitment | LOW | Joel's differentiator: prototype before full commitment. Make this PROMINENT |
-| **Pricing transparency or ranges** | Small businesses hate "contact for quote"; showing ranges builds trust | LOW | Even ranges ("$5k-15k") reduce friction; rare among developers |
-| **Case study ROI metrics** | Small businesses care about business impact, not just "built with React" | MEDIUM | Show: "Reduced manual work by 15 hours/week" vs "Built an app" |
-| **Video testimonials** | 40% more authentic than text; small businesses value personal connection | MEDIUM | Even phone-recorded client videos trump polished text |
-| **Blog with domain expertise** | Positions as thought leader; passive SEO lead gen in 2026 | MEDIUM-HIGH | Focus: practical advice for small business owners (non-technical) |
-| **FAQ section** | Proactively answers small business objections/concerns | LOW | "How much does it cost?" "How long does it take?" "What if I'm not technical?" |
-| **Availability calendar/booking** | Removes friction for initial consultation | MEDIUM | Calendly integration or similar; professional + convenient |
-| **Multi-channel contact options** | Phone, email, contact form gives small businesses choice | LOW | Some prefer calling; some prefer forms. Offer both |
-| **Industry-specific examples** | "Restaurants" "Professional services" etc. helps visitors self-identify | LOW | Small businesses want to see "someone like me" |
-| **Dark/light mode toggle** | Shows attention to UX detail; modern expectation for dev portfolios | LOW | Common in 2026 portfolios; signals current skills |
+## Differentiators
 
-### Anti-Features (Commonly Requested, Often Problematic)
+Features that make this portfolio stand out. Not expected, but highly valued for neobrutalist sites.
 
-Features that seem good but create problems for this use case.
+| Feature | Value Proposition | Complexity | Dependencies | Notes |
+|---------|-------------------|------------|--------------|-------|
+| **Narrative homepage structure** | Tells story of working together vs static sections | MEDIUM | Content restructure + component refactor | Solutions → Process (cyclical) → Tech → About → Contact |
+| **Isometric/45° shadows** | More sophisticated than flat offset | MEDIUM | Custom shadow angles, transform tricks | Creates depth illusion, distinctive look |
+| **Stacked/layered card effects** | 3D paper stack illusion | MEDIUM | Multiple shadows or pseudo-elements | Reinforces tangible, physical metaphor |
+| **Animated "pressed" button states** | Simulates physical interaction | LOW | Transform + shadow transition | Remove shadow + translate(2px, 2px) |
+| **Quirky micro-interactions** | Adds personality without clutter | MEDIUM | CSS animations or light JS | Hover wiggles, bounces, rotations |
+| **Mixed-case or ALL CAPS headings** | Reinforces bold, unpolished vibe | LOW | Text-transform utilities | Use sparingly for hierarchy |
+| **Retro UI elements** | 90s nostalgia (Windows 98 buttons, etc.) | MEDIUM | Custom component styling | Skip bars, fake dropdowns for visual interest |
+| **Offset/overlapping elements** | Creates visual tension and depth | MEDIUM | Negative margins, z-index | Cards overlapping sections, images breaking boundaries |
+| **Narrative case study format** | Problem → constraints → solution → results | MEDIUM | Content templates for projects page | Already have case studies, just need narrative polish |
+| **Process as cyclical diagram** | Shows iteration, not linear workflow | HIGH | SVG or CSS diagram | Differentiates from typical step-by-step |
 
-| Feature | Why Requested | Why Problematic | Alternative |
-|---------|---------------|-----------------|-------------|
-| **Showing ALL projects** | Feels comprehensive | Dilutes quality signal; small businesses overwhelmed by choice | Curate 3-5 BEST projects with detailed case studies |
-| **Complex animations/interactions** | Shows off technical skill | Slow load times; distracts from content; hurts mobile UX | Simple, fast, clean design that showcases WORK not website itself |
-| **Separate blog platform (Medium, Dev.to)** | Easier than building own blog | Loses SEO value; sends traffic away; inconsistent branding | Simple blog on own domain for SEO + ownership |
-| **Live chat widget** | Seems modern/helpful | Small business clients expect asynchronous; chat requires staffing | Contact form + email + optional phone |
-| **Auto-playing video/audio** | Attention-grabbing | Annoying; accessibility issue; immediate bounce on mobile | Click-to-play videos only |
-| **Extensive technical jargon in case studies** | Shows technical depth | Small business clients don't care about tech stack details | Lead with BUSINESS IMPACT, tech stack as footnote |
-| **Newsletter popup on entry** | Email list building | Interrupts first impression; reduces conversion on first visit | Subtle footer signup or post-case-study offer |
-| **Login/gated content** | Email capture | Friction; small businesses want info fast; trust not established yet | Everything public until relationship established |
-| **Interactive portfolio pieces** | Shows technical prowess | Small businesses want to see THEIR problem solved, not game demos | Focus on business-outcome projects over technical showcases |
-| **Real-time availability status** | Transparency | Creates urgency pressure that small businesses dislike | General availability ("Booking for March 2026") without real-time |
+## Anti-Features
+
+Features to explicitly NOT build. Common mistakes in neobrutalism.
+
+| Anti-Feature | Why Avoid | What to Do Instead |
+|--------------|-----------|-------------------|
+| **Excessive color combinations** | Overwhelming, reduces contrast effectiveness | Stick to 2-3 bold colors + black/white. Yellow/teal/magenta is already pushing it. |
+| **Unreadable text contrast** | Accessibility failure, violates WCAG | Always test yellow on white, magenta on black. Use contrast checker. |
+| **Cluttered asymmetry** | Chaos ≠ asymmetry. Looks messy, not bold. | Asymmetry should be intentional, with clear focal points and whitespace. |
+| **Rounded corners on everything** | Softens brutalist aesthetic | Use `rounded-none` or minimal `rounded-sm` (2-4px max). Avoid pill shapes. |
+| **Soft gradients or blur** | Contradicts raw, unpolished principle | Solid colors only. Shadows have zero blur. |
+| **Over-animation** | Distracts from content, feels gimmicky | Limit to hover states and 1-2 signature interactions. |
+| **Breaking usability for aesthetics** | Navigation confusion, cognitive overload | Bold ≠ unusable. Maintain clear CTAs, readable body text, logical flow. |
+| **Ignoring dark mode** | Existing feature users expect | Adapt neobrutalism for dark mode (invert shadows, adjust colors). |
+| **Tiny body text** | Bold headings need readable body copy | Headings can be huge/bold, but body must be 16px+ with good line height. |
+| **Skipping mobile responsiveness** | Neobrutalism still needs to work on small screens | Simplify layouts on mobile, reduce shadow sizes, maintain borders. |
 
 ## Feature Dependencies
 
 ```
-Core Foundation:
-[Mobile-responsive design] ──required for──> [All features]
-[Fast load times] ──required for──> [SEO] + [Professional impression]
-[Professional domain] ──required for──> [Email] + [SEO]
+Neobrutalist Design System (foundation)
+├── Color tokens (yellow, teal, magenta, black, white)
+├── Border utilities (2px, 4px solid)
+├── Shadow utilities (4px/6px offset, zero blur)
+└── Typography scale (700-900 weights for headings)
+    │
+    ├──> Component Styling (depends on design system)
+    │    ├── Buttons (borders + shadows + hover effects)
+    │    ├── Cards (borders + shadows + color blocks)
+    │    ├── Inputs (thick borders, high contrast)
+    │    └── Navigation (bold, clear, accessible)
+    │
+    └──> Layout Patterns (depends on design system)
+         ├── Asymmetric grids (intentional breaks)
+         ├── Color block sections (background colors)
+         └── Overlapping elements (negative margins, z-index)
 
-Content Dependencies:
-[Services description] ──required for──> [Case studies] (must know what you do)
-[Case studies] ──required for──> [Testimonials] (context for social proof)
-[About section] ──required for──> [Process explanation]
+Narrative Homepage (content structure)
+├── Solutions section (problem-focused intro)
+├── Process section (cyclical diagram)
+├── Tech section (capabilities showcase)
+├── About section (personality + credentials)
+└── Contact section (CTA + form)
+    │
+    └──> Depends on: Existing content, neobrutalist card components
 
-Conversion Dependencies:
-[Contact form] ──enhanced by──> [FAQ] (reduces objections)
-[FAQ] ──enhanced by──> [Pricing transparency]
-[Testimonials] ──enhanced by──> [Case study metrics] (reinforcing proof)
-[Process explanation] ──enhances──> [Contact form] (reduces fear)
-
-SEO/Discovery:
-[Blog] ──drives──> [SEO] ──drives──> [Passive leads]
-[Case studies] ──contain──> [SEO keywords] (project-based searches)
-[Services description] ──drives──> [Local SEO] (for "web developer [city]")
-
-Optional Enhancements:
-[Availability calendar] ──requires──> [Contact form] (alternative path)
-[Video testimonials] ──enhances──> [Text testimonials]
-[Dark mode toggle] ──independent──> (nice-to-have, no dependencies)
+Projects Page Narrative Format
+├── Problem statement (business context)
+├── Constraints (timeline, budget, tech)
+├── Solution (what was built, why)
+├── Results (metrics, outcomes)
+└── Tradeoffs (what was deferred, why)
+    │
+    └──> Depends on: Existing portfolio data, card components
 ```
-
-### Dependency Notes
-
-- **Mobile-responsive design is foundation:** Everything else fails if mobile UX is broken. In 2026, 50%+ traffic is mobile, and small businesses browse on phones.
-
-- **Contact form is conversion hub:** FAQ, process explanation, testimonials all funnel to contact form as primary conversion point.
-
-- **Case studies anchor credibility:** Testimonials need case study context; services description needs proof points; SEO benefits from project-based content.
-
-- **Blog multiplies SEO impact:** Each post is an opportunity to rank for "[problem] solution developer" searches that small businesses make.
-
-- **Process explanation differentiates:** This is Joel's unique value prop (low-risk prototype approach). Must be prominent and tie into FAQ/contact form.
 
 ## MVP Definition
 
-### Launch With (v1)
+### Launch With (v1.1 — This Milestone)
 
-Minimum viable product for lead generation validation.
+For v1.1 milestone, prioritize in this order:
 
-- [x] **Mobile-responsive design** — Foundation; non-negotiable in 2026
-- [x] **Services page** — Clear description of web apps, automation, AI development
-- [x] **3-5 case studies** — Quality over quantity; must include business metrics/ROI
-- [x] **About page** — Humanize, explain approach, establish expertise
-- [x] **Process explanation (prominent)** — Joel's differentiator: prototype before commitment
-- [x] **Contact form** — 3-5 fields, mobile-optimized, clear CTA
-- [x] **3-5 testimonials** — Social proof with client names/companies
-- [x] **FAQ section** — Address common small business objections
-- [x] **SEO basics** — Meta tags, semantic HTML, sitemap, local optimization
-- [x] **Professional domain + fast hosting** — Technical credibility
+#### Phase 1: Design System Foundation (Week 1)
+1. **Tailwind config** for neobrutalist tokens (colors, shadows, borders)
+2. **Typography scale** with bold weights (Poppins 700-900 for headings)
+3. **Base component styles** (buttons, cards, inputs)
+4. **Dark mode adaptation** (inverted shadows, adjusted colors)
 
-### Add After Validation (v1.x)
+#### Phase 2: Core Visual Elements (Week 1-2)
+5. **Button components** with pressed hover effect
+6. **Card components** with borders + shadows + color blocks
+7. **Section color blocks** for homepage structure
+8. **Asymmetric layout patterns** for key sections
 
-Features to add once core is converting leads.
+#### Phase 3: Narrative Homepage (Week 2)
+9. **Solutions section** (problem-focused hero)
+10. **Process section** (cyclical diagram or narrative flow)
+11. **Tech section** (capabilities with visual interest)
+12. **About + Contact** sections (personality + CTA)
 
-- [ ] **Blog (3-5 initial posts)** — Trigger: After first 2-3 clients; SEO takes 3-6 months to compound
-- [ ] **Video testimonials** — Trigger: When you have clients willing to record; stronger than text
-- [ ] **Pricing transparency/ranges** — Trigger: After validating pricing model with first clients
-- [ ] **Availability calendar** — Trigger: When scheduling friction becomes bottleneck
-- [ ] **Industry-specific landing pages** — Trigger: When pattern emerges (e.g., 3+ restaurant clients)
-- [ ] **Case study expansion** — Trigger: Add new case studies as high-quality projects complete
+#### Phase 4: Projects & Blog Styling (Week 2-3)
+13. **Projects page** with narrative case study format
+14. **Blog index** with neobrutalist card grid
+15. **Tag pages** restyled to match
+16. **FAQ relocation** to footer or separate page
 
-### Future Consideration (v2+)
+### Defer to Post-v1.1
 
-Features to defer until product-market fit is established.
+Features that are nice-to-have but not critical for this milestone:
 
-- [ ] **Newsletter** — Defer: Until blog has 10+ posts and steady traffic
-- [ ] **Multi-language support** — Defer: Only if targeting non-English markets
-- [ ] **Client portal** — Defer: Until post-project relationship management needs emerge
-- [ ] **Dark mode toggle** — Defer: Nice-to-have, not conversion driver
-- [ ] **Advanced filtering (portfolio)** — Defer: Only needed if 10+ case studies
+- **Isometric shadows** - Nice-to-have, medium complexity
+- **Cyclical process diagram** - High complexity, narrative text flow works for MVP
+- **Retro UI elements** - Low priority, could feel gimmicky
+- **Advanced micro-interactions** - Polish after core design is validated
+- **Stacked card effects** - Visual flourish, not critical for MVP
+
+## Complexity Assessment
+
+| Feature Category | CSS Complexity | Content Complexity | Testing Complexity | Total |
+|------------------|----------------|--------------------|--------------------|-------|
+| Design system tokens | LOW | None | Medium (contrast checks) | LOW-MEDIUM |
+| Border + shadow styles | LOW | None | Low | LOW |
+| Button/card components | LOW | None | Medium (accessibility) | LOW-MEDIUM |
+| Asymmetric layouts | MEDIUM | None | Medium (responsive) | MEDIUM |
+| Narrative homepage | LOW (styling) | MEDIUM (restructure) | Medium (flow testing) | MEDIUM |
+| Projects narrative format | LOW (styling) | MEDIUM (content templates) | Low | MEDIUM |
+| Dark mode adaptation | MEDIUM | None | Medium (visual QA) | MEDIUM |
+| Hover interactions | LOW | None | Low | LOW |
+
+**Overall milestone complexity: MEDIUM**
+
+Most features are straightforward Tailwind CSS implementations. The main complexity is:
+1. Content restructuring for narrative flow
+2. Ensuring accessibility with bold colors
+3. Responsive behavior of asymmetric layouts
+
+## Implementation Notes
+
+### Tailwind Configuration
+
+```js
+// tailwind.config.js additions
+theme: {
+  extend: {
+    boxShadow: {
+      'brutal-sm': '2px 2px 0 0 #000',
+      'brutal': '4px 4px 0 0 #000',
+      'brutal-lg': '6px 6px 0 0 #000',
+      'brutal-yellow': '4px 4px 0 0 #ffef6a',
+      'brutal-teal': '4px 4px 0 0 oklch(0.7 0.15 200)',
+    },
+    borderWidth: {
+      '3': '3px',
+    },
+  }
+}
+```
+
+### Button Pattern
+
+```html
+<button class="
+  bg-yellow-400
+  border-4 border-black
+  shadow-brutal
+  px-6 py-3
+  font-bold
+  hover:shadow-none
+  hover:translate-x-1
+  hover:translate-y-1
+  transition-all
+">
+  Get Started
+</button>
+```
+
+### Card Pattern
+
+```html
+<div class="
+  bg-white
+  border-4 border-black
+  shadow-brutal-lg
+  p-8
+  relative
+">
+  <h3 class="font-black text-3xl mb-4">Title</h3>
+  <p class="text-lg">Content...</p>
+</div>
+```
+
+### Dark Mode Adaptation
+
+- Invert shadow colors: `dark:shadow-[4px_4px_0_0_#fff]`
+- Adjust border colors: `dark:border-white`
+- Maintain contrast: test all color combinations
+
+## Accessibility Checklist
+
+- [ ] All text meets WCAG AA contrast (4.5:1 for body, 3:1 for large text)
+- [ ] Yellow text never on white background without border/shadow
+- [ ] Buttons have clear focus states (not just hover)
+- [ ] Navigation remains logical despite asymmetric layout
+- [ ] Body text is 16px+ with 1.5+ line height
+- [ ] Color is not the only indicator (borders + text labels)
+- [ ] Dark mode maintains contrast ratios
+- [ ] Hover effects don't rely solely on color change
 
 ## Feature Prioritization Matrix
 
 | Feature | User Value | Implementation Cost | Priority |
 |---------|------------|---------------------|----------|
-| Mobile-responsive design | HIGH | MEDIUM | P1 |
-| Case studies (3-5) | HIGH | MEDIUM | P1 |
-| Contact form | HIGH | LOW | P1 |
-| Process explanation | HIGH | LOW | P1 |
-| Services description | HIGH | LOW | P1 |
-| About page | HIGH | LOW | P1 |
-| Testimonials (3-5) | HIGH | LOW | P1 |
-| FAQ section | HIGH | LOW | P1 |
-| SEO basics | HIGH | MEDIUM | P1 |
-| Fast load times | HIGH | MEDIUM | P1 |
-| Professional domain | HIGH | LOW | P1 |
-| Clear CTAs | HIGH | LOW | P1 |
-| Blog (initial posts) | MEDIUM | MEDIUM | P2 |
-| Pricing transparency | MEDIUM | LOW | P2 |
-| Video testimonials | MEDIUM | MEDIUM | P2 |
-| Availability calendar | MEDIUM | MEDIUM | P2 |
-| Multi-channel contact | MEDIUM | LOW | P2 |
-| Industry examples | MEDIUM | LOW | P2 |
-| Case study ROI metrics | MEDIUM | MEDIUM | P2 |
-| Dark mode toggle | LOW | LOW | P3 |
-| Newsletter | LOW | MEDIUM | P3 |
-| Advanced filtering | LOW | MEDIUM | P3 |
+| Thick borders | HIGH | LOW | P1 |
+| Hard offset shadows | HIGH | LOW | P1 |
+| Bold typography | HIGH | MEDIUM | P1 |
+| High contrast colors | HIGH | LOW | P1 |
+| Pressed button states | HIGH | LOW | P1 |
+| Color block sections | HIGH | LOW | P1 |
+| Card components | HIGH | LOW | P1 |
+| Dark mode adaptation | HIGH | MEDIUM | P1 |
+| Narrative homepage structure | HIGH | MEDIUM | P1 |
+| Asymmetric layouts | MEDIUM | MEDIUM | P2 |
+| Projects narrative format | MEDIUM | MEDIUM | P2 |
+| Blog restyling | MEDIUM | LOW | P2 |
+| Overlapping elements | MEDIUM | MEDIUM | P2 |
+| Quirky micro-interactions | LOW | MEDIUM | P3 |
+| Isometric shadows | LOW | MEDIUM | P3 |
+| Retro UI elements | LOW | MEDIUM | P3 |
+| Cyclical process diagram | LOW | HIGH | P3 |
 
 **Priority key:**
-- **P1: Must have for launch** — Core lead generation functionality
-- **P2: Should have, add when possible** — Enhances conversion but not blocker
-- **P3: Nice to have, future consideration** — Polish/scale features
+- **P1: Must have for v1.1** — Core neobrutalist visual identity
+- **P2: Should have, add when possible** — Enhances design but not blocker
+- **P3: Nice to have, future consideration** — Polish/differentiation features
 
-## Competitor Feature Analysis
+## Narrative Homepage Structure
 
-Based on 2026 ecosystem research of successful freelance developer portfolios targeting small businesses.
+Based on research, a compelling narrative homepage for a developer portfolio follows this pattern:
 
-| Feature | Common Approach | Missed Opportunity | Joel's Approach |
-|---------|----------------|-------------------|-----------------|
-| **Case studies** | Tech-focused ("Built with React") | Business impact metrics | Lead with ROI: "Reduced manual work 15hrs/week" |
-| **Services** | Generic list of technologies | Client pain points | Frame as solutions: "Automate repetitive tasks" |
-| **Testimonials** | "Great to work with!" | Specific outcomes | "Saved us 20 hours/week on inventory" |
-| **Process** | Hidden in About page or missing | Small business trust barrier | Prominent: "Prototype before commitment" |
-| **Pricing** | "Contact for quote" (friction) | Small businesses hate surprises | Ranges or starting prices: "$5k-15k" |
-| **Contact form** | 8+ fields or just email link | Qualification vs friction balance | 4 fields: name, email, project type, message |
-| **About** | Resume dump | Connection/trust | Story: Why I help small businesses + approach |
-| **Portfolio quantity** | 10-20 projects (overwhelming) | Decision paralysis | 3-5 best projects with deep case studies |
-| **Blog** | Technical tutorials for developers | SEO for wrong audience | Small business advice: "When to automate" |
-| **SEO** | Developer-focused keywords | Missing small business searches | "Small business automation [city]" |
+### Solutions Section (Hero)
+**Purpose:** Lead with client problems, not developer capabilities
+**Structure:**
+- Headline: Client pain point ("Drowning in manual work?")
+- Subhead: Solution promise ("I build automation that saves 15+ hours/week")
+- Visual: Bold graphic or screenshot with neobrutalist treatment
+- CTA: "See How It Works" (scroll to process)
+
+### Process Section (Cyclical)
+**Purpose:** Show collaborative, iterative approach (not waterfall)
+**Structure:**
+- 5 steps in circular or S-curve layout
+- Emphasis on "prototype before commitment" (Joel's differentiator)
+- Each step has icon + short description
+- Visual treatment: Color blocks, borders, asymmetric positioning
+
+### Tech Section (Capabilities)
+**Purpose:** Establish technical credibility without jargon
+**Structure:**
+- 3 service categories (Web Apps, Automation, AI)
+- Each as a card with icon, title, business benefit
+- Avoid tech stack details, focus on outcomes
+- Neobrutalist cards with shadows and bold colors
+
+### About Section (Personality)
+**Purpose:** Build trust, show person behind the work
+**Structure:**
+- Photo with neobrutalist border treatment
+- Story: Why I help small businesses
+- Credentials (brief, relevant)
+- CTA: "Ready to talk? Let's chat."
+
+### Contact Section (CTA)
+**Purpose:** Remove friction for initial outreach
+**Structure:**
+- Form with 4 fields (name, email, project type, message)
+- Multiple contact options (form, email, phone)
+- FAQ below form (address objections)
+- Neobrutalist form styling with thick borders
 
 ## Sources
 
-### Portfolio Best Practices (2026)
-- [22 Best Developer Portfolios (Examples) 2026 - Colorlib](https://colorlib.com/wp/developer-portfolios/)
-- [17 Inspiring Web Developer Portfolio Examples for 2026](https://templyo.io/blog/17-best-web-developer-portfolio-examples-for-2024)
-- [Best Web Developer Portfolio Examples from Top Developers in 2026](https://elementor.com/blog/best-web-developer-portfolio-examples/)
-- [Web Designer & Developer Portfolios: 25 Inspiring Examples (2026)](https://www.sitebuilderreport.com/inspiration/web-developer-designer-portfolios)
-- [25 web developer portfolio examples from top developers](https://www.hostinger.com/tutorials/web-developer-portfolio)
+### Neobrutalism Design Principles
+- [Neobrutalism: Definition and Best Practices - NN/G](https://www.nngroup.com/articles/neobrutalism/)
+- [Neubrutalism - UI Design Trend That Wins The Web - Bejamas](https://bejamas.com/blog/neubrutalism-web-design-trend)
+- [Neo Brutalism UI Design Trend - Onething Design](https://www.onething.design/post/neo-brutalism-ui-design-trend)
+- [Brutalism vs Neubrutalism in UI Design - CC Creative](https://www.cccreative.design/blogs/brutalism-vs-neubrutalism-in-ui-design)
+- [Neo Brutalism: Your Guide to the Design Trend - HubSpot](https://blog.hubspot.com/website/neo-brutalism)
+- [Neo Brutalism in Higher Ed Web UX - ColorWhistle](https://colorwhistle.com/neo-brutalism-higher-education-web-ux/)
 
-### Freelance Lead Generation (2026)
-- [Getting clients in 2026 - The Ultimate guide](https://www.amrudincatic.com/how-to-get-clients-in-2026/)
-- [How to Become a Freelance Web Developer in 2026 - A Detailed Guide](https://razorpay.com/learn/how-to-become-a-freelance-web-developer/)
-- [How to Get Web Development Clients in 2025 — 10 Proven Ways](https://www.saleshandy.com/blog/how-to-get-clients-for-web-development/)
+### Implementation & Components
+- [Neobrutalism Components - Tailwind CSS](https://www.neobrutalism.dev/)
+- [ekmas/neobrutalism-components - GitHub](https://github.com/ekmas/neobrutalism-components)
+- [Neobrutalism UI Kit - Tailkits](https://tailkits.com/components/neobrutalism/)
 
-### Small Business Website Features (2026)
-- [10 Best Website Developers for Small Business in 2026](https://ossisto.com/blog/website-developers-for-small-business/)
-- [Top Web Design Companies for Small Business 2026 – Ranked](https://onelittleweb.com/top-agencies/web-design-agencies-for-small-businesses/)
+### Narrative Homepage Structure
+- [Storytelling in Web Design - Ironistic](https://www.ironistic.com/insights/storytelling-in-web-design/)
+- [Immersive Storytelling Websites Guide - Utsubo](https://www.utsubo.com/blog/immersive-storytelling-websites-guide)
+- [Portfolio Website Examples - Figma](https://www.figma.com/resource-library/portfolio-website-examples/)
+- [Crafting a Narrative - Dribbble](https://dribbble.com/stories/2024/03/18/crafting-a-narrative-mastering-storytelling-in-your-design-portfolio)
+- [Portfolio & Agency Website Templates - Webflow](https://webflow.com/templates/category/portfolio-and-agency-websites)
 
-### Common Portfolio Mistakes (2026)
-- [5 Mistakes Developers Make in Their Portfolio Websites](https://www.devportfoliotemplates.com/blog/5-mistakes-developers-make-in-their-portfolio-websites)
-- [Web Developer Portfolio: How to Build a Powerful One (w/ 5 Examples!)](https://arc.dev/talent-blog/web-developer-portfolio/)
-- [8 Common Website Design Mistakes to Avoid in 2026](https://www.zachsean.com/post/8-common-website-design-mistakes-to-avoid-in-2026-for-better-conversions-and-user-experience)
-- [6 Wildly Common Portfolio Mistakes Designers Might Make](https://workspace.fiverr.com/blog/6-wildly-common-portfolio-mistakes-designers-might-make/)
-- [5 Most Common Developer Portfolio Mistakes](https://davidwalsh.name/5-most-common-developer-portfolio-mistakes)
+### Developer Portfolio Best Practices
+- [Impact-First Storytelling - Medium](https://medium.com/@sarahscussel/impact-first-storytelling-in-your-product-design-portfolio-9f122f747ee8)
+- [Web Developer Portfolio Examples - Middlehost](https://middlehost.com/blog/web-developer-portfolio-examples/)
+- [15 Best Web Developer Portfolio Examples - ZEGOCLOUD](https://www.zegocloud.com/blog/web-developer-portfolio)
+- [27 Inspiring Web Developer Portfolio Examples - Elementor](https://elementor.com/blog/inspiring-web-developer-portfolio-examples/)
 
-### Contact Form Best Practices (2026)
-- [Contact Form Design Examples: 20 Best Forms [With Tools]](https://www.eleken.co/blog-posts/contact-form-design)
-- [Contact Form Best Practices for 2025: Essential Tips for Every Business Website](https://www.prospermarketingsolutions.com/blogs-contact-form-best-practices-for-2025/)
-- [15 Best Contact Form Examples to Improve Your Lead Generation](https://visme.co/blog/contact-form-examples/)
-- [How to Supercharge Your Website's Contact Form (and Attract Better Freelance Clients)](https://mattolpinski.com/articles/supercharge-your-website-contact-form/)
-- [Lead generation forms: best practices and AI techniques for 2026](https://monday.com/blog/crm-and-sales/lead-generation-forms/)
+### CSS Implementation Details
+- [CSS Box Shadow - CSS-Tricks](https://css-tricks.com/almanac/properties/b/box-shadow/)
+- [Designing Beautiful Shadows - Josh W. Comeau](https://www.joshwcomeau.com/css/designing-shadows/)
 
-### Case Study Format (2026)
-- [How To Write a Client Case Study (With Examples) - AgencyAnalytics](https://agencyanalytics.com/blog/write-a-marketing-case-study-for-clients)
-- [How to write project case studies for your portfolio - DESK Magazine](https://vanschneider.com/blog/portfolio-tips/write-project-case-studies-portfolio/)
-- [Let your customers do your marketing: A practical guide to creating customer case studies and testimonials](https://medium.com/uncorkcapital/let-your-customers-do-your-marketing-a-practical-guide-to-creating-customer-case-studies-and-12a202db59bf)
-- [12 Marketing Portfolio Examples to Land High-Paying Clients](https://solidgigs.com/blog/marketing-portfolio-examples-to-land-high-paying-clients/)
-
-### Social Proof & Testimonials (2026)
-- [19 social proof examples for designers - LogRocket Blog](https://blog.logrocket.com/ux-design/19-social-proof-examples/)
-- [How to Use Testimonials and Social Proof to Supercharge Your Writing Portfolio](https://www.journoportfolio.com/blog/how-to-use-testimonials-and-social-proof-to-supercharge-your-writing-portfolio/)
-- [33 Impactful Social Proof Statistics (2026)](https://wisernotify.com/blog/social-proof-statistics/)
-
-### Blog & SEO Strategy (2026)
-- [Getting clients in 2026 - The Ultimate guide](https://www.amrudincatic.com/how-to-get-clients-in-2026/)
-- [B2B SaaS SEO Strategies for Growth in 2026](https://www.gravitatedesign.com/blog/b2b-saas-seo-strategies/)
-- [8 top SEO trends I'm seeing in 2026](https://www.marketermilk.com/blog/seo-trends-2026)
-- [TOP SEO TRENDS 2026: The Complete Guide for Digital Agencies and Their Clients](https://almcorp.com/blog/top-seo-trends-2026-guide-for-digital-agencies-and-clients/)
-- [The 2026 SEO Strategy That Actually Works](https://torro.io/blog/the-2026-seo-strategy-that-actually-works)
+### Accessibility & Best Practices
+- [Neo brutalism: The falsely accused UI design trend - Medium](https://medium.com/@pallavimitra432/neo-brutalism-the-falsely-accused-ui-design-trend-d2f06377297b)
+- [Principles of Neo Brutalism in Design - Nestify](https://nestify.io/blog/neo-brutalism-in-design/)
 
 ---
-*Feature research for: Joel Shinness Developer Portfolio/Services Website*
-*Researched: 2026-01-26*
-*Confidence: HIGH (verified across multiple 2026 sources)*
+*Feature research for: Joel Shinness Portfolio v1.1 — Neobrutalist Design & Narrative Homepage*
+*Researched: 2026-02-09*
+*Confidence: HIGH (verified via NN/G, Tailwind libraries, multiple design sources)*

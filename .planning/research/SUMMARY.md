@@ -1,350 +1,330 @@
 # Project Research Summary
 
-**Project:** Joel Shinness Developer Portfolio/Services Website
-**Domain:** Static portfolio site for freelance developer targeting small business clients
-**Researched:** 2026-01-26
+**Project:** Joel Shinness Portfolio — Neobrutalist Design System v1.1
+**Domain:** Portfolio/Blog Site Design Refresh
+**Researched:** 2026-02-09
 **Confidence:** HIGH
 
 ## Executive Summary
 
-This is a lead-generation focused developer portfolio targeting small business decision-makers who need web apps, automation, and AI development. The research strongly recommends a static JAMstack approach using Astro 5.x + Tailwind CSS 4.x deployed to GitHub Pages. This stack delivers exceptional performance (critical for SEO and first impressions), zero hosting costs, and positions Joel as technically current while keeping development simple.
+This research covers adding a neobrutalist design system to an existing Astro 5 + Tailwind CSS 4 portfolio site. The site already has core functionality (blog with MDX, portfolio projects, contact form, dark mode), so this milestone focuses exclusively on visual refresh with narrative homepage restructure. The recommended approach is CSS-first using Tailwind 4's @theme directive for design tokens, with implementation constrained to 3/10 aesthetic density to maintain professional trust while adding distinctive personality.
 
-The key strategic insight from research: most developer portfolios fail by speaking to other developers rather than business owners. Success requires business-outcome focused content (metrics and ROI over technical implementations), minimal friction contact paths, and strong social proof. Joel's differentiator—the low-risk prototype approach—must be prominently featured, not buried.
+The core technical approach is straightforward: install 1-2 variable fonts via Fontsource, define neobrutalist tokens (colors, shadows, borders) in global.css using @theme, build primitive components (Button, Card, Input) as Astro components, then update existing components with new styling. No JavaScript libraries needed—all neobrutalist patterns (thick borders, hard shadows, hover effects) are pure CSS via Tailwind utilities. The existing dark mode implementation stays intact but requires careful adaptation since neobrutalist shadows need inverted colors in dark mode to maintain depth.
 
-Critical risk: technical jargon throughout the site will alienate non-technical clients. Prevention starts in Phase 1 (content strategy) by writing for business outcomes first, technology second. Secondary risks include poor mobile performance (59% of traffic), weak or missing testimonials, and contact forms that either don't work or ask for too much information upfront.
+The primary risk is over-stylization undermining professional trust. The target audience is small business owners seeking lead generation, not design portfolio viewers. Research shows 3/10 density constraint is critical: apply bold neobrutalism to headers/CTAs/cards, but preserve generous whitespace and readable body text (especially blog posts). Secondary risks include WCAG contrast failures with bold colors (yellow on white backgrounds), dark mode color inversion breaking visual hierarchy, and box-shadow animation performance on mobile. All are preventable with testing discipline established in Phase 1 (Design System Foundation).
 
 ## Key Findings
 
 ### Recommended Stack
 
-Modern static site generation with Astro is the clear choice for this use case. Astro 5.16.15 delivers 50-70% smaller bundles than React alternatives while shipping fully static HTML for optimal SEO. The framework's Islands Architecture allows adding interactivity only where needed (portfolio filters, contact forms) without sacrificing performance. Tailwind CSS 4.1.18 provides rapid styling with 5x faster builds and zero configuration required.
+**No major stack changes needed.** The existing Astro 5 + Tailwind CSS 4 + MDX foundation is ideal for this design refresh. Only additions are typography packages—everything else uses built-in Tailwind 4 capabilities.
 
-**Core technologies:**
-- **Astro 5.16.15**: Static site generator — best-in-class for content-heavy sites, native GitHub Pages support, zero JavaScript by default
-- **Tailwind CSS 4.1.18**: Utility-first CSS — 100x faster incremental builds in v4, automatic content detection, industry standard
-- **TypeScript 5.9.3**: Type-safe development — demonstrates professional code quality, catches errors at compile time
-- **Node.js 20 LTS**: Build runtime — long-term support ensures stability through 2026
-- **Formspree**: Contact form backend — free tier (50 submissions/month) handles forms without custom backend
+**Core additions:**
+- **@fontsource-variable/bricolage-grotesque** (^5.2.10) — Quirky grotesque display font perfect for neobrutalist headings, variable font with weight/width/optical axes
+- **@fontsource-variable/fraunces** (optional) — Alternative display/accent font with optical size axis, good for editorial elements
+- **Tailwind 4 @theme directive** — Define all design tokens (colors, shadows, borders) in global.css, generates utilities automatically
+- **Pure CSS patterns** — No animation libraries, no component libraries. Tailwind 4 includes everything needed (text shadows in 4.1, box shadows, transitions)
 
-**Critical version requirements:**
-- Node.js 20 LTS minimum (18+ supported but 20 recommended)
-- Astro 5.x ships with Vite 6.x automatically
-- Avoid: Create React App (deprecated), Gatsby (overcomplicated), Jekyll (outdated)
+**Why no libraries:** NeoBrutalism.css and similar libraries just wrap what Tailwind 4 already provides. Adding dependencies creates bloat with zero benefit. Custom @theme configuration is more maintainable and generates smaller builds.
+
+**Performance impact:** ~50-110KB for fonts only (self-hosted via Fontsource). Zero JavaScript added. No external requests.
 
 ### Expected Features
 
-Research reveals a clear hierarchy of features based on small business client expectations and freelance developer portfolio best practices.
+**Must have (table stakes for neobrutalism):**
+- Thick borders (2-4px solid) on interactive elements
+- Hard offset shadows (4-6px, zero blur) for depth
+- High contrast color palette (yellow/teal/magenta already exist)
+- Bold typography (700-900 weights for headings)
+- Pressed button hover effects (translate + remove shadow)
+- Color block sections for visual separation
+- Dark mode adaptation (inverted shadows, adjusted colors)
 
-**Must have (table stakes):**
-- **Mobile-responsive design** — 59% of traffic is mobile; small business decision-makers browse on phones
-- **Clear services description** — Visitors need to understand offerings within seconds (web apps, automation, AI)
-- **3-5 portfolio case studies** — Quality over quantity; must include business metrics/ROI, not just tech stack
-- **Contact form** — Primary conversion point; 3-5 fields maximum (name, email, project type, message)
-- **About section** — Humanize Joel, explain approach, establish expertise for small business context
-- **Process explanation (prominent)** — Joel's differentiator: low-risk prototype approach before full commitment
-- **3-5 client testimonials** — Social proof with specific outcomes, client names, companies
-- **FAQ section** — Proactively address small business objections ("How much?" "How long?" "What if I'm not technical?")
-- **SEO basics** — Meta tags, semantic HTML, sitemap; critical for "web developer [city]" searches
-- **Fast load times** — Performance signals technical competence; slow dev portfolios hurt credibility
+**Should have (differentiators):**
+- Narrative homepage structure (Solutions → Process → Tech → About → Contact)
+- Asymmetric layouts with intentional breaks
+- Projects page with narrative case study format (Problem → Solution → Results)
+- Stacked/layered card effects for 3D illusion
+- Offset/overlapping elements for visual tension
 
-**Should have (competitive advantage):**
-- **Blog (3-5 initial posts)** — Passive SEO lead generation; focus on small business advice, not technical tutorials
-- **Pricing transparency/ranges** — Small businesses hate "contact for quote"; even ranges ($5k-15k) reduce friction
-- **Case study ROI metrics** — "Reduced manual work 15 hours/week" beats "Built with React"
-- **Video testimonials** — 40% more authentic than text; even phone-recorded beats polished text
-- **Availability calendar** — Calendly integration removes friction for initial consultation
+**Defer to post-v1.1:**
+- Isometric shadows (45° angles, medium complexity)
+- Cyclical process diagram (high complexity, narrative text works for MVP)
+- Retro UI elements (Windows 98 style, could feel gimmicky)
+- Advanced micro-interactions beyond hover states
+- Quirky animation library (low priority for professional site)
 
-**Defer (v2+):**
-- **Newsletter** — Only after blog has 10+ posts and steady traffic
-- **Dark mode toggle** — Nice-to-have, not conversion driver
-- **Client portal** — Wait until post-project relationship management needs emerge
-- **Advanced portfolio filtering** — Only needed with 10+ case studies
+**Anti-features (explicitly avoid):**
+- Excessive color combinations (stick to 3 bold colors max)
+- Unreadable text contrast (test all combinations with WCAG checker)
+- Cluttered asymmetry (chaos ≠ intentional asymmetry)
+- Soft gradients or blur (contradicts raw aesthetic)
+- Over-animation (exhausting, distracts from content)
+- Breaking usability for aesthetics (maintain clear CTAs, readable text)
 
 ### Architecture Approach
 
-JAMstack architecture (JavaScript, APIs, Markup) is the pattern for static portfolio sites. Content and presentation are decoupled: markdown/JSON holds data, Astro templates generate static HTML at build time, third-party APIs handle dynamic features (forms, analytics). This delivers blazing performance, excellent SEO, free hosting, and high security with no server to hack.
+**CSS-first design tokens with component composition.** All neobrutalist styles defined once in global.css @theme block, consumed via Tailwind utilities in Astro components. No runtime JavaScript for theming—everything compiles to static HTML + CSS.
 
 **Major components:**
-1. **Hero/Landing** — Value proposition and primary CTA; first impression drives conversion
-2. **Services** — 3-5 specific offerings with clear boundaries (what's included/excluded)
-3. **Portfolio** — Card grid linking to detailed case study pages; business-outcome focused
-4. **Case Study Pages** — Deep dive with problem/solution/results format; metrics required
-5. **About** — Client-benefit focused (not resume dump); establishes trust and expertise
-6. **Blog** — List of posts with individual post pages; SEO engine for long-term leads
-7. **Contact Form** — Posts to Formspree API; 4 fields maximum; clear success/error handling
-8. **Testimonials** — Social proof integrated throughout; specific outcomes with client attribution
+1. **Design Token Layer** — @theme in global.css defines colors (--color-brutal-yellow), shadows (--shadow-brutal-md), borders, typography. Generates Tailwind utilities automatically.
+2. **Primitive Components** — Button.astro, Card.astro, Input.astro with props for variants (primary/secondary, sm/md/lg). Server-rendered Astro components using Tailwind classes.
+3. **Modified Existing Components** — Update Header.astro, BlogCard.astro, Hero.astro, Services.astro with new design tokens. Leverage existing structure, swap classes.
+4. **Theme Provider** — Keep existing inline script in BaseLayout.astro for dark mode (localStorage + system preference). Adapt tokens for dark mode via CSS custom properties.
 
-**Key architectural patterns:**
-- **Progressive enhancement** — Core functionality works without JavaScript; enhanced interactively
-- **Data-driven components** — Portfolio items, testimonials stored in JSON; separation of content from presentation
-- **Third-party service integration** — Offload forms, analytics, comments to specialized APIs
+**Key patterns:**
+- Hover state: `hover:translate-x-1 hover:translate-y-1 hover:shadow-none` (creates press effect)
+- Dark mode: Semantic color tokens reference different values per mode, shadows inverted for visibility
+- Component composition: Build primitives with props, compose into larger components (Hero imports Button)
+- Progressive enhancement: Zero JavaScript for static elements, client:* directives only for interactive components
 
-**Project structure:** Start with flat structure for rapid prototyping, migrate to component-based when blog reaches 5+ posts or portfolio has 5+ case studies. Component structure enables reusable templates, content/presentation separation, and build optimization.
+**Integration with existing:**
+- Create new `components/primitives/` folder for Button, Card, Input
+- Modify existing components in place (Header, Footer, BlogCard, etc.)
+- Update global.css @theme block, keep existing utilities (.prose, .toc, animations)
+- Update BaseLayout.astro font imports, keep dark mode script unchanged
 
 ### Critical Pitfalls
 
-Research identified six critical pitfalls that cause developer portfolios to fail at client conversion:
+1. **WCAG contrast failures with bold colors** — Yellow/teal/magenta can visually "pop" but fail 4.5:1 ratio. Test EVERY color combination with WebAIM checker before implementation. Yellow only on dark backgrounds or with near-black text. Lighthouse CI enforces 90%+ accessibility, but manual testing required (automated tools miss subjective issues).
 
-1. **Technical Jargon Overwhelm** — Writing for developers instead of business owners. Site copy uses framework names and technical terms that alienate non-technical decision-makers. Prevention: write for 6th-8th grade reading level, lead with business outcomes ("increase sales 40%") not technical implementation ("built with React"), test copy with non-technical readers before publishing.
+2. **Sacrificing readability for aesthetic boldness** — Applying decorative fonts to body text kills legibility, especially in blog posts. Strict hierarchy: bold display fonts (Poppins/Bricolage Grotesque) for H1/H2 ONLY, neutral body fonts (Inter) for paragraphs. Minimum 16px body text, 1.75 line height. Test with real blog content, not Lorem Ipsum.
 
-2. **Developer-Centric Portfolio Presentation** — Showcasing technical achievements (complex animations, personal projects) rather than client results. Projects lack business context, metrics, or testimonials. Prevention: structure every portfolio piece as mini case study (problem → solution → measurable results), include specific metrics (20% conversion increase, 50% faster load), limit personal projects to 20% of portfolio.
+3. **Dark mode color inversion breaking visual hierarchy** — Naively flipping bg-white → bg-black destroys carefully crafted hierarchy. Shadows in dark mode need LIGHTER colors (not darker) to create depth. Bold colors may need 10-20% desaturation to reduce eye strain. Design both modes simultaneously, test every component in both modes during development.
 
-3. **Hidden or Complicated Contact Path** — Contact form buried, requires excessive information, or has no clear homepage CTA. Prevention: place primary CTA above fold on homepage, maximum 4 form fields (name, email, message, optional phone), offer multiple contact methods (form, email, phone), add contact CTAs at end of every major section.
+4. **Box-shadow animation performance degradation** — Animating box-shadow directly triggers expensive paint operations, causing jank on mobile (60fps → 20-30fps). NEVER animate box-shadow. Use pseudo-element technique: create ::after with shadow at opacity: 0, animate only opacity on hover. Combine with transform on parent for lift effect. Test on iPhone SE with DevTools Performance.
 
-4. **Missing or Generic Testimonials** — No testimonials, or generic praise ("Great developer!") without specifics. Prevention: build testimonial collection into project completion process, prompt clients with specific questions ("What business problem did this solve?" "What results?"), get permission for full name/company/photo, aim for testimonials under 12 months old.
+5. **Over-stylization undermining professional trust** — Pushing neobrutalism to 10/10 density creates experimental look that small business owners interpret as "unprofessional" or "not ready for serious work." Enforce 3/10 density rigorously: headers/hero at 7/10, core content at 2/10, blog posts at 1/10. Use neobrutalist elements as accents, not entire design language. Test with target audience (small business owners), not just design peers.
 
-5. **About Page as Resume Dump** — Chronological job history, technology lists, certifications that focus on developer's journey rather than client benefits. Prevention: lead with "I help small businesses...", replace tech lists with business capabilities, add value proposition in first 2 sentences, include photo.
+6. **Inconsistent spacing creating visual chaos** — Random spacing between thick borders/shadows makes layout feel haphazard instead of intentionally raw. Establish spacing scale: minimum 24px gap between bordered elements, 24-32px padding inside bordered containers, shadow-offset + 8px margin around shadow elements. Document spacing rules in design system.
 
-6. **No Clear Service Boundaries** — Generic "I build websites" or "full-stack development" without specifics. Potential clients can't self-identify if their project fits. Prevention: define 3-5 specific service offerings, list what's included/excluded for each, mention ideal client profile, say what you DON'T do.
+7. **Accessibility testing theater** — Passing 100% Lighthouse while failing actual users. Lighthouse can't evaluate subjective experience (eye strain from vibrating colors, invisible focus indicators that technically pass contrast, screen reader confusion despite ARIA labels). Manual testing non-negotiable: keyboard navigation, screen reader (VoiceOver/NVDA), color blindness simulation, bright sunlight testing.
 
 ## Implications for Roadmap
 
-Based on research, the roadmap should prioritize getting a functional lead-generation site live quickly (foundation + core content + contact), then build out proof points (portfolio, blog, testimonials) over time. This approach validates conversion before investing in content-heavy sections.
+Based on research, recommended 5-phase structure with clear dependencies:
 
-### Suggested Phase Structure
-
-#### Phase 1: Foundation & Content Strategy
-**Rationale:** All research points to content as the make-or-break factor. Must establish audience-first content guidelines before any design/development. Prevents technical jargon pitfall and ensures business-outcome focus from day one.
+### Phase 1: Design System Foundation
+**Rationale:** All components depend on tokens. Must establish accessible color palette, shadow system, typography scale before building anything. Prevents rework if contrast fails Lighthouse later.
 
 **Delivers:**
-- Project structure and GitHub repo setup
-- Base HTML templates with semantic markup
-- Global CSS (typography, colors, spacing variables)
-- Navigation and footer components
-- Content strategy document (tone, structure, anti-jargon guidelines)
+- Tailwind @theme config with neobrutalist tokens (colors, shadows, borders, typography)
+- Font imports in BaseLayout.astro (Bricolage Grotesque + Inter)
+- Dark mode token variants tested and working
+- Density guidelines documented (3/10 constraint with per-section targets)
+- Accessibility baseline (WCAG contrast checked, documented for all color combinations)
 
 **Addresses:**
-- Foundation for all features (from ARCHITECTURE.md dependencies)
-- Prevention of technical jargon overwhelm (PITFALLS.md #1)
-- Prevention of About page as resume dump (PITFALLS.md #5)
+- Table stakes: high contrast palette, bold typography scale, thick borders, hard shadows
+- Pitfalls: WCAG contrast failures, dark mode color inversion, inconsistent spacing
+- Stack: Fontsource variable fonts installed and loaded
 
 **Avoids:**
-- Writing developer-focused copy that needs complete rewrite later
-- Building on unclear positioning/messaging
+- Rework from inaccessible colors discovered late
+- Dark mode broken after component implementation
+- Inconsistent token usage across components
 
-**Research flag:** Standard patterns; no additional research needed
+**Research needed:** None. Standard Tailwind 4 patterns, well-documented.
 
-#### Phase 2: Core Content Pages
-**Rationale:** Services, About, and hero sections establish credibility and explain offerings. These pages answer "who are you?" and "what do you do?" before portfolio proves "can you do it?" This order follows ARCHITECTURE.md build dependencies.
+---
+
+### Phase 2: Primitive Components
+**Rationale:** Build reusable building blocks (Button, Card, Input) that composed components (Hero, BlogCard) will consume. Bottom-up implementation prevents duplicate styling logic.
 
 **Delivers:**
-- Hero section with value proposition and primary CTA
-- Services page with 3-5 specific offerings (clear boundaries)
-- About page (client-benefit focused, not resume)
-- Process explanation section (low-risk prototype approach)
-- Mobile-responsive design foundation
+- Button.astro with variants (primary/secondary/neutral), sizes (sm/md/lg), hover press effect
+- Card.astro with shadow-brutal, border-2, rounded-brutal, color block variants
+- Input.astro for forms with focus states and accessibility
+- Badge.astro for tags/labels
+- All primitives tested in both light and dark modes
 
-**Addresses:**
-- Clear services description (FEATURES.md table stakes)
-- About section (FEATURES.md table stakes)
-- Process explanation as differentiator (FEATURES.md competitive advantage)
+**Uses:**
+- Design tokens from Phase 1
+- Tailwind utilities: border-*, shadow-brutal-*, hover:translate-*, transition-all
+- Astro component props for configuration
+
+**Implements:**
+- Architecture pattern: component composition with props
+- Hover state pattern: translate + shadow-none
+- Dark mode: semantic color tokens with dark: prefix
 
 **Avoids:**
-- No clear service boundaries pitfall (PITFALLS.md #6)
-- Generic positioning that makes self-identification impossible
+- Box-shadow animation performance (use pseudo-element technique)
+- Over-componentization (single Button with props, not PrimaryButton/SecondaryButton/etc.)
+- Client-side JavaScript for static styling
 
-**Research flag:** Standard patterns; no additional research needed
+**Research needed:** None. Standard Astro component patterns.
 
-#### Phase 3: Portfolio & Case Studies
-**Rationale:** Once positioning is clear, portfolio provides proof. Research shows 3-5 high-quality case studies beat 20 mediocre ones. Each must follow problem/solution/results format with business metrics.
+---
+
+### Phase 3: Component Updates & Homepage Narrative
+**Rationale:** With primitives available, update existing components and restructure homepage. Homepage is highest-traffic page, narrative structure is key differentiator for lead generation.
 
 **Delivers:**
-- Portfolio grid component (card layout)
-- 3-5 case study pages (detailed narratives)
-- portfolio.json data structure
-- Business-outcome focused presentation (ROI metrics, client results)
+- Hero.astro updated with narrative "Solutions" messaging (problem-focused, not capability-focused)
+- Process.astro with cyclical/iterative workflow structure (MVP: narrative text, defer diagram to post-v1.1)
+- Services.astro (Tech section) using Card primitive, business benefit focus
+- About.astro with personality + credentials
+- Header.astro navigation with Button primitive
+- Footer.astro updated styling
+- Contact form with Input primitive, neobrutalist styling
 
 **Addresses:**
-- Portfolio/case studies (FEATURES.md table stakes)
-- Case study ROI metrics (FEATURES.md competitive advantage)
+- Narrative homepage structure (Solutions → Process → Tech → About → Contact)
+- Asymmetric layouts with intentional breaks
+- Color block sections for visual separation
+- Table stakes: pressed button states, card components
+
+**Implements:**
+- Primitives from Phase 2 composed into larger components
+- Narrative content structure from FEATURES.md research
 
 **Avoids:**
-- Developer-centric portfolio presentation (PITFALLS.md #2)
-- Technical jargon in case studies (PITFALLS.md #1)
+- Typography readability issues (test Hero CTA + About section with target audience)
+- Professional trust undermining (apply 7/10 density to hero, 2/10 to content areas)
 
-**Research flag:** Standard patterns; no additional research needed
+**Research needed:** None for implementation. May need content strategy validation with target audience during testing.
 
-#### Phase 4: Contact & Conversion
-**Rationale:** Critical for lead capture. Research shows this must work perfectly from day one. Simple form (4 fields max) posting to Formspree with clear success/error states.
+---
+
+### Phase 4: Projects & Blog Styling
+**Rationale:** Projects and blog consume primitives built in Phase 2. Blog styling is lower priority than homepage since traffic flows Homepage → Projects → Contact for lead generation.
 
 **Delivers:**
-- Contact form with client-side validation
-- Formspree integration and testing
-- Thank-you page or inline success message
-- Multiple contact CTAs throughout site
-- FAQ section addressing common objections
+- BlogCard.astro updated with Card primitive, shadow-brutal, border-2
+- Blog index page with neobrutalist card grid
+- Blog post template with subtle neobrutalist accents (headings only, preserve readable body)
+- Tag pages restyled to match
+- Portfolio projects page with narrative case study format (Problem → Solution → Results)
+- Individual project pages updated
 
 **Addresses:**
-- Contact form (FEATURES.md table stakes)
-- FAQ section (FEATURES.md table stakes)
-- Clear CTAs (FEATURES.md table stakes)
+- Blog restyling (P2 priority)
+- Projects narrative format (P2 priority)
+- Table stakes: dark mode adaptation for all blog components
 
 **Avoids:**
-- Hidden or complicated contact path (PITFALLS.md #3)
-- Contact form that doesn't work (HIGH cost if broken)
+- Typography readability issues (critical test: read full blog post >1000 words on mobile)
+- Over-styling code blocks (astro-expressive-code should shine, subtle borders max)
+- Applying neobrutalist density to body text (1/10 density in blog posts)
 
-**Research flag:** Standard patterns; Formspree integration is well-documented
+**Research needed:** None. Standard component updates.
 
-#### Phase 5: Testimonials & Social Proof
-**Rationale:** Testimonials reinforce portfolio claims. Research shows specific outcomes ("saved 20 hours/week") beat generic praise. This phase can run parallel to blog development.
+---
+
+### Phase 5: Testing, Refinement & Accessibility Validation
+**Rationale:** Comprehensive testing catches issues before launch. Manual accessibility testing is critical since Lighthouse can pass while failing actual users. Target audience validation ensures professional trust isn't undermined.
 
 **Delivers:**
-- testimonials.json data structure
-- Testimonial component (reusable across pages)
-- 3-5 testimonials with client names/companies
-- Integration on homepage and relevant sections
+- Manual accessibility audit (keyboard navigation, VoiceOver/NVDA screen reader, color blindness simulation)
+- Performance testing on target devices (iPhone SE, mid-range Android)
+- Dark mode QA pass across all pages
+- Target audience user testing (small business owners, not design community)
+- Density audit (verify 3/10 constraint enforced per section)
+- Spacing consistency audit (no one-off values, all use spacing scale)
+- Lighthouse CI validation (≥90% all metrics)
+- Conversion rate baseline established for post-launch monitoring
 
 **Addresses:**
-- Client testimonials (FEATURES.md table stakes)
-- Social proof reinforcing case studies
+- All critical pitfalls (WCAG, readability, dark mode, performance, over-stylization, spacing, accessibility theater)
+- Professional trust validation with target audience
+- Mobile responsiveness validation
 
 **Avoids:**
-- Missing or generic testimonials (PITFALLS.md #4)
+- Launching with passing Lighthouse but failing users
+- Over-stylization reducing conversions (discovered post-launch)
+- Box-shadow jank on mobile undetected
 
-**Research flag:** Standard patterns; no additional research needed
+**Research needed:** None. Standard QA processes with neobrutalist-specific checklists.
 
-#### Phase 6: Blog & SEO Foundation
-**Rationale:** Blog is SEO engine for long-term passive leads. Research shows focus should be small business advice (non-technical) not developer tutorials. Can start with 3-5 posts; expands over time.
-
-**Delivers:**
-- Blog post list page
-- Blog post template (individual posts)
-- 3-5 initial posts (small business focused)
-- SEO basics (meta tags, sitemap, semantic HTML)
-- Image optimization (WebP/AVIF, lazy loading)
-
-**Addresses:**
-- Blog (FEATURES.md should-have for competitive advantage)
-- SEO basics (FEATURES.md table stakes)
-
-**Avoids:**
-- Missing SEO that makes site unfindable
-- Technical blog content that attracts wrong audience
-
-**Research flag:** Standard patterns; Astro Content Collections are well-documented
-
-#### Phase 7: Performance & Launch Prep
-**Rationale:** Final optimization before launch. Research shows slow developer portfolios hurt credibility. Target Lighthouse score >90 mobile, <2s LCP.
-
-**Delivers:**
-- Image compression and optimization
-- CSS/JS minification
-- GitHub Actions deployment workflow
-- Cross-browser testing
-- Accessibility audit (keyboard navigation, alt text, color contrast)
-- Mobile device testing (iPhone, Android)
-
-**Addresses:**
-- Fast load times (FEATURES.md table stakes)
-- Professional domain (FEATURES.md table stakes)
-
-**Avoids:**
-- Poor mobile performance trap (PITFALLS.md performance section)
-- Missing build-time optimization (PITFALLS.md anti-pattern #5)
-
-**Research flag:** Standard patterns; GitHub Pages deployment is well-documented
+---
 
 ### Phase Ordering Rationale
 
-**Sequential dependencies:**
-- Phase 1 (Foundation) must complete before all others — establishes structure and content guidelines
-- Phase 2 (Core Content) should precede Phase 3 (Portfolio) — positioning must be clear before proving expertise
-- Phase 4 (Contact) can start after Phase 1 — independent feature but needs foundation
-- Phases 5-6 (Testimonials, Blog) can run in parallel — no dependencies between them
-- Phase 7 (Performance) must come last — can't optimize what doesn't exist
-
-**Why this grouping:**
-- Phases 1-2-4 create minimum viable site that can generate leads (prioritizes revenue)
-- Phase 3 adds proof points to increase conversion
-- Phases 5-6 add depth (social proof, content marketing)
-- Phase 7 polishes for professional launch
+**Why this order:**
+1. **Tokens first (Phase 1):** Foundation dependency. All components consume tokens. Accessibility baseline prevents late rework.
+2. **Primitives second (Phase 2):** Building blocks for composed components. Bottom-up prevents duplicate styling logic.
+3. **Homepage third (Phase 3):** Highest-traffic page, key differentiator for lead generation. Benefits from primitives being stable.
+4. **Blog/Projects fourth (Phase 4):** Lower priority than homepage for conversion funnel. Can iterate post-launch.
+5. **Testing last (Phase 5):** Validates complete system. Manual accessibility catches what Lighthouse misses.
 
 **How this avoids pitfalls:**
-- Content strategy first prevents technical jargon throughout project
-- Business-outcome focus established early (Phases 2-3)
-- Contact conversion prioritized (Phase 4) before nice-to-haves
-- Testimonial collection process starts during Phase 3 portfolio work
+- Phase 1 prevents WCAG contrast failures, dark mode issues, inconsistent spacing (foundational discipline)
+- Phase 2 prevents box-shadow animation performance issues (primitives enforce performant patterns)
+- Phase 3-4 risk over-stylization but Phase 5 target audience testing catches before launch
+- Phase 5 prevents accessibility testing theater (manual audit required)
+
+**Dependencies:**
+- Phase 2 depends on Phase 1 (tokens)
+- Phase 3-4 depend on Phase 2 (primitives)
+- Phase 5 depends on Phase 3-4 (complete system to test)
+
+Linear flow, no circular dependencies.
 
 ### Research Flags
 
-**Phases with standard patterns (skip research-phase):**
-- **Phase 1-2:** Static site structure and content pages are well-established patterns
-- **Phase 3:** Portfolio case study format has extensive best practices documentation
-- **Phase 4:** Formspree integration is well-documented; contact form patterns are standard
-- **Phase 5:** Testimonial display is straightforward; collection is process-based
-- **Phase 6:** Astro Content Collections and blog patterns are well-documented
-- **Phase 7:** Performance optimization and GitHub Pages deployment have extensive guides
+**Phases with standard patterns (skip /gsd:research-phase):**
+- **Phase 1:** Tailwind 4 @theme configuration is well-documented, neobrutalist token patterns established
+- **Phase 2:** Astro component composition with props is standard pattern
+- **Phase 4:** Blog styling is standard component updates
 
-**No phases require deeper research.** This is a well-trodden path with established tooling and patterns. The research conducted provides sufficient depth for all phases.
+**Phases likely needing validation (not research, but testing):**
+- **Phase 3:** Content strategy for narrative homepage may need stakeholder/target audience validation during planning (not technical research)
+- **Phase 5:** Manual accessibility testing process may need tooling setup (VoiceOver, NVDA, simulation tools)
+
+**No phases need /gsd:research-phase.** All technical patterns are established and verified in research. Implementation is straightforward application of known patterns.
 
 ## Confidence Assessment
 
 | Area | Confidence | Notes |
 |------|------------|-------|
-| Stack | HIGH | Official Astro/Tailwind documentation verified; versions confirmed current; GitHub Pages integration is native |
-| Features | HIGH | Cross-referenced 15+ sources on portfolio best practices, freelance lead generation, small business expectations; consistent patterns emerged |
-| Architecture | HIGH | JAMstack patterns for static sites are mature and well-documented; component structure follows established best practices |
-| Pitfalls | HIGH | Validated across multiple 2025-2026 sources; portfolio mistakes, freelance communication, conversion optimization all align |
+| Stack | HIGH | Fontsource packages verified on npm, Tailwind 4 @theme documented officially, no libraries needed reduces risk |
+| Features | HIGH | Neobrutalism patterns verified via NN/G (authoritative UX source), table stakes identified from multiple design sources, narrative structure from portfolio best practices |
+| Architecture | HIGH | Tailwind 4 CSS-first theming verified in official docs, Astro component patterns verified in official docs, no novel integration points |
+| Pitfalls | HIGH | WCAG accessibility standards are specification, box-shadow performance issues verified with technical articles, over-stylization risk validated from multiple professional context sources |
 
-**Overall confidence:** HIGH
+**Overall confidence: HIGH**
 
-All four research areas produced consistent, actionable findings from multiple credible sources. Stack recommendations come from official documentation. Feature priorities emerged from portfolio analysis, freelance guides, and small business research. Architecture patterns are industry standard for static sites. Pitfalls were validated across developer portfolio mistakes, conversion optimization, and client communication domains.
+All core technical recommendations verified with official documentation (Tailwind 4, Astro, Fontsource, WCAG). Design patterns cross-referenced across multiple authoritative sources (NN/G for neobrutalism definition, multiple portfolio best practice sources for narrative structure). No experimental technologies or unproven patterns.
 
 ### Gaps to Address
 
-**No critical gaps identified.** Research provided clear direction for all project aspects.
+**Minor gaps (won't block implementation):**
+- **Exact color values for dark mode:** Need to desaturate bold colors by 10-20% for dark mode to reduce eye strain. Research identifies need but exact OKLCH values require design iteration during Phase 1 implementation. Not a blocker—can test and adjust.
 
-**Minor validation points during implementation:**
-- **Formspree free tier limits (50 submissions/month):** Sufficient for early stage but monitor during Phase 4 testing
-- **Pricing transparency messaging:** Research shows ranges help but need validation with Joel's actual pricing model in Phase 2
-- **Blog topic selection:** Research says "small business advice" but specific topics should be validated against Joel's expertise areas in Phase 6
-- **ESLint/Prettier config:** Research agrees on approach but specific rules should follow Astro community standards during Phase 1 setup
+- **Shadow offset coordination with translate values:** Research recommends using Tailwind's default spacing (translate-x-1 = 0.25rem = 4px) aligned to shadow offsets. If shadow is 6px, may need custom translate utility. Can resolve during Phase 1 token definition.
 
-These are implementation details, not research gaps. The strategic direction is clear.
+- **Density guidelines per component type:** Research establishes 3/10 overall constraint and per-section targets (hero 7/10, content 2/10, blog 1/10), but specific components (button, card, input) need density interpretation. Document during Phase 1 with examples.
+
+- **Target audience preferences for narrative structure:** Research identifies problem-focused hero structure as best practice, but Joel's specific target audience (small business owners) may have preferences. Validate with user testing in Phase 5, but shouldn't block Phase 3 implementation (worst case: adjust messaging, structure stays).
+
+**No critical gaps.** All gaps are implementation details resolvable during respective phases, not blockers requiring additional research.
 
 ## Sources
 
-### Stack Research (HIGH confidence)
-- Astro 5.16.15 Release (Official GitHub) — Latest stable version, features, compatibility
-- Astro GitHub Pages Deployment Guide (Official Docs) — Native integration patterns
-- Tailwind CSS v4.1.18 Release (Official GitHub) — Performance improvements, breaking changes
-- TypeScript 5.9.3 Release (Microsoft Official Blog) — Version compatibility
-- Pagepro Astro vs Next.js 2025 Comparison — Technical benchmarks for static sites
-- CloudCannon Static Site Generators 2025 — Industry analysis, use case matching
-- FrontendTools Image Optimization 2025 — WebP/AVIF implementation patterns
+### Primary (HIGH confidence)
+- [Tailwind CSS v4.1 Documentation](https://tailwindcss.com/docs/theme) — @theme directive, shadow syntax, dark mode
+- [Tailwind CSS v4.1 Announcement](https://tailwindcss.com/blog/tailwindcss-v4-1) — Text shadows, CSS-first theming features
+- [Astro Components Documentation](https://docs.astro.build/en/basics/astro-components/) — Component patterns, props, slots
+- [Astro Fonts Guide](https://docs.astro.build/en/guides/fonts/) — Fontsource recommendations
+- [Fontsource Bricolage Grotesque](https://www.npmjs.com/package/@fontsource-variable/bricolage-grotesque) — Package verification, version compatibility
+- [WCAG Color Contrast Requirements](https://webaim.org/articles/contrast/) — Accessibility standards (4.5:1 text, 3:1 UI)
+- [NN/G: Neobrutalism Definition and Best Practices](https://www.nngroup.com/articles/neobrutalism/) — Authoritative UX source on design pattern
 
-### Features Research (HIGH confidence)
-- 22+ Developer Portfolio Examples (Colorlib, Templyo, Elementor, Sitebuilder, Hostinger) — Feature analysis across successful portfolios
-- Freelance Client Acquisition Guides (Amrudin Catic, Razorpay, Saleshandy) — Lead generation patterns 2025-2026
-- Small Business Website Developers Analysis (Ossisto, OneLittleWeb) — Client expectations research
-- Common Portfolio Mistakes (DevPortfolioTemplates, Arc.dev, Fiverr, David Walsh) — Anti-pattern validation
-- Contact Form Best Practices (Eleken, Prosper Marketing, Visme, Matt Olpinski, Monday.com) — Conversion optimization 2025
-- Case Study Writing Guides (AgencyAnalytics, DESK Magazine, Uncork Capital) — Business-outcome format
-- Social Proof Statistics (LogRocket, JournoPortfolio, WiserNotify) — Testimonial effectiveness
-- SEO Trends 2026 (Gravitate Design, Marketer Milk, ALM Corp, Torro.io) — Optimization priorities
+### Secondary (MEDIUM confidence)
+- [Neobrutalism.dev Components](https://www.neobrutalism.dev/) — Shadow patterns, hover effects (reference implementation)
+- [Bejamas: Neubrutalism Web Design Trend](https://bejamas.com/blog/neubrutalism-web-design-trend) — Feature overview, best practices
+- [Tobias Ahlin: Animating Box-Shadow Performance](https://tobiasahlin.com/blog/how-to-animate-box-shadow/) — Pseudo-element technique for performant shadows
+- [Kristi.Digital: Fonts for Neobrutalist Design](https://blog.kristi.digital/p/my-favourite-fonts-for-neobrutalist-web-design) — Typography recommendations (Bricolage Grotesque featured)
+- [HubSpot: Neo Brutalism Guide](https://blog.hubspot.com/website/neo-brutalism) — Professional context for business sites
+- [Manuel Matuzovic: Building Inaccessible Sites with Perfect Lighthouse Scores](https://www.matuzo.at/blog/building-the-most-inaccessible-site-possible-with-a-perfect-lighthouse-score/) — Accessibility testing limitations
 
-### Architecture Research (HIGH confidence)
-- Frontend Architecture Patterns 2026 (DEV Community) — Modern component structures
-- JAMstack Future 2025-2026 Research Paper (Keen Computer) — Architecture evolution
-- JAMstack Official Documentation (jamstack.org, Umbraco) — Pattern definitions
-- Frontend Code Organization Best Practices (LinkedIn, Adekola Olawale) — Structure conventions
-- Jamstack Contact Forms Guide (Statichunt) — Integration patterns for 20+ services
-- GitHub Pages Best Practices 2025 (Protec Blog) — Deployment optimization
-- GitHub Pages Official Docs — Publishing configuration, workflows
-- Static Site Folder Structure Guide (mendo.zone) — Organization patterns
-- Anti-Patterns in Software Architecture (IT Architecture Insights) — Common mistakes
-
-### Pitfalls Research (HIGH confidence)
-- Developer Portfolio Mistakes (DevPortfolioTemplates, Wix, Pesto Tech, CoachFullStack) — Validated across 4+ sources
-- Freelance Developer Mistakes (LearnToCodeWith.me, TrulySmall) — Client communication failures
-- Website Design Mistakes 2026 (Zach Sean) — Conversion killers
-- Lead Generation Mistakes (Leaders Institute, WebFX) — Contact form optimization
-- Technical Jargon Issues (GuppyFish Web, Business.com) — Audience mismatch problems
-- Trust Signals Research (SlashExperts, BestVersionMedia) — Testimonial requirements
-- Portfolio SEO Mistakes (Wix, WebDesignerIndia, Medium/OnlyOneAman) — Search optimization
-- Case Study Portfolio Mistakes (UXFol.io, Toptal) — Presentation failures
-- JAMstack Pros/Cons 2026 (esparkinfo, Ample) — Technology limitations
+### Tertiary (Context only)
+- Multiple portfolio website examples (Figma, Webflow, Dribbble) — Narrative structure patterns (context for Phase 3 content structure)
+- CSS-Tricks box-shadow guide — General CSS reference (not neobrutalism-specific)
+- Various neobrutalism design showcases — Visual inspiration (not technical guidance)
 
 ---
-*Research completed: 2026-01-26*
-*Ready for roadmap: yes*
+*Research completed: 2026-02-09*
+*Ready for roadmap: YES*
+*Confidence: HIGH across all research areas*

@@ -1,271 +1,264 @@
-# Stack Research
+# Stack Research - Neobrutalist Design Additions
 
-**Domain:** Developer portfolio/services website (static, GitHub Pages)
-**Researched:** 2025-01-26
+**Domain:** Neobrutalist design system for existing Astro 5 + Tailwind CSS 4 site
+**Researched:** 2026-02-09
 **Confidence:** HIGH
 
-## Recommended Stack
+## Context
 
-### Core Technologies
+This research focuses ONLY on stack additions/changes needed for neobrutalist design refresh. The existing validated stack (Astro 5, Tailwind CSS 4, MDX, TypeScript, Expressive Code) is NOT re-researched.
 
-| Technology | Version | Purpose | Why Recommended |
-|------------|---------|---------|-----------------|
-| Astro | 5.16.15 | Static site generator | **Best-in-class for static sites.** Zero JavaScript by default, 50-70% smaller bundles than React alternatives, ships fully static HTML for SEO. Native GitHub Pages support, perfect for content-heavy portfolio sites. Islands Architecture allows adding interactivity only where needed. |
-| TypeScript | 5.9.3 | Type-safe JavaScript | Industry standard for production code. Catches errors at compile time, provides better IDE support, demonstrates professional code quality to potential clients. |
-| Tailwind CSS | 4.1.18 | Utility-first CSS framework | v4.0+ is 5x faster with 100x faster incremental builds. Zero configuration required, automatic content detection eliminates manual setup. Industry standard for rapid UI development in 2025. |
-| Node.js | 20 LTS | JavaScript runtime | Long-term support version ensures stability. Required for build tooling and local development. |
+## Recommended Stack Additions
 
-### Supporting Libraries
+### Typography - Variable Fonts via Fontsource
 
-| Library | Version | Purpose | When to Use |
-|---------|---------|---------|-------------|
-| @astrojs/tailwind | Latest | Tailwind integration for Astro | Required to use Tailwind CSS with Astro. Built-in integration handles configuration automatically. |
-| @astrojs/mdx | Latest | MDX support for Astro | For case studies and blog-style project descriptions. Allows embedding components in markdown for rich content. |
-| sharp | Latest | Image optimization | Built-in with Astro. Handles WebP/AVIF conversion, responsive images, and lazy loading automatically. Critical for portfolio with case study images. |
+| Package | Version | Purpose | Why Recommended |
+|---------|---------|---------|-----------------|
+| @fontsource-variable/bricolage-grotesque | ^5.2.10 | Display headings | Perfect for neobrutalism: quirky, expressive grotesque with chunky contrast. Variable font with weight/width/optical size axes. Industry-standard for Gen Z brands and bold layouts. |
+| @fontsource-variable/fraunces | ^5.2.10 | Alternative display/accent | Optical-size axis swings from refined text to lush display. Geometric with subtle retro vibes, excellent for editorial design elements. |
+| @fontsource-variable/anybody | ^5.2.10 | Optional tertiary | Additional quirky sans-serif option if more variety needed for UI elements. |
 
-### Development Tools
+**Why Fontsource over alternatives:**
+- Zero-config self-hosting (no Google Fonts privacy concerns)
+- npm-based workflow integrates with Astro/Vite build
+- Tree-shakeable - only bundle weights/axes you use
+- Variable fonts = single file, maximum flexibility
+- Official packages maintained by Fontsource project (5M+ weekly downloads)
 
-| Tool | Purpose | Notes |
-|------|---------|-------|
-| ESLint | TypeScript linting | Use @typescript-eslint/parser and @typescript-eslint/eslint-plugin. Enforce code quality standards. |
-| Prettier | Code formatting | Use eslint-config-prettier to avoid conflicts. Enforces consistent formatting across project. |
-| GitHub Actions | CI/CD for GitHub Pages | Astro provides official GitHub Action. Commit lockfile so action detects package manager automatically. |
+### CSS Patterns - Pure Tailwind Utilities
 
-### Form Handling (Contact Form)
+| Component | Approach | Why NOT a Library |
+|-----------|----------|-------------------|
+| Neobrutalism borders | Tailwind utilities: `border-2`, `border-4`, `border-black` | Already in Tailwind 4. No library needed. |
+| Bold shadows | Custom `@theme` variables + utilities | Tailwind 4.1 includes text shadows. Box shadows via `--shadow-*` theme variables. |
+| Color system | `@theme` with `--color-*` variables | Tailwind 4 CSS-first theming. No library needed. |
 
-| Service | Pricing | Purpose | Why |
-|---------|---------|---------|-----|
-| Formspree | Free tier (50/mo) | Contact form backend | Simple integration, no backend code required. Most popular for static sites. Free tier sufficient for portfolio contact forms. |
-| Un-static Forms | Varies | Alternative form handler | Second choice if Formspree doesn't meet needs. Popular with GitHub Pages users. |
+**Custom Shadow Pattern (add to global.css):**
+```css
+@theme {
+  --shadow-brutal-sm: 2px 2px 0 0 currentColor;
+  --shadow-brutal-md: 4px 4px 0 0 currentColor;
+  --shadow-brutal-lg: 6px 6px 0 0 currentColor;
+  --shadow-brutal-xl: 8px 8px 0 0 currentColor;
+}
+```
 
-### Analytics (Optional)
+Generates: `shadow-brutal-sm`, `shadow-brutal-md`, `shadow-brutal-lg`, `shadow-brutal-xl` utilities.
 
-| Service | Pricing | Purpose | Why |
-|---------|---------|---------|-----|
-| Plausible | $9/month or self-host | Privacy-friendly analytics | GDPR-compliant, cookie-free, <1KB script. Better privacy story to show clients. |
-| Umami | Free (self-host) or $9/mo | Alternative analytics | Same benefits as Plausible, free if you self-host. Uses PostgreSQL, lighter than Plausible's ClickHouse. |
+### Animation - Pure CSS (No Library Needed)
+
+| Need | Solution | Why |
+|------|----------|-----|
+| Hover effects | Tailwind 4 `hover:translate-*` + `transition-transform` | Built-in. Static sites don't need JS animation libraries. |
+| Custom animations | `@theme { @keyframes }` + `--animate-*` variables | Tailwind 4 CSS-first animation system. |
+| Entrance animations | Optional: Copy specific animations from Animate.css | Only if needed. Don't install whole library. |
+
+**Pattern for neobrutalist "press" effect:**
+```css
+/* Add to component classes */
+.brutal-button {
+  @apply border-2 border-black shadow-brutal-md;
+  @apply hover:translate-x-1 hover:translate-y-1 hover:shadow-none;
+  @apply transition-all duration-150;
+}
+```
+
+### Color Management - Tailwind 4 Theme Variables
+
+**Recommended approach:** Define colors in `@theme` block, not separate library.
+
+```css
+@theme {
+  /* Neobrutalist palette */
+  --color-brutal-yellow: #ffef6a;
+  --color-brutal-turquoise: oklch(0.75 0.15 200);
+  --color-brutal-magenta: oklch(0.65 0.25 350);
+  --color-brutal-black: #1a1a1a;
+  --color-brutal-white: #fefefe;
+
+  /* Override default grays with higher contrast */
+  --color-gray-50: oklch(0.98 0 0);
+  --color-gray-950: oklch(0.15 0 0);
+}
+```
+
+Generates utilities: `bg-brutal-yellow`, `text-brutal-turquoise`, `border-brutal-magenta`, etc.
 
 ## Installation
 
 ```bash
-# Initialize new Astro project
-npm create astro@latest
+# Typography (choose one or both display fonts)
+npm install @fontsource-variable/bricolage-grotesque
 
-# Core dependencies (installed automatically)
-# astro@5.16.15
-# typescript@5.9.3
+# Optional: Additional display fonts
+npm install @fontsource-variable/fraunces
+npm install @fontsource-variable/anybody
+```
 
-# Add Tailwind CSS integration
-npx astro add tailwind
+**No other packages needed.** All CSS patterns use Tailwind 4's built-in capabilities.
 
-# Add MDX for rich content
-npx astro add mdx
+## Integration Points
 
-# Dev dependencies for code quality
-npm install -D eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin prettier eslint-config-prettier eslint-plugin-prettier
+### 1. Font Loading (BaseLayout.astro)
+
+```typescript
+---
+import '@fontsource-variable/bricolage-grotesque';
+import '@fontsource-variable/fraunces'; // if using
+---
+```
+
+### 2. Theme Configuration (src/styles/global.css)
+
+```css
+@import "tailwindcss";
+
+@theme {
+  /* Fonts */
+  --font-display: "Bricolage Grotesque Variable", system-ui, sans-serif;
+  --font-accent: "Fraunces Variable", serif;
+  --font-body: "Inter", system-ui, sans-serif; /* Keep existing */
+
+  /* Colors - neobrutalist palette */
+  --color-brutal-yellow: #ffef6a;
+  --color-brutal-turquoise: oklch(0.75 0.15 200);
+  --color-brutal-magenta: oklch(0.65 0.25 350);
+  --color-brutal-black: #1a1a1a;
+  --color-brutal-white: #fefefe;
+
+  /* Shadows - hard offset style */
+  --shadow-brutal-sm: 2px 2px 0 0 currentColor;
+  --shadow-brutal-md: 4px 4px 0 0 currentColor;
+  --shadow-brutal-lg: 6px 6px 0 0 currentColor;
+  --shadow-brutal-xl: 8px 8px 0 0 currentColor;
+
+  /* Text shadows (Tailwind 4.1) */
+  --text-shadow-brutal: 2px 2px 0 currentColor;
+}
+
+/* Global styles */
+body {
+  @apply font-body;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-display;
+}
+```
+
+### 3. Utility Usage (Components)
+
+```html
+<!-- Neobrutalist button -->
+<button class="
+  bg-brutal-yellow
+  text-brutal-black
+  border-2 border-brutal-black
+  shadow-brutal-md
+  px-6 py-3
+  rounded-none
+  hover:translate-x-1 hover:translate-y-1
+  hover:shadow-none
+  transition-all duration-150
+  font-display font-bold
+">
+  Click Me
+</button>
+
+<!-- Neobrutalist card -->
+<div class="
+  bg-brutal-turquoise
+  border-4 border-brutal-black
+  shadow-brutal-lg
+  p-8
+  rounded-lg
+">
+  <h2 class="text-shadow-brutal">Title</h2>
+</div>
 ```
 
 ## Alternatives Considered
 
 | Recommended | Alternative | When to Use Alternative |
 |-------------|-------------|-------------------------|
-| Astro | Next.js (static export) | If you need dynamic data, server-side rendering, or plan to add authentication later. Next.js is overkill for pure static portfolios. |
-| Astro | Jekyll | Never. Jekyll is the GitHub Pages default but uses Ruby, has slower builds, and less modern DX than Astro. Only use if you must avoid Node.js. |
-| Astro | Hugo | If you have thousands of pages and need sub-second builds. Hugo is faster but harder to customize, poor DX for interactive components. |
-| Tailwind CSS | Custom CSS | If you have strong design opinions and CSS architecture experience. For rapid development, Tailwind is superior. |
-| Formspree | Google Forms | Never for a professional portfolio. Google Forms looks unprofessional and doesn't match site design. |
-| Formspree | Self-hosted backend | Only if you want to demonstrate full-stack skills. Adds complexity and hosting costs for minimal benefit on a portfolio site. |
+| Fontsource variable fonts | Google Fonts CDN | Never - Fontsource provides same fonts with better privacy, performance, and DX |
+| Fontsource | astro-font package | Only if you MUST use Google Fonts CDN (compliance reasons). Adds build complexity. |
+| Custom `@theme` shadows | NeoBrutalism.css library | Never - The library just wraps what Tailwind 4 already does. Adds dependency for no benefit. |
+| Tailwind animations | Animate.css | Only if you need 50+ different entrance animations. For neobrutalism, you need 2-3 hover effects max. |
+| `@theme` colors | Separate CSS variables | Never for Tailwind projects - `@theme` generates utilities automatically |
 
 ## What NOT to Use
 
 | Avoid | Why | Use Instead |
 |-------|-----|-------------|
-| Create React App | Deprecated in 2023, no longer maintained | Astro for static sites, Next.js if you need React with SSR |
-| Gatsby | Heavy runtime, complex setup, losing popularity | Astro (similar DX, better performance, simpler) |
-| Vue-based SSG (VitePress, Nuxt static) | Astro supports Vue components if needed, no need for Vue-specific SSG | Astro with Vue integration if you prefer Vue |
-| Webpack (standalone) | Replaced by Vite in modern tooling | Vite (bundled with Astro, 100x faster HMR) |
-| Google Analytics | Privacy concerns, bloated script, GDPR complexity | Plausible or Umami (privacy-friendly, lightweight) |
-| jQuery | Outdated, unnecessary with modern frameworks | Vanilla JS or Astro components for interactivity |
+| NeoBrutalism.css library | Wraps Tailwind utilities with no added value. 6KB for features already in Tailwind 4. | Custom `@theme` config |
+| tailwindcss-animate plugin | Incompatible with Tailwind 4's CSS-first approach. Requires v3 config. | `@theme { @keyframes }` |
+| @fontsource static packages | 2x-5x larger bundle size vs variable fonts. Less flexibility. | @fontsource-variable packages |
+| Google Fonts CDN | Privacy concerns, external dependency, potential GDPR issues. | Fontsource self-hosted |
+| Motion libraries (Framer Motion, GSAP) | Overkill for static site. Adds 20-100KB+ JS. Neobrutalism uses CSS transforms only. | Tailwind transitions |
 
-## Stack Patterns by Use Case
+## Stack Patterns by Scenario
 
-**If showcasing React expertise to potential clients:**
-- Add `@astrojs/react` integration
-- Use React for interactive portfolio components (project filters, animations)
-- Keep most pages pure Astro (static) for performance
-- Demonstrates modern React skills while maintaining static site benefits
+**If using multiple display fonts:**
+- Install both Bricolage Grotesque and Fraunces
+- Define `--font-display` and `--font-accent` in `@theme`
+- Use `font-display` for headings, `font-accent` for pull quotes / hero text
+- Keep body text separate (Inter or similar neutral sans)
 
-**If targeting enterprise clients:**
-- Add TypeScript strict mode (`"strict": true` in tsconfig.json)
-- Include ESLint + Prettier configuration in repo
-- Add GitHub Actions for automated testing/deployment
-- Shows commitment to code quality and professional practices
+**If minimizing bundle size:**
+- Use only Bricolage Grotesque (single variable font = ~50KB)
+- Skip Fraunces unless serif accent is critical
+- Define only the shadow sizes you actually use
+- Don't import fonts globally - import in layouts that need them
 
-**If emphasizing performance expertise:**
-- Add Lighthouse CI to GitHub Actions
-- Implement WebP/AVIF images with fallbacks
-- Use Astro's View Transitions API for SPA-like navigation
-- Display performance scores on site as credibility signal
-
-**If building blog/thought leadership:**
-- Use Astro Content Collections for type-safe blog posts
-- Add RSS feed generation (`@astrojs/rss`)
-- Implement reading time estimates and SEO meta tags
-- Add MDX for rich, interactive blog content
+**If supporting older browsers:**
+- Tailwind 4.1 includes automatic fallbacks for OKLCH colors (Safari 15+)
+- Variable fonts supported in all browsers since 2018
+- CSS custom properties supported everywhere (IE is dead)
+- No additional polyfills needed
 
 ## Version Compatibility
 
 | Package | Compatible With | Notes |
 |---------|-----------------|-------|
-| Astro 5.x | Vite 6.x | Astro 5.0+ ships with Vite 6. No manual configuration needed. |
-| Tailwind CSS 4.x | Astro 5.x | Full compatibility. Use @astrojs/tailwind integration. |
-| TypeScript 5.9.3 | Astro 5.x | Recommended version. Astro supports TS 5.x natively. |
-| Node.js 20 LTS | All above | Minimum Node.js 18, but 20 LTS recommended for stability. |
-| Sharp (latest) | Astro 5.x | Auto-installed with Astro. Handles image optimization out of box. |
+| @fontsource-variable/bricolage-grotesque@^5.2.10 | Astro 5.x, Vite 5+, any bundler | Zero config. Just import and use. |
+| Tailwind CSS 4.1+ | @tailwindcss/vite@^4.1.18 | Required for text-shadow utilities. You have 4.1.18 (good). |
+| OKLCH color functions | Modern browsers (2024+) | Tailwind 4.1 auto-generates fallbacks. No action needed. |
 
-## GitHub Pages Configuration
+## Performance Impact
 
-### Required Setup
+| Addition | Bundle Size | Runtime Impact |
+|----------|-------------|----------------|
+| Bricolage Grotesque variable | ~50KB compressed | Negligible (single font file) |
+| Fraunces variable | ~60KB compressed | Negligible |
+| Custom @theme config | 0KB (generates utilities) | None - compile-time only |
+| Tailwind transitions | 0KB (already in build) | Sub-millisecond CSS animations |
 
-```javascript
-// astro.config.mjs
-export default defineConfig({
-  site: 'https://joel-shinness.github.io', // Your GitHub Pages URL
-  base: '/repo-name', // Only if NOT using username.github.io repo
-  // If using username.github.io repo, omit 'base' entirely
-  integrations: [tailwind(), mdx()],
-})
-```
-
-### GitHub Actions Workflow
-
-Create `.github/workflows/deploy.yml`:
-
-```yaml
-name: Deploy to GitHub Pages
-
-on:
-  push:
-    branches: [ main ]
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - name: Install dependencies
-        run: npm ci
-      - name: Build
-        run: npm run build
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./dist
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-```
-
-**Critical:** Commit your `package-lock.json` so GitHub Actions detects npm as your package manager.
-
-### Repository Settings
-
-1. Go to Settings → Pages
-2. Source: **GitHub Actions** (not "Deploy from branch")
-3. Enforce HTTPS (enabled by default)
-
-## Image Optimization Strategy
-
-For a portfolio with case study images, proper image optimization is critical:
-
-### Format Priority (2025)
-1. **AVIF** - Best compression (50% smaller than JPEG, 20% smaller than WebP)
-2. **WebP** - Excellent compression, universal browser support
-3. **JPEG/PNG** - Fallback for ancient browsers
-
-### Astro's Built-in Solution
-
-```astro
----
-import { Image } from 'astro:assets';
-import heroImage from '../assets/project-hero.jpg';
----
-
-<Image
-  src={heroImage}
-  alt="Project screenshot"
-  widths={[400, 800, 1200]}
-  formats={['avif', 'webp', 'jpg']}
-  loading="lazy"
-/>
-```
-
-Astro automatically:
-- Converts to WebP/AVIF
-- Generates responsive srcset
-- Optimizes file sizes
-- Handles lazy loading
-- Serves appropriate format based on browser support
-
-### Performance Impact
-- 50-80% reduction in image payload
-- Critical for Core Web Vitals (SEO ranking factor in 2025)
-- Faster page loads = better first impression for potential clients
-
-## Development Workflow
-
-```bash
-# Local development
-npm run dev
-
-# Build for production (GitHub Actions does this automatically)
-npm run build
-
-# Preview production build locally
-npm run preview
-
-# Lint and format
-npm run lint
-npm run format
-```
+**Total addition:** ~50-110KB fonts only. No JS. No external requests.
 
 ## Sources
 
-**HIGH Confidence (Official Documentation):**
-- [Astro 5.16.15 Release](https://github.com/withastro/astro/releases) - Official GitHub releases page
-- [Astro GitHub Pages Deployment](https://docs.astro.build/en/guides/deploy/github/) - Official Astro documentation
-- [Tailwind CSS v4.1.18](https://github.com/tailwindlabs/tailwindcss/releases) - Official Tailwind releases
-- [TypeScript 5.9.3 Release](https://devblogs.microsoft.com/typescript/announcing-typescript-5-9/) - Official Microsoft blog
+### HIGH Confidence Sources
 
-**MEDIUM Confidence (Multiple Credible Sources):**
-- [Astro vs Next.js Comparison 2025](https://pagepro.co/blog/astro-nextjs/) - Detailed technical comparison
-- [Static Site Generators Best Practices 2025](https://cloudcannon.com/blog/the-top-five-static-site-generators-for-2025-and-when-to-use-them/) - Industry analysis
-- [Image Optimization Techniques 2025](https://www.frontendtools.tech/blog/modern-image-optimization-techniques-2025) - WebP/AVIF implementation guide
-- [Privacy-Friendly Analytics Comparison](https://vemetric.com/blog/plausible-vs-umami) - Plausible vs Umami analysis
-- [Contact Form Solutions for Static Sites](https://un-static.com/how-to/add-github-pages-contact-form) - Formspree integration guide
+- [Fontsource Bricolage Grotesque](https://www.npmjs.com/package/@fontsource-variable/bricolage-grotesque) - Official npm package, version verified
+- [Fontsource Fraunces](https://www.npmjs.com/package/@fontsource-variable/fraunces) - Official npm package
+- [Tailwind CSS v4.1 Announcement](https://tailwindcss.com/blog/tailwindcss-v4-1) - Official release notes (text shadows, CSS-first theming)
+- [Tailwind CSS Theme Variables](https://tailwindcss.com/docs/theme) - Official documentation for @theme directive
+- [Astro Fonts Guide](https://docs.astro.build/en/guides/fonts/) - Official Astro documentation recommending Fontsource
 
-**LOW Confidence (WebSearch Only - Verify During Implementation):**
-- ESLint + Prettier configuration patterns - Multiple 2025 sources agree on approach but verify with official docs during setup
+### MEDIUM Confidence Sources
+
+- [My Favourite Fonts for Neobrutalist Web Design](https://blog.kristi.digital/p/my-favourite-fonts-for-neobrutalist-web-design) - Community recommendations (Bricolage Grotesque featured)
+- [Bricolage Grotesque Font Pairing](https://pimpmytype.com/bricolage-grotesque-font-pairing/) - Typography resource
+- [Tailwind CSS 4 Custom Colors](https://tailkits.com/blog/tailwind-v4-custom-colors/) - Tutorial on @theme colors
+- [Neobrutalism Components](https://www.neobrutalism.dev/) - Reference implementation showing patterns
+
+### LOW Confidence Sources (Context Only)
+
+- Various WebSearch results about neobrutalism design trends - Used for understanding aesthetic, not technical decisions
+- CSS animation libraries search results - Confirmed no library needed for neobrutalist hover effects
 
 ---
-*Stack research for: Joel Shinness Developer Portfolio*
-*Researched: 2025-01-26*
-*Target: GitHub Pages static hosting, small business clients*
+*Stack research for: Neobrutalist design system additions*
+*Researched: 2026-02-09*
+*Confidence: HIGH - All core technologies verified with official sources*
