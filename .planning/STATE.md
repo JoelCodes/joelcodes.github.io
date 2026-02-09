@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-02-09)
 ## Current Position
 
 Phase: 8 of 11 (Primitive Components)
-Plan: 1 of 3 complete
+Plan: 2 of 3 complete
 Status: In progress
-Last activity: 2026-02-09 — Completed 08-01-PLAN.md (Button & Card Primitives)
+Last activity: 2026-02-09 — Completed 08-02-PLAN.md (Input Component & Demo Page)
 
-Progress: [████████████░░░░░░░░] 68% (26 of ~38 total plans complete across v1.0 + v1.1)
+Progress: [█████████████░░░░░░░] 71% (27 of ~38 total plans complete across v1.0 + v1.1)
 
 ## Milestone History
 
@@ -48,6 +48,10 @@ Recent decisions affecting v1.1:
 - **Transform-only animation** (08-01): Avoid box-shadow animation (causes 200ms repaints); use hardware-accelerated transforms instead
 - **WCAG 2.4.13 focus states** (08-01): 2px outline with 4px offset meets AAA requirements for keyboard navigation
 - **Card stacking isolation** (08-01): Use isolation: isolate to prevent z-index conflicts with pseudo-element layers
+- **Double ring focus technique** (08-02): 2px inner gap + 4px outer ring achieves 21:1 contrast for WCAG 2.4.13 compliance
+- **HTML attribute forwarding** (08-02): Spread operator passes through required, pattern, minlength for native form validation
+- **Visual verification checkpoints** (08-02): Human review of hover/active/focus states catches visual bugs before integration
+- **2-layer button refinement** (08-02): Simplified from 3-layer to 2-layer for cleaner visual result and reduced DOM complexity
 
 ### Pending Todos
 
@@ -81,9 +85,9 @@ Recent decisions affecting v1.1:
 ## Session Continuity
 
 Last session: 2026-02-09
-Stopped at: Completed 08-01-PLAN.md execution (Button & Card Primitives)
+Stopped at: Completed 08-02-PLAN.md execution (Input Component & Demo Page)
 Resume file: None
-Next action: Execute next Phase 8 plan (08-02 or 08-03)
+Next action: Execute next Phase 8 plan (08-03 - final primitive components plan)
 
 ---
 *State initialized: 2026-01-26*
