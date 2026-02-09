@@ -65,8 +65,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 08-01-PLAN.md — Create Button and Card components with neobrutalist styling
-- [ ] 08-02-PLAN.md — Create Input component and demo page for visual verification
+- [x] 08-01-PLAN.md — Create Button and Card components with neobrutalist styling
+- [x] 08-02-PLAN.md — Create Input component and demo page for visual verification
 
 #### Phase 9: Homepage & Navigation
 **Goal**: Transform homepage into narrative journey and update header/footer with neobrutalist styling
@@ -136,7 +136,7 @@ Phases execute in numeric order: 7 -> 8 -> 9 -> 10 -> 11
 | 5. Blog Platform | v1.0 | 6/6 | Complete | 2026-01-27 |
 | 6. Performance & Deploy | v1.0 | 2/2 | Complete | 2026-01-27 |
 | 7. Design System Foundation | v1.1 | 2/2 | Complete | 2026-02-09 |
-| 8. Primitive Components | v1.1 | 0/2 | Not started | - |
+| 8. Primitive Components | v1.1 | 2/2 | Complete | 2026-02-09 |
 | 9. Homepage & Navigation | v1.1 | 0/3 | Not started | - |
 | 10. Projects & Blog | v1.1 | 0/2 | Not started | - |
 | 11. Testing & Accessibility | v1.1 | 0/1 | Not started | - |
