@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-02-09)
 ## Current Position
 
 Phase: 7 of 11 (Design System Foundation)
-Plan: 1 of 3 complete
+Plan: 2 of 3 complete
 Status: In progress
-Last activity: 2026-02-09 — Completed 07-01-PLAN.md (Design Tokens)
+Last activity: 2026-02-09 — Completed 07-02-PLAN.md (Typography & Density)
 
-Progress: [████████████░░░░░░░░] 63% (24 of ~38 total plans complete across v1.0 + v1.1)
+Progress: [████████████░░░░░░░░] 66% (25 of ~38 total plans complete across v1.0 + v1.1)
 
 ## Milestone History
 
@@ -40,6 +40,10 @@ Recent decisions affecting v1.1:
 - **OKLCH color system** (07-01): Perceptually uniform color space for consistent relationships and dark mode variants
 - **Shadow-to-glow dark mode** (07-01): Hard offset shadows become colored glows in dark mode for futuristic feel
 - **Variable fonts** (07-01): Bricolage Grotesque + DM Sans via Google Fonts with full weight axes
+- **Density scale system** (07-02): 10-point scale with per-section targets (Hero 10/10, Content 3/10, Blog 2/10)
+- **One accent per section** (07-02): Single dominant color per visual group to prevent chaos
+- **Shadows imply importance** (07-02): Reserved for interactive elements and hero sections only
+- **H1 ALL CAPS exclusivity** (07-02): Only H1 uses ALL CAPS for maximum impact and readability
 
 ### Pending Todos
 
@@ -71,9 +75,9 @@ Recent decisions affecting v1.1:
 ## Session Continuity
 
 Last session: 2026-02-09
-Stopped at: Completed 07-01-PLAN.md execution (Design Tokens)
+Stopped at: Completed 07-02-PLAN.md execution (Typography & Density)
 Resume file: None
-Next action: Execute remaining Phase 7 plans (07-02 and 07-03)
+Next action: Execute remaining Phase 7 plan (07-03)
 
 ---
 *State initialized: 2026-01-26*
