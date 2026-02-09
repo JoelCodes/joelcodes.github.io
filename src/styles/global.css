@@ -173,11 +173,26 @@
 }
 
 /* Blog post prose styling */
+.prose h1 {
+  font-family: var(--font-heading);
+  font-size: var(--text-4xl);
+  font-weight: var(--font-weight-h1);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: var(--color-text-light);
+}
+
+.dark .prose h1 {
+  color: var(--color-text-dark);
+}
+
 .prose h2 {
   font-family: var(--font-heading);
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-top: 2rem;
+  font-size: var(--text-3xl);
+  font-weight: var(--font-weight-h2);
+  margin-top: 2.5rem;
   margin-bottom: 1rem;
   color: var(--color-text-light);
 }
@@ -188,14 +203,27 @@
 
 .prose h3 {
   font-family: var(--font-heading);
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-top: 1.5rem;
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-h3);
+  margin-top: 2rem;
   margin-bottom: 0.75rem;
   color: var(--color-text-light);
 }
 
 .dark .prose h3 {
+  color: var(--color-text-dark);
+}
+
+.prose h4 {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-h4);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-text-light);
+}
+
+.dark .prose h4 {
   color: var(--color-text-dark);
 }
 
