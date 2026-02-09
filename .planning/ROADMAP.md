@@ -2,14 +2,14 @@
 
 ## Milestones
 
-- ✅ **v1.0 MVP** - Phases 1-6 (shipped 2026-01-27)
-- 🚧 **v1.1 Design Updates** - Phases 7-11 (in progress)
-- 📋 **v1.2 Enhancements** - Future phases (planned)
+- **v1.0 MVP** - Phases 1-6 (shipped 2026-01-27)
+- **v1.1 Design Updates** - Phases 7-11 (in progress)
+- **v1.2 Enhancements** - Future phases (planned)
 
 ## Phases
 
 <details>
-<summary>✅ v1.0 MVP (Phases 1-6) - SHIPPED 2026-01-27</summary>
+<summary>v1.0 MVP (Phases 1-6) - SHIPPED 2026-01-27</summary>
 
 Complete lead-generation focused portfolio website with responsive design, blog platform, portfolio showcase, contact form, and Lighthouse 90+ performance.
 
@@ -25,13 +25,13 @@ Complete lead-generation focused portfolio website with responsive design, blog 
 
 </details>
 
-### 🚧 v1.1 Design Updates (In Progress)
+### v1.1 Design Updates (In Progress)
 
 **Milestone Goal:** Transform the site from generic minimalist to distinctive neobrutalist, with a narrative homepage that tells the story of working with Joel. Target small business owners with competence, confidence, personality, and approachability while maintaining 3/10 aesthetic density.
 
 **Key features:**
 - Neobrutalist design system (yellow/turquoise/magenta, quirky typography, bold borders)
-- Narrative homepage structure (Solutions → Process → Tech → About → Contact)
+- Narrative homepage structure (Solutions -> Process -> Tech -> About -> Contact)
 - Projects page with narrative format
 - Restyled blog index and tag pages
 - FAQ relocated from homepage
@@ -62,11 +62,11 @@ Plans:
   3. Input component has bold focus states that meet WCAG visibility requirements
   4. Card component supports stacked/layered effects for 3D illusion
   5. All primitives work in both light and dark modes
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 08-01: TBD
-- [ ] 08-02: TBD
+- [ ] 08-01-PLAN.md — Create Button and Card components with neobrutalist styling
+- [ ] 08-02-PLAN.md — Create Input component and demo page for visual verification
 
 #### Phase 9: Homepage & Navigation
 **Goal**: Transform homepage into narrative journey and update header/footer with neobrutalist styling
@@ -92,7 +92,7 @@ Plans:
 **Success Criteria** (what must be TRUE):
   1. Portfolio renamed to Projects in URL and navigation
   2. Projects page uses neobrutalist card grid with thick borders and shadows
-  3. Individual project pages use narrative case study format (Problem → Solution → Results)
+  3. Individual project pages use narrative case study format (Problem -> Solution -> Results)
   4. Blog index and tag pages use neobrutalist card grid
   5. Blog post headings have subtle neobrutalist accents while body text remains readable
 **Plans**: TBD
@@ -110,13 +110,13 @@ Plans:
   2. Performance testing on target devices (iPhone SE, mid-range Android) shows no jank
   3. Dark mode works correctly across all pages and components
   4. Density audit confirms 3/10 constraint enforced per section
-  5. Lighthouse CI validation achieves ≥90% across all metrics
+  5. Lighthouse CI validation achieves >=90% across all metrics
 **Plans**: TBD
 
 Plans:
 - [ ] 11-01: TBD
 
-### 📋 v1.2 Enhancements (Planned)
+### v1.2 Enhancements (Planned)
 
 **Milestone Goal:** Add advanced differentiators and engagement features (isometric shadows, cyclical process diagram, testimonials section, newsletter signup).
 
@@ -125,7 +125,7 @@ Details TBD after v1.1 ships.
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 7 → 8 → 9 → 10 → 11
+Phases execute in numeric order: 7 -> 8 -> 9 -> 10 -> 11
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
