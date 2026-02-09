@@ -20,68 +20,64 @@ const {
 
 <style>
   .card {
+    --card-shadow: var(--color-yellow);
+
     position: relative;
     padding: var(--spacing-neo-lg);
     border: var(--border-neo-thick) solid var(--color-text-light);
     border-radius: 0.5rem;
     background: var(--color-bg-light);
     isolation: isolate; /* Create stacking context for pseudo-elements */
+    box-shadow: 6px 6px 0 var(--card-shadow);
   }
 
-  .dark .card {
+  :global(.dark) .card {
     background: var(--color-bg-dark);
     border-color: var(--color-text-dark);
   }
 
-  /* Hard offset shadows for light mode */
-  .card-yellow {
-    box-shadow: 6px 6px 0 var(--color-yellow);
-  }
+  /* Variant colors - light mode */
+  .card-yellow { --card-shadow: var(--color-yellow); }
+  .card-turquoise { --card-shadow: var(--color-turquoise); }
+  .card-magenta { --card-shadow: var(--color-magenta); }
 
-  .card-turquoise {
-    box-shadow: 6px 6px 0 var(--color-turquoise);
-  }
-
-  .card-magenta {
-    box-shadow: 6px 6px 0 var(--color-magenta);
-  }
-
-  /* Dark mode: shadows become glows */
-  .dark .card-yellow {
-    box-shadow: 0 0 24px oklch(0.80 0.16 95 / 0.5);
-  }
-
-  .dark .card-turquoise {
-    box-shadow: 0 0 24px oklch(0.65 0.13 195 / 0.5);
-  }
-
-  .dark .card-magenta {
-    box-shadow: 0 0 24px oklch(0.60 0.18 350 / 0.5);
-  }
+  /* Variant colors - dark mode (use dark variants) */
+  :global(.dark) .card-yellow { --card-shadow: var(--color-yellow-dark); }
+  :global(.dark) .card-turquoise { --card-shadow: var(--color-turquoise-dark); }
+  :global(.dark) .card-magenta { --card-shadow: var(--color-magenta-dark); }
 
   /* Stacked effect: background layers via pseudo-elements */
+  .card-stacked {
+    box-shadow: none;
+    isolation: auto;
+  }
+
   .card-stacked::before,
   .card-stacked::after {
     content: '';
     position: absolute;
     inset: -4px;
-    border: var(--border-neo) solid var(--color-text-light);
+    border: 2px solid;
     border-radius: 0.5rem;
     z-index: -1;
   }
 
   .card-stacked::before {
-    transform: translate(-8px, -8px);
-    opacity: 0.3;
+    transform: translate(4px, 4px);
+    border-color: oklch(0.25 0 0 / 0.6); /* 60% opacity black - closer */
   }
 
   .card-stacked::after {
-    transform: translate(-4px, -4px);
-    opacity: 0.6;
+    transform: translate(8px, 8px);
+    border-color: oklch(0.25 0 0 / 0.3); /* 30% opacity black - further */
+    box-shadow: 4px 4px 0 var(--card-shadow);
   }
 
-  .dark .card-stacked::before,
-  .dark .card-stacked::after {
-    border-color: var(--color-text-dark);
+  :global(.dark) .card-stacked::before {
+    border-color: oklch(0.95 0 0 / 0.6); /* 60% opacity white - closer */
+  }
+
+  :global(.dark) .card-stacked::after {
+    border-color: oklch(0.95 0 0 / 0.3); /* 30% opacity white - further */
   }
 </style>

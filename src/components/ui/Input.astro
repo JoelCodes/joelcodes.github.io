@@ -56,7 +56,7 @@ const errorId = error ? `${id}-error` : undefined;
     margin-bottom: 0.5rem;
   }
 
-  .dark .input-label {
+  :global(.dark) .input-label {
     color: var(--color-text-dark);
   }
 
@@ -71,7 +71,7 @@ const errorId = error ? `${id}-error` : undefined;
     transition: border-color 200ms;
   }
 
-  .dark .input {
+  :global(.dark) .input {
     color: var(--color-text-dark);
     background: var(--color-bg-dark);
     border-color: var(--color-text-dark);
@@ -83,7 +83,7 @@ const errorId = error ? `${id}-error` : undefined;
     box-shadow: 0 0 0 2px var(--color-bg-light), 0 0 0 4px var(--color-text-light);
   }
 
-  .dark .input:focus-visible {
+  :global(.dark) .input:focus-visible {
     box-shadow: 0 0 0 2px var(--color-bg-dark), 0 0 0 4px var(--color-text-dark);
   }
 
@@ -100,15 +100,15 @@ const errorId = error ? `${id}-error` : undefined;
     border-color: var(--color-magenta);
   }
 
-  .dark .input-yellow:focus-visible {
+  :global(.dark) .input-yellow:focus-visible {
     border-color: var(--color-yellow-dark);
   }
 
-  .dark .input-turquoise:focus-visible {
+  :global(.dark) .input-turquoise:focus-visible {
     border-color: var(--color-turquoise-dark);
   }
 
-  .dark .input-magenta:focus-visible {
+  :global(.dark) .input-magenta:focus-visible {
     border-color: var(--color-magenta-dark);
   }
 
@@ -123,11 +123,11 @@ const errorId = error ? `${id}-error` : undefined;
     margin: 0;
   }
 
-  .dark .input-error {
+  :global(.dark) .input-error {
     border-color: oklch(0.65 0.20 25) !important;
   }
 
-  .dark .input-error-message {
+  :global(.dark) .input-error-message {
     color: oklch(0.65 0.20 25);
   }
 </style>

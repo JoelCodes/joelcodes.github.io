@@ -27,20 +27,28 @@ const sizeClasses = {
 ---
 
 <Tag
-  class={`btn-wrapper ${className}`}
+  class:list={[`btn btn-${variant}`, className]}
   href={href}
   type={!href ? type : undefined}
   {...rest}
 >
-  <span class={`btn-shadow btn-shadow-${variant}`}></span>
-  <span class="btn-edge"></span>
-  <span class={`btn-front btn-front-${variant} ${sizeClasses[size]}`}>
+  <span class={`btn-front ${sizeClasses[size]}`}>
     <slot />
   </span>
 </Tag>
 
 <style>
-  .btn-wrapper {
+  /*
+   * Neobrutalist Button - 2-layer approach
+   * Wrapper = shadow/edge layer (shows border, colored shadow offset)
+   * Front = button face that translates on hover/active
+   */
+  .btn {
+    --btn-bg: var(--color-yellow);
+    --btn-accent: var(--color-text-light);
+    --btn-shadow: oklch(0.65 0.10 95);
+    --btn-offset: 4px;
+
     position: relative;
     display: inline-block;
     border: none;
@@ -48,49 +56,52 @@ const sizeClasses = {
     padding: 0;
     cursor: pointer;
     text-decoration: none;
-    transition: filter 250ms;
+    /* Reserve space for shadow offset */
+    padding-bottom: var(--btn-offset);
   }
 
-  .btn-wrapper:focus-visible {
+  /* Light mode: colored background, dark text/border */
+  .btn-yellow {
+    --btn-bg: var(--color-yellow);
+    --btn-accent: var(--color-text-light);
+    --btn-shadow: oklch(0.65 0.10 95);
+  }
+  .btn-turquoise {
+    --btn-bg: var(--color-turquoise);
+    --btn-accent: var(--color-text-light);
+    --btn-shadow: oklch(0.55 0.07 195);
+  }
+  .btn-magenta {
+    --btn-bg: var(--color-magenta);
+    --btn-accent: var(--color-text-light);
+    --btn-shadow: oklch(0.55 0.12 350);
+  }
+
+  /* Dark mode: black background, colored text/border */
+  :global(.dark) .btn-yellow {
+    --btn-bg: var(--color-bg-dark);
+    --btn-accent: var(--color-yellow-dark);
+    --btn-shadow: oklch(0.55 0.08 95);
+  }
+  :global(.dark) .btn-turquoise {
+    --btn-bg: var(--color-bg-dark);
+    --btn-accent: var(--color-turquoise-dark);
+    --btn-shadow: oklch(0.45 0.05 195);
+  }
+  :global(.dark) .btn-magenta {
+    --btn-bg: var(--color-bg-dark);
+    --btn-accent: var(--color-magenta-dark);
+    --btn-shadow: oklch(0.45 0.10 350);
+  }
+
+  .btn:focus-visible {
     outline: 2px solid var(--color-text-light);
     outline-offset: 4px;
+    border-radius: 0.25rem;
   }
 
-  .dark .btn-wrapper:focus-visible {
+  :global(.dark) .btn:focus-visible {
     outline-color: var(--color-text-dark);
-  }
-
-  .btn-shadow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 0.25rem;
-    transform: translateY(2px);
-    transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
-  }
-
-  .btn-shadow-yellow { background: var(--color-yellow); }
-  .btn-shadow-turquoise { background: var(--color-turquoise); }
-  .btn-shadow-magenta { background: var(--color-magenta); }
-
-  .dark .btn-shadow-yellow { background: var(--color-yellow-dark); }
-  .dark .btn-shadow-turquoise { background: var(--color-turquoise-dark); }
-  .dark .btn-shadow-magenta { background: var(--color-magenta-dark); }
-
-  .btn-edge {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 0.25rem;
-    border: var(--border-neo-thick) solid var(--color-text-light);
-  }
-
-  .dark .btn-edge {
-    border-color: var(--color-text-dark);
   }
 
   .btn-front {
@@ -99,42 +110,24 @@ const sizeClasses = {
     border-radius: 0.25rem;
     font-family: var(--font-heading);
     font-weight: 700;
-    color: var(--color-text-light);
-    transform: translateY(-4px);
-    transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
+    color: var(--btn-accent);
+    background: var(--btn-bg);
+    border: var(--border-neo-thick) solid var(--btn-accent);
+    transform: translateY(0);
+    transition: transform 150ms ease, box-shadow 150ms ease;
+    /* Shadow creates the offset effect - uses darker variant of button color */
+    box-shadow: var(--btn-offset) var(--btn-offset) 0 var(--btn-shadow);
   }
 
-  .btn-front-yellow { background: var(--color-yellow); }
-  .btn-front-turquoise { background: var(--color-turquoise); }
-  .btn-front-magenta { background: var(--color-magenta); }
-
-  .dark .btn-front {
-    color: var(--color-text-dark);
-  }
-
-  .dark .btn-front-yellow { background: var(--color-yellow-dark); }
-  .dark .btn-front-turquoise { background: var(--color-turquoise-dark); }
-  .dark .btn-front-magenta { background: var(--color-magenta-dark); }
-
-  /* Hover: lift up */
-  .btn-wrapper:hover .btn-front {
-    transform: translateY(-6px);
-    transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
-  }
-
-  .btn-wrapper:hover .btn-shadow {
-    transform: translateY(4px);
-    transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
-  }
-
-  /* Active: press down */
-  .btn-wrapper:active .btn-front {
+  /* Hover: lift up (shadow grows) */
+  .btn:hover .btn-front {
     transform: translateY(-2px);
-    transition: transform 34ms;
+    box-shadow: calc(var(--btn-offset) + 2px) calc(var(--btn-offset) + 2px) 0 var(--btn-shadow);
   }
 
-  .btn-wrapper:active .btn-shadow {
-    transform: translateY(1px);
-    transition: transform 34ms;
+  /* Active: press down (shadow shrinks) */
+  .btn:active .btn-front {
+    transform: translateY(2px);
+    box-shadow: 2px 2px 0 var(--btn-shadow);
   }
 </style>
