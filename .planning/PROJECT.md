@@ -10,6 +10,19 @@ A lead-generation focused portfolio website for Joel Shinness targeting small bu
 
 Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
 
+## Current Milestone: v1.1 Design Updates
+
+**Goal:** Transform the site from generic minimalist to distinctive neobrutalist, with a narrative homepage that tells the story of working with Joel.
+
+**Target features:**
+- Neobrutalist design system (yellow/turquoise/magenta, quirky typography, bold borders)
+- Narrative homepage structure (Solutions → Process → Tech → About → Contact)
+- Projects page with narrative format
+- Restyled blog index and tag pages
+- FAQ relocated from homepage
+
+**Vibe:** Competence, confidence, personality, approachability. Density 3/10.
+
 ## Requirements
 
 ### Validated
@@ -32,15 +45,22 @@ Small business owners can understand what Joel does, trust his process, and easi
 
 ### Active
 
-(None — define in next milestone)
+*v1.1 Design Updates:*
+
+- [ ] Neobrutalist design system (colors, typography, visual elements)
+- [ ] Homepage narrative redesign (Solutions → Process → Tech → About → Contact)
+- [ ] Projects page with narrative structure (renamed from portfolio)
+- [ ] Blog index and tag pages restyled
+- [ ] FAQ relocated to footer or separate page
 
 ### Out of Scope
 
 - Booking/calendar integration — contact form sufficient
 - Pricing information — custom work requires conversation
 - CMS backend — Joel can edit code directly
-- Testimonials section — deferred to v1.1 (need real client quotes)
-- Newsletter signup — deferred to v1.1
+- Testimonials section — deferred to v1.2 (need real client quotes)
+- Newsletter signup — deferred to v1.2
+- Individual blog post redesign — current design works well
 
 ## Context
 
@@ -55,7 +75,7 @@ Small business owners can understand what Joel does, trust his process, and easi
 
 - **Hosting:** GitHub Pages — static-only, no server-side processing
 - **Stack:** Astro/JAMstack — all pages pre-rendered at build time
-- **Design:** B&W photography + yellow/teal accents + Poppins/Inter typography
+- **Design:** Neobrutalism — yellow/turquoise/magenta palette, quirky headings, bold borders
 - **Forms:** Formspree (50 submissions/month free tier)
 
 ## Key Decisions
@@ -71,4 +91,4 @@ Small business owners can understand what Joel does, trust his process, and easi
 | Formspree for forms | No backend needed, free tier sufficient | — Pending config |
 
 ---
-*Last updated: 2026-01-27 after v1.0 milestone*
+*Last updated: 2026-02-09 after v1.1 milestone start*
