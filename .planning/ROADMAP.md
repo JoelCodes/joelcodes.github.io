@@ -46,11 +46,11 @@ Complete lead-generation focused portfolio website with responsive design, blog 
   3. Dark mode adapts colors and inverts shadows without breaking visual hierarchy
   4. Typography uses quirky display font for headings and readable font for body text
   5. Density guidelines documented with per-section targets (3/10 overall constraint)
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 07-01: TBD
-- [ ] 07-02: TBD
+- [ ] 07-01-PLAN.md — Define OKLCH color tokens, shadow utilities, and load new fonts
+- [ ] 07-02-PLAN.md — Document density guidelines and finalize prose typography
 
 #### Phase 8: Primitive Components
 **Goal**: Build reusable neobrutalist UI components that compose into larger features
