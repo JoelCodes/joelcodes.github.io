@@ -1,286 +1,365 @@
 # Project Research Summary
 
-**Project:** Homepage Refinement (v1.2)
-**Domain:** Professional portfolio website with neobrutalist design
-**Researched:** 2026-02-09
+**Project:** Design System & Navigation Cleanup (v1.3)
+**Domain:** Design System Documentation for Astro Static Portfolio
+**Researched:** 2026-02-10
 **Confidence:** HIGH
 
 ## Executive Summary
 
-This is an incremental enhancement to an existing neobrutalist portfolio site built with Astro 5 and Tailwind CSS 4. The site already has established design system foundations (OKLCH colors, shadow-to-glow dark mode, WCAG 2.2 AA compliance, 3/10 neobrutalist density). This milestone adds outcome-focused messaging, isometric illustrations, and improved FAQ discoverability to the homepage without architectural changes.
+This is an incremental milestone building on an existing Astro 5 portfolio with neobrutalist design components (Button, Card, Input, Badge), OKLCH color tokens, and shadow-to-glow dark mode animations. The goal is to consolidate these existing components into an internal design system reference page and streamline navigation by removing homepage section links from the header while enhancing the footer with social icons and secondary navigation.
 
-The recommended approach is conservative: leverage existing components (Card, Button, FAQ), maintain strict design system constraints, and avoid introducing new dependencies. All enhancements are static content/markup changes. The critical technical decision is migrating from lucide-static to @lucide/astro for tree-shaking benefits (200KB+ savings), and establishing an isometric illustration style guide before implementation to prevent inconsistency. Performance must be protected through SVG optimization (20KB file size limit per illustration).
+**The recommended approach is pure implementation using existing stack capabilities.** No new dependencies are required. Astro 5.16.15 already provides file-based routing for the design system page, MDX for documentation, astro-expressive-code for syntax highlighting, and redirect configuration for navigation cleanup. The design system should be a single scrollable page at `/design-system` (noindexed) that imports and displays actual production components, not duplicates or mockups. Documentation must be treated as a living artifact with maintenance workflows, not a one-time snapshot.
 
-Key risks center on design system compliance rather than technical complexity. Over-stylization (exceeding 3/10 density), WCAG contrast failures from bold color combinations, and dark mode shadow transformation breakage are the primary pitfalls. The existing site has strong foundations—this milestone succeeds by adhering to them rather than introducing new patterns.
+**Key risks center on maintenance and migration.** The primary pitfall is stale documentation that drifts from component reality within weeks. The secondary risk is "fix everything" paralysis during component audits, where teams attempt massive standardization PRs that break production. Mitigation strategies include severity-tiered audit findings (CRITICAL/HIGH/MEDIUM/LOW), one component type per PR, 80% consistency as shipping threshold, and explicit documentation maintenance workflows in CLAUDE.md. Navigation cleanup must audit all internal link references (grep for hardcoded URLs) before removing header links to prevent orphan pages and broken funnels.
 
 ## Key Findings
 
 ### Recommended Stack
 
-No new architectural dependencies are needed. All enhancements use existing Astro 5 + Tailwind CSS 4 foundations with pure CSS techniques. The one critical stack change is migrating icon libraries for performance.
+**No new dependencies required.** The existing stack already provides all necessary capabilities for design system documentation and navigation cleanup. This is a pure implementation milestone, not a technology addition task.
 
-**Core technologies (existing, reused):**
-- **Astro 5** — Static site generation with file-based routing, already in use
-- **Tailwind CSS 4** — CSS-first theming via @theme directive, isometric utilities added to global.css
-- **@lucide/astro** — Tree-shakeable icon library (MIGRATION REQUIRED from lucide-static) — saves 200KB+ bundle size
-
-**New typography (optional):**
-- **@fontsource-variable/bricolage-grotesque** — Display font for neobrutalist headings, variable font for flexibility
+**Core technologies (already installed):**
+- **Astro 5.16.15**: File-based routing creates `/design-system` automatically, TypeScript Props interfaces serve as component documentation, redirect configuration handles URL aliases
+- **astro-expressive-code 0.41.6**: Powers syntax highlighting for code examples (same tool used in official Astro docs), supports 100+ languages including Astro/TypeScript/HTML
+- **@astrojs/mdx 4.3.13**: Component documentation in markdown, embed live examples, import components into .mdx files
+- **Tailwind CSS 4.1.18**: Design tokens already defined in global.css @theme block, no additional token extraction needed
+- **@lucide/astro 0.563.0**: Icon system for social icons (Instagram, Substack), tree-shaking prevents bundle bloat
 
 **What NOT to add:**
-- **astro-seo-schema** — Manual JSON-LD is simpler for FAQ page schema markup
-- **Pre-built isometric SVG libraries** — Won't match custom neobrutalist palette/style
-- **Animation libraries** — Pure CSS transforms sufficient for static site
+- Storybook (overkill for 4 components, requires 50+ dependencies)
+- react-live, Sandpack (client-side JavaScript bundles not needed for static examples)
+- Docusaurus (separate framework, too heavy for internal reference)
+- Component extractors (manual Props interface documentation is clearer)
+
+**Version status:** All packages current. Optional: Update Astro to 5.17.1 (minor patch release) if specific bug fixes needed.
 
 ### Expected Features
 
-**Must have (table stakes):**
-- Outcome-focused hero headline — Small business clients need "what's in it for me" within 3 seconds
-- Visual outcome badges/metrics — ROI thinking (time saved, money saved, results delivered)
-- Process section clarity — Risk-averse clients need workflow transparency before committing
-- FAQ discoverability — Dedicated /faq page instead of buried footer accordion
-- Service differentiation — Non-technical clients need to distinguish AI vs Automation vs Web Apps
+**Must have (table stakes - launch blockers for v1.3):**
+- **Design System Reference Page** — Internal-only (noindexed) single page at `/design-system` showcasing existing components
+- **Component Visual Examples** — Button, Card, Input, Badge with all variants displayed using actual production components
+- **Design Token Display** — OKLCH color palette, typography scale (Bricolage Grotesque headings, DM Sans body), spacing tokens
+- **Simplified Header Navigation** — Remove homepage section links (Solutions, Process, Tech, About), keep only Blog, Projects, FAQ, Contact
+- **Footer Social Icons** — Add Instagram + Substack (44x44px touch targets, horizontal layout, proper aria-labels)
+- **Footer Navigation Mirror** — Subtle secondary nav links to Blog, Projects, FAQ, Contact
+- **Contact Page Redirect** — `/contact` → `/#contact` using Astro redirect config (meta refresh for static site)
 
-**Should have (competitive differentiation):**
-- Isometric mini-illustrations per process step — Makes abstract workflow concrete and memorable
-- Outcome badges with visual hierarchy — Transforms generic "I build stuff" into measurable business value
-- Technology-specific illustrations — Helps clients distinguish service types visually
-- Neobrutalist FAQ page design — Transforms boring support page into on-brand experience
+**Should have (competitive advantage - add after validation in v1.4):**
+- **Interactive Component Demos** — Live examples with state changes (hover, focus, active)
+- **Component Usage Guidelines** — Brief "when to use" notes per component
+- **Shadow-to-Glow Comparison** — Side-by-side light/dark mode transformation showcase
+- **Isometric Utilities Showcase** — Interactive iso-rotate, iso-shadow, iso-glow demos
+- **Accessibility Audit Display** — Show 98.7% WCAG 2.2 AA compliance score
 
-**Defer (v2+):**
-- Pricing calculator — Custom work varies too much, creates false expectations
-- Animated isometric scenes — File size bloat, accessibility issues, static aesthetic is on-brand
-- Real-time chat widget — Overkill for freelance, contact form + FAQ covers communication
-- Auto-playing video background — Performance killer, accessibility nightmare
+**Defer (v2+ - not essential for design system launch):**
+- **Component Code Snippets** — Copy-pasteable Astro component code with syntax highlighting
+- **Animation Pattern Library** — Documented hover states, transitions, keyframes
+- **Responsive Breakpoint Visualizer** — Show mobile/tablet/desktop component behavior
+- **Design Token Versioning** — Track changes to colors/typography over time
 
-**Anti-features (avoid):**
-- Multiple CTAs in hero — Reduces conversions by 266% when competing actions present
-- Decorative display fonts in body text — Severe legibility issues, unprofessional
-- Complex interactive elements — Breaks mobile, adds JS complexity to static site
+**Anti-features (commonly requested but problematic):**
+- Storybook integration (200KB+ bundle for 4 components)
+- Real-time component editing playgrounds (requires code editor UI, sandboxing)
+- Comprehensive API documentation (over-documentation burden for simple components)
+- Multi-page design system site (navigation overhead, overkill for 4 components)
+- Public design system docs (exposes internal tooling, creates public library expectations)
+- Mega footer with all links (clutters page, violates neobrutalist minimalism)
 
 ### Architecture Approach
 
-This is an incremental enhancement to existing homepage sections, not a full site rebuild. All changes are component modifications or new page creation within established patterns.
+**Single-page design system with helper components.** The main reference page at `/src/pages/design-system.astro` imports actual production components from `/src/components/ui/` and displays them with variant showcases. Optional helper components in `/src/components/design-system/` (ColorSwatch, TypographyExample, ComponentVariants wrapper) handle token visualization without duplicating production code.
+
+**Major components:**
+1. **Design System Reference Page** (`/src/pages/design-system.astro`) — Single source of truth, uses BaseLayout, imports all UI components, displays design tokens from global.css
+2. **Component Variant Showcase Pattern** — Organized sections per component showing all sizes/variants/states with descriptive headers
+3. **CSS Custom Property Token Display** — Manual JSON (`/src/data/design-tokens.json`) synchronized with global.css for programmatic color swatches and typography scales
+4. **Static Redirects via Astro Config** — Meta-refresh HTML generation for GitHub Pages (no server-side redirect capability)
+5. **File-Based Routing** — Zero configuration, `/src/pages/design/` directory structure automatically creates routes
+
+**Key architectural patterns:**
+- **Pattern 1: File-Based Routing** — Create `src/pages/design-system.astro`, route exists automatically
+- **Pattern 2: Component Import Flow** — Import actual Button.astro (not Button-Showcase.astro duplicate), render with props, document inline
+- **Pattern 3: Token Display** — Extract tokens to JSON, reference both in CSS and display layer to ensure sync
+- **Pattern 4: Redirect Handling** — Astro `redirects` config generates `<meta http-equiv="refresh">` for static hosting
+- **Pattern 5: Existing Component Modification** — Enhance Button/Card/Input/Badge with backward-compatible props, never replace entirely
 
 **Integration points:**
-1. **Hero.astro (MODIFY)** — Add outcome-focused messaging, visual badges below headline, maintain Button.astro dependency
-2. **Process.astro (MODIFY)** — Add detailed descriptions, integrate isometric illustrations with existing vertical timeline
-3. **TechSection.astro (MODIFY)** — Reorganize from 4 categories to 3 (AI, Automations, Web Apps), add illustrations, adjust grid
-4. **FAQ page (NEW)** — Create /src/pages/faq.astro, import existing FAQ.astro component, add to navigation
-5. **Footer.astro (MODIFY)** — Remove or abbreviate FAQ section, add link to /faq page
+- BaseLayout wraps design system page (site header/footer consistency)
+- Header.astro updates to add Design System link (optional, internal use)
+- astro.config.mjs adds `/contact` redirect and sitemap filters
+- global.css provides design tokens via CSS custom properties
+- MobileNav.astro mirrors Header changes for responsive consistency
 
-**Major components reused:**
-- **Card.astro** — Technology cards, FAQ page layout
-- **Button.astro** — Hero CTA, FAQ page CTAs
-- **FAQ.astro** — Dedicated page imports existing accordion component
-
-**Data flow:** No changes. All content remains static (hardcoded in components). Illustration assets served from /public/images/ directory.
+**Anti-patterns to avoid:**
+- Duplicating components for documentation (creates two sources of truth)
+- Hardcoding token values in display (can drift from actual CSS)
+- Creating separate dark mode examples (can't test toggle behavior)
+- Server-side redirects on static hosts (GitHub Pages doesn't support)
+- Separate design system site (overkill for small portfolio)
 
 ### Critical Pitfalls
 
-1. **WCAG Contrast Failures with Bold Colors** — Vibrant neobrutalist yellow/cyan/magenta can fail WCAG 2.0 AA despite looking striking. Test EVERY color combination with WebAIM Contrast Checker before implementation. Restrict yellow accent to dark backgrounds or very dark text.
+1. **Design System Documentation Becomes Stale Immediately After Creation** — Documentation created as snapshot but components evolve in production. Within weeks, props don't match, variants are missing, examples throw errors. **Mitigation:** Add "Last Updated" timestamp with Git hash, create checklist in CLAUDE.md requiring design system update when components change, include component version tracking (Button v1.0 → v1.1).
 
-2. **Dark Mode Shadow-to-Glow Transformation Breaking** — New components bypass design system by hardcoding box-shadow values. Always use .shadow-neo-yellow, .shadow-neo-turquoise, .shadow-neo-magenta utilities. Create dedicated .shadow-iso-* utilities for isometric illustrations before implementation.
+2. **Component Audit Discovers Inconsistencies But Creates "Fix Everything" Paralysis** — Audit reveals 15+ inconsistencies (duplicate shadow implementations, mixed Tailwind classes, spacing variations), team attempts massive PR fixing everything at once, breaks production. **Mitigation:** Tier findings by severity (CRITICAL: accessibility differences, HIGH: visual inconsistencies, MEDIUM: code organization, LOW: naming conventions), one component type per PR, accept 80% consistency as shipping threshold.
 
-3. **Isometric Illustration Style Inconsistency** — Illustrations from different sources use different lighting angles, color palettes, detail levels. Establish style guidelines BEFORE creating any illustrations: light source direction (top-left 45°), color palette (existing yellow/turquoise/magenta), detail level (bold shapes, flat colors).
+3. **Astro Static Redirects Are Client-Side Meta Refresh, Not True 301s** — Adding `/contact: "/#contact"` to Astro config generates HTML with `<meta http-equiv="refresh">` tag, not HTTP 301. GitHub Pages is purely static hosting with no server-side redirect capability. Search engines see 200 OK initially, link juice doesn't transfer cleanly. **Mitigation:** Accept meta refresh limitations for internal navigation (SEO impact minimal for same-domain redirects), set 0-second timing, monitor Search Console for "Page with redirect" warnings.
 
-4. **SVG Performance Degradation** — Unoptimized isometric SVGs with thousands of path points cause render jank, especially on mobile. Enable Astro SVG optimization, set 20KB per file limit, reduce path precision from 6 decimals to 2, lazy load below-fold illustrations.
+4. **Navigation Cleanup Creates Broken Internal Links and Orphan Pages** — Team removes `/contact` from header but forgets to check blog post CTAs with hardcoded `/contact` URLs, contact form messages linking to "contact page", sitemap still includes `/contact`. After deployment, broken funnels and 404s appear. **Mitigation:** Audit ALL link references with grep (`grep -r 'href="/contact"' src/`), check configuration files (astro.config.mjs, content/blog/*.mdx), test from multiple entry points (homepage, blog post, project page).
 
-5. **Outcome Badges Overwhelming Hero** — Adding 6+ badges creates visual clutter, fails "5-second test." Maximum 3 badges in hero, positioned as secondary elements (never competing with headline or CTA). Test with target audience (small business owners), not just design peers.
+5. **Footer Social Icons Fail WCAG Accessibility Without Proper Labels** — Instagram/Substack icons wrapped in `<a>` tags but no accessible text label. Screen readers announce "link" or "graphic link" with no destination indication. Fails WCAG 2.4.4 (Link Purpose - In Context) and 1.1.1 (Non-text Content). **Mitigation:** Add `<span class="sr-only">Follow Joel on Instagram</span>` or `aria-label="Follow Joel on Instagram"` to every social link, ensure 44x44px touch target (WCAG 2.5.5 Level AAA), test with VoiceOver/NVDA before PR.
+
+6. **Design System Page Accidentally Indexed by Search Engines** — Internal reference page at `/design-system` gets indexed by Google, appears in search results for "Joel Shinness button component" instead of actual portfolio content, looks unprofessional exposing internal docs to clients. **Mitigation:** Add `<meta name="robots" content="noindex,nofollow">` from initial page creation, exclude from sitemap with filter (`filter: (page) => !page.includes('/design-system')`), monitor Search Console Coverage report.
+
+7. **Navigation Simplification Makes Secondary Content Undiscoverable** — Removing "About", "Process", "Services" from header means users from blog posts can't navigate to these homepage sections, conversion rate drops because users can't find process information. **Mitigation:** Distinguish primary (header: Blog, Projects, FAQ, Contact) vs secondary navigation (footer: About, Process, Services), test user journeys from all entry points, ensure every page discoverable within 3 clicks.
 
 ## Implications for Roadmap
 
-Based on research, this milestone should be broken into 5 phases with strict ordering to prevent pitfalls.
+Based on research, this milestone should be structured into **6 sequential phases** focusing on implementation and validation rather than new feature development. The work is incremental enhancement of an existing site, not greenfield construction.
 
-### Phase 1: Icon Library Migration + Design System Extensions
-**Rationale:** Must establish performance foundation and design system utilities before adding content. Icon migration saves 200KB+ bundle, isometric utilities ensure dark mode transformation works from start.
-
-**Delivers:**
-- Migration from lucide-static to @lucide/astro (tree-shaking)
-- Isometric CSS utilities in global.css (transform-style: preserve-3d patterns)
-- Shadow utilities for isometric elements (.shadow-iso-yellow, .shadow-iso-turquoise)
-- Optional: Install @fontsource-variable/bricolage-grotesque for display headings
-
-**Addresses:** Pitfall #2 (dark mode transformation), Pitfall #4 (SVG performance foundation)
-
-**Success criteria:** Bundle size reduction verified, isometric utilities tested in both light/dark modes
-
-### Phase 2: Hero Section Refinement
-**Rationale:** Hero is highest-impact element (first impression). Get messaging and outcome badges right before moving to lower-priority sections. Simple markup changes, low risk.
+### Phase 1: Design System Reference Page
+**Rationale:** Foundation for all subsequent work. Component consistency audit (Phase 2) requires documented source of truth. Navigation cleanup (Phase 5) needs stable component reference to verify consistency.
 
 **Delivers:**
-- Outcome-focused headline copy (problem-to-outcome reframe)
-- Visual outcome badges (maximum 3, using design system utilities)
-- Trust indicators positioned strategically (below CTA, not competing)
-- Maintained Button.astro usage for single primary CTA
+- `/src/pages/design-system.astro` with BaseLayout wrapper
+- Component showcase sections for Button, Card, Input, Badge (all variants)
+- Design token display (colors, typography, spacing from global.css)
+- `<meta name="robots" content="noindex,nofollow">` preventing search indexing
+- "Last Updated" timestamp with Git commit hash in header
+- Documentation maintenance workflow added to CLAUDE.md
 
-**Addresses:** Pitfall #6 (badge clutter), Pitfall #1 (WCAG contrast on badges)
+**Addresses Features:**
+- Design System Reference Page (table stakes)
+- Component Visual Examples (table stakes)
+- Design Token Display (table stakes)
 
-**Uses:** @lucide/astro for badge icons, existing shadow-neo-* utilities
+**Avoids Pitfalls:**
+- Pitfall 1 (stale documentation) — Maintenance workflow established from start
+- Pitfall 6 (accidental indexing) — Noindex meta tag added immediately
 
-**Success criteria:** "5-second test" passes, WCAG contrast verified, target audience validates clarity
+**Research flag:** Standard pattern. Astro docs, design system examples, and internal codebase analysis provide clear implementation path. **Skip phase-level research.**
 
-### Phase 3: Process Section Enhancement
-**Rationale:** Dependent on Phase 1 isometric utilities. Requires illustration asset preparation before implementation. Medium complexity due to layout adjustments for illustrations.
+---
 
-**Delivers:**
-- Enhanced process descriptions (1-2 sentences per step)
-- Isometric mini-illustrations for 5 process steps
-- Layout adjustment for illustration placement (flexbox/grid for side-by-side desktop, stacked mobile)
-
-**Addresses:** Pitfall #3 (establish isometric style guidelines FIRST), Pitfall #4 (SVG optimization), Pitfall #2 (shadow transformation on illustrations)
-
-**Illustration requirements:**
-- 5 SVG files: /public/images/process/step-{1-5}.svg
-- Style guide established: light angle (top-left 45°), color palette (yellow/turquoise/magenta), flat colors, thick borders
-- Each file <20KB after SVGO optimization
-- Descriptive alt text for screen readers
-
-**Success criteria:** Illustrations consistent style, recognized on mobile (375px), performance maintained (LCP increase <200ms)
-
-### Phase 4: Technology Section Redesign
-**Rationale:** Builds on isometric style guide from Phase 3. Reorganizes existing component rather than creating new patterns. Medium complexity.
+### Phase 2: Component Consistency Audit
+**Rationale:** Must understand current component usage patterns before attempting standardization. Audit identifies which inconsistencies are CRITICAL (accessibility) vs LOW (naming conventions), preventing "fix everything" paralysis.
 
 **Delivers:**
-- 3-category structure (AI, Automations, Web Apps)
-- Isometric illustration per category (matching style from Phase 3)
-- Grid layout adjustment (grid-cols-1 md:grid-cols-3)
-- Philosophy text maintained or repositioned
+- Complete audit document listing all component usage across pages
+- Severity tiers assigned: CRITICAL (accessibility), HIGH (visual), MEDIUM (code org), LOW (naming)
+- Prioritized action plan identifying which findings to address in Phase 3
+- Visual regression baseline (screenshots of all pages before migration)
 
-**Uses:** Existing Card.astro component, isometric style guide from Phase 3
+**Addresses Features:**
+- Enables Phase 3 component migration with tiered approach
+- Validates design system documentation against production reality
 
-**Addresses:** Feature differentiation for non-technical clients
+**Avoids Pitfalls:**
+- Pitfall 2 (fix everything paralysis) — Severity tiers prevent massive risky PRs
+- Pitfall 1 (stale docs) — Audit verifies documentation matches current state
 
-**Illustration requirements:**
-- 3 SVG files: /public/images/tech/{ai|automations|web-apps}.svg
-- Same style as process illustrations (consistency critical)
-- Visual metaphors: AI (brain/neural network), Automation (gears/connections), Web Apps (browser/interface)
+**Research flag:** Standard audit methodology. No specialized research needed. **Skip phase-level research.**
 
-**Success criteria:** Services visually distinct, illustrations match process style, grid responsive
+---
 
-### Phase 5: FAQ Page Creation
-**Rationale:** Independent of other phases, can be done anytime. Low complexity, standard Astro page creation pattern. Requires manual accessibility testing.
+### Phase 3: Component Migration (Tiered)
+**Rationale:** Address audit findings incrementally, one component type per PR, focusing on CRITICAL and HIGH severity issues. Accept 80% consistency as shipping threshold. LOW severity issues deferred to v2.0+.
 
 **Delivers:**
-- Dedicated /src/pages/faq.astro page
-- Imports existing FAQ.astro component (or inlines content)
-- Manual JSON-LD structured data for FAQ schema
-- Footer.astro modified (remove or abbreviate FAQ, add link to /faq)
-- Navigation link added to FAQ page
+- CRITICAL issues fixed: Accessibility inconsistencies (focus states, ARIA attributes)
+- HIGH issues fixed: Visual inconsistencies (shadow offsets, border widths, color variants)
+- MEDIUM issues documented: Code organization (inline styles vs utility classes) — defer to v2
+- LOW issues documented: Naming convention variations — defer to v2
+- Visual regression verification (before/after screenshots)
 
-**Addresses:** Pitfall #7 (keyboard accessibility), Pitfall #10 (accessibility testing beyond Lighthouse)
+**Addresses Features:**
+- Ensures design system documentation is trustworthy source of truth
+- Standardizes component usage without breaking production
 
-**Accessibility requirements:**
-- Keyboard navigation (Enter/Space toggle, Tab moves between questions)
-- ARIA attributes (aria-expanded, aria-controls, aria-labelledby)
-- Focus indicators visible against neobrutalist borders
-- Screen reader testing (VoiceOver/NVDA)
+**Avoids Pitfalls:**
+- Pitfall 2 (fix everything paralysis) — Tiered approach, ship incrementally
+- Pitfall 1 (stale docs) — Update design system page as components evolve
 
-**Success criteria:** Manual keyboard test passes, screen reader announces state correctly, Lighthouse 100%
+**Research flag:** Standard pattern. One component type per PR, visual regression testing. **Skip phase-level research.**
+
+---
+
+### Phase 4: Contact Page Redirect
+**Rationale:** Must implement redirect BEFORE navigation cleanup (Phase 5) to avoid broken links. Audit all internal link references before adding redirect to prevent orphan pages.
+
+**Delivers:**
+- Grep audit of all `/contact` references in codebase
+- Updated links in blog posts, components, configuration files to use `/#contact`
+- Redirect added to astro.config.mjs: `/contact: "/#contact"`
+- Sitemap filter excludes `/contact` from sitemap.xml
+- Build verification: `/contact/index.html` contains `<meta http-equiv="refresh">`
+- Test from 3+ entry points (homepage, blog post, project page)
+
+**Addresses Features:**
+- Contact Page Redirect (table stakes)
+- Prevents broken navigation funnel
+
+**Avoids Pitfalls:**
+- Pitfall 3 (meta refresh vs 301) — Documented as expected behavior for static hosting
+- Pitfall 4 (broken internal links) — Grep audit catches all references before redirect
+
+**Research flag:** Standard pattern. Astro redirect configuration well-documented. **Skip phase-level research.**
+
+---
+
+### Phase 5: Navigation Cleanup (Header)
+**Rationale:** Simplify header navigation by removing homepage section links (Solutions, Process, Tech, About), keeping only primary pages (Blog, Projects, FAQ, Contact). Reduces cognitive load from 9 links to 5 links. Requires Phase 4 redirect completion to avoid broken contact links.
+
+**Delivers:**
+- Header.astro updated: Remove Solutions, Process, Tech, About links
+- MobileNav.astro updated: Mirror header changes for consistency
+- Final header links: Blog, Projects, FAQ, Contact (+ Home via logo)
+- Responsive testing at 320px/768px/1024px viewports
+- User journey testing from blog/project pages to verify discoverability
+
+**Addresses Features:**
+- Simplified Header Navigation (table stakes)
+- Reduces cognitive load (best practice: 5-7 links maximum)
+
+**Avoids Pitfalls:**
+- Pitfall 7 (undiscoverable sections) — Footer will provide secondary nav in Phase 6
+- Pitfall 4 (navigation inconsistency) — Header + MobileNav updated in same PR
+
+**Research flag:** Standard pattern. Navigation best practices well-documented. **Skip phase-level research.**
+
+---
+
+### Phase 6: Footer Enhancement (Social Icons + Secondary Nav)
+**Rationale:** Complete navigation cleanup by enhancing footer with social icons (Instagram, Substack) and secondary navigation mirroring header. Footer becomes discovery path for homepage sections removed from header in Phase 5.
+
+**Delivers:**
+- Footer social icons: Instagram, Substack (44x44px touch targets, 10px spacing, horizontal layout)
+- Accessibility: `<span class="sr-only">Follow Joel on Instagram</span>` for screen readers
+- Footer navigation: Subtle links to Blog, Projects, FAQ, Contact (mirrors header)
+- Secondary links: About, Process, Services (homepage sections not in header)
+- VoiceOver/NVDA testing before merge
+- Playwright axe-core test passes
+
+**Addresses Features:**
+- Footer Social Icons (table stakes)
+- Footer Navigation Mirror (table stakes)
+- Ensures secondary content discoverable after header simplification
+
+**Avoids Pitfalls:**
+- Pitfall 5 (social icon accessibility) — Proper aria-labels from start
+- Pitfall 7 (undiscoverable sections) — Footer provides secondary navigation
+
+**Research flag:** Standard pattern. Footer best practices and WCAG 2.2 accessibility requirements well-documented. **Skip phase-level research.**
+
+---
 
 ### Phase Ordering Rationale
 
-**Why this order:**
-1. **Phase 1 MUST come first** — Design system foundation prevents pitfalls in all subsequent phases. Icon migration immediately improves performance baseline.
-2. **Phase 2 before 3/4** — Hero has highest user impact. Get messaging right before investing in illustration creation.
-3. **Phase 3 before Phase 4** — Establish isometric style guide with 5 process illustrations before creating 3 technology illustrations. Prevents inconsistency pitfall.
-4. **Phase 5 independent** — FAQ page has no dependencies on other phases, can be implemented anytime or in parallel.
+**Sequential dependencies drive order:**
+1. Phase 1 (Design System) must come first — Provides documented source of truth for Phase 2 audit
+2. Phase 2 (Audit) must precede Phase 3 (Migration) — Can't fix inconsistencies without knowing what's broken
+3. Phase 4 (Contact Redirect) must precede Phase 5 (Header Cleanup) — Can't remove /contact from nav until redirect exists
+4. Phase 5 (Header) should precede Phase 6 (Footer) — Footer's secondary nav compensates for header simplification
 
-**Why this grouping:**
-- **Design system setup isolated** (Phase 1) — Critical foundation, must be solid before content changes
-- **Content enhancements grouped by complexity** — Hero (simple), Process (medium), Technology (medium)
-- **FAQ standalone** — Different component type (page vs homepage section), different testing requirements
+**Grouping prevents scope creep:**
+- Phases 1-3 focus on design system (documentation → audit → migration)
+- Phases 4-6 focus on navigation (redirect → header → footer)
+- Clear separation prevents "let's also fix the footer while we're touching the header" feature bloat
 
-**How this avoids pitfalls:**
-- Phase 1 establishes dark mode utilities → prevents Pitfall #2 (shadow transformation)
-- Phase 3 establishes isometric guidelines → prevents Pitfall #3 (style inconsistency)
-- Phase 3 includes SVG optimization → prevents Pitfall #4 (performance degradation)
-- Phase 2 tests badge count → prevents Pitfall #6 (hero clutter)
-- Phase 5 requires manual accessibility testing → prevents Pitfall #7 (keyboard failures)
+**Pitfall mitigation informs structure:**
+- Tiered audit (Phase 2) prevents "fix everything" paralysis (Pitfall 2)
+- Link audit before redirect (Phase 4) prevents broken links (Pitfall 4)
+- Footer enhancement after header cleanup (Phase 6) prevents undiscoverable sections (Pitfall 7)
 
 ### Research Flags
 
-**Phases with standard patterns (skip research-phase):**
-- **Phase 1:** Icon library migrations well-documented, Tailwind CSS custom utilities established pattern
-- **Phase 2:** Hero section enhancements standard web design pattern, extensive research already completed
-- **Phase 5:** FAQ page creation standard Astro pattern, JSON-LD implementation documented
+**All phases use standard patterns — skip phase-level research for entire milestone.**
 
-**Phases needing validation during implementation (no deep research needed, but careful testing):**
-- **Phase 3:** Isometric illustration style guide requires design decisions, performance testing critical
-- **Phase 4:** Extends Phase 3 patterns, validate illustration consistency
+Reasons:
+- Astro file-based routing, redirects, and sitemap configuration are well-documented in official docs
+- Design system documentation patterns have clear industry consensus (Carbon, W3C, Material Design examples)
+- Navigation best practices are well-established (5-7 links, footer as secondary nav)
+- WCAG 2.2 accessibility requirements are explicit standards with test tooling
+- Existing codebase analysis (Astro 5.16.15, Tailwind CSS 4, astro-expressive-code) confirms all capabilities present
 
-**No phases require `/gsd:research-phase`** — domain is well-understood, all patterns documented, existing site provides architectural guidance.
+**When to reconsider:**
+- If Phase 3 audit reveals unknown component patterns requiring specialized research
+- If Phase 4 reveals edge cases with Astro redirects not covered in official docs
+- If Playwright accessibility tests reveal issues requiring deeper ARIA pattern research
 
 ## Confidence Assessment
 
 | Area | Confidence | Notes |
 |------|------------|-------|
-| Stack | HIGH | No new dependencies. Icon migration well-documented. Pure CSS approach validated. |
-| Features | HIGH | Outcome-focused hero, isometric illustrations, FAQ pages are established patterns with extensive 2026 research. |
-| Architecture | HIGH | Incremental changes to existing components. File-based routing patterns clear. Integration points documented. |
-| Pitfalls | HIGH | Neobrutalist design pitfalls extensively researched. WCAG compliance, dark mode transformation, SVG optimization all documented. |
+| Stack | HIGH | All capabilities verified in existing dependencies. No new packages required. Astro 5 docs confirm file-based routing, redirect config, and MDX integration. |
+| Features | HIGH | Table stakes and differentiators validated against industry patterns (design system documentation best practices, portfolio navigation standards, WCAG 2.2 requirements). MVP clearly defined. |
+| Architecture | HIGH | File-based routing pattern, static redirect implementation, and component showcase structure validated with official Astro docs and design system examples (Carbon, W3C, Material Design). |
+| Pitfalls | HIGH | All 7 critical pitfalls sourced from 2026 industry articles, Astro documentation caveats, WCAG standards, and analysis of existing codebase constraints (GitHub Pages static hosting). |
 
 **Overall confidence:** HIGH
 
 ### Gaps to Address
 
-**Design decisions requiring client input:**
-- **Outcome badge content** — Which 3 metrics to highlight in hero (time saved? money saved? customers satisfied?). Research shows maximum 3 badges, but content needs client validation.
-- **Process step descriptions** — Expand existing "You/Joel" format with 1-2 sentences context. Requires copywriting with client input.
-- **Isometric illustration complexity** — Balance between simple/recognizable and detailed/impressive. Needs design iteration with feedback.
+**No critical gaps requiring pre-implementation research.** All patterns are well-documented and existing stack capabilities confirmed. Minor validation needed during implementation:
 
-**Validation during implementation:**
-- **Yellow accent WCAG compliance** — Existing #ffef6a must be tested against all new contexts (outcome badges, illustration backgrounds). May need fallback color for contrast failures.
-- **Mobile illustration recognition** — Isometric illustrations must be tested at 375px viewport. If unrecognizable, simplify or create mobile variants.
-- **FAQ question prioritization** — Current 5 questions work, but if FAQ grows, needs categorization strategy.
+- **Component audit findings (Phase 2):** Severity tier thresholds may need adjustment based on actual inconsistencies discovered. If audit reveals unexpected patterns (e.g., beta components with complex versioning), may need to revisit migration strategy in Phase 3.
 
-**Performance monitoring:**
-- **Bundle size after icon migration** — Verify 200KB+ reduction from lucide-static removal
-- **LCP impact from illustrations** — Process and Technology sections add 8 illustrations. Must verify LCP increase <200ms total.
-- **Mobile scroll performance** — Test on mid-range device (not just dev machine). Watch for render jank when illustrations enter viewport.
+- **Static redirect behavior (Phase 4):** Astro docs explicitly state meta refresh is used for static builds, but should verify actual HTML output in `/dist/contact/index.html` after build. Monitor Search Console for 2 weeks post-deployment to catch any unexpected SEO issues.
+
+- **Screen reader testing (Phase 6):** While WCAG requirements are clear (link purpose, non-text content), should test actual VoiceOver/NVDA announcements for social icons to ensure natural phrasing ("Follow Joel on Instagram" vs "Instagram link Joel follow").
+
+**Handling strategy:** All gaps are implementation validation points, not research blockers. Proceed with standard patterns, validate during execution, adjust if needed.
 
 ## Sources
 
 ### Primary (HIGH confidence)
 
-**Stack Research:**
-- [Lucide Static Documentation](https://lucide.dev/guide/packages/lucide-static) — Package limitations and use cases
-- [Lucide Astro Documentation](https://lucide.dev/guide/packages/lucide-astro) — Installation, usage, tree-shaking benefits
-- [Tailwind CSS v4.1 Announcement](https://tailwindcss.com/blog/tailwindcss-v4-1) — Official release notes (text shadows, CSS-first theming)
-- [Astro Fonts Guide](https://docs.astro.build/en/guides/fonts/) — Official Astro documentation recommending Fontsource
-- [Fontsource Bricolage Grotesque](https://www.npmjs.com/package/@fontsource-variable/bricolage-grotesque) — Official npm package
+**Astro Official Documentation:**
+- [Astro Configuration Reference](https://docs.astro.build/en/reference/configuration-reference/) — Redirects syntax, sitemap configuration
+- [Astro Routing Documentation](https://docs.astro.build/en/guides/routing/) — File-based routing, dynamic routes
+- [Astro Components Documentation](https://docs.astro.build/en/basics/astro-components/) — Component composition, Props interface
+- [Astro TypeScript Guide](https://docs.astro.build/en/guides/typescript/) — Props interface type checking
+- [Astro Syntax Highlighting](https://docs.astro.build/en/guides/syntax-highlighting/) — Code block configuration
 
-**Architecture Research:**
-- Existing codebase analysis: /src/pages/index.astro, /src/components/*.astro — Component patterns, integration points
-- [Astro Documentation](https://docs.astro.build) — File-based routing, component patterns
+**WCAG Standards:**
+- [Understanding Success Criterion 2.4.4: Link Purpose (In Context)](https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-in-context.html)
+- [Page Regions - W3C WAI](https://www.w3.org/WAI/tutorials/page-structure/regions/)
+- [Footer Accessibility Tests - U.S. Web Design System](https://designsystem.digital.gov/components/footer/accessibility-tests/)
 
-**Pitfalls Research:**
-- [Neobrutalism: Definition and Best Practices - Nielsen Norman Group](https://www.nngroup.com/articles/neobrutalism/) — Authoritative UX research
-- [WCAG 2.2 Guidelines](https://www.w3.org/WAI/WCAG22/quickref/) — Accessibility requirements
-- [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/) — Color contrast validation
-- [Astro Experimental SVG optimization](https://docs.astro.build/en/reference/experimental-flags/svg-optimization/) — Official documentation
+**Package Verification:**
+- npm registry: astro@5.17.1 (latest), astro-expressive-code@0.41.6 (current), @astrojs/mdx@4.3.13 (current)
 
 ### Secondary (MEDIUM confidence)
 
-**Features Research:**
-- [Hero Section Design: Best Practices & Examples for 2026](https://www.perfectafternoon.com/2025/hero-section-design/) — Industry patterns
-- [Website Hero Section Best Practices + Examples](https://prismic.io/blog/website-hero-section) — Design patterns
-- [Hero Section Test That Led To A 50% Increase In Conversions](https://carrot.com/blog/hero-section-conversion-test/) — A/B testing data
-- [Isometric websites - 28+ Best Isometric Web Design Ideas 2026](https://99designs.com/inspiration/websites/isometric) — Design inspiration
-- [20 Best FAQ Pages (+ How To Create Your Own) (2026)](https://www.shopify.com/blog/120928069-how-to-create-faq-page) — FAQ patterns
+**Design System Patterns:**
+- [Building the Ultimate Design System: Architecture Guide for 2026](https://medium.com/@padmacnu/building-the-ultimate-design-system-a-complete-architecture-guide-for-2026-6dfcab0e9999)
+- [Design System Documentation Best Practices - Backlight.dev](https://backlight.dev/blog/design-system-documentation-best-practices)
+- [7 Best Practices for Design System Documentation - UXPin](https://www.uxpin.com/studio/blog/7-best-practices-for-design-system-documentation/)
+- [Best design system documentation sites - Backlight.dev](https://backlight.dev/mastery/the-best-design-system-documentation-sites)
 
 **Pitfalls Research:**
-- [My Favourite Fonts for Neobrutalist Web Design](https://blog.kristi.digital/p/my-favourite-fonts-for-neobrutalist-web-design) — Typography recommendations
-- [IBM Design Language – Isometric Style](https://www.ibm.com/design/language/illustration/isometric-style/design/) — Lighting consistency patterns
-- [7 Ways to Optimize SVGs: Reduce File Size by 80%](https://www.frontendtools.tech/blog/optimizing-svgs-web-performance-scalability) — Performance optimization
-- [Dark Mode Design Best Practices in 2026](https://www.tech-rz.com/blog/dark-mode-design-best-practices-in-2026/) — Shadow-to-glow patterns
+- [Design Systems in 2026: Predictions, Pitfalls, and Power Moves](https://medium.com/@rydarashid/design-systems-in-2026-predictions-pitfalls-and-power-moves-f401317f7563)
+- [Design System Adoption Pitfalls - Netguru](https://www.netguru.com/blog/design-system-adoption-pitfalls)
+- [Tips and Tricks for Design System Migrations](https://medium.com/@nonisnilukshi/tips-and-tricks-for-design-system-migrations-5beafb8e58c5)
 
-### Tertiary (LOW confidence)
+**Navigation Best Practices:**
+- [Website Header Design Best Practices for 2025 - Lauren Taylar](https://laurentaylar.com/blog/website-header-navigation-menu)
+- [Website Footer Design Best Practices - Orbit Media](https://www.orbitmedia.com/blog/website-footer-design-best-practices/)
+- [How to Add Social Media Icons to Website Footer - NiftyButtons](https://www.niftybuttons.com/blog/add-social-media-icons-website-footer)
 
-**Context only:**
-- [Search Engine Land: FAQ Schema Rise and Fall](https://searchengineland.com/faq-schema-rise-fall-seo-today-463993) — Current state of FAQ rich results (2023 restrictions)
-- Various WebSearch results about neobrutalism design trends — Used for understanding aesthetic, not technical decisions
+**Static Site Redirects:**
+- [Static Page Redirects using AstroJS](https://friedrichkurz.me/posts/2025-01-11/)
+- [Static Site Redirects With Astro - Lloyd Atkinson](https://www.lloydatkinson.net/posts/2022/static-site-redirects-with-astro/)
+- [How to Fix Astro Redirect Settings When They Don't Work - Nao](https://naonao-na.com/en/posts/astro-redirect-seo/)
+
+### Tertiary (context/validation)
+
+- [Astro Design System Theme](https://astro.build/themes/details/astro-design-system-docs/) — Reference implementation
+- [GitHub: astro-design-system by jordienr](https://github.com/jordienr/astro-design-system) — Starter template
+- [The Component Gallery](https://component.gallery/) — Component showcase examples
+- [Carbon Design System](https://carbondesignsystem.com/) — Industry standard reference
 
 ---
-*Research completed: 2026-02-09*
+*Research completed: 2026-02-10*
 *Ready for roadmap: yes*

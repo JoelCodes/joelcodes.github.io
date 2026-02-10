@@ -1,363 +1,354 @@
-# Feature Research: Homepage Refinement (v1.2)
+# Feature Research: Design System & Navigation Cleanup (v1.3)
 
-**Domain:** Lead-generation portfolio website (neobrutalist design)
-**Researched:** 2026-02-09
+**Domain:** Design System Documentation & Portfolio Navigation
+**Researched:** 2026-02-10
 **Confidence:** HIGH
 
 ## Feature Landscape
 
-This research focuses on the INCREMENTAL features being added to an existing neobrutalist portfolio site. The base site is already built with homepage sections, blog, portfolio, contact form, and neobrutalist design system.
+This research focuses on the INCREMENTAL features being added for v1.3. The base site already has neobrutalist components (Button, Card, Input, Badge), OKLCH design tokens, shadow-to-glow animations, and isometric utilities. Focus is on consolidating these into a reference page and streamlining navigation.
 
 ### Table Stakes (Users Expect These)
 
-Features users assume exist in outcome-focused portfolio sites targeting small business clients.
+Features users assume exist. Missing these = product feels incomplete.
 
 | Feature | Why Expected | Complexity | Notes |
 |---------|--------------|------------|-------|
-| Outcome-focused headline | Users want to know "what's in it for me" within 3 seconds | LOW | Hero already exists, needs reframe from problem to outcome |
-| Clear value metrics | Small business clients think in ROI terms (time, money, customers) | LOW | Visual badges/icons with metrics (already have border/shadow system) |
-| Process transparency | Risk-averse clients need to understand workflow before committing | LOW | Process component exists, needs descriptive text enhancement |
-| Service differentiation | Clients need to understand what each service type solves | MEDIUM | Services component exists as 3 cards, needs expansion with illustrations |
-| FAQ discoverability | Common questions should be easy to find and scan | LOW | FAQ exists in footer accordion, needs dedicated page |
-| Trust indicators | Portfolio sites need social proof elements near CTA | LOW | Can use outcome badges, client count, testimonial snippets |
-| Mobile-first layout | 60%+ traffic is mobile for service businesses | LOW | Base responsive design exists, illustrations need mobile optimization |
+| Component Visual Reference | Design system docs need to show what components look like | LOW | Static HTML showcase of existing Button, Card, Input, Badge components with variants |
+| Color Palette Display | Design tokens must be visible to maintain consistency | LOW | Display OKLCH yellow/turquoise/magenta with hex/oklch values, light/dark variants |
+| Typography Scale | Two-tier typography system needs documented hierarchy | LOW | Show Bricolage Grotesque headings vs DM Sans body with size/weight tokens |
+| Working Interactive Examples | Static screenshots don't prove components work | MEDIUM | Live, interactive component demos (not just images) allow testing behavior |
+| Simplified Header Navigation | Portfolio sites should have 5-7 links max | LOW | Remove homepage section links (Solutions, Process, Tech, About) from header |
+| Footer Social Links | 72% of marketing sites include social icons in footer | LOW | Add Instagram + Substack icons (32-48px, 8-10px spacing) |
+| Footer Navigation Links | Standard for portfolio sites to mirror nav in footer | LOW | Subtle footer nav prevents users from scrolling back up |
+| Contact Page Redirect | /contact should point to /#contact for consistency | LOW | Astro redirect or meta refresh to anchor link |
 
 ### Differentiators (Competitive Advantage)
 
-Features that set this portfolio apart from generic developer sites.
+Features that set the product apart. Not required, but valuable.
 
 | Feature | Value Proposition | Complexity | Notes |
 |---------|-------------------|------------|-------|
-| Isometric mini-illustrations per process step | Makes abstract workflow concrete and memorable | MEDIUM | Neobrutalist aesthetic with thick borders, flat colors, 30-degree angles |
-| Outcome badges with visual hierarchy | Transforms generic "I build stuff" into measurable business value | LOW | Leverage existing shadow-neo system, add icons/numbers |
-| Technology-specific illustrations | Helps non-technical clients distinguish AI vs Automation vs Web Apps | MEDIUM | Three distinct visual metaphors with 1-2 sentence descriptions |
-| Prototype-first positioning | Differentiates from "pay upfront" competitors, reduces client risk | LOW | Already in process, needs emphasis in hero/CTA |
-| Neobrutalist FAQ page design | Transforms boring support page into on-brand experience | LOW | Apply existing Card/Button components with accordion interactions |
-| Process narrative with "You/Joel" dialogue | Personalizes workflow, shows collaborative vs transactional approach | LOW | Already implemented in Process component, adding illustrations enhances |
-| Dedicated FAQ page vs footer accordion | Improves SEO, allows richer content, better UX for multiple questions | LOW | Move existing FAQ.astro to /faq page, add navigation link |
+| Shadow-to-Glow Documentation | Unique dark mode transformation is a selling point | LOW | Show side-by-side light mode (hard shadows) vs dark mode (soft glows) |
+| Isometric Utilities Showcase | Custom CSS utilities are portfolio-worthy | MEDIUM | Interactive demos of iso-rotate, iso-shadow, iso-glow with live previews |
+| Accessibility Audit Results | WCAG compliance is a trust signal | LOW | Display 98.7% manual audit score, link to Playwright tests |
+| Component Usage Guidelines | When/how to use each component prevents misuse | MEDIUM | Brief usage notes per component ("Use Button for actions, Card for content blocks") |
+| Internal-Only Reference Page | Hidden from nav but accessible via direct URL | LOW | /design-system route with no header/footer links (meta noindex) |
+| Performance Metrics Display | Lighthouse scores validate quality | LOW | Show 92+ performance score alongside design tokens |
 
 ### Anti-Features (Commonly Requested, Often Problematic)
 
-Features that seem good but create problems for lead-generation portfolio sites.
+Features that seem good but create problems.
 
 | Feature | Why Requested | Why Problematic | Alternative |
 |---------|---------------|-----------------|-------------|
-| Pricing calculator | Clients want instant quotes | Custom work varies too much, creates false expectations | FAQ about pricing process, emphasize custom proposals |
-| Animated isometric scenes | "Make illustrations pop" | File size bloat, accessibility issues, neobrutalist aesthetic is static | Static isometric illustrations with hover state color shifts |
-| Multiple CTAs in hero | "Give users options" | Reduces conversions by 266% when competing actions present | Single primary CTA ("Start a Conversation"), secondary links in nav |
-| Real-time chat widget | "Be more accessible" | Interrupts UX, adds maintenance burden, overkill for freelance | Contact form + FAQ page covers async communication |
-| Interactive process timeline | "Make it engaging" | Adds JS complexity, breaks on mobile, accessibility concerns | Clean vertical timeline with illustrations (current approach works) |
-| Auto-playing video background | "Show work visually" | Performance killer, accessibility nightmare, distracts from message | Static hero with outcome badges, portfolio link for visual work |
-| Overly detailed service pages | "Explain everything" | Overwhelming for small business clients, delays contact | 1-2 sentence descriptions with illustrations, details in discovery call |
+| Storybook Integration | Industry standard for component libraries | Adds 50+ dependencies, 200KB+ bundle, requires build tooling overkill for 4 components | Static HTML page with live examples using existing components |
+| Real-Time Component Editing | Interactive playgrounds are trendy | Requires code editor UI, sandboxing, significant dev time for small team | Static variants with code snippets to copy-paste |
+| Comprehensive API Documentation | Feels professional and complete | Only 4 simple components with obvious props, over-documentation creates maintenance burden | Brief usage notes + props list in HTML comments |
+| Multi-Page Design System Site | Separates concerns cleanly | Navigation overhead, more pages to maintain, overkill for 4 components + tokens | Single scrollable page with anchor links |
+| Public Design System Docs | Shows transparency and expertise | Exposes internal tooling decisions, creates expectation of public component library | Internal-only page (noindex, no sitemap) for consistency audits |
+| Mega Footer with All Links | Kitchen sink approach feels complete | Clutters page, violates neobrutalist minimalism, too many choices paradox | Minimal footer: social icons + 4 key links (Blog, Projects, FAQ, Contact) |
 
 ## Feature Dependencies
 
 ```
-[Outcome badges in Hero]
-    └──requires──> [Icon/illustration system]
-                       └──requires──> [Neobrutalist visual style guide]
+Design System Reference Page
+    └──requires──> Existing Components (Button, Card, Input, Badge)
+    └──requires──> Design Tokens (already in global.css)
+    └──enhances──> Component Consistency Audit (reference for comparison)
 
-[Process illustrations] ──requires──> [Isometric design system]
-                                          └──requires──> [30-degree angle consistency]
-                                          └──requires──> [Brand color palette]
+Header Navigation Cleanup
+    └──requires──> Contact Page Redirect (remove /contact nav link)
+    └──conflicts──> Homepage Section Links (too many nav items)
 
-[Technology section] ──requires──> [Service differentiation content]
-                                      └──requires──> [Illustration per tech type]
+Footer Enhancement
+    └──requires──> Social Icons (Instagram, Substack)
+    └──enhances──> Simplified Header (footer carries secondary nav)
+    └──requires──> Header Link Mirror (consistency between header/footer)
 
-[FAQ page] ──enhances──> [SEO for support queries]
-              └──requires──> [Accordion component (already exists)]
-
-[Outcome metrics] ──enhances──> [Trust indicators]
-                     └──supports──> [Conversion optimization]
-
-[Visual illustrations] ──conflicts──> [Text-heavy descriptions]
-                          (balance needed: 1-2 sentences + visual)
+Component Consistency Audit
+    └──requires──> Design System Reference (source of truth)
+    └──identifies──> Inconsistent Usage (variant mismatches, token violations)
 ```
 
 ### Dependency Notes
 
-- **Outcome badges require icon system:** Leverage existing neobrutalist border/shadow system, add simple geometric icons (time clock, dollar sign, customer avatars, rocket, lightbulb)
-- **Process illustrations require isometric design system:** Maintain 30-degree angles across all five steps, use brand colors (yellow/turquoise/magenta), ensure visual consistency
-- **Technology section requires service differentiation:** Build on existing Services component structure (3 cards), add illustrations that visually distinguish AI (brain/neural network), Automation (gears/connections), Web Apps (browser/interface)
-- **FAQ page enhances SEO:** Dedicated /faq URL allows indexing support queries, improves discoverability vs buried footer accordion
-- **Visual illustrations conflict with text-heavy descriptions:** Neobrutalist aesthetic favors bold visuals over walls of text; keep descriptions to 1-2 sentences per item
+- **Design System Reference requires Existing Components:** All 4 components (Button, Card, Input, Badge) already built in v1.1–v1.2, just need showcased
+- **Header Cleanup requires Contact Redirect:** Can't remove /contact nav link until redirect is in place
+- **Footer Enhancement enhances Simplified Header:** Footer becomes secondary navigation once header is streamlined
+- **Component Audit requires Reference Page:** Can't audit consistency without documented source of truth
 
-## MVP Definition for v1.2
+## MVP Definition for v1.3
 
-This is a SUBSEQUENT milestone adding features to an existing v1.1 site. Focus is homepage refinement, NOT full site rebuild.
+This is a SUBSEQUENT milestone adding features to an existing v1.2 site. Focus is design system consolidation and navigation cleanup, NOT new feature development.
 
-### Launch With (v1.2)
+### Launch With (v1.3)
 
-Minimum viable additions to improve homepage conversion and clarity.
+Minimum viable product — what's needed to validate the concept.
 
-- [ ] Hero section with 5 outcome badges (time saved, money saved, customers satisfied, opportunities captured, solutions delivered) — Essential for reframing value proposition
-- [ ] Outcome badge design: geometric icons + short label + neobrutalist border/shadow — Leverages existing design system
-- [ ] Process section enhanced descriptions (1-2 sentences per step, not just "You/Joel" format) — Adds clarity without overwhelming
-- [ ] Technology section with 3 service cards (AI, Automations, Web Apps) + simple illustrations — Helps non-technical clients distinguish offerings
-- [ ] FAQ moved to dedicated /faq page with navigation link — Improves discoverability and SEO
-- [ ] FAQ page styling with neobrutalist accordion (reuse existing FAQ.astro structure) — Maintains brand consistency
+- [ ] Design System Reference Page — Internal reference for component consistency (existing components showcased)
+- [ ] Component Visual Examples — Button, Card, Input, Badge with all variants displayed
+- [ ] Design Token Display — OKLCH palette, typography scale, spacing tokens visible
+- [ ] Simplified Header Navigation — Remove homepage section links (Solutions, Process, Tech, About)
+- [ ] Footer Social Icons — Add Instagram + Substack (32-48px, horizontal layout)
+- [ ] Footer Navigation Mirror — Subtle links to Blog, Projects, FAQ, Contact
+- [ ] Contact Page Redirect — /contact → /#contact with 301 redirect
 
-### Add After Validation (v1.2.x)
+### Add After Validation (v1.4)
 
-Features to add once core refinements are validated.
+Features to add once core is working.
 
-- [ ] Isometric mini-illustrations for process steps (5 illustrations) — HIGH value but MEDIUM complexity, defer if timeline tight
-- [ ] Refined technology illustrations (upgrade from simple to isometric style) — Once isometric design system is established
-- [ ] Trust indicators in hero (client count, years experience, project count) — After collecting metrics
-- [ ] Testimonial snippet near primary CTA — Once client testimonials are collected
-- [ ] Enhanced FAQ categories (group by topic: Process, Pricing, Technical, Post-Project) — If FAQ grows beyond 5 questions
-- [ ] Mobile-optimized illustration variants — If performance metrics show mobile issues
+- [ ] Interactive Component Demos — Live examples with state changes (hover, focus, active)
+- [ ] Component Usage Guidelines — Brief "when to use" notes per component
+- [ ] Accessibility Audit Display — Show WCAG compliance score on design system page
+- [ ] Shadow-to-Glow Comparison — Side-by-side light/dark mode transformation showcase
+- [ ] Isometric Utilities Showcase — Interactive iso-rotate, iso-shadow, iso-glow demos
 
 ### Future Consideration (v2+)
 
-Features to defer until homepage refinement is complete and validated.
+Features to defer until product-market fit is established.
 
-- [ ] Interactive FAQ search — Low priority, current count is manageable
-- [ ] Animated outcome counters (numbers incrementing on scroll) — Gimmicky, doesn't align with neobrutalist aesthetic
-- [ ] Video testimonials in hero — Requires client video collection, performance concerns
-- [ ] Expanded service detail pages (/services/ai, /services/automation, /services/web-apps) — Overkill for freelance, details in discovery call
-- [ ] Multi-step contact form (wizard style) — Current single-page form works well, don't over-complicate
+- [ ] Component Code Snippets — Copy-pasteable Astro component code
+- [ ] Animation Pattern Library — Documented hover states, transitions, keyframes
+- [ ] Responsive Breakpoint Visualizer — Show mobile/tablet/desktop component behavior
+- [ ] Design Token Versioning — Track changes to colors/typography over time
 
 ## Feature Prioritization Matrix
 
 | Feature | User Value | Implementation Cost | Priority |
 |---------|------------|---------------------|----------|
-| Outcome badges in hero | HIGH (core value prop) | LOW (reuse design system) | P1 |
-| Enhanced process descriptions | HIGH (reduces uncertainty) | LOW (just copy) | P1 |
-| FAQ to dedicated page | MEDIUM (discoverability) | LOW (move component) | P1 |
-| Technology section with illustrations | HIGH (service clarity) | MEDIUM (3 illustrations) | P1 |
-| Simple geometric icons for badges | MEDIUM (visual interest) | LOW (SVG shapes) | P1 |
-| Isometric process illustrations | MEDIUM (memorability) | MEDIUM (5 illustrations, design system) | P2 |
-| Isometric technology illustrations | MEDIUM (visual upgrade) | MEDIUM (3 illustrations) | P2 |
-| Trust indicators (metrics) | MEDIUM (social proof) | LOW (data + display) | P2 |
-| FAQ categories/grouping | LOW (current count is 5) | LOW (markup change) | P3 |
-| Mobile illustration optimization | LOW (mobile works) | MEDIUM (variants) | P3 |
-| Interactive FAQ search | LOW (5 questions) | MEDIUM (JS required) | P3 |
+| Design System Reference Page | HIGH (consistency audit needs it) | LOW (static HTML) | P1 |
+| Simplified Header Navigation | HIGH (reduces cognitive load) | LOW (delete links) | P1 |
+| Footer Social Icons | MEDIUM (expected standard) | LOW (SVG icons + links) | P1 |
+| Footer Navigation Mirror | MEDIUM (usability improvement) | LOW (duplicate links) | P1 |
+| Contact Page Redirect | HIGH (prevents broken nav) | LOW (Astro redirect) | P1 |
+| Interactive Component Demos | MEDIUM (nice to have) | MEDIUM (JS state management) | P2 |
+| Component Usage Guidelines | MEDIUM (prevents misuse) | LOW (brief text notes) | P2 |
+| Shadow-to-Glow Comparison | LOW (portfolio showcase) | LOW (side-by-side CSS) | P2 |
+| Isometric Utilities Showcase | LOW (nice to have) | MEDIUM (interactive demos) | P2 |
+| Accessibility Audit Display | LOW (trust signal) | LOW (static metrics) | P3 |
+| Component Code Snippets | LOW (convenience feature) | MEDIUM (syntax highlighting) | P3 |
 
 **Priority key:**
-- P1: Must have for v1.2 launch (addresses core milestone goals)
-- P2: Should have, add when possible (enhances but not critical)
-- P3: Nice to have, future consideration (optimize existing first)
+- P1: Must have for launch (v1.3)
+- P2: Should have, add when possible (v1.4)
+- P3: Nice to have, future consideration (v2.0+)
+
+## Competitor Feature Analysis
+
+| Feature | Storybook (Industry Standard) | Custom HTML (Our Approach) | Our Reasoning |
+|---------|-------------------------------|----------------------------|---------------|
+| Component Showcase | Isolated stories with controls | Static HTML with live examples | 4 components don't justify Storybook's 50+ dependencies |
+| Interactive Demos | Interactive controls panel | Static variants + hover states | Small team, static site constraints, minimal maintenance |
+| Documentation Format | MDX with autodocs | Single scrollable HTML page | Faster to build, easier to maintain, fits neobrutalist aesthetic |
+| Framework Integration | Full framework support | Astro components in situ | Already built, just need showcased |
+| Accessibility Testing | Automated a11y addon | Playwright + axe-core (existing) | Already validated to 98.7% WCAG 2.2 AA |
+| Navigation Pattern | Sidebar with tree hierarchy | Anchor links on single page | 4 components + tokens = overkill for multi-page docs |
+| Public vs Internal | Public by default | Internal-only (noindex) | Not building public component library, just internal reference |
+
+## Design System Documentation Best Practices (2026)
+
+Based on research from [UXPin Design System Documentation](https://www.uxpin.com/studio/blog/7-best-practices-for-design-system-documentation/), [Design System Mastery by Backlight.dev](https://backlight.dev/mastery/the-best-design-system-documentation-sites), and [Storybook Documentation Patterns](https://www.supernova.io/blog/top-storybook-documentation-examples-and-the-lessons-you-can-learn):
+
+### Key Patterns for Internal Reference Pages:
+
+1. **Visual First, Text Second** - Show components before explaining them (90% increase in adoption with interactive demos)
+2. **Living Documentation** - Use actual components, not screenshots (code is the source of truth)
+3. **Simple Language** - Avoid jargon, write how it's done, explain where to use it
+4. **Four Documentation Types** - Tutorials (learning), How-to guides (goal-oriented), Explanations (understanding), Reference (information)
+5. **Getting Started First** - Onboarding is critical for adoption
+6. **Keep Updated** - Sync documentation with changelogs automatically
+7. **Tailor to Audience** - Developers need props, designers need usage guidelines, split accordingly
+8. **Clear Navigation** - Hierarchy with categories makes finding things easier
+9. **Maintain Changelogs Visibly** - Show version control, promote trust and reliability
+
+### Adaptation for Joel Shinness Website:
+
+- **Internal-only reference** (not public design system) - No need for external developer onboarding
+- **4 components + tokens** - Single page with anchor links, not multi-page site
+- **Neobrutalist aesthetic** - Bold borders, yellow/turquoise accents, quirky headings
+- **Static HTML showcase** - Live examples using existing Astro components, no Storybook overhead
+- **Consistency audit focus** - Primary use case is ensuring all pages use components correctly
+
+## Navigation Cleanup Best Practices (2026)
+
+Based on research from [Lauren Taylar's Website Header Design Best Practices](https://laurentaylar.com/blog/website-header-navigation-menu), [Portfolio Website Design Guide](https://www.sitebuilderreport.com/how-to-make-a-portfolio-website), and [Footer Design Best Practices by Orbit Media](https://www.orbitmedia.com/blog/website-footer-design-best-practices/):
+
+### Header Simplification:
+
+- **5-7 links maximum** - Current header has 9 links (Home, Solutions, Process, Tech, About, Projects, Blog, FAQ, Contact)
+- **No "solving" navigation** - Visitors shouldn't pause or squint
+- **Group similar pages** - Use dropdowns if needed, but keep intuitive
+- **Remove internal section links from header** - Homepage sections (Solutions, Process, Tech, About) don't belong in global nav
+
+### Footer Enhancement:
+
+- **Social icons belong in footer** (72% of top marketing sites) - Don't put in header (interrupts user journey)
+- **32-48px icon size on desktop**, 44x44px minimum on mobile (Apple's touch target size)
+- **8-10px spacing between icons** - Avoid mis-taps on mobile
+- **Horizontal layout preferred** - Single row of 3-4 icons, less vertical space than stacking
+- **"Follow Us" heading optional** - Can add for clarity, but not required
+- **Open in new tab** - Don't lose website when clicking social links
+- **Mirror header links subtly** - Footer nav is expected, but should be less prominent than header
+
+### Applied to Joel Shinness Website:
+
+**Current Header (9 links):**
+- Home, Solutions, Process, Tech, About, Projects, Blog, FAQ, Contact
+
+**Simplified Header (5 links):**
+- Blog, Projects, FAQ, Contact, Home (logo click)
+
+**Rationale:**
+- Solutions, Process, Tech, About are homepage sections (accessible via scroll on /)
+- Removing 4 internal section links reduces cognitive load
+- Projects, Blog, FAQ are standalone pages (deserve global nav)
+- Contact stays in header (CTA priority)
+
+**Footer Enhancement:**
+- Add Instagram + Substack icons (horizontal, 44x44px, 10px spacing)
+- Keep existing GitHub + LinkedIn icons
+- Add subtle nav links: Blog, Projects, FAQ, Contact (mirror header)
+- Keep existing copyright + "Built with Astro" credit
+- Keep existing FAQ prominent link (border separator, larger text)
 
 ## Implementation Best Practices from Research
 
-### Outcome-Focused Hero Sections
+### Design System Reference Page Structure
 
-Based on 2026 industry research, high-converting hero sections follow these patterns:
+Based on [The Component Gallery](https://component.gallery/), [W3C Design System](https://design-system.w3.org/), and [Carbon Design System](https://carbondesignsystem.com/):
 
-**Messaging Strategy:**
-- Headlines should answer "What is this, and why should I care?" in under 3 seconds
-- Focus on outcomes and benefits, not features: "Save 10 hours/week" not "Powerful automation tools"
-- Single clear CTA reduces conversion friction (multiple CTAs decrease conversions by up to 266%)
+**Page Structure:**
+1. **Introduction** - What this page is, who it's for (internal reference)
+2. **Design Tokens** - Colors, typography, spacing (source of truth)
+3. **Components** - Button, Card, Input, Badge (all variants)
+4. **Utilities** - Isometric transforms, shadow-to-glow (CSS classes)
+5. **Usage Guidelines** - When to use each component (brief notes)
 
-**Trust Elements:**
-- Trust badges, client logos, or key statistics near CTA boost credibility
-- Social proof formats: "500+ happy clients" or "Featured in [Publication]"
-- Outcome metrics work as trust signals: "Saved clients $2M+" or "Built 50+ solutions"
+**Component Showcase Format:**
+- Component name as heading
+- Brief description (1 sentence)
+- All variants displayed (default, hover, disabled, etc.)
+- Props/attributes list (inline in HTML)
+- Usage notes (when/how to use)
 
-**Visual Hierarchy:**
-- "Less is more" approach: slimmed-down hero versions showed 45.87% conversion uplift
-- Avoid walls of text, graphics, and competing elements
-- Use visual badges/icons to communicate value at a glance
+**Visual Design:**
+- White/light gray backgrounds for light mode examples
+- Dark backgrounds for dark mode examples
+- Consistent spacing between sections (use existing spacing tokens)
+- Code snippets with syntax highlighting (optional, P2)
 
-**Testing Recommendations:**
-- A/B test headline variations (benefit-driven vs. problem-focused)
-- Track bounce rate, click-through rate, scroll depth, time on page
-- Run quarterly optimization tests
+### Footer Social Icon Implementation
 
-### Isometric Illustration Implementation
+Based on [NiftyButtons Footer Guide](https://www.niftybuttons.com/blog/add-social-media-icons-website-footer) and [Orbit Media Footer Best Practices](https://www.orbitmedia.com/blog/website-footer-design-best-practices/):
 
-Based on 2026 design trends and neobrutalist aesthetic:
+**Icon Specifications:**
+- Size: 44x44px touch target (mobile-first)
+- Spacing: 10px gap between icons
+- Layout: Horizontal flex row, center-aligned
+- Color: text-muted (light/dark variants)
+- Hover: turquoise accent (brand color)
+- Opening: New tab (target="_blank" rel="noopener noreferrer")
 
-**Design Principles:**
-- Maintain consistent 30-degree angles across all illustrations for visual coherence
-- Use brand colors (yellow/turquoise/magenta) strategically within illustrations
-- Keep illustrations purposeful and simple, not decorative fluff
-- Pair accent-colored backgrounds with simple black line illustrations for balance
+**Accessibility:**
+- Descriptive aria-label ("Instagram (opens in new tab)")
+- Focus states with visible outline
+- Sufficient color contrast (WCAG AA)
+- Touch target size meets mobile guidelines (44x44px minimum)
 
-**Tools & Resources:**
-- Adobe Illustrator remains industry standard for isometric vector creation
-- Isometric grid feature ensures proper angle consistency
-- For neobrutalist style: thick borders, flat colors, no gradients, 100% opacity black shadows
+**Icon Sources:**
+- Use @lucide/astro for Instagram icon
+- Check if Substack icon available, fallback to custom SVG if needed
+- Keep consistent with existing GitHub/LinkedIn implementation
 
-**Accessibility Considerations:**
-- Decorative illustrations should have empty alt text (alt="") to avoid screen reader clutter
-- WCAG 2.2 requires alt="" for pure decoration (aesthetic purpose only, no information)
-- If illustration conveys process information, use descriptive alt text
-- Ensure illustrations don't rely solely on color to convey meaning
+### Contact Page Redirect Implementation
 
-**Use Cases:**
-- Process visualization (5-step workflow)
-- Service differentiation (AI vs Automation vs Web Apps)
-- Workflow tools and SaaS products benefit most from isometric style
-- Spatial or process visualization makes abstract concepts concrete
+Based on Astro documentation and SEO best practices:
 
-### Process Step Visualization
+**Redirect Options:**
+1. **Astro middleware redirect** (preferred) - Server-side 301 redirect
+2. **Meta refresh** (fallback) - Client-side redirect for static hosting
+3. **JavaScript redirect** (avoid) - Not SEO-friendly, accessibility issues
 
-Based on workflow design research:
+**Implementation:**
+```astro
+---
+// src/pages/contact.astro
+// For GitHub Pages (static), use meta refresh + JS fallback
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="refresh" content="0; url=/#contact">
+  <link rel="canonical" href="/#contact">
+</head>
+<body>
+  <script>window.location.replace('/#contact');</script>
+  <p>Redirecting to <a href="/#contact">Contact</a>...</p>
+</body>
+</html>
+```
 
-**Content Strategy:**
-- Use 1-2 sentences per step to provide context without overwhelming
-- Number steps clearly (1-5) with visual hierarchy
-- Show progression with vertical timeline, not horizontal (mobile-friendly)
-- Include "You/Joel" dialogue format to personalize collaborative nature
-
-**Visual Enhancements:**
-- Isometric mini-illustrations per step make workflow memorable
-- Use consistent visual language (same angle, style, color palette)
-- Show characters or objects "progressing" through steps if using illustrations
-- Avoid animated timelines (accessibility issues, mobile problems)
-
-**Process Infographic Patterns:**
-- Circular layouts work for iterative processes (not applicable here)
-- Flow charts work for multiple paths (not applicable for linear 5-step)
-- Vertical timeline with illustrations works best for mobile-first sequential processes
-
-### Technology/Service Differentiation
-
-Based on portfolio design trends:
-
-**Organization Strategies:**
-- Group services into distinct categories with visual separation
-- Use subheaders and icons/illustrations to aid navigation
-- No more than 7 items per category for scannability
-- Each service needs 1-2 sentence description + visual metaphor
-
-**Portfolio-Specific Recommendations:**
-- Show tech stack used in projects (transparency builds trust)
-- Case studies should explain: problem → approach → technologies → results
-- Lead with strongest work (first 30 seconds are critical)
-- "View Live" and "View Code" CTAs above the fold for each project
-
-**Service Card Design:**
-- Three-column grid for desktop (already implemented)
-- Stack vertically on mobile
-- Consistent visual treatment (neobrutalist Cards with yellow accents)
-- Illustration + title + short description + example format works well
-
-### FAQ Page Design
-
-Based on 2026 FAQ best practices:
-
-**Layout Strategy:**
-- Accordion format keeps content organized and space-efficient
-- Group similar questions with subheaders if count exceeds 7
-- Link most popular questions to top of page
-- Allow multiple accordion items open simultaneously (user control)
-
-**Placement Recommendations:**
-- Dedicated /faq page better than buried footer for discoverability
-- Include in main navigation or support/contact page links
-- FAQ pages improve SEO for support queries
-- Better to reveal all content if users need most answers vs clicking each item
-
-**Content Organization:**
-- Current 5 questions is manageable without categories
-- Add categories when question count exceeds 7-10
-- Common categories: Billing, Process, Technical, Timeline, Post-Project
-- Keep answers concise (1-2 paragraphs max)
-
-**Interaction Patterns:**
-- Native HTML `<details>` accordion is zero-JS, accessible
-- Avoid auto-closing previous item (frustrating when comparing)
-- Use accordions when users need 1-2 answers, not when they need all content
-- For small question count (5), expanded view could work instead of accordion
-
-## Neobrutalist Design Constraints
-
-Existing design system constraints that inform feature implementation:
-
-**Visual Language:**
-- Yellow (#ffef6a), turquoise, magenta OKLCH palette
-- 3/10 density (white space, not crowded)
-- Quirky headings (Bricolage Grotesque)
-- Bold 3px borders on everything
-- Hard offset shadows (no blur)
-- Shadow-to-glow transformation in dark mode
-
-**Component System:**
-- Cards with border + shadow-neo variants
-- Buttons with 3-layer hardware-accelerated technique
-- Native HTML accordions (FAQ)
-- Typography: two-tier (neobrutalist headings, readable body)
-
-**Illustration Guidelines for Neobrutalism:**
-- Raw, unrefined shapes (rectangles, circles, polygons)
-- Thick borders, flat icons, vibrant colors
-- Black shadows at 100% opacity
-- No gradients, no soft shadows, no blur effects
-- Intentionally loud and saturated with bold accents
-- Simple black line illustrations on accent-colored backgrounds
-
-**Accessibility Compliance:**
-- WCAG 2.2 AA compliant (98.7% manual audit in v1.1)
-- Playwright + axe-core automated validation in CI
-- Color contrast ratios meet AA standards
-- Keyboard navigation support
-- Screen reader compatible
+**SEO Considerations:**
+- Use canonical link to indicate preferred URL
+- Provide visible fallback link (no-JS users)
+- Update sitemap to remove /contact
+- Add redirect note to robots.txt if needed
 
 ## Dependencies on Existing Features
 
-These new features build on the existing v1.1 foundation:
+These new features build on the existing v1.2 foundation:
 
-| Existing Feature | How v1.2 Uses It |
+| Existing Feature | How v1.3 Uses It |
 |------------------|------------------|
-| Hero component | Reframe messaging from problem-first to outcome-first, add badges |
-| Services component (3 cards) | Expand to Technology section, add illustrations |
-| Process component (5-step timeline) | Add detailed descriptions, optionally add isometric illustrations |
-| FAQ component (footer accordion) | Move to dedicated /faq page, keep accordion structure |
-| Card component | Use for technology cards, FAQ page layout |
-| Button component | Use for FAQ page CTAs |
-| Border/shadow system | Apply to outcome badges, maintain visual consistency |
-| Dark mode system | Ensure illustrations work in both light/dark modes |
-| Responsive grid | Technology section uses existing 3-column grid |
-| Typography system | Apply to new content (hero outcomes, process descriptions) |
+| Button component | Showcase all variants (primary, secondary, disabled, hover states) |
+| Card component | Showcase with different content types and border variants |
+| Input component | Showcase text, email, textarea variants with labels |
+| Badge component | Showcase with different colors and sizes |
+| OKLCH design tokens | Display color palette with values |
+| Typography system | Display font families, sizes, weights |
+| Shadow-to-glow utilities | Document transformation in design system page |
+| Isometric utilities | Document iso-rotate, iso-shadow, iso-glow classes |
+| Header component | Simplify by removing internal section links |
+| Footer component | Enhance with social icons and nav links |
+| Dark mode toggle | Ensure design system page works in both themes |
 
 **Integration Notes:**
-- All new features use existing Astro components (Card, Button)
-- Illustrations must work with shadow-to-glow dark mode transformation
-- Color palette constrained to yellow/turquoise/magenta
-- No new design patterns needed, only content/illustration additions
+- Design system page uses existing BaseLayout for consistency
+- All component examples use actual Astro components (not mockups)
+- No new CSS needed, just showcase existing tokens/utilities
+- Header/footer changes affect all pages automatically (layout components)
 
 ## Sources
 
-**Outcome-Focused Hero Sections:**
-- [Hero Section Design: Best Practices & Examples for 2026](https://www.perfectafternoon.com/2025/hero-section-design/)
-- [Website Hero Section Best Practices + Examples](https://prismic.io/blog/website-hero-section)
-- [I've Studied 50+ Hero Section Examples: Here Are the Best](https://thrivethemes.com/hero-section-examples/)
-- [Hero Section Test That Led To A 50% Increase In Conversions](https://carrot.com/blog/hero-section-conversion-test/)
-- [High-Converting SaaS Landing Pages: 2026 Best Practices](https://www.saashero.net/design/enterprise-landing-page-design-2026/)
+**Design System Documentation:**
+- [Design System Documentation in 9 Easy Steps - UXPin](https://www.uxpin.com/studio/blog/design-system-documentation-guide/)
+- [7 Best Practices for Design System Documentation - UXPin](https://www.uxpin.com/studio/blog/7-best-practices-for-design-system-documentation/)
+- [Best design system documentation sites - Backlight.dev](https://backlight.dev/mastery/the-best-design-system-documentation-sites)
+- [Design System Documentation Best Practices - Backlight.dev](https://backlight.dev/blog/design-system-documentation-best-practices)
+- [Top Storybook Documentation Examples - Supernova.io](https://www.supernova.io/blog/top-storybook-documentation-examples-and-the-lessons-you-can-learn)
+- [How to document components - Storybook Docs](https://storybook.js.org/docs/writing-docs)
 
-**Isometric Illustration Design:**
-- [Isometric websites - 28+ Best Isometric Web Design Ideas 2026](https://99designs.com/inspiration/websites/isometric)
-- [8 Inspiring Examples of Isometric Illustrations in Web Design](https://speckyboy.com/isometric-illustrations-web-design/)
-- [The Complete Guide to Website Illustrations: A 2026 Strategic Toolkit](https://getillustrations.com/blog/the-complete-guide-to-website-illustrations-a-2026-strategic-toolkit/)
-- [What is Isometric Design? A Web Designer's Guide](https://elements.envato.com/learn/isometric-design-trend-web-design)
+**Internal vs Public Documentation:**
+- [Developer documentation: How to measure impact - GetDX](https://getdx.com/blog/developer-documentation/)
+- [Internal Documentation Guide - ProProfsKB](https://www.proprofskb.com/blog/internal-documentation/)
+- [Technical Documentation in Software Development - DistantJob](https://distantjob.com/blog/software-technical-documentation/)
 
-**Process Visualization:**
-- [28 Process Infographic Examples with Design Tips](https://venngage.com/blog/process-infographic-examples/)
-- [The Complete Guide to Website Illustrations: A 2026 Strategic Toolkit](https://getillustrations.com/blog/the-complete-guide-to-website-illustrations-a-2026-strategic-toolkit/)
+**Portfolio Navigation:**
+- [Website Header Design Best Practices for 2025 - Lauren Taylar](https://laurentaylar.com/blog/website-header-navigation-menu)
+- [How To Make a Portfolio Website: A Simple Guide For 2026 - SiteBuilderReport](https://www.sitebuilderreport.com/how-to-make-a-portfolio-website)
+- [19 Best Portfolio Design Trends (In 2026) - Colorlib](https://colorlib.com/wp/portfolio-design-trends/)
 
-**Service Differentiation:**
-- [19 Best Portfolio Design Trends (In 2026)](https://colorlib.com/wp/portfolio-design-trends/)
-- [How to Build a Strong Tech Portfolio in 2026](https://rkycareers.com/blog/how-to-build-strong-tech-portfolio-2026/)
+**Footer & Social Icons:**
+- [Website Footer Design Best Practices: 27 Things to Put at the Bottom - Orbit Media](https://www.orbitmedia.com/blog/website-footer-design-best-practices/)
+- [7 Best Website Footer Design Examples & SEO Best Practices - Neue World](https://www.neue.world/insights/best-website-footer-design-examples)
+- [How to Add Social Media Icons to Website Footer - NiftyButtons](https://www.niftybuttons.com/blog/add-social-media-icons-website-footer)
 
-**FAQ Design:**
-- [20 Best FAQ Pages (+ How To Create Your Own) (2026)](https://www.shopify.com/blog/120928069-how-to-create-faq-page)
-- [9 FAQ website examples: Designs that improve support and conversions](https://webflow.com/blog/faq-pages)
-- [How To Implement Accordion UI Design: Pros, Cons, and Tips (2026)](https://www.shopify.com/blog/accordion-ui-design)
-- [How to Design a Better FAQ Page: 5 Best Practices](https://www.orbitmedia.com/blog/faq-page-design-best-practices/)
-
-**Neobrutalist Design:**
-- [Neobrutalism: Definition and Best Practices - Nielsen Norman Group](https://www.nngroup.com/articles/neobrutalism/)
-- [Trend Deep Dive: Neo-brutalism](https://author.envato.com/hub/trend-deep-dive-neo-brutalism/)
-- [How can I design in the Neo Brutalism style?](https://medium.com/@sepidy/how-can-i-design-in-the-neo-brutalism-style-d85c458042de)
-
-**Accessibility:**
-- [Decorative Images - Web Accessibility Initiative (WAI)](https://www.w3.org/WAI/tutorials/images/decorative/)
-- [An alt Decision Tree - Web Accessibility Initiative (WAI)](https://www.w3.org/WAI/tutorials/images/decision-tree/)
-- [Image Alt Text for Better Accessibility](https://www.wcag.com/blog/good-alt-text-bad-alt-text-making-your-content-perceivable/)
+**Component Showcases:**
+- [The Component Gallery](https://component.gallery/)
+- [Carbon Design System](https://carbondesignsystem.com/)
+- [W3C Design System](https://design-system.w3.org/)
 
 ---
-*Feature research for: Homepage Refinement (v1.2)*
-*Researched: 2026-02-09*
+*Feature research for: Design System & Navigation Cleanup (v1.3)*
+*Researched: 2026-02-10*

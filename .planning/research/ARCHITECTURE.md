@@ -1,477 +1,552 @@
-# Architecture Research: Homepage Refinements Integration
+# Architecture Research
 
-**Domain:** Homepage enhancement for existing neobrutalist portfolio site
-**Researched:** 2026-02-09
+**Domain:** Design System Reference Pages for Astro Static Sites
+**Researched:** 2026-02-10
 **Confidence:** HIGH
 
-## Existing Architecture Overview
+## Standard Architecture
+
+### System Overview
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                      BaseLayout.astro                        │
-│  (HTML shell, SEO, fonts, dark mode, Header/Footer)         │
+│                     User Navigation Layer                    │
+│  (Header with links to design system reference page)        │
 ├─────────────────────────────────────────────────────────────┤
-│                        Header.astro                          │
-│  (Sticky nav, dark mode toggle, mobile menu)                 │
+│                                                              │
+│  ┌──────────────────────────────────────────────────────┐   │
+│  │   Design System Reference Page (/design/components)  │   │
+│  │                                                       │   │
+│  │   ┌─────────────┐  ┌─────────────┐  ┌─────────────┐ │   │
+│  │   │  Component  │  │  Component  │  │  Component  │ │   │
+│  │   │  Showcase   │  │  Showcase   │  │  Showcase   │ │   │
+│  │   │  Section    │  │  Section    │  │  Section    │ │   │
+│  │   └─────────────┘  └─────────────┘  └─────────────┘ │   │
+│  │                                                       │   │
+│  │   ┌───────────────────────────────────────────────┐  │   │
+│  │   │       Design Tokens Display Section          │  │   │
+│  │   │  (Colors, Typography, Spacing, Shadows)      │  │   │
+│  │   └───────────────────────────────────────────────┘  │   │
+│  └──────────────────────────────────────────────────────┘   │
+│                                                              │
 ├─────────────────────────────────────────────────────────────┤
-│                          MAIN                                │
-│  ┌─────────────────────────────────────────────────────┐    │
-│  │              src/pages/index.astro                   │    │
-│  │  (Imports and stacks homepage section components)   │    │
-│  │                                                       │    │
-│  │  ┌─────────────────────────────────────────────┐    │    │
-│  │  │ Hero.astro                                   │    │    │
-│  │  │ - Problem-first value prop                   │    │    │
-│  │  │ - Uses Button.astro                          │    │    │
-│  │  └─────────────────────────────────────────────┘    │    │
-│  │                                                       │    │
-│  │  ┌─────────────────────────────────────────────┐    │    │
-│  │  │ Services.astro                               │    │    │
-│  │  │ - 3-card service overview                    │    │    │
-│  │  │ - Uses Card.astro (yellow)                   │    │    │
-│  │  └─────────────────────────────────────────────┘    │    │
-│  │                                                       │    │
-│  │  ┌─────────────────────────────────────────────┐    │    │
-│  │  │ Process.astro                                │    │    │
-│  │  │ - 5-step vertical timeline                   │    │    │
-│  │  │ - "You/Joel" collaborative format            │    │    │
-│  │  └─────────────────────────────────────────────┘    │    │
-│  │                                                       │    │
-│  │  ┌─────────────────────────────────────────────┐    │    │
-│  │  │ homepage/TechSection.astro                   │    │    │
-│  │  │ - 4-card tech stack grid                     │    │    │
-│  │  │ - Uses Card.astro (magenta)                  │    │    │
-│  │  └─────────────────────────────────────────────┘    │    │
-│  │                                                       │    │
-│  │  ┌─────────────────────────────────────────────┐    │    │
-│  │  │ About.astro                                  │    │    │
-│  │  └─────────────────────────────────────────────┘    │    │
-│  │                                                       │    │
-│  │  ┌─────────────────────────────────────────────┐    │    │
-│  │  │ homepage/ContactSection.astro                │    │    │
-│  │  └─────────────────────────────────────────────┘    │    │
-│  └─────────────────────────────────────────────────────┘    │
-├─────────────────────────────────────────────────────────────┤
-│                       Footer.astro                           │
-│  (Copyright, social links, FAQ accordion)                    │
+│                    Component Layer                          │
+│  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐       │
+│  │ Button  │  │  Card   │  │  Input  │  │  Badge  │       │
+│  └────┬────┘  └────┬────┘  └────┬────┘  └────┬────┘       │
+│       │            │            │            │             │
+├───────┴────────────┴────────────┴────────────┴─────────────┤
+│                    Design Tokens Layer                      │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │              global.css (@theme block)              │   │
+│  │  Colors • Typography • Spacing • Borders • Shadows  │   │
+│  └─────────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Component Location Patterns
+### Component Responsibilities
 
-| Pattern | Examples | Rationale |
-|---------|----------|-----------|
-| **Root components** | `Hero.astro`, `Services.astro`, `Process.astro`, `About.astro` | Reusable across multiple pages, generic |
-| **Page-specific** | `homepage/TechSection.astro`, `homepage/ContactSection.astro` | Only used on homepage, more specific |
-| **UI primitives** | `ui/Card.astro`, `ui/Button.astro`, `ui/Input.astro` | Reusable building blocks |
-| **Layout** | `layout/Header.astro`, `layout/Footer.astro`, `layout/MobileNav.astro` | Site-wide structure |
+| Component | Responsibility | Typical Implementation |
+|-----------|----------------|------------------------|
+| Design System Reference Page | Single source of truth for all UI components and design tokens | Astro page at `src/pages/design/components.astro` |
+| Component Showcase Sections | Display all variants/states of a component with live examples | Wrapper divs containing multiple component instances |
+| Design Token Display | Visual reference for CSS custom properties (colors, spacing, etc.) | HTML sections rendering token values from global.css |
+| UI Primitives (Button, Card, Input, Badge) | Reusable components with variant props | Astro components in `src/components/ui/` |
+| BaseLayout | HTML shell with dark mode, fonts, Header/Footer | Used by all pages including design reference |
 
-### Current Component Dependencies
+## Recommended Project Structure
 
+**Current Structure (Existing):**
 ```
-Hero.astro
-  └── ui/Button.astro
-
-Services.astro
-  ├── ui/Card.astro (variant="yellow")
-  └── ui/Button.astro
-
-Process.astro
-  └── (no dependencies, custom styled)
-
-homepage/TechSection.astro
-  └── ui/Card.astro (variant="magenta")
-
-Footer.astro
-  └── (FAQ accordion inline, lucide-static icons)
+src/
+├── components/
+│   ├── ui/                # Primitive components
+│   │   ├── Button.astro   # Multi-variant button with neobrutalist styling
+│   │   ├── Card.astro     # Card with offset shadows/glows
+│   │   ├── Input.astro    # Form input with error states
+│   │   └── Badge.astro    # Isometric shadow badge
+│   └── layout/            # Layout components
+│       ├── Header.astro   # Site header with nav
+│       ├── Footer.astro   # Site footer
+│       └── MobileNav.astro
+├── layouts/
+│   └── BaseLayout.astro   # HTML shell wrapper
+├── pages/
+│   ├── index.astro        # Homepage
+│   ├── component-demo.astro # EXISTING component demo (basic)
+│   ├── blog/              # Blog pages
+│   ├── portfolio/         # Portfolio pages
+│   ├── faq.astro
+│   └── contact.astro
+└── styles/
+    └── global.css         # Design tokens in @theme block
 ```
 
-## Milestone Integration Points
+**New Additions for Design System Reference:**
+```
+src/
+├── components/
+│   ├── design-system/     # NEW: Design system-specific components
+│   │   ├── ColorSwatch.astro        # Display color tokens
+│   │   ├── TypographyExample.astro  # Display typography scales
+│   │   ├── SpacingGrid.astro        # Visualize spacing tokens
+│   │   └── ComponentVariants.astro  # Wrapper for showing variants
+│   └── ui/                # (Existing - may need modifications)
+├── pages/
+│   ├── design/            # NEW: Design system pages
+│   │   └── components.astro  # Main design reference page
+│   └── component-demo.astro  # MODIFY: Add redirect to /design/components
+└── data/                  # NEW: Design token data
+    └── design-tokens.json # Structured token data for display
+```
 
-### 1. Hero Section Enhancement (MODIFY Hero.astro)
+### Structure Rationale
 
-**Current state:**
-- Single bordered box with headline
-- One-liner value prop
-- Single CTA button
+- **`src/components/design-system/`**: Separates documentation/display components from production UI components. These are for showing design tokens visually, not for use in actual pages.
 
-**Required changes:**
-- Add outcome-focused messaging (modify headline + value prop)
-- Add visual badges/trust indicators (new markup)
-- Maintain existing Button.astro dependency
+- **`src/pages/design/components.astro`**: Single comprehensive reference page following industry patterns (Material Design, Carbon, Fluent all use similar approaches). Using `/design/components` path instead of `/component-demo` for better SEO and discoverability.
 
-**Integration considerations:**
-- **No new components needed** — Hero.astro already exists at correct level
-- **Styling:** Use existing shadow utilities (`shadow-neo-yellow`, `shadow-neo-turquoise`)
-- **Badges:** Can be inline SVG or new simple badge elements with Card.astro styling
-- **Layout:** Existing container structure supports additional elements
+- **`src/data/design-tokens.json`**: Extracting token data into JSON allows programmatic display without parsing CSS. Makes it easy to generate color swatches, spacing visualizations, etc.
 
-**Modification scope:** MEDIUM
-- Update headline copy
-- Add badge container below/beside headline
-- Possibly adjust layout from pure-center to accommodate badges
+- **Redirect from `/component-demo` to `/design/components`**: Preserves any existing links while moving to better-named route.
 
-### 2. Process Section Enhancement (MODIFY Process.astro)
+## Architectural Patterns
 
-**Current state:**
-- 5-step vertical timeline with turquoise line
-- Numbered circle markers
-- "You/Joel" dialogue boxes per step
+### Pattern 1: File-Based Routing for Reference Pages
 
-**Required changes:**
-- Add detailed descriptions (expand existing content)
-- Add isometric illustrations per step (new asset integration)
+**What:** Astro uses directory structure in `src/pages/` to automatically generate routes. No routing configuration needed.
 
-**Integration considerations:**
-- **No new components needed** — Process.astro already exists
-- **Illustration assets:** Need to determine format and location
-  - Recommended: `/public/images/process/step-{1-5}.svg` or `.png`
-  - Reference via `/images/process/step-1.svg` in component
-- **Layout adjustment:** Current `pl-12` (padding-left) for timeline content may need adjustment to accommodate illustrations
-  - Could use flexbox/grid to place illustration beside content
-  - Or stack illustration above "You/Joel" boxes on mobile, side-by-side on desktop
+**When to use:** Always for static documentation pages. For this milestone, creating `src/pages/design/components.astro` automatically creates the `/design/components` route.
 
-**Modification scope:** MEDIUM-HIGH
-- Expand content copy within existing structure
-- Add `<img>` tags per step
-- Adjust layout CSS for illustration placement
-- Responsive considerations for illustration sizing
+**Trade-offs:**
+- **Pro:** Zero configuration, intuitive URL structure
+- **Pro:** Easy to add more design system pages later (`/design/tokens`, `/design/guidelines`)
+- **Con:** Must create files for each route (but this is desired for static docs)
 
-### 3. Technology Section Redesign (MODIFY TechSection.astro)
-
-**Current state:**
-- Split layout: left philosophy text, right 4-card grid (Frontend, Backend, AI/ML, Infrastructure)
-- All cards use Card.astro with magenta variant
-- Technologies listed as bullet points within cards
-
-**Required changes:**
-- Reorganize into 3 categories: AI, Automations, Web Apps
-- Add illustrations per category
-- Maintain philosophy text or replace with new messaging
-
-**Integration considerations:**
-- **No new components needed** — TechSection.astro in `homepage/` already page-specific
-- **Card.astro reuse:** Can continue using Card.astro component
-- **Illustration assets:** Need to determine format
-  - Recommended: `/public/images/tech/ai.svg`, `/public/images/tech/automations.svg`, `/public/images/tech/web-apps.svg`
-- **Layout adjustment:** Current grid is `grid-cols-1 sm:grid-cols-2`
-  - For 3 categories: `grid-cols-1 md:grid-cols-3` makes sense
-  - Philosophy text could stay in same asymmetric layout, or move/remove
-
-**Modification scope:** MEDIUM
-- Restructure data from 4 categories to 3
-- Add illustration `<img>` tags within or above cards
-- Adjust grid columns
-- Update content copy for new categorization
-
-### 4. FAQ Dedicated Page (NEW PAGE + MODIFY Footer)
-
-**Current state:**
-- Footer.astro contains FAQ accordion with 5 questions
-- FAQ.astro exists but is standalone component (not currently used)
-
-**Required changes:**
-- Create `/src/pages/faq.astro` as dedicated page
-- Decide Footer FAQ fate: remove entirely, or keep abbreviated version with "See all FAQ" link
-
-**Integration considerations:**
-- **NEW: `/src/pages/faq.astro`** — Use BaseLayout, import FAQ.astro or inline accordion
-- **MODIFY: `Footer.astro`** — Two options:
-  - **Option A (Clean):** Remove FAQ section entirely, add simple link to /faq in footer nav
-  - **Option B (Teaser):** Keep 2-3 questions, add "View All Questions" link to /faq
-- **FAQ.astro reuse:** Existing FAQ.astro (src/components/FAQ.astro) can be imported by faq.astro page
-  - Current FAQ.astro has same 5 questions as Footer, slightly different styling
-  - Should consolidate into single FAQ component used by both page and footer (if keeping footer FAQ)
-
-**New components needed:**
-- **NONE** — `/src/pages/faq.astro` is a page file, not a component
-- Can reuse existing `FAQ.astro` component
-
-**Modification scope:** LOW-MEDIUM
-- Create new page file (copy BaseLayout pattern from other pages)
-- Modify Footer.astro to remove or abbreviate FAQ section
-- Optionally refactor FAQ.astro to accept props (e.g., `limit` to show subset)
-
-## Recommended Build Order
-
-Based on dependencies and complexity:
-
-### Phase 1: Asset Preparation (Prerequisite)
-1. **Gather/create illustration assets:**
-   - Process step illustrations (5 files): `/public/images/process/step-{1-5}.{svg|png}`
-   - Technology category illustrations (3 files): `/public/images/tech/{ai|automations|web-apps}.{svg|png}`
-   - Hero badges/trust indicators (if visual): `/public/images/hero/{badge-name}.{svg|png}`
-
-2. **Decide asset format:**
-   - **SVG recommended** for illustrations (scalable, smaller file size, theme-able)
-   - **PNG acceptable** if illustrations are complex/photographic
-
-### Phase 2: Simple Modifications (Low Risk)
-1. **FAQ Page** — New page, no existing dependencies
-   - Create `/src/pages/faq.astro`
-   - Import existing `FAQ.astro` component or inline content
-   - Test in isolation
-
-2. **Hero Enhancement** — Modify existing component
-   - Update copy/messaging
-   - Add badge elements (minimal new markup)
-   - Test visual hierarchy
-
-### Phase 3: Layout-Heavy Modifications (Higher Risk)
-3. **Technology Section Redesign** — Restructure existing component
-   - Reorganize 4 categories → 3 categories
-   - Add illustrations
-   - Adjust grid layout
-   - Test responsive behavior
-
-4. **Process Section Enhancement** — Modify existing component with new layout
-   - Add illustrations (requires layout adjustment for image placement)
-   - Expand content copy
-   - Test vertical timeline + image layout on mobile/desktop
-
-### Phase 4: Integration & Cleanup
-5. **Footer FAQ Decision** — Modify existing component
-   - Remove or abbreviate footer FAQ based on decision
-   - Add link to /faq page if needed
-   - Test footer appearance
-
-6. **Overall Testing:**
-   - Visual hierarchy flow (Hero → Services → Process → Tech → About → Contact)
-   - Mobile responsiveness for all modified sections
-   - Dark mode appearance
-   - Performance (image optimization)
-
-## Data Flow Changes
-
-### Current Data Flow
-- **Static content:** All homepage sections have hardcoded content in component files
-- **No external data sources** for homepage (blog uses Content Collections, portfolio uses projects.json)
-
-### After Milestone
-- **No data flow changes** — All enhancements remain static content
-- **New static assets:** Illustration images loaded via public folder URLs
-
-### Potential Future Consideration
-If FAQ grows beyond 5-10 questions, consider:
-- Moving FAQ data to `/src/data/faq.json` or Content Collection
-- Would allow FAQ.astro to be data-driven, easier to maintain
-
-## Component Structure Recommendations
-
-### Hero.astro Enhancement Pattern
-
-```astro
+**Example:**
+```typescript
+// src/pages/design/components.astro
 ---
-import Button from './ui/Button.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../../components/ui/Button.astro';
+import Card from '../../components/ui/Card.astro';
 ---
 
-<section id="hero" class="hero min-h-[80vh] flex items-center justify-center px-6 py-24 md:py-32">
-  <div class="container max-w-4xl mx-auto text-center">
-    <!-- Main headline box (existing) -->
-    <div class="border-[3px] border-text-light dark:border-text-dark p-6 md:p-8 inline-block shadow-neo-yellow mb-8">
-      <h1 class="...">
-        [New outcome-focused headline]
-      </h1>
-    </div>
+<BaseLayout title="Component Reference" description="Complete design system reference">
+  <div class="max-w-7xl mx-auto px-6 py-12">
+    <h1>Component Library</h1>
 
-    <!-- Value prop (existing, update copy) -->
-    <p class="...">
-      [Updated value proposition]
-    </p>
-
-    <!-- NEW: Visual badges/trust indicators -->
-    <div class="flex flex-wrap justify-center gap-4 mb-8">
-      <!-- Option 1: Text badges with Card styling -->
-      <div class="inline-flex items-center gap-2 px-4 py-2 border-[3px] border-text-light dark:border-text-dark shadow-neo-turquoise">
-        <img src="/images/hero/icon-1.svg" alt="" class="w-6 h-6" />
-        <span>Badge Text</span>
-      </div>
-      <!-- Repeat for additional badges -->
-    </div>
-
-    <!-- CTA (existing) -->
-    <Button variant="yellow" size="lg" href="/contact">
-      Start a Conversation
-    </Button>
-  </div>
-</section>
-```
-
-### Process.astro Enhancement Pattern
-
-```astro
-<article class="relative pl-12 pb-8 border-l-[4px] border-turquoise">
-  <!-- Step marker (existing) -->
-  <div class="absolute left-0 top-0 -ml-4.5 w-8 h-8 ...">
-    <span>1</span>
-  </div>
-
-  <!-- Step content with NEW illustration -->
-  <div class="flex flex-col md:flex-row gap-6 items-start">
-    <!-- NEW: Illustration -->
-    <div class="w-full md:w-1/3 flex-shrink-0">
-      <img
-        src="/images/process/step-1.svg"
-        alt="Discovery phase illustration"
-        class="w-full h-auto"
-      />
-    </div>
-
-    <!-- Existing content (title + dialogue boxes) -->
-    <div class="flex-1">
-      <h3 class="...">Discovery</h3>
-      <div class="border-[3px] ... space-y-3">
-        <div>
-          <span class="font-semibold">You:</span>
-          <span class="...">Share your challenges and goals</span>
-        </div>
-        <!-- etc -->
-      </div>
-    </div>
-  </div>
-</article>
-```
-
-### TechSection.astro Redesign Pattern
-
-```astro
-<section id="tech" ...>
-  <div class="container mx-auto px-6 md:px-12">
-    <h2 ...>How I Build</h2>
-
-    <!-- Keep asymmetric layout or adjust to full-width for 3 cards -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <!-- AI Card with illustration -->
-      <Card variant="magenta">
-        <img
-          src="/images/tech/ai.svg"
-          alt="AI illustration"
-          class="w-full h-32 object-contain mb-4"
-        />
-        <h3 class="...">AI Integration</h3>
-        <ul class="...">
-          <li><span class="font-semibold">OpenAI</span> — Natural language</li>
-          <!-- etc -->
-        </ul>
-      </Card>
-
-      <!-- Automations Card -->
-      <Card variant="turquoise">
-        <!-- Similar pattern -->
-      </Card>
-
-      <!-- Web Apps Card -->
-      <Card variant="yellow">
-        <!-- Similar pattern -->
-      </Card>
-    </div>
-  </div>
-</section>
-```
-
-### FAQ Page Pattern
-
-```astro
----
-// /src/pages/faq.astro
-import BaseLayout from '../layouts/BaseLayout.astro';
-import FAQ from '../components/FAQ.astro';
----
-
-<BaseLayout
-  title="Frequently Asked Questions | Joel Shinness"
-  description="Common questions about working together on custom software projects"
->
-  <div class="container mx-auto px-6 py-24 max-w-4xl">
-    <h1 class="font-heading text-4xl md:text-5xl font-bold text-center mb-4">
-      Frequently Asked Questions
-    </h1>
-    <p class="text-center text-text-muted-light dark:text-text-muted-dark mb-12">
-      Everything you need to know about working together
-    </p>
-
-    <FAQ />
+    <section id="buttons">
+      <h2>Buttons</h2>
+      <Button variant="yellow">Yellow</Button>
+      <Button variant="turquoise">Turquoise</Button>
+      <Button variant="magenta">Magenta</Button>
+    </section>
   </div>
 </BaseLayout>
 ```
 
-## Anti-Patterns to Avoid
+### Pattern 2: Static Redirects via Astro Config
 
-### Anti-Pattern 1: Creating Unnecessary New Components
+**What:** Astro config `redirects` object creates HTML meta-refresh redirects for static sites (no server required).
 
-**What people do:** Create new components like `HeroBadge.astro`, `ProcessIllustration.astro` for simple markup
-**Why it's wrong:** Over-abstraction for static content adds complexity without benefit
-**Do this instead:** Keep illustrations and badges as simple `<img>` and `<div>` elements within parent components. Only create new components if they're reused 3+ times.
+**When to use:** When renaming routes or creating URL aliases. For this milestone, redirect `/component-demo` → `/design/components`.
 
-### Anti-Pattern 2: Inconsistent Component Location
+**Trade-offs:**
+- **Pro:** Works on static hosts (GitHub Pages, Netlify, Vercel)
+- **Pro:** No server-side configuration needed
+- **Pro:** Generates actual HTML files at old paths
+- **Con:** Uses meta-refresh (not true 301), slightly slower than server redirects
+- **Con:** Search engines see these as permanent but may take time to update
 
-**What people do:** Put new FAQ page in `/src/components/pages/FAQ.astro` instead of `/src/pages/faq.astro`
-**Why it's wrong:** Breaks Astro's file-based routing convention, page won't be accessible
-**Do this instead:** Pages go in `/src/pages/`, components go in `/src/components/`. Follow existing pattern.
+**Example:**
+```javascript
+// astro.config.mjs
+export default defineConfig({
+  redirects: {
+    '/component-demo': '/design/components',
+  },
+});
+```
 
-### Anti-Pattern 3: Hardcoding Image Paths in Multiple Places
+This generates `dist/component-demo.html`:
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="refresh" content="0;url=/design/components">
+  </head>
+</html>
+```
 
-**What people do:** Write `/public/images/process/step-1.svg` instead of `/images/process/step-1.svg`
-**Why it's wrong:** `/public/` is automatically root in Astro build, breaks in production
-**Do this instead:** Reference public assets as `/images/...` without `/public/` prefix. Astro handles the path resolution.
+### Pattern 3: Component Variant Display Pattern
 
-### Anti-Pattern 4: Breaking Responsive Layout
+**What:** Display all variants/states of a component in organized sections with descriptive headers and context.
 
-**What people do:** Add illustrations with fixed widths that break mobile layout
-**Why it's wrong:** Site becomes unusable on mobile, fails accessibility
-**Do this instead:**
-- Use responsive utilities (`w-full md:w-1/3`)
-- Test on mobile viewport during development
-- Use flexbox/grid with wrapping (`flex-col md:flex-row`)
+**When to use:** On design system reference pages to show designers/developers all available options.
 
-## Integration Checklist
+**Trade-offs:**
+- **Pro:** Single source of truth for component capabilities
+- **Pro:** Visual regression testing (screenshot before/after changes)
+- **Con:** Must manually update when adding new variants (but this is intentional - forces documentation)
 
-Before starting implementation:
+**Example:**
+```typescript
+<section id="buttons">
+  <h2>Buttons</h2>
+  <p>Hover to see lift effect, click for press effect, tab for focus ring</p>
 
-- [ ] **Assets ready:** All illustration files created and placed in `/public/images/`
-- [ ] **Image optimization:** SVGs minified, PNGs compressed (use ImageOptim or similar)
-- [ ] **Copy ready:** New headlines, value props, detailed process descriptions written
-- [ ] **Design decisions:** Badge style, illustration placement, FAQ footer treatment decided
+  <div>
+    <h3>Sizes</h3>
+    <div class="flex gap-4">
+      <Button variant="yellow" size="sm">Small</Button>
+      <Button variant="yellow" size="md">Medium</Button>
+      <Button variant="yellow" size="lg">Large</Button>
+    </div>
+  </div>
 
-During implementation:
+  <div>
+    <h3>Variants</h3>
+    <div class="flex gap-4">
+      <Button variant="yellow">Yellow</Button>
+      <Button variant="turquoise">Turquoise</Button>
+      <Button variant="magenta">Magenta</Button>
+    </div>
+  </div>
+</section>
+```
 
-- [ ] **Follow location patterns:** Homepage-specific components in `homepage/`, reusable in root
-- [ ] **Maintain Card.astro usage:** Don't recreate card styling, use existing component
-- [ ] **Test dark mode:** All new elements have dark mode styling
-- [ ] **Test responsive:** Mobile, tablet, desktop breakpoints
-- [ ] **Preserve accessibility:** alt text on images, semantic HTML, ARIA labels
+### Pattern 4: CSS Custom Property Token Display
 
-After implementation:
+**What:** Parse or manually list design tokens from `global.css` and display them with visual examples.
 
-- [ ] **Lighthouse CI:** Verify performance score stays 90%+
-- [ ] **Visual regression:** Compare before/after screenshots
-- [ ] **Content review:** Copy/messaging accuracy
-- [ ] **Link validation:** /faq page linked from footer/nav
+**When to use:** When building a design system reference that shows colors, typography, spacing, etc.
+
+**Trade-offs:**
+- **Pro:** Designers/developers see exact values used in code
+- **Pro:** Easy to update (tokens live in one place)
+- **Con:** CSS custom properties can't be read at build time without tooling
+- **Con:** Manual approach requires keeping JSON in sync with CSS
+
+**Example (Manual Approach):**
+```typescript
+// src/data/design-tokens.json
+{
+  "colors": {
+    "yellow": {
+      "value": "oklch(0.85 0.18 95)",
+      "usage": "Primary CTA buttons, highlights"
+    },
+    "turquoise": {
+      "value": "oklch(0.70 0.15 195)",
+      "usage": "Secondary actions, links"
+    }
+  }
+}
+
+// src/pages/design/components.astro
+---
+import tokens from '../../data/design-tokens.json';
+---
+<section id="colors">
+  <h2>Colors</h2>
+  {Object.entries(tokens.colors).map(([name, { value, usage }]) => (
+    <div>
+      <div style={`background: ${value}; width: 100px; height: 100px;`} />
+      <p><code>{name}</code>: {value}</p>
+      <p>{usage}</p>
+    </div>
+  ))}
+</section>
+```
+
+### Pattern 5: Existing Component Modification (Not Replacement)
+
+**What:** When improving the design system, modify existing components with new features rather than replacing them entirely.
+
+**When to use:** When components are already in use across the site. For this milestone, existing Button, Card, Input, Badge components should be enhanced with better documentation but not rewritten.
+
+**Trade-offs:**
+- **Pro:** No breaking changes to existing pages
+- **Pro:** Gradual improvement path
+- **Con:** May accumulate technical debt if old patterns linger
+- **Con:** Must test all existing usages after modifications
+
+**Example:**
+```typescript
+// DON'T: Create Button2.astro with new features
+// DO: Enhance Button.astro with backward-compatible additions
+
+// Before:
+interface Props {
+  variant?: 'yellow' | 'turquoise' | 'magenta';
+  size?: 'sm' | 'md' | 'lg';
+}
+
+// After (adding disabled state):
+interface Props {
+  variant?: 'yellow' | 'turquoise' | 'magenta';
+  size?: 'sm' | 'md' | 'lg';
+  disabled?: boolean;  // NEW - backward compatible
+}
+```
+
+## Data Flow
+
+### Request Flow (Static Site)
+
+```
+User navigates to /design/components
+    ↓
+Astro SSG pre-rendered HTML served
+    ↓
+Browser loads: BaseLayout → Header + Main Content + Footer
+    ↓
+Component examples render with inline styles (scoped CSS)
+    ↓
+Dark mode JS reads localStorage, toggles .dark class
+    ↓
+CSS custom properties update via :root selectors
+```
+
+### Design Token Flow
+
+```
+[global.css] → Design Tokens defined in @theme block
+    ↓
+[Component CSS] → References tokens via var(--token-name)
+    ↓
+[Runtime] → Browser resolves CSS variables to computed values
+    ↓
+[Dark Mode Toggle] → .dark class switches token values
+```
+
+### Component Import Flow
+
+```
+[Page: design/components.astro]
+    ↓
+import Button from '../../components/ui/Button.astro'
+import Card from '../../components/ui/Card.astro'
+    ↓
+<Button variant="yellow">Click me</Button>
+    ↓
+[Button.astro] renders with scoped CSS
+    ↓
+CSS uses var(--color-yellow) from global.css
+```
+
+## Integration Points
+
+### New Component: `src/pages/design/components.astro`
+
+**Purpose:** Main design system reference page
+
+**Integrates with:**
+- `BaseLayout.astro` - Wraps page with site header/footer
+- All `src/components/ui/*` components - Imports and displays them
+- `global.css` - Displays design tokens visually
+- `Header.astro` - Should add link to /design/components in nav
+
+**Data dependencies:**
+- Optional: `src/data/design-tokens.json` for structured token display
+- CSS custom properties from `global.css`
+
+**Build order:**
+1. Create `design-tokens.json` (if using token display)
+2. Create helper components in `src/components/design-system/` (ColorSwatch, etc.)
+3. Create `src/pages/design/components.astro`
+4. Test all component variants render correctly
+5. Add link to Header navigation
+
+### Modified Component: `Header.astro`
+
+**Changes needed:**
+- Add navigation link to `/design/components` (probably in a dropdown or "Resources" section)
+
+**Integration points:**
+- No breaking changes to existing navigation
+- Should work on mobile nav as well (`MobileNav.astro`)
+
+### Redirect Configuration: `astro.config.mjs`
+
+**Changes needed:**
+```javascript
+redirects: {
+  '/component-demo': '/design/components',  // NEW
+  '/portfolio': '/projects',                // EXISTING
+  '/portfolio/[slug]': '/projects/[slug]',  // EXISTING
+}
+```
+
+**Integration points:**
+- Build process generates redirect HTML files
+- No impact on other routes
+- Static hosting (GitHub Pages) serves meta-refresh redirects
+
+### Optional New Components: `src/components/design-system/`
+
+**Purpose:** Helper components for visualizing design tokens
+
+**Possible components:**
+- `ColorSwatch.astro` - Shows color value with visual swatch
+- `TypographyExample.astro` - Displays font scale with examples
+- `SpacingGrid.astro` - Visualizes spacing tokens
+- `ShadowExample.astro` - Shows shadow/glow effects
+
+**Integration:**
+- Only used on design reference pages
+- Import design tokens from `design-tokens.json` or hard-code references
+- Use same styling patterns as existing UI components
 
 ## Scaling Considerations
 
-### Current Scale: Static Portfolio Site
-- No database, no API calls
-- All content compiled at build time
-- Deployed to GitHub Pages (static hosting)
+| Scale | Architecture Adjustments |
+|-------|--------------------------|
+| 1-10 components | Single page (`/design/components`) with sections for each component. Current approach. |
+| 10-30 components | Consider splitting into categories: `/design/components` (index), `/design/buttons`, `/design/forms`, etc. Astro file-based routing makes this trivial. |
+| 30+ components | Use dynamic routing with `[component].astro` and `getStaticPaths()` to generate pages from component metadata. Consider Storybook or dedicated docs framework. |
 
-### This Milestone: No Architecture Impact
-- All changes are static content/markup
-- No new external dependencies
-- No performance concerns (a few images won't impact Lighthouse scores if optimized)
+### Scaling Priorities
 
-### Future Considerations (Not This Milestone)
-If site grows beyond 20-30 FAQ items or needs dynamic content:
-- Consider Content Collections for FAQ (similar to blog)
-- Would enable tagging, search, filtering
-- Still builds to static, maintains performance
+1. **First bottleneck:** Page becomes too long to scroll (20+ component sections). **Solution:** Split into category pages (`/design/buttons`, `/design/forms`).
+
+2. **Second bottleneck:** Too many category pages to maintain manually. **Solution:** Use Astro Content Collections or dynamic routing with component metadata JSON.
+
+3. **Third bottleneck:** Need interactive examples (state management demos). **Solution:** Add Astro islands with React/Vue/Svelte for interactive components.
+
+## Anti-Patterns
+
+### Anti-Pattern 1: Duplicating Components for Documentation
+
+**What people do:** Create separate `Button-Showcase.astro` alongside `Button.astro` just for the design system page.
+
+**Why it's wrong:**
+- Two sources of truth - showcase can drift from actual component
+- Doubles maintenance burden
+- Showcase can't test real component behavior
+
+**Do this instead:**
+- Import and use the actual `Button.astro` component on the design reference page
+- If showcase needs special behavior, use wrapper components in `design-system/` folder that import real components
+
+### Anti-Pattern 2: Hardcoding Token Values in Display
+
+**What people do:**
+```html
+<div style="background: oklch(0.85 0.18 95)">Yellow</div>
+```
+
+**Why it's wrong:**
+- Token value in global.css can change, making display inaccurate
+- Can't show dark mode variant automatically
+- Not using the same tokens as actual components
+
+**Do this instead:**
+```html
+<div style="background: var(--color-yellow)" class="dark:bg-[--color-yellow-dark]">
+  Yellow: <code>var(--color-yellow)</code>
+</div>
+```
+Or extract tokens to JSON and reference both CSS and display from the same source.
+
+### Anti-Pattern 3: Creating Separate Dark Mode Examples
+
+**What people do:** Render two versions of each component side-by-side (light and dark).
+
+**Why it's wrong:**
+- Can't test dark mode toggle behavior
+- Doubles page size and maintenance
+- User can't easily see their preferred theme
+
+**Do this instead:**
+- Single set of examples that respect the site's dark mode toggle
+- Add note: "Toggle dark mode in header to see dark variants"
+- If side-by-side comparison needed, use Astro islands with `client:only` to force theme on specific sections
+
+### Anti-Pattern 4: Server-Side Redirects on Static Hosts
+
+**What people do:** Try to configure nginx/Apache redirects for Astro static sites hosted on GitHub Pages.
+
+**Why it's wrong:**
+- GitHub Pages doesn't support server configuration
+- Overcomplicates deployment
+- Static site generation is the strength - use it
+
+**Do this instead:**
+- Use Astro's `redirects` config for meta-refresh redirects
+- If true server redirects needed, use Netlify `_redirects` file or Vercel config
+- For GitHub Pages, Astro meta-refresh is the correct approach
+
+### Anti-Pattern 5: Separate Design System Site
+
+**What people do:** Build a completely separate Astro site for design system docs at a different domain.
+
+**Why it's wrong:**
+- For small portfolios with 5-10 components, this is overkill
+- Doubles deployment complexity
+- Components can drift between main site and docs site
+- Search engines index them separately
+
+**Do this instead:**
+- Single site with `/design` path for design system pages
+- Share same components, tokens, and deployment
+- Only split to separate site if design system serves multiple projects
+
+## Build Order Recommendations
+
+Based on dependencies and integration points, recommended build order:
+
+### Phase 1: Data Layer (if using token display)
+1. Create `src/data/design-tokens.json` with color, typography, spacing tokens
+2. Validate JSON structure matches actual global.css values
+
+### Phase 2: Helper Components (if needed)
+3. Create `src/components/design-system/ColorSwatch.astro`
+4. Create `src/components/design-system/ComponentVariants.astro` wrapper
+
+### Phase 3: Main Reference Page
+5. Create `src/pages/design/components.astro`
+6. Import and display existing UI components (Button, Card, Input, Badge)
+7. Add token display sections using helper components
+8. Test all variants render correctly in light and dark mode
+
+### Phase 4: Navigation Updates
+9. Modify `src/components/layout/Header.astro` to add link to /design/components
+10. Modify `src/components/layout/MobileNav.astro` if needed
+
+### Phase 5: Redirects
+11. Update `astro.config.mjs` with redirect from `/component-demo` to `/design/components`
+12. Build and verify redirect works
+
+### Phase 6: Documentation & Cleanup
+13. Consider deprecating or removing old `/component-demo` page content
+14. Update internal links across site to point to `/design/components`
+15. Add metadata/SEO for design system page
 
 ## Sources
 
-- **Existing codebase:** `/src/pages/index.astro`, `/src/components/*.astro`
-- **Astro documentation:** File-based routing, component patterns
-- **Current milestone context:** Homepage refinement requirements
+**Astro Documentation:**
+- [Configuration Reference - Astro Docs](https://docs.astro.build/en/reference/configuration-reference/) - Redirects configuration syntax
+- [Routing - Astro Docs](https://docs.astro.build/en/guides/routing/) - File-based routing patterns
+
+**Design System Patterns:**
+- [Best Practices for Scalable Component Libraries | UXPin](https://www.uxpin.com/studio/blog/best-practices-for-scalable-component-libraries/) - Component organization
+- [3 Best Ways to Organize & Maintain Your Design System](https://www.insaim.design/blog/3-best-ways-to-organize-maintain-your-design-system) - Governance and structure
+- [Design tokens | Design good practices](https://goodpractices.design/articles/design-tokens) - Token implementation
+- [Tailwind CSS Best Practices 2025-2026: Design Tokens, Typography & Responsive Patterns | FrontendTools](https://www.frontendtools.tech/blog/tailwind-css-best-practices-design-system-patterns) - Token organization for Tailwind
+
+**Redirect Patterns:**
+- [Static Site Redirects With Astro (or Any Static Site Builder) - Lloyd Atkinson](https://www.lloydatkinson.net/posts/2022/static-site-redirects-with-astro/) - Meta-refresh redirect patterns
+- [How to Fix Astro Redirect Settings When They Don't Work [Static Site SEO] - Nao](https://naonao-na.com/en/posts/astro-redirect-seo/) - Troubleshooting static redirects
+- [Static Page Redirects using AstroJS](https://friedrichkurz.me/posts/2025-01-11/) - Implementation examples
+
+**Component Showcase Patterns:**
+- [10 Best Design System Examples for 2026 | DesignRush](https://www.designrush.com/best-designs/websites/trends/design-system-examples) - Industry examples
+- [GitHub - jordienr/astro-design-system](https://github.com/jordienr/astro-design-system) - Astro design system starter
+- [Building the Ultimate Design System: A Complete Architecture Guide for 2026 | Medium](https://medium.com/@padmacnu/building-the-ultimate-design-system-a-complete-architecture-guide-for-2026-6dfcab0e9999) - Complete architecture patterns
 
 ---
-*Architecture research for: Homepage Refinements Integration*
-*Researched: 2026-02-09*
+*Architecture research for: Design System Reference Pages in Astro*
+*Researched: 2026-02-10*
+*Confidence: HIGH*

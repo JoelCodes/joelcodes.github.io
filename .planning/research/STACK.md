@@ -1,536 +1,271 @@
-# Stack Research - Neobrutalist Design Additions
+# Stack Research
 
-**Domain:** Neobrutalist design system for existing Astro 5 + Tailwind CSS 4 site
-**Researched:** 2026-02-09 (Updated for homepage refinement features)
+**Domain:** Design system reference page and component documentation
+**Researched:** 2026-02-10
 **Confidence:** HIGH
 
-## Context
+## Executive Summary
 
-This research covers stack additions for:
-1. **Original milestone:** Neobrutalist design refresh (fonts, colors, shadows)
-2. **New milestone (this update):** Homepage refinement features (isometric illustrations, outcome badges, FAQ page)
+For adding a design system reference page with component documentation and navigation cleanup to an existing Astro 5 portfolio, **NO new dependencies are required**. The existing stack (Astro 5.16.15, astro-expressive-code 0.41.6, @astrojs/mdx 4.3.13, TypeScript) already provides all necessary capabilities. Redirect handling is already configured in astro.config.mjs.
 
-The existing validated stack (Astro 5, Tailwind CSS 4, MDX, TypeScript, Expressive Code) is NOT re-researched.
+This milestone is a **pure implementation task** using existing tools, not a technology addition task.
 
-## Stack Changes Required for Homepage Refinement
+## Existing Stack Capabilities (Already Validated)
 
-### CRITICAL: Icon Library Migration
+### Core Technologies
 
-| Change | From | To | Version | Why |
-|--------|------|-----|---------|-----|
-| Icon library | `lucide-static` | `@lucide/astro` | ^0.563.0 | Tree-shaking, zero runtime JS, Astro-native components |
+| Technology | Current Version | Latest Version | Purpose | Capabilities for New Features |
+|------------|-----------------|----------------|---------|-------------------------------|
+| Astro | 5.16.15 | 5.17.1 | Static site generator | ✅ File-based routing for /design-system page<br/>✅ TypeScript props documentation via Props interface<br/>✅ Redirect configuration built-in<br/>✅ Component composition |
+| @astrojs/mdx | 4.3.13 | 4.3.13 (current) | MDX processing | ✅ Component documentation in markdown<br/>✅ Import components into .mdx files<br/>✅ Embed live examples |
+| astro-expressive-code | 0.41.6 | 0.41.6 (current) | Syntax highlighting | ✅ Fenced code blocks with syntax highlighting<br/>✅ Inline code via CSS selectors (`p > code`)<br/>✅ 100+ languages including Astro, TypeScript, HTML<br/>✅ Powers official Astro docs |
+| TypeScript | Installed | - | Type safety | ✅ Component Props interface auto-detection<br/>✅ HTMLAttributes type for HTML element mirroring<br/>✅ Polymorphic component support via HTMLTag |
+| @lucide/astro | 0.563.0 | - | Icon system | ✅ Already integrated and used |
+| Tailwind CSS | 4.1.18 | - | Styling | ✅ Design tokens already defined in global.css |
 
-**Current problem with lucide-static:**
-According to [Lucide's official documentation](https://lucide.dev/guide/packages/lucide-static), lucide-static includes ALL icons in SVG sprites and icon fonts, significantly increasing bundle size. It's designed for non-framework scenarios (icon fonts, raw SVG embedding) and explicitly warns against production use without tree-shaking.
+### Redirect Handling
 
-**Why @lucide/astro is better:**
-- **Zero JavaScript overhead**: Icons render as static SVG at build time
-- **Tree-shakable**: Only imported icons included in final bundle (200KB+ savings expected)
-- **Astro-native**: Works seamlessly with Astro's component system
-- **Same icon set**: No design changes, just performance improvement
+| Capability | Status | Implementation |
+|-----------|--------|----------------|
+| Astro redirects config | ✅ Already configured | `astro.config.mjs` lines 14-17 |
+| Static site redirects | ✅ Generates `<meta http-equiv="refresh">` | Built-in for `output: static` mode |
+| Route priority | ✅ Understood | Redirects lower precedence than actual files |
+| Dynamic route redirects | ✅ Supported | Same parameters required for dynamic routes |
 
-**Migration command:**
-```bash
-npm uninstall lucide-static
-npm install @lucide/astro
-```
+## What NOT to Add
 
-**Migration effort:** LOW - Find/replace import statements. Icon names identical.
+| Avoid | Why | Existing Alternative |
+|-------|-----|---------------------|
+| Storybook | Overkill for 4 components, requires build tooling, separate dev server | Astro page with component showcase |
+| react-live | Requires React runtime, client-side JavaScript bundle | Static examples with astro-expressive-code |
+| Docusaurus | Separate framework, documentation-specific, too heavy | Astro with MDX already handles this |
+| Sandpack | Client-side code playground, unnecessary JavaScript weight | Pre-rendered examples sufficient |
+| Component library extractors (react-docgen, etc.) | Not needed for Astro components | Manual Props interface documentation |
+| Additional syntax highlighters (Shiki, Prism standalone) | Redundant | astro-expressive-code already uses Shiki |
 
-## Recommended Stack Additions (Original Milestone)
+## Implementation Patterns for New Features
 
-### Typography - Variable Fonts via Fontsource
+### 1. Design System Page Structure
 
-| Package | Version | Purpose | Why Recommended |
-|---------|---------|---------|-----------------|
-| @fontsource-variable/bricolage-grotesque | ^5.2.10 | Display headings | Perfect for neobrutalism: quirky, expressive grotesque with chunky contrast. Variable font with weight/width/optical size axes. Industry-standard for Gen Z brands and bold layouts. |
-| @fontsource-variable/fraunces | ^5.2.10 | Alternative display/accent | Optical-size axis swings from refined text to lush display. Geometric with subtle retro vibes, excellent for editorial design elements. |
-| @fontsource-variable/anybody | ^5.2.10 | Optional tertiary | Additional quirky sans-serif option if more variety needed for UI elements. |
-
-**Why Fontsource over alternatives:**
-- Zero-config self-hosting (no Google Fonts privacy concerns)
-- npm-based workflow integrates with Astro/Vite build
-- Tree-shakeable - only bundle weights/axes you use
-- Variable fonts = single file, maximum flexibility
-- Official packages maintained by Fontsource project (5M+ weekly downloads)
-
-### CSS Patterns - Pure Tailwind Utilities
-
-| Component | Approach | Why NOT a Library |
-|-----------|----------|-------------------|
-| Neobrutalism borders | Tailwind utilities: `border-2`, `border-4`, `border-black` | Already in Tailwind 4. No library needed. |
-| Bold shadows | Custom `@theme` variables + utilities | Tailwind 4.1 includes text shadows. Box shadows via `--shadow-*` theme variables. |
-| Color system | `@theme` with `--color-*` variables | Tailwind 4 CSS-first theming. No library needed. |
-
-**Custom Shadow Pattern (add to global.css):**
-```css
-@theme {
-  --shadow-brutal-sm: 2px 2px 0 0 currentColor;
-  --shadow-brutal-md: 4px 4px 0 0 currentColor;
-  --shadow-brutal-lg: 6px 6px 0 0 currentColor;
-  --shadow-brutal-xl: 8px 8px 0 0 currentColor;
-}
-```
-
-Generates: `shadow-brutal-sm`, `shadow-brutal-md`, `shadow-brutal-lg`, `shadow-brutal-xl` utilities.
-
-### Animation - Pure CSS (No Library Needed)
-
-| Need | Solution | Why |
-|------|----------|-----|
-| Hover effects | Tailwind 4 `hover:translate-*` + `transition-transform` | Built-in. Static sites don't need JS animation libraries. |
-| Custom animations | `@theme { @keyframes }` + `--animate-*` variables | Tailwind 4 CSS-first animation system. |
-| Entrance animations | Optional: Copy specific animations from Animate.css | Only if needed. Don't install whole library. |
-
-**Pattern for neobrutalist "press" effect:**
-```css
-/* Add to component classes */
-.brutal-button {
-  @apply border-2 border-black shadow-brutal-md;
-  @apply hover:translate-x-1 hover:translate-y-1 hover:shadow-none;
-  @apply transition-all duration-150;
-}
-```
-
-### Color Management - Tailwind 4 Theme Variables
-
-**Recommended approach:** Define colors in `@theme` block, not separate library.
-
-```css
-@theme {
-  /* Neobrutalist palette */
-  --color-brutal-yellow: #ffef6a;
-  --color-brutal-turquoise: oklch(0.75 0.15 200);
-  --color-brutal-magenta: oklch(0.65 0.25 350);
-  --color-brutal-black: #1a1a1a;
-  --color-brutal-white: #fefefe;
-
-  /* Override default grays with higher contrast */
-  --color-gray-50: oklch(0.98 0 0);
-  --color-gray-950: oklch(0.15 0 0);
-}
-```
-
-Generates utilities: `bg-brutal-yellow`, `text-brutal-turquoise`, `border-brutal-magenta`, etc.
-
-## Homepage Refinement Feature Implementation
-
-### 1. Outcome Badges/Icons in Hero
-
-**Technology:** @lucide/astro + existing Tailwind design system (NO NEW PACKAGES)
-
-**Available icons in Lucide:**
-- `badge-dollar-sign` - Money saved
-- `timer` - Time saved
-- `trending-up` - Growth/improvement
-- `gauge` - Performance/efficiency
-- `clock-arrow-up` - Time efficiency
-
-**Implementation:**
-```astro
----
-import { BadgeDollarSign, Timer, TrendingUp } from '@lucide/astro';
----
-
-<div class="outcome-badge bg-yellow border-neo shadow-neo-yellow">
-  <BadgeDollarSign size={32} />
-  <span>$50K saved</span>
-</div>
-```
-
-**Why this approach:**
-- Uses existing design tokens (--color-yellow, --border-neo)
-- Zero runtime JavaScript
-- Icons are semantic and accessible
-- Matches neobrutalist aesthetic
-- NO additional packages needed (using @lucide/astro migration)
-
-**Sources:**
-- [Lucide badge icons](https://lucide.dev/icons/badge-dollar-sign)
-- [Lucide Astro documentation](https://lucide.dev/guide/packages/lucide-astro)
-
-### 2. Isometric Illustrations (Process + Technology Sections)
-
-**Technology:** Pure CSS 3D transforms + custom SVG components (NO NEW PACKAGES)
-
-**Why pure CSS:**
-- Zero runtime JavaScript overhead (critical for static site)
-- Full control over neobrutalist styling (thick borders, shadow-to-glow dark mode)
-- Matches existing design system tokens
-- No external dependencies
-
-**CSS technique:**
-```css
-.isometric-container {
-  transform-style: preserve-3d;
-  transform: rotateX(45deg) rotateZ(45deg);
-}
-
-.isometric-face {
-  transform: translateZ(20px);
-}
-```
-
-**Add to global.css:**
-```css
-@layer utilities {
-  .isometric-base {
-    transform-style: preserve-3d;
-    transform: rotateX(45deg) rotateZ(45deg);
-  }
-
-  .isometric-face-front {
-    transform: translateZ(20px);
-  }
-
-  .isometric-face-top {
-    transform: rotateX(90deg) translateZ(20px);
-  }
-
-  .isometric-face-side {
-    transform: rotateY(90deg) translateZ(20px);
-  }
-}
-```
-
-**Design patterns from research:**
-- [CSS 3D Transforms tutorial](https://webdesign.tutsplus.com/create-an-isometric-layout-with-3d-transforms--cms-27134t) shows rotateX(), rotateY(), rotateZ() approach
-- [Pure CSS Isometric Boxes](https://codepen.io/johan/pen/AzxJYk) demonstrates animation-ready isometric grid
-- [Pyxofy CSS Art tutorial](https://www.pyxofy.com/css-art-creating-an-isometric-cube-using-css-transform/) covers isometric grid guides with repeating-linear-gradient()
-
-**Implementation approach:**
-1. Create base isometric grid utility classes in global.css (see above)
-2. Build 3-4 reusable isometric "primitives" (cube, cylinder, platform)
-3. Compose process/technology illustrations from primitives
-4. Apply existing shadow-to-glow transforms for dark mode
-
-**Why NOT pre-built SVG libraries:**
-- External SVG packs don't match neobrutalist palette (yellow/turquoise/magenta)
-- Design system requires specific OKLCH colors and thick borders
-- Shadow-to-glow dark mode transformation is custom
-- Hand-coded approach maintains design consistency
-
-**Sources:**
-- [How to Create Isometric Layout With CSS](https://webdesign.tutsplus.com/create-an-isometric-layout-with-3d-transforms--cms-27134t)
-- [Pure CSS Isometric Boxes](https://codepen.io/johan/pen/AzxJYk)
-
-### 3. FAQ Page with Structured Data
-
-**Technology:** Manual JSON-LD implementation using Astro's `set:html` directive (NO NEW PACKAGES)
-
-**Why manual implementation:**
-- Simple FAQ pages don't need TypeScript schema validation
-- Astro's `set:html` directive makes manual JSON-LD trivial
-- No additional dependencies
-- Full control over schema structure
-- Common pattern in Astro community (2026 best practice)
-
-**Implementation pattern:**
-```astro
----
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "How long does a project take?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Most projects complete in 4-8 weeks..."
-      }
-    }
-  ]
-};
----
-
-<head>
-  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
-</head>
-```
-
-**Why NOT astro-seo-schema:**
-- Adds schema-dts dependency for TypeScript types (overkill for simple FAQ)
-- Manual approach is more maintainable (one less package to update)
-- Astro community consensus favors manual JSON-LD for simple use cases
-- FAQ content is static (not pulling from external API requiring validation)
-
-**Important note on FAQ rich results:**
-As of August 2023, Google restricted FAQ rich results to authoritative government and health websites. This implementation is primarily for semantic markup and future-proofing, not SERP features.
-
-**Sources:**
-- [How I add structured data markup to Astro sites](https://stephen-lunt.dev/blog/astro-structured-data/)
-- [Adding structured data to blog posts using Astro](https://frodeflaten.com/posts/adding-structured-data-to-blog-posts-using-astro/)
-- [FAQ schema rise and fall](https://searchengineland.com/faq-schema-rise-fall-seo-today-463993)
-
-## Installation
-
-```bash
-# Typography (choose one or both display fonts)
-npm install @fontsource-variable/bricolage-grotesque
-
-# Optional: Additional display fonts
-npm install @fontsource-variable/fraunces
-npm install @fontsource-variable/anybody
-
-# REQUIRED: Icon library migration
-npm uninstall lucide-static
-npm install @lucide/astro
-```
-
-**No other packages needed for homepage refinement features.** All CSS patterns use Tailwind 4's built-in capabilities.
-
-## Integration Points
-
-### 1. Font Loading (BaseLayout.astro)
+**Pattern:** Single Astro page at `/src/pages/design-system.astro`
 
 ```typescript
----
-import '@fontsource-variable/bricolage-grotesque';
-import '@fontsource-variable/fraunces'; // if using
----
+// No new dependencies needed
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+import { Code } from 'astro:components';
 ```
 
-### 2. Theme Configuration (src/styles/global.css)
+### 2. Component Documentation Pattern
 
-```css
-@import "tailwindcss";
+**Pattern:** TypeScript Props interface + usage examples
 
-@theme {
-  /* Fonts */
-  --font-display: "Bricolage Grotesque Variable", system-ui, sans-serif;
-  --font-accent: "Fraunces Variable", serif;
-  --font-body: "Inter", system-ui, sans-serif; /* Keep existing */
-
-  /* Colors - neobrutalist palette */
-  --color-brutal-yellow: #ffef6a;
-  --color-brutal-turquoise: oklch(0.75 0.15 200);
-  --color-brutal-magenta: oklch(0.65 0.25 350);
-  --color-brutal-black: #1a1a1a;
-  --color-brutal-white: #fefefe;
-
-  /* Shadows - hard offset style */
-  --shadow-brutal-sm: 2px 2px 0 0 currentColor;
-  --shadow-brutal-md: 4px 4px 0 0 currentColor;
-  --shadow-brutal-lg: 6px 6px 0 0 currentColor;
-  --shadow-brutal-xl: 8px 8px 0 0 currentColor;
-
-  /* Text shadows (Tailwind 4.1) */
-  --text-shadow-brutal: 2px 2px 0 currentColor;
-}
-
-/* NEW: Isometric utilities */
-@layer utilities {
-  .isometric-base {
-    transform-style: preserve-3d;
-    transform: rotateX(45deg) rotateZ(45deg);
-  }
-
-  .isometric-face-front {
-    transform: translateZ(20px);
-  }
-
-  .isometric-face-top {
-    transform: rotateX(90deg) translateZ(20px);
-  }
-
-  .isometric-face-side {
-    transform: rotateY(90deg) translateZ(20px);
-  }
-}
-
-/* Global styles */
-body {
-  @apply font-body;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  @apply font-display;
+```typescript
+// Already supported - Props interface auto-detected
+interface Props extends HTMLAttributes<'button'> {
+  variant?: 'yellow' | 'turquoise' | 'magenta';
+  size?: 'sm' | 'md' | 'lg';
 }
 ```
 
-### 3. Utility Usage (Components)
+**Display:** Show props table using TypeScript definitions, not automatic extraction.
 
-```html
-<!-- Neobrutalist button -->
-<button class="
-  bg-brutal-yellow
-  text-brutal-black
-  border-2 border-brutal-black
-  shadow-brutal-md
-  px-6 py-3
-  rounded-none
-  hover:translate-x-1 hover:translate-y-1
-  hover:shadow-none
-  transition-all duration-150
-  font-display font-bold
-">
-  Click Me
-</button>
+### 3. Code Examples Pattern
 
-<!-- Neobrutalist card -->
-<div class="
-  bg-brutal-turquoise
-  border-4 border-brutal-black
-  shadow-brutal-lg
-  p-8
-  rounded-lg
-">
-  <h2 class="text-shadow-brutal">Title</h2>
+**Pattern:** Fenced code blocks with astro-expressive-code + live component examples
+
+```astro
+<!-- Code example with syntax highlighting -->
+```astro
+<Button variant="yellow" size="lg">
+  Click me
+</Button>
+\`\`\`
+
+<!-- Live example right below -->
+<div class="example-container">
+  <Button variant="yellow" size="lg">
+    Click me
+  </Button>
 </div>
 ```
 
-## What NOT to Add (Homepage Refinement)
+**Inline code:** Styled with `p > code` CSS selector (already in global.css lines 417-426).
 
-| Avoid | Why | Use Instead |
-|-------|-----|-------------|
-| **astro-seo-schema** | Adds unnecessary dependency for simple FAQ page. Manual JSON-LD is simpler and more maintainable. | Manual JSON-LD with `set:html` directive |
-| **isometric-css library** | JavaScript library for isometric projections. Adds runtime overhead when pure CSS achieves same result. | Pure CSS 3D transforms (`rotateX`, `rotateY`, `translateZ`) |
-| **iiisometric design tool** | External design tool requiring export workflow. Site uses code-based design system. | Hand-coded CSS isometric components matching neobrutalist theme |
-| **Additional icon libraries** | Lucide already provides 1000+ icons including all needed badge/metrics icons (badge-dollar-sign, timer, gauge, trending-up). | Existing @lucide/astro with selective imports |
-| **SVG illustration libraries** | Pre-built isometric SVG packs conflict with custom neobrutalist design system (yellow/turquoise/magenta palette). | Custom SVG components styled with existing design tokens |
+### 4. Redirect Handling
 
-## Alternatives Considered
+**Status:** Already configured in `astro.config.mjs`
 
-| Recommended | Alternative | When to Use Alternative |
-|-------------|-------------|-------------------------|
-| Fontsource variable fonts | Google Fonts CDN | Never - Fontsource provides same fonts with better privacy, performance, and DX |
-| Fontsource | astro-font package | Only if you MUST use Google Fonts CDN (compliance reasons). Adds build complexity. |
-| Custom `@theme` shadows | NeoBrutalism.css library | Never - The library just wraps what Tailwind 4 already does. Adds dependency for no benefit. |
-| Tailwind animations | Animate.css | Only if you need 50+ different entrance animations. For neobrutalism, you need 2-3 hover effects max. |
-| `@theme` colors | Separate CSS variables | Never for Tailwind projects - `@theme` generates utilities automatically |
-| @lucide/astro | Heroicons | Lucide has larger icon set (1000+ vs 450). Already in use, no reason to switch. |
-| Pure CSS isometric | Pre-built SVG libraries | Never - Doesn't match design system. Would require extensive customization. |
-| Manual JSON-LD | astro-seo-schema | Only if FAQ content is dynamic from API and needs TypeScript validation. |
+```javascript
+redirects: {
+  '/portfolio': '/projects',
+  '/portfolio/[slug]': '/projects/[slug]',
+}
+```
 
-## What NOT to Use
+**For navigation cleanup:** Add redirects as needed, no library required.
 
-| Avoid | Why | Use Instead |
-|-------|-----|-------------|
-| NeoBrutalism.css library | Wraps Tailwind utilities with no added value. 6KB for features already in Tailwind 4. | Custom `@theme` config |
-| tailwindcss-animate plugin | Incompatible with Tailwind 4's CSS-first approach. Requires v3 config. | `@theme { @keyframes }` |
-| @fontsource static packages | 2x-5x larger bundle size vs variable fonts. Less flexibility. | @fontsource-variable packages |
-| Google Fonts CDN | Privacy concerns, external dependency, potential GDPR issues. | Fontsource self-hosted |
-| Motion libraries (Framer Motion, GSAP) | Overkill for static site. Adds 20-100KB+ JS. Neobrutalism uses CSS transforms only. | Tailwind transitions |
-| lucide-static | Bundles ALL icons (200KB+). No tree-shaking. | @lucide/astro (tree-shakeable) |
+### 5. Component Variant Showcase
 
-## Stack Patterns by Scenario
+**Pattern:** Grid layout with component instances
 
-**If using multiple display fonts:**
-- Install both Bricolage Grotesque and Fraunces
-- Define `--font-display` and `--font-accent` in `@theme`
-- Use `font-display` for headings, `font-accent` for pull quotes / hero text
-- Keep body text separate (Inter or similar neutral sans)
+```astro
+<!-- No JavaScript runtime needed -->
+<div class="variant-grid">
+  <Button variant="yellow">Yellow</Button>
+  <Button variant="turquoise">Turquoise</Button>
+  <Button variant="magenta">Magenta</Button>
+</div>
+```
 
-**If minimizing bundle size:**
-- Use only Bricolage Grotesque (single variable font = ~50KB)
-- Skip Fraunces unless serif accent is critical
-- Define only the shadow sizes you actually use
-- Don't import fonts globally - import in layouts that need them
-- Migrate to @lucide/astro to save 200KB+ from unused icons
-
-**If supporting older browsers:**
-- Tailwind 4.1 includes automatic fallbacks for OKLCH colors (Safari 15+)
-- Variable fonts supported in all browsers since 2018
-- CSS custom properties supported everywhere (IE is dead)
-- CSS 3D transforms supported in all modern browsers (IE11+)
-- No additional polyfills needed
-
-**If building complex isometric scenes:**
-- Start with 2-3 simple primitives (cube, cylinder, platform)
-- Compose complex illustrations from primitives
-- Use existing design tokens for colors/borders
-- Apply shadow-to-glow dark mode transformations
+**Interactive:** Components are interactive by default (CSS hover/active states).
 
 ## Version Compatibility
 
-| Package | Compatible With | Notes |
-|---------|-----------------|-------|
-| @fontsource-variable/bricolage-grotesque@^5.2.10 | Astro 5.x, Vite 5+, any bundler | Zero config. Just import and use. |
-| @lucide/astro@^0.563.0 | Astro 5.x, astro@^5.0.0 | Tree-shakeable. Zero runtime JS. |
-| Tailwind CSS 4.1+ | @tailwindcss/vite@^4.1.18 | Required for text-shadow utilities. You have 4.1.18 (good). |
-| OKLCH color functions | Modern browsers (2024+) | Tailwind 4.1 auto-generates fallbacks. No action needed. |
+All existing packages are compatible and current:
 
-## Performance Impact
+| Package | Current | Latest | Action |
+|---------|---------|--------|--------|
+| astro | 5.16.15 | 5.17.1 | Optional: Update to 5.17.1 for latest features |
+| @astrojs/mdx | 4.3.13 | 4.3.13 | ✅ Current |
+| astro-expressive-code | 0.41.6 | 0.41.6 | ✅ Current |
+| @tailwindcss/vite | 4.1.18 | - | ✅ Current |
 
-| Addition | Bundle Size | Runtime Impact |
-|----------|-------------|----------------|
-| Bricolage Grotesque variable | ~50KB compressed | Negligible (single font file) |
-| Fraunces variable | ~60KB compressed | Negligible |
-| Custom @theme config | 0KB (generates utilities) | None - compile-time only |
-| Tailwind transitions | 0KB (already in build) | Sub-millisecond CSS animations |
-| **lucide-static → @lucide/astro** | **-200KB bundle** | **Zero runtime JS** |
-| Pure CSS isometric | 0KB (CSS only) | None - transforms computed at render |
-| Manual JSON-LD | +1-2KB HTML | None - static markup only |
-| **Net impact** | **-90KB to -150KB** | **Faster load times** |
+**Recommendation:** Stay on current versions unless specific bug fixes are needed. Astro 5.17.1 is a minor patch release.
 
-**Total addition:** ~50-110KB fonts only. Icon migration SAVES 200KB. No JS. No external requests.
+## Architecture Considerations
 
-## Migration Checklist
+### Design System Page Organization
 
-### Icon Library Migration (REQUIRED)
-
-**Files to update:**
-1. Find all imports of `lucide-static`
-2. Replace with `@lucide/astro` imports
-3. Verify icon names (should be identical)
-
-**Before:**
-```astro
----
-// lucide-static usage (need to verify exact pattern in codebase)
----
+```
+/src/pages/design-system.astro          # Main design system page
+/src/components/design-system/
+  ├── ComponentShowcase.astro           # Reusable component demo wrapper
+  └── PropsTable.astro                  # Props documentation table
 ```
 
-**After:**
-```astro
----
-import { Menu, X, Sun, Moon } from '@lucide/astro';
----
+**Why this structure:**
+- Keeps design system code separate from production components
+- ComponentShowcase can wrap any component with example container
+- PropsTable is reusable for all component documentation sections
 
-<Menu size={24} />
+### Component Documentation Approach
+
+**Manual documentation** (recommended for 4 components):
+- Define props in TypeScript Props interface
+- Document in PropsTable component manually
+- Show usage examples with code + live preview
+
+**Why not automated:**
+- Only 4 components to document (Button, Card, Input, Badge)
+- Astro components don't have runtime prop extraction
+- Manual documentation is clearer and more controlled
+- No additional build complexity
+
+## Integration Points
+
+### With Existing Design System
+
+**Color tokens:** Already defined in `/src/styles/global.css` lines 3-68
+- Use CSS custom properties for color swatches
+- No need to parse/extract programmatically
+
+**Typography tokens:** Already defined in `/src/styles/global.css` lines 43-67
+- Display using existing CSS variables
+- No additional tools needed
+
+**Components:** Import from `/src/components/ui/`
+- Button, Card, Input, Badge already built
+- Import and render directly in design system page
+
+### With Navigation
+
+**Current navigation:** `/src/components/layout/Header.astro`
+- Add "Design System" link to nav array
+- No routing library needed (file-based routing)
+
+**Redirects:** Configured in `astro.config.mjs`
+- Add new redirects as needed
+- Static site generates `<meta>` redirects automatically
+
+## Best Practices for Implementation
+
+### 1. Code Example Pattern
+
+```astro
+<section class="component-section">
+  <h2>Button Component</h2>
+
+  <!-- Props documentation -->
+  <PropsTable component="Button" props={buttonProps} />
+
+  <!-- Code example -->
+  <div class="code-example">
+    <Code code={`<Button variant="yellow">Click me</Button>`} lang="astro" />
+  </div>
+
+  <!-- Live preview -->
+  <div class="live-preview">
+    <Button variant="yellow">Click me</Button>
+  </div>
+</section>
 ```
 
-**Bundle size impact:**
-- lucide-static: Includes ALL 1000+ icons in bundle
-- @lucide/astro: Includes ONLY imported icons
-- Expected reduction: 200KB+ (depending on how many icons used)
+### 2. Variant Showcase Pattern
+
+```astro
+<!-- Show all variants in a grid -->
+<div class="variant-showcase">
+  {['yellow', 'turquoise', 'magenta'].map(variant => (
+    <div class="variant-demo">
+      <Button variant={variant}>{variant}</Button>
+      <span class="variant-label">{variant}</span>
+    </div>
+  ))}
+</div>
+```
+
+### 3. Design Token Display Pattern
+
+```astro
+<!-- Show color tokens -->
+<div class="color-grid">
+  <div class="color-swatch" style="background: var(--color-yellow)">
+    <span>--color-yellow</span>
+    <code>oklch(0.85 0.18 95)</code>
+  </div>
+</div>
+```
 
 ## Sources
 
-### HIGH Confidence Sources (Official Documentation)
+### Official Documentation (HIGH confidence)
+- [Astro Components Documentation](https://docs.astro.build/en/basics/astro-components/) — Component composition and usage
+- [Astro TypeScript Guide](https://docs.astro.build/en/guides/typescript/) — Props interface and type checking
+- [Astro Syntax Highlighting](https://docs.astro.build/en/guides/syntax-highlighting/) — Code block configuration
+- [Astro Routing Documentation](https://docs.astro.build/en/guides/routing/) — File-based routing and redirects
+- [Astro Configuration Reference](https://docs.astro.build/en/reference/configuration-reference/) — Redirect configuration
 
-- [Fontsource Bricolage Grotesque](https://www.npmjs.com/package/@fontsource-variable/bricolage-grotesque) - Official npm package, version verified
-- [Fontsource Fraunces](https://www.npmjs.com/package/@fontsource-variable/fraunces) - Official npm package
-- [Tailwind CSS v4.1 Announcement](https://tailwindcss.com/blog/tailwindcss-v4-1) - Official release notes (text shadows, CSS-first theming)
-- [Tailwind CSS Theme Variables](https://tailwindcss.com/docs/theme) - Official documentation for @theme directive
-- [Astro Fonts Guide](https://docs.astro.build/en/guides/fonts/) - Official Astro documentation recommending Fontsource
-- [Lucide Static Documentation](https://lucide.dev/guide/packages/lucide-static) - Package limitations and use cases
-- [Lucide Astro Documentation](https://lucide.dev/guide/packages/lucide-astro) - Installation, usage, tree-shaking benefits
-- [Lucide Icons Gallery](https://lucide.dev/icons/) - Available badge/metrics icons
+### Package Verification (HIGH confidence)
+- npm registry: astro@5.17.1 (latest), astro-expressive-code@0.41.6 (current), @astrojs/mdx@4.3.13 (current)
 
-### MEDIUM Confidence Sources (Community Best Practices)
+### Design System Patterns (MEDIUM confidence)
+- [Building the Ultimate Design System: Architecture Guide for 2026](https://medium.com/@padmacnu/building-the-ultimate-design-system-a-complete-architecture-guide-for-2026-6dfcab0e9999) — Modern architecture approaches
+- [The Design System Guide](https://thedesignsystem.guide/documentation) — Documentation best practices
+- [Backlight: Design System Documentation Best Practices](https://backlight.dev/blog/design-system-documentation-best-practices) — Documentation patterns
 
-- [My Favourite Fonts for Neobrutalist Web Design](https://blog.kristi.digital/p/my-favourite-fonts-for-neobrutalist-web-design) - Community recommendations (Bricolage Grotesque featured)
-- [Bricolage Grotesque Font Pairing](https://pimpmytype.com/bricolage-grotesque-font-pairing/) - Typography resource
-- [Tailwind CSS 4 Custom Colors](https://tailkits.com/blog/tailwind-v4-custom-colors/) - Tutorial on @theme colors
-- [Neobrutalism Components](https://www.neobrutalism.dev/) - Reference implementation showing patterns
-- [Stephen Lunt: Structured Data in Astro](https://stephen-lunt.dev/blog/astro-structured-data/) - Manual JSON-LD implementation
-- [Frode Flaten: Adding Structured Data to Blog Posts](https://frodeflaten.com/posts/adding-structured-data-to-blog-posts-using-astro/) - set:html directive pattern
-- [John Dalesandro: JSON-LD for Rich Results](https://johndalesandro.com/blog/astro-add-json-ld-structured-data-to-your-website-for-rich-search-results/) - Schema markup approach
-- [Envato Tuts+: Isometric Layout with CSS](https://webdesign.tutsplus.com/create-an-isometric-layout-with-3d-transforms--cms-27134t) - CSS 3D transform techniques
-- [Pyxofy: CSS Isometric Cube](https://www.pyxofy.com/css-art-creating-an-isometric-cube-using-css-transform/) - Isometric projection patterns
-- [CodePen: Pure CSS Isometric Boxes](https://codepen.io/johan/pen/AzxJYk) - Animation-ready isometric grid
+### Astro Design System Examples (MEDIUM confidence)
+- [Astro Design System Theme](https://astro.build/themes/details/astro-design-system-docs/) — Reference implementation
+- [GitHub: astro-design-system by jordienr](https://github.com/jordienr/astro-design-system) — Starter template pattern
+- [What's new in Astro - January 2026](https://astro.build/blog/whats-new-january-2026/) — Latest features and integrations
 
-### LOW Confidence Sources (Context Only)
-
-- [Search Engine Land: FAQ Schema Rise and Fall](https://searchengineland.com/faq-schema-rise-fall-seo-today-463993) - Current state of FAQ rich results
-- [Lineicons: Best Icon Libraries 2026](https://lineicons.com/blog/best-open-source-icon-libraries) - Icon library comparisons
-- [Lineicons: Free SVG Illustrations](https://lineicons.com/blog/free-illustrations) - Illustration resource overview
-- Various WebSearch results about neobrutalism design trends - Used for understanding aesthetic, not technical decisions
-- CSS animation libraries search results - Confirmed no library needed for neobrutalist hover effects
+### Code Examples and Syntax Highlighting (MEDIUM confidence)
+- [Expressive Code Documentation](https://expressive-code.com/key-features/syntax-highlighting/) — Syntax highlighting features
+- [Astro Starlight: Code Component](https://starlight.astro.build/components/code/) — Code component usage patterns
+- [Add inline syntax highlighting to Astro](https://camdecoster.dev/posts/add-inline-syntax-highlighting-to-astro/) — Inline code patterns
 
 ---
-*Stack research for: Neobrutalist design system + homepage refinement features*
-*Researched: 2026-02-09*
-*Confidence: HIGH - All core technologies verified with official sources*
+*Stack research for: Design system reference page and component documentation*
+*Researched: 2026-02-10*
+*Confidence: HIGH — All capabilities verified in existing dependencies*

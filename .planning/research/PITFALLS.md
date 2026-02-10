@@ -1,319 +1,269 @@
 # Pitfalls Research
 
-**Domain:** Neobrutalist Design Implementation for Professional Portfolio Site
-**Researched:** 2026-02-09
+**Domain:** Design System Documentation & Navigation Cleanup for Existing Static Sites
+**Researched:** 2026-02-10
 **Confidence:** HIGH
 
 ## Critical Pitfalls
 
-### Pitfall 1: Failing WCAG Contrast Requirements with Bold Color Palettes
+### Pitfall 1: Design System Documentation Becomes Stale Immediately After Creation
 
 **What goes wrong:**
-Designers pair vibrant neobrutalist colors (yellow, cyan, bright pink) that visually "pop" but fail WCAG 2.0 AA contrast ratios of 4.5:1 for normal text and 3:1 for large text. This causes Lighthouse accessibility failures and excludes users with visual impairments.
+Design system documentation is created as a snapshot, but component implementations continue to evolve in production pages. Within weeks, the documentation shows outdated props, missing variants, or incorrect usage examples. Teams stop trusting the documentation and revert to reading component source code directly.
 
 **Why it happens:**
-Neobrutalism's defining characteristic is bold, saturated colors. Designers assume "high contrast = accessible," but vibrant hue combinations (yellow + cyan, hot pink + orange) can have insufficient luminance contrast even when visually striking. The existing yellow accent (#ffef6a) on this site may fail contrast tests against light backgrounds.
+Documentation is treated as a one-time deliverable rather than a living artifact. There's no clear owner responsible for keeping it synchronized with component changes. Developers update components without updating the reference page. In 2026, design systems still struggle with "design drift" - the biggest cost is detecting and preventing drift before it spreads, not creating the components themselves.
 
 **How to avoid:**
-- Run **every** color combination through WCAG contrast checker before implementation
-- For yellow accent, only use on dark backgrounds or with very dark text (near-black)
-- Never use brand colors as exception—WCAG applies universally, including to corporate visual guidelines
-- Test with WebAIM Contrast Checker or Coolors contrast tool during design phase, not after implementation
-- Restrict palette to 2-3 bold colors maximum to reduce combinations requiring testing
+- Place documentation file at `/design-system` (not `/docs` or `/styleguide`) so it's discoverable but clearly internal
+- Use `<meta name="robots" content="noindex,nofollow">` to prevent search engine indexing while keeping it accessible to team
+- Include "Last Updated" timestamp with Git commit hash in documentation header
+- Create checklist in CLAUDE.md: "When updating a component in `/src/components/ui/`, verify `/design-system` examples match"
+- Document ALL component variants, props, and usage patterns discovered during audit phase
+- Include both correct usage examples AND common misuse examples with explanations
+- Add component version tracking (even informally: "Button v1.0 - initial", "Button v1.1 - added size variants")
 
 **Warning signs:**
-- Lighthouse accessibility score drops below 90%
-- Text feels "vibrating" or hard to focus on
-- Colors look great in design tool but feel harsh on actual site
-- Squinting required to read body text in any lighting condition
+- Documentation examples throw TypeScript errors when copy-pasted
+- Props listed in documentation don't match component interface definitions
+- Production pages use component patterns not documented
+- Developers ask questions about components instead of checking documentation
+- Multiple "versions" of same component exist across pages with different implementations
 
 **Phase to address:**
-Phase 1 (Design System Foundation) — establish accessible color tokens before building components. Block implementation of any color combination that fails WCAG AA.
+Phase 1 (Design System Reference Page) — Establish documentation structure with built-in maintenance reminders
+Phase 2 (Component Consistency Audit) — Verify documentation matches reality before relying on it
 
 ---
 
-### Pitfall 2: Sacrificing Typography Readability for Aesthetic Boldness
+### Pitfall 2: Component Audit Discovers Inconsistencies But Creates "Fix Everything" Paralysis
 
 **What goes wrong:**
-Applying decorative, condensed, or quirky display fonts to body text creates severe legibility issues. Users struggle to read content, bounce rate increases, and the site feels unprofessional despite looking "designed." Long-form blog posts become painful to read.
+The audit reveals 15+ component usage inconsistencies: `BlogCard` and `ProjectCard` have duplicate shadow implementations, buttons use mix of `btn-` classes and inline Tailwind, spacing varies between pages. Team attempts to "fix everything at once" and creates massive, risky PRs that break existing functionality or introduce subtle visual regressions.
 
 **Why it happens:**
-Neobrutalism showcases bold, unconventional typography as a primary design element. Designers extend the aesthetic to all text, forgetting that readability is non-negotiable for a lead-generation portfolio site targeting non-technical small business owners.
+Audit findings are treated as a to-do list requiring 100% completion rather than a prioritized backlog. Fear of "leaving technical debt" drives over-correction. No clear definition of "acceptable inconsistency" vs "critical standardization." Teams should "audit each component and leave the garbage out" rather than transferring all existing patterns to the new system.
 
 **How to avoid:**
-- **Strict font hierarchy:** Bold display fonts (Bricolage Grotesque) for H1/H2 only, neutral body fonts (DM Sans) for paragraphs
-- Never use condensed or decorative fonts for text blocks longer than 2 lines
-- Minimum body text size: 16px (1rem) for desktop, 18px for mobile
-- Line height: 1.75 for body text (already implemented in `.prose p`)
-- Test all blog post content with actual copy, not Lorem Ipsum—real content reveals readability issues
+- **Tier findings into severity levels:**
+  - **CRITICAL:** Component implementations that differ in accessibility (e.g., focus states, ARIA attributes) — Must fix
+  - **HIGH:** Visual inconsistencies users would notice (shadow offsets, border widths, color variants) — Should standardize
+  - **MEDIUM:** Code organization issues (inline styles vs utility classes) — Nice to have
+  - **LOW:** Naming convention variations that don't affect output — Defer
+- **One component type per PR:** Standardize all Button usage in PR #1, all Card usage in PR #2
+- **Visual regression testing:** Take screenshots before/after for each page affected by component changes
+- **Accept "80% consistent is shipping":** Perfect consistency is less valuable than consistent, documented patterns going forward
+- **Create tiered task list:** Organize audit findings by status (ready to fix, awaiting discussion) to aid prioritization
 
 **Warning signs:**
-- User testing shows visitors skimming instead of reading
-- Contact form submissions decrease after redesign
-- Text feels cramped despite generous whitespace elsewhere
-- Blog post reading time analytics drop significantly
-- Complaints about "hard to read" or "straining eyes"
+- PR touches more than 3 component files simultaneously
+- Team debates "the right way" for >30 minutes without documenting options
+- Audit findings doc grows to >20 items without prioritization
+- Discussion of "rewriting everything to be cleaner"
+- Beta components accumulate long version histories without migration to newer versions
 
 **Phase to address:**
-Phase 1 (Design System Foundation) — Define type scale with readability constraints. Phase 4 (Blog Integration) — validate all typography with real blog content before launch.
+Phase 2 (Component Consistency Audit) — Establish severity tiers BEFORE audit begins
+Phase 3 (Component Migration) — Apply tiered approach, ship incrementally
 
 ---
 
-### Pitfall 3: Dark Mode Shadow-to-Glow Transformation Breaking with New Elements
+### Pitfall 3: Astro Static Redirects Are Client-Side Meta Refresh, Not True 301s
 
 **What goes wrong:**
-New isometric illustrations, outcome badges, and FAQ components don't inherit the shadow-to-glow transformation properly in dark mode. Shadows remain hard and dark (invisible on dark backgrounds), or glows become harsh and "radioactive." The carefully designed shadow-to-glow system breaks down, making dark mode look buggy and inconsistent.
+Project adds `/contact: "/#contact"` to `astro.config.mjs` redirects, assuming it creates HTTP 301 redirect. In reality, Astro generates HTML file at `/contact/index.html` with `<meta http-equiv="refresh">` tag. Search engines initially see 200 OK response, then parse meta tag. Link juice doesn't transfer cleanly, and some crawlers treat this as soft 404. Users on slow connections see flash of redirect page.
 
 **Why it happens:**
-The existing system uses specific utilities like `.shadow-neo-yellow` and `.shadow-neo-turquoise` that automatically transform from hard offset shadows in light mode to soft glows in dark mode. New components (isometric illustrations, outcome badges, FAQ accordions) get built with hardcoded shadow values or inline styles, bypassing the design system. The transformation relies on CSS custom properties and the `.dark` class modifier, which require explicit implementation for each new component.
+Astro's documentation states "produces a client redirect using `<meta http-equiv='refresh'>`" for static builds, but developers assume "redirect" means HTTP-level redirect. GitHub Pages is purely static hosting with no server-side redirect capability - you give it a directory of files, and it'll serve them with no server-side computation. The redirect works functionally (users end up at destination) but fails SEO/UX expectations.
 
 **How to avoid:**
-- **Never use hardcoded `box-shadow` values**—always use design system utilities (`.shadow-neo-yellow`, `.shadow-neo-turquoise`, `.shadow-neo-magenta`)
-- For isometric illustrations, create dedicated shadow utilities that transform properly: `.shadow-iso-yellow`, `.shadow-iso-turquoise` with both light (hard) and dark (glow) variants
-- Document the shadow-to-glow pattern explicitly in component guidelines: "All shadows must use design system utilities to ensure dark mode transformation"
-- Test every new component in both light and dark mode during development, not as final QA step
-- For SVG illustrations, use CSS filters for glows rather than SVG `<feGaussianBlur>` to maintain consistency with design system
-- Outcome badges should use the same shadow transformation as buttons/cards, not custom implementations
+- **Accept meta refresh limitations for internal navigation cleanup:** For `/contact → /#contact`, SEO impact is minimal (both URLs are on same domain, redirect page exists briefly)
+- **Verify redirect implementation:** After adding to config, build site and inspect `/contact/index.html` — it should contain meta refresh tag and JavaScript fallback
+- **Set aggressive refresh timing:** Astro uses `content="0;url=..."` (0 seconds) by default, which minimizes flash
+- **Alternative for critical SEO pages:** If redirecting URLs with significant backlinks, consider keeping original page with canonical link instead of redirect
+- **Monitor in Search Console:** Watch for "Page with redirect" warnings in Google Search Console Coverage report
+- **Understand status code limitations:** Astro serves redirected GET requests with status 301 when using SSR, but static builds cannot support status codes
 
 **Warning signs:**
-- New components look great in light mode but broken in dark mode
-- Shadows disappear or become invisible in dark mode
-- Glows feel harsh, neon, or "radioactive" compared to existing components
-- User toggles dark mode and new sections stand out as visually inconsistent
-- DevTools inspection shows inline `box-shadow` values instead of CSS custom properties
+- Redirect destination appears in browser address bar only after delay
+- Google Search Console shows "Duplicate content" warnings for redirect source/destination
+- Analytics shows multiple pageviews per session (counts both redirect page and destination)
+- Users report "page flashed before redirecting"
+- Expecting HTTP 301 behavior but getting meta refresh (check Network tab in DevTools)
 
 **Phase to address:**
-Phase 1 (Hero Refinement) — Establish shadow utilities for outcome badges that inherit transformation. Phase 2 (Process Section Illustrations) — Create `.shadow-iso-*` utilities for isometric elements before implementing illustrations. Phase 3 (FAQ Page) — Test accordion expand/collapse states in both modes.
+Phase 4 (Contact Page Redirect) — Document meta refresh behavior, add visual regression test for redirect page
+Phase 5 (Navigation Cleanup) — Ensure header/footer don't link to redirect URLs
 
 ---
 
-### Pitfall 4: Isometric Illustration Style Inconsistency Across Components
+### Pitfall 4: Navigation Cleanup Creates Broken Internal Links and Orphan Pages
 
 **What goes wrong:**
-Isometric illustrations in the process section use one lighting angle and color palette, while technology section illustrations use a different angle and palette. Illustration style clashes with existing neobrutalist elements (hard shadows, flat colors). The site feels like multiple designers worked independently without coordination, undermining professional trust.
+Team removes `/contact` link from header, updates footer links, but forgets to check: contact form success/error messages that link back to "contact page", blog post CTAs with hardcoded `/contact` URLs, sitemap includes `/contact` as standalone page, mobile nav drawer still has old link structure. After deployment, users clicking "contact" links in blog posts get meta refresh redirect, analytics show broken funnel, and page feels inconsistent.
 
 **Why it happens:**
-Isometric illustrations are sourced from different libraries (Undraw, unDraw alternatives, custom creation) without establishing unified style guidelines first. The key to isometric style is lighting consistency—keeping the direction or source of light consistent within illustrations creates a clear relationship between shapes and shadows. Without documented guidelines for isometric elements, each implementation makes independent choices about color saturation, lighting angle, level of detail, and how illustrations integrate with neobrutalist borders/shadows.
+Navigation cleanup focuses on visible navigation components (Header, Footer) without auditing all internal link references across content, components, and configuration files. Grepping for `/contact` misses anchor links like `/#contact` that should be preferred pattern. Orphan pages (pages not linked from main navigation) are common problems - if a page doesn't include links to another page, Google may have trouble finding and indexing it.
 
 **How to avoid:**
-- **Establish isometric style guidelines before creating any illustrations:**
-  - Light source direction: Choose one angle (e.g., top-left at 45°) and use consistently
-  - Color palette: Limit to existing accent colors (yellow, turquoise, magenta) + neutrals
-  - Detail level: Match neobrutalist aesthetic—bold shapes, minimal texture, flat colors
-  - Integration pattern: How illustrations interact with borders/shadows (inside bordered container? floating with own shadow?)
-- Create or procure all illustrations from single source with consistent style
-- If using illustration libraries, filter strictly by style characteristics
-- Document illustration specifications in design system: lighting angle, color usage, border treatment
-- For dark mode, adjust illustration brightness/saturation (don't create entirely new illustrations)
-- Test illustrations together on same page before finalizing—they should feel like a family
+- **Audit ALL link references before cleanup:**
+  ```bash
+  # Find all href references to old URLs
+  grep -r 'href="/contact"' src/
+  grep -r "href='/contact'" src/
+  # Find all anchor tags (catches template string hrefs)
+  grep -r '<a ' src/ | grep contact
+  ```
+- **Check configuration files:**
+  - `astro.config.mjs` — sitemap, redirects
+  - `src/content/blog/*.mdx` — any hardcoded contact links in posts
+  - `src/components/**/*.astro` — all components with navigation
+- **Preferred internal link patterns:**
+  - Homepage sections: Always `/#section-id` (works from any page)
+  - Pages: Always `/page` (no trailing slash for consistency)
+  - External: Always full URL with `rel="noopener"`
+- **Test from multiple pages:**
+  - Click contact links from: homepage, blog post, project page, 404 page
+  - Verify all resolve to `/#contact` correctly
+- **Prevent orphan pages:** Ensure no page is more than 3 clicks from homepage
 
 **Warning signs:**
-- Illustrations from different sections look like they came from different websites
-- Some illustrations have soft shadows, others have hard shadows
-- Color palettes vary between illustrations (one uses pastels, another uses saturated brights)
-- Illustrations conflict visually with neobrutalist borders/shadows
-- One illustration has 20 details, another has 3 (inconsistent complexity)
-- Light appears to come from different directions across illustrations
+- 404 errors in production logs after deployment
+- Analytics funnel shows drop-off at "contact" step
+- Users report "contact link doesn't work" from specific pages
+- Sitemap.xml lists URLs that redirect or don't exist
+- Google Search Console reports "Discovered - currently not indexed" for pages you want indexed
 
 **Phase to address:**
-Phase 2 (Process Section Illustrations) — Establish isometric guidelines and create/procure first set. Validate style before proceeding to Phase 3 (Technology Section).
+Phase 4 (Contact Page Redirect) — Audit all `/contact` references before adding redirect
+Phase 5 (Navigation Cleanup) — Update all navigation components + verify with link crawler
 
 ---
 
-### Pitfall 5: Isometric SVG Performance Degradation from Complex Paths
+### Pitfall 5: Footer Social Icons Fail WCAG Accessibility Without Proper Labels
 
 **What goes wrong:**
-High-detail isometric illustrations with thousands of SVG path points cause render jank, especially on mobile devices. Page load times increase significantly (LCP degrades), Lighthouse performance scores drop below 90%, and scrolling feels sluggish when illustrations are in viewport. The site becomes noticeably slower despite being a static site.
+Team adds Instagram and Substack icons to footer using SVG `<svg><use>` or Lucide icons, wrapping them in `<a>` tags with `href` but no accessible text label. Screen readers announce "link" or "graphic link" with no indication of destination. Footer fails WCAG 2.4.4 (Link Purpose - In Context) and 1.1.1 (Non-text Content). WCAG 2.2 Level AA is the current accessibility standard applied to websites in the United States in 2026.
 
 **Why it happens:**
-Designers export isometric illustrations directly from design tools (Figma, Illustrator) without optimization. Unoptimized SVGs can significantly slow down rendering, increase bundle size, and impact Core Web Vitals. Complex isometric illustrations often contain excessive path precision (6 decimal places instead of 2), unnecessary metadata, hidden layers, and unmerged paths. Each illustration might be 50-200KB unoptimized when it should be 5-20KB.
+Visual designers see icon-only links as cleaner aesthetic. Developers assume icon shape conveys meaning (Instagram logo = Instagram link). Testing with keyboard navigation works (links are focusable), creating false confidence. Screen reader testing is skipped or done after implementation. Social media icons need specific labels like "Follow us on Instagram" instead of generic "Instagram icon."
 
 **How to avoid:**
-- **Optimize all SVG files before adding to project:**
-  - Use SVGO or Astro's built-in SVG optimization (experimental flag: `svg-optimization`)
-  - Reduce path coordinate precision from 6 decimals to 2 (40% file size reduction with no visual change)
-  - Remove unnecessary metadata, comments, hidden layers
-  - Merge paths where possible without losing editability
-  - Simplify complex paths (40-80% size reduction possible)
-- Set target file size limits: <20KB per illustration, <10KB ideal
-- Use Astro's `<Image />` or `<Picture />` component for raster fallbacks if SVG complexity can't be reduced
-- Lazy load illustrations below the fold using Astro's `loading="lazy"` attribute
-- Test performance impact on mid-range mobile device (not just dev machine)
-- Monitor bundle size during build—flag any SVG over 20KB for manual optimization
+- **Use visually-hidden span for screen readers:**
+  ```astro
+  <a href="https://instagram.com/..." class="footer-social-link">
+    <Instagram class="w-6 h-6" aria-hidden="true" />
+    <span class="sr-only">Follow Joel on Instagram</span>
+  </a>
+  ```
+- **Add `aria-label` to link (alternative):**
+  ```astro
+  <a href="..." aria-label="Follow Joel on Instagram" class="footer-social-link">
+    <Instagram class="w-6 h-6" aria-hidden="true" />
+  </a>
+  ```
+- **Ensure `.sr-only` utility exists in Tailwind:**
+  ```css
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+  ```
+- **Test with screen reader before PR:**
+  - macOS: VoiceOver (Cmd+F5)
+  - Windows: NVDA (free)
+  - Verify each social link announces platform name + action
+- **Minimum touch target size:** 44x44px for WCAG 2.5.5 Level AAA (use padding to expand clickable area)
 
 **Warning signs:**
-- Lighthouse performance score drops when illustrations added to page
-- LCP (Largest Contentful Paint) increases by >500ms
-- Build output shows SVG files >20KB
-- Scrolling feels janky when illustrations enter viewport
-- Mobile devices (especially older iPhones) show noticeable lag
-- DevTools Performance tab shows long paint times during scroll
+- Playwright axe-core tests fail with "Links must have discernible text"
+- Manual keyboard navigation doesn't show tooltip on focus
+- Screen reader announces "link graphic" without destination
+- Lighthouse accessibility score drops below 100
+- Social icons too small on mobile (<44x44px touch target)
 
 **Phase to address:**
-Phase 2 (Process Section Illustrations) — Establish SVG optimization pipeline before first illustration. Set up Astro SVG optimization and validate output sizes. Phase 6 (Performance Audit) — Verify no performance regressions from illustrations.
+Phase 6 (Footer Cleanup) — Add social icons with proper accessibility from start, include Playwright test
 
 ---
 
-### Pitfall 6: Outcome Badges Creating Visual Clutter in Hero Section
+### Pitfall 6: Design System Page Accidentally Indexed by Search Engines
 
 **What goes wrong:**
-Adding outcome-focused badges/icons to the hero section creates overwhelming visual density. Instead of clarifying value proposition, badges compete with headline, CTA, and hero image. Users don't know where to look first. The "5-second test" fails—visitors can't articulate what the site offers after 5 seconds of viewing.
+Internal design system reference page at `/design-system` gets indexed by Google. Search results show design documentation to potential clients who search for Joel's name. Page ranks for keywords like "Joel Shinness button component" instead of actual portfolio content. Looks unprofessional - internal docs exposed publicly.
 
 **Why it happens:**
-Best practices recommend trust signals (badges, icons, metrics) to boost credibility, and outcome-focused messaging to clarify value. However, cramming multiple messages, CTAs, excessive copy, and competing visuals into a single space is the most common hero section mistake. The existing site targets 10/10 neobrutalist density for hero sections, which already includes bold typography, thick borders, and colored shadows. Adding 4-6 outcome badges pushes density beyond usable levels.
+Team assumes internal pages won't be indexed without explicit linking from navigation. Search engines crawl all pages in sitemap regardless of navigation visibility. No `robots` meta tag prevents indexing. GitHub Pages serves all HTML files by default. In 2026, indexing should be treated like inventory management - if a page is meant to drive demand, it must be indexable; if not, it must be explicitly excluded.
 
 **How to avoid:**
-- **Strict badge hierarchy in hero:**
-  - Maximum 3 outcome badges/icons in hero (not 6+)
-  - Place badges as secondary elements—never competing with headline or CTA
-  - Use subtle treatment for badges: small icons, minimal borders, no shadows
-  - Position strategically: below CTA or to the side, never above headline
-  - Test with "5-second test"—users should articulate value proposition in 5 seconds
-- Consider moving some badges to pre/post-hero utility strip instead of cramming into hero
-- Badges should reinforce primary message, not introduce new concepts
-- Use consistent icon style (outline vs filled, size, color usage)
-- Test badge count variations: 0, 2, 4, 6—find optimal without overwhelming
+- **Add noindex meta tag to design system page:**
+  ```astro
+  <head>
+    <meta name="robots" content="noindex,nofollow">
+  </head>
+  ```
+- **Exclude from sitemap generation:**
+  ```javascript
+  // astro.config.mjs
+  sitemap({
+    filter: (page) => !page.includes('/design-system')
+  })
+  ```
+- **Add to robots.txt (optional additional layer):**
+  ```
+  Disallow: /design-system
+  ```
+- **Monitor Search Console:** Check "Coverage" report for unexpected indexed pages
+- **Alternative approach:** Use password protection or require login (not feasible for GitHub Pages static hosting)
 
 **Warning signs:**
-- Hero feels cluttered despite generous spacing
-- Users can't identify primary CTA in under 2 seconds
-- Multiple elements compete for attention (nothing stands out)
-- "5-second test" shows confusion about what site offers
-- Heat maps show scattered attention instead of focused scan pattern
-- Bounce rate increases after hero redesign
-- Design peers love it but target audience (small business owners) finds it confusing
+- Design system page appears in Google search results
+- Search Console shows `/design-system` in indexed pages
+- Analytics shows organic search traffic to design system page
+- Clients/visitors mention seeing internal documentation
 
 **Phase to address:**
-Phase 1 (Hero Refinement) — Test badge count variations with target audience before implementing. Start with 2 badges, increase only if testing supports it.
+Phase 1 (Design System Reference Page) — Add noindex meta tag from initial creation, not as afterthought
 
 ---
 
-### Pitfall 7: FAQ Accordions Losing WCAG 2.2 Keyboard Accessibility
+### Pitfall 7: Navigation Simplification Makes Secondary Content Undiscoverable
 
 **What goes wrong:**
-FAQ accordion components look great and work with mouse clicks but fail keyboard navigation and screen reader testing. Users can't expand/collapse questions with Enter/Space keys, focus indicators are invisible, or ARIA attributes are missing/incorrect. The FAQ page passes Lighthouse automated checks but fails manual accessibility testing.
+Team removes "About", "Process", "Services" links from header to simplify navigation. These sections still exist on homepage but users from blog posts or project pages can't navigate to them. Direct links to `/#about` from external sources (social media, emails) work, but users browsing the site have no way to discover these sections. Conversion rate drops because users can't find process information that builds trust.
 
 **Why it happens:**
-Accordion components require complex keyboard interaction patterns and ARIA attributes beyond basic HTML. Developers implement visual accordion behavior (click to expand) without implementing full WCAG 2.2 keyboard accessibility requirements. Neobrutalist styling (thick borders, bold colors) can obscure focus indicators—a blue focus ring on a yellow-bordered button becomes hard to see. The project has Lighthouse CI enforcement but this tests only a subset of accessibility issues—manual testing is required for interactive components.
+Navigation cleanup focuses on "reducing clutter" without considering information architecture and user journeys. Assumption that "everything is on homepage" means users will find it, forgetting that many users enter via blog posts or direct project links. Following best practice to "limit primary navigation to no more than seven items" is misinterpreted as "remove everything possible."
 
 **How to avoid:**
-- **Full accordion accessibility implementation:**
-  - Keyboard support: Enter and Space to toggle, Tab to move between questions
-  - ARIA attributes: `aria-expanded`, `aria-controls`, `aria-labelledby`
-  - Focus indicators with sufficient contrast against both background AND bordered elements
-  - Screen reader announces state: "Question 1, button, collapsed" / "expanded"
-  - Focus management: Focus moves to expanded content or stays on button (document choice)
-- Use `<details>` and `<summary>` HTML elements as foundation (native accessibility)
-- Test with keyboard only—disconnect mouse and navigate entire FAQ page
-- Test with screen reader (VoiceOver on Mac, NVDA on Windows)
-- Design custom focus indicators that work with neobrutalist borders (consider glow effect or thick outline in contrasting color)
-- Document accordion behavior in component guidelines with accessibility requirements
+- **Distinguish primary vs secondary navigation:**
+  - **Primary (header):** Pages users navigate to frequently (Blog, Projects, FAQ, Contact)
+  - **Secondary (footer):** Homepage sections and utility pages (About, Process, Services, Privacy)
+- **Footer as secondary navigation:** Mirror homepage section links subtly in footer
+- **Test user journeys from all entry points:**
+  - User lands on blog post → wants to learn about services → how do they get there?
+  - User lands on project page → wants to contact → is path clear?
+  - User lands on homepage → browses → navigates to blog → wants to return to services → how?
+- **Breadcrumbs or "Back to..." links:** For blog/project pages, provide clear path back to main sections
+- **Avoid "hidden room" syndrome:** Every page should be discoverable within 3 clicks from any other page
 
 **Warning signs:**
-- Lighthouse 100% but keyboard navigation doesn't work
-- Focus indicators invisible or hard to see on bordered buttons
-- Screen reader announces "button" but not expansion state
-- Enter key doesn't toggle accordion (only click works)
-- Tab order skips accordion content or behaves unexpectedly
-- Users with disabilities report FAQ page is difficult to use
+- Analytics show users entering on blog post and immediately bouncing
+- Conversion rate drops after navigation simplification
+- Users ask "How do I see your services?" despite services section existing
+- External links to `/#about` work but internal navigation doesn't provide path
+- Heat maps show users searching for navigation options that don't exist
 
 **Phase to address:**
-Phase 4 (FAQ Page) — Implement full keyboard and screen reader support from start, not as afterthought. Manual accessibility testing before considering page complete.
-
----
-
-### Pitfall 8: Over-Stylization Undermining Professional Trust
-
-**What goes wrong:**
-Pushing neobrutalism to 10/10 density creates a site that feels experimental, unfinished, or like a placeholder. Small business owners (target audience) interpret the aesthetic as "unprofessional," "not ready," or "too quirky for serious work." Lead generation drops instead of improving.
-
-**Why it happens:**
-Neobrutalism is inherently rebellious and anti-conventional. Designers see portfolio examples from creative agencies or design studios (who can push boundaries) and apply the same density to a professional services site. The project brief specifies "3/10 density — distinctive but not overwhelming," but excitement about the aesthetic leads to feature creep: every element gets thick borders, every shadow gets exaggerated, every font gets bolder.
-
-**How to avoid:**
-- **Establish and enforce the 3/10 density constraint rigorously:**
-  - Headers/Hero: 7/10 neobrutalism (make a statement)
-  - Core content areas: 2/10 neobrutalism (subtle accents only)
-  - Blog posts: 1/10 neobrutalism (prioritize readability)
-- Use neobrutalist elements as **accents**, not the entire design language
-- Apply thick borders to CTAs and card components only, not every div
-- Limit bold colors to accent elements: buttons, tags, highlights
-- Preserve generous whitespace—neobrutalism without breathing room = chaos
-- **Test with target audience** (small business owners) before launch, not just design peers
-- Create "density guidelines" document showing do/don't examples per section
-
-**Warning signs:**
-- Design peers love it, but target audience focus group is confused/put off
-- Multiple elements compete for attention (nothing stands out)
-- Site feels overwhelming or exhausting to browse
-- Users describe design as "loud," "aggressive," or "too much"
-- Bounce rate increases compared to previous design
-- Conversion rate drops despite improved visual interest
-
-**Phase to address:**
-Phase 1 (Design System Foundation) — define density constraints per component type. Phase 5 (Testing & Refinement) — user testing with actual target audience (small business owners), not design community.
-
----
-
-### Pitfall 9: Inconsistent Spacing Creating Visual Chaos
-
-**What goes wrong:**
-Applying random or inconsistent spacing between neobrutalist elements (thick borders, bold shadows, large type) creates a layout that feels haphazard instead of intentionally raw. Elements collide visually, breathing room disappears, and the design feels amateurish rather than bold.
-
-**Why it happens:**
-Neobrutalism celebrates "unpolished" aesthetics, which designers misinterpret as "spacing doesn't matter." Without systematic spacing, thick borders touch or nearly touch, shadows overlap confusingly, and the intentional rawness becomes accidental mess. Tailwind's utility classes make it easy to apply spacing inconsistently (`p-4` here, `p-6` there, `p-8` elsewhere).
-
-**How to avoid:**
-- **Establish spacing scale for neobrutalist elements** (not just base Tailwind scale):
-  - Minimum gap between bordered elements: 24px (2rem / `gap-6`)
-  - Padding inside bordered containers: 24-32px (`p-6` or `p-8`)
-  - Margin around shadow elements: shadow-offset + 8px minimum
-- Use consistent shadow offset across similar elements (e.g., all cards use `8px 8px`)
-- Document spacing rules in design system: "Neobrutalist cards require 32px vertical margin"
-- Use Tailwind's `space-y-*` and `gap-*` utilities consistently
-- Avoid one-off spacing values—stick to scale
-
-**Warning signs:**
-- Elements feel "too close" despite generous whitespace elsewhere
-- Shadows overlap or touch adjacent elements
-- Thick borders create unintended visual connections between unrelated elements
-- Design feels cluttered despite minimal number of elements
-- Responsive breakpoints cause spacing to collapse awkwardly
-
-**Phase to address:**
-Phase 1 (Design System Foundation) — define neobrutalist spacing scale and usage rules. Phase 3 (Page Templates) — apply spacing system consistently across all templates.
-
----
-
-### Pitfall 10: Accessibility Testing Theater (Passing Lighthouse, Failing Humans)
-
-**What goes wrong:**
-Site achieves 100% Lighthouse accessibility score but remains difficult to use for people with disabilities. Color contrast passes automated checks but causes eye strain. Focus indicators are technically present but invisible. ARIA labels exist but don't help screen reader users navigate effectively.
-
-**Why it happens:**
-The project has Lighthouse CI enforcement with 90%+ thresholds, creating incentive to "pass the test" rather than "be accessible." Neobrutalism's high contrast can technically pass WCAG while still causing issues: vibrating colors, harsh contrasts, overwhelming visual density. Lighthouse can only test a subset of accessibility issues—it cannot evaluate subjective experience.
-
-**How to avoid:**
-- **Manual accessibility testing is non-negotiable:**
-  - Keyboard-only navigation testing for every interactive element
-  - Screen reader testing (VoiceOver on Mac, NVDA on Windows)
-  - Color blindness simulation (Chrome DevTools, Stark plugin)
-  - Test with actual users who have disabilities if possible
-- Focus indicators must have sufficient contrast **against both background and element**
-  - Blue ring on blue button = invisible, even if technically present
-- Test in different lighting conditions (bright sunlight, dim room)
-- Verify interactive elements are clearly distinguishable (neobrutalist flat aesthetic can make buttons look like decorative elements)
-- Document accessibility beyond automated checks: "Tested with keyboard navigation, tested with VoiceOver, tested in bright sunlight"
-
-**Warning signs:**
-- 100% Lighthouse score but users report accessibility problems
-- Focus indicators hard to see in practice despite passing contrast checks
-- Interactive elements look like static design elements
-- Screen reader announces everything but navigation is still confusing
-- Colors pass WCAG but cause headaches or eye strain in real-world use
-
-**Phase to address:**
-Phase 5 (Testing & Refinement) — dedicated manual accessibility testing with multiple methods. Do not rely solely on Lighthouse CI passing.
+Phase 5 (Navigation Cleanup) — Plan both primary (header) and secondary (footer) navigation simultaneously
+Phase 6 (Footer Cleanup) — Implement secondary navigation that maintains discoverability
 
 ---
 
@@ -323,31 +273,33 @@ Shortcuts that seem reasonable but create long-term problems.
 
 | Shortcut | Immediate Benefit | Long-term Cost | When Acceptable |
 |----------|-------------------|----------------|-----------------|
-| Using same shadow values for all components | Faster implementation, consistent look | No visual hierarchy, everything same "weight" | Never—differentiate card shadows (8px) vs button shadows (4px) vs hero shadows (12px) |
-| Hardcoding colors instead of CSS custom properties | Quick to write, no abstraction needed | Dark mode becomes painful, color changes require find/replace | Never—use Tailwind theme tokens from day one |
-| Applying neobrutalist style to all elements | Impressive in screenshots, maximizes aesthetic | Overwhelming density, professional trust undermined | Never—use 3/10 density constraint |
-| Skipping mobile testing of thick borders/shadows | Faster dev cycle, desktop looks great | Mobile feels cramped, borders too thick at small viewport | Never—test responsive behavior immediately |
-| Copy-pasting shadow animation code across components | Fast, works in isolation | Performance issues accumulate, hard to optimize later | Only in prototype phase, refactor before production |
-| Using yellow accent on light backgrounds | Matches brand colors, visually striking | Fails WCAG contrast, Lighthouse fails | Only for non-text decorative elements |
-| Sourcing isometric illustrations from multiple libraries | More variety, faster to find "perfect" image | Inconsistent style undermines professional look | Only during prototyping to test concepts |
-| Inline SVG without optimization | Easy to copy-paste from design tool | Massive file sizes, performance degradation | Only for quick prototypes, never production |
-| Using generic accordion scripts without accessibility | Works with mouse, faster implementation | Fails keyboard users, screen readers, WCAG 2.2 | Never—build accessible from start |
-| Adding 6+ outcome badges to hero for completeness | Showcases all value propositions at once | Visual clutter, fails 5-second test, overwhelms users | Never—maximum 3 badges in hero |
+| Inline component variants in production pages instead of using design system | Faster to ship page-specific tweaks | Documentation becomes unreliable; identical components reimplemented 3+ times | Never — if variant is needed, add to design system component |
+| "TODO: standardize later" comments in component files | Acknowledges inconsistency without blocking PR | TODOs never get addressed; becomes archaeological record of intentions | Only if TODO includes ticket number and severity level |
+| Copy-pasting component code to "try something out" | Quick prototyping without touching shared components | Duplicate implementations diverge; unclear which is "canonical" | Only in throwaway branches; never merge duplicates |
+| Using generic `<div>` instead of semantic HTML in components | Simpler structure, fewer ARIA attributes needed | Accessibility failures; screen reader navigation breaks | Never — use `<nav>`, `<footer>`, `<section>`, `<article>` |
+| "Looks good on my screen" without cross-browser testing | Ships faster; dev machine is high-end | Safari/Firefox rendering differences; mobile layout breaks | Never — at minimum test on 1 other browser + mobile viewport |
+| Skipping visual regression tests for "minor" component changes | Faster PR reviews | Subtle visual bugs in production; shadow offsets shift by 1px | Only for non-visual changes (accessibility attributes, aria-labels) |
+| Hardcoding navigation links in multiple components | Fast to implement, no abstraction needed | Link changes require updating 5+ files; easy to miss one | Never — centralize navigation config or use shared component |
+| Excluding pages from sitemap manually vs configuration | Quick fix for one-off exclusion | Configuration sprawl; unclear which pages intentionally excluded | Only during prototyping; formalize in config before production |
+
+---
 
 ## Integration Gotchas
 
-Common mistakes when integrating new components with existing neobrutalist system.
+Common mistakes when connecting to external services or updating existing integrations.
 
 | Integration | Common Mistake | Correct Approach |
 |-------------|----------------|------------------|
-| Isometric illustrations + neobrutalist borders | Illustration gets its own shadow that conflicts with container shadow | Place illustration inside bordered container with no shadow, OR give illustration shadow and remove container border |
-| Outcome badges + hero section density | Adding badges without reducing other elements (hero now 13/10 density) | Hero stays at 10/10—if badges added, reduce headline size or remove secondary elements |
-| FAQ accordions + dark mode | Accordion border/shadow hardcoded, doesn't transform to glow | Use `.shadow-neo-*` utilities so accordion inherits shadow-to-glow transformation |
-| SVG illustrations + Astro build | SVGs imported without optimization enabled | Enable Astro experimental flag `svg-optimization` in config before adding illustrations |
-| Outcome icons + OKLCH color system | Using generic icon colors (hex/rgb) that don't match design system | Extract icon colors from existing OKLCH tokens for consistency |
-| New components + existing spacing scale | Applying Tailwind defaults without considering neobrutalist spacing needs | Use documented neobrutalist spacing scale (minimum 24px gap between bordered elements) |
-| Isometric illustrations + mobile viewports | Illustrations too complex/detailed to be recognizable at small sizes | Test illustrations at 375px width, simplify or create alternate simplified version for mobile |
-| FAQ page + blog typography | Using same `.prose` styling for FAQ that's optimized for blog content | Create separate `.faq-content` class with appropriate spacing/sizing for Q&A format |
+| GitHub Pages Deployment | Assuming custom redirects in `.htaccess` or `_redirects` work | Use Astro's `redirects` config; generates meta refresh HTML |
+| Astro Sitemap Integration | Not excluding redirect pages from sitemap | Add `filter: (page) => !page.includes('/contact')` to sitemap config |
+| Astro Sitemap Integration | Not excluding internal documentation pages | Add filter for `/design-system` and any other internal pages |
+| Formspree Contact Form | Hardcoding form action URL in component | Store in environment variable; different for dev/prod |
+| Lucide Icons (tree-shaking) | Importing all icons at once `import * as icons from '@lucide/astro'` | Import only used icons `import { Mail, Instagram, BookOpen } from '@lucide/astro'` |
+| Lighthouse CI | Setting thresholds to 100 for all categories without testing | Start with `assertions: { categories: { performance: 90 } }`, adjust up |
+| Dark Mode Persistence | Reading `localStorage` during SSR (causes hydration mismatch) | Use `<script is:inline>` to read theme before hydration |
+| Navigation Components | Updating Header but not MobileNav or Footer | Update all navigation components in same PR; verify consistency |
+
+---
 
 ## Performance Traps
 
@@ -355,49 +307,58 @@ Patterns that work at small scale but fail as usage grows.
 
 | Trap | Symptoms | Prevention | When It Breaks |
 |------|----------|------------|----------------|
-| Unoptimized isometric SVGs | LCP increases by 500ms+, Lighthouse performance drops | Enable Astro SVG optimization, set <20KB per file limit | First illustration added (if complex) |
-| Multiple isometric illustrations on single page | Scrolling jank on mobile, long paint times | Lazy load below-fold illustrations, limit to 3-4 per page max | 4+ complex illustrations on same page |
-| Animating box-shadow on multiple cards | Smooth on dev machine, janky on mobile | Use pseudo-element opacity technique for all shadow animations | 3+ animated shadows visible simultaneously |
-| Outcome badge icons loaded as individual requests | Slower page load, multiple HTTP requests | Use SVG sprite or icon font for all hero icons | 6+ small icon files |
-| FAQ accordions with complex SVG icons | Expand/collapse animations stutter | Use simple geometric icons or icon fonts for accordion indicators | 10+ FAQ items with SVG icons |
-| Loading multiple neobrutalist display fonts | More font options, expressive typography | Restrict to 1 display font (Bricolage Grotesque), 1 body font (DM Sans) | Third font added (each font ~30-50kb) |
-| High-resolution isometric PNGs as fallback | Better detail than optimized SVG | Use properly optimized SVG instead of raster fallback | Any PNG >50KB used |
+| Adding all icon variants to design system reference page | Initial load fine, but page size grows with each icon | Lazy-load icon examples with `<details>` or separate page | >50 icons (page size >500KB) |
+| Embedding large example code blocks in design system docs | Documentation page loads slowly | Use syntax highlighting with code folding; limit examples to 20 lines | >10 full component examples |
+| Not compressing images in component documentation | Documentation feels sluggish | Use WebP format; max 1200px width; compress with Squoosh | >5 uncompressed screenshots |
+| Loading all component variants simultaneously for visual testing | Browser memory spikes during testing | Render one variant type at a time; use pagination | >100 component instances |
+| Keeping old redirect pages in build output | Build time increases; deploy size grows | Set `redirects` expiration; remove source pages after redirect stable | >20 redirect pages |
+| Not tree-shaking utility CSS classes | Tailwind bundle grows with unused utilities | Use `content: ['./src/**/*.{astro,html,js,jsx,md,mdx,ts,tsx}']` in Tailwind config | Never an issue with proper content paths |
+| Social icon SVGs loaded as individual requests | Slower page load, multiple HTTP requests | Use icon library with tree-shaking (@lucide/astro) or SVG sprite | >6 small icon files |
+
+---
 
 ## UX Pitfalls
 
-Common user experience mistakes when adding outcome-focused messaging and interactive components.
+Common user experience mistakes when adding documentation and cleaning navigation.
 
 | Pitfall | User Impact | Better Approach |
 |---------|-------------|-----------------|
-| Too many outcome badges in hero (6+) | Overwhelmed, can't identify primary value proposition | Maximum 3 badges, test with "5-second test" |
-| All FAQ questions closed by default | Users must click each to find answer, high friction | Consider opening first 2-3 questions by default, or add search |
-| Isometric illustrations without alt text | Screen reader users miss context, SEO impact | Descriptive alt text for each illustration: "Isometric illustration showing three-step process workflow" |
-| Outcome badges using jargon or unclear metrics | Confusing to non-technical small business owners | Use plain language: "Save 10 hours/week" not "37% productivity gain" |
-| FAQ questions in random order | Users can't predict where to find answers | Group by theme, order by frequency (most-asked first), or alphabetical |
-| Process section with 8+ isometric steps | Cognitive overload, users skip reading | Maximum 5 steps in process, combine related steps if needed |
-| Interactive elements indistinguishable from decorative | Users don't realize FAQ questions are clickable | Clear affordances: cursor change, hover state, "click to expand" hint |
-| Outcome badges competing with CTA | Users read badges instead of clicking CTA, conversions drop | Badges secondary to CTA—smaller, positioned to not compete |
-| Isometric illustrations too abstract | Users don't understand what illustration represents | Test comprehension—users should identify concept without explanation |
-| FAQ answers too long (200+ words) | Users won't read long answers, defeats "quick reference" purpose | Keep answers under 100 words, link to blog post for details |
+| Design system reference page accessible via main navigation | Internal docs shown to clients; looks unprofessional | Keep URL accessible but hide from nav; add `<meta name="robots" content="noindex">` |
+| Footer navigation duplicates header exactly | Redundant; wastes vertical space; unclear hierarchy | Footer: secondary links (Privacy, FAQ, About), header: primary (Projects, Blog, Contact) |
+| Social icons without hover states | Unclear which icon is focused when tabbing | Add hover color change + outline on focus (4.5:1 contrast) |
+| Removing contact page breaks browser back button flow | User fills form → submits → success → back button → redirect loop | Keep `/contact` page with redirect; redirect happens instantly |
+| Navigation cleanup removes links from header but not mobile nav | Desktop/mobile navigation inconsistent | Update Header, MobileNav, Footer in same PR; verify with responsive testing |
+| "Contact" CTA buttons link to different anchors across pages | Some go to `/#contact`, others to `/contact#form` | Standardize on `/#contact`; works from any page consistently |
+| Footer social icons too small on mobile (<44x44px touch target) | Users with motor impairments struggle to tap | Min 44x44px touch target (WCAG 2.5.5 Level AAA); use padding to expand clickable area |
+| Navigation simplification makes sections undiscoverable | Users can't find "Process" or "Services" sections from blog pages | Footer provides secondary navigation to homepage sections |
+| Design system docs use jargon ("prop", "variant", "slot") | Non-technical team members can't understand documentation | Use plain language; define technical terms; include visual examples |
+
+---
 
 ## "Looks Done But Isn't" Checklist
 
 Things that appear complete but are missing critical pieces.
 
-- [ ] **Isometric illustrations optimized:** Files under 20KB each, SVGO or Astro optimization applied
-- [ ] **Illustration style consistency:** All illustrations use same light source angle, color palette, detail level
-- [ ] **Dark mode shadow transformation:** All new components use `.shadow-neo-*` utilities, tested in dark mode
-- [ ] **Outcome badges count tested:** Maximum 3 badges in hero, validated with "5-second test" and target audience
-- [ ] **FAQ keyboard accessibility:** Enter/Space toggle works, Tab navigation correct, tested without mouse
-- [ ] **FAQ screen reader support:** ARIA attributes correct, state announced properly, tested with VoiceOver/NVDA
-- [ ] **Focus indicators on new components:** Visible against both background and bordered elements, tested manually
-- [ ] **SVG alt text:** Every isometric illustration has descriptive alt text for screen readers and SEO
-- [ ] **Mobile responsiveness:** Illustrations recognizable at 375px, badge layout doesn't break, FAQ accordions work on touch
-- [ ] **Performance metrics maintained:** Lighthouse performance 90+, LCP increase <200ms, no scrolling jank
-- [ ] **Spacing consistency:** New components follow neobrutalist spacing scale (24px minimum gap between bordered elements)
-- [ ] **OKLCH color integration:** Outcome badges and illustrations use existing color tokens, not new arbitrary colors
-- [ ] **Density compliance:** Each section measured against density guidelines (hero 10/10, content 3/10, etc.)
-- [ ] **Target audience validation:** Tested with small business owners (not just design peers), value proposition clear
+- [ ] **Design System Page:** Component examples render correctly, but TypeScript interfaces not documented — verify every prop has description
+- [ ] **Design System Page:** Documentation created but no `<meta name="robots" content="noindex">` — verify excluded from search indexing
+- [ ] **Design System Page:** Examples shown but no "Last Updated" timestamp — verify maintenance mechanism documented
+- [ ] **Component Audit:** Visual inconsistencies documented, but no severity prioritization — verify CRITICAL/HIGH/MEDIUM/LOW tiers assigned
+- [ ] **Component Audit:** Findings list created but no plan for addressing — verify tiered action plan with phases
+- [ ] **Navigation Cleanup:** Header updated, but mobile nav/footer still have old links — verify all navigation components updated
+- [ ] **Navigation Cleanup:** Primary nav simplified but no secondary nav in footer — verify discoverability maintained
+- [ ] **Contact Redirect:** `/contact` redirects, but blog posts still link to `/contact` — verify all internal links audited with grep
+- [ ] **Contact Redirect:** Redirect added to astro.config.mjs but not verified as meta refresh — verify build output contains `<meta http-equiv="refresh">`
+- [ ] **Contact Redirect:** Redirect works but page still in sitemap — verify sitemap filter excludes `/contact`
+- [ ] **Footer Social Icons:** Icons added, but no screen reader labels — verify `<span class="sr-only">` or `aria-label` present
+- [ ] **Footer Social Icons:** Labels added but no minimum touch target size — verify 44x44px touch area on mobile
+- [ ] **Accessibility Testing:** Keyboard navigation works, but not tested with screen reader — verify VoiceOver/NVDA testing completed
+- [ ] **Visual Regression:** Components look correct in light mode, but dark mode shadows broken — verify both themes tested
+- [ ] **Responsive Design:** Footer looks good on desktop, but icons overlap on mobile 320px — verify min viewport 320px tested
+- [ ] **Sitemap:** Redirect pages excluded, but orphan pages not removed — verify `sitemap.xml` has only canonical URLs
+- [ ] **Sitemap:** Internal docs excluded from sitemap but not from robots.txt — verify complete exclusion strategy
+- [ ] **Documentation Maintenance:** Reference page created, but no update process in CLAUDE.md — verify workflow documented
+
+---
 
 ## Recovery Strategies
 
@@ -405,16 +366,19 @@ When pitfalls occur despite prevention, how to recover.
 
 | Pitfall | Recovery Cost | Recovery Steps |
 |---------|---------------|----------------|
-| WCAG contrast failures discovered after implementation | MEDIUM | 1. Audit all color combinations with WebAIM checker 2. Create compliant color palette alternatives 3. Replace in CSS custom properties 4. Re-test Lighthouse 5. Manual QA all pages |
-| Dark mode shadows don't transform properly | MEDIUM | 1. Audit all new components for hardcoded shadows 2. Replace with `.shadow-neo-*` utilities 3. Test every component in dark mode 4. Document shadow usage in component guidelines |
-| Isometric illustrations inconsistent style | HIGH | 1. Document style guidelines (light angle, colors, detail) 2. Audit existing illustrations against guidelines 3. Recreate or heavily edit non-compliant illustrations 4. Establish single source for future illustrations |
-| Unoptimized SVGs causing performance issues | LOW | 1. Run all SVGs through SVGO 2. Enable Astro SVG optimization 3. Rebuild and test bundle sizes 4. Verify Lighthouse performance restored |
-| Outcome badges overwhelming hero section | MEDIUM | 1. User test variations with 0, 2, 3, 4 badges 2. Find optimal count (likely 2-3) 3. Move excess badges to utility strip or separate section 4. Retest "5-second test" |
-| FAQ accordions fail keyboard accessibility | HIGH | 1. Implement full keyboard support (Enter, Space, Tab) 2. Add proper ARIA attributes 3. Design visible focus indicators 4. Test with keyboard only 5. Test with screen reader 6. Document for future components |
-| Professional trust issues from over-stylization | HIGH | 1. Measure density across all sections 2. Reduce to documented targets (hero 10/10, content 3/10) 3. User test with target audience 4. A/B test if possible 5. Monitor conversion rates |
-| Spacing inconsistencies across new components | MEDIUM | 1. Document spacing scale in design system 2. Audit all new components 3. Refactor using systematic spacing utilities 4. Create before/after examples for team reference |
-| Isometric illustrations unrecognizable on mobile | MEDIUM | 1. Test each illustration at 375px 2. Simplify complex illustrations or create mobile variants 3. Consider replacing with simpler icons if simplification isn't enough 4. Retest comprehension |
-| Body text readability issues in blog posts | LOW | 1. Create `.prose-readable` variant class 2. Apply to blog content only 3. Test with real blog posts 4. User testing with non-technical audience |
+| Design system docs are stale | MEDIUM | Run component audit again; update docs; add "Last Updated" timestamp; document update workflow in CLAUDE.md |
+| Component audit created massive PR that broke prod | HIGH | Revert PR; break into 5 smaller PRs (1 per component type); add visual regression tests; ship incrementally |
+| Static redirect causes SEO issues | LOW | Monitor Search Console; if link juice lost, restore original page with canonical tag; redirect becomes secondary |
+| Navigation cleanup broke internal links | MEDIUM | Audit all pages for broken links; create redirect map; update all hardcoded URLs; deploy hotfix |
+| Footer social icons fail accessibility | LOW | Add `.sr-only` spans with descriptive text; re-run Playwright tests; deploy in same PR |
+| Mobile nav not updated with header | LOW | Update MobileNav component; verify consistency; add responsive test to prevent regression |
+| Redirect pages included in sitemap | LOW | Update `sitemap` config with filter; rebuild; submit new sitemap to Search Console |
+| Design system page indexed by Google | LOW | Add `<meta name="robots" content="noindex">` to page; request removal in Search Console; wait 1-2 weeks |
+| Navigation simplification made sections undiscoverable | MEDIUM | Add secondary navigation in footer; test user journeys from all entry points; monitor conversion rate recovery |
+| Component inconsistencies overwhelming | MEDIUM | Tier findings by severity; tackle CRITICAL first; accept 80% consistency as shipping; document remaining inconsistencies |
+| Footer navigation duplicates header | LOW | Redesign footer to show secondary links; distinguish primary (header) vs secondary (footer) navigation |
+
+---
 
 ## Pitfall-to-Phase Mapping
 
@@ -422,68 +386,62 @@ How roadmap phases should address these pitfalls.
 
 | Pitfall | Prevention Phase | Verification |
 |---------|------------------|--------------|
-| WCAG contrast failures | Phase 1: Hero Refinement | WebAIM Contrast Checker on outcome badges, Lighthouse CI passes |
-| Typography readability | Phase 1: Hero Refinement | Target audience can articulate value prop in 5 seconds |
-| Dark mode shadow transformation breaking | Phase 1: Hero Refinement, Phase 2: Process Section, Phase 4: FAQ Page | Every new component tested in both light and dark modes |
-| Isometric illustration style inconsistency | Phase 2: Process Section Illustrations (establish guidelines before implementation) | All illustrations use same light angle, color palette, detail level |
-| SVG performance degradation | Phase 2: Process Section Illustrations, Phase 3: Technology Section | All SVGs <20KB, Lighthouse performance 90+, LCP increase <200ms |
-| Outcome badges overwhelming hero | Phase 1: Hero Refinement | "5-second test" passes, maximum 3 badges, user testing validates clarity |
-| FAQ keyboard accessibility failures | Phase 4: FAQ Page | Manual keyboard navigation test passes, screen reader test passes |
-| Over-stylization undermining trust | All phases (enforce 3/10 density throughout) | User testing with small business owners, conversion rate maintained/improved |
-| Inconsistent spacing | Phase 1: Hero Refinement (establish spacing for badges/icons) | Spacing audit shows consistent use of documented scale |
-| Accessibility testing theater | Phase 5: Testing & Refinement | Manual accessibility tests completed (keyboard, screen reader, color blindness) |
+| Stale documentation | Phase 1 (Design System Reference) | Documentation includes "Last Updated" + Git hash; CLAUDE.md has update workflow |
+| "Fix everything" paralysis | Phase 2 (Component Audit) | Findings have severity tiers (CRITICAL/HIGH/MEDIUM/LOW) before migration starts |
+| Meta refresh instead of 301 | Phase 4 (Contact Redirect) | Build site; inspect `/contact/index.html`; verify `<meta http-equiv="refresh">` exists |
+| Broken internal links | Phase 4-5 (Redirect + Nav Cleanup) | Grep for all `/contact` refs; update before redirect; test from 3+ pages |
+| Social icon accessibility | Phase 6 (Footer Cleanup) | Playwright axe-core test passes; VoiceOver announces "Follow Joel on [Platform]" |
+| Navigation inconsistency | Phase 5 (Navigation Cleanup) | Header, MobileNav, Footer all updated in same PR; responsive test at 320px/768px/1024px |
+| Redirect pages in sitemap | Phase 4 (Contact Redirect) | Update sitemap config with filter; verify `sitemap.xml` excludes `/contact` |
+| Design system page indexed | Phase 1 (Design System Reference) | Add noindex meta tag; exclude from sitemap; check Search Console after 1 week |
+| Undiscoverable sections | Phase 5-6 (Navigation + Footer Cleanup) | User journey testing from blog/project pages; verify 3-click discoverability rule |
+| Component migration risks | Phase 3 (Component Migration) | One component type per PR; visual regression screenshots; 80% consistency acceptable |
+
+---
 
 ## Sources
 
-### Neobrutalism Design Principles
-- [Neobrutalism: Definition and Best Practices - Nielsen Norman Group](https://www.nngroup.com/articles/neobrutalism/)
-- [Neubrutalism - UI Design Trend That Wins The Web - Bejamas](https://bejamas.com/blog/neubrutalism-web-design-trend)
-- [Brutalism vs Neubrutalism in UI Design - CC Creative](https://www.cccreative.design/blogs/brutalism-vs-neubrutalism-in-ui-design)
-- [Consistency is key with branding - Neo Brutalism Design Scale](https://www.neobrutalism.dev/)
+**Design System Documentation & Migration:**
+- [Design Systems in 2026: Predictions, Pitfalls, and Power Moves](https://medium.com/@rydarashid/design-systems-in-2026-predictions-pitfalls-and-power-moves-f401317f7563)
+- [Design System Adoption Pitfalls](https://www.netguru.com/blog/design-system-adoption-pitfalls)
+- [Design System Documentation Best Practices](https://backlight.dev/blog/design-system-documentation-best-practices)
+- [Tips and Tricks for Design System Migrations](https://medium.com/@nonisnilukshi/tips-and-tricks-for-design-system-migrations-5beafb8e58c5)
+- [How to Conduct a Design System Audit](https://sparkbox.com/foundry/design_system_audit)
+- [Pro Tips for UI Library Migration in Large Projects](https://medium.com/@houhoucoop/pro-tips-for-ui-library-migration-in-large-projects-d54f0fbcd083)
 
-### Dark Mode & Shadow-to-Glow Implementation
-- [Dark Mode Design Best Practices in 2026 - Tech-RZ](https://www.tech-rz.com/blog/dark-mode-design-best-practices-in-2026/)
-- [Dark Mode Done Right: Best Practices for 2026 - Medium](https://medium.com/@social_7132/dark-mode-done-right-best-practices-for-2026-c223a4b92417)
-- [Dark Mode Design Systems: A Practical Guide - Medium](https://medium.com/design-bootcamp/dark-mode-design-systems-a-practical-guide-13bc67e43774)
-- [Dark Mode Design: Trends, Myths, and Common Mistakes - WebWave](https://webwave.me/blog/dark-mode-design-trends)
-- [The Dark Side of Dark Mode: 7 UX Design Mistakes - SevenKoncepts](https://sevenkoncepts.com/blog/the-dark-side-of-dark-mode-design-mistakes/)
+**Navigation & Website Redesign:**
+- [8 Common Website Design Mistakes to Avoid in 2026](https://www.zachsean.com/post/8-common-website-design-mistakes-to-avoid-in-2026-for-better-conversions-and-user-experience)
+- [Don't Make These Common Website Redesign Mistakes in 2026](https://digitalvolcanoes.com/blogs/dont-make-these-common-website-redesign-mistakes-in-2026)
+- [Avoiding Common Pitfalls in Website Redesign](https://www.brightspot.com/cms-resources/content-insights/how-to-avoid-common-pitfalls-in-website-redesign)
+- [Footer Navigation Best Practices](https://www.sliderrevolution.com/design/footer-navigation-best-practices/)
 
-### Isometric Illustration Consistency & Performance
-- [IBM Design Language – Isometric Style](https://www.ibm.com/design/language/illustration/isometric-style/design/)
-- [7 Ways to Optimize SVGs: Reduce File Size by 80% - FrontendTools](https://www.frontendtools.tech/blog/optimizing-svgs-web-performance-scalability)
-- [High Performance SVGs - CSS-Tricks](https://css-tricks.com/high-performance-svgs/)
-- [SVG Performance Optimization for Modern Websites - SVG AI](https://www.svgai.org/blog/svg-performance-optimization)
-- [How to improve page load speed with SVG optimization - Raygun](https://raygun.com/blog/improve-page-load-speed-svg-optimization/)
+**Static Site Redirects:**
+- [Static Page Redirects using AstroJS](https://friedrichkurz.me/posts/2025-01-11/)
+- [Astro Routing Documentation](https://docs.astro.build/en/guides/routing/)
+- [Astro Configuration Reference](https://docs.astro.build/en/reference/configuration-reference/)
+- [Astro.redirect Not Available in Static Mode](https://docs.astro.build/en/reference/errors/static-redirect-not-available/)
+- [GitHub Pages Client-Side Routing Issues](https://github.com/orgs/community/discussions/64096)
+- [Redirecting Static Pages](https://theorangeone.net/posts/redirecting-static-pages/)
+- [Static Site Redirects With Astro](https://www.lloydatkinson.net/posts/2022/static-site-redirects-with-astro/)
 
-### Astro SVG Optimization
-- [Experimental SVG optimization - Astro Docs](https://docs.astro.build/en/reference/experimental-flags/svg-optimization/)
-- [How to optimize images in Astro: A step-by-step guide - Uploadcare](https://uploadcare.com/blog/how-to-optimize-images-in-astro/)
-- [feat: add SVGO optimization support for SVG assets - Astro GitHub](https://github.com/withastro/astro/commit/1a2ed01c92fe93843046396a2c854514747f4df8)
+**SEO & Indexing:**
+- [SEO Site Structure Guide 2026](https://www.teamlewis.com/magazine/seo-site-structure/)
+- [Ghost SEO Index: Hidden Pages Getting Indexed](https://indexly.ai/blog/understanding-ghost-seo-index/)
+- [11 Types of Pages to Hide from Google](https://red-website-design.co.uk/hide-pages-from-google/)
+- [Technical SEO Checklist 2026](https://theclaymedia.com/technical-seo-checklist-2026/)
+- [SEO Information Architecture in 2026](https://chapters-eg.com/blog/seo-blog/seo-information-architecture-in-2026/)
 
-### Hero Section & Outcome-Focused Messaging
-- [Hero Section Design: Best Practices & Examples for 2026 - Perfect Afternoon](https://www.perfectafternoon.com/2025/hero-section-design/)
-- [High-Impact Hero Sections That Don't Hurt Page Speed: A CRO Guide - GoStellar](https://www.gostellar.app/blog/high-impact-hero-sections-that-dont-hurt-page-speed)
-- [Hero Section Optimization: Best Practices and Examples - Omniconvert](https://www.omniconvert.com/blog/hero-section-examples/)
-- [Best Practices for SaaS Website Hero Sections - ALF Design Group](https://www.alfdesigngroup.com/post/saas-hero-section-best-practices)
-
-### FAQ Page Accessibility (WCAG 2.2)
-- [Designing Accessible Dark Mode: A WCAG-Compliant Interface Redesign - Medium](https://medium.com/@design.ebuniged/designing-accessible-dark-mode-a-wcag-compliant-interface-redesign-0e0225833aa4)
-- [Dark Mode: Best Practices for Accessibility - DubBot](https://dubbot.com/dubblog/2023/dark-mode-a11y.html)
-- [The Designer's Guide to Dark Mode Accessibility - Accessibility Checker](https://www.accessibilitychecker.org/blog/dark-mode-accessibility/)
-- [Avoiding accessibility mistakes: 3 actions for 2026 - The Drum](https://www.thedrum.com/industry-insight/avoiding-accessibility-mistakes-three-actions-that-will-help-you-win-in-2026)
-
-### Accessibility & OKLCH Color Contrast
-- [OKLCH in CSS: Consistent, accessible color palettes - LogRocket](https://blog.logrocket.com/oklch-css-consistent-accessible-color-palettes)
-- [Color Contrast for Accessibility: WCAG Guide (2026) - WebAbility](https://www.webability.io/blog/color-contrast-for-accessibility)
-- [WCAG 2.2 color contrast validator with OKLCH support - GitHub](https://github.com/incluud/color-contrast-checker)
-- [Offering a Dark Mode Doesn't Satisfy WCAG Contrast Requirements - BOIA](https://www.boia.org/blog/offering-a-dark-mode-doesnt-satisfy-wcag-color-contrast-requirements)
-
-### Performance & Core Web Vitals
-- [Optimize Astro.js with Static Site Generation - TillItsDone](https://tillitsdone.com/blogs/astro-js-performance-optimization/)
-- [Boosting Web Performance: Astro JS Image & Speed Optimization - DEV](https://dev.to/benajaero/boosting-web-performance-how-we-supercharged-our-agencys-site-with-astro-js-image-speed-optimization-techniques-18mf)
-- [How to animate box-shadow with silky smooth performance - Tobias Ahlin](https://tobiasahlin.com/blog/how-to-animate-box-shadow/)
+**Accessibility (WCAG 2.2):**
+- [Footer Accessibility Tests - U.S. Web Design System](https://designsystem.digital.gov/components/footer/accessibility-tests/)
+- [Footer Component - U.S. Web Design System](https://designsystem.digital.gov/components/footer/)
+- [New Digital Accessibility Requirements in 2026](https://bbklaw.com/resources/new-digital-accessibility-requirements-in-2026)
+- [2026 WCAG & ADA Website Compliance Requirements](https://www.accessibility.works/blog/wcag-ada-website-compliance-standards-requirements/)
+- [Page Regions - W3C WAI](https://www.w3.org/WAI/tutorials/page-structure/regions/)
+- [Understanding Success Criterion 2.4.4: Link Purpose (In Context)](https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-in-context.html)
 
 ---
-*Pitfalls research for: Adding outcome-focused hero, isometric illustrations, and FAQ page to existing neobrutalist portfolio site*
-*Researched: 2026-02-09*
-*Context: Subsequent milestone adding features to site with existing OKLCH color system, shadow-to-glow dark mode, WCAG 2.2 AA compliance*
+
+*Pitfalls research for: Design System Documentation & Navigation Cleanup*
+*Researched: 2026-02-10*
+*Context: v1.3 milestone adding design system reference page, component consistency audit, navigation cleanup, and contact redirect to existing portfolio site with neobrutalist design on GitHub Pages*
+*Confidence: HIGH (verified with official Astro docs, WCAG 2.2 standards, 2026 industry sources, and analysis of existing codebase)*
