@@ -11,11 +11,11 @@ See: .planning/PROJECT.md (updated 2026-02-09)
 ## Current Position
 
 Phase: 14 of 16 (Process Section)
-Plan: 0 of ? in current phase
-Status: Ready to plan
-Last activity: 2026-02-10 - Phase 13 complete, verified
+Plan: 1 of ? in current phase
+Status: In progress
+Last activity: 2026-02-10 - Completed 14-01-PLAN.md (Process illustrations)
 
-Progress: [███████████████████████░░░░░░░░░] 73% (51 of 69+ plans complete)
+Progress: [███████████████████████░░░░░░░░░] 75% (52 of 69+ plans complete)
 
 ## Milestone History
 
@@ -40,7 +40,7 @@ See `.planning/milestones/` for archived roadmaps and requirements.
 |-----------|--------|-------|--------|
 | v1.0 MVP | 1-6 | 23 | Complete |
 | v1.1 Design | 7-11 | 14 | Complete |
-| v1.2 Refinement | 12-16 | 4/? | In progress |
+| v1.2 Refinement | 12-16 | 5/? | In progress |
 
 **Recent Trend:**
 - v1.1 velocity: Stable, 2-day milestone completion
@@ -55,6 +55,9 @@ See `.planning/milestones/` for archived roadmaps and requirements.
 Key decisions are logged in PROJECT.md Key Decisions table.
 
 Recent decisions affecting v1.2:
+- **Phase 14-01**: Simple geometric shapes (3-5 per illustration) ensure clarity at 64x64px and keep files under 1KB
+- **Phase 14-01**: currentColor enables CSS-based theming - single SVG works with any color without variants
+- **Phase 14-01**: Opacity-based face differentiation (0.7, 0.85, 1.0) creates isometric depth without color complexity
 - **Phase 13-01**: Badge variants use WCAG-compliant text tokens from global.css for automatic contrast compliance
 - **Phase 13-01**: Badges use iso-shadow utility for automatic dark mode glow transformation
 - **Phase 13-01**: Conservative placeholder metrics (500+ hours, 100%, 12+) for credibility - can update with real data later
@@ -90,9 +93,9 @@ Recent decisions affecting v1.2:
 - ✅ Icon visual regression tests (12-03): Baseline screenshots ensure icon rendering consistency
 
 **Phase 14/15 considerations:**
-- Isometric illustration style guide must be established in Phase 14 before Phase 15 to prevent inconsistency
-- SVG optimization critical (20KB limit per file) to protect LCP performance
-- Mobile recognition testing (375px) required before shipping illustrations
+- ✅ Isometric illustration style guide established (14-01): 3-5 shapes, currentColor, viewBox, opacity faces
+- ✅ SVG size target validated (14-01): All 5 illustrations under 1KB each, 3.26KB total
+- Mobile recognition testing (375px) required before shipping illustrations (deferred to integration)
 
 **Phase 16 considerations:**
 - FAQ keyboard accessibility already validated in v1.1, should carry forward to dedicated page
@@ -104,10 +107,10 @@ Recent decisions affecting v1.2:
 ## Session Continuity
 
 Last session: 2026-02-10
-Stopped at: Phase 13 complete, verified
+Stopped at: Completed 14-01-PLAN.md (Process illustrations)
 Resume file: None
-Next action: `/gsd:plan-phase 14`
+Next action: Continue with 14-02 or next plan in phase 14
 
 ---
 *State initialized: 2026-01-26*
-*Last updated: 2026-02-10 (Phase 13 complete: Outcome-focused hero with trust badges)*
+*Last updated: 2026-02-10 (Phase 14-01 complete: 5 isometric process illustrations created and tested)*
