@@ -62,7 +62,8 @@ test.describe('Icon visual regression', () => {
     await firstProject.click();
     await page.waitForLoadState('networkidle');
 
-    const footer = page.locator('footer');
+    // Use role='contentinfo' to target main footer (not blockquote footer)
+    const footer = page.getByRole('contentinfo');
     await expect(footer).toHaveScreenshot('project-detail-footer.png');
   });
 
