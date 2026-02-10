@@ -80,10 +80,13 @@ See: `.planning/milestones/v1.2-ROADMAP.md` for full details.
   3. Developer can view OKLCH color palette with hex/oklch values for both light and dark modes
   4. Developer can view typography scale (Bricolage Grotesque, DM Sans) with size examples
   5. Developer can view isometric utilities (iso-shadow, iso-glow, iso-rotate) with visual examples
-**Plans**: TBD
+**Plans**: 4 plans in 3 waves
 
 Plans:
-- [ ] 17-01: TBD
+- [ ] 17-01-PLAN.md — Page infrastructure (layout, sidebar nav, code toggle/copy)
+- [ ] 17-02-PLAN.md — Design tokens (colors, typography sections)
+- [ ] 17-03-PLAN.md — Components (Button, Card, Input, Badge documentation)
+- [ ] 17-04-PLAN.md — Utilities (isometric utilities, JSON endpoint, CLAUDE.md update)
 
 #### Phase 18: Component Consistency Audit
 **Goal**: Complete inventory of component usage across all pages with severity-tiered findings
