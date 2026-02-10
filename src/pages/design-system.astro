@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import DesignSystemNav from '../components/design-system/DesignSystemNav.astro';
+import TokenSwatch from '../components/design-system/TokenSwatch.astro';
 ---
 
 <BaseLayout title="Design System | Joel Shinness" description="Internal design system reference for Joel and AI coding agents">
@@ -43,9 +44,132 @@ import DesignSystemNav from '../components/design-system/DesignSystemNav.astro';
           <h2 class="font-heading text-3xl font-bold uppercase mb-6 border-l-4 border-turquoise dark:border-turquoise-dark pl-4">
             Colors
           </h2>
-          <p class="text-text-muted-light dark:text-text-muted-dark mb-4">
-            Color tokens will be documented here.
+          <p class="text-lg leading-relaxed mb-6 text-text-muted-light dark:text-text-muted-dark">
+            All colors use <strong>OKLCH</strong> (Oklab Lightness Chroma Hue) color space for perceptually uniform color representation. Dark mode variants reduce lightness by 5% and chroma by 0.02 for consistent visual hierarchy.
           </p>
+
+          <!-- Primary Accent Colors -->
+          <h3 class="font-heading text-xl font-semibold mb-4 mt-8">Primary Accent Colors</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <TokenSwatch
+              name="Yellow"
+              cssVar="--color-yellow"
+              oklch="oklch(0.85 0.18 95)"
+              hex="#ffef6a"
+              darkOklch="oklch(0.80 0.16 95)"
+              darkHex="#f5e03b"
+            />
+            <TokenSwatch
+              name="Turquoise"
+              cssVar="--color-turquoise"
+              oklch="oklch(0.70 0.15 195)"
+              hex="#4dd4c0"
+              darkOklch="oklch(0.65 0.13 195)"
+              darkHex="#2dbfaa"
+            />
+            <TokenSwatch
+              name="Magenta"
+              cssVar="--color-magenta"
+              oklch="oklch(0.65 0.20 350)"
+              hex="#d946ef"
+              darkOklch="oklch(0.60 0.18 350)"
+              darkHex="#c026d3"
+            />
+          </div>
+
+          <!-- Text Color Variants -->
+          <h3 class="font-heading text-xl font-semibold mb-4 mt-8">Text Color Variants (WCAG Compliant)</h3>
+          <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4">
+            Adjusted for sufficient contrast on light/dark backgrounds to meet accessibility standards.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <TokenSwatch
+              name="Yellow Text"
+              cssVar="--color-yellow-text"
+              oklch="oklch(0.55 0.15 95)"
+              hex="#b3a617"
+              darkOklch="oklch(0.85 0.18 95)"
+              darkHex="#ffef6a"
+            />
+            <TokenSwatch
+              name="Turquoise Text"
+              cssVar="--color-turquoise-text"
+              oklch="oklch(0.45 0.12 195)"
+              hex="#0d8577"
+              darkOklch="oklch(0.70 0.15 195)"
+              darkHex="#4dd4c0"
+            />
+          </div>
+
+          <!-- Neutral Colors -->
+          <h3 class="font-heading text-xl font-semibold mb-4 mt-8">Neutral Colors</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <TokenSwatch
+              name="Background Light"
+              cssVar="--color-bg-light"
+              oklch="oklch(1.0 0 0)"
+              hex="#ffffff"
+            />
+            <TokenSwatch
+              name="Background Dark"
+              cssVar="--color-bg-dark"
+              oklch="oklch(0.15 0 0)"
+              hex="#1a1a1a"
+            />
+            <TokenSwatch
+              name="Text Light"
+              cssVar="--color-text-light"
+              oklch="oklch(0.2 0 0)"
+              hex="#2b2b2b"
+            />
+            <TokenSwatch
+              name="Text Dark"
+              cssVar="--color-text-dark"
+              oklch="oklch(0.95 0 0)"
+              hex="#f2f2f2"
+            />
+            <TokenSwatch
+              name="Text Muted Light"
+              cssVar="--color-text-muted-light"
+              oklch="oklch(0.5 0 0)"
+              hex="#808080"
+            />
+            <TokenSwatch
+              name="Text Muted Dark"
+              cssVar="--color-text-muted-dark"
+              oklch="oklch(0.7 0 0)"
+              hex="#b3b3b3"
+            />
+          </div>
+
+          <!-- Usage Guidelines -->
+          <h3 class="font-heading text-xl font-semibold mb-4 mt-8">Usage Guidelines</h3>
+          <div class="bg-yellow/10 dark:bg-yellow-dark/10 border-3 border-yellow dark:border-yellow-dark rounded-lg p-6 space-y-4">
+            <div>
+              <h4 class="font-heading font-semibold mb-2">Yellow</h4>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark">
+                Primary CTA buttons, hero accents, important highlights. High energy and attention-grabbing.
+              </p>
+            </div>
+            <div>
+              <h4 class="font-heading font-semibold mb-2">Turquoise</h4>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark">
+                Secondary actions, card shadows/glows, section accents. Calm and modern, supports hierarchy.
+              </p>
+            </div>
+            <div>
+              <h4 class="font-heading font-semibold mb-2">Magenta</h4>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark">
+                Tertiary accents, hover states, decorative elements. Creative and energetic, use sparingly.
+              </p>
+            </div>
+            <div>
+              <h4 class="font-heading font-semibold mb-2">Dark Mode Transformation</h4>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark">
+                All dark mode variants reduce lightness (L) by 5% and chroma (C) by 0.02. Shadows transform to glows using the same color values for futuristic dark mode feel.
+              </p>
+            </div>
+          </div>
         </section>
 
         <!-- Typography Section -->
