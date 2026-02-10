@@ -1,0 +1,38 @@
+---
+import CodeBlock from './CodeBlock.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  code: string;
+  lang?: string;
+}
+
+const { title, description, code, lang = 'astro' } = Astro.props;
+---
+
+<div class="component-showcase mb-12">
+  <h3 class="font-heading text-2xl font-semibold mb-4">
+    {title}
+  </h3>
+  <p class="text-text-muted-light dark:text-text-muted-dark mb-6">
+    {description}
+  </p>
+
+  <!-- Live demo area -->
+  <div class="demo-area bg-gray-100 dark:bg-gray-900 border-3 border-text-light dark:border-text-dark rounded-lg p-8 mb-6">
+    <slot />
+  </div>
+
+  <!-- Code block with toggle -->
+  <CodeBlock code={code} lang={lang} title="Usage Example" />
+</div>
+
+<style>
+  .demo-area {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+</style>
