@@ -31,7 +31,7 @@ const postsWithMeta = sortedPosts.map((post) => {
     <div class="max-w-7xl mx-auto">
       <!-- Page header -->
       <header class="text-center mb-12">
-        <h1 class="font-heading text-4xl md:text-5xl font-bold mb-4">Blog</h1>
+        <h1 class="font-heading text-4xl md:text-5xl font-bold uppercase mb-4">Blog</h1>
         <p class="text-lg text-text-muted-light dark:text-text-muted-dark max-w-2xl mx-auto">
           Practical insights on automation, AI, and custom software for small businesses.
           Learn how to work smarter, not harder.
@@ -41,14 +41,14 @@ const postsWithMeta = sortedPosts.map((post) => {
       <!-- Filter buttons -->
       <div class="flex flex-wrap justify-center gap-3 mb-12">
         <button
-          class="filter-btn active px-6 py-2 rounded-full transition-colors duration-200 bg-accent-yellow hover:bg-accent-yellow-hover text-bg-dark font-medium"
+          class="filter-btn active px-6 py-2 rounded-full transition-colors duration-200 bg-turquoise text-bg-dark border-[3px] border-text-light dark:border-text-dark font-bold"
           onclick="filterSelection('all'); setActiveButton(this)"
         >
           All Posts
         </button>
         {allTags.map((tag) => (
           <button
-            class="filter-btn px-6 py-2 rounded-full transition-colors duration-200 bg-text-muted-light/20 dark:bg-text-muted-dark/20 text-text-light dark:text-text-dark hover:bg-text-muted-light/30 dark:hover:bg-text-muted-dark/30 font-medium"
+            class="filter-btn px-6 py-2 rounded-full transition-colors duration-200 bg-transparent border-[3px] border-text-light dark:border-text-dark text-text-light dark:text-text-dark hover:bg-turquoise/10 dark:hover:bg-turquoise-dark/10 font-medium"
             onclick={`filterSelection('${tag}'); setActiveButton(this)`}
           >
             {tag}
@@ -77,7 +77,7 @@ const postsWithMeta = sortedPosts.map((post) => {
         <div class="text-center mt-12">
           <button
             id="load-more-btn"
-            class="px-8 py-3 rounded-full transition-colors duration-200 bg-accent-teal hover:bg-accent-teal-hover text-white font-medium"
+            class="px-8 py-3 rounded-full transition-colors duration-200 bg-turquoise hover:bg-turquoise-hover text-bg-dark border-[3px] border-text-light dark:border-text-dark font-bold"
             onclick="loadMorePosts()"
           >
             Load More Posts
@@ -117,11 +117,11 @@ const postsWithMeta = sortedPosts.map((post) => {
     function setActiveButton(btn) {
       const buttons = document.getElementsByClassName('filter-btn');
       for (let i = 0; i < buttons.length; i++) {
-        buttons[i].classList.remove('active', 'bg-accent-yellow', 'hover:bg-accent-yellow-hover', 'text-bg-dark');
-        buttons[i].classList.add('bg-text-muted-light/20', 'dark:bg-text-muted-dark/20', 'text-text-light', 'dark:text-text-dark', 'hover:bg-text-muted-light/30', 'dark:hover:bg-text-muted-dark/30');
+        buttons[i].classList.remove('active', 'bg-turquoise', 'text-bg-dark', 'font-bold');
+        buttons[i].classList.add('bg-transparent', 'text-text-light', 'dark:text-text-dark', 'hover:bg-turquoise/10', 'dark:hover:bg-turquoise-dark/10', 'font-medium');
       }
-      btn.classList.remove('bg-text-muted-light/20', 'dark:bg-text-muted-dark/20', 'text-text-light', 'dark:text-text-dark', 'hover:bg-text-muted-light/30', 'dark:hover:bg-text-muted-dark/30');
-      btn.classList.add('active', 'bg-accent-yellow', 'hover:bg-accent-yellow-hover', 'text-bg-dark');
+      btn.classList.remove('bg-transparent', 'text-text-light', 'dark:text-text-dark', 'hover:bg-turquoise/10', 'dark:hover:bg-turquoise-dark/10', 'font-medium');
+      btn.classList.add('active', 'bg-turquoise', 'text-bg-dark', 'font-bold');
     }
 
     function loadMorePosts() {
