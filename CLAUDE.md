@@ -62,6 +62,28 @@ Custom theme defined in `/src/styles/global.css`:
 - Accent colors: yellow (#ffef6a), teal (oklch)
 - Fonts: Poppins (headings), Inter (body)
 
+See `/design-system` for full token reference.
+
+### Design System
+
+**Before creating new UI elements:**
+1. Check `/design-system` page for existing components
+2. Use existing Button, Card, Input, Badge components from `/src/components/ui/`
+3. Reference `/design-system.json` for available tokens and component props
+
+**Available components:**
+- `Button` - Neobrutalist buttons (variants: yellow, turquoise, magenta; sizes: sm, md, lg)
+- `Card` - Container with colored shadow (variants + stacked option)
+- `Input` - Form inputs with labels and validation
+- `Badge` - Metric display badges
+
+**Design tokens:**
+- Colors: yellow, turquoise, magenta (OKLCH-based with dark mode variants)
+- Typography: Bricolage Grotesque (headings), DM Sans (body)
+- Isometric utilities: iso-shadow, iso-glow, iso-rotate
+
+**Do not create new components** for functionality that existing components already provide.
+
 ### CI/CD
 
 - **GitHub Actions** deploys to GitHub Pages on push to `main`
