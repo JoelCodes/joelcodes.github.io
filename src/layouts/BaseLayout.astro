@@ -24,6 +24,9 @@ const { title, description = 'Web apps, automation, and AI development for small
     <!-- SEO: meta tags, OpenGraph, Twitter Card, JSON-LD -->
     <SEO title={title} description={description} />
 
+    <!-- Additional head content via slot -->
+    <slot name="head" />
+
     <!-- Google Fonts - preconnect for initial connection, dns-prefetch as fallback -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
