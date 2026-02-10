@@ -1,0 +1,139 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Isometric Utilities Test | Dev Only"
+  description="Development test page for isometric CSS utilities"
+>
+  <section class="py-16 px-6">
+    <div class="container max-w-4xl mx-auto">
+      <h1 class="font-heading text-3xl font-bold mb-2 text-text-light dark:text-text-dark">
+        Isometric Utilities Test
+      </h1>
+      <p class="text-text-muted-light dark:text-text-muted-dark mb-8">
+        Development reference page. Not linked in navigation.
+      </p>
+
+      <!-- Rotation Presets -->
+      <section class="mb-12">
+        <h2 class="font-heading text-2xl font-bold mb-6 text-text-light dark:text-text-dark">
+          Rotation Presets
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Standard -->
+          <div>
+            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-2">.iso-rotate (45°)</p>
+            <div class="iso-container perspective-1000">
+              <div class="iso-rotate w-24 h-24 bg-yellow border-3 border-text-light dark:border-text-dark"></div>
+            </div>
+          </div>
+          <!-- Subtle -->
+          <div>
+            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-2">.iso-rotate-subtle (30°)</p>
+            <div class="iso-container perspective-1000">
+              <div class="iso-rotate-subtle w-24 h-24 bg-turquoise border-3 border-text-light dark:border-text-dark"></div>
+            </div>
+          </div>
+          <!-- Steep -->
+          <div>
+            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-2">.iso-rotate-steep (60°)</p>
+            <div class="iso-container perspective-1000">
+              <div class="iso-rotate-steep w-24 h-24 bg-magenta border-3 border-text-light dark:border-text-dark"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Shadow Utilities (Light Mode) -->
+      <section class="mb-12">
+        <h2 class="font-heading text-2xl font-bold mb-6 text-text-light dark:text-text-dark">
+          Shadow Utilities (Light Mode = Offset, Dark Mode = Glow)
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Small -->
+          <div>
+            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-2">.iso-shadow-sm</p>
+            <div class="text-yellow w-24 h-24 bg-bg-light dark:bg-bg-dark border-3 border-text-light dark:border-text-dark iso-shadow-sm"></div>
+          </div>
+          <!-- Standard -->
+          <div>
+            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-2">.iso-shadow</p>
+            <div class="text-turquoise w-24 h-24 bg-bg-light dark:bg-bg-dark border-3 border-text-light dark:border-text-dark iso-shadow"></div>
+          </div>
+          <!-- Large -->
+          <div>
+            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-2">.iso-shadow-lg</p>
+            <div class="text-magenta w-24 h-24 bg-bg-light dark:bg-bg-dark border-3 border-text-light dark:border-text-dark iso-shadow-lg"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Glow Utilities -->
+      <section class="mb-12">
+        <h2 class="font-heading text-2xl font-bold mb-6 text-text-light dark:text-text-dark">
+          Glow Utilities (Always Glow)
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Subtle -->
+          <div>
+            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-2">.iso-glow-subtle</p>
+            <div class="text-yellow w-24 h-24 bg-bg-light dark:bg-bg-dark border-3 border-text-light dark:border-text-dark iso-glow-subtle"></div>
+          </div>
+          <!-- Standard -->
+          <div>
+            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-2">.iso-glow</p>
+            <div class="text-turquoise w-24 h-24 bg-bg-light dark:bg-bg-dark border-3 border-text-light dark:border-text-dark iso-glow"></div>
+          </div>
+          <!-- Strong -->
+          <div>
+            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-2">.iso-glow-strong</p>
+            <div class="text-magenta w-24 h-24 bg-bg-light dark:bg-bg-dark border-3 border-text-light dark:border-text-dark iso-glow-strong"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hover States -->
+      <section class="mb-12">
+        <h2 class="font-heading text-2xl font-bold mb-6 text-text-light dark:text-text-dark">
+          Hover States
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Lift -->
+          <div>
+            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-2">.iso-hover-lift (hover to lift)</p>
+            <div class="iso-hover-lift w-24 h-24 bg-yellow border-3 border-text-light dark:border-text-dark cursor-pointer"></div>
+          </div>
+          <!-- Glow -->
+          <div>
+            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-2">.iso-hover-glow (hover to glow)</p>
+            <div class="text-turquoise iso-hover-glow w-24 h-24 bg-bg-light dark:bg-bg-dark border-3 border-text-light dark:border-text-dark cursor-pointer"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Combined Example -->
+      <section class="mb-12">
+        <h2 class="font-heading text-2xl font-bold mb-6 text-text-light dark:text-text-dark">
+          Combined Example
+        </h2>
+        <p class="text-text-muted-light dark:text-text-muted-dark mb-4">
+          .iso-container + .iso-rotate + .iso-shadow + .iso-hover-lift
+        </p>
+        <div class="iso-container perspective-1000">
+          <div class="text-yellow iso-rotate iso-shadow iso-hover-lift w-32 h-32 bg-bg-light dark:bg-bg-dark border-3 border-text-light dark:border-text-dark cursor-pointer flex items-center justify-center">
+            <span class="text-text-light dark:text-text-dark font-bold">Hover me</span>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Add perspective for 3D transforms */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+</style>
