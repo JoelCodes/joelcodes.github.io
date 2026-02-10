@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-02-09)
 ## Current Position
 
 Phase: 9 of 11 (Homepage Navigation)
-Plan: 1 of 3 complete
+Plan: 2 of 3 complete
 Status: In progress
-Last activity: 2026-02-10 — Completed 09-01-PLAN.md (Navigation Chrome Update)
+Last activity: 2026-02-10 — Completed 09-02-PLAN.md (Tech and Contact Sections)
 
-Progress: [█████████████░░░░░░░] 76% (29 of ~38 total plans complete across v1.0 + v1.1)
+Progress: [█████████████░░░░░░░] 79% (30 of ~38 total plans complete across v1.0 + v1.1)
 
 ## Milestone History
 
@@ -58,6 +58,8 @@ Recent decisions affecting v1.1:
 - **Smooth scroll with accessibility** (09-01): HTML smooth scroll behavior with prefers-reduced-motion support and scroll-margin-top offset for sticky header
 - **FAQ footer location** (09-01): FAQ relocated to footer accordion to prevent disrupting homepage narrative while keeping content accessible
 - **Native HTML accordion** (09-01): Use details/summary elements for FAQ accordion for better accessibility and zero JavaScript
+- **Asymmetric grid layouts** (09-02): 1:2 and 2:1 grid ratios create visual interest without chaos
+- **Section-specific accents** (09-02): Each homepage section uses single accent color (magenta for Tech, turquoise for Contact)
 
 ### Pending Todos
 
@@ -69,7 +71,7 @@ Recent decisions affecting v1.1:
 5. Test dark mode glow visibility across different monitors/brightness levels (noted in 08-03)
 
 **v1.0 deployment (still pending):**
-1. Configure Formspree form ID (replace `YOUR_FORM_ID` in contact.astro)
+1. Configure Formspree form ID (replace `YOUR_FORM_ID` in contact.astro and ContactSection.astro)
 2. Add real social links (LinkedIn, GitHub URLs)
 3. Replace placeholder images with real content
 
@@ -95,10 +97,10 @@ Recent decisions affecting v1.1:
 ## Session Continuity
 
 Last session: 2026-02-10
-Stopped at: Completed 09-01-PLAN.md execution (Navigation Chrome Update)
+Stopped at: Completed 09-02-PLAN.md execution (Tech and Contact Sections)
 Resume file: None
-Next action: Continue Phase 9 (Plan 02: Hero Section Updates)
+Next action: Continue Phase 9 (Plan 03: Homepage Assembly)
 
 ---
 *State initialized: 2026-01-26*
-*Last updated: 2026-02-09 (v1.1 roadmap created)*
+*Last updated: 2026-02-10 (completed 09-02)*
