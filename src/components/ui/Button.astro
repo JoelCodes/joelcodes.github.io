@@ -95,6 +95,10 @@ const sizeClasses = {
   }
 
   /* Focus ring: box-shadow on btn-front follows border-radius */
+  .btn:focus-visible {
+    outline: none; /* Remove browser default outline */
+  }
+
   .btn:focus-visible .btn-front {
     box-shadow:
       0 0 0 2px var(--color-bg-light),  /* 2px white gap */
