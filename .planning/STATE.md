@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-09)
 
 **Core value:** Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
-**Current focus:** Phase 9 - Homepage Navigation (v1.1 Design Updates)
+**Current focus:** Phase 10 - Projects & Blog Pages (v1.1 Design Updates)
 
 ## Current Position
 
-Phase: 9 of 11 (Homepage Navigation) - COMPLETE
-Plan: 4 of 4 complete
-Status: Phase complete (including gap closure)
-Last activity: 2026-02-10 — Completed 09-04-PLAN.md (Navigation Section Links)
+Phase: 10 of 11 (Projects & Blog Pages) - IN PROGRESS
+Plan: 1 of 3 complete
+Status: Active development
+Last activity: 2026-02-09 — Completed 10-01-PLAN.md (Portfolio → Projects Rename)
 
-Progress: [██████████████░░░░░░] 84% (32 of ~38 total plans complete across v1.0 + v1.1)
+Progress: [██████████████░░░░░░] 87% (33 of ~38 total plans complete across v1.0 + v1.1)
 
 ## Milestone History
 
@@ -66,6 +66,10 @@ Recent decisions affecting v1.1:
 - **Cross-page anchor format** (09-04): Use /#section format for anchor links to work from any page on site
 - **Navigation link ordering** (09-04): Home | Sections | Pages | Contact structure creates logical narrative flow
 - **Single mobile close button** (09-04): Hamburger-to-X animation provides single clear close mechanism (no duplicate buttons)
+- **Static meta refresh redirects** (10-01): Astro redirects generate HTML meta refresh for GitHub Pages (not HTTP 301 but functionally equivalent)
+- **Case study narrative structure** (10-01): Problem → Solution → Results format mirrors how small business owners evaluate solutions
+- **Yellow offset shadows for cards** (10-01): 6px offset provides strong visual weight, yellow accent matches design system
+- **Category-based project filtering** (10-01): Single category per project (mutually exclusive) simpler than tag system at current scale
 
 ### Pending Todos
 
@@ -80,6 +84,12 @@ Recent decisions affecting v1.1:
 1. Configure Formspree form ID (replace `YOUR_FORM_ID` in contact.astro and ContactSection.astro)
 2. Add real social links (LinkedIn, GitHub URLs)
 3. Replace placeholder images with real content
+
+**Phase 10 (Projects & Blog):**
+1. Add real project screenshots (currently using placeholder SVGs)
+2. Expand project dataset to 5-10 projects for credibility
+3. Add aria-pressed to filter buttons for screen reader state announcement
+4. Verify yellow badge color contrast meets WCAG 4.5:1 minimum
 
 ### Blockers/Concerns
 
@@ -102,11 +112,11 @@ Recent decisions affecting v1.1:
 
 ## Session Continuity
 
-Last session: 2026-02-10
-Stopped at: Completed Phase 9 (Homepage Navigation) including gap closure plan 09-04
+Last session: 2026-02-09
+Stopped at: Completed 10-01-PLAN.md (Portfolio → Projects Rename)
 Resume file: None
-Next action: Begin Phase 10 (Blog and Portfolio Page Updates)
+Next action: Continue Phase 10 with plan 10-02 (Blog Index Redesign)
 
 ---
 *State initialized: 2026-01-26*
-*Last updated: 2026-02-10 (completed 09-04 gap closure)*
+*Last updated: 2026-02-09 (completed 10-01)*
