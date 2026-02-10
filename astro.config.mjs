@@ -11,6 +11,11 @@ import robotsTxt from 'astro-robots-txt';
 export default defineConfig({
   site: 'https://joelshinness.com',
 
+  redirects: {
+    '/portfolio': '/projects',
+    '/portfolio/[slug]': '/projects/[slug]',
+  },
+
   // base: '/joel-shinness-website', // Uncomment if not using custom domain
   vite: {
     plugins: [tailwindcss()],
