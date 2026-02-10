@@ -10,12 +10,12 @@ See: .planning/PROJECT.md (updated 2026-02-09)
 
 ## Current Position
 
-Phase: 15 of 16 (Technology Section)
-Plan: 2 of 2 in current phase
-Status: Phase complete - ready for Phase 16
-Last activity: 2026-02-10 - Phase 15 verified complete
+Phase: 16 of 16 (FAQ Page)
+Plan: 1 of 1 in current phase
+Status: Phase 16 Plan 01 complete
+Last activity: 2026-02-10 - Completed 16-01-PLAN.md
 
-Progress: [████████████████████████░░░░░░░░] 81% (56 of 69+ plans complete)
+Progress: [████████████████████████░░░░░░░░] 83% (57 of 69+ plans complete)
 
 ## Milestone History
 
@@ -55,6 +55,9 @@ See `.planning/milestones/` for archived roadmaps and requirements.
 Key decisions are logged in PROJECT.md Key Decisions table.
 
 Recent decisions affecting v1.2:
+- **Phase 16-01**: Full page structure for FAQ (not BaseLayout) enables direct <head> access for JSON-LD injection
+- **Phase 16-01**: FAQ navigation placement after Blog, before Contact follows research recommendation for optimal user flow
+- **Phase 16-01**: Simple footer FAQ link (vs teaser accordion) reduces visual weight while maintaining discoverability
 - **Phase 15-02**: Flat article layout (no Card component) for technology section improves scannability vs card-based layouts
 - **Phase 15-02**: "What I Build" heading replaces "How I Build" for user-focused service offering messaging (vs tech stack)
 - **Phase 15-02**: 3-column responsive grid (gap-8 md:gap-12) establishes service category structure: AI Solutions, Automations, Web Apps
@@ -117,7 +120,10 @@ Recent decisions affecting v1.2:
 - iso-shadow-sm proven effective for 64px illustrations (used in both Process and Tech sections)
 
 **Phase 16 considerations:**
-- FAQ keyboard accessibility already validated in v1.1, should carry forward to dedicated page
+- ✅ Phase 16-01 complete: Dedicated /faq page with FAQPage JSON-LD schema and navigation integration
+- ✅ Native <details> accordion provides built-in keyboard accessibility (Tab, Enter/Space)
+- ✅ FAQPage JSON-LD pattern established for future FAQ sections
+- ✅ Navigation order finalized: Blog → FAQ → Contact
 
 **Phase 13 considerations:**
 - ✅ Phase 13 complete: Badge component and outcome-focused hero with 3 trust badges
@@ -126,10 +132,10 @@ Recent decisions affecting v1.2:
 ## Session Continuity
 
 Last session: 2026-02-10
-Stopped at: Phase 15 complete (all 2 plans executed, verified)
+Stopped at: Phase 16 Plan 01 complete
 Resume file: None
-Next action: `/gsd:plan-phase 16`
+Next action: Check if Phase 16 has more plans, otherwise v1.2 milestone complete
 
 ---
 *State initialized: 2026-01-26*
-*Last updated: 2026-02-10 (Phase 15 complete: Technology section with 3 service categories and isometric illustrations)*
+*Last updated: 2026-02-10 (Phase 16-01 complete: FAQ page with FAQPage JSON-LD schema and navigation integration)*
