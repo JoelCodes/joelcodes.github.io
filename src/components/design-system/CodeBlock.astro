@@ -119,3 +119,10 @@ const { code, lang = 'astro', title } = Astro.props;
   // Re-initialize after Astro page transitions (if using view transitions)
   document.addEventListener('astro:page-load', initCodeBlocks);
 </script>
+
+<style>
+  .code-content pre {
+    padding: 1rem;
+    margin: 0;
+  }
+</style>
