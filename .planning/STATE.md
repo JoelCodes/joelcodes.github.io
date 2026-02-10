@@ -77,6 +77,7 @@ Recent decisions affecting v1.2:
 1. Add real project screenshots (currently using placeholder SVGs)
 2. Expand project dataset to 5-10 projects for credibility
 3. Add aria-pressed to filter buttons for screen reader state announcement
+4. Update contact.astro to use Button/Input components with turquoise variant (discovered in 12-UAT)
 
 ### Blockers/Concerns
 
@@ -96,10 +97,10 @@ Recent decisions affecting v1.2:
 ## Session Continuity
 
 Last session: 2026-02-09
-Stopped at: Completed 12-03-PLAN.md (icon visual regression tests)
+Stopped at: Phase 12 UAT complete (6/7 passed, 1 deferred)
 Resume file: None
 Next action: `/gsd:plan-phase 13`
 
 ---
 *State initialized: 2026-01-26*
-*Last updated: 2026-02-09 (12-03 complete: icon visual regression tests, Phase 12 complete)*
+*Last updated: 2026-02-09 (Phase 12 UAT complete, ready for Phase 13)*
