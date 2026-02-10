@@ -1,5 +1,8 @@
 ---
 // Services component: Three equal service cards with descriptions and examples
+import Card from './ui/Card.astro';
+import Button from './ui/Button.astro';
+
 const services = [
   {
     title: "Web Apps",
@@ -19,25 +22,28 @@ const services = [
 ];
 ---
 
-<section class="services py-16 px-6">
+<section id="solutions" aria-labelledby="solutions-heading" class="services py-24 md:py-32 px-6">
   <div class="container max-w-6xl mx-auto">
-    <h2 class="font-heading text-3xl md:text-4xl font-bold text-center mb-12 text-text-light dark:text-text-dark">
-      What I Build
+    <h2 id="solutions-heading" class="font-heading font-bold text-3xl md:text-4xl mb-8 text-center text-text-light dark:text-text-dark">
+      Solutions That Fit
     </h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
       {services.map(service => (
-        <article class="service-card p-6 border border-text-muted-light/20 dark:border-text-muted-dark/20 rounded-lg bg-bg-light dark:bg-bg-dark">
-          <h3 class="font-heading text-xl md:text-2xl font-semibold mb-3 text-text-light dark:text-text-dark">
+        <Card variant="yellow">
+          <h3 class="font-heading text-xl md:text-2xl font-semibold mb-3">
             {service.title}
           </h3>
-          <p class="font-body text-base mb-3 text-text-light dark:text-text-dark">
+          <p class="font-body text-base mb-3">
             {service.description}
           </p>
           <p class="font-body text-sm italic text-text-muted-light dark:text-text-muted-dark">
             {service.example}
           </p>
-        </article>
+        </Card>
       ))}
+    </div>
+    <div class="text-center">
+      <Button variant="yellow" href="#contact">Discuss Your Project</Button>
     </div>
   </div>
 </section>
