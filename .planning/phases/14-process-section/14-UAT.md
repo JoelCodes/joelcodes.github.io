@@ -1,9 +1,9 @@
 ---
 status: complete
 phase: 14-process-section
-source: 14-01-SUMMARY.md, 14-02-SUMMARY.md
+source: 14-01-SUMMARY.md, 14-02-SUMMARY.md, 14-03-SUMMARY.md
 started: 2026-02-09T23:55:00Z
-updated: 2026-02-09T23:56:00Z
+updated: 2026-02-10T08:15:00Z
 ---
 
 ## Current Test
@@ -14,9 +14,8 @@ updated: 2026-02-09T23:56:00Z
 
 ### 1. Process illustrations visible
 expected: On the homepage Process section, each of the 5 steps displays an isometric illustration to the left of the step heading.
-result: issue
-reported: "The illustration is on top of the heading instead of to the left."
-severity: major
+result: pass
+note: Fixed in 14-03 gap closure (pl-24 md:pl-32 padding), re-verified 2026-02-10
 
 ### 2. Illustrations use color theming
 expected: Illustrations pick up the step's accent color (yellow, turquoise, or magenta) - they're not all the same color.
@@ -49,19 +48,18 @@ result: pass
 ## Summary
 
 total: 8
-passed: 7
-issues: 1
+passed: 8
+issues: 0
 pending: 0
 skipped: 0
 
 ## Gaps
 
+[All gaps closed]
+
+### Resolved
+
 - truth: "Each of the 5 steps displays an isometric illustration to the left of the step heading"
-  status: failed
-  reason: "User reported: The illustration is on top of the heading instead of to the left."
-  severity: major
-  test: 1
-  root_cause: ""
-  artifacts: []
-  missing: []
-  debug_session: ""
+  status: resolved
+  fix: "14-03-PLAN.md - Increased padding to pl-24 md:pl-32"
+  verified: 2026-02-10
