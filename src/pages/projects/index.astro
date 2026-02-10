@@ -1,0 +1,95 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import projects from '../../data/projects.json';
+---
+
+<BaseLayout
+  title="Projects | Joel Shinness"
+  description="Browse my web development, automation, and AI projects. Explore case studies showing how I've helped small businesses succeed."
+>
+  <main class="py-16 px-4">
+    <div class="max-w-7xl mx-auto">
+      <!-- Page header -->
+      <header class="text-center mb-12">
+        <h1 class="font-heading text-4xl md:text-5xl font-bold uppercase mb-4">Projects</h1>
+        <p class="text-lg text-text-muted-light dark:text-text-muted-dark max-w-2xl mx-auto">
+          Real projects, real results. See how I've helped small businesses automate workflows,
+          build custom tools, and leverage AI to work smarter.
+        </p>
+      </header>
+
+      <!-- Filter buttons -->
+      <div class="flex flex-wrap justify-center gap-3 mb-12">
+        <button
+          class="filter-btn active px-6 py-2 rounded-full transition-colors duration-200 bg-yellow dark:bg-yellow-dark border-[3px] border-text-light dark:border-text-dark font-bold text-text-light hover:bg-yellow-600 dark:hover:bg-yellow-500"
+          onclick="filterSelection('all'); setActiveButton(this)"
+        >
+          All Projects
+        </button>
+        <button
+          class="filter-btn px-6 py-2 rounded-full transition-colors duration-200 bg-transparent border-[3px] border-text-light dark:border-text-dark font-bold text-text-light dark:text-text-dark hover:bg-text-muted-light/10 dark:hover:bg-text-muted-dark/10"
+          onclick="filterSelection('web-apps'); setActiveButton(this)"
+        >
+          Web Apps
+        </button>
+        <button
+          class="filter-btn px-6 py-2 rounded-full transition-colors duration-200 bg-transparent border-[3px] border-text-light dark:border-text-dark font-bold text-text-light dark:text-text-dark hover:bg-text-muted-light/10 dark:hover:bg-text-muted-dark/10"
+          onclick="filterSelection('automation'); setActiveButton(this)"
+        >
+          Automation
+        </button>
+        <button
+          class="filter-btn px-6 py-2 rounded-full transition-colors duration-200 bg-transparent border-[3px] border-text-light dark:border-text-dark font-bold text-text-light dark:text-text-dark hover:bg-text-muted-light/10 dark:hover:bg-text-muted-dark/10"
+          onclick="filterSelection('ai-dev'); setActiveButton(this)"
+        >
+          AI Development
+        </button>
+      </div>
+
+      <!-- Projects grid -->
+      <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {projects.map((project) => (
+          <article class={`project-card show`} data-category={project.category}>
+            <ProjectCard
+              title={project.title}
+              slug={project.slug}
+              thumbnail={project.thumbnail}
+              category={project.category}
+              categoryLabel={project.categoryLabel}
+              problem={project.problem}
+            />
+          </article>
+        ))}
+      </section>
+    </div>
+  </main>
+
+  <script is:inline>
+    function filterSelection(category) {
+      const cards = document.getElementsByClassName('project-card');
+
+      for (let i = 0; i < cards.length; i++) {
+        cards[i].classList.remove('show');
+
+        const cardCategory = cards[i].getAttribute('data-category');
+        if (category === 'all' || cardCategory === category) {
+          cards[i].classList.add('show');
+        }
+      }
+    }
+
+    function setActiveButton(btn) {
+      const buttons = document.getElementsByClassName('filter-btn');
+      for (let i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove('active', 'bg-yellow', 'dark:bg-yellow-dark');
+        buttons[i].classList.add('bg-transparent');
+      }
+      btn.classList.remove('bg-transparent');
+      btn.classList.add('active', 'bg-yellow', 'dark:bg-yellow-dark');
+    }
+
+    // Initialize with all projects visible
+    filterSelection('all');
+  </script>
+</BaseLayout>
