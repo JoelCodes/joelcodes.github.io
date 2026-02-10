@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-02-10)
 ## Current Position
 
 Phase: 17 of 22 (Design System Reference Page)
-Plan: 3 of ? in current phase
+Plan: 4 of ? in current phase
 Status: In progress
-Last activity: 2026-02-10 — Completed 17-03-PLAN.md
+Last activity: 2026-02-10 — Completed 17-04-PLAN.md
 
-Progress: [████████████████████████░░] 76% (16 phases complete, 3 plans in phase 17, 6 phases remaining)
+Progress: [████████████████████████░░] 77% (16 phases complete, 4 plans in phase 17, 6 phases remaining)
 
 ## Milestone History
 
@@ -30,7 +30,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 49 (v1.0: 23, v1.1: 14, v1.2: 10, v1.3: 2)
+- Total plans completed: 50 (v1.0: 23, v1.1: 14, v1.2: 10, v1.3: 3)
 - Average duration: ~2-5 min/plan (recent trend)
 - Total execution time: ~5 days across 3 milestones
 
@@ -58,6 +58,9 @@ See `.planning/MILESTONES.md` for full milestone details.
 Key decisions are logged in PROJECT.md Key Decisions table.
 
 Recent decisions affecting v1.3:
+- **17-04**: JSON API endpoint — /design-system.json as Astro GET endpoint for machine-readable design tokens
+- **17-04**: Visual utility examples — Live demos with colored boxes showing shadow/glow/rotate effects
+- **17-04**: CLAUDE.md design system section — AI agent instructions to check design system before creating new UI
 - **17-03**: ComponentShowcase wrapper — Reusable component for consistent documentation structure (title, description, demo, code)
 - **17-03**: Props tables — HTML tables with Prop/Type/Default/Description columns for scannable reference
 - **17-02**: TokenSwatch component — Reusable color token display component (11 colors documented with consistent formatting)
@@ -88,10 +91,10 @@ None yet for v1.3.
 ## Session Continuity
 
 Last session: 2026-02-10
-Stopped at: Completed 17-03-PLAN.md
+Stopped at: Completed 17-04-PLAN.md
 Resume file: None
-Next action: Continue with 17-04 (document utilities)
+Next action: Continue with next phase plan or phase 18
 
 ---
 *State initialized: 2026-01-26*
-*Last updated: 2026-02-10 (Completed 17-03: Design system Components section - Button, Card, Input, Badge)*
+*Last updated: 2026-02-10 (Completed 17-04: Design system Utilities section + JSON API + CLAUDE.md instructions)*
