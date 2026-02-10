@@ -94,14 +94,19 @@ const sizeClasses = {
     --btn-shadow: oklch(0.45 0.10 350);
   }
 
-  .btn:focus-visible {
-    outline: 2px solid var(--color-text-light);
-    outline-offset: 4px;
-    border-radius: 0.25rem;
+  /* Focus ring: box-shadow on btn-front follows border-radius */
+  .btn:focus-visible .btn-front {
+    box-shadow:
+      0 0 0 2px var(--color-bg-light),  /* 2px white gap */
+      0 0 0 4px var(--color-text-light), /* 4px dark ring */
+      var(--btn-offset) var(--btn-offset) 0 var(--btn-shadow); /* Preserve button shadow */
   }
 
-  :global(.dark) .btn:focus-visible {
-    outline-color: var(--color-text-dark);
+  :global(.dark) .btn:focus-visible .btn-front {
+    box-shadow:
+      0 0 0 2px var(--color-bg-dark),   /* 2px dark gap */
+      0 0 0 4px var(--color-text-dark),  /* 4px light ring */
+      var(--btn-offset) var(--btn-offset) 0 var(--btn-shadow); /* Preserve button shadow */
   }
 
   .btn-front {
@@ -125,9 +130,39 @@ const sizeClasses = {
     box-shadow: calc(var(--btn-offset) + 2px) calc(var(--btn-offset) + 2px) 0 var(--btn-shadow);
   }
 
+  /* Hover + focus: preserve focus ring while lifting */
+  .btn:hover:focus-visible .btn-front {
+    box-shadow:
+      0 0 0 2px var(--color-bg-light),
+      0 0 0 4px var(--color-text-light),
+      calc(var(--btn-offset) + 2px) calc(var(--btn-offset) + 2px) 0 var(--btn-shadow);
+  }
+
+  :global(.dark) .btn:hover:focus-visible .btn-front {
+    box-shadow:
+      0 0 0 2px var(--color-bg-dark),
+      0 0 0 4px var(--color-text-dark),
+      calc(var(--btn-offset) + 2px) calc(var(--btn-offset) + 2px) 0 var(--btn-shadow);
+  }
+
   /* Active: press down (shadow shrinks) */
   .btn:active .btn-front {
     transform: translateY(2px);
     box-shadow: 2px 2px 0 var(--btn-shadow);
+  }
+
+  /* Active + focus: preserve focus ring while pressing */
+  .btn:active:focus-visible .btn-front {
+    box-shadow:
+      0 0 0 2px var(--color-bg-light),
+      0 0 0 4px var(--color-text-light),
+      2px 2px 0 var(--btn-shadow);
+  }
+
+  :global(.dark) .btn:active:focus-visible .btn-front {
+    box-shadow:
+      0 0 0 2px var(--color-bg-dark),
+      0 0 0 4px var(--color-text-dark),
+      2px 2px 0 var(--btn-shadow);
   }
 </style>
