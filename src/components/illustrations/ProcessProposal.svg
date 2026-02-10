@@ -1,0 +1,12 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <!-- Document - isometric paper -->
+  <path d="M25 20 L75 20 L75 80 L25 80 Z" fill="currentColor" opacity="0.15"/>
+  <!-- Document border -->
+  <path d="M25 20 L75 20 L75 80 L25 80 Z" fill="none" stroke="currentColor" stroke-width="3" opacity="0.9"/>
+  <!-- Text lines -->
+  <rect x="32" y="30" width="30" height="3" fill="currentColor" opacity="0.6"/>
+  <rect x="32" y="38" width="36" height="3" fill="currentColor" opacity="0.6"/>
+  <rect x="32" y="46" width="32" height="3" fill="currentColor" opacity="0.6"/>
+  <!-- Checkmark -->
+  <path d="M42 60 L48 68 L62 52" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" opacity="0.85"/>
+</svg>

@@ -1,0 +1,12 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <!-- Screen - isometric rectangle -->
+  <path d="M20 30 L80 30 L80 70 L20 70 Z" fill="currentColor" opacity="0.2"/>
+  <!-- Screen border -->
+  <path d="M20 30 L80 30 L80 70 L20 70 Z" fill="none" stroke="currentColor" stroke-width="3" opacity="0.9"/>
+  <!-- Content block 1 -->
+  <rect x="30" y="40" width="20" height="8" fill="currentColor" opacity="0.7"/>
+  <!-- Content block 2 -->
+  <rect x="30" y="52" width="40" height="4" fill="currentColor" opacity="0.5"/>
+  <!-- Content block 3 -->
+  <rect x="30" y="58" width="35" height="4" fill="currentColor" opacity="0.5"/>
+</svg>

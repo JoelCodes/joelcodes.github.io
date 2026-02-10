@@ -1,0 +1,12 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <!-- Bottom cube - front face -->
+  <path d="M30 55 L50 45 L70 55 L50 65 Z" fill="currentColor" opacity="0.85"/>
+  <!-- Bottom cube - top face -->
+  <path d="M50 45 L70 55 L70 65 L50 55 Z" fill="currentColor" opacity="1"/>
+  <!-- Bottom cube - side face -->
+  <path d="M30 55 L30 65 L50 75 L50 65 Z" fill="currentColor" opacity="0.7"/>
+  <!-- Top cube - front face -->
+  <path d="M40 35 L50 30 L60 35 L50 40 Z" fill="currentColor" opacity="0.85"/>
+  <!-- Top cube - side face -->
+  <path d="M40 35 L40 45 L50 50 L50 40 Z" fill="currentColor" opacity="0.7"/>
+</svg>
