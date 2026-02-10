@@ -105,17 +105,21 @@ skipped: 0
     - "Change isolation: auto to isolation: isolate in .card-stacked class"
 
 - truth: "Badge component shows correct color variants (Yellow, Turquoise, Magenta)"
-  status: failed
+  status: fixed
   reason: "User reported: The badges aren't in the right colors. The yellow is more of a beige, the turquoise is also dark, and the magenta is only black."
   severity: major
   test: 9
-  root_cause: "Badge magenta variant uses generic text colors (text-text-light) instead of magenta-specific colors, and no --color-magenta-text CSS variable exists; yellow/turquoise use text variants which are muted for WCAG compliance on backgrounds"
+  resolution: "Fixed in 17-05-PLAN.md - Badge now uses bright accent colors"
+
+- truth: "Badge yellow text is readable on white background"
+  status: failed
+  reason: "User reported: yellow against white isn't easy to read. Suggested black text with primary color background."
+  severity: major
+  test: 9 (re-verification)
+  root_cause: "Bright yellow text (#ffef6a) on white has ~1.1:1 contrast, far below WCAG AA 4.5:1"
   artifacts:
     - path: "src/components/ui/Badge.astro"
-      issue: "Line 24: magenta variant uses wrong color classes"
-    - path: "src/styles/global.css"
-      issue: "Missing --color-magenta-text variable"
+      issue: "Colored text on transparent background fails contrast for yellow"
   missing:
-    - "Define --color-magenta-text and --color-magenta-text-dark in global.css"
-    - "Update Badge.astro magenta variant to use text-magenta-text"
-    - "Consider if Badge should use brighter accent colors instead of muted text variants"
+    - "Use colored backgrounds with dark text instead of colored text"
+  fix_plan: "17-06-PLAN.md"
