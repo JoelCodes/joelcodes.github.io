@@ -1,5 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ProcessDiscovery from '../components/illustrations/ProcessDiscovery.svg';
+import ProcessPrototype from '../components/illustrations/ProcessPrototype.svg';
+import ProcessProposal from '../components/illustrations/ProcessProposal.svg';
+import ProcessBuild from '../components/illustrations/ProcessBuild.svg';
+import ProcessHandover from '../components/illustrations/ProcessHandover.svg';
 ---
 
 <BaseLayout
@@ -123,6 +128,58 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="iso-container perspective-1000">
           <div class="text-yellow iso-rotate iso-shadow iso-hover-lift w-32 h-32 bg-bg-light dark:bg-bg-dark border-3 border-text-light dark:border-text-dark cursor-pointer flex items-center justify-center">
             <span class="text-text-light dark:text-text-dark font-bold">Hover me</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Process Illustrations -->
+      <section class="mb-16">
+        <h2 class="font-heading text-2xl font-bold mb-6 text-text-light dark:text-text-dark">
+          Process Illustrations
+        </h2>
+
+        <div class="grid grid-cols-5 gap-4 mb-8">
+          <div class="flex flex-col items-center gap-2 text-yellow">
+            <ProcessDiscovery width={64} height={64} />
+            <span class="text-sm text-text-light dark:text-text-dark">Discovery</span>
+          </div>
+          <div class="flex flex-col items-center gap-2 text-turquoise">
+            <ProcessPrototype width={64} height={64} />
+            <span class="text-sm text-text-light dark:text-text-dark">Prototype</span>
+          </div>
+          <div class="flex flex-col items-center gap-2 text-magenta">
+            <ProcessProposal width={64} height={64} />
+            <span class="text-sm text-text-light dark:text-text-dark">Proposal</span>
+          </div>
+          <div class="flex flex-col items-center gap-2 text-yellow">
+            <ProcessBuild width={64} height={64} />
+            <span class="text-sm text-text-light dark:text-text-dark">Build</span>
+          </div>
+          <div class="flex flex-col items-center gap-2 text-turquoise">
+            <ProcessHandover width={64} height={64} />
+            <span class="text-sm text-text-light dark:text-text-dark">Handover</span>
+          </div>
+        </div>
+
+        <!-- Test with iso-shadow utility -->
+        <h3 class="text-lg font-semibold mb-4 text-text-light dark:text-text-dark">
+          With iso-shadow (light mode) / iso-glow (dark mode)
+        </h3>
+        <div class="grid grid-cols-5 gap-4">
+          <div class="flex flex-col items-center gap-2 text-yellow iso-shadow p-4 rounded bg-bg-light dark:bg-bg-dark border-3 border-text-light dark:border-text-dark">
+            <ProcessDiscovery width={64} height={64} />
+          </div>
+          <div class="flex flex-col items-center gap-2 text-turquoise iso-shadow p-4 rounded bg-bg-light dark:bg-bg-dark border-3 border-text-light dark:border-text-dark">
+            <ProcessPrototype width={64} height={64} />
+          </div>
+          <div class="flex flex-col items-center gap-2 text-magenta iso-shadow p-4 rounded bg-bg-light dark:bg-bg-dark border-3 border-text-light dark:border-text-dark">
+            <ProcessProposal width={64} height={64} />
+          </div>
+          <div class="flex flex-col items-center gap-2 text-yellow iso-shadow p-4 rounded bg-bg-light dark:bg-bg-dark border-3 border-text-light dark:border-text-dark">
+            <ProcessBuild width={64} height={64} />
+          </div>
+          <div class="flex flex-col items-center gap-2 text-turquoise iso-shadow p-4 rounded bg-bg-light dark:bg-bg-dark border-3 border-text-light dark:border-text-dark">
+            <ProcessHandover width={64} height={64} />
           </div>
         </div>
       </section>
