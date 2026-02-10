@@ -788,34 +788,279 @@ import Badge from '../components/ui/Badge.astro';
             Utilities
           </h2>
 
+          <p class="text-lg leading-relaxed mb-8 text-text-muted-light dark:text-text-muted-dark">
+            Isometric utilities provide hard offset shadows in light mode that transform to soft glows in dark mode, 3D rotation effects, and explicit glow effects for neobrutalist aesthetics.
+          </p>
+
           <!-- Isometric Shadow -->
           <div id="utility-iso-shadow" class="mb-12">
             <h3 class="font-heading text-2xl font-semibold mb-4">
-              Isometric Shadow
+              Shadow Utilities
             </h3>
-            <p class="text-text-muted-light dark:text-text-muted-dark mb-4">
-              Isometric shadow utility documentation will be added here.
+            <p class="text-text-muted-light dark:text-text-muted-dark mb-6">
+              Hard offset shadows in light mode, soft glows in dark mode. All shadows use <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">currentColor</code> to inherit text color.
             </p>
+
+            <!-- Visual Examples -->
+            <div class="bg-gray-100 dark:bg-gray-900 border-3 border-text-light dark:border-text-dark rounded-lg p-6 mb-6">
+              <h4 class="font-heading text-lg font-semibold mb-4">Size Variants</h4>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Small Shadow -->
+                <div class="flex flex-col items-center gap-3">
+                  <div class="border-3 border-turquoise dark:border-turquoise-dark iso-shadow-sm text-turquoise dark:text-turquoise-dark bg-bg-light dark:bg-bg-dark rounded-lg px-6 py-4 w-32 h-32 flex items-center justify-center">
+                    <span class="font-heading font-bold text-center">iso-shadow-sm</span>
+                  </div>
+                  <p class="text-sm text-text-muted-light dark:text-text-muted-dark">3px offset</p>
+                </div>
+
+                <!-- Default Shadow -->
+                <div class="flex flex-col items-center gap-3">
+                  <div class="border-3 border-turquoise dark:border-turquoise-dark iso-shadow text-turquoise dark:text-turquoise-dark bg-bg-light dark:bg-bg-dark rounded-lg px-6 py-4 w-32 h-32 flex items-center justify-center">
+                    <span class="font-heading font-bold text-center">iso-shadow</span>
+                  </div>
+                  <p class="text-sm text-text-muted-light dark:text-text-muted-dark">5px offset (default)</p>
+                </div>
+
+                <!-- Large Shadow -->
+                <div class="flex flex-col items-center gap-3">
+                  <div class="border-3 border-turquoise dark:border-turquoise-dark iso-shadow-lg text-turquoise dark:text-turquoise-dark bg-bg-light dark:bg-bg-dark rounded-lg px-6 py-4 w-32 h-32 flex items-center justify-center">
+                    <span class="font-heading font-bold text-center">iso-shadow-lg</span>
+                  </div>
+                  <p class="text-sm text-text-muted-light dark:text-text-muted-dark">8px offset</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Classes Table -->
+            <div class="mb-6 overflow-x-auto">
+              <h4 class="font-heading text-lg font-semibold mb-3">Classes</h4>
+              <table class="w-full border-3 border-text-light dark:border-text-dark">
+                <thead class="bg-turquoise/10 dark:bg-turquoise-dark/10">
+                  <tr>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Class</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Light Mode</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Dark Mode</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">.iso-shadow-sm</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-xs">3px 3px 0 currentColor</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-xs">0 0 15px color-mix(20%)</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">.iso-shadow</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-xs">5px 5px 0 currentColor</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-xs">0 0 20px color-mix(40%)</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 font-mono text-sm">.iso-shadow-lg</td>
+                    <td class="px-4 py-2 font-mono text-xs">8px 8px 0 currentColor</td>
+                    <td class="px-4 py-2 font-mono text-xs">0 0 30px color-mix(60%)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Dark Mode Transformation -->
+            <div class="bg-yellow/10 dark:bg-yellow-dark/10 border-3 border-yellow dark:border-yellow-dark rounded-lg p-6 mb-6">
+              <h4 class="font-heading text-lg font-semibold mb-3">Dark Mode Transformation</h4>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4">
+                The same element automatically transforms from a hard offset shadow to a soft glow based on theme. Toggle dark mode to see the transformation.
+              </p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <p class="text-xs font-mono mb-2 text-text-muted-light dark:text-text-muted-dark">Light Mode: Hard Shadow</p>
+                  <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded block">box-shadow: 5px 5px 0 currentColor</code>
+                </div>
+                <div>
+                  <p class="text-xs font-mono mb-2 text-text-muted-light dark:text-text-muted-dark">Dark Mode: Soft Glow</p>
+                  <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded block">box-shadow: 0 0 20px color-mix(in oklch, currentColor 40%, transparent)</code>
+                </div>
+              </div>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark mt-4">
+                <strong>Why this matters:</strong> Maintains visual hierarchy while creating a futuristic dark mode feel. The glow preserves the accent color while adapting to the darker background.
+              </p>
+            </div>
+
+            <!-- Code Example -->
+            <div class="bg-gray-100 dark:bg-gray-900 border-3 border-text-light dark:border-text-dark rounded-lg p-4">
+              <h4 class="font-heading text-lg font-semibold mb-3">Usage Example</h4>
+              <pre class="font-mono text-sm overflow-x-auto"><code>&lt;div class="border-3 border-turquoise iso-shadow text-turquoise"&gt;
+  Shadow becomes glow in dark mode
+&lt;/div&gt;</code></pre>
+            </div>
           </div>
 
           <!-- Isometric Glow -->
           <div id="utility-iso-glow" class="mb-12">
             <h3 class="font-heading text-2xl font-semibold mb-4">
-              Isometric Glow
+              Glow Utilities
             </h3>
-            <p class="text-text-muted-light dark:text-text-muted-dark mb-4">
-              Isometric glow utility documentation will be added here.
+            <p class="text-text-muted-light dark:text-text-muted-dark mb-6">
+              Explicit glow effects that always glow, regardless of theme. Use when you want glow in light mode too.
             </p>
+
+            <!-- Visual Examples -->
+            <div class="bg-gray-100 dark:bg-gray-900 border-3 border-text-light dark:border-text-dark rounded-lg p-6 mb-6">
+              <h4 class="font-heading text-lg font-semibold mb-4">Intensity Variants</h4>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Subtle Glow -->
+                <div class="flex flex-col items-center gap-3">
+                  <div class="border-3 border-magenta dark:border-magenta-dark iso-glow-subtle text-magenta dark:text-magenta-dark bg-bg-light dark:bg-bg-dark rounded-lg px-6 py-4 w-32 h-32 flex items-center justify-center">
+                    <span class="font-heading font-bold text-center text-sm">iso-glow-subtle</span>
+                  </div>
+                  <p class="text-sm text-text-muted-light dark:text-text-muted-dark">15px, 20% opacity</p>
+                </div>
+
+                <!-- Default Glow -->
+                <div class="flex flex-col items-center gap-3">
+                  <div class="border-3 border-magenta dark:border-magenta-dark iso-glow text-magenta dark:text-magenta-dark bg-bg-light dark:bg-bg-dark rounded-lg px-6 py-4 w-32 h-32 flex items-center justify-center">
+                    <span class="font-heading font-bold text-center">iso-glow</span>
+                  </div>
+                  <p class="text-sm text-text-muted-light dark:text-text-muted-dark">20px, 40% opacity</p>
+                </div>
+
+                <!-- Strong Glow -->
+                <div class="flex flex-col items-center gap-3">
+                  <div class="border-3 border-magenta dark:border-magenta-dark iso-glow-strong text-magenta dark:text-magenta-dark bg-bg-light dark:bg-bg-dark rounded-lg px-6 py-4 w-32 h-32 flex items-center justify-center">
+                    <span class="font-heading font-bold text-center text-sm">iso-glow-strong</span>
+                  </div>
+                  <p class="text-sm text-text-muted-light dark:text-text-muted-dark">30px, 60% opacity</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Use Cases -->
+            <div class="bg-yellow/10 dark:bg-yellow-dark/10 border-3 border-yellow dark:border-yellow-dark rounded-lg p-6 mb-6">
+              <h4 class="font-heading text-lg font-semibold mb-3">Use Cases</h4>
+              <ul class="list-disc list-inside space-y-2 text-text-muted-light dark:text-text-muted-dark">
+                <li>Accent elements that should glow in both light and dark mode</li>
+                <li>Hover states (see .iso-hover-glow below)</li>
+                <li>Decorative elements that need consistent glow across themes</li>
+                <li>CTAs or highlights that benefit from extra visual emphasis</li>
+              </ul>
+            </div>
+
+            <!-- Code Example -->
+            <div class="bg-gray-100 dark:bg-gray-900 border-3 border-text-light dark:border-text-dark rounded-lg p-4">
+              <h4 class="font-heading text-lg font-semibold mb-3">Usage Example</h4>
+              <pre class="font-mono text-sm overflow-x-auto"><code>&lt;div class="iso-glow-strong text-magenta"&gt;
+  Always glows
+&lt;/div&gt;</code></pre>
+            </div>
           </div>
 
           <!-- Isometric Rotate -->
           <div id="utility-iso-rotate" class="mb-12">
             <h3 class="font-heading text-2xl font-semibold mb-4">
-              Isometric Rotate
+              Rotation Utilities
             </h3>
-            <p class="text-text-muted-light dark:text-text-muted-dark mb-4">
-              Isometric rotate utility documentation will be added here.
+            <p class="text-text-muted-light dark:text-text-muted-dark mb-6">
+              3D isometric rotation transforms for creating depth effects. Use with <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">.iso-container</code> wrapper for proper 3D rendering.
             </p>
+
+            <!-- Visual Examples -->
+            <div class="bg-gray-100 dark:bg-gray-900 border-3 border-text-light dark:border-text-dark rounded-lg p-6 mb-6">
+              <h4 class="font-heading text-lg font-semibold mb-4">Rotation Variants</h4>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Subtle Rotation -->
+                <div class="flex flex-col items-center gap-3">
+                  <div class="iso-container" style="perspective: 500px;">
+                    <div class="iso-rotate-subtle bg-yellow border-3 border-text-light dark:border-text-dark rounded-lg w-24 h-24 flex items-center justify-center">
+                      <span class="font-heading font-bold text-sm text-center">30°</span>
+                    </div>
+                  </div>
+                  <p class="text-sm text-text-muted-light dark:text-text-muted-dark">.iso-rotate-subtle</p>
+                  <p class="text-xs font-mono text-text-muted-light dark:text-text-muted-dark">rotateX(30deg) rotateZ(30deg)</p>
+                </div>
+
+                <!-- Standard Rotation -->
+                <div class="flex flex-col items-center gap-3">
+                  <div class="iso-container" style="perspective: 500px;">
+                    <div class="iso-rotate bg-yellow border-3 border-text-light dark:border-text-dark rounded-lg w-24 h-24 flex items-center justify-center">
+                      <span class="font-heading font-bold text-sm text-center">45°</span>
+                    </div>
+                  </div>
+                  <p class="text-sm text-text-muted-light dark:text-text-muted-dark">.iso-rotate (standard)</p>
+                  <p class="text-xs font-mono text-text-muted-light dark:text-text-muted-dark">rotateX(45deg) rotateZ(45deg)</p>
+                </div>
+
+                <!-- Steep Rotation -->
+                <div class="flex flex-col items-center gap-3">
+                  <div class="iso-container" style="perspective: 500px;">
+                    <div class="iso-rotate-steep bg-yellow border-3 border-text-light dark:border-text-dark rounded-lg w-24 h-24 flex items-center justify-center">
+                      <span class="font-heading font-bold text-sm text-center">60°X 45°Z</span>
+                    </div>
+                  </div>
+                  <p class="text-sm text-text-muted-light dark:text-text-muted-dark">.iso-rotate-steep</p>
+                  <p class="text-xs font-mono text-text-muted-light dark:text-text-muted-dark">rotateX(60deg) rotateZ(45deg)</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Face Positioning Classes -->
+            <div class="mb-6">
+              <h4 class="font-heading text-lg font-semibold mb-3">Face Positioning Classes</h4>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4">
+                For multi-face isometric elements (cubes, boxes). Use with <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">.iso-container</code> parent.
+              </p>
+              <div class="overflow-x-auto">
+                <table class="w-full border-3 border-text-light dark:border-text-dark">
+                  <thead class="bg-turquoise/10 dark:bg-turquoise-dark/10">
+                    <tr>
+                      <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Class</th>
+                      <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Transform</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">.iso-face-front</td>
+                      <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-xs">translateZ(20px)</td>
+                    </tr>
+                    <tr>
+                      <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">.iso-face-top</td>
+                      <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-xs">rotateX(90deg) translateZ(20px)</td>
+                    </tr>
+                    <tr>
+                      <td class="px-4 py-2 font-mono text-sm">.iso-face-side</td>
+                      <td class="px-4 py-2 font-mono text-xs">rotateY(90deg) translateZ(20px)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Hover Utilities -->
+            <div class="mb-6">
+              <h4 class="font-heading text-lg font-semibold mb-3">Hover Utilities</h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-gray-100 dark:bg-gray-900 border-3 border-text-light dark:border-text-dark rounded-lg p-4">
+                  <h5 class="font-heading font-semibold mb-2">.iso-hover-lift</h5>
+                  <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-3">Lifts element -8px on hover with 200ms transition.</p>
+                  <div class="iso-hover-lift border-3 border-turquoise dark:border-turquoise-dark bg-turquoise/10 dark:bg-turquoise-dark/10 rounded-lg px-4 py-3 cursor-pointer">
+                    <span class="font-heading font-semibold">Hover me</span>
+                  </div>
+                </div>
+                <div class="bg-gray-100 dark:bg-gray-900 border-3 border-text-light dark:border-text-dark rounded-lg p-4">
+                  <h5 class="font-heading font-semibold mb-2">.iso-hover-glow</h5>
+                  <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-3">Adds glow on hover with 200ms transition.</p>
+                  <div class="iso-hover-glow border-3 border-magenta dark:border-magenta-dark text-magenta dark:text-magenta-dark bg-bg-light dark:bg-bg-dark rounded-lg px-4 py-3 cursor-pointer">
+                    <span class="font-heading font-semibold">Hover me</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Code Example -->
+            <div class="bg-gray-100 dark:bg-gray-900 border-3 border-text-light dark:border-text-dark rounded-lg p-4">
+              <h4 class="font-heading text-lg font-semibold mb-3">Usage Example</h4>
+              <pre class="font-mono text-sm overflow-x-auto"><code>&lt;div class="iso-container"&gt;
+  &lt;div class="iso-rotate iso-shadow bg-yellow w-24 h-24"&gt;
+    Isometric box
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </div>
           </div>
         </section>
       </main>
