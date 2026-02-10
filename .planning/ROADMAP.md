@@ -132,8 +132,8 @@ Plans:
 **Plans**: 2 plans in 2 waves
 
 Plans:
-- [ ] 15-01-PLAN.md - Create 3 isometric SVG illustrations for technology categories
-- [ ] 15-02-PLAN.md - Restructure TechSection with 3-column grid and illustrations
+- [x] 15-01-PLAN.md - Create 3 isometric SVG illustrations for technology categories
+- [x] 15-02-PLAN.md - Restructure TechSection with 3-column grid and illustrations
 
 #### Phase 16: FAQ Page
 
@@ -177,5 +177,5 @@ Phases execute in numeric order: 1 -> 2 -> ... -> 16
 | 12. Foundation | v1.2 | 3/3 | Complete | 2026-02-09 |
 | 13. Hero Section | v1.2 | 1/1 | Complete | 2026-02-10 |
 | 14. Process Section | v1.2 | 3/3 | Complete | 2026-02-10 |
-| 15. Technology Section | v1.2 | 0/2 | Not started | - |
+| 15. Technology Section | v1.2 | 2/2 | Complete | 2026-02-10 |
 | 16. FAQ Page | v1.2 | 0/? | Not started | - |
