@@ -11,11 +11,11 @@ See: .planning/PROJECT.md (updated 2026-02-09)
 ## Current Position
 
 Phase: 15 of 16 (Technology Section)
-Plan: 1 of ? in current phase
+Plan: 2 of ? in current phase
 Status: In progress
-Last activity: 2026-02-10 - Completed 15-01-PLAN.md (technology illustrations)
+Last activity: 2026-02-10 - Completed 15-02-PLAN.md (technology section restructure)
 
-Progress: [███████████████████████░░░░░░░░░] 80% (55 of 69+ plans complete)
+Progress: [███████████████████████░░░░░░░░░] 81% (56 of 69+ plans complete)
 
 ## Milestone History
 
@@ -55,6 +55,9 @@ See `.planning/milestones/` for archived roadmaps and requirements.
 Key decisions are logged in PROJECT.md Key Decisions table.
 
 Recent decisions affecting v1.2:
+- **Phase 15-02**: Flat article layout (no Card component) for technology section improves scannability vs card-based layouts
+- **Phase 15-02**: "What I Build" heading replaces "How I Build" for user-focused service offering messaging (vs tech stack)
+- **Phase 15-02**: 3-column responsive grid (gap-8 md:gap-12) establishes service category structure: AI Solutions, Automations, Web Apps
 - **Phase 15-01**: Technology illustration metaphors: neural network (AI), interlocking gears (automations), browser window (web apps) for instant category recognition
 - **Phase 15-01**: Under-1KB optimization: Simplified TechAutomations from 8 to 4 gear teeth (739 bytes) while maintaining visual clarity
 - **Phase 14-03**: Padding calculation pattern for illustrations: position + width + gap = required padding (validates proper spacing)
@@ -102,11 +105,15 @@ Recent decisions affecting v1.2:
 **Phase 14/15 considerations:**
 - ✅ Phase 14 complete: Process section with 5 isometric illustrations, user-focused descriptions, and correct spacing
 - ✅ Phase 15-01 complete: Technology illustrations created (AI, Automations, Web Apps) following established style guide
+- ✅ Phase 15-02 complete: Technology section restructured with 3 service categories and illustrations
+- ✅ Technology section layout validated: Flat article layout beats card-based layout for scannability
+- ✅ Service category structure established: AI Solutions, Automations, Web Apps with user-focused descriptions
 - ✅ Technology illustration metaphors validated: Neural network, gears, browser window are distinct and recognizable at 64x64px
 - ✅ Isometric illustration style guide established (14-01): 3-5 shapes, currentColor, viewBox, opacity faces
 - ✅ SVG size target validated (14-01, 15-01): All 8 illustrations under 1KB each, 5.74KB total
 - ✅ Process integration validated (14-02): Responsive sizing, accessibility maintained, minimal LCP impact
 - ✅ Illustration positioning pattern validated (14-03): Padding calculation ensures proper gaps at all viewports
+- ✅ Color variety pattern proven: yellow/turquoise/magenta differentiation works across both Process and Tech sections
 - iso-shadow-sm proven effective for 64px illustrations (used in both Process and Tech sections)
 
 **Phase 16 considerations:**
@@ -119,10 +126,10 @@ Recent decisions affecting v1.2:
 ## Session Continuity
 
 Last session: 2026-02-10
-Stopped at: Completed 15-01-PLAN.md (technology illustrations)
+Stopped at: Completed 15-02-PLAN.md (technology section restructure)
 Resume file: None
-Next action: Continue Phase 15 planning and execution
+Next action: Continue Phase 15 or proceed to Phase 16
 
 ---
 *State initialized: 2026-01-26*
-*Last updated: 2026-02-10 (Phase 15-01 complete: Created 3 technology category isometric illustrations - AI, Automations, Web Apps)*
+*Last updated: 2026-02-10 (Phase 15-02 complete: Restructured TechSection.astro with 3 service categories - AI Solutions, Automations, Web Apps)*
