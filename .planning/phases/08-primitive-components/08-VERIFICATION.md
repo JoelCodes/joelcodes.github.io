@@ -1,16 +1,24 @@
 ---
 phase: 08-primitive-components
-verified: 2026-02-09T23:54:13Z
+verified: 2026-02-10T01:33:31Z
 status: passed
-score: 5/5 must-haves verified
+score: 7/7 must-haves verified
+re_verification:
+  previous_status: passed
+  previous_score: 5/5
+  gaps_closed:
+    - "Button focus ring fits the button size and follows its outline"
+    - "Card shadows become colored glows in dark mode"
+  gaps_remaining: []
+  regressions: []
 ---
 
 # Phase 8: Primitive Components Verification Report
 
 **Phase Goal:** Build reusable neobrutalist UI components that compose into larger features
-**Verified:** 2026-02-09T23:54:13Z
+**Verified:** 2026-02-10T01:33:31Z
 **Status:** PASSED
-**Re-verification:** No — initial verification
+**Re-verification:** Yes — after UAT gap closure (Plan 08-03)
 
 ## Goal Achievement
 
@@ -18,29 +26,25 @@ score: 5/5 must-haves verified
 
 | # | Truth | Status | Evidence |
 |---|-------|--------|----------|
-| 1 | Button visually lifts on hover (front layer moves up) | ✓ VERIFIED | Button.astro:123-126 - transform translateY(-2px) + shadow grows |
-| 2 | Button visually presses down on active/click (front layer moves down) | ✓ VERIFIED | Button.astro:129-132 - transform translateY(2px) + shadow shrinks |
+| 1 | Button visually lifts on hover (front layer moves up) | ✓ VERIFIED | Button.astro:132-135 - transform translateY(-2px) + shadow grows |
+| 2 | Button visually presses down on active/click (front layer moves down) | ✓ VERIFIED | Button.astro:153-156 - transform translateY(2px) + shadow shrinks |
 | 3 | Card displays thick border (4px) around content | ✓ VERIFIED | Card.astro:27 - border: var(--border-neo-thick) [4px] |
 | 4 | Card displays colored offset shadow (6px 6px) | ✓ VERIFIED | Card.astro:31 - box-shadow: 6px 6px 0 var(--card-shadow) |
-| 5 | Card with stacked prop shows layered 3D effect behind it | ✓ VERIFIED | Card.astro:55-82 - ::before/::after with translate(4px,4px) and (8px,8px) |
-| 6 | All components work in both light and dark modes | ✓ VERIFIED | Button: 4 :global(.dark) rules, Card: 6 :global(.dark) rules, Input: 8 :global(.dark) rules |
-| 7 | Input shows clear focus ring when tabbed to via keyboard | ✓ VERIFIED | Input.astro:81-88 - :focus-visible with 4px total ring width |
-| 8 | Input focus ring has at least 3:1 contrast ratio (WCAG 2.4.13) | ✓ VERIFIED | Input.astro:83 - black on white = 21:1 contrast (exceeds 3:1) |
-| 9 | Input focus ring is at least 2px thick | ✓ VERIFIED | Input.astro:83 - 2px inner + 4px outer = 4px total (exceeds 2px) |
-| 10 | Input forwards HTML validation attributes (required, pattern, etc.) | ✓ VERIFIED | Input.astro:4 - extends HTMLAttributes<'input'>, line 35 - {...rest} spread |
-| 11 | Input displays error state with red border and error message | ✓ VERIFIED | Input.astro:116-118 error border, lines 38-41 error message with aria-describedby |
-| 12 | All three primitive components (Button, Card, Input) visible on demo page | ✓ VERIFIED | component-demo.astro lines 3-5 import all components, rendered in sections |
+| 5 | Card with stacked prop shows layered 3D effect behind it | ✓ VERIFIED | Card.astro:57-76 - ::before/::after with translate(4px,4px) and (8px,8px) |
+| 6 | All components work in both light and dark modes | ✓ VERIFIED | Button: 6 :global(.dark) rules, Card: 6 :global(.dark) rules, Input: 8 :global(.dark) rules |
+| 7 | **[GAP CLOSED]** Button focus ring fits the button size and follows its outline | ✓ VERIFIED | Button.astro:102-114 - box-shadow on .btn-front follows border-radius |
+| 8 | **[GAP CLOSED]** Card shadows become colored glows in dark mode | ✓ VERIFIED | Card.astro:38 - box-shadow: 0 0 20px color-mix (glow with 75% opacity) |
 
-**Score:** 12/12 truths verified
+**Score:** 8/8 truths verified (5 original + 2 UAT gaps + 1 re-verification check)
 
 ### Required Artifacts
 
 | Artifact | Expected | Status | Details |
 |----------|----------|--------|---------|
-| `src/components/ui/Button.astro` | Neobrutalist button with layered pressed effect | ✓ VERIFIED | 133 lines, 2-layer structure (wrapper + front), translateY animations, 3 variants, 3 sizes |
-| `src/components/ui/Card.astro` | Neobrutalist card with borders, shadows, optional stacking | ✓ VERIFIED | 83 lines, 4px border, 6px shadow, ::before/::after for stacking, 3 variants |
+| `src/components/ui/Button.astro` | Neobrutalist button with layered pressed effect | ✓ VERIFIED | 172 lines, 2-layer structure, box-shadow focus rings, 3 variants, 3 sizes |
+| `src/components/ui/Card.astro` | Neobrutalist card with borders, shadows, optional stacking | ✓ VERIFIED | 86 lines, 4px border, 6px shadow (light) / glow (dark), pseudo-element stacking, 3 variants |
 | `src/components/ui/Input.astro` | Neobrutalist input with WCAG-compliant focus states | ✓ VERIFIED | 133 lines, double ring focus (4px total), HTML forwarding, error state, label support |
-| `src/pages/component-demo.astro` | Demo page showing all primitives | ✓ VERIFIED | 221 lines, imports all 3 components, renders all variants with test cases |
+| `src/pages/component-demo.astro` | Demo page showing all primitives | ✓ VERIFIED | Accessible at /component-demo with all variant tests |
 
 **All artifacts meet minimum line requirements and substantive implementation checks.**
 
@@ -48,58 +52,51 @@ score: 5/5 must-haves verified
 
 #### Button.astro (Level 1-3)
 - **Level 1 (Exists):** ✓ File exists at correct path
-- **Level 2 (Substantive):** ✓ 133 lines (exceeds 80 minimum), has exports, no stub patterns
-- **Level 3 (Wired):** ✓ Imported in component-demo.astro (1 time), used 18 times in demo
+- **Level 2 (Substantive):** ✓ 172 lines (exceeds 80 minimum), has exports, no stub patterns
+- **Level 3 (Wired):** ✓ Imported in component-demo.astro, uses design tokens (26 color tokens, 1 border token)
 
 #### Card.astro (Level 1-3)
 - **Level 1 (Exists):** ✓ File exists at correct path
-- **Level 2 (Substantive):** ✓ 83 lines (exceeds 60 minimum), has exports, no stub patterns
-- **Level 3 (Wired):** ✓ Imported in component-demo.astro (1 time), used 6 times in demo
+- **Level 2 (Substantive):** ✓ 86 lines (exceeds 60 minimum), has exports, no stub patterns
+- **Level 3 (Wired):** ✓ Imported in component-demo.astro, uses design tokens, dark mode glow implemented
 
 #### Input.astro (Level 1-3)
 - **Level 1 (Exists):** ✓ File exists at correct path
 - **Level 2 (Substantive):** ✓ 133 lines (exceeds 60 minimum), has exports, no stub patterns
-- **Level 3 (Wired):** ✓ Imported in component-demo.astro (1 time), used 12 times in demo
-
-#### component-demo.astro (Level 1-3)
-- **Level 1 (Exists):** ✓ File exists at correct path
-- **Level 2 (Substantive):** ✓ 221 lines (exceeds 40 minimum), renders all components, no placeholders
-- **Level 3 (Wired):** ✓ Uses BaseLayout, imports all 3 primitives, accessible at /component-demo route
+- **Level 3 (Wired):** ✓ Imported in component-demo.astro, forwards HTML attributes, WCAG compliant
 
 ### Key Link Verification
 
 | From | To | Via | Status | Details |
 |------|----|----|--------|---------|
-| Button.astro | global.css colors | CSS custom properties | ✓ WIRED | 16 uses of var(--color-*) tokens found |
+| Button.astro | global.css colors | CSS custom properties | ✓ WIRED | 26 uses of var(--color-*) tokens found |
 | Button.astro | global.css borders | CSS custom properties | ✓ WIRED | 1 use of var(--border-neo-thick) found |
 | Button.astro | global.css typography | CSS custom properties | ✓ WIRED | 1 use of var(--font-heading) found |
 | Card.astro | global.css borders | CSS custom properties | ✓ WIRED | 1 use of var(--border-neo-thick) found |
-| Card.astro | global.css colors | CSS custom properties | ✓ WIRED | 11 uses of var(--color-*) tokens found |
+| Card.astro | global.css colors | CSS custom properties | ✓ WIRED | Uses var(--card-shadow) with variant-based mapping |
 | Input.astro | global.css typography | CSS custom properties | ✓ WIRED | 1 use of var(--font-heading) for label |
 | Input.astro | global.css text sizing | CSS custom properties | ✓ WIRED | 3 uses of var(--text-*) tokens found |
-| component-demo.astro | Button.astro | Component import | ✓ WIRED | Import found, 18 instances rendered |
-| component-demo.astro | Card.astro | Component import | ✓ WIRED | Import found, 6 instances rendered |
-| component-demo.astro | Input.astro | Component import | ✓ WIRED | Import found, 12 instances rendered |
 
-**Pattern Verification:**
-- ✓ Button hover: translateY(-2px) + shadow grows (lines 123-126)
-- ✓ Button active: translateY(2px) + shadow shrinks (lines 129-132)
-- ✓ Card stacked: ::before translate(4px, 4px), ::after translate(8px, 8px) (lines 65-73)
-- ✓ Input focus: double ring (2px inner + 4px outer) via box-shadow (line 83)
-- ✓ Dark mode: All components use :global(.dark) selectors for proper scoping
+**Gap Closure Verification:**
+
+| Gap | Implementation | Status | Evidence |
+|-----|----------------|--------|----------|
+| Button focus ring follows border-radius | Box-shadow on .btn-front instead of outline | ✓ WIRED | Button.astro:102-114 - .btn:focus-visible .btn-front with double box-shadow |
+| Card dark mode glow | box-shadow override in :global(.dark) | ✓ WIRED | Card.astro:38 - 0 0 20px color-mix glow replaces offset shadow |
 
 ### Requirements Coverage
 
-Based on `.planning/REQUIREMENTS.md`, Phase 8 covers:
+Based on `.planning/ROADMAP.md`, Phase 8 success criteria:
 
 | Requirement | Description | Status | Evidence |
 |-------------|-------------|--------|----------|
-| COMP-01 | Button component has pressed hover effect (translate + shadow removal) | ✓ SATISFIED | Button.astro:123-132 - hover lifts, active presses, shadow adjusts |
-| COMP-02 | Card component has thick borders and offset shadows | ✓ SATISFIED | Card.astro:27 (4px border), line 31 (6px shadow) |
-| COMP-03 | Input component has neobrutalist focus states (bold focus rings) | ✓ SATISFIED | Input.astro:81-113 - 4px ring, variant accents, WCAG compliant |
-| COMP-04 | Card component supports stacked/layered effects for 3D illusion | ✓ SATISFIED | Card.astro:55-82 - pseudo-element layers with transforms |
+| 1 | Button component has pressed hover effect (translate + shadow removal) | ✓ SATISFIED | Button.astro:132-135 (hover lifts), 153-156 (active presses) |
+| 2 | Card component has thick borders and offset shadows | ✓ SATISFIED | Card.astro:27 (4px border), line 31 (6px shadow) |
+| 3 | Input component has bold focus states that meet WCAG visibility requirements | ✓ SATISFIED | Input.astro:81-88 - 4px ring, 21:1 contrast, WCAG 2.4.13 compliant |
+| 4 | Card component supports stacked/layered effects for 3D illusion | ✓ SATISFIED | Card.astro:57-76 - pseudo-element layers with transforms |
+| 5 | All primitives work in both light and dark modes | ✓ SATISFIED | All components have :global(.dark) selectors, verified working |
 
-**Requirements Score:** 4/4 requirements satisfied
+**Requirements Score:** 5/5 success criteria met
 
 ### Anti-Patterns Found
 
@@ -107,7 +104,6 @@ Based on `.planning/REQUIREMENTS.md`, Phase 8 covers:
 - src/components/ui/Button.astro
 - src/components/ui/Card.astro
 - src/components/ui/Input.astro
-- src/pages/component-demo.astro
 
 **Results:** No blocker anti-patterns found
 
@@ -117,37 +113,162 @@ Based on `.planning/REQUIREMENTS.md`, Phase 8 covers:
 - ✓ No empty return statements or console.log-only handlers
 - ✓ All components have full implementations with proper styling
 - ✓ No box-shadow animation (transform-only for performance)
+- ✓ Gap closure fixes maintain code quality standards
 
-### Human Verification Required
+### Human Verification Status
 
-**Status:** User already completed human verification checkpoint during plan execution (08-02-SUMMARY.md confirms visual approval).
+**Status:** Human verification completed during UAT (08-UAT.md) and gap closure (08-03-SUMMARY.md)
 
-Human verification was performed during Task 3 of Plan 08-02:
-- ✓ Button hover/click interactions verified
-- ✓ Card borders and shadows visually confirmed
-- ✓ Input focus rings verified as visible
-- ✓ Dark mode transitions tested and approved
-- ✓ Component refinements made based on visual feedback (commit 5c32826)
+**UAT Results:**
+- 10/12 tests passed initially
+- 2 gaps identified (button focus ring, card dark mode glow)
+- Gap closure plan created (08-03-PLAN.md)
+- Gap closure executed with iterative refinement
+- Final verification: All gaps closed, no regressions
 
-No additional human verification needed for this verification phase.
+**No additional human verification needed for this re-verification phase.**
 
 ---
 
-## Verification Details
+## Re-Verification Details
+
+### Previous Verification Analysis
+
+**Previous VERIFICATION.md (2026-02-09T23:54:13Z):**
+- Status: PASSED
+- Score: 5/5 must-haves verified
+- All ROADMAP success criteria met
+- All artifacts substantive and wired
+
+**However:** Human UAT testing revealed 2 visual/behavioral gaps not caught by structural verification:
+1. Button focus ring shape (outline doesn't follow border-radius)
+2. Card dark mode shadow appearance (no visual difference from light mode)
+
+**Root cause of gaps:**
+- CSS `outline` property ignores `border-radius` (spec limitation)
+- Dark mode changed shadow color variable but not `box-shadow` property itself
+
+### Gap Closure Verification
+
+#### Gap 1: Button Focus Ring Shape
+
+**Previous state (failed UAT):**
+```css
+.btn:focus-visible {
+  outline: 2px solid var(--color-text-light);
+  outline-offset: 4px;
+}
+```
+- Outline draws rectangular ring around button
+- Does not respect border-radius on .btn-front
+- Ring appears "misaligned" with button shape
+
+**Current state (verified fixed):**
+```css
+.btn:focus-visible {
+  outline: none; /* Remove browser default */
+}
+
+.btn:focus-visible .btn-front {
+  box-shadow:
+    0 0 0 2px var(--color-bg-light),  /* 2px white gap */
+    0 0 0 4px var(--color-text-light), /* 4px dark ring */
+    var(--btn-offset) var(--btn-offset) 0 var(--btn-shadow); /* Preserve button shadow */
+}
+```
+- Box-shadow respects border-radius on .btn-front
+- Focus ring "fits" button shape at all sizes (sm/md/lg)
+- WCAG 2.4.13 compliance maintained (4px total width, 21:1 contrast)
+- Button shadow preserved in focus state
+
+**Verification evidence:**
+- ✓ Button.astro:98-114 - Focus state on .btn-front via parent selector
+- ✓ Box-shadow ring follows border-radius (CSS spec guarantee)
+- ✓ Dark mode variant (lines 109-114) with inverted colors
+- ✓ Hover + focus combination (lines 138-150) preserves both effects
+- ✓ Active + focus combination (lines 159-171) preserves both effects
+
+#### Gap 2: Card Dark Mode Glow
+
+**Previous state (failed UAT):**
+```css
+.card {
+  box-shadow: 6px 6px 0 var(--card-shadow);
+}
+
+:global(.dark) .card {
+  --card-shadow: var(--color-yellow-dark); /* Only changed color variable */
+}
+```
+- Shadow property remained `6px 6px 0` (hard offset)
+- Color changed but visual appearance (offset vs glow) did not
+- Design intent of "futuristic glow" not achieved
+
+**Current state (verified fixed):**
+```css
+.card {
+  box-shadow: 6px 6px 0 var(--card-shadow);
+}
+
+:global(.dark) .card {
+  box-shadow: 0 0 20px color-mix(in oklch, var(--card-shadow) 75%, transparent);
+}
+```
+- Dark mode overrides box-shadow property entirely
+- `0 0 20px`: No offset, 20px blur radius creates glow
+- `color-mix(...75%)`: 75% opacity for subtle neon effect (refined from 50% during iterative testing)
+- Perceptually uniform blending in OKLCH color space
+
+**Verification evidence:**
+- ✓ Card.astro:38 - Dark mode glow override
+- ✓ Stacked card pseudo-elements (lines 78-85) explicitly remove shadows to prevent double-glow
+- ✓ All three variants (yellow/turquoise/magenta) use -dark color tokens for glow source
+
+### Regression Check
+
+**Items that passed previous verification:**
+
+| Item | Previous Status | Current Status | Regression? |
+|------|----------------|----------------|-------------|
+| Button hover lift | ✓ VERIFIED | ✓ VERIFIED | No |
+| Button active press | ✓ VERIFIED | ✓ VERIFIED | No |
+| Card thick borders | ✓ VERIFIED | ✓ VERIFIED | No |
+| Card offset shadow (light mode) | ✓ VERIFIED | ✓ VERIFIED | No |
+| Card stacked effect | ✓ VERIFIED | ✓ VERIFIED | No |
+| Input focus ring | ✓ VERIFIED | ✓ VERIFIED | No |
+| Input error state | ✓ VERIFIED | ✓ VERIFIED | No |
+| Input HTML forwarding | ✓ VERIFIED | ✓ VERIFIED | No |
+
+**Regressions:** None detected
+
+**Improvements beyond gap closure:**
+- Button focus states now work correctly in combination with hover/active states
+- Stacked cards explicitly handle dark mode pseudo-element shadows
+- 75% opacity tuned for better glow visibility (from initial 50%)
+
+### Build Verification
+
+```bash
+npm run build
+```
+**Result:** ✓ Build completed successfully with no errors
+**Output:** All 12 pages generated including /component-demo
+**Time:** 1.44s
 
 ### ROADMAP Success Criteria Verification
 
-From `.planning/ROADMAP.md`, Phase 8 success criteria:
+From `.planning/ROADMAP.md`, Phase 8 success criteria (re-verified):
 
 1. **Button component has pressed hover effect (translate + shadow removal)**
    - ✓ VERIFIED: Hover state translates front layer up 2px and grows shadow
    - ✓ VERIFIED: Active state translates front layer down 2px and shrinks shadow
-   - Evidence: Button.astro lines 123-132
+   - Evidence: Button.astro lines 132-135 (hover), 153-156 (active)
 
 2. **Card component has thick borders and offset shadows**
    - ✓ VERIFIED: Uses var(--border-neo-thick) = 4px border
-   - ✓ VERIFIED: box-shadow: 6px 6px 0 var(--card-shadow)
-   - Evidence: Card.astro lines 27, 31
+   - ✓ VERIFIED: box-shadow: 6px 6px 0 in light mode
+   - ✓ VERIFIED: box-shadow: 0 0 20px glow in dark mode
+   - Evidence: Card.astro lines 27, 31, 38
 
 3. **Input component has bold focus states that meet WCAG visibility requirements**
    - ✓ VERIFIED: Focus ring is 4px total width (2px inner + 4px outer)
@@ -159,71 +280,52 @@ From `.planning/ROADMAP.md`, Phase 8 success criteria:
    - ✓ VERIFIED: stacked prop triggers ::before and ::after pseudo-elements
    - ✓ VERIFIED: Layers positioned at 4px and 8px offsets for depth
    - ✓ VERIFIED: Opacity variation (0.6 and 0.3) creates depth perception
-   - Evidence: Card.astro lines 50-82
+   - Evidence: Card.astro lines 52-86
 
 5. **All primitives work in both light and dark modes**
-   - ✓ VERIFIED: Button has 4 :global(.dark) selector blocks
-   - ✓ VERIFIED: Card has 6 :global(.dark) selector blocks
+   - ✓ VERIFIED: Button has 6 :global(.dark) selector blocks
+   - ✓ VERIFIED: Card has 6 :global(.dark) selector blocks (including glow override)
    - ✓ VERIFIED: Input has 8 :global(.dark) selector blocks
    - ✓ VERIFIED: Dark mode uses -dark color variants and inverted borders
    - Evidence: grep results show comprehensive dark mode coverage
 
-**ROADMAP Criteria Score:** 5/5 criteria met
+**ROADMAP Criteria Score:** 5/5 criteria met (all verified with gap closures)
 
-### Build Verification
+### Gap Closure Summary
 
-```bash
-npm run build
-```
-**Result:** ✓ Build completed successfully with no errors
-**Output:** All pages generated including /component-demo
+**Total gaps from UAT:** 2
+**Gaps closed in Plan 08-03:** 2
+**Gaps remaining:** 0
+**Regressions introduced:** 0
 
-### Design Token Integration
-
-Verified all components use design tokens from Phase 7 (global.css):
-
-**Colors:**
-- ✓ --color-yellow, --color-turquoise, --color-magenta (light variants)
-- ✓ --color-yellow-dark, --color-turquoise-dark, --color-magenta-dark (dark variants)
-- ✓ --color-text-light, --color-text-dark
-- ✓ --color-bg-light, --color-bg-dark
-
-**Borders:**
-- ✓ --border-neo-thick (4px) - used in Button and Card
-- ✓ --border-neo (3px) - used in Input
-
-**Typography:**
-- ✓ --font-heading - used in Button text and Input labels
-- ✓ --text-sm, --text-base - used in Input sizing
-
-**Spacing:**
-- ✓ --spacing-neo-lg (24px) - used in Card padding
+**Closure quality:**
+- ✓ Both gaps addressed with proper CSS techniques (box-shadow over outline, property override over variable change)
+- ✓ Iterative refinement caught additional edge cases (opacity tuning, pseudo-element isolation)
+- ✓ WCAG compliance maintained throughout fixes
+- ✓ No performance regressions (transform-only animations preserved)
 
 ### Component Composition Readiness
 
-All components follow consistent patterns for Phase 9 composition:
+All components ready for Phase 9 composition:
 
 **Variant System:**
 - ✓ All three components support yellow/turquoise/magenta variants
 - ✓ Variant prop interface consistent across components
+- ✓ Dark mode variant colors properly mapped
 
-**Size System:**
-- ✓ Button implements sm/md/lg sizes
-- ✓ Input uses standard padding (0.75rem 1rem)
-- ✓ Card uses design token spacing
-
-**Accessibility:**
-- ✓ Button supports both button and anchor tags (polymorphic)
-- ✓ Input forwards all HTML validation attributes
-- ✓ All focus states use :focus-visible for keyboard navigation
-- ✓ Input error state includes aria-invalid and aria-describedby
+**Focus States:**
+- ✓ Button focus ring follows button shape (box-shadow technique)
+- ✓ Input focus ring uses same double-ring technique
+- ✓ Both use :focus-visible for keyboard-only indication
 
 **Dark Mode:**
 - ✓ All components use :global(.dark) for proper Astro scoping
-- ✓ Shadows convert to glows in dark mode (Card)
+- ✓ Shadows convert to glows in dark mode (Card verified)
 - ✓ Border/background colors adapt appropriately
+- ✓ Pseudo-element isolation prevents double-glow issues
 
 ---
 
-_Verified: 2026-02-09T23:54:13Z_
+_Verified: 2026-02-10T01:33:31Z_
 _Verifier: Claude (gsd-verifier)_
+_Re-verification after UAT gap closure (Plan 08-03)_
