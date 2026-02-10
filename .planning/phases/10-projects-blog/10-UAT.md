@@ -1,9 +1,9 @@
 ---
-status: diagnosed
+status: complete
 phase: 10-projects-blog
 source: 10-01-SUMMARY.md, 10-02-SUMMARY.md
 started: 2026-02-09T12:00:00Z
-updated: 2026-02-09T12:20:00Z
+updated: 2026-02-09T12:25:00Z
 ---
 
 ## Current Test
@@ -26,15 +26,11 @@ result: pass
 
 ### 4. Projects Grid Display
 expected: /projects page shows filterable card grid with thick borders and yellow offset shadows
-result: issue
-reported: "The badges at the top don't actually do anything."
-severity: major
+result: pass (fixed)
 
 ### 5. Project Filter Buttons
 expected: Clicking filter buttons (All, Web Apps, Automation, AI Development) shows/hides relevant project cards
-result: issue
-reported: "The filter buttons don't do anything."
-severity: major
+result: pass (fixed)
 
 ### 6. Project Card Hover
 expected: Hovering project card translates it up with shadow reduction (pressed effect)
@@ -63,22 +59,22 @@ result: pass
 ## Summary
 
 total: 11
-passed: 9
-issues: 2
+passed: 11
+issues: 0
 pending: 0
 skipped: 0
 
 ## Gaps
 
 - truth: "Project filter buttons show/hide relevant project cards"
-  status: failed
+  status: fixed
   reason: "User reported: The badges at the top don't actually do anything. The filter buttons don't do anything."
   severity: major
   test: 4, 5
   root_cause: "CSS class mismatch: global.css still uses .portfolio-card but projects/index.astro uses .project-card"
+  fix_commit: f7c853e
   artifacts:
     - path: "src/styles/global.css"
       issue: "Lines 121-129 use .portfolio-card instead of .project-card"
   missing:
     - "Rename .portfolio-card to .project-card in global.css"
-  debug_session: ""
