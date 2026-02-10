@@ -1,6 +1,6 @@
 ---
 // Footer component with copyright and basic info
-import { Github, Linkedin } from 'lucide-static';
+import { Github, Linkedin } from '@lucide/astro';
 
 const currentYear = new Date().getFullYear();
 ---
@@ -28,7 +28,7 @@ const currentYear = new Date().getFullYear();
         aria-label="LinkedIn (opens in new tab)"
         class="social-link text-text-muted-light dark:text-text-muted-dark hover:text-turquoise transition-colors"
       >
-        <Fragment set:html={Linkedin} />
+        <Linkedin size={20} />
       </a>
       <a
         href="https://github.com/joelshinness"
@@ -37,7 +37,7 @@ const currentYear = new Date().getFullYear();
         aria-label="GitHub (opens in new tab)"
         class="social-link text-text-muted-light dark:text-text-muted-dark hover:text-turquoise transition-colors"
       >
-        <Fragment set:html={Github} />
+        <Github size={20} />
       </a>
     </div>
 
@@ -107,9 +107,3 @@ const currentYear = new Date().getFullYear();
   </div>
 </footer>
 
-<style>
-  .social-link svg {
-    width: 1.25rem;
-    height: 1.25rem;
-  }
-</style>
