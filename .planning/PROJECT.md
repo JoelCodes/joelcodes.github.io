@@ -4,7 +4,17 @@
 
 A lead-generation focused portfolio website for Joel Shinness targeting small business clients. The site communicates expertise in web apps, automation, and AI development through distinctive neobrutalist design, narrative storytelling, and clear calls to action.
 
-**Current state:** v1.1 shipped. Neobrutalist design complete with WCAG 2.2 AA accessibility compliance.
+**Current state:** v1.2 in progress. Refining homepage sections to better communicate value and working style.
+
+## Current Milestone: v1.2 Homepage Refinement
+
+**Goal:** Improve each homepage section to be more detailed, interesting, and better communicate outcomes and what it's like to work with Joel.
+
+**Target features:**
+- Hero section reframed around outcomes (time/money saved, customers satisfied) with visual badges
+- Process section with detailed descriptions and isometric illustrations per step
+- Technology section distinguishing AI, Automations, and Web Apps with illustrations
+- FAQ moved to dedicated page
 
 ## Core Value
 
@@ -42,12 +52,13 @@ Small business owners can understand what Joel does, trust his process, and easi
 
 ### Active
 
-*v1.2 Enhancements (planned):*
+*v1.2 Homepage Refinement:*
 
-- [ ] Isometric shadows (45° angles) for advanced depth effect
-- [ ] Cyclical process diagram (visual, not just text)
-- [ ] Testimonials section with client quotes
-- [ ] Newsletter signup integration
+- [ ] Hero section with outcome-focused messaging and visual badges
+- [ ] Process section with detailed descriptions (1-2 sentences per step)
+- [ ] Process section with isometric mini-illustrations per step
+- [ ] Technology section split into AI, Automations, Web Apps with illustrations
+- [ ] FAQ moved to dedicated /faq page
 
 ### Out of Scope
 
@@ -93,4 +104,4 @@ Small business owners can understand what Joel does, trust his process, and easi
 | Native HTML accordion (FAQ) | Zero JS, built-in accessibility | ✓ Good — v1.1 |
 
 ---
-*Last updated: 2026-02-10 after v1.1 milestone*
+*Last updated: 2026-02-09 after v1.2 milestone start*
