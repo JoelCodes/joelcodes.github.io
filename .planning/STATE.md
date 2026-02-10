@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-02-09)
 ## Current Position
 
 Phase: 8 of 11 (Primitive Components)
-Plan: 2 of 3 complete
-Status: In progress
-Last activity: 2026-02-09 — Completed 08-02-PLAN.md (Input Component & Demo Page)
+Plan: 3 of 3 complete
+Status: Phase complete
+Last activity: 2026-02-09 — Completed 08-03-PLAN.md (UAT Gap Closure)
 
-Progress: [█████████████░░░░░░░] 71% (27 of ~38 total plans complete across v1.0 + v1.1)
+Progress: [█████████████░░░░░░░] 74% (28 of ~38 total plans complete across v1.0 + v1.1)
 
 ## Milestone History
 
@@ -52,14 +52,18 @@ Recent decisions affecting v1.1:
 - **HTML attribute forwarding** (08-02): Spread operator passes through required, pattern, minlength for native form validation
 - **Visual verification checkpoints** (08-02): Human review of hover/active/focus states catches visual bugs before integration
 - **2-layer button refinement** (08-02): Simplified from 3-layer to 2-layer for cleaner visual result and reduced DOM complexity
+- **Box-shadow focus rings** (08-03): Use box-shadow instead of outline for focus rings to respect border-radius on rounded elements
+- **Iterative visual refinement** (08-03): Visual CSS work benefits from implement → verify → adjust → verify pattern to catch edge cases spec can't capture
+- **Dark mode glow opacity** (08-03): 80% opacity via color-mix provides good visibility while maintaining subtlety (initial 50% too faint)
 
 ### Pending Todos
 
 **Before v1.1 deployment:**
 1. **[URGENT]** Validate color contrast ratios meet WCAG 4.5:1 minimum (yellow/turquoise/magenta on white + dark variants)
-2. Test dark mode shadow glow visibility on all components (may need adjustment of 50% opacity)
+2. ~~Test dark mode shadow glow visibility on all components (may need adjustment of 50% opacity)~~ **DONE** - Adjusted to 80% opacity in 08-03
 3. Manual accessibility audit (keyboard navigation, screen reader)
 4. Target audience validation (small business owners)
+5. Test dark mode glow visibility across different monitors/brightness levels (noted in 08-03)
 
 **v1.0 deployment (still pending):**
 1. Configure Formspree form ID (replace `YOUR_FORM_ID` in contact.astro)
@@ -74,20 +78,23 @@ Recent decisions affecting v1.1:
 - Density guidelines (3/10 constraint) need per-section targets documented
 
 **Phase 9 (Composite Components):**
-- Button + Icon composition patterns need documentation
-- Card + Button integration testing (padding, CTAs)
-- Consider pressed effect for clickable cards
+- Button + Icon composition will inherit focus ring behavior from 08-03
+- Card + Button integration testing needed (padding, CTAs, spacing)
+- Consider pressed effect for clickable cards (similar to button active state)
+- Test composite components with keyboard navigation
 
 **Phase 11 (Testing & Accessibility):**
 - Manual accessibility testing required (Lighthouse alone insufficient)
 - Target audience validation needed to ensure professional trust maintained
+- Verify focus ring contrast ratio against final color palette (from 08-03)
+- End-to-end keyboard navigation test through all composite components
 
 ## Session Continuity
 
 Last session: 2026-02-09
-Stopped at: Completed 08-02-PLAN.md execution (Input Component & Demo Page)
+Stopped at: Completed 08-03-PLAN.md execution (UAT Gap Closure - Phase 8 complete)
 Resume file: None
-Next action: Execute next Phase 8 plan (08-03 - final primitive components plan)
+Next action: Begin Phase 9 (Composite Components)
 
 ---
 *State initialized: 2026-01-26*
