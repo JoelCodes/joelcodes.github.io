@@ -136,6 +136,56 @@ section[id] {
     box-shadow: 3px 3px 0 var(--color-magenta);
     transform: translate(2px, 2px);
   }
+
+  /* Isometric Transform Utilities */
+  .iso-container {
+    transform-style: preserve-3d;
+  }
+
+  /* Standard isometric rotation (45° on both axes) */
+  .iso-rotate {
+    transform: rotateX(45deg) rotateZ(45deg);
+  }
+
+  /* Subtle tilt (30° - less dramatic) */
+  .iso-rotate-subtle {
+    transform: rotateX(30deg) rotateZ(30deg);
+  }
+
+  /* Steep tilt (60° X, 45° Z - more dramatic) */
+  .iso-rotate-steep {
+    transform: rotateX(60deg) rotateZ(45deg);
+  }
+
+  /* Face positioning for multi-face isometric elements */
+  .iso-face-front {
+    transform: translateZ(20px);
+  }
+
+  .iso-face-top {
+    transform: rotateX(90deg) translateZ(20px);
+  }
+
+  .iso-face-side {
+    transform: rotateY(90deg) translateZ(20px);
+  }
+
+  /* Hover states */
+  .iso-hover-lift {
+    transition: transform 200ms ease;
+  }
+
+  .iso-hover-lift:hover {
+    transform: translateY(-8px);
+  }
+
+  .iso-hover-glow {
+    transition: box-shadow 200ms ease;
+  }
+
+  .iso-hover-glow:hover {
+    box-shadow: 0 0 20px currentColor;
+  }
 }
 
 /* Project card filtering animations */
