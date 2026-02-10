@@ -72,31 +72,31 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FOUND-01 | TBD | Pending |
-| FOUND-02 | TBD | Pending |
-| FOUND-03 | TBD | Pending |
-| HERO-01 | TBD | Pending |
-| HERO-02 | TBD | Pending |
-| HERO-03 | TBD | Pending |
-| PROC-01 | TBD | Pending |
-| PROC-02 | TBD | Pending |
-| PROC-03 | TBD | Pending |
-| PROC-04 | TBD | Pending |
-| TECH-01 | TBD | Pending |
-| TECH-02 | TBD | Pending |
-| TECH-03 | TBD | Pending |
-| TECH-04 | TBD | Pending |
-| FAQ-01 | TBD | Pending |
-| FAQ-02 | TBD | Pending |
-| FAQ-03 | TBD | Pending |
-| FAQ-04 | TBD | Pending |
-| FAQ-05 | TBD | Pending |
+| FOUND-01 | Phase 12 | Pending |
+| FOUND-02 | Phase 12 | Pending |
+| FOUND-03 | Phase 12 | Pending |
+| HERO-01 | Phase 13 | Pending |
+| HERO-02 | Phase 13 | Pending |
+| HERO-03 | Phase 13 | Pending |
+| PROC-01 | Phase 14 | Pending |
+| PROC-02 | Phase 14 | Pending |
+| PROC-03 | Phase 14 | Pending |
+| PROC-04 | Phase 14 | Pending |
+| TECH-01 | Phase 15 | Pending |
+| TECH-02 | Phase 15 | Pending |
+| TECH-03 | Phase 15 | Pending |
+| TECH-04 | Phase 15 | Pending |
+| FAQ-01 | Phase 16 | Pending |
+| FAQ-02 | Phase 16 | Pending |
+| FAQ-03 | Phase 16 | Pending |
+| FAQ-04 | Phase 16 | Pending |
+| FAQ-05 | Phase 16 | Pending |
 
 **Coverage:**
 - v1.2 requirements: 19 total
-- Mapped to phases: 0
-- Unmapped: 19 (pending roadmap)
+- Mapped to phases: 19
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-02-09*
-*Last updated: 2026-02-09 after initial definition*
+*Last updated: 2026-02-09 after roadmap creation*
