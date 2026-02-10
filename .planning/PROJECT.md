@@ -2,26 +2,13 @@
 
 ## What This Is
 
-A lead-generation focused portfolio website for Joel Shinness targeting small business clients. The site communicates expertise in web apps, automation, and AI development through clear positioning, case study showcase, and blog content.
+A lead-generation focused portfolio website for Joel Shinness targeting small business clients. The site communicates expertise in web apps, automation, and AI development through distinctive neobrutalist design, narrative storytelling, and clear calls to action.
 
-**Current state:** v1.0 shipped. Live at GitHub Pages (pending deployment).
+**Current state:** v1.1 shipped. Neobrutalist design complete with WCAG 2.2 AA accessibility compliance.
 
 ## Core Value
 
 Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
-
-## Current Milestone: v1.1 Design Updates
-
-**Goal:** Transform the site from generic minimalist to distinctive neobrutalist, with a narrative homepage that tells the story of working with Joel.
-
-**Target features:**
-- Neobrutalist design system (yellow/turquoise/magenta, quirky typography, bold borders)
-- Narrative homepage structure (Solutions → Process → Tech → About → Contact)
-- Projects page with narrative format
-- Restyled blog index and tag pages
-- FAQ relocated from homepage
-
-**Vibe:** Competence, confidence, personality, approachability. Density 3/10.
 
 ## Requirements
 
@@ -39,28 +26,36 @@ Small business owners can understand what Joel does, trust his process, and easi
 - ✓ Contact form with Formspree integration — v1.0
 - ✓ Responsive design (mobile, tablet, desktop) — v1.0
 - ✓ Dark mode with persistence — v1.0
-- ✓ B&W photography with yellow/teal accents — v1.0
 - ✓ SEO meta tags and JSON-LD structured data — v1.0
 - ✓ Lighthouse 90+ performance — v1.0 (achieved 92)
 
+*Shipped in v1.1:*
+
+- ✓ Neobrutalist design system (yellow/turquoise/magenta OKLCH palette) — v1.1
+- ✓ Quirky typography with Bricolage Grotesque headings — v1.1
+- ✓ Hard offset shadows with shadow-to-glow dark mode transformation — v1.1
+- ✓ Homepage narrative structure (Solutions → Process → Tech → About → Contact) — v1.1
+- ✓ Projects page with neobrutalist cards and case study format — v1.1
+- ✓ Blog index and tag pages with turquoise accents — v1.1
+- ✓ FAQ relocated to footer accordion — v1.1
+- ✓ WCAG 2.2 AA accessibility compliance (98.7% manual audit) — v1.1
+
 ### Active
 
-*v1.1 Design Updates:*
+*v1.2 Enhancements (planned):*
 
-- [ ] Neobrutalist design system (colors, typography, visual elements)
-- [ ] Homepage narrative redesign (Solutions → Process → Tech → About → Contact)
-- [ ] Projects page with narrative structure (renamed from portfolio)
-- [ ] Blog index and tag pages restyled
-- [ ] FAQ relocated to footer or separate page
+- [ ] Isometric shadows (45° angles) for advanced depth effect
+- [ ] Cyclical process diagram (visual, not just text)
+- [ ] Testimonials section with client quotes
+- [ ] Newsletter signup integration
 
 ### Out of Scope
 
 - Booking/calendar integration — contact form sufficient
 - Pricing information — custom work requires conversation
 - CMS backend — Joel can edit code directly
-- Testimonials section — deferred to v1.2 (need real client quotes)
-- Newsletter signup — deferred to v1.2
-- Individual blog post redesign — current design works well
+- Individual blog post redesign — two-tier typography works well
+- Color block sections — asymmetric layouts preferred
 
 ## Context
 
@@ -69,7 +64,8 @@ Small business owners can understand what Joel does, trust his process, and easi
 - **Differentiator:** Low-risk process with prototype before full commitment
 - **Tech stack:** Astro 5.x, Tailwind CSS 4.x, MDX, TypeScript
 - **Hosting:** GitHub Pages (static, free)
-- **Current LOC:** 2,052 lines across 24 source files
+- **Current LOC:** 3,139 lines across 37 source files
+- **Design system:** Neobrutalism — yellow/turquoise/magenta palette, 3/10 density, quirky headings, bold borders
 
 ## Constraints
 
@@ -77,6 +73,7 @@ Small business owners can understand what Joel does, trust his process, and easi
 - **Stack:** Astro/JAMstack — all pages pre-rendered at build time
 - **Design:** Neobrutalism — yellow/turquoise/magenta palette, quirky headings, bold borders
 - **Forms:** Formspree (50 submissions/month free tier)
+- **Accessibility:** WCAG 2.2 AA compliant (validated by Playwright/axe-core)
 
 ## Key Decisions
 
@@ -84,11 +81,16 @@ Small business owners can understand what Joel does, trust his process, and easi
 |----------|-----------|---------|
 | Static site over CMS | Joel can edit code; simpler hosting | ✓ Good — works well |
 | Contact form over booking | Lower friction for initial contact | ✓ Good — simple UX |
-| Start with 1 portfolio project | Ship faster, add more later | ✓ Good — can expand |
 | Astro + Tailwind v4 | Modern stack, fast builds, great DX | ✓ Good — 1.2s builds |
 | MDX for blog | Rich content with code blocks | ✓ Good — Expressive Code works |
 | Homepage About section | Single-page feel, no separate page | ✓ Good — removed nav link |
 | Formspree for forms | No backend needed, free tier sufficient | — Pending config |
+| OKLCH color system | Perceptually uniform, easy dark mode variants | ✓ Good — v1.1 |
+| Shadow-to-glow dark mode | Futuristic feel, maintains hierarchy | ✓ Good — v1.1 |
+| 3-layer button technique | Hardware-accelerated, 60 FPS on mobile | ✓ Good — v1.1 |
+| Playwright + axe-core | Automated WCAG validation in CI | ✓ Good — v1.1 |
+| Two-tier typography | Neobrutalist headings, readable body | ✓ Good — v1.1 |
+| Native HTML accordion (FAQ) | Zero JS, built-in accessibility | ✓ Good — v1.1 |
 
 ---
-*Last updated: 2026-02-09 after v1.1 milestone start*
+*Last updated: 2026-02-10 after v1.1 milestone*
