@@ -2,14 +2,14 @@
 
 ## Milestones
 
-- ✅ **v1.0 MVP** - Phases 1-6 (shipped 2026-01-27)
-- ✅ **v1.1 Design Updates** - Phases 7-11 (shipped 2026-02-10)
-- 🚧 **v1.2 Homepage Refinement** - Phases 12-16 (in progress)
+- v1.0 MVP - Phases 1-6 (shipped 2026-01-27)
+- v1.1 Design Updates - Phases 7-11 (shipped 2026-02-10)
+- v1.2 Homepage Refinement - Phases 12-16 (in progress)
 
 ## Phases
 
 <details>
-<summary>✅ v1.0 MVP (Phases 1-6) - SHIPPED 2026-01-27</summary>
+<summary>v1.0 MVP (Phases 1-6) - SHIPPED 2026-01-27</summary>
 
 Complete lead-generation focused portfolio website with responsive design, blog platform, portfolio showcase, contact form, and Lighthouse 90+ performance.
 
@@ -28,7 +28,7 @@ See: `.planning/milestones/v1.0-ROADMAP.md` for full details.
 </details>
 
 <details>
-<summary>✅ v1.1 Design Updates (Phases 7-11) - SHIPPED 2026-02-10</summary>
+<summary>v1.1 Design Updates (Phases 7-11) - SHIPPED 2026-02-10</summary>
 
 Distinctive neobrutalist design transformation with narrative homepage, WCAG 2.2 AA accessibility compliance, and 3/10 aesthetic density.
 
@@ -37,7 +37,7 @@ Distinctive neobrutalist design transformation with narrative homepage, WCAG 2.2
 **Key accomplishments:**
 - OKLCH neobrutalist design system with shadow-to-glow dark mode transformation
 - Button, Card, and Input primitives with WCAG 2.4.13 focus states
-- Narrative homepage (Solutions → Process → Tech → About → Contact)
+- Narrative homepage (Solutions -> Process -> Tech -> About -> Contact)
 - Projects and Blog with neobrutalist cards and two-tier typography
 - Playwright/axe-core accessibility testing with 98.7% manual audit pass rate
 - FAQ relocated to footer accordion
@@ -46,7 +46,7 @@ See: `.planning/milestones/v1.1-ROADMAP.md` for full details.
 
 </details>
 
-### 🚧 v1.2 Homepage Refinement (In Progress)
+### v1.2 Homepage Refinement (In Progress)
 
 **Milestone Goal:** Improve each homepage section to be more detailed, interesting, and better communicate outcomes and working style with outcome-focused messaging, isometric illustrations, and improved FAQ discoverability.
 
@@ -67,9 +67,9 @@ See: `.planning/milestones/v1.1-ROADMAP.md` for full details.
 **Plans**: 3 plans in 2 waves
 
 Plans:
-- [ ] 12-01-PLAN.md — Migrate icon library (lucide-static to @lucide/astro)
-- [ ] 12-02-PLAN.md — Add isometric CSS utilities and test page
-- [ ] 12-03-PLAN.md — Create visual regression tests for icons
+- [x] 12-01-PLAN.md - Migrate icon library (lucide-static to @lucide/astro)
+- [x] 12-02-PLAN.md - Add isometric CSS utilities and test page
+- [x] 12-03-PLAN.md - Create visual regression tests for icons
 
 #### Phase 13: Hero Section
 
@@ -86,10 +86,10 @@ Plans:
   4. All badge color combinations pass WCAG 2.2 AA contrast checks
   5. Hero passes "5-second test" for clarity
 
-**Plans**: TBD
+**Plans**: 1 plan in 1 wave
 
 Plans:
-- [ ] 13-01: TBD
+- [ ] 13-01-PLAN.md - Create Badge component and update Hero with outcome-focused content
 
 #### Phase 14: Process Section
 
@@ -102,7 +102,7 @@ Plans:
 **Success Criteria** (what must be TRUE):
   1. Each of 5 process steps has 1-2 sentence description explaining what happens
   2. Each process step has an isometric mini-illustration
-  3. All 5 illustrations follow consistent style guide (45° light angle, neobrutalist palette, flat colors)
+  3. All 5 illustrations follow consistent style guide (45 degree light angle, neobrutalist palette, flat colors)
   4. Illustrations optimized (each <20KB) and have descriptive alt text
   5. Illustrations recognizable on mobile (375px viewport)
   6. Largest Contentful Paint (LCP) increase <200ms from baseline
@@ -156,7 +156,7 @@ Plans:
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → ... → 16
+Phases execute in numeric order: 1 -> 2 -> ... -> 16
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
@@ -172,7 +172,7 @@ Phases execute in numeric order: 1 → 2 → ... → 16
 | 10. Projects & Blog | v1.1 | 2/2 | Complete | 2026-02-09 |
 | 11. Testing & Accessibility | v1.1 | 3/3 | Complete | 2026-02-10 |
 | 12. Foundation | v1.2 | 3/3 | Complete | 2026-02-09 |
-| 13. Hero Section | v1.2 | 0/? | Not started | - |
+| 13. Hero Section | v1.2 | 0/1 | Not started | - |
 | 14. Process Section | v1.2 | 0/? | Not started | - |
 | 15. Technology Section | v1.2 | 0/? | Not started | - |
 | 16. FAQ Page | v1.2 | 0/? | Not started | - |
