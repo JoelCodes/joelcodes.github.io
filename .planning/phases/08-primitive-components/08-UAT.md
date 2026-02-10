@@ -1,5 +1,5 @@
 ---
-status: complete
+status: diagnosed
 phase: 08-primitive-components
 source: 08-01-SUMMARY.md, 08-02-SUMMARY.md
 started: 2026-02-09T23:55:00Z
@@ -79,13 +79,23 @@ skipped: 0
   reason: "User reported: The ring is the same size for each button, instead of looking like it fits the button."
   severity: major
   test: 3
-  artifacts: []
-  missing: []
+  root_cause: "CSS outline does not respect border-radius - outlines are always rectangular. Focus ring applied to outer .btn wrapper instead of .btn-front which has rounded corners."
+  artifacts:
+    - path: "src/components/ui/Button.astro"
+      issue: "Lines 97-101: outline on .btn:focus-visible is rectangular, border-radius has no effect on outlines"
+  missing:
+    - "Replace outline with box-shadow on .btn-front to follow button shape"
+  debug_session: ".planning/debug/button-focus-ring-size.md"
 
 - truth: "Card shadows become colored glows in dark mode"
   status: failed
   reason: "User reported: There's no difference in how the shadows look between light and dark mode."
   severity: major
   test: 6
-  artifacts: []
-  missing: []
+  root_cause: "Dark mode rules only change shadow color via --card-shadow variable but never change box-shadow property itself. Shadow stays as offset (6px 6px 0) instead of becoming glow (0 0 20px)."
+  artifacts:
+    - path: "src/components/ui/Card.astro"
+      issue: "Lines 34-47: Missing box-shadow override in dark mode, only changes color variable"
+  missing:
+    - "Add box-shadow: 0 0 20px color-mix(...) in :global(.dark) .card rule"
+  debug_session: ".planning/debug/card-dark-mode-glow.md"
