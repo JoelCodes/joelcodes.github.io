@@ -2,6 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import DesignSystemNav from '../components/design-system/DesignSystemNav.astro';
 import TokenSwatch from '../components/design-system/TokenSwatch.astro';
+import ComponentShowcase from '../components/design-system/ComponentShowcase.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+import Input from '../components/ui/Input.astro';
+import Badge from '../components/ui/Badge.astro';
 ---
 
 <BaseLayout title="Design System | Joel Shinness" description="Internal design system reference for Joel and AI coding agents">
@@ -375,12 +380,91 @@ import TokenSwatch from '../components/design-system/TokenSwatch.astro';
 
           <!-- Button Component -->
           <div id="component-button" class="mb-12">
-            <h3 class="font-heading text-2xl font-semibold mb-4">
-              Button
-            </h3>
-            <p class="text-text-muted-light dark:text-text-muted-dark mb-4">
-              Button component documentation will be added here.
-            </p>
+            <ComponentShowcase
+              title="Button"
+              description="Neobrutalist buttons with 2-layer shadow effect. Supports three color variants and three sizes."
+              code={`<Button variant="yellow">Primary Action</Button>
+<Button variant="turquoise" size="lg">Large Button</Button>
+<Button href="/contact" variant="magenta">Link Button</Button>`}
+            >
+              <!-- Color Variants -->
+              <div class="w-full mb-6">
+                <h4 class="font-heading text-lg font-semibold mb-3">Color Variants</h4>
+                <div class="flex flex-wrap gap-4">
+                  <Button variant="yellow">Yellow (Default)</Button>
+                  <Button variant="turquoise">Turquoise</Button>
+                  <Button variant="magenta">Magenta</Button>
+                </div>
+              </div>
+
+              <!-- Size Variants -->
+              <div class="w-full mb-6">
+                <h4 class="font-heading text-lg font-semibold mb-3">Size Variants</h4>
+                <div class="flex flex-wrap gap-4 items-center">
+                  <Button size="sm" variant="yellow">Small</Button>
+                  <Button size="md" variant="turquoise">Medium (Default)</Button>
+                  <Button size="lg" variant="magenta">Large</Button>
+                </div>
+              </div>
+
+              <!-- Link Variant -->
+              <div class="w-full">
+                <h4 class="font-heading text-lg font-semibold mb-3">As Link</h4>
+                <Button href="#component-button" variant="turquoise">Link Button</Button>
+              </div>
+            </ComponentShowcase>
+
+            <!-- Props Table -->
+            <div class="mt-6 overflow-x-auto">
+              <h4 class="font-heading text-lg font-semibold mb-3">Props</h4>
+              <table class="w-full border-3 border-text-light dark:border-text-dark">
+                <thead class="bg-turquoise/10 dark:bg-turquoise-dark/10">
+                  <tr>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Prop</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Type</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Default</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Options</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">variant</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">string</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">'yellow'</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">'yellow' | 'turquoise' | 'magenta'</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">size</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">string</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">'md'</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">'sm' | 'md' | 'lg'</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">href</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">string</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">undefined</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">Any valid URL (renders as &lt;a&gt; instead of &lt;button&gt;)</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 font-mono text-sm">type</td>
+                    <td class="px-4 py-2 text-sm">string</td>
+                    <td class="px-4 py-2 font-mono text-sm">'button'</td>
+                    <td class="px-4 py-2 font-mono text-sm">'button' | 'submit' | 'reset'</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- States Documentation -->
+            <div class="mt-6">
+              <h4 class="font-heading text-lg font-semibold mb-3">Interactive States</h4>
+              <ul class="list-disc list-inside space-y-2 text-text-muted-light dark:text-text-muted-dark">
+                <li><strong>Hover:</strong> Button lifts up (-2px), shadow grows by 2px</li>
+                <li><strong>Active:</strong> Button presses down (+2px), shadow shrinks to 2px</li>
+                <li><strong>Focus:</strong> Double ring technique (WCAG 2.4.13 compliant) - 2px gap + 4px ring</li>
+                <li><strong>Disabled:</strong> Reduced opacity (not shown in demo, use disabled attribute)</li>
+              </ul>
+            </div>
           </div>
 
           <!-- Card Component -->
