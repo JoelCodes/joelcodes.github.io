@@ -113,11 +113,12 @@ Plans:
   3. Dark mode works correctly across all pages and components
   4. Density audit confirms 3/10 constraint enforced per section
   5. Lighthouse CI validation achieves >=90% across all metrics
-**Plans**: 2 plans
+**Plans**: 3 plans
 
 Plans:
 - [x] 11-01-PLAN.md — Set up automated accessibility testing with Playwright and axe-core, verify Lighthouse CI baseline
 - [x] 11-02-PLAN.md — Execute manual accessibility audit (keyboard, screen reader, color contrast, dark mode, performance, density)
+- [ ] 11-03-PLAN.md — Fix WCAG color contrast violations (yellow stats, turquoise email link, dark mode filter buttons)
 
 ### v1.2 Enhancements (Planned)
 
@@ -142,4 +143,4 @@ Phases execute in numeric order: 7 -> 8 -> 9 -> 10 -> 11
 | 8. Primitive Components | v1.1 | 3/3 | Complete | 2026-02-09 |
 | 9. Homepage & Navigation | v1.1 | 4/4 | Complete | 2026-02-09 |
 | 10. Projects & Blog | v1.1 | 2/2 | Complete | 2026-02-09 |
-| 11. Testing & Accessibility | v1.1 | 2/2 | Complete | 2026-02-10 |
+| 11. Testing & Accessibility | v1.1 | 2/3 | In Progress | - |
