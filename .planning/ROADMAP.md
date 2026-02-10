@@ -3,7 +3,7 @@
 ## Milestones
 
 - **v1.0 MVP** - Phases 1-6 (shipped 2026-01-27)
-- **v1.1 Design Updates** - Phases 7-11 (in progress)
+- **v1.1 Design Updates** - Phases 7-11 (shipped 2026-02-10)
 - **v1.2 Enhancements** - Future phases (planned)
 
 ## Phases
@@ -116,8 +116,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 11-01-PLAN.md — Set up automated accessibility testing with Playwright and axe-core, verify Lighthouse CI baseline
-- [ ] 11-02-PLAN.md — Execute manual accessibility audit (keyboard, screen reader, color contrast, dark mode, performance, density)
+- [x] 11-01-PLAN.md — Set up automated accessibility testing with Playwright and axe-core, verify Lighthouse CI baseline
+- [x] 11-02-PLAN.md — Execute manual accessibility audit (keyboard, screen reader, color contrast, dark mode, performance, density)
 
 ### v1.2 Enhancements (Planned)
 
@@ -142,4 +142,4 @@ Phases execute in numeric order: 7 -> 8 -> 9 -> 10 -> 11
 | 8. Primitive Components | v1.1 | 3/3 | Complete | 2026-02-09 |
 | 9. Homepage & Navigation | v1.1 | 4/4 | Complete | 2026-02-09 |
 | 10. Projects & Blog | v1.1 | 2/2 | Complete | 2026-02-09 |
-| 11. Testing & Accessibility | v1.1 | 0/2 | Not started | - |
+| 11. Testing & Accessibility | v1.1 | 2/2 | Complete | 2026-02-10 |
