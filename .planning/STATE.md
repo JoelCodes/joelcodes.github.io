@@ -12,7 +12,7 @@ See: .planning/PROJECT.md (updated 2026-02-10)
 Phase: 18 of 22 (Component Consistency Audit)
 Plan: 0 of ? in current phase
 Status: Ready to plan
-Last activity: 2026-02-10 — Completed Phase 17 (Design System Reference Page)
+Last activity: 2026-02-10 — Completed 17-05-PLAN.md (UAT Gap Closure)
 
 Progress: [█████████████████████████░] 77% (17 phases complete, 5 phases remaining)
 
@@ -30,7 +30,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 51 (v1.0: 23, v1.1: 14, v1.2: 10, v1.3: 4)
+- Total plans completed: 52 (v1.0: 23, v1.1: 14, v1.2: 10, v1.3: 5)
 - Average duration: ~2-5 min/plan (recent trend)
 - Total execution time: ~5 days across 3 milestones
 
@@ -58,6 +58,8 @@ See `.planning/MILESTONES.md` for full milestone details.
 Key decisions are logged in PROJECT.md Key Decisions table.
 
 Recent decisions affecting v1.3:
+- **17-05**: Badge accent color strategy — Use bright accent colors for badges (decorative displays) vs muted text variants (body text)
+- **17-05**: CodeBlock padding implementation — Scoped <style> block keeps styling localized to component
 - **17-04**: JSON API endpoint — /design-system.json as Astro GET endpoint for machine-readable design tokens
 - **17-04**: Visual utility examples — Live demos with colored boxes showing shadow/glow/rotate effects
 - **17-04**: CLAUDE.md design system section — AI agent instructions to check design system before creating new UI
@@ -91,10 +93,10 @@ None yet for v1.3.
 ## Session Continuity
 
 Last session: 2026-02-10
-Stopped at: Phase 17 complete (all 4 plans verified)
+Stopped at: Completed 17-05-PLAN.md (UAT Gap Closure - 3 visual fixes)
 Resume file: None
 Next action: Plan Phase 18 (Component Consistency Audit)
 
 ---
 *State initialized: 2026-01-26*
-*Last updated: 2026-02-10 (Phase 17 complete — Design System Reference Page with 4 plans)*
+*Last updated: 2026-02-10 (Completed 17-05: UAT Gap Closure — Phase 17 fully complete)*
