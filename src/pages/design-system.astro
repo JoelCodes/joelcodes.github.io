@@ -177,9 +177,194 @@ import TokenSwatch from '../components/design-system/TokenSwatch.astro';
           <h2 class="font-heading text-3xl font-bold uppercase mb-6 border-l-4 border-turquoise dark:border-turquoise-dark pl-4">
             Typography
           </h2>
-          <p class="text-text-muted-light dark:text-text-muted-dark mb-4">
-            Typography tokens will be documented here.
+          <p class="text-lg leading-relaxed mb-6 text-text-muted-light dark:text-text-muted-dark">
+            Two-tier typography system using <strong>Bricolage Grotesque</strong> for headings and <strong>DM Sans</strong> for body text. All sizes follow a 1.25 ratio scale.
           </p>
+
+          <!-- Font Specimens -->
+          <h3 id="typography-families" class="font-heading text-xl font-semibold mb-4 mt-8">Font Families</h3>
+
+          <!-- Bricolage Grotesque -->
+          <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-6 mb-6 bg-bg-light dark:bg-bg-dark shadow-neo-turquoise dark:shadow-neo-turquoise">
+            <h4 class="font-heading text-lg font-semibold mb-3">Bricolage Grotesque</h4>
+            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4">
+              CSS Variable: <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">var(--font-heading)</code>
+            </p>
+            <div class="space-y-3 mb-4">
+              <p class="font-heading text-2xl">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+              <p class="font-heading text-2xl">abcdefghijklmnopqrstuvwxyz</p>
+              <p class="font-heading text-2xl">0123456789</p>
+            </div>
+            <div class="space-y-2">
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-1">Weight Examples:</p>
+              <p class="font-heading text-lg font-semibold">Weight 600 (Semibold) — H3, H4</p>
+              <p class="font-heading text-lg font-bold">Weight 700 (Bold) — H2</p>
+              <p class="font-heading text-lg" style="font-weight: 800;">Weight 800 (Extrabold) — H1, Buttons, Labels</p>
+            </div>
+            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mt-4">
+              <strong>Usage:</strong> All headings (H1-H4), buttons, labels, section titles
+            </p>
+          </div>
+
+          <!-- DM Sans -->
+          <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-6 mb-6 bg-bg-light dark:bg-bg-dark shadow-neo-turquoise dark:shadow-neo-turquoise">
+            <h4 class="font-heading text-lg font-semibold mb-3">DM Sans</h4>
+            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4">
+              CSS Variable: <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">var(--font-body)</code>
+            </p>
+            <div class="space-y-3 mb-4">
+              <p class="font-body text-2xl">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+              <p class="font-body text-2xl">abcdefghijklmnopqrstuvwxyz</p>
+              <p class="font-body text-2xl">0123456789</p>
+            </div>
+            <div class="space-y-2">
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-1">Weight Examples:</p>
+              <p class="font-body text-lg font-normal">Weight 400 (Regular) — Body text, paragraphs</p>
+              <p class="font-body text-lg font-medium">Weight 500 (Medium) — Emphasized text</p>
+              <p class="font-body text-lg font-semibold">Weight 600 (Semibold) — Strong emphasis</p>
+            </div>
+            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mt-4">
+              <strong>Usage:</strong> Body text, paragraphs, form inputs, navigation, captions
+            </p>
+          </div>
+
+          <!-- Type Scale -->
+          <h3 id="typography-scale" class="font-heading text-xl font-semibold mb-4 mt-8">Type Scale</h3>
+          <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4">
+            1.25 ratio scale for consistent vertical rhythm.
+          </p>
+
+          <div class="space-y-4">
+            <!-- XS -->
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <div class="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 items-center">
+                <div>
+                  <p class="font-heading font-semibold text-sm">xs</p>
+                  <p class="text-xs text-text-muted-light dark:text-text-muted-dark">0.75rem (12px)</p>
+                </div>
+                <p class="text-xs">The quick brown fox jumps over the lazy dog</p>
+              </div>
+            </div>
+
+            <!-- SM -->
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <div class="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 items-center">
+                <div>
+                  <p class="font-heading font-semibold text-sm">sm</p>
+                  <p class="text-xs text-text-muted-light dark:text-text-muted-dark">0.875rem (14px)</p>
+                </div>
+                <p class="text-sm">The quick brown fox jumps over the lazy dog</p>
+              </div>
+            </div>
+
+            <!-- Base -->
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <div class="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 items-center">
+                <div>
+                  <p class="font-heading font-semibold text-sm">base</p>
+                  <p class="text-xs text-text-muted-light dark:text-text-muted-dark">1rem (16px)</p>
+                </div>
+                <p class="text-base">The quick brown fox jumps over the lazy dog</p>
+              </div>
+            </div>
+
+            <!-- LG -->
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <div class="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 items-center">
+                <div>
+                  <p class="font-heading font-semibold text-sm">lg</p>
+                  <p class="text-xs text-text-text-muted-light dark:text-text-muted-dark">1.125rem (18px)</p>
+                </div>
+                <p class="text-lg">The quick brown fox jumps over the lazy dog</p>
+              </div>
+            </div>
+
+            <!-- XL -->
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <div class="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 items-center">
+                <div>
+                  <p class="font-heading font-semibold text-sm">xl</p>
+                  <p class="text-xs text-text-muted-light dark:text-text-muted-dark">1.25rem (20px)</p>
+                </div>
+                <p class="text-xl">The quick brown fox jumps over the lazy dog</p>
+              </div>
+            </div>
+
+            <!-- 2XL -->
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <div class="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 items-center">
+                <div>
+                  <p class="font-heading font-semibold text-sm">2xl</p>
+                  <p class="text-xs text-text-muted-light dark:text-text-muted-dark">1.5rem (24px)</p>
+                </div>
+                <p class="text-2xl">The quick brown fox jumps over the lazy dog</p>
+              </div>
+            </div>
+
+            <!-- 3XL -->
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <div class="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 items-center">
+                <div>
+                  <p class="font-heading font-semibold text-sm">3xl</p>
+                  <p class="text-xs text-text-muted-light dark:text-text-muted-dark">1.875rem (30px)</p>
+                </div>
+                <p class="text-3xl">The quick brown fox jumps over the lazy dog</p>
+              </div>
+            </div>
+
+            <!-- 4XL -->
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <div class="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 items-center">
+                <div>
+                  <p class="font-heading font-semibold text-sm">4xl</p>
+                  <p class="text-xs text-text-muted-light dark:text-text-muted-dark">2.25rem (36px)</p>
+                </div>
+                <p class="text-4xl">The quick brown fox jumps over the lazy dog</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Font Weight Tokens -->
+          <h3 class="font-heading text-xl font-semibold mb-4 mt-8">Font Weight Tokens</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">--font-weight-h1: 800</code>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark mt-2">Extrabold — H1 headings</p>
+            </div>
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">--font-weight-h2: 700</code>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark mt-2">Bold — H2 headings</p>
+            </div>
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">--font-weight-h3: 600</code>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark mt-2">Semibold — H3 headings</p>
+            </div>
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">--font-weight-h4: 500</code>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark mt-2">Medium — H4 headings</p>
+            </div>
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">--font-weight-body: 400</code>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark mt-2">Regular — Body text</p>
+            </div>
+          </div>
+
+          <!-- Line Height Tokens -->
+          <h3 class="font-heading text-xl font-semibold mb-4 mt-8">Line Height Tokens</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">--leading-tight: 1.25</code>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark mt-2">Headings, labels</p>
+            </div>
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">--leading-normal: 1.5</code>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark mt-2">Body text default</p>
+            </div>
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">--leading-relaxed: 1.75</code>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark mt-2">Long-form content</p>
+            </div>
+          </div>
         </section>
 
         <!-- Components Section -->
