@@ -1,20 +1,20 @@
 ---
 // Hero component: Problem-first value proposition with CTA
+import Button from './ui/Button.astro';
 ---
 
-<section class="hero min-h-[80vh] flex items-center justify-center px-6 py-12">
+<section id="hero" class="hero min-h-[80vh] flex items-center justify-center px-6 py-24 md:py-32">
   <div class="container max-w-4xl mx-auto text-center">
-    <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-text-light dark:text-text-dark">
-      Tired of off-the-shelf tools that don't fit?
-    </h1>
+    <div class="border-[3px] border-text-light dark:border-text-dark p-6 md:p-8 inline-block shadow-neo-yellow mb-8">
+      <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase text-text-light dark:text-text-dark">
+        Tired of off-the-shelf tools that don't fit?
+      </h1>
+    </div>
     <p class="font-body text-xl md:text-2xl mb-8 text-text-muted-light dark:text-text-muted-dark max-w-2xl mx-auto">
       Custom web apps, automation, and AI integration for small businesses that need exactly what they need.
     </p>
-    <a
-      href="/contact"
-      class="inline-block font-heading font-semibold text-lg px-8 py-4 bg-accent-yellow hover:bg-accent-yellow-hover text-text-light rounded-lg transition-colors duration-200"
-    >
+    <Button variant="yellow" size="lg" href="/contact">
       Start a Conversation
-    </a>
+    </Button>
   </div>
 </section>
