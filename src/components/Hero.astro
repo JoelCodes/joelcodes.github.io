@@ -1,18 +1,39 @@
 ---
-// Hero component: Problem-first value proposition with CTA
+// Hero component: Outcome-focused value proposition with trust badges
 import Button from './ui/Button.astro';
+import Badge from './ui/Badge.astro';
 ---
 
 <section id="hero" class="hero min-h-[80vh] flex items-center justify-center px-6 py-24 md:py-32">
   <div class="container max-w-4xl mx-auto text-center">
     <div class="border-[3px] border-text-light dark:border-text-dark p-6 md:p-8 inline-block shadow-neo-yellow mb-8">
       <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase text-text-light dark:text-text-dark">
-        Tired of off-the-shelf tools that don't fit?
+        Save 500+ hours on repetitive tasks
       </h1>
     </div>
     <p class="font-body text-xl md:text-2xl mb-8 text-text-muted-light dark:text-text-muted-dark max-w-2xl mx-auto">
-      Custom web apps, automation, and AI integration for small businesses that need exactly what they need.
+      Custom automation that works exactly how your team works
     </p>
+    <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-4 sm:gap-6 mb-8">
+      <Badge
+        label="Time saved by clients"
+        value="500+ hours"
+        description="saved per year"
+        variant="yellow"
+      />
+      <Badge
+        label="Customer satisfaction rate"
+        value="100%"
+        description="satisfied clients"
+        variant="turquoise"
+      />
+      <Badge
+        label="Projects delivered"
+        value="12+"
+        description="projects delivered"
+        variant="magenta"
+      />
+    </div>
     <Button variant="yellow" size="lg" href="/contact">
       Start a Conversation
     </Button>
