@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { Loader2 } from 'lucide-static';
+import { Loader2 } from '@lucide/astro';
 ---
 
 <BaseLayout title="Contact | Joel Shinness" description="Get in touch with Joel Shinness for custom software development, automation, or AI integration projects.">
@@ -106,7 +106,7 @@ import { Loader2 } from 'lucide-static';
         >
           <span class="button-text">Send Message</span>
           <span class="loading-icon hidden">
-            <Fragment set:html={Loader2} />
+            <Loader2 size={20} />
           </span>
         </button>
 
