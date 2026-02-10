@@ -1,0 +1,121 @@
+---
+import { Code } from 'astro:components';
+
+interface Props {
+  code: string;
+  lang?: string;
+  title?: string;
+}
+
+const { code, lang = 'astro', title } = Astro.props;
+---
+
+<div class="code-block-wrapper border-3 border-text-light dark:border-text-dark shadow-neo-turquoise rounded-lg overflow-hidden bg-bg-light dark:bg-bg-dark mb-6">
+  {title && (
+    <div class="px-4 py-2 border-b-3 border-text-light dark:border-text-dark bg-turquoise/10 dark:bg-turquoise-dark/10">
+      <p class="font-heading font-semibold text-sm uppercase tracking-wide">
+        {title}
+      </p>
+    </div>
+  )}
+
+  <div class="p-4">
+    <div class="flex gap-2 mb-3">
+      <button
+        class="toggle-btn px-4 py-2 text-sm font-semibold uppercase bg-yellow hover:bg-yellow-hover dark:bg-yellow-dark dark:hover:bg-yellow-hover border-3 border-text-light dark:border-text-dark shadow-neo-yellow transition-all hover:shadow-neo-yellow-hover"
+        aria-expanded="false"
+        aria-controls={`code-content-${Math.random().toString(36).substring(2, 9)}`}
+      >
+        View Code
+      </button>
+      <button
+        class="copy-btn px-4 py-2 text-sm font-semibold uppercase bg-turquoise hover:bg-turquoise-hover dark:bg-turquoise-dark dark:hover:bg-turquoise-hover border-3 border-text-light dark:border-text-dark shadow-neo-turquoise transition-all hover:shadow-neo-turquoise-hover"
+        aria-label="Copy code to clipboard"
+      >
+        Copy
+      </button>
+    </div>
+
+    <div
+      class="code-content"
+      style="display: none;"
+      id={`code-content-${Math.random().toString(36).substring(2, 9)}`}
+    >
+      <Code code={code} lang={lang} theme="github-dark" />
+    </div>
+
+    <noscript>
+      <div class="mt-3">
+        <Code code={code} lang={lang} theme="github-dark" />
+      </div>
+    </noscript>
+  </div>
+</div>
+
+<script>
+  // Function to initialize code blocks
+  function initCodeBlocks() {
+    const codeBlocks = document.querySelectorAll('.code-block-wrapper');
+
+    codeBlocks.forEach(block => {
+      const toggleBtn = block.querySelector('.toggle-btn');
+      const copyBtn = block.querySelector('.copy-btn');
+      const codeContent = block.querySelector('.code-content');
+      const codeElement = codeContent?.querySelector('code');
+
+      if (!toggleBtn || !copyBtn || !codeContent) return;
+
+      // Toggle code visibility
+      toggleBtn.addEventListener('click', () => {
+        const isHidden = codeContent.style.display === 'none';
+
+        if (isHidden) {
+          codeContent.style.display = 'block';
+          toggleBtn.textContent = 'Hide Code';
+          toggleBtn.setAttribute('aria-expanded', 'true');
+        } else {
+          codeContent.style.display = 'none';
+          toggleBtn.textContent = 'View Code';
+          toggleBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Copy code to clipboard
+      copyBtn.addEventListener('click', async () => {
+        const codeText = codeElement?.textContent || '';
+
+        try {
+          await navigator.clipboard.writeText(codeText);
+
+          // Success feedback
+          const originalText = copyBtn.textContent;
+          copyBtn.textContent = 'Copied!';
+          copyBtn.classList.add('bg-green-500', 'dark:bg-green-600');
+          copyBtn.classList.remove('bg-turquoise', 'dark:bg-turquoise-dark');
+
+          // Reset after 2 seconds
+          setTimeout(() => {
+            copyBtn.textContent = originalText;
+            copyBtn.classList.remove('bg-green-500', 'dark:bg-green-600');
+            copyBtn.classList.add('bg-turquoise', 'dark:bg-turquoise-dark');
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy code:', err);
+          // Error feedback
+          const originalText = copyBtn.textContent;
+          copyBtn.textContent = 'Failed';
+
+          setTimeout(() => {
+            copyBtn.textContent = originalText;
+          }, 2000);
+        }
+      });
+    });
+  }
+
+  // Initialize on page load
+  initCodeBlocks();
+
+  // Re-initialize after Astro page transitions (if using view transitions)
+  document.addEventListener('astro:page-load', initCodeBlocks);
+</script>
