@@ -186,6 +186,49 @@ section[id] {
   .iso-hover-glow:hover {
     box-shadow: 0 0 20px currentColor;
   }
+
+  /* Isometric Shadow Utilities (light mode: hard offset, dark mode: soft glow) */
+
+  /* Small shadow (3px offset) */
+  .iso-shadow-sm {
+    box-shadow: 3px 3px 0 currentColor;
+  }
+
+  /* Standard shadow (5px offset) */
+  .iso-shadow {
+    box-shadow: 5px 5px 0 currentColor;
+  }
+
+  /* Large shadow (8px offset) */
+  .iso-shadow-lg {
+    box-shadow: 8px 8px 0 currentColor;
+  }
+
+  /* Dark mode: transform shadows to glows */
+  .dark .iso-shadow-sm {
+    box-shadow: 0 0 15px color-mix(in oklch, currentColor 20%, transparent);
+  }
+
+  .dark .iso-shadow {
+    box-shadow: 0 0 20px color-mix(in oklch, currentColor 40%, transparent);
+  }
+
+  .dark .iso-shadow-lg {
+    box-shadow: 0 0 30px color-mix(in oklch, currentColor 60%, transparent);
+  }
+
+  /* Explicit glow utilities (always glow, regardless of theme) */
+  .iso-glow-subtle {
+    box-shadow: 0 0 15px color-mix(in oklch, currentColor 20%, transparent);
+  }
+
+  .iso-glow {
+    box-shadow: 0 0 20px color-mix(in oklch, currentColor 40%, transparent);
+  }
+
+  .iso-glow-strong {
+    box-shadow: 0 0 30px color-mix(in oklch, currentColor 60%, transparent);
+  }
 }
 
 /* Project card filtering animations */
