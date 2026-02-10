@@ -1,5 +1,11 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/global.css';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import SEO from '../components/SEO.astro';
+
+const title = 'FAQ';
+const description = 'Frequently asked questions about working with Joel Shinness';
 
 // FAQ data extracted from Footer.astro
 const faqs = [
@@ -40,30 +46,76 @@ const faqSchema = {
 };
 ---
 
-<BaseLayout title="FAQ" description="Frequently asked questions about working with Joel Shinness">
-  <Fragment slot="head">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO: meta tags, OpenGraph, Twitter Card, JSON-LD -->
+    <SEO title={title} description={description} />
+
+    <!-- FAQPage JSON-LD schema -->
     <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
-  </Fragment>
 
-  <section class="py-16 px-4">
-    <div class="container mx-auto max-w-3xl">
-      <h1 class="font-heading text-4xl md:text-5xl font-bold mb-12 text-text-light dark:text-text-dark text-center">
-        Frequently Asked Questions
-      </h1>
+    <!-- Google Fonts - preconnect for initial connection, dns-prefetch as fallback -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <!-- Non-render-blocking font loading with print media swap -->
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:opsz,wght@9..40,100..900&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:opsz,wght@9..40,100..900&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:opsz,wght@9..40,100..900&display=swap" rel="stylesheet" />
+    </noscript>
 
-      <div class="flex flex-col gap-4">
-        {faqs.map(faq => (
-          <details class="group border-[3px] border-text-light dark:border-text-dark rounded p-4">
-            <summary class="font-heading font-bold cursor-pointer list-none flex items-center justify-between text-text-light dark:text-text-dark">
-              <span>{faq.question}</span>
-              <span class="text-2xl transition-transform group-open:rotate-45">+</span>
-            </summary>
-            <div class="mt-4 pt-4 border-t-[3px] border-text-light/20 dark:border-text-dark/20 text-text-muted-light dark:text-text-muted-dark leading-relaxed">
-              {faq.answer}
-            </div>
-          </details>
-        ))}
-      </div>
-    </div>
-  </section>
-</BaseLayout>
+    <!-- Dark mode script - runs before body renders to prevent FOUC -->
+    <script is:inline>
+      document.documentElement.classList.toggle(
+        "dark",
+        localStorage.theme === "dark" ||
+          (!("theme" in localStorage) &&
+           window.matchMedia("(prefers-color-scheme: dark)").matches)
+      );
+    </script>
+  </head>
+  <body class="font-body bg-bg-light dark:bg-bg-dark text-text-light dark:text-text-dark min-h-screen flex flex-col">
+    <Header />
+    <main class="flex-grow">
+      <section class="py-16 px-4">
+        <div class="container mx-auto max-w-3xl">
+          <h1 class="font-heading text-4xl md:text-5xl font-bold mb-12 text-text-light dark:text-text-dark text-center">
+            Frequently Asked Questions
+          </h1>
+
+          <div class="flex flex-col gap-4">
+            {faqs.map(faq => (
+              <details class="group border-[3px] border-text-light dark:border-text-dark rounded p-4">
+                <summary class="font-heading font-bold cursor-pointer list-none flex items-center justify-between text-text-light dark:text-text-dark">
+                  <span>{faq.question}</span>
+                  <span class="text-2xl transition-transform group-open:rotate-45">+</span>
+                </summary>
+                <div class="mt-4 pt-4 border-t-[3px] border-text-light/20 dark:border-text-dark/20 text-text-muted-light dark:text-text-muted-dark leading-relaxed">
+                  {faq.answer}
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>
