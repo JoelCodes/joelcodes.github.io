@@ -1,0 +1,116 @@
+---
+// Design system navigation sidebar
+---
+
+<nav class="toc hidden lg:block" aria-label="Design system navigation">
+  <p class="font-heading font-semibold text-sm uppercase tracking-wide mb-4 text-text-muted-light dark:text-text-muted-dark">
+    Sections
+  </p>
+
+  <ul class="space-y-4">
+    <!-- Introduction -->
+    <li>
+      <a href="#introduction" class="toc-2">
+        Introduction
+      </a>
+    </li>
+
+    <!-- Colors -->
+    <li>
+      <a href="#colors" class="toc-2">
+        Colors
+      </a>
+    </li>
+
+    <!-- Typography -->
+    <li>
+      <a href="#typography" class="toc-2">
+        Typography
+      </a>
+    </li>
+
+    <!-- Components -->
+    <li>
+      <div class="toc-2 font-semibold text-text-light dark:text-text-dark mb-1">
+        Components
+      </div>
+      <ul class="space-y-1 pl-4">
+        <li>
+          <a href="#component-button" class="toc-3">
+            Button
+          </a>
+        </li>
+        <li>
+          <a href="#component-card" class="toc-3">
+            Card
+          </a>
+        </li>
+        <li>
+          <a href="#component-input" class="toc-3">
+            Input
+          </a>
+        </li>
+        <li>
+          <a href="#component-badge" class="toc-3">
+            Badge
+          </a>
+        </li>
+      </ul>
+    </li>
+
+    <!-- Utilities -->
+    <li>
+      <div class="toc-2 font-semibold text-text-light dark:text-text-dark mb-1">
+        Utilities
+      </div>
+      <ul class="space-y-1 pl-4">
+        <li>
+          <a href="#utility-iso-shadow" class="toc-3">
+            Isometric Shadow
+          </a>
+        </li>
+        <li>
+          <a href="#utility-iso-glow" class="toc-3">
+            Isometric Glow
+          </a>
+        </li>
+        <li>
+          <a href="#utility-iso-rotate" class="toc-3">
+            Isometric Rotate
+          </a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+<script>
+  // Active section highlighting (reuses TOC pattern from blog)
+  function initDesignSystemNav() {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          const id = entry.target.getAttribute('id');
+          const navLink = document.querySelector(`.toc a[href="#${id}"]`);
+
+          if (entry.isIntersecting && navLink) {
+            document.querySelectorAll('.toc a').forEach(link => link.classList.remove('active'));
+            navLink.classList.add('active');
+          }
+        });
+      },
+      { rootMargin: '-80px 0px -80% 0px' }
+    );
+
+    // Observe all sections with IDs
+    document.querySelectorAll('section[id], div[id^="component-"], div[id^="utility-"]').forEach(section => {
+      observer.observe(section);
+    });
+  }
+
+  // Initialize on page load
+  initDesignSystemNav();
+
+  // Re-initialize after Astro page transitions
+  document.addEventListener('astro:page-load', initDesignSystemNav);
+</script>
