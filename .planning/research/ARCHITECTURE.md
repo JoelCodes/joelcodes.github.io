@@ -1,522 +1,477 @@
-# Architecture Research: Neobrutalist Design System
+# Architecture Research: Homepage Refinements Integration
 
-**Domain:** Neobrutalist design system for portfolio/blog site
+**Domain:** Homepage enhancement for existing neobrutalist portfolio site
 **Researched:** 2026-02-09
 **Confidence:** HIGH
 
-## Standard Architecture
-
-### System Overview
+## Existing Architecture Overview
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    Design Token Layer                        │
-│         (Tailwind 4 @theme directive in global.css)          │
+│                      BaseLayout.astro                        │
+│  (HTML shell, SEO, fonts, dark mode, Header/Footer)         │
 ├─────────────────────────────────────────────────────────────┤
-│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐        │
-│  │  Colors  │ │ Shadows  │ │ Borders  │ │ Typography│       │
-│  │  --color │ │ --shadow │ │ --radius │ │  --font   │       │
-│  └────┬─────┘ └────┬─────┘ └────┬─────┘ └────┬─────┘        │
-│       └────────────┴─────────────┴────────────┘              │
+│                        Header.astro                          │
+│  (Sticky nav, dark mode toggle, mobile menu)                 │
 ├─────────────────────────────────────────────────────────────┤
-│                   Component Layer                            │
-│      (Astro components using Tailwind utilities)             │
+│                          MAIN                                │
+│  ┌─────────────────────────────────────────────────────┐    │
+│  │              src/pages/index.astro                   │    │
+│  │  (Imports and stacks homepage section components)   │    │
+│  │                                                       │    │
+│  │  ┌─────────────────────────────────────────────┐    │    │
+│  │  │ Hero.astro                                   │    │    │
+│  │  │ - Problem-first value prop                   │    │    │
+│  │  │ - Uses Button.astro                          │    │    │
+│  │  └─────────────────────────────────────────────┘    │    │
+│  │                                                       │    │
+│  │  ┌─────────────────────────────────────────────┐    │    │
+│  │  │ Services.astro                               │    │    │
+│  │  │ - 3-card service overview                    │    │    │
+│  │  │ - Uses Card.astro (yellow)                   │    │    │
+│  │  └─────────────────────────────────────────────┘    │    │
+│  │                                                       │    │
+│  │  ┌─────────────────────────────────────────────┐    │    │
+│  │  │ Process.astro                                │    │    │
+│  │  │ - 5-step vertical timeline                   │    │    │
+│  │  │ - "You/Joel" collaborative format            │    │    │
+│  │  └─────────────────────────────────────────────┘    │    │
+│  │                                                       │    │
+│  │  ┌─────────────────────────────────────────────┐    │    │
+│  │  │ homepage/TechSection.astro                   │    │    │
+│  │  │ - 4-card tech stack grid                     │    │    │
+│  │  │ - Uses Card.astro (magenta)                  │    │    │
+│  │  └─────────────────────────────────────────────┘    │    │
+│  │                                                       │    │
+│  │  ┌─────────────────────────────────────────────┐    │    │
+│  │  │ About.astro                                  │    │    │
+│  │  └─────────────────────────────────────────────┘    │    │
+│  │                                                       │    │
+│  │  ┌─────────────────────────────────────────────┐    │    │
+│  │  │ homepage/ContactSection.astro                │    │    │
+│  │  └─────────────────────────────────────────────┘    │    │
+│  └─────────────────────────────────────────────────────┘    │
 ├─────────────────────────────────────────────────────────────┤
-│  ┌───────────┐  ┌───────────┐  ┌───────────┐                │
-│  │  Button   │  │   Card    │  │   Form    │                │
-│  │  Border   │  │  Shadow   │  │   Input   │                │
-│  │  Hover    │  │  Layout   │  │  Focus    │                │
-│  └─────┬─────┘  └─────┬─────┘  └─────┬─────┘                │
-│        │               │               │                     │
-├────────┴───────────────┴───────────────┴─────────────────────┤
-│                    Page Layer                                │
-│       (Existing layouts + pages consume components)          │
-├─────────────────────────────────────────────────────────────┤
-│  ┌──────────────────────────────────────────────────────┐   │
-│  │            BaseLayout.astro                           │   │
-│  │    (Dark mode toggle, font loading, SEO)              │   │
-│  └──────────────────────────────────────────────────────┘   │
+│                       Footer.astro                           │
+│  (Copyright, social links, FAQ accordion)                    │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Component Responsibilities
+### Component Location Patterns
 
-| Component | Responsibility | Typical Implementation |
-|-----------|----------------|------------------------|
-| **Design Tokens** | Define color, spacing, shadow, border values | Tailwind 4 `@theme` directive with CSS custom properties |
-| **Primitive Components** | Button, Card, Input with neobrutalist styling | Astro components with Tailwind utility classes |
-| **Layout Components** | Header, Footer, Hero with updated styling | Modified existing components with new design tokens |
-| **Theme Provider** | Dark mode toggle, localStorage persistence | Inline script in BaseLayout.astro (existing pattern) |
+| Pattern | Examples | Rationale |
+|---------|----------|-----------|
+| **Root components** | `Hero.astro`, `Services.astro`, `Process.astro`, `About.astro` | Reusable across multiple pages, generic |
+| **Page-specific** | `homepage/TechSection.astro`, `homepage/ContactSection.astro` | Only used on homepage, more specific |
+| **UI primitives** | `ui/Card.astro`, `ui/Button.astro`, `ui/Input.astro` | Reusable building blocks |
+| **Layout** | `layout/Header.astro`, `layout/Footer.astro`, `layout/MobileNav.astro` | Site-wide structure |
 
-## Recommended Project Structure
-
-### Integration with Existing Structure
+### Current Component Dependencies
 
 ```
-src/
-├── styles/
-│   └── global.css              # MODIFY: Add @theme tokens, keep existing utilities
-├── components/
-│   ├── primitives/             # NEW: Neobrutalist base components
-│   │   ├── Button.astro       # NEW: Button with border-2, shadow-brutal
-│   │   ├── Card.astro         # NEW: Card with shadow-brutal, rounded-brutal
-│   │   ├── Input.astro        # NEW: Form input with focus states
-│   │   └── Badge.astro        # NEW: Tag/badge component
-│   ├── layout/                # MODIFY: Update existing components
-│   │   ├── Header.astro       # MODIFY: Apply neobrutalist button styles
-│   │   ├── Footer.astro       # MODIFY: Update with new design tokens
-│   │   └── MobileNav.astro    # MODIFY: Update styling
-│   ├── Hero.astro             # MODIFY: Update CTA button
-│   ├── BlogCard.astro         # MODIFY: Add shadow-brutal, border-2
-│   ├── Services.astro         # MODIFY: Update card styling
-│   ├── FAQ.astro              # MODIFY: Update accordion styling
-│   ├── Process.astro          # MODIFY: Update card styling
-│   └── About.astro            # MODIFY: Update styling
-├── layouts/
-│   └── BaseLayout.astro       # MODIFY: Update font imports (Poppins/Inter → quirky/readable)
-└── pages/                     # NO CHANGES: Pages consume updated components
+Hero.astro
+  └── ui/Button.astro
+
+Services.astro
+  ├── ui/Card.astro (variant="yellow")
+  └── ui/Button.astro
+
+Process.astro
+  └── (no dependencies, custom styled)
+
+homepage/TechSection.astro
+  └── ui/Card.astro (variant="magenta")
+
+Footer.astro
+  └── (FAQ accordion inline, lucide-static icons)
 ```
 
-### Structure Rationale
+## Milestone Integration Points
 
-- **`primitives/` folder:** NEW folder for reusable neobrutalist components. Separates design system primitives from composed components (Hero, Services, etc.). Follows Astro community pattern of organizing by abstraction level.
+### 1. Hero Section Enhancement (MODIFY Hero.astro)
 
-- **Modified existing components:** Leverage existing component structure, update with new Tailwind classes. Avoid wholesale rewrites—apply neobrutalist tokens via class swaps.
+**Current state:**
+- Single bordered box with headline
+- One-liner value prop
+- Single CTA button
 
-- **`global.css` as single source of truth:** Tailwind 4's `@theme` directive makes this file both the token definition and utility generator. No separate config file needed.
+**Required changes:**
+- Add outcome-focused messaging (modify headline + value prop)
+- Add visual badges/trust indicators (new markup)
+- Maintain existing Button.astro dependency
 
-## Architectural Patterns
+**Integration considerations:**
+- **No new components needed** — Hero.astro already exists at correct level
+- **Styling:** Use existing shadow utilities (`shadow-neo-yellow`, `shadow-neo-turquoise`)
+- **Badges:** Can be inline SVG or new simple badge elements with Card.astro styling
+- **Layout:** Existing container structure supports additional elements
 
-### Pattern 1: CSS-First Design Tokens with Tailwind 4 @theme
+**Modification scope:** MEDIUM
+- Update headline copy
+- Add badge container below/beside headline
+- Possibly adjust layout from pure-center to accommodate badges
 
-**What:** Define all design tokens (colors, shadows, borders, typography) in `global.css` using Tailwind 4's `@theme` directive. Tokens become both CSS custom properties and Tailwind utility classes.
+### 2. Process Section Enhancement (MODIFY Process.astro)
 
-**When to use:** For the entire design system—this is the foundation pattern for neobrutalism.
+**Current state:**
+- 5-step vertical timeline with turquoise line
+- Numbered circle markers
+- "You/Joel" dialogue boxes per step
 
-**Trade-offs:**
-- **Pro:** Single source of truth, no JavaScript config, runtime CSS variables for dynamic theming
-- **Pro:** Smaller build output, easier dark mode with semantic color names
-- **Con:** Requires Tailwind 4 (project already uses this via `@tailwindcss/vite`)
+**Required changes:**
+- Add detailed descriptions (expand existing content)
+- Add isometric illustrations per step (new asset integration)
 
-**Example:**
-```css
-/* global.css */
-@import "tailwindcss";
+**Integration considerations:**
+- **No new components needed** — Process.astro already exists
+- **Illustration assets:** Need to determine format and location
+  - Recommended: `/public/images/process/step-{1-5}.svg` or `.png`
+  - Reference via `/images/process/step-1.svg` in component
+- **Layout adjustment:** Current `pl-12` (padding-left) for timeline content may need adjustment to accommodate illustrations
+  - Could use flexbox/grid to place illustration beside content
+  - Or stack illustration above "You/Joel" boxes on mobile, side-by-side on desktop
 
-@theme {
-  /* Neobrutalist color palette - high contrast */
-  --color-yellow: oklch(0.90 0.15 95);
-  --color-yellow-dark: oklch(0.85 0.18 95);
-  --color-turquoise: oklch(0.70 0.15 190);
-  --color-magenta: oklch(0.65 0.25 330);
+**Modification scope:** MEDIUM-HIGH
+- Expand content copy within existing structure
+- Add `<img>` tags per step
+- Adjust layout CSS for illustration placement
+- Responsive considerations for illustration sizing
 
-  /* Semantic color mapping */
-  --color-primary: var(--color-yellow);
-  --color-secondary: var(--color-turquoise);
-  --color-accent: var(--color-magenta);
+### 3. Technology Section Redesign (MODIFY TechSection.astro)
 
-  /* Neobrutalist shadows - solid, offset */
-  --shadow-brutal: 4px 4px 0 0 rgb(0 0 0);
-  --shadow-brutal-lg: 6px 6px 0 0 rgb(0 0 0);
-  --shadow-brutal-inset: inset 4px 4px 0 0 rgb(0 0 0 / 0.1);
+**Current state:**
+- Split layout: left philosophy text, right 4-card grid (Frontend, Backend, AI/ML, Infrastructure)
+- All cards use Card.astro with magenta variant
+- Technologies listed as bullet points within cards
 
-  /* Dark mode shadows - lighter color */
-  --shadow-brutal-dark: 4px 4px 0 0 rgb(255 255 255 / 0.2);
-  --shadow-brutal-lg-dark: 6px 6px 0 0 rgb(255 255 255 / 0.2);
+**Required changes:**
+- Reorganize into 3 categories: AI, Automations, Web Apps
+- Add illustrations per category
+- Maintain philosophy text or replace with new messaging
 
-  /* Borders - thick and bold */
-  --radius-brutal: 0.5rem;  /* rounded-brutal */
+**Integration considerations:**
+- **No new components needed** — TechSection.astro in `homepage/` already page-specific
+- **Card.astro reuse:** Can continue using Card.astro component
+- **Illustration assets:** Need to determine format
+  - Recommended: `/public/images/tech/ai.svg`, `/public/images/tech/automations.svg`, `/public/images/tech/web-apps.svg`
+- **Layout adjustment:** Current grid is `grid-cols-1 sm:grid-cols-2`
+  - For 3 categories: `grid-cols-1 md:grid-cols-3` makes sense
+  - Philosophy text could stay in same asymmetric layout, or move/remove
 
-  /* Typography */
-  --font-heading: 'Space Grotesk', system-ui, sans-serif;  /* Example quirky font */
-  --font-body: 'Inter', system-ui, sans-serif;  /* Keeps existing readable font */
-}
+**Modification scope:** MEDIUM
+- Restructure data from 4 categories to 3
+- Add illustration `<img>` tags within or above cards
+- Adjust grid columns
+- Update content copy for new categorization
 
-/* Dark mode variant */
-@custom-variant dark (&:where(.dark, .dark *));
-```
+### 4. FAQ Dedicated Page (NEW PAGE + MODIFY Footer)
 
-### Pattern 2: Component Hover State with Shadow Translation
+**Current state:**
+- Footer.astro contains FAQ accordion with 5 questions
+- FAQ.astro exists but is standalone component (not currently used)
 
-**What:** Neobrutalist buttons/cards have a distinctive "press" effect: on hover, the element translates to match the shadow offset, and the shadow disappears, creating the illusion of the element being pressed into the page.
+**Required changes:**
+- Create `/src/pages/faq.astro` as dedicated page
+- Decide Footer FAQ fate: remove entirely, or keep abbreviated version with "See all FAQ" link
 
-**When to use:** Buttons, interactive cards, clickable elements.
+**Integration considerations:**
+- **NEW: `/src/pages/faq.astro`** — Use BaseLayout, import FAQ.astro or inline accordion
+- **MODIFY: `Footer.astro`** — Two options:
+  - **Option A (Clean):** Remove FAQ section entirely, add simple link to /faq in footer nav
+  - **Option B (Teaser):** Keep 2-3 questions, add "View All Questions" link to /faq
+- **FAQ.astro reuse:** Existing FAQ.astro (src/components/FAQ.astro) can be imported by faq.astro page
+  - Current FAQ.astro has same 5 questions as Footer, slightly different styling
+  - Should consolidate into single FAQ component used by both page and footer (if keeping footer FAQ)
 
-**Trade-offs:**
-- **Pro:** Distinctive kinetic feedback, maintains brutalist aesthetic, accessible (visible state change)
-- **Con:** More CSS than simple opacity change, requires coordinated translation values
+**New components needed:**
+- **NONE** — `/src/pages/faq.astro` is a page file, not a component
+- Can reuse existing `FAQ.astro` component
 
-**Example:**
+**Modification scope:** LOW-MEDIUM
+- Create new page file (copy BaseLayout pattern from other pages)
+- Modify Footer.astro to remove or abbreviate FAQ section
+- Optionally refactor FAQ.astro to accept props (e.g., `limit` to show subset)
+
+## Recommended Build Order
+
+Based on dependencies and complexity:
+
+### Phase 1: Asset Preparation (Prerequisite)
+1. **Gather/create illustration assets:**
+   - Process step illustrations (5 files): `/public/images/process/step-{1-5}.{svg|png}`
+   - Technology category illustrations (3 files): `/public/images/tech/{ai|automations|web-apps}.{svg|png}`
+   - Hero badges/trust indicators (if visual): `/public/images/hero/{badge-name}.{svg|png}`
+
+2. **Decide asset format:**
+   - **SVG recommended** for illustrations (scalable, smaller file size, theme-able)
+   - **PNG acceptable** if illustrations are complex/photographic
+
+### Phase 2: Simple Modifications (Low Risk)
+1. **FAQ Page** — New page, no existing dependencies
+   - Create `/src/pages/faq.astro`
+   - Import existing `FAQ.astro` component or inline content
+   - Test in isolation
+
+2. **Hero Enhancement** — Modify existing component
+   - Update copy/messaging
+   - Add badge elements (minimal new markup)
+   - Test visual hierarchy
+
+### Phase 3: Layout-Heavy Modifications (Higher Risk)
+3. **Technology Section Redesign** — Restructure existing component
+   - Reorganize 4 categories → 3 categories
+   - Add illustrations
+   - Adjust grid layout
+   - Test responsive behavior
+
+4. **Process Section Enhancement** — Modify existing component with new layout
+   - Add illustrations (requires layout adjustment for image placement)
+   - Expand content copy
+   - Test vertical timeline + image layout on mobile/desktop
+
+### Phase 4: Integration & Cleanup
+5. **Footer FAQ Decision** — Modify existing component
+   - Remove or abbreviate footer FAQ based on decision
+   - Add link to /faq page if needed
+   - Test footer appearance
+
+6. **Overall Testing:**
+   - Visual hierarchy flow (Hero → Services → Process → Tech → About → Contact)
+   - Mobile responsiveness for all modified sections
+   - Dark mode appearance
+   - Performance (image optimization)
+
+## Data Flow Changes
+
+### Current Data Flow
+- **Static content:** All homepage sections have hardcoded content in component files
+- **No external data sources** for homepage (blog uses Content Collections, portfolio uses projects.json)
+
+### After Milestone
+- **No data flow changes** — All enhancements remain static content
+- **New static assets:** Illustration images loaded via public folder URLs
+
+### Potential Future Consideration
+If FAQ grows beyond 5-10 questions, consider:
+- Moving FAQ data to `/src/data/faq.json` or Content Collection
+- Would allow FAQ.astro to be data-driven, easier to maintain
+
+## Component Structure Recommendations
+
+### Hero.astro Enhancement Pattern
+
 ```astro
-<!-- Button.astro -->
-<button
-  class="
-    border-2 border-black dark:border-white
-    shadow-brutal dark:shadow-brutal-dark
-    bg-primary text-black
-    rounded-brutal
-    px-6 py-3
-    font-heading font-bold
-    transition-all duration-150
-    hover:translate-x-1 hover:translate-y-1
-    hover:shadow-none
-    active:translate-x-1 active:translate-y-1
-    active:shadow-none
-  "
+---
+import Button from './ui/Button.astro';
+---
+
+<section id="hero" class="hero min-h-[80vh] flex items-center justify-center px-6 py-24 md:py-32">
+  <div class="container max-w-4xl mx-auto text-center">
+    <!-- Main headline box (existing) -->
+    <div class="border-[3px] border-text-light dark:border-text-dark p-6 md:p-8 inline-block shadow-neo-yellow mb-8">
+      <h1 class="...">
+        [New outcome-focused headline]
+      </h1>
+    </div>
+
+    <!-- Value prop (existing, update copy) -->
+    <p class="...">
+      [Updated value proposition]
+    </p>
+
+    <!-- NEW: Visual badges/trust indicators -->
+    <div class="flex flex-wrap justify-center gap-4 mb-8">
+      <!-- Option 1: Text badges with Card styling -->
+      <div class="inline-flex items-center gap-2 px-4 py-2 border-[3px] border-text-light dark:border-text-dark shadow-neo-turquoise">
+        <img src="/images/hero/icon-1.svg" alt="" class="w-6 h-6" />
+        <span>Badge Text</span>
+      </div>
+      <!-- Repeat for additional badges -->
+    </div>
+
+    <!-- CTA (existing) -->
+    <Button variant="yellow" size="lg" href="/contact">
+      Start a Conversation
+    </Button>
+  </div>
+</section>
+```
+
+### Process.astro Enhancement Pattern
+
+```astro
+<article class="relative pl-12 pb-8 border-l-[4px] border-turquoise">
+  <!-- Step marker (existing) -->
+  <div class="absolute left-0 top-0 -ml-4.5 w-8 h-8 ...">
+    <span>1</span>
+  </div>
+
+  <!-- Step content with NEW illustration -->
+  <div class="flex flex-col md:flex-row gap-6 items-start">
+    <!-- NEW: Illustration -->
+    <div class="w-full md:w-1/3 flex-shrink-0">
+      <img
+        src="/images/process/step-1.svg"
+        alt="Discovery phase illustration"
+        class="w-full h-auto"
+      />
+    </div>
+
+    <!-- Existing content (title + dialogue boxes) -->
+    <div class="flex-1">
+      <h3 class="...">Discovery</h3>
+      <div class="border-[3px] ... space-y-3">
+        <div>
+          <span class="font-semibold">You:</span>
+          <span class="...">Share your challenges and goals</span>
+        </div>
+        <!-- etc -->
+      </div>
+    </div>
+  </div>
+</article>
+```
+
+### TechSection.astro Redesign Pattern
+
+```astro
+<section id="tech" ...>
+  <div class="container mx-auto px-6 md:px-12">
+    <h2 ...>How I Build</h2>
+
+    <!-- Keep asymmetric layout or adjust to full-width for 3 cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- AI Card with illustration -->
+      <Card variant="magenta">
+        <img
+          src="/images/tech/ai.svg"
+          alt="AI illustration"
+          class="w-full h-32 object-contain mb-4"
+        />
+        <h3 class="...">AI Integration</h3>
+        <ul class="...">
+          <li><span class="font-semibold">OpenAI</span> — Natural language</li>
+          <!-- etc -->
+        </ul>
+      </Card>
+
+      <!-- Automations Card -->
+      <Card variant="turquoise">
+        <!-- Similar pattern -->
+      </Card>
+
+      <!-- Web Apps Card -->
+      <Card variant="yellow">
+        <!-- Similar pattern -->
+      </Card>
+    </div>
+  </div>
+</section>
+```
+
+### FAQ Page Pattern
+
+```astro
+---
+// /src/pages/faq.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FAQ from '../components/FAQ.astro';
+---
+
+<BaseLayout
+  title="Frequently Asked Questions | Joel Shinness"
+  description="Common questions about working together on custom software projects"
 >
-  <slot />
-</button>
+  <div class="container mx-auto px-6 py-24 max-w-4xl">
+    <h1 class="font-heading text-4xl md:text-5xl font-bold text-center mb-4">
+      Frequently Asked Questions
+    </h1>
+    <p class="text-center text-text-muted-light dark:text-text-muted-dark mb-12">
+      Everything you need to know about working together
+    </p>
+
+    <FAQ />
+  </div>
+</BaseLayout>
 ```
 
-### Pattern 3: Dark Mode with High-Contrast Semantic Colors
+## Anti-Patterns to Avoid
 
-**What:** Use semantic color tokens (`--color-primary`, `--color-bg`) that reference different base colors in light vs. dark mode. Neobrutalism requires higher contrast in dark mode to maintain the bold aesthetic.
+### Anti-Pattern 1: Creating Unnecessary New Components
 
-**When to use:** All color decisions in components—never hardcode color values, always use semantic tokens.
+**What people do:** Create new components like `HeroBadge.astro`, `ProcessIllustration.astro` for simple markup
+**Why it's wrong:** Over-abstraction for static content adds complexity without benefit
+**Do this instead:** Keep illustrations and badges as simple `<img>` and `<div>` elements within parent components. Only create new components if they're reused 3+ times.
 
-**Trade-offs:**
-- **Pro:** Easy mode switching, accessible contrast ratios, maintainable
-- **Con:** Requires careful color selection to meet WCAG AA (4.5:1 text, 3:1 UI elements)
+### Anti-Pattern 2: Inconsistent Component Location
 
-**Example:**
-```css
-@theme {
-  /* Light mode colors */
-  --color-bg: #ffffff;
-  --color-text: #0a0a0a;
-  --color-border: #0a0a0a;
+**What people do:** Put new FAQ page in `/src/components/pages/FAQ.astro` instead of `/src/pages/faq.astro`
+**Why it's wrong:** Breaks Astro's file-based routing convention, page won't be accessible
+**Do this instead:** Pages go in `/src/pages/`, components go in `/src/components/`. Follow existing pattern.
 
-  /* Dark mode requires custom properties + variant */
-}
+### Anti-Pattern 3: Hardcoding Image Paths in Multiple Places
 
-/* Approach 1: Dark mode override in @theme */
-@custom-variant dark (&:where(.dark, .dark *));
+**What people do:** Write `/public/images/process/step-1.svg` instead of `/images/process/step-1.svg`
+**Why it's wrong:** `/public/` is automatically root in Astro build, breaks in production
+**Do this instead:** Reference public assets as `/images/...` without `/public/` prefix. Astro handles the path resolution.
 
-/* Then in components, use dark: prefix */
-.card {
-  @apply bg-bg text-text border-border;
-  @apply dark:bg-[#1a1a1a] dark:text-[#fafafa] dark:border-[#fafafa];
-}
+### Anti-Pattern 4: Breaking Responsive Layout
 
-/* Approach 2: CSS custom properties with fallback (more flexible) */
-:root {
-  --color-bg-light: #ffffff;
-  --color-bg-dark: #1a1a1a;
-}
+**What people do:** Add illustrations with fixed widths that break mobile layout
+**Why it's wrong:** Site becomes unusable on mobile, fails accessibility
+**Do this instead:**
+- Use responsive utilities (`w-full md:w-1/3`)
+- Test on mobile viewport during development
+- Use flexbox/grid with wrapping (`flex-col md:flex-row`)
 
-.dark {
-  --color-bg: var(--color-bg-dark);
-}
+## Integration Checklist
 
-:root:not(.dark) {
-  --color-bg: var(--color-bg-light);
-}
-```
+Before starting implementation:
 
-### Pattern 4: Astro Component Composition with Tailwind Utilities
+- [ ] **Assets ready:** All illustration files created and placed in `/public/images/`
+- [ ] **Image optimization:** SVGs minified, PNGs compressed (use ImageOptim or similar)
+- [ ] **Copy ready:** New headlines, value props, detailed process descriptions written
+- [ ] **Design decisions:** Badge style, illustration placement, FAQ footer treatment decided
 
-**What:** Build primitive components (Button, Card, Input) as Astro components that accept props for variants (size, color) but default to neobrutalist styling. Compose into larger components (Hero, BlogCard).
+During implementation:
 
-**When to use:** All neobrutalist components—keep them as Astro components (server-rendered) unless interactivity requires client-side JavaScript.
+- [ ] **Follow location patterns:** Homepage-specific components in `homepage/`, reusable in root
+- [ ] **Maintain Card.astro usage:** Don't recreate card styling, use existing component
+- [ ] **Test dark mode:** All new elements have dark mode styling
+- [ ] **Test responsive:** Mobile, tablet, desktop breakpoints
+- [ ] **Preserve accessibility:** alt text on images, semantic HTML, ARIA labels
 
-**Trade-offs:**
-- **Pro:** Astro's zero-JS by default, props for flexibility, TypeScript for safety
-- **Con:** No runtime state (use client:* directives if needed, e.g., for accordions)
+After implementation:
 
-**Example:**
-```astro
----
-// primitives/Button.astro
-interface Props {
-  variant?: 'primary' | 'secondary' | 'neutral';
-  size?: 'sm' | 'md' | 'lg';
-  href?: string;
-  class?: string;
-}
-
-const {
-  variant = 'primary',
-  size = 'md',
-  href,
-  class: className = ''
-} = Astro.props;
-
-const variantClasses = {
-  primary: 'bg-primary text-black border-black dark:border-white',
-  secondary: 'bg-secondary text-black border-black dark:border-white',
-  neutral: 'bg-bg text-text border-border'
-};
-
-const sizeClasses = {
-  sm: 'px-4 py-2 text-sm',
-  md: 'px-6 py-3 text-base',
-  lg: 'px-8 py-4 text-lg'
-};
-
-const baseClasses = `
-  inline-flex items-center justify-center
-  font-heading font-bold
-  border-2 rounded-brutal
-  shadow-brutal dark:shadow-brutal-dark
-  transition-all duration-150
-  hover:translate-x-1 hover:translate-y-1 hover:shadow-none
-  active:translate-x-1 active:translate-y-1 active:shadow-none
-  ${variantClasses[variant]}
-  ${sizeClasses[size]}
-  ${className}
-`;
-
-const Element = href ? 'a' : 'button';
----
-
-<Element href={href} class={baseClasses}>
-  <slot />
-</Element>
-```
-
-### Pattern 5: Progressive Enhancement for Dark Mode
-
-**What:** Use the existing inline script pattern in BaseLayout.astro to prevent FOUC (flash of unstyled content), setting dark mode class before page renders based on localStorage and system preference.
-
-**When to use:** Keep the existing pattern—it works and is accessible.
-
-**Trade-offs:**
-- **Pro:** No flash, respects system preference, persists choice
-- **Con:** Inline script (not a real con for this use case)
-
-**Example (existing pattern to KEEP):**
-```astro
-<!-- BaseLayout.astro -->
-<script is:inline>
-  document.documentElement.classList.toggle(
-    "dark",
-    localStorage.theme === "dark" ||
-      (!("theme" in localStorage) &&
-       window.matchMedia("(prefers-color-scheme: dark)").matches)
-  );
-</script>
-```
-
-## Data Flow
-
-### Design Token Flow
-
-```
-@theme in global.css
-    ↓
-Tailwind generates utilities (bg-primary, shadow-brutal, etc.)
-    ↓
-Astro components use utilities in class attributes
-    ↓
-HTML rendered with inline styles (for static site)
-    ↓
-CSS custom properties available at runtime (for dynamic theming)
-```
-
-### Component Composition Flow
-
-```
-Primitive Component (Button.astro)
-    ↓ props: variant, size
-Component uses props to conditionally apply Tailwind classes
-    ↓ compiles to
-Static HTML with classes
-    ↓
-Browser renders with Tailwind CSS
-```
-
-### Dark Mode State Flow
-
-```
-Page Load → Inline Script Runs (before render)
-    ↓
-Check localStorage.theme or system preference
-    ↓
-Add/remove .dark class on <html>
-    ↓
-Tailwind dark: variant utilities activate
-    ↓
-CSS custom properties reference dark mode values
-    ↓
-User clicks theme toggle → localStorage updates → class toggles → CSS updates
-```
-
-### Key Data Flows
-
-1. **Token definition to usage:** Tokens defined once in `@theme`, consumed via Tailwind utilities everywhere. No prop drilling, no JavaScript state for colors/shadows.
-
-2. **Component variants:** Props select which Tailwind classes to apply. Composition at template time (Astro build), not runtime (JavaScript).
-
-3. **Dark mode:** Class-based (.dark on html element), controlled by localStorage + script, CSS custom properties respond to class.
+- [ ] **Lighthouse CI:** Verify performance score stays 90%+
+- [ ] **Visual regression:** Compare before/after screenshots
+- [ ] **Content review:** Copy/messaging accuracy
+- [ ] **Link validation:** /faq page linked from footer/nav
 
 ## Scaling Considerations
 
-| Scale | Architecture Adjustments |
-|-------|--------------------------|
-| Current project (portfolio/blog) | Static site generation with Astro is perfect. No backend, no database, no scaling concerns. Design system complexity should remain low. |
-| 10-50 pages | Same architecture. Tailwind purging keeps CSS small. Component library grows slowly. |
-| 100+ components | Consider documenting components with Storybook or similar. May want to extract primitives to separate package if reused across multiple sites. |
+### Current Scale: Static Portfolio Site
+- No database, no API calls
+- All content compiled at build time
+- Deployed to GitHub Pages (static hosting)
 
-### Scaling Priorities
+### This Milestone: No Architecture Impact
+- All changes are static content/markup
+- No new external dependencies
+- No performance concerns (a few images won't impact Lighthouse scores if optimized)
 
-1. **First bottleneck:** Build time as components increase. **Solution:** Astro's partial hydration and fast dev server should handle this. If needed, use client:visible for below-fold components.
-
-2. **Second bottleneck:** Design token management if colors/shadows proliferate. **Solution:** Maintain discipline—limit palette to 5-7 colors, 3 shadow variants. Delete unused tokens.
-
-## Anti-Patterns
-
-### Anti-Pattern 1: Inline Styles or Style Tags
-
-**What people do:** Define component-specific styles in `<style>` tags within Astro components or use inline `style=""` attributes for colors/shadows.
-
-**Why it's wrong:**
-- Breaks the design system—tokens defined in `@theme` aren't used
-- Can't leverage Tailwind's purging or dark mode utilities
-- Creates inconsistency across components
-
-**Do this instead:** Always use Tailwind utility classes referencing design tokens. If you need a one-off style, extend `@theme` with a new token or use Tailwind's arbitrary values (`bg-[#abcdef]`) sparingly.
-
-### Anti-Pattern 2: Over-Componentizing Primitives
-
-**What people do:** Create separate Button.astro, PrimaryButton.astro, SecondaryButton.astro, LargeButton.astro, SmallButton.astro, etc.
-
-**Why it's wrong:**
-- Explosion of files for simple variants
-- Hard to maintain, easy to drift in styling
-- Loses the benefit of props for configuration
-
-**Do this instead:** Single `Button.astro` component with props for `variant` and `size`. Use TypeScript interfaces to constrain valid values.
-
-### Anti-Pattern 3: Hardcoding Shadow Offsets in Components
-
-**What people do:** Write `translate-x-[4px] translate-y-[4px]` in component classes to match shadow offset.
-
-**Why it's wrong:**
-- If shadow offset changes in `@theme`, all components break
-- Magic numbers scattered across codebase
-- Not DRY
-
-**Do this instead:**
-**Option A:** Use Tailwind's default translate utilities that match your shadow offsets (e.g., if shadow is 4px, use `translate-x-1 translate-y-1` which is 0.25rem = 4px at base font size).
-
-**Option B (better):** Define custom translate utilities in `@theme`:
-```css
-@theme {
-  --spacing-brutal-offset: 4px;
-  --spacing-brutal-offset-lg: 6px;
-}
-```
-Then use `translate-x-brutal-offset translate-y-brutal-offset` (requires extending Tailwind with custom utilities, which is more complex—Option A is simpler).
-
-**Recommended:** Stick with Option A using Tailwind's default spacing scale aligned to shadow offsets.
-
-### Anti-Pattern 4: Using Client-Side JavaScript for Static Theming
-
-**What people do:** Import React/Vue components with useState for buttons, cards, or other non-interactive elements just to get styled components.
-
-**Why it's wrong:**
-- Ships JavaScript for static content
-- Breaks Astro's zero-JS philosophy
-- Slower page loads, worse Lighthouse scores
-
-**Do this instead:** Keep components as Astro (.astro) files. Only use `client:*` directives for truly interactive components (modals, carousels, form validation).
-
-### Anti-Pattern 5: Skipping Accessibility for Aesthetics
-
-**What people do:** Use color combinations that look bold but fail WCAG contrast ratios (e.g., yellow text on white background, or magenta on black failing 4.5:1).
-
-**Why it's wrong:**
-- Unusable for users with visual impairments
-- Fails Lighthouse accessibility audit
-- Legal/compliance issues for some projects
-
-**Do this instead:**
-- Test all color combinations with a contrast checker (WebAIM, Chrome DevTools)
-- Yellow on black: GOOD (high contrast)
-- Yellow on white: BAD (low contrast)—use yellow background with black text instead
-- For dark mode, desaturate bright colors slightly to reduce eye strain while maintaining contrast
-- Document contrast ratios in FEATURES.md or PITFALLS.md
-
-## Integration Points
-
-### With Existing Codebase
-
-| Component | Integration Strategy | Notes |
-|-----------|---------------------|-------|
-| **global.css** | MODIFY: Replace existing `@theme` block, keep custom utilities (.prose, .toc, etc.) | Existing animations (fadeInScale) can stay—they're orthogonal to design system |
-| **BaseLayout.astro** | MODIFY: Update font imports from Poppins/Inter to new heading/body fonts | Keep dark mode script as-is—it works |
-| **Header.astro** | MODIFY: Replace button/link classes with primitive Button component or updated utility classes | Navigation links get neobrutalist hover states |
-| **BlogCard.astro** | MODIFY: Add `border-2`, `shadow-brutal`, `rounded-brutal` classes | Keep existing props (title, slug, etc.)—only change styling |
-| **Hero.astro** | MODIFY: CTA button becomes `<Button variant="primary">` | Keep existing layout structure |
-
-### External Dependencies
-
-| Service | Integration Pattern | Notes |
-|---------|---------------------|-------|
-| **Google Fonts** | Update font URLs in BaseLayout.astro | Example: Replace Poppins with Space Grotesk or DM Sans |
-| **Tailwind CSS 4** | Already integrated via `@tailwindcss/vite` | Verify version is 4.x in package.json |
-| **Astro Expressive Code** | NO CHANGES | Syntax highlighting for blog posts—keep existing theme |
-
-### Internal Boundaries
-
-| Boundary | Communication | Notes |
-|----------|---------------|-------|
-| **Design Tokens ↔ Components** | Tailwind utility classes | One-way: tokens defined in CSS, consumed by components |
-| **Primitives ↔ Composed Components** | Astro component imports and slots | Hero imports Button, BlogCard imports Card primitive |
-| **Dark Mode ↔ All Components** | CSS class (.dark on html) + Tailwind dark: variant | Global toggle affects all components via CSS cascade |
-
-## Build Order Recommendation
-
-Based on dependency analysis, implement in this order:
-
-### Phase 1: Foundation (Design Tokens)
-1. Update `global.css` with neobrutalist `@theme` tokens (colors, shadows, borders, typography)
-2. Update `BaseLayout.astro` with new font imports
-3. Test dark mode still works with new tokens
-
-**Rationale:** All components depend on tokens. Must be first.
-
-### Phase 2: Primitives (Reusable Components)
-4. Create `Button.astro` in `components/primitives/`
-5. Create `Card.astro` in `components/primitives/`
-6. Create `Input.astro` in `components/primitives/`
-
-**Rationale:** Composed components (Hero, BlogCard) will use these. Build bottom-up.
-
-### Phase 3: Update Existing Components
-7. Modify `Hero.astro` to use `<Button>`
-8. Modify `BlogCard.astro` to use neobrutalist classes
-9. Modify `Header.astro` navigation and theme toggle
-10. Modify other components (Services, FAQ, Process, About)
-
-**Rationale:** Top-level components depend on primitives and tokens.
-
-### Phase 4: Validation
-11. Visual regression testing (manual or automated with Percy/Chromatic)
-12. Lighthouse CI—verify accessibility scores stay ≥90
-13. Dark mode testing
-
-**Rationale:** Catch regressions before considering complete.
+### Future Considerations (Not This Milestone)
+If site grows beyond 20-30 FAQ items or needs dynamic content:
+- Consider Content Collections for FAQ (similar to blog)
+- Would enable tagging, search, filtering
+- Still builds to static, maintains performance
 
 ## Sources
 
-### High Confidence (Official Documentation)
-- [Tailwind CSS v4 @theme Documentation](https://tailwindcss.com/docs/theme) - Theme variables and token syntax
-- [Astro Components Documentation](https://docs.astro.build/en/basics/astro-components/) - Component patterns and props
-- [Astro Template Directives](https://docs.astro.build/en/reference/directives-reference/) - Client directives and hydration
-
-### Medium Confidence (Verified Community Resources)
-- [Neobrutalism Components GitHub](https://github.com/ekmas/neobrutalism-components) - Component patterns (note: no longer maintained but patterns valid)
-- [Neobrutalism.dev Documentation](https://www.neobrutalism.dev/) - Shadow, border, and hover patterns
-- [NN/G Neobrutalism Article](https://www.nngroup.com/articles/neobrutalism/) - Definition and best practices
-- [Tailwind CSS Best Practices 2025-2026](https://www.frontendtools.front/blog/tailwind-css-best-practices-design-system-patterns) - Design token patterns
-
-### Context (Design Philosophy)
-- [Neubrutalism Web Design Trend - Bejamas](https://bejamas.com/blog/neubrutalism-web-design-trend) - Feature overview
-- [Dark Mode Best Practices 2026](https://www.tech-rz.com/blog/dark-mode-design-best-practices-in-2026/) - High contrast and accessibility
-- [Dark Mode UI Best Practices](https://www.designstudiouiux.com/blog/dark-mode-ui-design-best-practices/) - Contrast standards and color desaturation
+- **Existing codebase:** `/src/pages/index.astro`, `/src/components/*.astro`
+- **Astro documentation:** File-based routing, component patterns
+- **Current milestone context:** Homepage refinement requirements
 
 ---
-*Architecture research for: Neobrutalist Design System*
+*Architecture research for: Homepage Refinements Integration*
 *Researched: 2026-02-09*
-*Confidence: HIGH (Tailwind 4 patterns verified with official docs, neobrutalist component patterns cross-referenced across multiple sources)*

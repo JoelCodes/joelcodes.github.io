@@ -1,330 +1,286 @@
 # Project Research Summary
 
-**Project:** Joel Shinness Portfolio — Neobrutalist Design System v1.1
-**Domain:** Portfolio/Blog Site Design Refresh
+**Project:** Homepage Refinement (v1.2)
+**Domain:** Professional portfolio website with neobrutalist design
 **Researched:** 2026-02-09
 **Confidence:** HIGH
 
 ## Executive Summary
 
-This research covers adding a neobrutalist design system to an existing Astro 5 + Tailwind CSS 4 portfolio site. The site already has core functionality (blog with MDX, portfolio projects, contact form, dark mode), so this milestone focuses exclusively on visual refresh with narrative homepage restructure. The recommended approach is CSS-first using Tailwind 4's @theme directive for design tokens, with implementation constrained to 3/10 aesthetic density to maintain professional trust while adding distinctive personality.
+This is an incremental enhancement to an existing neobrutalist portfolio site built with Astro 5 and Tailwind CSS 4. The site already has established design system foundations (OKLCH colors, shadow-to-glow dark mode, WCAG 2.2 AA compliance, 3/10 neobrutalist density). This milestone adds outcome-focused messaging, isometric illustrations, and improved FAQ discoverability to the homepage without architectural changes.
 
-The core technical approach is straightforward: install 1-2 variable fonts via Fontsource, define neobrutalist tokens (colors, shadows, borders) in global.css using @theme, build primitive components (Button, Card, Input) as Astro components, then update existing components with new styling. No JavaScript libraries needed—all neobrutalist patterns (thick borders, hard shadows, hover effects) are pure CSS via Tailwind utilities. The existing dark mode implementation stays intact but requires careful adaptation since neobrutalist shadows need inverted colors in dark mode to maintain depth.
+The recommended approach is conservative: leverage existing components (Card, Button, FAQ), maintain strict design system constraints, and avoid introducing new dependencies. All enhancements are static content/markup changes. The critical technical decision is migrating from lucide-static to @lucide/astro for tree-shaking benefits (200KB+ savings), and establishing an isometric illustration style guide before implementation to prevent inconsistency. Performance must be protected through SVG optimization (20KB file size limit per illustration).
 
-The primary risk is over-stylization undermining professional trust. The target audience is small business owners seeking lead generation, not design portfolio viewers. Research shows 3/10 density constraint is critical: apply bold neobrutalism to headers/CTAs/cards, but preserve generous whitespace and readable body text (especially blog posts). Secondary risks include WCAG contrast failures with bold colors (yellow on white backgrounds), dark mode color inversion breaking visual hierarchy, and box-shadow animation performance on mobile. All are preventable with testing discipline established in Phase 1 (Design System Foundation).
+Key risks center on design system compliance rather than technical complexity. Over-stylization (exceeding 3/10 density), WCAG contrast failures from bold color combinations, and dark mode shadow transformation breakage are the primary pitfalls. The existing site has strong foundations—this milestone succeeds by adhering to them rather than introducing new patterns.
 
 ## Key Findings
 
 ### Recommended Stack
 
-**No major stack changes needed.** The existing Astro 5 + Tailwind CSS 4 + MDX foundation is ideal for this design refresh. Only additions are typography packages—everything else uses built-in Tailwind 4 capabilities.
+No new architectural dependencies are needed. All enhancements use existing Astro 5 + Tailwind CSS 4 foundations with pure CSS techniques. The one critical stack change is migrating icon libraries for performance.
 
-**Core additions:**
-- **@fontsource-variable/bricolage-grotesque** (^5.2.10) — Quirky grotesque display font perfect for neobrutalist headings, variable font with weight/width/optical axes
-- **@fontsource-variable/fraunces** (optional) — Alternative display/accent font with optical size axis, good for editorial elements
-- **Tailwind 4 @theme directive** — Define all design tokens (colors, shadows, borders) in global.css, generates utilities automatically
-- **Pure CSS patterns** — No animation libraries, no component libraries. Tailwind 4 includes everything needed (text shadows in 4.1, box shadows, transitions)
+**Core technologies (existing, reused):**
+- **Astro 5** — Static site generation with file-based routing, already in use
+- **Tailwind CSS 4** — CSS-first theming via @theme directive, isometric utilities added to global.css
+- **@lucide/astro** — Tree-shakeable icon library (MIGRATION REQUIRED from lucide-static) — saves 200KB+ bundle size
 
-**Why no libraries:** NeoBrutalism.css and similar libraries just wrap what Tailwind 4 already provides. Adding dependencies creates bloat with zero benefit. Custom @theme configuration is more maintainable and generates smaller builds.
+**New typography (optional):**
+- **@fontsource-variable/bricolage-grotesque** — Display font for neobrutalist headings, variable font for flexibility
 
-**Performance impact:** ~50-110KB for fonts only (self-hosted via Fontsource). Zero JavaScript added. No external requests.
+**What NOT to add:**
+- **astro-seo-schema** — Manual JSON-LD is simpler for FAQ page schema markup
+- **Pre-built isometric SVG libraries** — Won't match custom neobrutalist palette/style
+- **Animation libraries** — Pure CSS transforms sufficient for static site
 
 ### Expected Features
 
-**Must have (table stakes for neobrutalism):**
-- Thick borders (2-4px solid) on interactive elements
-- Hard offset shadows (4-6px, zero blur) for depth
-- High contrast color palette (yellow/teal/magenta already exist)
-- Bold typography (700-900 weights for headings)
-- Pressed button hover effects (translate + remove shadow)
-- Color block sections for visual separation
-- Dark mode adaptation (inverted shadows, adjusted colors)
+**Must have (table stakes):**
+- Outcome-focused hero headline — Small business clients need "what's in it for me" within 3 seconds
+- Visual outcome badges/metrics — ROI thinking (time saved, money saved, results delivered)
+- Process section clarity — Risk-averse clients need workflow transparency before committing
+- FAQ discoverability — Dedicated /faq page instead of buried footer accordion
+- Service differentiation — Non-technical clients need to distinguish AI vs Automation vs Web Apps
 
-**Should have (differentiators):**
-- Narrative homepage structure (Solutions → Process → Tech → About → Contact)
-- Asymmetric layouts with intentional breaks
-- Projects page with narrative case study format (Problem → Solution → Results)
-- Stacked/layered card effects for 3D illusion
-- Offset/overlapping elements for visual tension
+**Should have (competitive differentiation):**
+- Isometric mini-illustrations per process step — Makes abstract workflow concrete and memorable
+- Outcome badges with visual hierarchy — Transforms generic "I build stuff" into measurable business value
+- Technology-specific illustrations — Helps clients distinguish service types visually
+- Neobrutalist FAQ page design — Transforms boring support page into on-brand experience
 
-**Defer to post-v1.1:**
-- Isometric shadows (45° angles, medium complexity)
-- Cyclical process diagram (high complexity, narrative text works for MVP)
-- Retro UI elements (Windows 98 style, could feel gimmicky)
-- Advanced micro-interactions beyond hover states
-- Quirky animation library (low priority for professional site)
+**Defer (v2+):**
+- Pricing calculator — Custom work varies too much, creates false expectations
+- Animated isometric scenes — File size bloat, accessibility issues, static aesthetic is on-brand
+- Real-time chat widget — Overkill for freelance, contact form + FAQ covers communication
+- Auto-playing video background — Performance killer, accessibility nightmare
 
-**Anti-features (explicitly avoid):**
-- Excessive color combinations (stick to 3 bold colors max)
-- Unreadable text contrast (test all combinations with WCAG checker)
-- Cluttered asymmetry (chaos ≠ intentional asymmetry)
-- Soft gradients or blur (contradicts raw aesthetic)
-- Over-animation (exhausting, distracts from content)
-- Breaking usability for aesthetics (maintain clear CTAs, readable text)
+**Anti-features (avoid):**
+- Multiple CTAs in hero — Reduces conversions by 266% when competing actions present
+- Decorative display fonts in body text — Severe legibility issues, unprofessional
+- Complex interactive elements — Breaks mobile, adds JS complexity to static site
 
 ### Architecture Approach
 
-**CSS-first design tokens with component composition.** All neobrutalist styles defined once in global.css @theme block, consumed via Tailwind utilities in Astro components. No runtime JavaScript for theming—everything compiles to static HTML + CSS.
+This is an incremental enhancement to existing homepage sections, not a full site rebuild. All changes are component modifications or new page creation within established patterns.
 
-**Major components:**
-1. **Design Token Layer** — @theme in global.css defines colors (--color-brutal-yellow), shadows (--shadow-brutal-md), borders, typography. Generates Tailwind utilities automatically.
-2. **Primitive Components** — Button.astro, Card.astro, Input.astro with props for variants (primary/secondary, sm/md/lg). Server-rendered Astro components using Tailwind classes.
-3. **Modified Existing Components** — Update Header.astro, BlogCard.astro, Hero.astro, Services.astro with new design tokens. Leverage existing structure, swap classes.
-4. **Theme Provider** — Keep existing inline script in BaseLayout.astro for dark mode (localStorage + system preference). Adapt tokens for dark mode via CSS custom properties.
+**Integration points:**
+1. **Hero.astro (MODIFY)** — Add outcome-focused messaging, visual badges below headline, maintain Button.astro dependency
+2. **Process.astro (MODIFY)** — Add detailed descriptions, integrate isometric illustrations with existing vertical timeline
+3. **TechSection.astro (MODIFY)** — Reorganize from 4 categories to 3 (AI, Automations, Web Apps), add illustrations, adjust grid
+4. **FAQ page (NEW)** — Create /src/pages/faq.astro, import existing FAQ.astro component, add to navigation
+5. **Footer.astro (MODIFY)** — Remove or abbreviate FAQ section, add link to /faq page
 
-**Key patterns:**
-- Hover state: `hover:translate-x-1 hover:translate-y-1 hover:shadow-none` (creates press effect)
-- Dark mode: Semantic color tokens reference different values per mode, shadows inverted for visibility
-- Component composition: Build primitives with props, compose into larger components (Hero imports Button)
-- Progressive enhancement: Zero JavaScript for static elements, client:* directives only for interactive components
+**Major components reused:**
+- **Card.astro** — Technology cards, FAQ page layout
+- **Button.astro** — Hero CTA, FAQ page CTAs
+- **FAQ.astro** — Dedicated page imports existing accordion component
 
-**Integration with existing:**
-- Create new `components/primitives/` folder for Button, Card, Input
-- Modify existing components in place (Header, Footer, BlogCard, etc.)
-- Update global.css @theme block, keep existing utilities (.prose, .toc, animations)
-- Update BaseLayout.astro font imports, keep dark mode script unchanged
+**Data flow:** No changes. All content remains static (hardcoded in components). Illustration assets served from /public/images/ directory.
 
 ### Critical Pitfalls
 
-1. **WCAG contrast failures with bold colors** — Yellow/teal/magenta can visually "pop" but fail 4.5:1 ratio. Test EVERY color combination with WebAIM checker before implementation. Yellow only on dark backgrounds or with near-black text. Lighthouse CI enforces 90%+ accessibility, but manual testing required (automated tools miss subjective issues).
+1. **WCAG Contrast Failures with Bold Colors** — Vibrant neobrutalist yellow/cyan/magenta can fail WCAG 2.0 AA despite looking striking. Test EVERY color combination with WebAIM Contrast Checker before implementation. Restrict yellow accent to dark backgrounds or very dark text.
 
-2. **Sacrificing readability for aesthetic boldness** — Applying decorative fonts to body text kills legibility, especially in blog posts. Strict hierarchy: bold display fonts (Poppins/Bricolage Grotesque) for H1/H2 ONLY, neutral body fonts (Inter) for paragraphs. Minimum 16px body text, 1.75 line height. Test with real blog content, not Lorem Ipsum.
+2. **Dark Mode Shadow-to-Glow Transformation Breaking** — New components bypass design system by hardcoding box-shadow values. Always use .shadow-neo-yellow, .shadow-neo-turquoise, .shadow-neo-magenta utilities. Create dedicated .shadow-iso-* utilities for isometric illustrations before implementation.
 
-3. **Dark mode color inversion breaking visual hierarchy** — Naively flipping bg-white → bg-black destroys carefully crafted hierarchy. Shadows in dark mode need LIGHTER colors (not darker) to create depth. Bold colors may need 10-20% desaturation to reduce eye strain. Design both modes simultaneously, test every component in both modes during development.
+3. **Isometric Illustration Style Inconsistency** — Illustrations from different sources use different lighting angles, color palettes, detail levels. Establish style guidelines BEFORE creating any illustrations: light source direction (top-left 45°), color palette (existing yellow/turquoise/magenta), detail level (bold shapes, flat colors).
 
-4. **Box-shadow animation performance degradation** — Animating box-shadow directly triggers expensive paint operations, causing jank on mobile (60fps → 20-30fps). NEVER animate box-shadow. Use pseudo-element technique: create ::after with shadow at opacity: 0, animate only opacity on hover. Combine with transform on parent for lift effect. Test on iPhone SE with DevTools Performance.
+4. **SVG Performance Degradation** — Unoptimized isometric SVGs with thousands of path points cause render jank, especially on mobile. Enable Astro SVG optimization, set 20KB per file limit, reduce path precision from 6 decimals to 2, lazy load below-fold illustrations.
 
-5. **Over-stylization undermining professional trust** — Pushing neobrutalism to 10/10 density creates experimental look that small business owners interpret as "unprofessional" or "not ready for serious work." Enforce 3/10 density rigorously: headers/hero at 7/10, core content at 2/10, blog posts at 1/10. Use neobrutalist elements as accents, not entire design language. Test with target audience (small business owners), not just design peers.
-
-6. **Inconsistent spacing creating visual chaos** — Random spacing between thick borders/shadows makes layout feel haphazard instead of intentionally raw. Establish spacing scale: minimum 24px gap between bordered elements, 24-32px padding inside bordered containers, shadow-offset + 8px margin around shadow elements. Document spacing rules in design system.
-
-7. **Accessibility testing theater** — Passing 100% Lighthouse while failing actual users. Lighthouse can't evaluate subjective experience (eye strain from vibrating colors, invisible focus indicators that technically pass contrast, screen reader confusion despite ARIA labels). Manual testing non-negotiable: keyboard navigation, screen reader (VoiceOver/NVDA), color blindness simulation, bright sunlight testing.
+5. **Outcome Badges Overwhelming Hero** — Adding 6+ badges creates visual clutter, fails "5-second test." Maximum 3 badges in hero, positioned as secondary elements (never competing with headline or CTA). Test with target audience (small business owners), not just design peers.
 
 ## Implications for Roadmap
 
-Based on research, recommended 5-phase structure with clear dependencies:
+Based on research, this milestone should be broken into 5 phases with strict ordering to prevent pitfalls.
 
-### Phase 1: Design System Foundation
-**Rationale:** All components depend on tokens. Must establish accessible color palette, shadow system, typography scale before building anything. Prevents rework if contrast fails Lighthouse later.
-
-**Delivers:**
-- Tailwind @theme config with neobrutalist tokens (colors, shadows, borders, typography)
-- Font imports in BaseLayout.astro (Bricolage Grotesque + Inter)
-- Dark mode token variants tested and working
-- Density guidelines documented (3/10 constraint with per-section targets)
-- Accessibility baseline (WCAG contrast checked, documented for all color combinations)
-
-**Addresses:**
-- Table stakes: high contrast palette, bold typography scale, thick borders, hard shadows
-- Pitfalls: WCAG contrast failures, dark mode color inversion, inconsistent spacing
-- Stack: Fontsource variable fonts installed and loaded
-
-**Avoids:**
-- Rework from inaccessible colors discovered late
-- Dark mode broken after component implementation
-- Inconsistent token usage across components
-
-**Research needed:** None. Standard Tailwind 4 patterns, well-documented.
-
----
-
-### Phase 2: Primitive Components
-**Rationale:** Build reusable building blocks (Button, Card, Input) that composed components (Hero, BlogCard) will consume. Bottom-up implementation prevents duplicate styling logic.
+### Phase 1: Icon Library Migration + Design System Extensions
+**Rationale:** Must establish performance foundation and design system utilities before adding content. Icon migration saves 200KB+ bundle, isometric utilities ensure dark mode transformation works from start.
 
 **Delivers:**
-- Button.astro with variants (primary/secondary/neutral), sizes (sm/md/lg), hover press effect
-- Card.astro with shadow-brutal, border-2, rounded-brutal, color block variants
-- Input.astro for forms with focus states and accessibility
-- Badge.astro for tags/labels
-- All primitives tested in both light and dark modes
+- Migration from lucide-static to @lucide/astro (tree-shaking)
+- Isometric CSS utilities in global.css (transform-style: preserve-3d patterns)
+- Shadow utilities for isometric elements (.shadow-iso-yellow, .shadow-iso-turquoise)
+- Optional: Install @fontsource-variable/bricolage-grotesque for display headings
 
-**Uses:**
-- Design tokens from Phase 1
-- Tailwind utilities: border-*, shadow-brutal-*, hover:translate-*, transition-all
-- Astro component props for configuration
+**Addresses:** Pitfall #2 (dark mode transformation), Pitfall #4 (SVG performance foundation)
 
-**Implements:**
-- Architecture pattern: component composition with props
-- Hover state pattern: translate + shadow-none
-- Dark mode: semantic color tokens with dark: prefix
+**Success criteria:** Bundle size reduction verified, isometric utilities tested in both light/dark modes
 
-**Avoids:**
-- Box-shadow animation performance (use pseudo-element technique)
-- Over-componentization (single Button with props, not PrimaryButton/SecondaryButton/etc.)
-- Client-side JavaScript for static styling
-
-**Research needed:** None. Standard Astro component patterns.
-
----
-
-### Phase 3: Component Updates & Homepage Narrative
-**Rationale:** With primitives available, update existing components and restructure homepage. Homepage is highest-traffic page, narrative structure is key differentiator for lead generation.
+### Phase 2: Hero Section Refinement
+**Rationale:** Hero is highest-impact element (first impression). Get messaging and outcome badges right before moving to lower-priority sections. Simple markup changes, low risk.
 
 **Delivers:**
-- Hero.astro updated with narrative "Solutions" messaging (problem-focused, not capability-focused)
-- Process.astro with cyclical/iterative workflow structure (MVP: narrative text, defer diagram to post-v1.1)
-- Services.astro (Tech section) using Card primitive, business benefit focus
-- About.astro with personality + credentials
-- Header.astro navigation with Button primitive
-- Footer.astro updated styling
-- Contact form with Input primitive, neobrutalist styling
+- Outcome-focused headline copy (problem-to-outcome reframe)
+- Visual outcome badges (maximum 3, using design system utilities)
+- Trust indicators positioned strategically (below CTA, not competing)
+- Maintained Button.astro usage for single primary CTA
 
-**Addresses:**
-- Narrative homepage structure (Solutions → Process → Tech → About → Contact)
-- Asymmetric layouts with intentional breaks
-- Color block sections for visual separation
-- Table stakes: pressed button states, card components
+**Addresses:** Pitfall #6 (badge clutter), Pitfall #1 (WCAG contrast on badges)
 
-**Implements:**
-- Primitives from Phase 2 composed into larger components
-- Narrative content structure from FEATURES.md research
+**Uses:** @lucide/astro for badge icons, existing shadow-neo-* utilities
 
-**Avoids:**
-- Typography readability issues (test Hero CTA + About section with target audience)
-- Professional trust undermining (apply 7/10 density to hero, 2/10 to content areas)
+**Success criteria:** "5-second test" passes, WCAG contrast verified, target audience validates clarity
 
-**Research needed:** None for implementation. May need content strategy validation with target audience during testing.
-
----
-
-### Phase 4: Projects & Blog Styling
-**Rationale:** Projects and blog consume primitives built in Phase 2. Blog styling is lower priority than homepage since traffic flows Homepage → Projects → Contact for lead generation.
+### Phase 3: Process Section Enhancement
+**Rationale:** Dependent on Phase 1 isometric utilities. Requires illustration asset preparation before implementation. Medium complexity due to layout adjustments for illustrations.
 
 **Delivers:**
-- BlogCard.astro updated with Card primitive, shadow-brutal, border-2
-- Blog index page with neobrutalist card grid
-- Blog post template with subtle neobrutalist accents (headings only, preserve readable body)
-- Tag pages restyled to match
-- Portfolio projects page with narrative case study format (Problem → Solution → Results)
-- Individual project pages updated
+- Enhanced process descriptions (1-2 sentences per step)
+- Isometric mini-illustrations for 5 process steps
+- Layout adjustment for illustration placement (flexbox/grid for side-by-side desktop, stacked mobile)
 
-**Addresses:**
-- Blog restyling (P2 priority)
-- Projects narrative format (P2 priority)
-- Table stakes: dark mode adaptation for all blog components
+**Addresses:** Pitfall #3 (establish isometric style guidelines FIRST), Pitfall #4 (SVG optimization), Pitfall #2 (shadow transformation on illustrations)
 
-**Avoids:**
-- Typography readability issues (critical test: read full blog post >1000 words on mobile)
-- Over-styling code blocks (astro-expressive-code should shine, subtle borders max)
-- Applying neobrutalist density to body text (1/10 density in blog posts)
+**Illustration requirements:**
+- 5 SVG files: /public/images/process/step-{1-5}.svg
+- Style guide established: light angle (top-left 45°), color palette (yellow/turquoise/magenta), flat colors, thick borders
+- Each file <20KB after SVGO optimization
+- Descriptive alt text for screen readers
 
-**Research needed:** None. Standard component updates.
+**Success criteria:** Illustrations consistent style, recognized on mobile (375px), performance maintained (LCP increase <200ms)
 
----
-
-### Phase 5: Testing, Refinement & Accessibility Validation
-**Rationale:** Comprehensive testing catches issues before launch. Manual accessibility testing is critical since Lighthouse can pass while failing actual users. Target audience validation ensures professional trust isn't undermined.
+### Phase 4: Technology Section Redesign
+**Rationale:** Builds on isometric style guide from Phase 3. Reorganizes existing component rather than creating new patterns. Medium complexity.
 
 **Delivers:**
-- Manual accessibility audit (keyboard navigation, VoiceOver/NVDA screen reader, color blindness simulation)
-- Performance testing on target devices (iPhone SE, mid-range Android)
-- Dark mode QA pass across all pages
-- Target audience user testing (small business owners, not design community)
-- Density audit (verify 3/10 constraint enforced per section)
-- Spacing consistency audit (no one-off values, all use spacing scale)
-- Lighthouse CI validation (≥90% all metrics)
-- Conversion rate baseline established for post-launch monitoring
+- 3-category structure (AI, Automations, Web Apps)
+- Isometric illustration per category (matching style from Phase 3)
+- Grid layout adjustment (grid-cols-1 md:grid-cols-3)
+- Philosophy text maintained or repositioned
 
-**Addresses:**
-- All critical pitfalls (WCAG, readability, dark mode, performance, over-stylization, spacing, accessibility theater)
-- Professional trust validation with target audience
-- Mobile responsiveness validation
+**Uses:** Existing Card.astro component, isometric style guide from Phase 3
 
-**Avoids:**
-- Launching with passing Lighthouse but failing users
-- Over-stylization reducing conversions (discovered post-launch)
-- Box-shadow jank on mobile undetected
+**Addresses:** Feature differentiation for non-technical clients
 
-**Research needed:** None. Standard QA processes with neobrutalist-specific checklists.
+**Illustration requirements:**
+- 3 SVG files: /public/images/tech/{ai|automations|web-apps}.svg
+- Same style as process illustrations (consistency critical)
+- Visual metaphors: AI (brain/neural network), Automation (gears/connections), Web Apps (browser/interface)
 
----
+**Success criteria:** Services visually distinct, illustrations match process style, grid responsive
+
+### Phase 5: FAQ Page Creation
+**Rationale:** Independent of other phases, can be done anytime. Low complexity, standard Astro page creation pattern. Requires manual accessibility testing.
+
+**Delivers:**
+- Dedicated /src/pages/faq.astro page
+- Imports existing FAQ.astro component (or inlines content)
+- Manual JSON-LD structured data for FAQ schema
+- Footer.astro modified (remove or abbreviate FAQ, add link to /faq)
+- Navigation link added to FAQ page
+
+**Addresses:** Pitfall #7 (keyboard accessibility), Pitfall #10 (accessibility testing beyond Lighthouse)
+
+**Accessibility requirements:**
+- Keyboard navigation (Enter/Space toggle, Tab moves between questions)
+- ARIA attributes (aria-expanded, aria-controls, aria-labelledby)
+- Focus indicators visible against neobrutalist borders
+- Screen reader testing (VoiceOver/NVDA)
+
+**Success criteria:** Manual keyboard test passes, screen reader announces state correctly, Lighthouse 100%
 
 ### Phase Ordering Rationale
 
 **Why this order:**
-1. **Tokens first (Phase 1):** Foundation dependency. All components consume tokens. Accessibility baseline prevents late rework.
-2. **Primitives second (Phase 2):** Building blocks for composed components. Bottom-up prevents duplicate styling logic.
-3. **Homepage third (Phase 3):** Highest-traffic page, key differentiator for lead generation. Benefits from primitives being stable.
-4. **Blog/Projects fourth (Phase 4):** Lower priority than homepage for conversion funnel. Can iterate post-launch.
-5. **Testing last (Phase 5):** Validates complete system. Manual accessibility catches what Lighthouse misses.
+1. **Phase 1 MUST come first** — Design system foundation prevents pitfalls in all subsequent phases. Icon migration immediately improves performance baseline.
+2. **Phase 2 before 3/4** — Hero has highest user impact. Get messaging right before investing in illustration creation.
+3. **Phase 3 before Phase 4** — Establish isometric style guide with 5 process illustrations before creating 3 technology illustrations. Prevents inconsistency pitfall.
+4. **Phase 5 independent** — FAQ page has no dependencies on other phases, can be implemented anytime or in parallel.
+
+**Why this grouping:**
+- **Design system setup isolated** (Phase 1) — Critical foundation, must be solid before content changes
+- **Content enhancements grouped by complexity** — Hero (simple), Process (medium), Technology (medium)
+- **FAQ standalone** — Different component type (page vs homepage section), different testing requirements
 
 **How this avoids pitfalls:**
-- Phase 1 prevents WCAG contrast failures, dark mode issues, inconsistent spacing (foundational discipline)
-- Phase 2 prevents box-shadow animation performance issues (primitives enforce performant patterns)
-- Phase 3-4 risk over-stylization but Phase 5 target audience testing catches before launch
-- Phase 5 prevents accessibility testing theater (manual audit required)
-
-**Dependencies:**
-- Phase 2 depends on Phase 1 (tokens)
-- Phase 3-4 depend on Phase 2 (primitives)
-- Phase 5 depends on Phase 3-4 (complete system to test)
-
-Linear flow, no circular dependencies.
+- Phase 1 establishes dark mode utilities → prevents Pitfall #2 (shadow transformation)
+- Phase 3 establishes isometric guidelines → prevents Pitfall #3 (style inconsistency)
+- Phase 3 includes SVG optimization → prevents Pitfall #4 (performance degradation)
+- Phase 2 tests badge count → prevents Pitfall #6 (hero clutter)
+- Phase 5 requires manual accessibility testing → prevents Pitfall #7 (keyboard failures)
 
 ### Research Flags
 
-**Phases with standard patterns (skip /gsd:research-phase):**
-- **Phase 1:** Tailwind 4 @theme configuration is well-documented, neobrutalist token patterns established
-- **Phase 2:** Astro component composition with props is standard pattern
-- **Phase 4:** Blog styling is standard component updates
+**Phases with standard patterns (skip research-phase):**
+- **Phase 1:** Icon library migrations well-documented, Tailwind CSS custom utilities established pattern
+- **Phase 2:** Hero section enhancements standard web design pattern, extensive research already completed
+- **Phase 5:** FAQ page creation standard Astro pattern, JSON-LD implementation documented
 
-**Phases likely needing validation (not research, but testing):**
-- **Phase 3:** Content strategy for narrative homepage may need stakeholder/target audience validation during planning (not technical research)
-- **Phase 5:** Manual accessibility testing process may need tooling setup (VoiceOver, NVDA, simulation tools)
+**Phases needing validation during implementation (no deep research needed, but careful testing):**
+- **Phase 3:** Isometric illustration style guide requires design decisions, performance testing critical
+- **Phase 4:** Extends Phase 3 patterns, validate illustration consistency
 
-**No phases need /gsd:research-phase.** All technical patterns are established and verified in research. Implementation is straightforward application of known patterns.
+**No phases require `/gsd:research-phase`** — domain is well-understood, all patterns documented, existing site provides architectural guidance.
 
 ## Confidence Assessment
 
 | Area | Confidence | Notes |
 |------|------------|-------|
-| Stack | HIGH | Fontsource packages verified on npm, Tailwind 4 @theme documented officially, no libraries needed reduces risk |
-| Features | HIGH | Neobrutalism patterns verified via NN/G (authoritative UX source), table stakes identified from multiple design sources, narrative structure from portfolio best practices |
-| Architecture | HIGH | Tailwind 4 CSS-first theming verified in official docs, Astro component patterns verified in official docs, no novel integration points |
-| Pitfalls | HIGH | WCAG accessibility standards are specification, box-shadow performance issues verified with technical articles, over-stylization risk validated from multiple professional context sources |
+| Stack | HIGH | No new dependencies. Icon migration well-documented. Pure CSS approach validated. |
+| Features | HIGH | Outcome-focused hero, isometric illustrations, FAQ pages are established patterns with extensive 2026 research. |
+| Architecture | HIGH | Incremental changes to existing components. File-based routing patterns clear. Integration points documented. |
+| Pitfalls | HIGH | Neobrutalist design pitfalls extensively researched. WCAG compliance, dark mode transformation, SVG optimization all documented. |
 
-**Overall confidence: HIGH**
-
-All core technical recommendations verified with official documentation (Tailwind 4, Astro, Fontsource, WCAG). Design patterns cross-referenced across multiple authoritative sources (NN/G for neobrutalism definition, multiple portfolio best practice sources for narrative structure). No experimental technologies or unproven patterns.
+**Overall confidence:** HIGH
 
 ### Gaps to Address
 
-**Minor gaps (won't block implementation):**
-- **Exact color values for dark mode:** Need to desaturate bold colors by 10-20% for dark mode to reduce eye strain. Research identifies need but exact OKLCH values require design iteration during Phase 1 implementation. Not a blocker—can test and adjust.
+**Design decisions requiring client input:**
+- **Outcome badge content** — Which 3 metrics to highlight in hero (time saved? money saved? customers satisfied?). Research shows maximum 3 badges, but content needs client validation.
+- **Process step descriptions** — Expand existing "You/Joel" format with 1-2 sentences context. Requires copywriting with client input.
+- **Isometric illustration complexity** — Balance between simple/recognizable and detailed/impressive. Needs design iteration with feedback.
 
-- **Shadow offset coordination with translate values:** Research recommends using Tailwind's default spacing (translate-x-1 = 0.25rem = 4px) aligned to shadow offsets. If shadow is 6px, may need custom translate utility. Can resolve during Phase 1 token definition.
+**Validation during implementation:**
+- **Yellow accent WCAG compliance** — Existing #ffef6a must be tested against all new contexts (outcome badges, illustration backgrounds). May need fallback color for contrast failures.
+- **Mobile illustration recognition** — Isometric illustrations must be tested at 375px viewport. If unrecognizable, simplify or create mobile variants.
+- **FAQ question prioritization** — Current 5 questions work, but if FAQ grows, needs categorization strategy.
 
-- **Density guidelines per component type:** Research establishes 3/10 overall constraint and per-section targets (hero 7/10, content 2/10, blog 1/10), but specific components (button, card, input) need density interpretation. Document during Phase 1 with examples.
-
-- **Target audience preferences for narrative structure:** Research identifies problem-focused hero structure as best practice, but Joel's specific target audience (small business owners) may have preferences. Validate with user testing in Phase 5, but shouldn't block Phase 3 implementation (worst case: adjust messaging, structure stays).
-
-**No critical gaps.** All gaps are implementation details resolvable during respective phases, not blockers requiring additional research.
+**Performance monitoring:**
+- **Bundle size after icon migration** — Verify 200KB+ reduction from lucide-static removal
+- **LCP impact from illustrations** — Process and Technology sections add 8 illustrations. Must verify LCP increase <200ms total.
+- **Mobile scroll performance** — Test on mid-range device (not just dev machine). Watch for render jank when illustrations enter viewport.
 
 ## Sources
 
 ### Primary (HIGH confidence)
-- [Tailwind CSS v4.1 Documentation](https://tailwindcss.com/docs/theme) — @theme directive, shadow syntax, dark mode
-- [Tailwind CSS v4.1 Announcement](https://tailwindcss.com/blog/tailwindcss-v4-1) — Text shadows, CSS-first theming features
-- [Astro Components Documentation](https://docs.astro.build/en/basics/astro-components/) — Component patterns, props, slots
-- [Astro Fonts Guide](https://docs.astro.build/en/guides/fonts/) — Fontsource recommendations
-- [Fontsource Bricolage Grotesque](https://www.npmjs.com/package/@fontsource-variable/bricolage-grotesque) — Package verification, version compatibility
-- [WCAG Color Contrast Requirements](https://webaim.org/articles/contrast/) — Accessibility standards (4.5:1 text, 3:1 UI)
-- [NN/G: Neobrutalism Definition and Best Practices](https://www.nngroup.com/articles/neobrutalism/) — Authoritative UX source on design pattern
+
+**Stack Research:**
+- [Lucide Static Documentation](https://lucide.dev/guide/packages/lucide-static) — Package limitations and use cases
+- [Lucide Astro Documentation](https://lucide.dev/guide/packages/lucide-astro) — Installation, usage, tree-shaking benefits
+- [Tailwind CSS v4.1 Announcement](https://tailwindcss.com/blog/tailwindcss-v4-1) — Official release notes (text shadows, CSS-first theming)
+- [Astro Fonts Guide](https://docs.astro.build/en/guides/fonts/) — Official Astro documentation recommending Fontsource
+- [Fontsource Bricolage Grotesque](https://www.npmjs.com/package/@fontsource-variable/bricolage-grotesque) — Official npm package
+
+**Architecture Research:**
+- Existing codebase analysis: /src/pages/index.astro, /src/components/*.astro — Component patterns, integration points
+- [Astro Documentation](https://docs.astro.build) — File-based routing, component patterns
+
+**Pitfalls Research:**
+- [Neobrutalism: Definition and Best Practices - Nielsen Norman Group](https://www.nngroup.com/articles/neobrutalism/) — Authoritative UX research
+- [WCAG 2.2 Guidelines](https://www.w3.org/WAI/WCAG22/quickref/) — Accessibility requirements
+- [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/) — Color contrast validation
+- [Astro Experimental SVG optimization](https://docs.astro.build/en/reference/experimental-flags/svg-optimization/) — Official documentation
 
 ### Secondary (MEDIUM confidence)
-- [Neobrutalism.dev Components](https://www.neobrutalism.dev/) — Shadow patterns, hover effects (reference implementation)
-- [Bejamas: Neubrutalism Web Design Trend](https://bejamas.com/blog/neubrutalism-web-design-trend) — Feature overview, best practices
-- [Tobias Ahlin: Animating Box-Shadow Performance](https://tobiasahlin.com/blog/how-to-animate-box-shadow/) — Pseudo-element technique for performant shadows
-- [Kristi.Digital: Fonts for Neobrutalist Design](https://blog.kristi.digital/p/my-favourite-fonts-for-neobrutalist-web-design) — Typography recommendations (Bricolage Grotesque featured)
-- [HubSpot: Neo Brutalism Guide](https://blog.hubspot.com/website/neo-brutalism) — Professional context for business sites
-- [Manuel Matuzovic: Building Inaccessible Sites with Perfect Lighthouse Scores](https://www.matuzo.at/blog/building-the-most-inaccessible-site-possible-with-a-perfect-lighthouse-score/) — Accessibility testing limitations
 
-### Tertiary (Context only)
-- Multiple portfolio website examples (Figma, Webflow, Dribbble) — Narrative structure patterns (context for Phase 3 content structure)
-- CSS-Tricks box-shadow guide — General CSS reference (not neobrutalism-specific)
-- Various neobrutalism design showcases — Visual inspiration (not technical guidance)
+**Features Research:**
+- [Hero Section Design: Best Practices & Examples for 2026](https://www.perfectafternoon.com/2025/hero-section-design/) — Industry patterns
+- [Website Hero Section Best Practices + Examples](https://prismic.io/blog/website-hero-section) — Design patterns
+- [Hero Section Test That Led To A 50% Increase In Conversions](https://carrot.com/blog/hero-section-conversion-test/) — A/B testing data
+- [Isometric websites - 28+ Best Isometric Web Design Ideas 2026](https://99designs.com/inspiration/websites/isometric) — Design inspiration
+- [20 Best FAQ Pages (+ How To Create Your Own) (2026)](https://www.shopify.com/blog/120928069-how-to-create-faq-page) — FAQ patterns
+
+**Pitfalls Research:**
+- [My Favourite Fonts for Neobrutalist Web Design](https://blog.kristi.digital/p/my-favourite-fonts-for-neobrutalist-web-design) — Typography recommendations
+- [IBM Design Language – Isometric Style](https://www.ibm.com/design/language/illustration/isometric-style/design/) — Lighting consistency patterns
+- [7 Ways to Optimize SVGs: Reduce File Size by 80%](https://www.frontendtools.tech/blog/optimizing-svgs-web-performance-scalability) — Performance optimization
+- [Dark Mode Design Best Practices in 2026](https://www.tech-rz.com/blog/dark-mode-design-best-practices-in-2026/) — Shadow-to-glow patterns
+
+### Tertiary (LOW confidence)
+
+**Context only:**
+- [Search Engine Land: FAQ Schema Rise and Fall](https://searchengineland.com/faq-schema-rise-fall-seo-today-463993) — Current state of FAQ rich results (2023 restrictions)
+- Various WebSearch results about neobrutalism design trends — Used for understanding aesthetic, not technical decisions
 
 ---
 *Research completed: 2026-02-09*
-*Ready for roadmap: YES*
-*Confidence: HIGH across all research areas*
+*Ready for roadmap: yes*

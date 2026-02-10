@@ -41,7 +41,7 @@ Applying decorative, condensed, or quirky display fonts to body text creates sev
 Neobrutalism showcases bold, unconventional typography as a primary design element. Designers extend the aesthetic to all text, forgetting that readability is non-negotiable for a lead-generation portfolio site targeting non-technical small business owners.
 
 **How to avoid:**
-- **Strict font hierarchy:** Bold display fonts (Poppins) for H1/H2 only, neutral body fonts (Inter) for paragraphs
+- **Strict font hierarchy:** Bold display fonts (Bricolage Grotesque) for H1/H2 only, neutral body fonts (DM Sans) for paragraphs
 - Never use condensed or decorative fonts for text blocks longer than 2 lines
 - Minimum body text size: 16px (1rem) for desktop, 18px for mobile
 - Line height: 1.75 for body text (already implemented in `.prose p`)
@@ -59,65 +59,170 @@ Phase 1 (Design System Foundation) — Define type scale with readability constr
 
 ---
 
-### Pitfall 3: Dark Mode Color Inversion Breaking Visual Hierarchy
+### Pitfall 3: Dark Mode Shadow-to-Glow Transformation Breaking with New Elements
 
 **What goes wrong:**
-Naively inverting colors for dark mode destroys the carefully crafted visual hierarchy. Bold accent colors that worked on white backgrounds become garish or invisible on dark backgrounds. Shadows intended to create depth disappear entirely. The site looks broken in dark mode.
+New isometric illustrations, outcome badges, and FAQ components don't inherit the shadow-to-glow transformation properly in dark mode. Shadows remain hard and dark (invisible on dark backgrounds), or glows become harsh and "radioactive." The carefully designed shadow-to-glow system breaks down, making dark mode look buggy and inconsistent.
 
 **Why it happens:**
-Existing dark mode uses `.dark` class with localStorage persistence. Designers assume flipping `bg-white` to `bg-black` and `text-black` to `text-white` is sufficient, but neobrutalist shadows, thick borders, and bold colors require careful recalibration per mode. The current system already has separate light/dark tokens, but neobrutalist elements need mode-specific offset shadows and border treatments.
+The existing system uses specific utilities like `.shadow-neo-yellow` and `.shadow-neo-turquoise` that automatically transform from hard offset shadows in light mode to soft glows in dark mode. New components (isometric illustrations, outcome badges, FAQ accordions) get built with hardcoded shadow values or inline styles, bypassing the design system. The transformation relies on CSS custom properties and the `.dark` class modifier, which require explicit implementation for each new component.
 
 **How to avoid:**
-- Design both modes simultaneously, not dark mode as afterthought
-- Shadows in dark mode need lighter colors (not darker) to create depth
-- Test every component in both modes during development, not at end
-- Use CSS custom properties for shadows: `--shadow-light` and `--shadow-dark`
-- Bold colors may need 10-20% desaturation in dark mode to reduce eye strain
-- Thick borders may need reduced width in dark mode (6px → 4px) to prevent overwhelming dark backgrounds
+- **Never use hardcoded `box-shadow` values**—always use design system utilities (`.shadow-neo-yellow`, `.shadow-neo-turquoise`, `.shadow-neo-magenta`)
+- For isometric illustrations, create dedicated shadow utilities that transform properly: `.shadow-iso-yellow`, `.shadow-iso-turquoise` with both light (hard) and dark (glow) variants
+- Document the shadow-to-glow pattern explicitly in component guidelines: "All shadows must use design system utilities to ensure dark mode transformation"
+- Test every new component in both light and dark mode during development, not as final QA step
+- For SVG illustrations, use CSS filters for glows rather than SVG `<feGaussianBlur>` to maintain consistency with design system
+- Outcome badges should use the same shadow transformation as buttons/cards, not custom implementations
 
 **Warning signs:**
-- Elements "disappear" in dark mode (dark shadow on dark background)
-- Dark mode feels harsher on eyes than light mode (should be gentler)
-- Users disable dark mode specifically on your site
-- Accent colors feel "neon" or "radioactive" in dark mode
-- Thick borders create "cage effect" in dark mode
+- New components look great in light mode but broken in dark mode
+- Shadows disappear or become invisible in dark mode
+- Glows feel harsh, neon, or "radioactive" compared to existing components
+- User toggles dark mode and new sections stand out as visually inconsistent
+- DevTools inspection shows inline `box-shadow` values instead of CSS custom properties
 
 **Phase to address:**
-Phase 2 (Core Components) — build dark mode variants alongside light mode for each component. Phase 5 (Testing & Refinement) — dedicated dark mode QA pass with real users.
+Phase 1 (Hero Refinement) — Establish shadow utilities for outcome badges that inherit transformation. Phase 2 (Process Section Illustrations) — Create `.shadow-iso-*` utilities for isometric elements before implementing illustrations. Phase 3 (FAQ Page) — Test accordion expand/collapse states in both modes.
 
 ---
 
-### Pitfall 4: CSS Box-Shadow Performance Degradation on Animation
+### Pitfall 4: Isometric Illustration Style Inconsistency Across Components
 
 **What goes wrong:**
-Animating `box-shadow` directly (hover effects, transitions, scroll animations) triggers expensive paint operations at every frame, causing jank on mid-range devices and mobile. Animations that should run at 60fps drop to 20-30fps, feeling sluggish and unprofessional.
+Isometric illustrations in the process section use one lighting angle and color palette, while technology section illustrations use a different angle and palette. Illustration style clashes with existing neobrutalist elements (hard shadows, flat colors). The site feels like multiple designers worked independently without coordination, undermining professional trust.
 
 **Why it happens:**
-Neobrutalism relies heavily on thick, offset box shadows as a defining visual element. Designers add hover effects that animate shadow properties directly, not realizing `box-shadow` is one of the most expensive CSS properties to animate—it forces full repaints unlike `transform` and `opacity`.
+Isometric illustrations are sourced from different libraries (Undraw, unDraw alternatives, custom creation) without establishing unified style guidelines first. The key to isometric style is lighting consistency—keeping the direction or source of light consistent within illustrations creates a clear relationship between shapes and shadows. Without documented guidelines for isometric elements, each implementation makes independent choices about color saturation, lighting angle, level of detail, and how illustrations integrate with neobrutalist borders/shadows.
 
 **How to avoid:**
-- **Never animate `box-shadow` directly.** Use the pseudo-element technique:
-  1. Create `::after` pseudo-element with desired shadow
-  2. Set `opacity: 0` initially
-  3. Animate only `opacity` on hover/interaction
-  4. Optionally combine with `transform` on parent element for lift effect
-- For scroll-triggered animations, use Intersection Observer to toggle classes, not animate shadow values
-- Test all animations on mid-range mobile device (not just dev machine)
-- Use browser DevTools Performance tab to verify 60fps during animations
+- **Establish isometric style guidelines before creating any illustrations:**
+  - Light source direction: Choose one angle (e.g., top-left at 45°) and use consistently
+  - Color palette: Limit to existing accent colors (yellow, turquoise, magenta) + neutrals
+  - Detail level: Match neobrutalist aesthetic—bold shapes, minimal texture, flat colors
+  - Integration pattern: How illustrations interact with borders/shadows (inside bordered container? floating with own shadow?)
+- Create or procure all illustrations from single source with consistent style
+- If using illustration libraries, filter strictly by style characteristics
+- Document illustration specifications in design system: lighting angle, color usage, border treatment
+- For dark mode, adjust illustration brightness/saturation (don't create entirely new illustrations)
+- Test illustrations together on same page before finalizing—they should feel like a family
 
 **Warning signs:**
-- Hover effects feel "choppy" or delayed
-- Lighthouse performance score drops when hovering over elements
-- Mobile users experience lag when interacting with buttons/cards
-- Browser DevTools shows paint operations during animations
-- Scrolling feels janky when animated shadow elements are in viewport
+- Illustrations from different sections look like they came from different websites
+- Some illustrations have soft shadows, others have hard shadows
+- Color palettes vary between illustrations (one uses pastels, another uses saturated brights)
+- Illustrations conflict visually with neobrutalist borders/shadows
+- One illustration has 20 details, another has 3 (inconsistent complexity)
+- Light appears to come from different directions across illustrations
 
 **Phase to address:**
-Phase 2 (Core Components) — implement performant shadow animation patterns from the start. Phase 5 (Testing & Refinement) — performance audit on target devices (iPhone SE, mid-range Android).
+Phase 2 (Process Section Illustrations) — Establish isometric guidelines and create/procure first set. Validate style before proceeding to Phase 3 (Technology Section).
 
 ---
 
-### Pitfall 5: Over-Stylization Undermining Professional Trust
+### Pitfall 5: Isometric SVG Performance Degradation from Complex Paths
+
+**What goes wrong:**
+High-detail isometric illustrations with thousands of SVG path points cause render jank, especially on mobile devices. Page load times increase significantly (LCP degrades), Lighthouse performance scores drop below 90%, and scrolling feels sluggish when illustrations are in viewport. The site becomes noticeably slower despite being a static site.
+
+**Why it happens:**
+Designers export isometric illustrations directly from design tools (Figma, Illustrator) without optimization. Unoptimized SVGs can significantly slow down rendering, increase bundle size, and impact Core Web Vitals. Complex isometric illustrations often contain excessive path precision (6 decimal places instead of 2), unnecessary metadata, hidden layers, and unmerged paths. Each illustration might be 50-200KB unoptimized when it should be 5-20KB.
+
+**How to avoid:**
+- **Optimize all SVG files before adding to project:**
+  - Use SVGO or Astro's built-in SVG optimization (experimental flag: `svg-optimization`)
+  - Reduce path coordinate precision from 6 decimals to 2 (40% file size reduction with no visual change)
+  - Remove unnecessary metadata, comments, hidden layers
+  - Merge paths where possible without losing editability
+  - Simplify complex paths (40-80% size reduction possible)
+- Set target file size limits: <20KB per illustration, <10KB ideal
+- Use Astro's `<Image />` or `<Picture />` component for raster fallbacks if SVG complexity can't be reduced
+- Lazy load illustrations below the fold using Astro's `loading="lazy"` attribute
+- Test performance impact on mid-range mobile device (not just dev machine)
+- Monitor bundle size during build—flag any SVG over 20KB for manual optimization
+
+**Warning signs:**
+- Lighthouse performance score drops when illustrations added to page
+- LCP (Largest Contentful Paint) increases by >500ms
+- Build output shows SVG files >20KB
+- Scrolling feels janky when illustrations enter viewport
+- Mobile devices (especially older iPhones) show noticeable lag
+- DevTools Performance tab shows long paint times during scroll
+
+**Phase to address:**
+Phase 2 (Process Section Illustrations) — Establish SVG optimization pipeline before first illustration. Set up Astro SVG optimization and validate output sizes. Phase 6 (Performance Audit) — Verify no performance regressions from illustrations.
+
+---
+
+### Pitfall 6: Outcome Badges Creating Visual Clutter in Hero Section
+
+**What goes wrong:**
+Adding outcome-focused badges/icons to the hero section creates overwhelming visual density. Instead of clarifying value proposition, badges compete with headline, CTA, and hero image. Users don't know where to look first. The "5-second test" fails—visitors can't articulate what the site offers after 5 seconds of viewing.
+
+**Why it happens:**
+Best practices recommend trust signals (badges, icons, metrics) to boost credibility, and outcome-focused messaging to clarify value. However, cramming multiple messages, CTAs, excessive copy, and competing visuals into a single space is the most common hero section mistake. The existing site targets 10/10 neobrutalist density for hero sections, which already includes bold typography, thick borders, and colored shadows. Adding 4-6 outcome badges pushes density beyond usable levels.
+
+**How to avoid:**
+- **Strict badge hierarchy in hero:**
+  - Maximum 3 outcome badges/icons in hero (not 6+)
+  - Place badges as secondary elements—never competing with headline or CTA
+  - Use subtle treatment for badges: small icons, minimal borders, no shadows
+  - Position strategically: below CTA or to the side, never above headline
+  - Test with "5-second test"—users should articulate value proposition in 5 seconds
+- Consider moving some badges to pre/post-hero utility strip instead of cramming into hero
+- Badges should reinforce primary message, not introduce new concepts
+- Use consistent icon style (outline vs filled, size, color usage)
+- Test badge count variations: 0, 2, 4, 6—find optimal without overwhelming
+
+**Warning signs:**
+- Hero feels cluttered despite generous spacing
+- Users can't identify primary CTA in under 2 seconds
+- Multiple elements compete for attention (nothing stands out)
+- "5-second test" shows confusion about what site offers
+- Heat maps show scattered attention instead of focused scan pattern
+- Bounce rate increases after hero redesign
+- Design peers love it but target audience (small business owners) finds it confusing
+
+**Phase to address:**
+Phase 1 (Hero Refinement) — Test badge count variations with target audience before implementing. Start with 2 badges, increase only if testing supports it.
+
+---
+
+### Pitfall 7: FAQ Accordions Losing WCAG 2.2 Keyboard Accessibility
+
+**What goes wrong:**
+FAQ accordion components look great and work with mouse clicks but fail keyboard navigation and screen reader testing. Users can't expand/collapse questions with Enter/Space keys, focus indicators are invisible, or ARIA attributes are missing/incorrect. The FAQ page passes Lighthouse automated checks but fails manual accessibility testing.
+
+**Why it happens:**
+Accordion components require complex keyboard interaction patterns and ARIA attributes beyond basic HTML. Developers implement visual accordion behavior (click to expand) without implementing full WCAG 2.2 keyboard accessibility requirements. Neobrutalist styling (thick borders, bold colors) can obscure focus indicators—a blue focus ring on a yellow-bordered button becomes hard to see. The project has Lighthouse CI enforcement but this tests only a subset of accessibility issues—manual testing is required for interactive components.
+
+**How to avoid:**
+- **Full accordion accessibility implementation:**
+  - Keyboard support: Enter and Space to toggle, Tab to move between questions
+  - ARIA attributes: `aria-expanded`, `aria-controls`, `aria-labelledby`
+  - Focus indicators with sufficient contrast against both background AND bordered elements
+  - Screen reader announces state: "Question 1, button, collapsed" / "expanded"
+  - Focus management: Focus moves to expanded content or stays on button (document choice)
+- Use `<details>` and `<summary>` HTML elements as foundation (native accessibility)
+- Test with keyboard only—disconnect mouse and navigate entire FAQ page
+- Test with screen reader (VoiceOver on Mac, NVDA on Windows)
+- Design custom focus indicators that work with neobrutalist borders (consider glow effect or thick outline in contrasting color)
+- Document accordion behavior in component guidelines with accessibility requirements
+
+**Warning signs:**
+- Lighthouse 100% but keyboard navigation doesn't work
+- Focus indicators invisible or hard to see on bordered buttons
+- Screen reader announces "button" but not expansion state
+- Enter key doesn't toggle accordion (only click works)
+- Tab order skips accordion content or behaves unexpectedly
+- Users with disabilities report FAQ page is difficult to use
+
+**Phase to address:**
+Phase 4 (FAQ Page) — Implement full keyboard and screen reader support from start, not as afterthought. Manual accessibility testing before considering page complete.
+
+---
+
+### Pitfall 8: Over-Stylization Undermining Professional Trust
 
 **What goes wrong:**
 Pushing neobrutalism to 10/10 density creates a site that feels experimental, unfinished, or like a placeholder. Small business owners (target audience) interpret the aesthetic as "unprofessional," "not ready," or "too quirky for serious work." Lead generation drops instead of improving.
@@ -150,7 +255,7 @@ Phase 1 (Design System Foundation) — define density constraints per component 
 
 ---
 
-### Pitfall 6: Inconsistent Spacing Creating Visual Chaos
+### Pitfall 9: Inconsistent Spacing Creating Visual Chaos
 
 **What goes wrong:**
 Applying random or inconsistent spacing between neobrutalist elements (thick borders, bold shadows, large type) creates a layout that feels haphazard instead of intentionally raw. Elements collide visually, breathing room disappears, and the design feels amateurish rather than bold.
@@ -180,7 +285,7 @@ Phase 1 (Design System Foundation) — define neobrutalist spacing scale and usa
 
 ---
 
-### Pitfall 7: Accessibility Testing Theater (Passing Lighthouse, Failing Humans)
+### Pitfall 10: Accessibility Testing Theater (Passing Lighthouse, Failing Humans)
 
 **What goes wrong:**
 Site achieves 100% Lighthouse accessibility score but remains difficult to use for people with disabilities. Color contrast passes automated checks but causes eye strain. Focus indicators are technically present but invisible. ARIA labels exist but don't help screen reader users navigate effectively.
@@ -224,19 +329,25 @@ Shortcuts that seem reasonable but create long-term problems.
 | Skipping mobile testing of thick borders/shadows | Faster dev cycle, desktop looks great | Mobile feels cramped, borders too thick at small viewport | Never—test responsive behavior immediately |
 | Copy-pasting shadow animation code across components | Fast, works in isolation | Performance issues accumulate, hard to optimize later | Only in prototype phase, refactor before production |
 | Using yellow accent on light backgrounds | Matches brand colors, visually striking | Fails WCAG contrast, Lighthouse fails | Only for non-text decorative elements |
+| Sourcing isometric illustrations from multiple libraries | More variety, faster to find "perfect" image | Inconsistent style undermines professional look | Only during prototyping to test concepts |
+| Inline SVG without optimization | Easy to copy-paste from design tool | Massive file sizes, performance degradation | Only for quick prototypes, never production |
+| Using generic accordion scripts without accessibility | Works with mouse, faster implementation | Fails keyboard users, screen readers, WCAG 2.2 | Never—build accessible from start |
+| Adding 6+ outcome badges to hero for completeness | Showcases all value propositions at once | Visual clutter, fails 5-second test, overwhelms users | Never—maximum 3 badges in hero |
 
 ## Integration Gotchas
 
-Common mistakes when integrating neobrutalism with existing systems.
+Common mistakes when integrating new components with existing neobrutalist system.
 
 | Integration | Common Mistake | Correct Approach |
 |-------------|----------------|------------------|
-| Tailwind CSS 4 (@tailwindcss/vite) | Assuming v3 shadow utilities work the same in v4 | Review Tailwind 4 docs for shadow syntax changes, test all existing utilities |
-| Astro Content Collections | Applying neobrutalist styling globally to `.prose` content | Selective application: neobrutalist accents on headings/blockquotes only, preserve readable body text |
-| Dark mode with localStorage | Forgetting to update neobrutalist shadow/border values for dark mode | Create separate CSS custom properties: `--shadow-offset-light` and `--shadow-offset-dark` |
-| astro-expressive-code | Over-styling code blocks with thick borders/bold shadows | Minimal styling on code blocks—let syntax highlighting shine, subtle border max |
-| Google Fonts loading | Adding more display fonts increases LCP/render-blocking time | Limit to 2 font families max, use font-display: swap, preload critical fonts |
-| Lighthouse CI thresholds | Assuming accessible colors automatically pass | Test every new color combination manually before implementing |
+| Isometric illustrations + neobrutalist borders | Illustration gets its own shadow that conflicts with container shadow | Place illustration inside bordered container with no shadow, OR give illustration shadow and remove container border |
+| Outcome badges + hero section density | Adding badges without reducing other elements (hero now 13/10 density) | Hero stays at 10/10—if badges added, reduce headline size or remove secondary elements |
+| FAQ accordions + dark mode | Accordion border/shadow hardcoded, doesn't transform to glow | Use `.shadow-neo-*` utilities so accordion inherits shadow-to-glow transformation |
+| SVG illustrations + Astro build | SVGs imported without optimization enabled | Enable Astro experimental flag `svg-optimization` in config before adding illustrations |
+| Outcome icons + OKLCH color system | Using generic icon colors (hex/rgb) that don't match design system | Extract icon colors from existing OKLCH tokens for consistency |
+| New components + existing spacing scale | Applying Tailwind defaults without considering neobrutalist spacing needs | Use documented neobrutalist spacing scale (minimum 24px gap between bordered elements) |
+| Isometric illustrations + mobile viewports | Illustrations too complex/detailed to be recognizable at small sizes | Test illustrations at 375px width, simplify or create alternate simplified version for mobile |
+| FAQ page + blog typography | Using same `.prose` styling for FAQ that's optimized for blog content | Create separate `.faq-content` class with appropriate spacing/sizing for Q&A format |
 
 ## Performance Traps
 
@@ -244,39 +355,49 @@ Patterns that work at small scale but fail as usage grows.
 
 | Trap | Symptoms | Prevention | When It Breaks |
 |------|----------|------------|----------------|
+| Unoptimized isometric SVGs | LCP increases by 500ms+, Lighthouse performance drops | Enable Astro SVG optimization, set <20KB per file limit | First illustration added (if complex) |
+| Multiple isometric illustrations on single page | Scrolling jank on mobile, long paint times | Lazy load below-fold illustrations, limit to 3-4 per page max | 4+ complex illustrations on same page |
 | Animating box-shadow on multiple cards | Smooth on dev machine, janky on mobile | Use pseudo-element opacity technique for all shadow animations | 3+ animated shadows visible simultaneously |
-| Multiple layered shadows per element | Looks impressive, loads fine | Limit to 2 shadows max per element, test on mid-range devices | On mobile devices, especially older iPhones |
-| High-resolution shadow blur values | Beautiful soft shadows | Use blur radius ≤ 20px for neobrutalism (hard shadows match aesthetic better anyway) | 10+ shadowed elements on page |
-| Loading multiple neobrutalist display fonts | More font options, expressive typography | Restrict to 1 display font (Poppins), 1 body font (Inter) | Third font added (each font ~30-50kb) |
-| Over-using CSS custom properties for every shadow | Flexible, easy to theme | Balance flexibility with performance—hardcode common shadows, tokenize only variants | 20+ custom shadow properties defined |
+| Outcome badge icons loaded as individual requests | Slower page load, multiple HTTP requests | Use SVG sprite or icon font for all hero icons | 6+ small icon files |
+| FAQ accordions with complex SVG icons | Expand/collapse animations stutter | Use simple geometric icons or icon fonts for accordion indicators | 10+ FAQ items with SVG icons |
+| Loading multiple neobrutalist display fonts | More font options, expressive typography | Restrict to 1 display font (Bricolage Grotesque), 1 body font (DM Sans) | Third font added (each font ~30-50kb) |
+| High-resolution isometric PNGs as fallback | Better detail than optimized SVG | Use properly optimized SVG instead of raster fallback | Any PNG >50KB used |
 
 ## UX Pitfalls
 
-Common user experience mistakes in neobrutalist design.
+Common user experience mistakes when adding outcome-focused messaging and interactive components.
 
 | Pitfall | User Impact | Better Approach |
 |---------|-------------|-----------------|
-| Making all buttons same thickness/shadow | Can't distinguish primary vs secondary actions | Primary CTA: 6px border + 8px shadow, Secondary: 4px border + 4px shadow, Tertiary: 2px border only |
-| Using neobrutalist style for form validation errors | Errors feel decorative, not urgent | Reserve bold red+black combo specifically for errors, use different shadow offset (inset shadow = error state) |
-| Flat hierarchy without depth cues | Everything same visual weight, hard to prioritize | Use shadow depth as hierarchy: Hero 12px > Cards 8px > Buttons 4px > Text 0px |
-| Over-animating on hover | Fun at first, exhausting after 10 interactions | Subtle lift (2-4px) + opacity change only, no rotation/skew/excessive movement |
-| Ignoring mobile touch target sizes | Thick borders reduce perceived touch area | Ensure 44x44px minimum touch target despite visual styling, use padding to expand hit area |
-| No visual feedback for loading states | Bold design makes loading feel broken | Neobrutalist skeleton screens with thick borders, or simple pulse animation on button text |
+| Too many outcome badges in hero (6+) | Overwhelmed, can't identify primary value proposition | Maximum 3 badges, test with "5-second test" |
+| All FAQ questions closed by default | Users must click each to find answer, high friction | Consider opening first 2-3 questions by default, or add search |
+| Isometric illustrations without alt text | Screen reader users miss context, SEO impact | Descriptive alt text for each illustration: "Isometric illustration showing three-step process workflow" |
+| Outcome badges using jargon or unclear metrics | Confusing to non-technical small business owners | Use plain language: "Save 10 hours/week" not "37% productivity gain" |
+| FAQ questions in random order | Users can't predict where to find answers | Group by theme, order by frequency (most-asked first), or alphabetical |
+| Process section with 8+ isometric steps | Cognitive overload, users skip reading | Maximum 5 steps in process, combine related steps if needed |
+| Interactive elements indistinguishable from decorative | Users don't realize FAQ questions are clickable | Clear affordances: cursor change, hover state, "click to expand" hint |
+| Outcome badges competing with CTA | Users read badges instead of clicking CTA, conversions drop | Badges secondary to CTA—smaller, positioned to not compete |
+| Isometric illustrations too abstract | Users don't understand what illustration represents | Test comprehension—users should identify concept without explanation |
+| FAQ answers too long (200+ words) | Users won't read long answers, defeats "quick reference" purpose | Keep answers under 100 words, link to blog post for details |
 
 ## "Looks Done But Isn't" Checklist
 
 Things that appear complete but are missing critical pieces.
 
-- [ ] **Color contrast:** Automated tools pass — verify manually in bright sunlight and with color blindness simulation
-- [ ] **Focus indicators:** Visible in isolation — verify contrast against all background colors and element types
-- [ ] **Dark mode:** Components look good — verify shadow visibility, color saturation adjusted, borders not overwhelming
-- [ ] **Typography:** Headings look bold — verify body text readability in long-form content (blog posts >1000 words)
-- [ ] **Animations:** Smooth on dev machine — verify 60fps on iPhone SE, mid-range Android using DevTools Performance
-- [ ] **Spacing:** Design files show consistent spacing — verify responsive behavior, check all breakpoints for collisions
-- [ ] **Accessibility:** Lighthouse 100% — verify keyboard navigation, screen reader, actual user testing with disabilities
-- [ ] **Mobile borders:** Thick borders look great on desktop — verify mobile viewport doesn't feel cramped, consider reducing border-width at small breakpoints
-- [ ] **CTAs:** Buttons visually prominent — verify non-technical users recognize as clickable (test with target audience)
-- [ ] **Professional perception:** Design community loves it — verify target audience (small business owners) trusts it for lead generation
+- [ ] **Isometric illustrations optimized:** Files under 20KB each, SVGO or Astro optimization applied
+- [ ] **Illustration style consistency:** All illustrations use same light source angle, color palette, detail level
+- [ ] **Dark mode shadow transformation:** All new components use `.shadow-neo-*` utilities, tested in dark mode
+- [ ] **Outcome badges count tested:** Maximum 3 badges in hero, validated with "5-second test" and target audience
+- [ ] **FAQ keyboard accessibility:** Enter/Space toggle works, Tab navigation correct, tested without mouse
+- [ ] **FAQ screen reader support:** ARIA attributes correct, state announced properly, tested with VoiceOver/NVDA
+- [ ] **Focus indicators on new components:** Visible against both background and bordered elements, tested manually
+- [ ] **SVG alt text:** Every isometric illustration has descriptive alt text for screen readers and SEO
+- [ ] **Mobile responsiveness:** Illustrations recognizable at 375px, badge layout doesn't break, FAQ accordions work on touch
+- [ ] **Performance metrics maintained:** Lighthouse performance 90+, LCP increase <200ms, no scrolling jank
+- [ ] **Spacing consistency:** New components follow neobrutalist spacing scale (24px minimum gap between bordered elements)
+- [ ] **OKLCH color integration:** Outcome badges and illustrations use existing color tokens, not new arbitrary colors
+- [ ] **Density compliance:** Each section measured against density guidelines (hero 10/10, content 3/10, etc.)
+- [ ] **Target audience validation:** Tested with small business owners (not just design peers), value proposition clear
 
 ## Recovery Strategies
 
@@ -285,12 +406,15 @@ When pitfalls occur despite prevention, how to recover.
 | Pitfall | Recovery Cost | Recovery Steps |
 |---------|---------------|----------------|
 | WCAG contrast failures discovered after implementation | MEDIUM | 1. Audit all color combinations with WebAIM checker 2. Create compliant color palette alternatives 3. Replace in CSS custom properties 4. Re-test Lighthouse 5. Manual QA all pages |
+| Dark mode shadows don't transform properly | MEDIUM | 1. Audit all new components for hardcoded shadows 2. Replace with `.shadow-neo-*` utilities 3. Test every component in dark mode 4. Document shadow usage in component guidelines |
+| Isometric illustrations inconsistent style | HIGH | 1. Document style guidelines (light angle, colors, detail) 2. Audit existing illustrations against guidelines 3. Recreate or heavily edit non-compliant illustrations 4. Establish single source for future illustrations |
+| Unoptimized SVGs causing performance issues | LOW | 1. Run all SVGs through SVGO 2. Enable Astro SVG optimization 3. Rebuild and test bundle sizes 4. Verify Lighthouse performance restored |
+| Outcome badges overwhelming hero section | MEDIUM | 1. User test variations with 0, 2, 3, 4 badges 2. Find optimal count (likely 2-3) 3. Move excess badges to utility strip or separate section 4. Retest "5-second test" |
+| FAQ accordions fail keyboard accessibility | HIGH | 1. Implement full keyboard support (Enter, Space, Tab) 2. Add proper ARIA attributes 3. Design visible focus indicators 4. Test with keyboard only 5. Test with screen reader 6. Document for future components |
+| Professional trust issues from over-stylization | HIGH | 1. Measure density across all sections 2. Reduce to documented targets (hero 10/10, content 3/10) 3. User test with target audience 4. A/B test if possible 5. Monitor conversion rates |
+| Spacing inconsistencies across new components | MEDIUM | 1. Document spacing scale in design system 2. Audit all new components 3. Refactor using systematic spacing utilities 4. Create before/after examples for team reference |
+| Isometric illustrations unrecognizable on mobile | MEDIUM | 1. Test each illustration at 375px 2. Simplify complex illustrations or create mobile variants 3. Consider replacing with simpler icons if simplification isn't enough 4. Retest comprehension |
 | Body text readability issues in blog posts | LOW | 1. Create `.prose-readable` variant class 2. Apply to blog content only 3. Test with real blog posts 4. User testing with non-technical audience |
-| Dark mode colors look broken | HIGH | 1. Create dark mode design mockups for all components 2. Define `--color-*-dark` tokens 3. Implement dark mode variants 4. Test every component in both modes 5. User testing in dark mode |
-| Box-shadow animations causing jank | MEDIUM | 1. Identify all animated shadow instances 2. Refactor using pseudo-element technique 3. Test performance with DevTools 4. Verify 60fps on target devices |
-| Over-stylization reducing conversions | HIGH | 1. A/B test dialed-back version (2/10 density) 2. User interviews to identify specific pain points 3. Selectively reduce density in problem areas 4. Re-test conversion metrics |
-| Inconsistent spacing across pages | MEDIUM | 1. Document spacing scale for neobrutalist elements 2. Audit all pages for violations 3. Refactor using systematic spacing utilities 4. Create component documentation with spacing examples |
-| Passing Lighthouse but failing users | HIGH | 1. Conduct manual accessibility audit (keyboard, screen reader) 2. Test with color blindness simulation 3. User testing with people with disabilities 4. Fix identified issues 5. Document manual testing process for future |
 
 ## Pitfall-to-Phase Mapping
 
@@ -298,16 +422,16 @@ How roadmap phases should address these pitfalls.
 
 | Pitfall | Prevention Phase | Verification |
 |---------|------------------|--------------|
-| WCAG contrast failures | Phase 1: Design System | WebAIM Contrast Checker on all color tokens, Lighthouse CI passes |
-| Typography readability | Phase 1: Design System, Phase 4: Blog Integration | Read full blog post on mobile, target audience feedback on readability |
-| Dark mode color inversion | Phase 2: Core Components | Every component tested in both modes, dark mode user testing |
-| Box-shadow animation performance | Phase 2: Core Components | DevTools Performance tab shows 60fps, test on iPhone SE |
-| Over-stylization | Phase 1: Design System, Phase 5: Testing & Refinement | Density guidelines documented, target audience user testing |
-| Inconsistent spacing | Phase 1: Design System, Phase 3: Page Templates | Spacing audit passes, no one-off values in templates |
-| Accessibility testing theater | Phase 5: Testing & Refinement | Manual keyboard/screen reader testing completed, documented |
-| Font pairing mistakes | Phase 1: Design System | Body text legibility in blog posts >1000 words |
-| Mobile responsiveness | Phase 2: Core Components, Phase 3: Page Templates | Test all breakpoints, borders/shadows scaled appropriately |
-| Professional trust issues | Phase 5: Testing & Refinement | Target audience user testing, conversion rate monitoring |
+| WCAG contrast failures | Phase 1: Hero Refinement | WebAIM Contrast Checker on outcome badges, Lighthouse CI passes |
+| Typography readability | Phase 1: Hero Refinement | Target audience can articulate value prop in 5 seconds |
+| Dark mode shadow transformation breaking | Phase 1: Hero Refinement, Phase 2: Process Section, Phase 4: FAQ Page | Every new component tested in both light and dark modes |
+| Isometric illustration style inconsistency | Phase 2: Process Section Illustrations (establish guidelines before implementation) | All illustrations use same light angle, color palette, detail level |
+| SVG performance degradation | Phase 2: Process Section Illustrations, Phase 3: Technology Section | All SVGs <20KB, Lighthouse performance 90+, LCP increase <200ms |
+| Outcome badges overwhelming hero | Phase 1: Hero Refinement | "5-second test" passes, maximum 3 badges, user testing validates clarity |
+| FAQ keyboard accessibility failures | Phase 4: FAQ Page | Manual keyboard navigation test passes, screen reader test passes |
+| Over-stylization undermining trust | All phases (enforce 3/10 density throughout) | User testing with small business owners, conversion rate maintained/improved |
+| Inconsistent spacing | Phase 1: Hero Refinement (establish spacing for badges/icons) | Spacing audit shows consistent use of documented scale |
+| Accessibility testing theater | Phase 5: Testing & Refinement | Manual accessibility tests completed (keyboard, screen reader, color blindness) |
 
 ## Sources
 
@@ -315,34 +439,51 @@ How roadmap phases should address these pitfalls.
 - [Neobrutalism: Definition and Best Practices - Nielsen Norman Group](https://www.nngroup.com/articles/neobrutalism/)
 - [Neubrutalism - UI Design Trend That Wins The Web - Bejamas](https://bejamas.com/blog/neubrutalism-web-design-trend)
 - [Brutalism vs Neubrutalism in UI Design - CC Creative](https://www.cccreative.design/blogs/brutalism-vs-neubrutalism-in-ui-design)
-- [Neobrutalism In Web Design: The Bold Rebellion Against Convention - GraphicFolks](https://graphicfolks.com/blog/neobrutalism-in-web-design/)
+- [Consistency is key with branding - Neo Brutalism Design Scale](https://www.neobrutalism.dev/)
 
-### Accessibility
-- [WebAIM: Contrast and Color Accessibility](https://webaim.org/articles/contrast/)
-- [WCAG Color Accessibility Guide 2026 - AI Brand Colors](https://aibrandcolors.com/accessibility-guide/)
-- [Lighthouse accessibility score - Chrome for Developers](https://developer.chrome.com/docs/lighthouse/accessibility/scoring)
-- [Building the most inaccessible site possible with a perfect Lighthouse score - Manuel Matuzovic](https://www.matuzo.at/blog/building-the-most-inaccessible-site-possible-with-a-perfect-lighthouse-score/)
+### Dark Mode & Shadow-to-Glow Implementation
+- [Dark Mode Design Best Practices in 2026 - Tech-RZ](https://www.tech-rz.com/blog/dark-mode-design-best-practices-in-2026/)
+- [Dark Mode Done Right: Best Practices for 2026 - Medium](https://medium.com/@social_7132/dark-mode-done-right-best-practices-for-2026-c223a4b92417)
+- [Dark Mode Design Systems: A Practical Guide - Medium](https://medium.com/design-bootcamp/dark-mode-design-systems-a-practical-guide-13bc67e43774)
+- [Dark Mode Design: Trends, Myths, and Common Mistakes - WebWave](https://webwave.me/blog/dark-mode-design-trends)
+- [The Dark Side of Dark Mode: 7 UX Design Mistakes - SevenKoncepts](https://sevenkoncepts.com/blog/the-dark-side-of-dark-mode-design-mistakes/)
 
-### Typography & Readability
-- [Essential Typography Trends for Digital Products in 2026 - Desinance](https://desinance.com/design/product-design/typography-trends-2026/)
-- [My Favourite Fonts for Neobrutalist Web Design - Kristi.Digital](https://blog.kristi.digital/p/my-favourite-fonts-for-neobrutalist-web-design)
-- [Choosing Accessible Fonts - DigitalA11Y](https://www.digitala11y.com/choosing-accessible-fonts-enhancing-readability-and-inclusivity/)
+### Isometric Illustration Consistency & Performance
+- [IBM Design Language – Isometric Style](https://www.ibm.com/design/language/illustration/isometric-style/design/)
+- [7 Ways to Optimize SVGs: Reduce File Size by 80% - FrontendTools](https://www.frontendtools.tech/blog/optimizing-svgs-web-performance-scalability)
+- [High Performance SVGs - CSS-Tricks](https://css-tricks.com/high-performance-svgs/)
+- [SVG Performance Optimization for Modern Websites - SVG AI](https://www.svgai.org/blog/svg-performance-optimization)
+- [How to improve page load speed with SVG optimization - Raygun](https://raygun.com/blog/improve-page-load-speed-svg-optimization/)
 
-### Performance
+### Astro SVG Optimization
+- [Experimental SVG optimization - Astro Docs](https://docs.astro.build/en/reference/experimental-flags/svg-optimization/)
+- [How to optimize images in Astro: A step-by-step guide - Uploadcare](https://uploadcare.com/blog/how-to-optimize-images-in-astro/)
+- [feat: add SVGO optimization support for SVG assets - Astro GitHub](https://github.com/withastro/astro/commit/1a2ed01c92fe93843046396a2c854514747f4df8)
+
+### Hero Section & Outcome-Focused Messaging
+- [Hero Section Design: Best Practices & Examples for 2026 - Perfect Afternoon](https://www.perfectafternoon.com/2025/hero-section-design/)
+- [High-Impact Hero Sections That Don't Hurt Page Speed: A CRO Guide - GoStellar](https://www.gostellar.app/blog/high-impact-hero-sections-that-dont-hurt-page-speed)
+- [Hero Section Optimization: Best Practices and Examples - Omniconvert](https://www.omniconvert.com/blog/hero-section-examples/)
+- [Best Practices for SaaS Website Hero Sections - ALF Design Group](https://www.alfdesigngroup.com/post/saas-hero-section-best-practices)
+
+### FAQ Page Accessibility (WCAG 2.2)
+- [Designing Accessible Dark Mode: A WCAG-Compliant Interface Redesign - Medium](https://medium.com/@design.ebuniged/designing-accessible-dark-mode-a-wcag-compliant-interface-redesign-0e0225833aa4)
+- [Dark Mode: Best Practices for Accessibility - DubBot](https://dubbot.com/dubblog/2023/dark-mode-a11y.html)
+- [The Designer's Guide to Dark Mode Accessibility - Accessibility Checker](https://www.accessibilitychecker.org/blog/dark-mode-accessibility/)
+- [Avoiding accessibility mistakes: 3 actions for 2026 - The Drum](https://www.thedrum.com/industry-insight/avoiding-accessibility-mistakes-three-actions-that-will-help-you-win-in-2026)
+
+### Accessibility & OKLCH Color Contrast
+- [OKLCH in CSS: Consistent, accessible color palettes - LogRocket](https://blog.logrocket.com/oklch-css-consistent-accessible-color-palettes)
+- [Color Contrast for Accessibility: WCAG Guide (2026) - WebAbility](https://www.webability.io/blog/color-contrast-for-accessibility)
+- [WCAG 2.2 color contrast validator with OKLCH support - GitHub](https://github.com/incluud/color-contrast-checker)
+- [Offering a Dark Mode Doesn't Satisfy WCAG Contrast Requirements - BOIA](https://www.boia.org/blog/offering-a-dark-mode-doesnt-satisfy-wcag-color-contrast-requirements)
+
+### Performance & Core Web Vitals
+- [Optimize Astro.js with Static Site Generation - TillItsDone](https://tillitsdone.com/blogs/astro-js-performance-optimization/)
+- [Boosting Web Performance: Astro JS Image & Speed Optimization - DEV](https://dev.to/benajaero/boosting-web-performance-how-we-supercharged-our-agencys-site-with-astro-js-image-speed-optimization-techniques-18mf)
 - [How to animate box-shadow with silky smooth performance - Tobias Ahlin](https://tobiasahlin.com/blog/how-to-animate-box-shadow/)
-- [How to Animate CSS Box Shadows and Optimize Performance - SitePoint](https://www.sitepoint.com/css-box-shadow-animation-performance/)
-- [box-shadow transition performance - Cloud66](https://blog.cloud66.com/box-shadow-transition-performance)
-
-### Dark Mode Implementation
-- [GitHub - Neobrutal Discord Theme (light and dark mode)](https://github.com/Saltssaumure/neobrutal-discord-theme)
-- [Google Homepage UI Redesign in Neobrutalism Style with Tailwind CSS v4](https://dev.to/thedevricha/google-homepage-ui-redesign-in-neobrutalism-style-with-tailwind-css-v4-4c38)
-
-### Professional Context
-- [Neo Brutalism: Your Guide to the Design Trend - HubSpot](https://blog.hubspot.com/website/neo-brutalism)
-- [What Is the Neubrutalism Web Design Trend - Envato](https://elements.envato.com/learn/what-is-the-neubrutalism-web-design-trend)
-- [16 Neo Brutalist Website Examples That Refuse To Play It Safe](https://reallygooddesigns.com/neo-brutalist-website-examples/)
 
 ---
-*Pitfalls research for: Neobrutalist design implementation on professional portfolio site*
+*Pitfalls research for: Adding outcome-focused hero, isometric illustrations, and FAQ page to existing neobrutalist portfolio site*
 *Researched: 2026-02-09*
-*Context: Subsequent milestone adding neobrutalism to existing portfolio site with dark mode, targeting small business owners for lead generation*
+*Context: Subsequent milestone adding features to site with existing OKLCH color system, shadow-to-glow dark mode, WCAG 2.2 AA compliance*

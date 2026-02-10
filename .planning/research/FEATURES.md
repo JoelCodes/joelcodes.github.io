@@ -1,349 +1,363 @@
-# Feature Landscape: Neobrutalist Design & Narrative Homepage
+# Feature Research: Homepage Refinement (v1.2)
 
-**Domain:** Portfolio Website Design (Neobrutalism + Narrative Structure)
+**Domain:** Lead-generation portfolio website (neobrutalist design)
 **Researched:** 2026-02-09
-**Context:** Subsequent milestone adding neobrutalist design to existing portfolio site
 **Confidence:** HIGH
 
-## Executive Summary
+## Feature Landscape
 
-This research focuses on the NEW features needed for v1.1: transforming an existing minimalist portfolio site into a distinctive neobrutalist design with narrative homepage structure. The existing site already has core functionality (blog, projects, contact, dark mode). This analysis catalogs only the visual design patterns and narrative elements needed for the redesign.
+This research focuses on the INCREMENTAL features being added to an existing neobrutalist portfolio site. The base site is already built with homepage sections, blog, portfolio, contact form, and neobrutalist design system.
 
-**Key findings:**
-- Neobrutalism is defined by thick borders (2-4px), hard offset shadows (4-6px, zero blur), high contrast colors, and asymmetric layouts
-- Implementation via Tailwind is straightforward using border-*, shadow-*, and transform utilities
-- Narrative homepage structure follows problem → solution → process → results pattern
-- Critical risk: balancing bold aesthetics with accessibility (contrast ratios, readable typography)
+### Table Stakes (Users Expect These)
 
-## Table Stakes Features
+Features users assume exist in outcome-focused portfolio sites targeting small business clients.
 
-Features users expect from neobrutalist design. Missing these = design feels incomplete or fake.
+| Feature | Why Expected | Complexity | Notes |
+|---------|--------------|------------|-------|
+| Outcome-focused headline | Users want to know "what's in it for me" within 3 seconds | LOW | Hero already exists, needs reframe from problem to outcome |
+| Clear value metrics | Small business clients think in ROI terms (time, money, customers) | LOW | Visual badges/icons with metrics (already have border/shadow system) |
+| Process transparency | Risk-averse clients need to understand workflow before committing | LOW | Process component exists, needs descriptive text enhancement |
+| Service differentiation | Clients need to understand what each service type solves | MEDIUM | Services component exists as 3 cards, needs expansion with illustrations |
+| FAQ discoverability | Common questions should be easy to find and scan | LOW | FAQ exists in footer accordion, needs dedicated page |
+| Trust indicators | Portfolio sites need social proof elements near CTA | LOW | Can use outcome badges, client count, testimonial snippets |
+| Mobile-first layout | 60%+ traffic is mobile for service businesses | LOW | Base responsive design exists, illustrations need mobile optimization |
 
-| Feature | Why Expected | Complexity | Dependencies | Notes |
-|---------|--------------|------------|--------------|-------|
-| **Thick borders (2-4px)** | Core neobrutalist visual identifier | LOW | Tailwind `border-2`, `border-4` | BLACK borders standard, color accents optional |
-| **Hard offset shadows** | Creates depth without gradients | LOW | Tailwind custom shadow config | Typical: `4px 4px 0 0 #000`, zero blur |
-| **High contrast color palette** | Defines neobrutalism vs minimalism | LOW | Tailwind color tokens | Already have yellow/teal/magenta |
-| **Bold, chunky typography** | Visual weight matches border heaviness | MEDIUM | Font selection, weight classes | Need 700-900 weights |
-| **Asymmetric layouts** | Breaks traditional grid, adds personality | MEDIUM | Flexbox/grid with intentional breaks | Avoids perfect symmetry |
-| **Raw, unpolished aesthetic** | Rejects smooth minimalism | LOW | Remove gradients, rounded corners | May keep slight radius for readability |
-| **Interactive hover effects** | Tactile feedback (shadow removal, transform) | LOW | Tailwind hover: utilities | Classic: remove shadow + translate on hover |
-| **Color blocks for sections** | Visual separation without subtlety | LOW | Background color utilities | Yellow/teal/magenta on white/black |
-| **Monospace or geometric fonts** | Reinforces brutalist vibe | LOW | Font family configuration | Consider for headings or accents |
+### Differentiators (Competitive Advantage)
 
-## Differentiators
+Features that set this portfolio apart from generic developer sites.
 
-Features that make this portfolio stand out. Not expected, but highly valued for neobrutalist sites.
+| Feature | Value Proposition | Complexity | Notes |
+|---------|-------------------|------------|-------|
+| Isometric mini-illustrations per process step | Makes abstract workflow concrete and memorable | MEDIUM | Neobrutalist aesthetic with thick borders, flat colors, 30-degree angles |
+| Outcome badges with visual hierarchy | Transforms generic "I build stuff" into measurable business value | LOW | Leverage existing shadow-neo system, add icons/numbers |
+| Technology-specific illustrations | Helps non-technical clients distinguish AI vs Automation vs Web Apps | MEDIUM | Three distinct visual metaphors with 1-2 sentence descriptions |
+| Prototype-first positioning | Differentiates from "pay upfront" competitors, reduces client risk | LOW | Already in process, needs emphasis in hero/CTA |
+| Neobrutalist FAQ page design | Transforms boring support page into on-brand experience | LOW | Apply existing Card/Button components with accordion interactions |
+| Process narrative with "You/Joel" dialogue | Personalizes workflow, shows collaborative vs transactional approach | LOW | Already implemented in Process component, adding illustrations enhances |
+| Dedicated FAQ page vs footer accordion | Improves SEO, allows richer content, better UX for multiple questions | LOW | Move existing FAQ.astro to /faq page, add navigation link |
 
-| Feature | Value Proposition | Complexity | Dependencies | Notes |
-|---------|-------------------|------------|--------------|-------|
-| **Narrative homepage structure** | Tells story of working together vs static sections | MEDIUM | Content restructure + component refactor | Solutions → Process (cyclical) → Tech → About → Contact |
-| **Isometric/45° shadows** | More sophisticated than flat offset | MEDIUM | Custom shadow angles, transform tricks | Creates depth illusion, distinctive look |
-| **Stacked/layered card effects** | 3D paper stack illusion | MEDIUM | Multiple shadows or pseudo-elements | Reinforces tangible, physical metaphor |
-| **Animated "pressed" button states** | Simulates physical interaction | LOW | Transform + shadow transition | Remove shadow + translate(2px, 2px) |
-| **Quirky micro-interactions** | Adds personality without clutter | MEDIUM | CSS animations or light JS | Hover wiggles, bounces, rotations |
-| **Mixed-case or ALL CAPS headings** | Reinforces bold, unpolished vibe | LOW | Text-transform utilities | Use sparingly for hierarchy |
-| **Retro UI elements** | 90s nostalgia (Windows 98 buttons, etc.) | MEDIUM | Custom component styling | Skip bars, fake dropdowns for visual interest |
-| **Offset/overlapping elements** | Creates visual tension and depth | MEDIUM | Negative margins, z-index | Cards overlapping sections, images breaking boundaries |
-| **Narrative case study format** | Problem → constraints → solution → results | MEDIUM | Content templates for projects page | Already have case studies, just need narrative polish |
-| **Process as cyclical diagram** | Shows iteration, not linear workflow | HIGH | SVG or CSS diagram | Differentiates from typical step-by-step |
+### Anti-Features (Commonly Requested, Often Problematic)
 
-## Anti-Features
+Features that seem good but create problems for lead-generation portfolio sites.
 
-Features to explicitly NOT build. Common mistakes in neobrutalism.
-
-| Anti-Feature | Why Avoid | What to Do Instead |
-|--------------|-----------|-------------------|
-| **Excessive color combinations** | Overwhelming, reduces contrast effectiveness | Stick to 2-3 bold colors + black/white. Yellow/teal/magenta is already pushing it. |
-| **Unreadable text contrast** | Accessibility failure, violates WCAG | Always test yellow on white, magenta on black. Use contrast checker. |
-| **Cluttered asymmetry** | Chaos ≠ asymmetry. Looks messy, not bold. | Asymmetry should be intentional, with clear focal points and whitespace. |
-| **Rounded corners on everything** | Softens brutalist aesthetic | Use `rounded-none` or minimal `rounded-sm` (2-4px max). Avoid pill shapes. |
-| **Soft gradients or blur** | Contradicts raw, unpolished principle | Solid colors only. Shadows have zero blur. |
-| **Over-animation** | Distracts from content, feels gimmicky | Limit to hover states and 1-2 signature interactions. |
-| **Breaking usability for aesthetics** | Navigation confusion, cognitive overload | Bold ≠ unusable. Maintain clear CTAs, readable body text, logical flow. |
-| **Ignoring dark mode** | Existing feature users expect | Adapt neobrutalism for dark mode (invert shadows, adjust colors). |
-| **Tiny body text** | Bold headings need readable body copy | Headings can be huge/bold, but body must be 16px+ with good line height. |
-| **Skipping mobile responsiveness** | Neobrutalism still needs to work on small screens | Simplify layouts on mobile, reduce shadow sizes, maintain borders. |
+| Feature | Why Requested | Why Problematic | Alternative |
+|---------|---------------|-----------------|-------------|
+| Pricing calculator | Clients want instant quotes | Custom work varies too much, creates false expectations | FAQ about pricing process, emphasize custom proposals |
+| Animated isometric scenes | "Make illustrations pop" | File size bloat, accessibility issues, neobrutalist aesthetic is static | Static isometric illustrations with hover state color shifts |
+| Multiple CTAs in hero | "Give users options" | Reduces conversions by 266% when competing actions present | Single primary CTA ("Start a Conversation"), secondary links in nav |
+| Real-time chat widget | "Be more accessible" | Interrupts UX, adds maintenance burden, overkill for freelance | Contact form + FAQ page covers async communication |
+| Interactive process timeline | "Make it engaging" | Adds JS complexity, breaks on mobile, accessibility concerns | Clean vertical timeline with illustrations (current approach works) |
+| Auto-playing video background | "Show work visually" | Performance killer, accessibility nightmare, distracts from message | Static hero with outcome badges, portfolio link for visual work |
+| Overly detailed service pages | "Explain everything" | Overwhelming for small business clients, delays contact | 1-2 sentence descriptions with illustrations, details in discovery call |
 
 ## Feature Dependencies
 
 ```
-Neobrutalist Design System (foundation)
-├── Color tokens (yellow, teal, magenta, black, white)
-├── Border utilities (2px, 4px solid)
-├── Shadow utilities (4px/6px offset, zero blur)
-└── Typography scale (700-900 weights for headings)
-    │
-    ├──> Component Styling (depends on design system)
-    │    ├── Buttons (borders + shadows + hover effects)
-    │    ├── Cards (borders + shadows + color blocks)
-    │    ├── Inputs (thick borders, high contrast)
-    │    └── Navigation (bold, clear, accessible)
-    │
-    └──> Layout Patterns (depends on design system)
-         ├── Asymmetric grids (intentional breaks)
-         ├── Color block sections (background colors)
-         └── Overlapping elements (negative margins, z-index)
+[Outcome badges in Hero]
+    └──requires──> [Icon/illustration system]
+                       └──requires──> [Neobrutalist visual style guide]
 
-Narrative Homepage (content structure)
-├── Solutions section (problem-focused intro)
-├── Process section (cyclical diagram)
-├── Tech section (capabilities showcase)
-├── About section (personality + credentials)
-└── Contact section (CTA + form)
-    │
-    └──> Depends on: Existing content, neobrutalist card components
+[Process illustrations] ──requires──> [Isometric design system]
+                                          └──requires──> [30-degree angle consistency]
+                                          └──requires──> [Brand color palette]
 
-Projects Page Narrative Format
-├── Problem statement (business context)
-├── Constraints (timeline, budget, tech)
-├── Solution (what was built, why)
-├── Results (metrics, outcomes)
-└── Tradeoffs (what was deferred, why)
-    │
-    └──> Depends on: Existing portfolio data, card components
+[Technology section] ──requires──> [Service differentiation content]
+                                      └──requires──> [Illustration per tech type]
+
+[FAQ page] ──enhances──> [SEO for support queries]
+              └──requires──> [Accordion component (already exists)]
+
+[Outcome metrics] ──enhances──> [Trust indicators]
+                     └──supports──> [Conversion optimization]
+
+[Visual illustrations] ──conflicts──> [Text-heavy descriptions]
+                          (balance needed: 1-2 sentences + visual)
 ```
 
-## MVP Definition
+### Dependency Notes
 
-### Launch With (v1.1 — This Milestone)
+- **Outcome badges require icon system:** Leverage existing neobrutalist border/shadow system, add simple geometric icons (time clock, dollar sign, customer avatars, rocket, lightbulb)
+- **Process illustrations require isometric design system:** Maintain 30-degree angles across all five steps, use brand colors (yellow/turquoise/magenta), ensure visual consistency
+- **Technology section requires service differentiation:** Build on existing Services component structure (3 cards), add illustrations that visually distinguish AI (brain/neural network), Automation (gears/connections), Web Apps (browser/interface)
+- **FAQ page enhances SEO:** Dedicated /faq URL allows indexing support queries, improves discoverability vs buried footer accordion
+- **Visual illustrations conflict with text-heavy descriptions:** Neobrutalist aesthetic favors bold visuals over walls of text; keep descriptions to 1-2 sentences per item
 
-For v1.1 milestone, prioritize in this order:
+## MVP Definition for v1.2
 
-#### Phase 1: Design System Foundation (Week 1)
-1. **Tailwind config** for neobrutalist tokens (colors, shadows, borders)
-2. **Typography scale** with bold weights (Poppins 700-900 for headings)
-3. **Base component styles** (buttons, cards, inputs)
-4. **Dark mode adaptation** (inverted shadows, adjusted colors)
+This is a SUBSEQUENT milestone adding features to an existing v1.1 site. Focus is homepage refinement, NOT full site rebuild.
 
-#### Phase 2: Core Visual Elements (Week 1-2)
-5. **Button components** with pressed hover effect
-6. **Card components** with borders + shadows + color blocks
-7. **Section color blocks** for homepage structure
-8. **Asymmetric layout patterns** for key sections
+### Launch With (v1.2)
 
-#### Phase 3: Narrative Homepage (Week 2)
-9. **Solutions section** (problem-focused hero)
-10. **Process section** (cyclical diagram or narrative flow)
-11. **Tech section** (capabilities with visual interest)
-12. **About + Contact** sections (personality + CTA)
+Minimum viable additions to improve homepage conversion and clarity.
 
-#### Phase 4: Projects & Blog Styling (Week 2-3)
-13. **Projects page** with narrative case study format
-14. **Blog index** with neobrutalist card grid
-15. **Tag pages** restyled to match
-16. **FAQ relocation** to footer or separate page
+- [ ] Hero section with 5 outcome badges (time saved, money saved, customers satisfied, opportunities captured, solutions delivered) — Essential for reframing value proposition
+- [ ] Outcome badge design: geometric icons + short label + neobrutalist border/shadow — Leverages existing design system
+- [ ] Process section enhanced descriptions (1-2 sentences per step, not just "You/Joel" format) — Adds clarity without overwhelming
+- [ ] Technology section with 3 service cards (AI, Automations, Web Apps) + simple illustrations — Helps non-technical clients distinguish offerings
+- [ ] FAQ moved to dedicated /faq page with navigation link — Improves discoverability and SEO
+- [ ] FAQ page styling with neobrutalist accordion (reuse existing FAQ.astro structure) — Maintains brand consistency
 
-### Defer to Post-v1.1
+### Add After Validation (v1.2.x)
 
-Features that are nice-to-have but not critical for this milestone:
+Features to add once core refinements are validated.
 
-- **Isometric shadows** - Nice-to-have, medium complexity
-- **Cyclical process diagram** - High complexity, narrative text flow works for MVP
-- **Retro UI elements** - Low priority, could feel gimmicky
-- **Advanced micro-interactions** - Polish after core design is validated
-- **Stacked card effects** - Visual flourish, not critical for MVP
+- [ ] Isometric mini-illustrations for process steps (5 illustrations) — HIGH value but MEDIUM complexity, defer if timeline tight
+- [ ] Refined technology illustrations (upgrade from simple to isometric style) — Once isometric design system is established
+- [ ] Trust indicators in hero (client count, years experience, project count) — After collecting metrics
+- [ ] Testimonial snippet near primary CTA — Once client testimonials are collected
+- [ ] Enhanced FAQ categories (group by topic: Process, Pricing, Technical, Post-Project) — If FAQ grows beyond 5 questions
+- [ ] Mobile-optimized illustration variants — If performance metrics show mobile issues
 
-## Complexity Assessment
+### Future Consideration (v2+)
 
-| Feature Category | CSS Complexity | Content Complexity | Testing Complexity | Total |
-|------------------|----------------|--------------------|--------------------|-------|
-| Design system tokens | LOW | None | Medium (contrast checks) | LOW-MEDIUM |
-| Border + shadow styles | LOW | None | Low | LOW |
-| Button/card components | LOW | None | Medium (accessibility) | LOW-MEDIUM |
-| Asymmetric layouts | MEDIUM | None | Medium (responsive) | MEDIUM |
-| Narrative homepage | LOW (styling) | MEDIUM (restructure) | Medium (flow testing) | MEDIUM |
-| Projects narrative format | LOW (styling) | MEDIUM (content templates) | Low | MEDIUM |
-| Dark mode adaptation | MEDIUM | None | Medium (visual QA) | MEDIUM |
-| Hover interactions | LOW | None | Low | LOW |
+Features to defer until homepage refinement is complete and validated.
 
-**Overall milestone complexity: MEDIUM**
-
-Most features are straightforward Tailwind CSS implementations. The main complexity is:
-1. Content restructuring for narrative flow
-2. Ensuring accessibility with bold colors
-3. Responsive behavior of asymmetric layouts
-
-## Implementation Notes
-
-### Tailwind Configuration
-
-```js
-// tailwind.config.js additions
-theme: {
-  extend: {
-    boxShadow: {
-      'brutal-sm': '2px 2px 0 0 #000',
-      'brutal': '4px 4px 0 0 #000',
-      'brutal-lg': '6px 6px 0 0 #000',
-      'brutal-yellow': '4px 4px 0 0 #ffef6a',
-      'brutal-teal': '4px 4px 0 0 oklch(0.7 0.15 200)',
-    },
-    borderWidth: {
-      '3': '3px',
-    },
-  }
-}
-```
-
-### Button Pattern
-
-```html
-<button class="
-  bg-yellow-400
-  border-4 border-black
-  shadow-brutal
-  px-6 py-3
-  font-bold
-  hover:shadow-none
-  hover:translate-x-1
-  hover:translate-y-1
-  transition-all
-">
-  Get Started
-</button>
-```
-
-### Card Pattern
-
-```html
-<div class="
-  bg-white
-  border-4 border-black
-  shadow-brutal-lg
-  p-8
-  relative
-">
-  <h3 class="font-black text-3xl mb-4">Title</h3>
-  <p class="text-lg">Content...</p>
-</div>
-```
-
-### Dark Mode Adaptation
-
-- Invert shadow colors: `dark:shadow-[4px_4px_0_0_#fff]`
-- Adjust border colors: `dark:border-white`
-- Maintain contrast: test all color combinations
-
-## Accessibility Checklist
-
-- [ ] All text meets WCAG AA contrast (4.5:1 for body, 3:1 for large text)
-- [ ] Yellow text never on white background without border/shadow
-- [ ] Buttons have clear focus states (not just hover)
-- [ ] Navigation remains logical despite asymmetric layout
-- [ ] Body text is 16px+ with 1.5+ line height
-- [ ] Color is not the only indicator (borders + text labels)
-- [ ] Dark mode maintains contrast ratios
-- [ ] Hover effects don't rely solely on color change
+- [ ] Interactive FAQ search — Low priority, current count is manageable
+- [ ] Animated outcome counters (numbers incrementing on scroll) — Gimmicky, doesn't align with neobrutalist aesthetic
+- [ ] Video testimonials in hero — Requires client video collection, performance concerns
+- [ ] Expanded service detail pages (/services/ai, /services/automation, /services/web-apps) — Overkill for freelance, details in discovery call
+- [ ] Multi-step contact form (wizard style) — Current single-page form works well, don't over-complicate
 
 ## Feature Prioritization Matrix
 
 | Feature | User Value | Implementation Cost | Priority |
 |---------|------------|---------------------|----------|
-| Thick borders | HIGH | LOW | P1 |
-| Hard offset shadows | HIGH | LOW | P1 |
-| Bold typography | HIGH | MEDIUM | P1 |
-| High contrast colors | HIGH | LOW | P1 |
-| Pressed button states | HIGH | LOW | P1 |
-| Color block sections | HIGH | LOW | P1 |
-| Card components | HIGH | LOW | P1 |
-| Dark mode adaptation | HIGH | MEDIUM | P1 |
-| Narrative homepage structure | HIGH | MEDIUM | P1 |
-| Asymmetric layouts | MEDIUM | MEDIUM | P2 |
-| Projects narrative format | MEDIUM | MEDIUM | P2 |
-| Blog restyling | MEDIUM | LOW | P2 |
-| Overlapping elements | MEDIUM | MEDIUM | P2 |
-| Quirky micro-interactions | LOW | MEDIUM | P3 |
-| Isometric shadows | LOW | MEDIUM | P3 |
-| Retro UI elements | LOW | MEDIUM | P3 |
-| Cyclical process diagram | LOW | HIGH | P3 |
+| Outcome badges in hero | HIGH (core value prop) | LOW (reuse design system) | P1 |
+| Enhanced process descriptions | HIGH (reduces uncertainty) | LOW (just copy) | P1 |
+| FAQ to dedicated page | MEDIUM (discoverability) | LOW (move component) | P1 |
+| Technology section with illustrations | HIGH (service clarity) | MEDIUM (3 illustrations) | P1 |
+| Simple geometric icons for badges | MEDIUM (visual interest) | LOW (SVG shapes) | P1 |
+| Isometric process illustrations | MEDIUM (memorability) | MEDIUM (5 illustrations, design system) | P2 |
+| Isometric technology illustrations | MEDIUM (visual upgrade) | MEDIUM (3 illustrations) | P2 |
+| Trust indicators (metrics) | MEDIUM (social proof) | LOW (data + display) | P2 |
+| FAQ categories/grouping | LOW (current count is 5) | LOW (markup change) | P3 |
+| Mobile illustration optimization | LOW (mobile works) | MEDIUM (variants) | P3 |
+| Interactive FAQ search | LOW (5 questions) | MEDIUM (JS required) | P3 |
 
 **Priority key:**
-- **P1: Must have for v1.1** — Core neobrutalist visual identity
-- **P2: Should have, add when possible** — Enhances design but not blocker
-- **P3: Nice to have, future consideration** — Polish/differentiation features
+- P1: Must have for v1.2 launch (addresses core milestone goals)
+- P2: Should have, add when possible (enhances but not critical)
+- P3: Nice to have, future consideration (optimize existing first)
 
-## Narrative Homepage Structure
+## Implementation Best Practices from Research
 
-Based on research, a compelling narrative homepage for a developer portfolio follows this pattern:
+### Outcome-Focused Hero Sections
 
-### Solutions Section (Hero)
-**Purpose:** Lead with client problems, not developer capabilities
-**Structure:**
-- Headline: Client pain point ("Drowning in manual work?")
-- Subhead: Solution promise ("I build automation that saves 15+ hours/week")
-- Visual: Bold graphic or screenshot with neobrutalist treatment
-- CTA: "See How It Works" (scroll to process)
+Based on 2026 industry research, high-converting hero sections follow these patterns:
 
-### Process Section (Cyclical)
-**Purpose:** Show collaborative, iterative approach (not waterfall)
-**Structure:**
-- 5 steps in circular or S-curve layout
-- Emphasis on "prototype before commitment" (Joel's differentiator)
-- Each step has icon + short description
-- Visual treatment: Color blocks, borders, asymmetric positioning
+**Messaging Strategy:**
+- Headlines should answer "What is this, and why should I care?" in under 3 seconds
+- Focus on outcomes and benefits, not features: "Save 10 hours/week" not "Powerful automation tools"
+- Single clear CTA reduces conversion friction (multiple CTAs decrease conversions by up to 266%)
 
-### Tech Section (Capabilities)
-**Purpose:** Establish technical credibility without jargon
-**Structure:**
-- 3 service categories (Web Apps, Automation, AI)
-- Each as a card with icon, title, business benefit
-- Avoid tech stack details, focus on outcomes
-- Neobrutalist cards with shadows and bold colors
+**Trust Elements:**
+- Trust badges, client logos, or key statistics near CTA boost credibility
+- Social proof formats: "500+ happy clients" or "Featured in [Publication]"
+- Outcome metrics work as trust signals: "Saved clients $2M+" or "Built 50+ solutions"
 
-### About Section (Personality)
-**Purpose:** Build trust, show person behind the work
-**Structure:**
-- Photo with neobrutalist border treatment
-- Story: Why I help small businesses
-- Credentials (brief, relevant)
-- CTA: "Ready to talk? Let's chat."
+**Visual Hierarchy:**
+- "Less is more" approach: slimmed-down hero versions showed 45.87% conversion uplift
+- Avoid walls of text, graphics, and competing elements
+- Use visual badges/icons to communicate value at a glance
 
-### Contact Section (CTA)
-**Purpose:** Remove friction for initial outreach
-**Structure:**
-- Form with 4 fields (name, email, project type, message)
-- Multiple contact options (form, email, phone)
-- FAQ below form (address objections)
-- Neobrutalist form styling with thick borders
+**Testing Recommendations:**
+- A/B test headline variations (benefit-driven vs. problem-focused)
+- Track bounce rate, click-through rate, scroll depth, time on page
+- Run quarterly optimization tests
+
+### Isometric Illustration Implementation
+
+Based on 2026 design trends and neobrutalist aesthetic:
+
+**Design Principles:**
+- Maintain consistent 30-degree angles across all illustrations for visual coherence
+- Use brand colors (yellow/turquoise/magenta) strategically within illustrations
+- Keep illustrations purposeful and simple, not decorative fluff
+- Pair accent-colored backgrounds with simple black line illustrations for balance
+
+**Tools & Resources:**
+- Adobe Illustrator remains industry standard for isometric vector creation
+- Isometric grid feature ensures proper angle consistency
+- For neobrutalist style: thick borders, flat colors, no gradients, 100% opacity black shadows
+
+**Accessibility Considerations:**
+- Decorative illustrations should have empty alt text (alt="") to avoid screen reader clutter
+- WCAG 2.2 requires alt="" for pure decoration (aesthetic purpose only, no information)
+- If illustration conveys process information, use descriptive alt text
+- Ensure illustrations don't rely solely on color to convey meaning
+
+**Use Cases:**
+- Process visualization (5-step workflow)
+- Service differentiation (AI vs Automation vs Web Apps)
+- Workflow tools and SaaS products benefit most from isometric style
+- Spatial or process visualization makes abstract concepts concrete
+
+### Process Step Visualization
+
+Based on workflow design research:
+
+**Content Strategy:**
+- Use 1-2 sentences per step to provide context without overwhelming
+- Number steps clearly (1-5) with visual hierarchy
+- Show progression with vertical timeline, not horizontal (mobile-friendly)
+- Include "You/Joel" dialogue format to personalize collaborative nature
+
+**Visual Enhancements:**
+- Isometric mini-illustrations per step make workflow memorable
+- Use consistent visual language (same angle, style, color palette)
+- Show characters or objects "progressing" through steps if using illustrations
+- Avoid animated timelines (accessibility issues, mobile problems)
+
+**Process Infographic Patterns:**
+- Circular layouts work for iterative processes (not applicable here)
+- Flow charts work for multiple paths (not applicable for linear 5-step)
+- Vertical timeline with illustrations works best for mobile-first sequential processes
+
+### Technology/Service Differentiation
+
+Based on portfolio design trends:
+
+**Organization Strategies:**
+- Group services into distinct categories with visual separation
+- Use subheaders and icons/illustrations to aid navigation
+- No more than 7 items per category for scannability
+- Each service needs 1-2 sentence description + visual metaphor
+
+**Portfolio-Specific Recommendations:**
+- Show tech stack used in projects (transparency builds trust)
+- Case studies should explain: problem → approach → technologies → results
+- Lead with strongest work (first 30 seconds are critical)
+- "View Live" and "View Code" CTAs above the fold for each project
+
+**Service Card Design:**
+- Three-column grid for desktop (already implemented)
+- Stack vertically on mobile
+- Consistent visual treatment (neobrutalist Cards with yellow accents)
+- Illustration + title + short description + example format works well
+
+### FAQ Page Design
+
+Based on 2026 FAQ best practices:
+
+**Layout Strategy:**
+- Accordion format keeps content organized and space-efficient
+- Group similar questions with subheaders if count exceeds 7
+- Link most popular questions to top of page
+- Allow multiple accordion items open simultaneously (user control)
+
+**Placement Recommendations:**
+- Dedicated /faq page better than buried footer for discoverability
+- Include in main navigation or support/contact page links
+- FAQ pages improve SEO for support queries
+- Better to reveal all content if users need most answers vs clicking each item
+
+**Content Organization:**
+- Current 5 questions is manageable without categories
+- Add categories when question count exceeds 7-10
+- Common categories: Billing, Process, Technical, Timeline, Post-Project
+- Keep answers concise (1-2 paragraphs max)
+
+**Interaction Patterns:**
+- Native HTML `<details>` accordion is zero-JS, accessible
+- Avoid auto-closing previous item (frustrating when comparing)
+- Use accordions when users need 1-2 answers, not when they need all content
+- For small question count (5), expanded view could work instead of accordion
+
+## Neobrutalist Design Constraints
+
+Existing design system constraints that inform feature implementation:
+
+**Visual Language:**
+- Yellow (#ffef6a), turquoise, magenta OKLCH palette
+- 3/10 density (white space, not crowded)
+- Quirky headings (Bricolage Grotesque)
+- Bold 3px borders on everything
+- Hard offset shadows (no blur)
+- Shadow-to-glow transformation in dark mode
+
+**Component System:**
+- Cards with border + shadow-neo variants
+- Buttons with 3-layer hardware-accelerated technique
+- Native HTML accordions (FAQ)
+- Typography: two-tier (neobrutalist headings, readable body)
+
+**Illustration Guidelines for Neobrutalism:**
+- Raw, unrefined shapes (rectangles, circles, polygons)
+- Thick borders, flat icons, vibrant colors
+- Black shadows at 100% opacity
+- No gradients, no soft shadows, no blur effects
+- Intentionally loud and saturated with bold accents
+- Simple black line illustrations on accent-colored backgrounds
+
+**Accessibility Compliance:**
+- WCAG 2.2 AA compliant (98.7% manual audit in v1.1)
+- Playwright + axe-core automated validation in CI
+- Color contrast ratios meet AA standards
+- Keyboard navigation support
+- Screen reader compatible
+
+## Dependencies on Existing Features
+
+These new features build on the existing v1.1 foundation:
+
+| Existing Feature | How v1.2 Uses It |
+|------------------|------------------|
+| Hero component | Reframe messaging from problem-first to outcome-first, add badges |
+| Services component (3 cards) | Expand to Technology section, add illustrations |
+| Process component (5-step timeline) | Add detailed descriptions, optionally add isometric illustrations |
+| FAQ component (footer accordion) | Move to dedicated /faq page, keep accordion structure |
+| Card component | Use for technology cards, FAQ page layout |
+| Button component | Use for FAQ page CTAs |
+| Border/shadow system | Apply to outcome badges, maintain visual consistency |
+| Dark mode system | Ensure illustrations work in both light/dark modes |
+| Responsive grid | Technology section uses existing 3-column grid |
+| Typography system | Apply to new content (hero outcomes, process descriptions) |
+
+**Integration Notes:**
+- All new features use existing Astro components (Card, Button)
+- Illustrations must work with shadow-to-glow dark mode transformation
+- Color palette constrained to yellow/turquoise/magenta
+- No new design patterns needed, only content/illustration additions
 
 ## Sources
 
-### Neobrutalism Design Principles
-- [Neobrutalism: Definition and Best Practices - NN/G](https://www.nngroup.com/articles/neobrutalism/)
-- [Neubrutalism - UI Design Trend That Wins The Web - Bejamas](https://bejamas.com/blog/neubrutalism-web-design-trend)
-- [Neo Brutalism UI Design Trend - Onething Design](https://www.onething.design/post/neo-brutalism-ui-design-trend)
-- [Brutalism vs Neubrutalism in UI Design - CC Creative](https://www.cccreative.design/blogs/brutalism-vs-neubrutalism-in-ui-design)
-- [Neo Brutalism: Your Guide to the Design Trend - HubSpot](https://blog.hubspot.com/website/neo-brutalism)
-- [Neo Brutalism in Higher Ed Web UX - ColorWhistle](https://colorwhistle.com/neo-brutalism-higher-education-web-ux/)
+**Outcome-Focused Hero Sections:**
+- [Hero Section Design: Best Practices & Examples for 2026](https://www.perfectafternoon.com/2025/hero-section-design/)
+- [Website Hero Section Best Practices + Examples](https://prismic.io/blog/website-hero-section)
+- [I've Studied 50+ Hero Section Examples: Here Are the Best](https://thrivethemes.com/hero-section-examples/)
+- [Hero Section Test That Led To A 50% Increase In Conversions](https://carrot.com/blog/hero-section-conversion-test/)
+- [High-Converting SaaS Landing Pages: 2026 Best Practices](https://www.saashero.net/design/enterprise-landing-page-design-2026/)
 
-### Implementation & Components
-- [Neobrutalism Components - Tailwind CSS](https://www.neobrutalism.dev/)
-- [ekmas/neobrutalism-components - GitHub](https://github.com/ekmas/neobrutalism-components)
-- [Neobrutalism UI Kit - Tailkits](https://tailkits.com/components/neobrutalism/)
+**Isometric Illustration Design:**
+- [Isometric websites - 28+ Best Isometric Web Design Ideas 2026](https://99designs.com/inspiration/websites/isometric)
+- [8 Inspiring Examples of Isometric Illustrations in Web Design](https://speckyboy.com/isometric-illustrations-web-design/)
+- [The Complete Guide to Website Illustrations: A 2026 Strategic Toolkit](https://getillustrations.com/blog/the-complete-guide-to-website-illustrations-a-2026-strategic-toolkit/)
+- [What is Isometric Design? A Web Designer's Guide](https://elements.envato.com/learn/isometric-design-trend-web-design)
 
-### Narrative Homepage Structure
-- [Storytelling in Web Design - Ironistic](https://www.ironistic.com/insights/storytelling-in-web-design/)
-- [Immersive Storytelling Websites Guide - Utsubo](https://www.utsubo.com/blog/immersive-storytelling-websites-guide)
-- [Portfolio Website Examples - Figma](https://www.figma.com/resource-library/portfolio-website-examples/)
-- [Crafting a Narrative - Dribbble](https://dribbble.com/stories/2024/03/18/crafting-a-narrative-mastering-storytelling-in-your-design-portfolio)
-- [Portfolio & Agency Website Templates - Webflow](https://webflow.com/templates/category/portfolio-and-agency-websites)
+**Process Visualization:**
+- [28 Process Infographic Examples with Design Tips](https://venngage.com/blog/process-infographic-examples/)
+- [The Complete Guide to Website Illustrations: A 2026 Strategic Toolkit](https://getillustrations.com/blog/the-complete-guide-to-website-illustrations-a-2026-strategic-toolkit/)
 
-### Developer Portfolio Best Practices
-- [Impact-First Storytelling - Medium](https://medium.com/@sarahscussel/impact-first-storytelling-in-your-product-design-portfolio-9f122f747ee8)
-- [Web Developer Portfolio Examples - Middlehost](https://middlehost.com/blog/web-developer-portfolio-examples/)
-- [15 Best Web Developer Portfolio Examples - ZEGOCLOUD](https://www.zegocloud.com/blog/web-developer-portfolio)
-- [27 Inspiring Web Developer Portfolio Examples - Elementor](https://elementor.com/blog/inspiring-web-developer-portfolio-examples/)
+**Service Differentiation:**
+- [19 Best Portfolio Design Trends (In 2026)](https://colorlib.com/wp/portfolio-design-trends/)
+- [How to Build a Strong Tech Portfolio in 2026](https://rkycareers.com/blog/how-to-build-strong-tech-portfolio-2026/)
 
-### CSS Implementation Details
-- [CSS Box Shadow - CSS-Tricks](https://css-tricks.com/almanac/properties/b/box-shadow/)
-- [Designing Beautiful Shadows - Josh W. Comeau](https://www.joshwcomeau.com/css/designing-shadows/)
+**FAQ Design:**
+- [20 Best FAQ Pages (+ How To Create Your Own) (2026)](https://www.shopify.com/blog/120928069-how-to-create-faq-page)
+- [9 FAQ website examples: Designs that improve support and conversions](https://webflow.com/blog/faq-pages)
+- [How To Implement Accordion UI Design: Pros, Cons, and Tips (2026)](https://www.shopify.com/blog/accordion-ui-design)
+- [How to Design a Better FAQ Page: 5 Best Practices](https://www.orbitmedia.com/blog/faq-page-design-best-practices/)
 
-### Accessibility & Best Practices
-- [Neo brutalism: The falsely accused UI design trend - Medium](https://medium.com/@pallavimitra432/neo-brutalism-the-falsely-accused-ui-design-trend-d2f06377297b)
-- [Principles of Neo Brutalism in Design - Nestify](https://nestify.io/blog/neo-brutalism-in-design/)
+**Neobrutalist Design:**
+- [Neobrutalism: Definition and Best Practices - Nielsen Norman Group](https://www.nngroup.com/articles/neobrutalism/)
+- [Trend Deep Dive: Neo-brutalism](https://author.envato.com/hub/trend-deep-dive-neo-brutalism/)
+- [How can I design in the Neo Brutalism style?](https://medium.com/@sepidy/how-can-i-design-in-the-neo-brutalism-style-d85c458042de)
+
+**Accessibility:**
+- [Decorative Images - Web Accessibility Initiative (WAI)](https://www.w3.org/WAI/tutorials/images/decorative/)
+- [An alt Decision Tree - Web Accessibility Initiative (WAI)](https://www.w3.org/WAI/tutorials/images/decision-tree/)
+- [Image Alt Text for Better Accessibility](https://www.wcag.com/blog/good-alt-text-bad-alt-text-making-your-content-perceivable/)
 
 ---
-*Feature research for: Joel Shinness Portfolio v1.1 — Neobrutalist Design & Narrative Homepage*
+*Feature research for: Homepage Refinement (v1.2)*
 *Researched: 2026-02-09*
-*Confidence: HIGH (verified via NN/G, Tailwind libraries, multiple design sources)*
