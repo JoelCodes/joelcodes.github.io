@@ -64,10 +64,12 @@ See: `.planning/milestones/v1.1-ROADMAP.md` for full details.
   3. Isometric shadow utilities support dark mode glow transformation
   4. All existing pages render correctly with new icon library
 
-**Plans**: TBD
+**Plans**: 3 plans in 2 waves
 
 Plans:
-- [ ] 12-01: TBD
+- [ ] 12-01-PLAN.md — Migrate icon library (lucide-static to @lucide/astro)
+- [ ] 12-02-PLAN.md — Add isometric CSS utilities and test page
+- [ ] 12-03-PLAN.md — Create visual regression tests for icons
 
 #### Phase 13: Hero Section
 
