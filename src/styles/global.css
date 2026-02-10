@@ -14,6 +14,12 @@
   --color-turquoise-dark: oklch(0.65 0.13 195);
   --color-magenta-dark: oklch(0.60 0.18 350);
 
+  /* WCAG-compliant text variants for accessibility */
+  --color-yellow-text: oklch(0.55 0.15 95); /* 3:1+ contrast on white for large text */
+  --color-turquoise-text: oklch(0.45 0.12 195); /* 4.5:1+ contrast on white for normal text */
+  --color-yellow-text-dark: oklch(0.85 0.18 95); /* Original yellow works on dark bg */
+  --color-turquoise-text-dark: oklch(0.70 0.15 195); /* Original turquoise works on dark bg */
+
   /* Neutral colors (OKLCH format) */
   --color-bg-light: oklch(1.0 0 0);
   --color-bg-dark: oklch(0.15 0 0);
@@ -81,6 +87,21 @@ section[id] {
 
 /* Shadow utilities for neobrutalist design */
 @layer utilities {
+  /* WCAG-compliant text color utilities */
+  .text-yellow-text {
+    color: var(--color-yellow-text);
+  }
+  .dark .text-yellow-text {
+    color: var(--color-yellow-text-dark);
+  }
+
+  .text-turquoise-text {
+    color: var(--color-turquoise-text);
+  }
+  .dark .text-turquoise-text {
+    color: var(--color-turquoise-text-dark);
+  }
+
   .shadow-neo-yellow {
     box-shadow: 5px 5px 0 var(--color-yellow);
   }
