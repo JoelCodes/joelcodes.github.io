@@ -67,7 +67,7 @@ Plans:
 Plans:
 - [x] 08-01-PLAN.md — Create Button and Card components with neobrutalist styling
 - [x] 08-02-PLAN.md — Create Input component and demo page for visual verification
-- [ ] 08-03-PLAN.md — Fix Button focus ring shape and Card dark mode glow (UAT gap closure)
+- [x] 08-03-PLAN.md — Fix Button focus ring shape and Card dark mode glow (UAT gap closure)
 
 #### Phase 9: Homepage & Navigation
 **Goal**: Transform homepage into narrative journey and update header/footer with neobrutalist styling
@@ -137,7 +137,7 @@ Phases execute in numeric order: 7 -> 8 -> 9 -> 10 -> 11
 | 5. Blog Platform | v1.0 | 6/6 | Complete | 2026-01-27 |
 | 6. Performance & Deploy | v1.0 | 2/2 | Complete | 2026-01-27 |
 | 7. Design System Foundation | v1.1 | 2/2 | Complete | 2026-02-09 |
-| 8. Primitive Components | v1.1 | 2/3 | In progress | - |
+| 8. Primitive Components | v1.1 | 3/3 | Complete | 2026-02-09 |
 | 9. Homepage & Navigation | v1.1 | 0/3 | Not started | - |
 | 10. Projects & Blog | v1.1 | 0/2 | Not started | - |
 | 11. Testing & Accessibility | v1.1 | 0/1 | Not started | - |
