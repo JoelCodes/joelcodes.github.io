@@ -100,8 +100,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 10-01-PLAN.md — Rename Portfolio to Projects with redirects, create ProjectCard, and apply neobrutalist case study styling
-- [ ] 10-02-PLAN.md — Update BlogCard and blog pages with neobrutalist styling and two-tier typography
+- [x] 10-01-PLAN.md — Rename Portfolio to Projects with redirects, create ProjectCard, and apply neobrutalist case study styling
+- [x] 10-02-PLAN.md — Update BlogCard and blog pages with neobrutalist styling and two-tier typography
 
 #### Phase 11: Testing & Accessibility Validation
 **Goal**: Validate complete neobrutalist redesign meets performance, accessibility, and business goals
@@ -140,5 +140,5 @@ Phases execute in numeric order: 7 -> 8 -> 9 -> 10 -> 11
 | 7. Design System Foundation | v1.1 | 2/2 | Complete | 2026-02-09 |
 | 8. Primitive Components | v1.1 | 3/3 | Complete | 2026-02-09 |
 | 9. Homepage & Navigation | v1.1 | 4/4 | Complete | 2026-02-09 |
-| 10. Projects & Blog | v1.1 | 0/2 | Not started | - |
+| 10. Projects & Blog | v1.1 | 2/2 | Complete | 2026-02-09 |
 | 11. Testing & Accessibility | v1.1 | 0/1 | Not started | - |
