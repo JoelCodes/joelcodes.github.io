@@ -64,6 +64,21 @@
 /* Dark mode variant for class-based toggle */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Smooth scroll behavior with accessibility consideration */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+section[id] {
+  scroll-margin-top: 60px;
+}
+
 /* Shadow utilities for neobrutalist design */
 @layer utilities {
   .shadow-neo-yellow {
