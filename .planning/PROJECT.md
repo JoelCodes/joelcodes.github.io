@@ -4,7 +4,7 @@
 
 A lead-generation focused portfolio website for Joel Shinness targeting small business clients. The site communicates expertise in web apps, automation, and AI development through distinctive neobrutalist design with isometric illustrations, outcome-focused messaging, and clear calls to action.
 
-**Current state:** v1.2 shipped. Homepage sections refined with outcome-focused messaging, isometric illustrations, and dedicated FAQ page.
+**Current state:** v1.3 in progress. Design system consolidation and navigation cleanup.
 
 ## Core Value
 
@@ -51,7 +51,15 @@ Small business owners can understand what Joel does, trust his process, and easi
 
 ### Active
 
-*Future enhancements (candidates for v1.3+):*
+*v1.3 Design System & Navigation Cleanup:*
+
+- [ ] Design system reference page (internal, hidden from nav)
+- [ ] Component consistency audit across all pages
+- [ ] Navigation cleanup (remove homepage section links from header)
+- [ ] Delete /contact page with redirect to /#contact
+- [ ] Footer cleanup: add Instagram/Substack icons, mirror header links (subtle)
+
+*Future enhancements (candidates for v1.4+):*
 
 - [ ] Testimonials section with client quotes
 - [ ] Newsletter signup integration
@@ -106,5 +114,16 @@ Small business owners can understand what Joel does, trust his process, and easi
 | Dedicated FAQ page | SEO-friendly with JSON-LD, reduces footer weight | ✓ Good — v1.2 |
 | @lucide/astro tree-shaking | 200KB+ bundle reduction vs lucide-static | ✓ Good — v1.2 |
 
+## Current Milestone: v1.3 Design System & Navigation Cleanup
+
+**Goal:** Consolidate design system into a reference page, ensure consistent component usage across all pages, and streamline navigation for cleaner user experience.
+
+**Target features:**
+- Design system reference page with all components, typography, colors
+- Component consistency audit and migration
+- Simplified header (Blog, Projects, FAQ, Contact only)
+- Footer cleanup with social icons (Instagram, Substack) and subtle nav links
+- /contact page removal with redirect to /#contact
+
 ---
-*Last updated: 2026-02-10 after v1.2 milestone*
+*Last updated: 2026-02-10 after v1.3 milestone start*
