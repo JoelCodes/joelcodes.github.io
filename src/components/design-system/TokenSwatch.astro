@@ -1,0 +1,73 @@
+---
+export interface Props {
+  name: string;
+  cssVar: string;
+  oklch: string;
+  hex: string;
+  darkOklch?: string;
+  darkHex?: string;
+}
+
+const { name, cssVar, oklch, hex, darkOklch, darkHex } = Astro.props;
+---
+
+<div class="token-swatch border-3 border-text-light dark:border-text-dark rounded-lg overflow-hidden bg-bg-light dark:bg-bg-dark shadow-neo-turquoise dark:shadow-neo-turquoise">
+  <!-- Color preview swatch -->
+  <div
+    class="swatch-preview h-20"
+    style={`background: var(${cssVar});`}
+    aria-hidden="true"
+  ></div>
+
+  <!-- Token details -->
+  <div class="p-4 space-y-2">
+    <h3 class="font-heading font-semibold text-lg mb-3">{name}</h3>
+
+    <!-- Light mode values -->
+    <div class="space-y-1 text-sm">
+      <div class="grid grid-cols-[80px_1fr] gap-2 items-start">
+        <span class="text-text-muted-light dark:text-text-muted-dark">CSS Var:</span>
+        <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">var({cssVar})</code>
+      </div>
+      <div class="grid grid-cols-[80px_1fr] gap-2 items-start">
+        <span class="text-text-muted-light dark:text-text-muted-dark">OKLCH:</span>
+        <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">{oklch}</code>
+      </div>
+      <div class="grid grid-cols-[80px_1fr] gap-2 items-start">
+        <span class="text-text-muted-light dark:text-text-muted-dark">Hex:</span>
+        <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">{hex}</code>
+      </div>
+    </div>
+
+    <!-- Dark mode values (if provided) -->
+    {(darkOklch || darkHex) && (
+      <div class="mt-4 pt-3 border-t border-text-light/20 dark:border-text-dark/20">
+        <p class="text-xs font-semibold text-text-muted-light dark:text-text-muted-dark mb-2 uppercase tracking-wide">Dark Mode</p>
+        <div class="space-y-1 text-sm">
+          {darkOklch && (
+            <div class="grid grid-cols-[80px_1fr] gap-2 items-start">
+              <span class="text-text-muted-light dark:text-text-muted-dark">OKLCH:</span>
+              <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">{darkOklch}</code>
+            </div>
+          )}
+          {darkHex && (
+            <div class="grid grid-cols-[80px_1fr] gap-2 items-start">
+              <span class="text-text-muted-light dark:text-text-muted-dark">Hex:</span>
+              <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">{darkHex}</code>
+            </div>
+          )}
+        </div>
+      </div>
+    )}
+  </div>
+</div>
+
+<style>
+  .shadow-neo-turquoise {
+    box-shadow: 4px 4px 0 0 oklch(0.70 0.15 195);
+  }
+
+  .dark .shadow-neo-turquoise {
+    box-shadow: 4px 4px 0 0 oklch(0.65 0.13 195);
+  }
+</style>
