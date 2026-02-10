@@ -1,9 +1,9 @@
 ---
-status: complete
+status: diagnosed
 phase: 10-projects-blog
 source: 10-01-SUMMARY.md, 10-02-SUMMARY.md
 started: 2026-02-09T12:00:00Z
-updated: 2026-02-09T12:15:00Z
+updated: 2026-02-09T12:20:00Z
 ---
 
 ## Current Test
@@ -75,7 +75,10 @@ skipped: 0
   reason: "User reported: The badges at the top don't actually do anything. The filter buttons don't do anything."
   severity: major
   test: 4, 5
-  root_cause: ""
-  artifacts: []
-  missing: []
+  root_cause: "CSS class mismatch: global.css still uses .portfolio-card but projects/index.astro uses .project-card"
+  artifacts:
+    - path: "src/styles/global.css"
+      issue: "Lines 121-129 use .portfolio-card instead of .project-card"
+  missing:
+    - "Rename .portfolio-card to .project-card in global.css"
   debug_session: ""

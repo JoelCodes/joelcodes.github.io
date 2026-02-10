@@ -117,13 +117,13 @@ section[id] {
   }
 }
 
-/* Portfolio card filtering animations */
-.portfolio-card {
+/* Project card filtering animations */
+.project-card {
   display: none;
   opacity: 0;
 }
 
-.portfolio-card.show {
+.project-card.show {
   display: block;
   animation: fadeInScale 300ms ease-in-out forwards;
 }
