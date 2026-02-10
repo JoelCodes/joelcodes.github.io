@@ -3,7 +3,8 @@ status: complete
 phase: 09-homepage-navigation
 source: 09-01-SUMMARY.md, 09-02-SUMMARY.md, 09-03-SUMMARY.md
 started: 2026-02-10T02:30:00Z
-updated: 2026-02-10T02:45:00Z
+updated: 2026-02-10T03:00:00Z
+reverified: 2026-02-10T03:00:00Z
 ---
 
 ## Current Test
@@ -22,9 +23,8 @@ result: pass
 
 ### 3. Smooth Scroll Navigation
 expected: Clicking a navigation link (e.g., "About") smoothly scrolls to that section. Content is not hidden behind the sticky header.
-result: issue
-reported: "There are no navigation links for sections of the homepage."
-severity: major
+result: pass
+note: Fixed in 09-04, re-verified 2026-02-10
 
 ### 4. FAQ Accordion in Footer
 expected: Footer shows FAQ section with 5 collapsible questions. Clicking a question expands it to show the answer. The + icon rotates to × when expanded.
@@ -32,9 +32,8 @@ result: pass
 
 ### 5. Mobile Navigation
 expected: On mobile, hamburger menu appears. Tapping it opens slide-in panel with nav links and dark mode toggle. Panel has 3px borders.
-result: issue
-reported: "There appear to be two X buttons when the panel slides in, one from the hamburger menu and one that's part of the panel itself."
-severity: minor
+result: pass
+note: Fixed in 09-04, re-verified 2026-02-10
 
 ### 6. Hero Section Neobrutalist Styling
 expected: Hero has uppercase H1 heading ("I BUILD FAST WEBSITES" or similar). Yellow Button component visible. Decorative border elements present.
@@ -71,29 +70,26 @@ result: pass
 ## Summary
 
 total: 13
-passed: 11
-issues: 2
+passed: 13
+issues: 0
 pending: 0
 skipped: 0
+note: 2 issues fixed in 09-04, all tests now pass
 
 ## Gaps
 
+All gaps resolved in 09-04-PLAN.md, re-verified 2026-02-10.
+
+### Resolved
+
 - truth: "Clicking a navigation link smoothly scrolls to that section"
-  status: failed
-  reason: "User reported: There are no navigation links for sections of the homepage."
-  severity: major
-  test: 3
-  root_cause: ""
-  artifacts: []
-  missing: []
-  debug_session: ""
+  status: resolved
+  fix: "Added section anchor links (/#solutions, /#process, /#tech, /#about) to Header.astro and MobileNav.astro"
+  commit: 93e3693
+  verified: 2026-02-10
 
 - truth: "Mobile nav panel opens with single close button"
-  status: failed
-  reason: "User reported: There appear to be two X buttons when the panel slides in, one from the hamburger menu and one that's part of the panel itself."
-  severity: minor
-  test: 5
-  root_cause: ""
-  artifacts: []
-  missing: []
-  debug_session: ""
+  status: resolved
+  fix: "Removed duplicate close button from MobileNav.astro; hamburger-to-X animation provides single close mechanism"
+  commit: a77e26d
+  verified: 2026-02-10
