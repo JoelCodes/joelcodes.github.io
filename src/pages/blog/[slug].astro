@@ -32,7 +32,7 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString('en-US', {
 <BaseLayout title={post.data.title} description={post.data.description}>
   <div class="container mx-auto px-4 py-12">
     <!-- Back link -->
-    <a href="/blog" class="inline-flex items-center gap-2 text-text-muted-light dark:text-text-muted-dark hover:text-accent-teal transition-colors mb-8">
+    <a href="/blog" class="inline-flex items-center gap-2 text-turquoise hover:text-turquoise-hover dark:text-turquoise-dark dark:hover:text-turquoise transition-colors mb-8">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="m15 18-6-6 6-6"/>
       </svg>
@@ -50,7 +50,7 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString('en-US', {
       <article class="max-w-[65ch] mx-auto lg:mx-0">
         <!-- Post header -->
         <header class="mb-8">
-          <h1 class="font-heading text-3xl md:text-4xl font-bold mb-4">
+          <h1 class="font-heading text-3xl md:text-4xl font-bold uppercase mb-4">
             {post.data.title}
           </h1>
 
@@ -69,7 +69,7 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString('en-US', {
               {post.data.tags.map((tag: string) => (
                 <a
                   href={`/blog/tags/${tag}`}
-                  class="px-3 py-1 text-sm rounded-full bg-accent-teal/10 text-accent-teal hover:bg-accent-teal hover:text-bg-dark transition-colors"
+                  class="px-3 py-1 text-sm rounded-full border-2 border-turquoise/50 dark:border-turquoise-dark/50 bg-turquoise/10 dark:bg-turquoise-dark/10 text-text-light dark:text-text-dark hover:bg-turquoise hover:text-bg-dark dark:hover:bg-turquoise-dark dark:hover:text-bg-dark transition-colors"
                 >
                   {tag}
                 </a>
@@ -78,7 +78,7 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString('en-US', {
           )}
 
           <!-- Featured image -->
-          <div class="bg-gray-200 dark:bg-gray-700 rounded-lg mb-8">
+          <div class="bg-gray-200 dark:bg-gray-700 rounded-lg mb-8 border-2 border-text-light/20 dark:border-text-dark/20">
             <img
               src={post.data.featuredImage}
               alt={post.data.title}
@@ -97,7 +97,7 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString('en-US', {
 
         <!-- Back link at bottom -->
         <div class="mt-12 pt-8 border-t border-text-muted-light/20 dark:border-text-muted-dark/20">
-          <a href="/blog" class="inline-flex items-center gap-2 text-accent-teal hover:underline">
+          <a href="/blog" class="inline-flex items-center gap-2 text-turquoise hover:text-turquoise-hover dark:text-turquoise-dark dark:hover:text-turquoise transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="m15 18-6-6 6-6"/>
             </svg>
