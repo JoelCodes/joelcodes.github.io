@@ -89,10 +89,10 @@ section[id] {
   }
 
   .shadow-neo-turquoise {
-    box-shadow: 5px 5px 0 var(--color-turquoise);
+    box-shadow: 6px 6px 0 var(--color-turquoise);
   }
   .dark .shadow-neo-turquoise {
-    box-shadow: 0 0 20px color-mix(in oklch, var(--color-turquoise-dark) 50%, transparent);
+    box-shadow: 0 0 20px color-mix(in oklch, var(--color-turquoise-dark) 75%, transparent);
   }
 
   .shadow-neo-magenta {
@@ -109,7 +109,7 @@ section[id] {
   }
   .shadow-neo-turquoise-hover {
     box-shadow: 3px 3px 0 var(--color-turquoise);
-    transform: translate(2px, 2px);
+    transform: translate(3px, 3px);
   }
   .shadow-neo-magenta-hover {
     box-shadow: 3px 3px 0 var(--color-magenta);
