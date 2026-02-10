@@ -10,12 +10,12 @@ See: .planning/PROJECT.md (updated 2026-02-09)
 
 ## Current Position
 
-Phase: 14 of 16 (Process Section)
-Plan: 3 of 3 in current phase
-Status: Phase complete - ready for Phase 15
-Last activity: 2026-02-10 - Completed 14-03-PLAN.md (illustration positioning fix)
+Phase: 15 of 16 (Technology Section)
+Plan: 1 of ? in current phase
+Status: In progress
+Last activity: 2026-02-10 - Completed 15-01-PLAN.md (technology illustrations)
 
-Progress: [███████████████████████░░░░░░░░░] 78% (54 of 69+ plans complete)
+Progress: [███████████████████████░░░░░░░░░] 80% (55 of 69+ plans complete)
 
 ## Milestone History
 
@@ -40,7 +40,7 @@ See `.planning/milestones/` for archived roadmaps and requirements.
 |-----------|--------|-------|--------|
 | v1.0 MVP | 1-6 | 23 | Complete |
 | v1.1 Design | 7-11 | 14 | Complete |
-| v1.2 Refinement | 12-16 | 7/? | In progress |
+| v1.2 Refinement | 12-16 | 8/? | In progress |
 
 **Recent Trend:**
 - v1.1 velocity: Stable, 2-day milestone completion
@@ -55,6 +55,8 @@ See `.planning/milestones/` for archived roadmaps and requirements.
 Key decisions are logged in PROJECT.md Key Decisions table.
 
 Recent decisions affecting v1.2:
+- **Phase 15-01**: Technology illustration metaphors: neural network (AI), interlocking gears (automations), browser window (web apps) for instant category recognition
+- **Phase 15-01**: Under-1KB optimization: Simplified TechAutomations from 8 to 4 gear teeth (739 bytes) while maintaining visual clarity
 - **Phase 14-03**: Padding calculation pattern for illustrations: position + width + gap = required padding (validates proper spacing)
 - **Phase 14-03**: Fixed illustration overlap with pl-24 md:pl-32 (was pl-16 md:pl-20) ensuring 16px/24px gaps
 - **Phase 14-02**: Single paragraph descriptions (1-2 sentences) replace You:/Joel: boxes for improved scannability and user focus
@@ -99,11 +101,13 @@ Recent decisions affecting v1.2:
 
 **Phase 14/15 considerations:**
 - ✅ Phase 14 complete: Process section with 5 isometric illustrations, user-focused descriptions, and correct spacing
+- ✅ Phase 15-01 complete: Technology illustrations created (AI, Automations, Web Apps) following established style guide
+- ✅ Technology illustration metaphors validated: Neural network, gears, browser window are distinct and recognizable at 64x64px
 - ✅ Isometric illustration style guide established (14-01): 3-5 shapes, currentColor, viewBox, opacity faces
-- ✅ SVG size target validated (14-01): All 5 illustrations under 1KB each, 3.26KB total
+- ✅ SVG size target validated (14-01, 15-01): All 8 illustrations under 1KB each, 5.74KB total
 - ✅ Process integration validated (14-02): Responsive sizing, accessibility maintained, minimal LCP impact
 - ✅ Illustration positioning pattern validated (14-03): Padding calculation ensures proper gaps at all viewports
-- iso-shadow-sm proven effective for 64px illustrations (can reuse pattern in Tech section)
+- iso-shadow-sm proven effective for 64px illustrations (used in both Process and Tech sections)
 
 **Phase 16 considerations:**
 - FAQ keyboard accessibility already validated in v1.1, should carry forward to dedicated page
@@ -115,10 +119,10 @@ Recent decisions affecting v1.2:
 ## Session Continuity
 
 Last session: 2026-02-10
-Stopped at: Phase 14 complete (all 3 plans executed)
+Stopped at: Completed 15-01-PLAN.md (technology illustrations)
 Resume file: None
-Next action: `/gsd:plan-phase 15`
+Next action: Continue Phase 15 planning and execution
 
 ---
 *State initialized: 2026-01-26*
-*Last updated: 2026-02-10 (Phase 14-03 complete: Fixed illustration positioning with proper padding calculations)*
+*Last updated: 2026-02-10 (Phase 15-01 complete: Created 3 technology category isometric illustrations - AI, Automations, Web Apps)*
