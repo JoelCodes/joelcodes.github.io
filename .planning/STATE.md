@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-02-10)
 ## Current Position
 
 Phase: 17 of 22 (Design System Reference Page)
-Plan: 0 of ? in current phase
-Status: Ready to plan
-Last activity: 2026-02-10 — v1.3 milestone roadmap created
+Plan: 1 of ? in current phase
+Status: In progress
+Last activity: 2026-02-10 — Completed 17-01-PLAN.md
 
-Progress: [████████████████████████░░] 73% (16 phases complete, 6 phases remaining)
+Progress: [████████████████████████░░] 74% (16 phases complete, 1 plan in phase 17, 6 phases remaining)
 
 ## Milestone History
 
@@ -58,6 +58,8 @@ See `.planning/MILESTONES.md` for full milestone details.
 Key decisions are logged in PROJECT.md Key Decisions table.
 
 Recent decisions affecting v1.3:
+- **17-01**: BaseLayout head slot — Named slot for custom meta tag injection (enables noindex, future extensibility)
+- **17-01**: JavaScript toggle for CodeBlock — Interactive button control vs `<details>` for consistency with neobrutalist design
 - **v1.2**: Isometric currentColor SVGs — Single SVG works with any color, <1KB each
 - **v1.2**: Dedicated FAQ page — SEO-friendly with JSON-LD, reduces footer weight
 - **v1.2**: @lucide/astro tree-shaking — 200KB+ bundle reduction vs lucide-static
@@ -82,10 +84,10 @@ None yet for v1.3.
 ## Session Continuity
 
 Last session: 2026-02-10
-Stopped at: v1.3 milestone roadmap created with 6 phases (17-22)
+Stopped at: Completed 17-01-PLAN.md
 Resume file: None
-Next action: Plan Phase 17 (Design System Reference Page)
+Next action: Continue with 17-02 (populate design system content)
 
 ---
 *State initialized: 2026-01-26*
-*Last updated: 2026-02-10 (v1.3 roadmap created)*
+*Last updated: 2026-02-10 (Completed 17-01: Design system page infrastructure)*
