@@ -97,11 +97,11 @@ Plans:
   3. Individual project pages use narrative case study format (Problem -> Solution -> Results)
   4. Blog index and tag pages use neobrutalist card grid
   5. Blog post headings have subtle neobrutalist accents while body text remains readable
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 10-01: TBD
-- [ ] 10-02: TBD
+- [ ] 10-01-PLAN.md — Rename Portfolio to Projects with redirects, create ProjectCard, and apply neobrutalist case study styling
+- [ ] 10-02-PLAN.md — Update BlogCard and blog pages with neobrutalist styling and two-tier typography
 
 #### Phase 11: Testing & Accessibility Validation
 **Goal**: Validate complete neobrutalist redesign meets performance, accessibility, and business goals
