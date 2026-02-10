@@ -1,0 +1,147 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DesignSystemNav from '../components/design-system/DesignSystemNav.astro';
+---
+
+<BaseLayout title="Design System | Joel Shinness" description="Internal design system reference for Joel and AI coding agents">
+  <!-- Noindex meta tag for internal-only page -->
+  <meta slot="head" name="robots" content="noindex, follow" />
+
+  <div class="container mx-auto px-4 py-12">
+    <!-- Two-column grid: sidebar + main content -->
+    <div class="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-8">
+      <!-- Sidebar: sticky navigation (desktop only) -->
+      <aside class="hidden lg:block">
+        <div class="sticky top-[76px] max-h-[calc(100vh-92px)] overflow-y-auto">
+          <DesignSystemNav />
+        </div>
+      </aside>
+
+      <!-- Main content area -->
+      <main class="max-w-5xl">
+        <!-- Introduction Section -->
+        <section id="introduction" class="mb-16">
+          <h1 class="font-heading text-4xl md:text-5xl font-bold uppercase mb-6">
+            Design System
+          </h1>
+          <p class="text-lg leading-relaxed mb-4 text-text-muted-light dark:text-text-muted-dark">
+            Internal reference for Joel and AI coding agents. Components, tokens, and utilities for consistent development.
+          </p>
+          <p class="text-sm text-text-muted-light dark:text-text-muted-dark">
+            <strong>Machine-readable format:</strong>
+            <a
+              href="/design-system.json"
+              class="text-turquoise hover:text-turquoise-hover dark:text-turquoise-dark dark:hover:text-turquoise underline ml-1"
+            >
+              /design-system.json
+            </a>
+          </p>
+        </section>
+
+        <!-- Colors Section -->
+        <section id="colors" class="mb-16">
+          <h2 class="font-heading text-3xl font-bold uppercase mb-6 border-l-4 border-turquoise dark:border-turquoise-dark pl-4">
+            Colors
+          </h2>
+          <p class="text-text-muted-light dark:text-text-muted-dark mb-4">
+            Color tokens will be documented here.
+          </p>
+        </section>
+
+        <!-- Typography Section -->
+        <section id="typography" class="mb-16">
+          <h2 class="font-heading text-3xl font-bold uppercase mb-6 border-l-4 border-turquoise dark:border-turquoise-dark pl-4">
+            Typography
+          </h2>
+          <p class="text-text-muted-light dark:text-text-muted-dark mb-4">
+            Typography tokens will be documented here.
+          </p>
+        </section>
+
+        <!-- Components Section -->
+        <section id="components" class="mb-16">
+          <h2 class="font-heading text-3xl font-bold uppercase mb-6 border-l-4 border-turquoise dark:border-turquoise-dark pl-4">
+            Components
+          </h2>
+
+          <!-- Button Component -->
+          <div id="component-button" class="mb-12">
+            <h3 class="font-heading text-2xl font-semibold mb-4">
+              Button
+            </h3>
+            <p class="text-text-muted-light dark:text-text-muted-dark mb-4">
+              Button component documentation will be added here.
+            </p>
+          </div>
+
+          <!-- Card Component -->
+          <div id="component-card" class="mb-12">
+            <h3 class="font-heading text-2xl font-semibold mb-4">
+              Card
+            </h3>
+            <p class="text-text-muted-light dark:text-text-muted-dark mb-4">
+              Card component documentation will be added here.
+            </p>
+          </div>
+
+          <!-- Input Component -->
+          <div id="component-input" class="mb-12">
+            <h3 class="font-heading text-2xl font-semibold mb-4">
+              Input
+            </h3>
+            <p class="text-text-muted-light dark:text-text-muted-dark mb-4">
+              Input component documentation will be added here.
+            </p>
+          </div>
+
+          <!-- Badge Component -->
+          <div id="component-badge" class="mb-12">
+            <h3 class="font-heading text-2xl font-semibold mb-4">
+              Badge
+            </h3>
+            <p class="text-text-muted-light dark:text-text-muted-dark mb-4">
+              Badge component documentation will be added here.
+            </p>
+          </div>
+        </section>
+
+        <!-- Utilities Section -->
+        <section id="utilities" class="mb-16">
+          <h2 class="font-heading text-3xl font-bold uppercase mb-6 border-l-4 border-turquoise dark:border-turquoise-dark pl-4">
+            Utilities
+          </h2>
+
+          <!-- Isometric Shadow -->
+          <div id="utility-iso-shadow" class="mb-12">
+            <h3 class="font-heading text-2xl font-semibold mb-4">
+              Isometric Shadow
+            </h3>
+            <p class="text-text-muted-light dark:text-text-muted-dark mb-4">
+              Isometric shadow utility documentation will be added here.
+            </p>
+          </div>
+
+          <!-- Isometric Glow -->
+          <div id="utility-iso-glow" class="mb-12">
+            <h3 class="font-heading text-2xl font-semibold mb-4">
+              Isometric Glow
+            </h3>
+            <p class="text-text-muted-light dark:text-text-muted-dark mb-4">
+              Isometric glow utility documentation will be added here.
+            </p>
+          </div>
+
+          <!-- Isometric Rotate -->
+          <div id="utility-iso-rotate" class="mb-12">
+            <h3 class="font-heading text-2xl font-semibold mb-4">
+              Isometric Rotate
+            </h3>
+            <p class="text-text-muted-light dark:text-text-muted-dark mb-4">
+              Isometric rotate utility documentation will be added here.
+            </p>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+</BaseLayout>
