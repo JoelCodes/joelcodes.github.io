@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-02-09)
 ## Current Position
 
 Phase: 11 of 11 (Testing & Accessibility Validation) - COMPLETE
-Plan: 2 of 2 complete
-Status: Phase complete, milestone complete (verified)
-Last activity: 2026-02-10 — Completed Phase 11 execution and verification
+Plan: 3 of 3 complete
+Status: Phase complete, milestone complete (verified), WCAG violations resolved
+Last activity: 2026-02-10 — Completed 11-03 WCAG color contrast fixes
 
-Progress: [████████████████████] 100% (37 of 37 total plans complete across v1.0 + v1.1)
+Progress: [████████████████████] 100% (38 of 38 total plans complete across v1.0 + v1.1)
 
 ## Milestone History
 
@@ -75,17 +75,16 @@ Recent decisions affecting v1.1:
 - **75% dark mode glow opacity** (10-02): Increased from 50% for better visibility while maintaining subtlety (applied to turquoise shadows)
 - **Playwright for accessibility testing** (11-01): Integrates with axe-core for comprehensive WCAG 2.2 AA validation catching ~57% of violations
 - **Separate dark mode a11y tests** (11-01): Dark mode accessibility tested independently to catch color contrast regressions
+- **Text-specific OKLCH color tokens** (11-03): Separate -text variants for WCAG compliance (L 0.55 for yellow, L 0.45 for turquoise) preserve decorative accent colors
 
 ### Pending Todos
 
 **Before v1.1 deployment:**
-1. **[URGENT]** ~~Validate color contrast ratios meet WCAG 4.5:1 minimum (yellow/turquoise/magenta on white + dark variants)~~ **VALIDATED** (11-01) - Found 2 violations requiring remediation:
-   - Yellow stats (#f3cb00) - 1.57 ratio vs required 3:1
-   - Turquoise email link (#00babb) - 2.4 ratio vs required 4.5:1
-2. **[URGENT]** Fix color contrast violations found in 11-01 testing
+1. ~~**[URGENT]** Validate color contrast ratios meet WCAG 4.5:1 minimum (yellow/turquoise/magenta on white + dark variants)~~ **DONE** (11-01, 11-03) - All violations fixed
+2. ~~**[URGENT]** Fix color contrast violations found in 11-01 testing~~ **DONE** (11-03) - Zero axe-core violations across all pages
 3. ~~Test dark mode shadow glow visibility on all components (may need adjustment of 50% opacity)~~ **DONE** - Adjusted to 80% opacity in 08-03
 4. ~~Manual accessibility audit (keyboard navigation, screen reader)~~ **DONE** (11-02) - 98.7% pass rate (77/78 tests)
-5. Fix dark mode filter button contrast on projects page (non-critical) - 'All Projects' button has dark text on dark background when inactive
+5. ~~Fix dark mode filter button contrast on projects page (non-critical)~~ **DONE** (11-03) - CSS override ensures proper contrast in all states
 6. Target audience validation (small business owners)
 7. Test dark mode glow visibility across different monitors/brightness levels (noted in 08-03)
 
@@ -123,10 +122,10 @@ Recent decisions affecting v1.1:
 ## Session Continuity
 
 Last session: 2026-02-10
-Stopped at: Completed Phase 11 and v1.1 milestone
+Stopped at: Completed 11-03 WCAG color contrast fixes (gap closure)
 Resume file: None
-Next action: Run /gsd:complete-milestone to archive v1.1 and prepare for v1.2
+Next action: v1.1 ready for deployment - all Phase 11 accessibility blockers resolved
 
 ---
 *State initialized: 2026-01-26*
-*Last updated: 2026-02-10 (completed 11-01)*
+*Last updated: 2026-02-10 (completed 11-03)*
