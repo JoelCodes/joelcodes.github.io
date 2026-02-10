@@ -5,6 +5,9 @@ import ProcessPrototype from '../components/illustrations/ProcessPrototype.svg';
 import ProcessProposal from '../components/illustrations/ProcessProposal.svg';
 import ProcessBuild from '../components/illustrations/ProcessBuild.svg';
 import ProcessHandover from '../components/illustrations/ProcessHandover.svg';
+import TechAI from '../components/illustrations/TechAI.svg';
+import TechAutomations from '../components/illustrations/TechAutomations.svg';
+import TechWebApps from '../components/illustrations/TechWebApps.svg';
 ---
 
 <BaseLayout
@@ -180,6 +183,33 @@ import ProcessHandover from '../components/illustrations/ProcessHandover.svg';
           </div>
           <div class="flex flex-col items-center gap-2 text-turquoise iso-shadow p-4 rounded bg-bg-light dark:bg-bg-dark border-3 border-text-light dark:border-text-dark">
             <ProcessHandover width={64} height={64} />
+          </div>
+        </div>
+      </section>
+
+      <!-- Technology Illustrations -->
+      <section class="mb-16">
+        <h2 class="font-heading text-2xl font-bold mb-6 text-text-light dark:text-text-dark">
+          Technology Illustrations
+        </h2>
+        <div class="flex flex-wrap gap-8">
+          <div class="text-center">
+            <div class="text-yellow iso-shadow-sm rounded mb-2 inline-block">
+              <TechAI width={64} height={64} />
+            </div>
+            <p class="text-sm text-text-muted-light dark:text-text-muted-dark">AI</p>
+          </div>
+          <div class="text-center">
+            <div class="text-turquoise iso-shadow-sm rounded mb-2 inline-block">
+              <TechAutomations width={64} height={64} />
+            </div>
+            <p class="text-sm text-text-muted-light dark:text-text-muted-dark">Automations</p>
+          </div>
+          <div class="text-center">
+            <div class="text-magenta iso-shadow-sm rounded mb-2 inline-block">
+              <TechWebApps width={64} height={64} />
+            </div>
+            <p class="text-sm text-text-muted-light dark:text-text-muted-dark">Web Apps</p>
           </div>
         </div>
       </section>
