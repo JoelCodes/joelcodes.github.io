@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-02-09)
 
 ## Current Position
 
-Phase: 10 of 11 (Projects & Blog) - COMPLETE
-Plan: 2 of 2 complete
-Status: Phase complete (verified)
-Last activity: 2026-02-09 — Completed Phase 10 execution and verification
+Phase: 11 of 11 (Testing & Accessibility Validation) - IN PROGRESS
+Plan: 1 of 2+ complete
+Status: In progress
+Last activity: 2026-02-10 — Completed 11-01-PLAN.md (Automated accessibility testing infrastructure)
 
-Progress: [████████████████░░░░] 91% (34 of ~37 total plans complete across v1.0 + v1.1)
+Progress: [█████████████████░░░] 95% (35 of ~37 total plans complete across v1.0 + v1.1)
 
 ## Milestone History
 
@@ -73,15 +73,20 @@ Recent decisions affecting v1.1:
 - **Two-tier typography** (10-02): Neobrutalist headings (H1 uppercase, H2 border accent) + clean body text for reading comfort
 - **Turquoise blog accent** (10-02): Turquoise differentiates blog from projects (yellow) and contact (magenta) while maintaining design cohesion
 - **75% dark mode glow opacity** (10-02): Increased from 50% for better visibility while maintaining subtlety (applied to turquoise shadows)
+- **Playwright for accessibility testing** (11-01): Integrates with axe-core for comprehensive WCAG 2.2 AA validation catching ~57% of violations
+- **Separate dark mode a11y tests** (11-01): Dark mode accessibility tested independently to catch color contrast regressions
 
 ### Pending Todos
 
 **Before v1.1 deployment:**
-1. **[URGENT]** Validate color contrast ratios meet WCAG 4.5:1 minimum (yellow/turquoise/magenta on white + dark variants)
-2. ~~Test dark mode shadow glow visibility on all components (may need adjustment of 50% opacity)~~ **DONE** - Adjusted to 80% opacity in 08-03
-3. Manual accessibility audit (keyboard navigation, screen reader)
-4. Target audience validation (small business owners)
-5. Test dark mode glow visibility across different monitors/brightness levels (noted in 08-03)
+1. **[URGENT]** ~~Validate color contrast ratios meet WCAG 4.5:1 minimum (yellow/turquoise/magenta on white + dark variants)~~ **VALIDATED** (11-01) - Found 2 violations requiring remediation:
+   - Yellow stats (#f3cb00) - 1.57 ratio vs required 3:1
+   - Turquoise email link (#00babb) - 2.4 ratio vs required 4.5:1
+2. **[URGENT]** Fix color contrast violations found in 11-01 testing
+3. ~~Test dark mode shadow glow visibility on all components (may need adjustment of 50% opacity)~~ **DONE** - Adjusted to 80% opacity in 08-03
+4. Manual accessibility audit (keyboard navigation, screen reader)
+5. Target audience validation (small business owners)
+6. Test dark mode glow visibility across different monitors/brightness levels (noted in 08-03)
 
 **v1.0 deployment (still pending):**
 1. Configure Formspree form ID (replace `YOUR_FORM_ID` in contact.astro and ContactSection.astro)
@@ -108,18 +113,19 @@ Recent decisions affecting v1.1:
 - Test composite components with keyboard navigation
 
 **Phase 11 (Testing & Accessibility):**
-- Manual accessibility testing required (Lighthouse alone insufficient)
+- **[CRITICAL]** Color contrast violations require remediation before v1.1 deployment (yellow stats and turquoise email link)
+- Manual accessibility testing required (automated tests catch ~57% of issues)
 - Target audience validation needed to ensure professional trust maintained
-- Verify focus ring contrast ratio against final color palette (from 08-03)
 - End-to-end keyboard navigation test through all composite components
+- Expand test coverage to include dynamic routes (blog posts, project details, tag pages)
 
 ## Session Continuity
 
-Last session: 2026-02-09
-Stopped at: Completed Phase 10 (Projects & Blog) execution and verification
+Last session: 2026-02-10
+Stopped at: Completed 11-01-PLAN.md (Automated accessibility testing)
 Resume file: None
-Next action: Begin Phase 11 (Testing & Accessibility Validation)
+Next action: Continue Phase 11 - address color contrast violations or proceed with manual accessibility audit
 
 ---
 *State initialized: 2026-01-26*
-*Last updated: 2026-02-09 (completed Phase 10)*
+*Last updated: 2026-02-10 (completed 11-01)*
