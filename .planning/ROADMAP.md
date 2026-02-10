@@ -5,6 +5,7 @@
 - ✅ **v1.0 MVP** — Phases 1-6 (shipped 2026-01-27)
 - ✅ **v1.1 Design Updates** — Phases 7-11 (shipped 2026-02-10)
 - ✅ **v1.2 Homepage Refinement** — Phases 12-16 (shipped 2026-02-10)
+- 🚧 **v1.3 Design System & Navigation Cleanup** — Phases 17-22 (in progress)
 
 ## Phases
 
@@ -65,10 +66,95 @@ See: `.planning/milestones/v1.2-ROADMAP.md` for full details.
 
 </details>
 
+### 🚧 v1.3 Design System & Navigation Cleanup (In Progress)
+
+**Milestone Goal:** Consolidate design system into a reference page, ensure consistent component usage across all pages, and streamline navigation for cleaner user experience.
+
+#### Phase 17: Design System Reference Page
+**Goal**: Internal design system documentation page exists with all components, tokens, and utilities
+**Depends on**: Nothing (first phase of milestone)
+**Requirements**: DS-01, DS-02, DS-03, DS-04, DS-05, DS-06, DS-07, DS-08, DS-09
+**Success Criteria** (what must be TRUE):
+  1. Developer can view all Button variants (primary, secondary, turquoise, disabled) on /design-system page
+  2. Developer can view all Card, Input, and Badge component variants with examples
+  3. Developer can view OKLCH color palette with hex/oklch values for both light and dark modes
+  4. Developer can view typography scale (Bricolage Grotesque, DM Sans) with size examples
+  5. Developer can view isometric utilities (iso-shadow, iso-glow, iso-rotate) with visual examples
+**Plans**: TBD
+
+Plans:
+- [ ] 17-01: TBD
+
+#### Phase 18: Component Consistency Audit
+**Goal**: Complete inventory of component usage across all pages with severity-tiered findings
+**Depends on**: Phase 17
+**Requirements**: AUDIT-01, AUDIT-02, AUDIT-03
+**Success Criteria** (what must be TRUE):
+  1. Developer can read audit document listing all component usage inconsistencies
+  2. Audit findings are categorized by severity (CRITICAL/HIGH/MEDIUM/LOW)
+  3. Prioritized migration plan exists identifying which findings to address
+**Plans**: TBD
+
+Plans:
+- [ ] 18-01: TBD
+
+#### Phase 19: Component Migration (Tiered)
+**Goal**: CRITICAL and HIGH severity inconsistencies resolved, components match design system
+**Depends on**: Phase 18
+**Requirements**: AUDIT-02 (migration execution)
+**Success Criteria** (what must be TRUE):
+  1. All CRITICAL accessibility inconsistencies are fixed (focus states, ARIA attributes)
+  2. All HIGH visual inconsistencies are fixed (shadow offsets, border widths, color variants)
+  3. All pages use components that match design system reference
+**Plans**: TBD
+
+Plans:
+- [ ] 19-01: TBD
+
+#### Phase 20: Contact Form Enhancement
+**Goal**: Contact form optimized for lead generation with n8n webhook integration
+**Depends on**: Phase 17 (design system exists for form components)
+**Requirements**: FORM-01, FORM-02, FORM-03, FORM-04
+**Success Criteria** (what must be TRUE):
+  1. User can submit contact form and receive clear success/error feedback
+  2. Form submits to n8n webhook (placeholder URL, configurable)
+  3. Form fields are optimized based on freelance developer lead generation best practices
+**Plans**: TBD
+
+Plans:
+- [ ] 20-01: TBD
+
+#### Phase 21: Navigation Cleanup
+**Goal**: Simplified header navigation and contact page redirect implemented
+**Depends on**: Phase 19 (component consistency complete)
+**Requirements**: NAV-01, NAV-02, NAV-03
+**Success Criteria** (what must be TRUE):
+  1. User sees only Blog, Projects, FAQ, Contact links in header (homepage section links removed)
+  2. User visiting /contact is automatically redirected to /#contact
+  3. Footer FAQ standalone link is removed
+**Plans**: TBD
+
+Plans:
+- [ ] 21-01: TBD
+
+#### Phase 22: Footer Enhancement
+**Goal**: Footer contains social icons and secondary navigation
+**Depends on**: Phase 21
+**Requirements**: NAV-04, NAV-05, NAV-06, NAV-07
+**Success Criteria** (what must be TRUE):
+  1. User can see Instagram and Substack social icons in footer with 44x44px touch targets
+  2. User can navigate to Blog, Projects, FAQ, Contact from footer (mirrors header)
+  3. Screen reader users hear "Follow Joel on Instagram" and "Follow Joel on Substack" (proper aria-labels)
+  4. All social icons pass WCAG 2.2 AA accessibility (axe-core validation)
+**Plans**: TBD
+
+Plans:
+- [ ] 22-01: TBD
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 -> 2 -> ... -> 16
+Phases execute in numeric order: 1 -> 2 -> ... -> 16 -> 17 -> 18 -> 19 -> 20 -> 21 -> 22
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
@@ -88,3 +174,13 @@ Phases execute in numeric order: 1 -> 2 -> ... -> 16
 | 14. Process Section | v1.2 | 3/3 | Complete | 2026-02-10 |
 | 15. Technology Section | v1.2 | 2/2 | Complete | 2026-02-10 |
 | 16. FAQ Page | v1.2 | 1/1 | Complete | 2026-02-10 |
+| 17. Design System Reference Page | v1.3 | 0/? | Not started | - |
+| 18. Component Consistency Audit | v1.3 | 0/? | Not started | - |
+| 19. Component Migration (Tiered) | v1.3 | 0/? | Not started | - |
+| 20. Contact Form Enhancement | v1.3 | 0/? | Not started | - |
+| 21. Navigation Cleanup | v1.3 | 0/? | Not started | - |
+| 22. Footer Enhancement | v1.3 | 0/? | Not started | - |
+
+---
+*Roadmap initialized: 2026-01-26 for v1.0*
+*Last updated: 2026-02-10 after v1.3 milestone start*
