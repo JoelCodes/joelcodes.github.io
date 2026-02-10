@@ -154,7 +154,7 @@ Plans:
 **Plans**: 1 plan in 1 wave
 
 Plans:
-- [ ] 16-01-PLAN.md — Create FAQ page with JSON-LD, update navigation and footer
+- [x] 16-01-PLAN.md — Create FAQ page with JSON-LD, update navigation and footer
 
 ## Progress
 
@@ -178,4 +178,4 @@ Phases execute in numeric order: 1 -> 2 -> ... -> 16
 | 13. Hero Section | v1.2 | 1/1 | Complete | 2026-02-10 |
 | 14. Process Section | v1.2 | 3/3 | Complete | 2026-02-10 |
 | 15. Technology Section | v1.2 | 2/2 | Complete | 2026-02-10 |
-| 16. FAQ Page | v1.2 | 0/1 | Not started | - |
+| 16. FAQ Page | v1.2 | 1/1 | Complete | 2026-02-10 |
