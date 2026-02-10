@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-02-09)
 ## Current Position
 
 Phase: 10 of 11 (Projects & Blog Pages) - IN PROGRESS
-Plan: 1 of 3 complete
+Plan: 2 of 3 complete
 Status: Active development
-Last activity: 2026-02-09 — Completed 10-01-PLAN.md (Portfolio → Projects Rename)
+Last activity: 2026-02-09 — Completed 10-02-PLAN.md (Blog Index Redesign)
 
-Progress: [██████████████░░░░░░] 87% (33 of ~38 total plans complete across v1.0 + v1.1)
+Progress: [██████████████░░░░░░] 89% (34 of ~38 total plans complete across v1.0 + v1.1)
 
 ## Milestone History
 
@@ -70,6 +70,9 @@ Recent decisions affecting v1.1:
 - **Case study narrative structure** (10-01): Problem → Solution → Results format mirrors how small business owners evaluate solutions
 - **Yellow offset shadows for cards** (10-01): 6px offset provides strong visual weight, yellow accent matches design system
 - **Category-based project filtering** (10-01): Single category per project (mutually exclusive) simpler than tag system at current scale
+- **Two-tier typography** (10-02): Neobrutalist headings (H1 uppercase, H2 border accent) + clean body text for reading comfort
+- **Turquoise blog accent** (10-02): Turquoise differentiates blog from projects (yellow) and contact (magenta) while maintaining design cohesion
+- **75% dark mode glow opacity** (10-02): Increased from 50% for better visibility while maintaining subtlety (applied to turquoise shadows)
 
 ### Pending Todos
 
@@ -113,10 +116,10 @@ Recent decisions affecting v1.1:
 ## Session Continuity
 
 Last session: 2026-02-09
-Stopped at: Completed 10-01-PLAN.md (Portfolio → Projects Rename)
+Stopped at: Completed 10-02-PLAN.md (Blog Index Redesign)
 Resume file: None
-Next action: Continue Phase 10 with plan 10-02 (Blog Index Redesign)
+Next action: Continue Phase 10 with plan 10-03 (Blog Content Enhancement)
 
 ---
 *State initialized: 2026-01-26*
-*Last updated: 2026-02-09 (completed 10-01)*
+*Last updated: 2026-02-09 (completed 10-02)*
