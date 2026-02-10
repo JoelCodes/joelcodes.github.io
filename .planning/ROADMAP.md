@@ -80,13 +80,15 @@ See: `.planning/milestones/v1.2-ROADMAP.md` for full details.
   3. Developer can view OKLCH color palette with hex/oklch values for both light and dark modes
   4. Developer can view typography scale (Bricolage Grotesque, DM Sans) with size examples
   5. Developer can view isometric utilities (iso-shadow, iso-glow, iso-rotate) with visual examples
-**Plans**: 4 plans in 3 waves
+**Plans**: 5 plans in 3 waves
+**Completed**: 2026-02-10
 
 Plans:
 - [x] 17-01-PLAN.md — Page infrastructure (layout, sidebar nav, code toggle/copy)
 - [x] 17-02-PLAN.md — Design tokens (colors, typography sections)
 - [x] 17-03-PLAN.md — Components (Button, Card, Input, Badge documentation)
 - [x] 17-04-PLAN.md — Utilities (isometric utilities, JSON endpoint, CLAUDE.md update)
+- [x] 17-05-PLAN.md — UAT gap closure (CodeBlock padding, Card stacked isolation, Badge colors)
 
 #### Phase 18: Component Consistency Audit
 **Goal**: Complete inventory of component usage across all pages with severity-tiered findings
@@ -177,7 +179,7 @@ Phases execute in numeric order: 1 -> 2 -> ... -> 16 -> 17 -> 18 -> 19 -> 20 -> 
 | 14. Process Section | v1.2 | 3/3 | Complete | 2026-02-10 |
 | 15. Technology Section | v1.2 | 2/2 | Complete | 2026-02-10 |
 | 16. FAQ Page | v1.2 | 1/1 | Complete | 2026-02-10 |
-| 17. Design System Reference Page | v1.3 | 4/4 | Complete | 2026-02-10 |
+| 17. Design System Reference Page | v1.3 | 5/5 | Complete | 2026-02-10 |
 | 18. Component Consistency Audit | v1.3 | 0/? | Not started | - |
 | 19. Component Migration (Tiered) | v1.3 | 0/? | Not started | - |
 | 20. Contact Form Enhancement | v1.3 | 0/? | Not started | - |
