@@ -22,7 +22,7 @@ import projects from '../../data/projects.json';
       <!-- Filter buttons -->
       <div class="flex flex-wrap justify-center gap-3 mb-12">
         <button
-          class="filter-btn active px-6 py-2 rounded-full transition-colors duration-200 bg-yellow dark:bg-yellow-dark border-[3px] border-text-light dark:border-text-dark font-bold text-text-light hover:bg-yellow-600 dark:hover:bg-yellow-500"
+          class="filter-btn active px-6 py-2 rounded-full transition-colors duration-200 bg-yellow dark:bg-yellow-dark border-[3px] border-text-light dark:border-text-dark font-bold text-text-light dark:text-text-dark hover:bg-yellow-600 dark:hover:bg-yellow-500"
           onclick="filterSelection('all'); setActiveButton(this)"
         >
           All Projects
@@ -64,6 +64,13 @@ import projects from '../../data/projects.json';
       </section>
     </div>
   </main>
+
+  <style>
+    /* Active filter buttons always use dark text for contrast against yellow background */
+    .filter-btn.active {
+      color: var(--color-text-light);
+    }
+  </style>
 
   <script is:inline>
     function filterSelection(category) {
