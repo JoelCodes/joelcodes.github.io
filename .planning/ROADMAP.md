@@ -89,7 +89,7 @@ Plans:
 **Plans**: 1 plan in 1 wave
 
 Plans:
-- [ ] 13-01-PLAN.md - Create Badge component and update Hero with outcome-focused content
+- [x] 13-01-PLAN.md - Create Badge component and update Hero with outcome-focused content
 
 #### Phase 14: Process Section
 
@@ -172,7 +172,7 @@ Phases execute in numeric order: 1 -> 2 -> ... -> 16
 | 10. Projects & Blog | v1.1 | 2/2 | Complete | 2026-02-09 |
 | 11. Testing & Accessibility | v1.1 | 3/3 | Complete | 2026-02-10 |
 | 12. Foundation | v1.2 | 3/3 | Complete | 2026-02-09 |
-| 13. Hero Section | v1.2 | 0/1 | Not started | - |
+| 13. Hero Section | v1.2 | 1/1 | Complete | 2026-02-10 |
 | 14. Process Section | v1.2 | 0/? | Not started | - |
 | 15. Technology Section | v1.2 | 0/? | Not started | - |
 | 16. FAQ Page | v1.2 | 0/? | Not started | - |
