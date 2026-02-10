@@ -1,5 +1,7 @@
 ---
-import Card from '../ui/Card.astro';
+import TechAI from '../illustrations/TechAI.svg';
+import TechAutomations from '../illustrations/TechAutomations.svg';
+import TechWebApps from '../illustrations/TechWebApps.svg';
 ---
 
 <section
@@ -10,97 +12,50 @@ import Card from '../ui/Card.astro';
   <div class="container mx-auto px-6 md:px-12">
     <h2
       id="tech-heading"
-      class="font-heading font-bold text-3xl md:text-4xl uppercase mb-8 text-text-light dark:text-text-dark"
+      class="font-heading font-bold text-3xl md:text-4xl uppercase mb-12 text-text-light dark:text-text-dark"
     >
-      How I Build
+      What I Build
     </h2>
 
-    <!-- Asymmetric 1:2 grid layout -->
-    <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8 md:gap-12 items-start">
-      <!-- Left: Philosophy text -->
-      <div class="text-text-light dark:text-text-dark">
-        <p class="text-lg mb-4">
-          I believe in choosing the right tool for the job. No over-engineering, no chasing trends.
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+      <!-- AI Solutions -->
+      <article>
+        <div class="text-yellow iso-shadow-sm rounded mb-4 inline-block">
+          <TechAI class="w-12 h-12 md:w-16 md:h-16" />
+        </div>
+        <h3 class="font-heading text-2xl font-semibold text-text-light dark:text-text-dark mb-3">
+          AI Solutions
+        </h3>
+        <p class="text-text-muted-light dark:text-text-muted-dark leading-relaxed">
+          Custom AI tools that automate your workflows and surface insights from your data, without requiring a data science team.
         </p>
-        <p class="text-lg">
-          Modern, proven technologies that deliver results without unnecessary complexity.
+      </article>
+
+      <!-- Automations -->
+      <article>
+        <div class="text-turquoise iso-shadow-sm rounded mb-4 inline-block">
+          <TechAutomations class="w-12 h-12 md:w-16 md:h-16" />
+        </div>
+        <h3 class="font-heading text-2xl font-semibold text-text-light dark:text-text-dark mb-3">
+          Automations
+        </h3>
+        <p class="text-text-muted-light dark:text-text-muted-dark leading-relaxed">
+          Connect your tools and eliminate repetitive tasks so your team can focus on high-value work.
         </p>
-      </div>
+      </article>
 
-      <!-- Right: Tech stack grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <!-- Frontend -->
-        <Card variant="magenta">
-          <h3 class="font-heading font-bold text-xl mb-3 text-text-light dark:text-text-dark">
-            Frontend
-          </h3>
-          <ul class="space-y-2 text-text-light dark:text-text-dark">
-            <li>
-              <span class="font-semibold">Astro</span> — Fast static sites
-            </li>
-            <li>
-              <span class="font-semibold">React</span> — Interactive UIs
-            </li>
-            <li>
-              <span class="font-semibold">Tailwind CSS</span> — Rapid styling
-            </li>
-          </ul>
-        </Card>
-
-        <!-- Backend -->
-        <Card variant="magenta">
-          <h3 class="font-heading font-bold text-xl mb-3 text-text-light dark:text-text-dark">
-            Backend
-          </h3>
-          <ul class="space-y-2 text-text-light dark:text-text-dark">
-            <li>
-              <span class="font-semibold">Node.js</span> — Scalable APIs
-            </li>
-            <li>
-              <span class="font-semibold">Python</span> — Data processing
-            </li>
-            <li>
-              <span class="font-semibold">PostgreSQL</span> — Reliable data
-            </li>
-          </ul>
-        </Card>
-
-        <!-- AI/ML -->
-        <Card variant="magenta">
-          <h3 class="font-heading font-bold text-xl mb-3 text-text-light dark:text-text-dark">
-            AI/ML
-          </h3>
-          <ul class="space-y-2 text-text-light dark:text-text-dark">
-            <li>
-              <span class="font-semibold">OpenAI</span> — Natural language
-            </li>
-            <li>
-              <span class="font-semibold">LangChain</span> — AI workflows
-            </li>
-            <li>
-              <span class="font-semibold">Vector DBs</span> — Smart search
-            </li>
-          </ul>
-        </Card>
-
-        <!-- Infrastructure -->
-        <Card variant="magenta">
-          <h3 class="font-heading font-bold text-xl mb-3 text-text-light dark:text-text-dark">
-            Infrastructure
-          </h3>
-          <ul class="space-y-2 text-text-light dark:text-text-dark">
-            <li>
-              <span class="font-semibold">Vercel</span> — Fast deploys
-            </li>
-            <li>
-              <span class="font-semibold">AWS</span> — Cloud services
-            </li>
-            <li>
-              <span class="font-semibold">GitHub Actions</span> — CI/CD
-            </li>
-          </ul>
-        </Card>
-      </div>
+      <!-- Web Apps -->
+      <article>
+        <div class="text-magenta iso-shadow-sm rounded mb-4 inline-block">
+          <TechWebApps class="w-12 h-12 md:w-16 md:h-16" />
+        </div>
+        <h3 class="font-heading text-2xl font-semibold text-text-light dark:text-text-dark mb-3">
+          Web Apps
+        </h3>
+        <p class="text-text-muted-light dark:text-text-muted-dark leading-relaxed">
+          Modern, fast web applications built with proven technologies that scale with your business.
+        </p>
+      </article>
     </div>
   </div>
 </section>
