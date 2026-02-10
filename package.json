@@ -6,7 +6,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test:a11y": "playwright test tests/accessibility",
+    "test:a11y:ui": "playwright test tests/accessibility --ui"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
@@ -18,5 +20,9 @@
     "lucide-static": "^0.563.0",
     "reading-time-estimator": "^2.1.1",
     "tailwindcss": "^4.1.18"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.11.1",
+    "@playwright/test": "^1.58.2"
   }
 }
