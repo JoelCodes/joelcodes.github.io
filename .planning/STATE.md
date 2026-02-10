@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-09)
 
 **Core value:** Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
-**Current focus:** Phase 8 - Primitive Components (v1.1 Design Updates)
+**Current focus:** Phase 9 - Homepage Navigation (v1.1 Design Updates)
 
 ## Current Position
 
-Phase: 8 of 11 (Primitive Components)
-Plan: 3 of 3 complete
-Status: Phase complete
-Last activity: 2026-02-09 — Completed 08-03-PLAN.md (UAT Gap Closure)
+Phase: 9 of 11 (Homepage Navigation)
+Plan: 1 of 3 complete
+Status: In progress
+Last activity: 2026-02-10 — Completed 09-01-PLAN.md (Navigation Chrome Update)
 
-Progress: [█████████████░░░░░░░] 74% (28 of ~38 total plans complete across v1.0 + v1.1)
+Progress: [█████████████░░░░░░░] 76% (29 of ~38 total plans complete across v1.0 + v1.1)
 
 ## Milestone History
 
@@ -55,6 +55,9 @@ Recent decisions affecting v1.1:
 - **Box-shadow focus rings** (08-03): Use box-shadow instead of outline for focus rings to respect border-radius on rounded elements
 - **Iterative visual refinement** (08-03): Visual CSS work benefits from implement → verify → adjust → verify pattern to catch edge cases spec can't capture
 - **Dark mode glow opacity** (08-03): 80% opacity via color-mix provides good visibility while maintaining subtlety (initial 50% too faint)
+- **Smooth scroll with accessibility** (09-01): HTML smooth scroll behavior with prefers-reduced-motion support and scroll-margin-top offset for sticky header
+- **FAQ footer location** (09-01): FAQ relocated to footer accordion to prevent disrupting homepage narrative while keeping content accessible
+- **Native HTML accordion** (09-01): Use details/summary elements for FAQ accordion for better accessibility and zero JavaScript
 
 ### Pending Todos
 
@@ -91,10 +94,10 @@ Recent decisions affecting v1.1:
 
 ## Session Continuity
 
-Last session: 2026-02-09
-Stopped at: Completed 08-03-PLAN.md execution (UAT Gap Closure - Phase 8 complete)
+Last session: 2026-02-10
+Stopped at: Completed 09-01-PLAN.md execution (Navigation Chrome Update)
 Resume file: None
-Next action: Begin Phase 9 (Composite Components)
+Next action: Continue Phase 9 (Plan 02: Hero Section Updates)
 
 ---
 *State initialized: 2026-01-26*
