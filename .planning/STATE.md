@@ -11,11 +11,11 @@ See: .planning/PROJECT.md (updated 2026-02-09)
 ## Current Position
 
 Phase: 12 of 16 (Foundation)
-Plan: 2 of 3 in current phase
-Status: In progress
-Last activity: 2026-02-10 - Completed 12-02-PLAN.md (isometric utilities)
+Plan: 3 of 3 in current phase
+Status: Phase complete
+Last activity: 2026-02-09 - Completed 12-03-PLAN.md (icon visual regression tests)
 
-Progress: [██████████████████████░░░░░░░░░░] 71% (49 of 69+ plans complete)
+Progress: [███████████████████████░░░░░░░░░] 72% (50 of 69+ plans complete)
 
 ## Milestone History
 
@@ -40,7 +40,7 @@ See `.planning/milestones/` for archived roadmaps and requirements.
 |-----------|--------|-------|--------|
 | v1.0 MVP | 1-6 | 23 | Complete |
 | v1.1 Design | 7-11 | 14 | Complete |
-| v1.2 Refinement | 12-16 | 2/22 | In progress |
+| v1.2 Refinement | 12-16 | 3/22 | In progress |
 
 **Recent Trend:**
 - v1.1 velocity: Stable, 2-day milestone completion
@@ -55,6 +55,8 @@ See `.planning/milestones/` for archived roadmaps and requirements.
 Key decisions are logged in PROJECT.md Key Decisions table.
 
 Recent decisions affecting v1.2:
+- **Phase 12-03**: Visual regression tests use maxDiffPixels: 100 for anti-aliasing tolerance
+- **Phase 12-03**: Role-based selectors (contentinfo) for main footer to avoid strict mode violations
 - **Phase 12-02**: Isometric glow colors derive from currentColor (element's text color) for flexible per-element theming
 - **Phase 12-02**: OKLCH color-mix for isometric glows ensures perceptually uniform results across hues
 - **Phase 12-02**: Three rotation presets (subtle 30°, standard 45°, steep 60°) for different illustration styles
@@ -81,6 +83,7 @@ Recent decisions affecting v1.2:
 **Phase 12 considerations:**
 - ✅ Icon migration completed (12-01): Pattern established for future icon usage
 - ✅ Isometric utilities completed (12-02): Dark mode glow transformation working, test page at /test-isometric
+- ✅ Icon visual regression tests (12-03): Baseline screenshots ensure icon rendering consistency
 
 **Phase 14/15 considerations:**
 - Isometric illustration style guide must be established in Phase 14 before Phase 15 to prevent inconsistency
@@ -92,11 +95,11 @@ Recent decisions affecting v1.2:
 
 ## Session Continuity
 
-Last session: 2026-02-10
-Stopped at: Completed 12-02-PLAN.md (isometric utilities)
+Last session: 2026-02-09
+Stopped at: Completed 12-03-PLAN.md (icon visual regression tests)
 Resume file: None
-Next action: Execute 12-03-PLAN.md (Wave 1 final plan)
+Next action: Phase 12 complete - await next phase execution
 
 ---
 *State initialized: 2026-01-26*
-*Last updated: 2026-02-10 (12-02 complete: isometric utilities)*
+*Last updated: 2026-02-09 (12-03 complete: icon visual regression tests, Phase 12 complete)*
