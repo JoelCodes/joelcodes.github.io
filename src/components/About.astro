@@ -2,15 +2,15 @@
 // About component: Personal story with credibility signals
 ---
 
-<section class="py-16 px-6">
+<section id="about" aria-labelledby="about-heading" class="py-24 md:py-32 px-6">
   <div class="container max-w-6xl mx-auto">
-    <h2 class="font-heading text-3xl md:text-4xl font-bold text-center mb-12 text-text-light dark:text-text-dark">
+    <h2 id="about-heading" class="font-heading text-3xl md:text-4xl font-bold mb-8 text-text-light dark:text-text-dark">
       About Joel
     </h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-[1fr_1.5fr] gap-8 items-start">
+    <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8 items-start">
       <!-- Image column -->
-      <figure class="border border-text-light dark:border-text-dark bg-gray-200 dark:bg-gray-700">
+      <figure class="border-[4px] border-text-light dark:border-text-dark bg-gray-200 dark:bg-gray-700 shadow-neo-yellow">
         <img
           src="/images/profile-placeholder.svg"
           alt="Joel working at desk with code visible on screen"
@@ -26,27 +26,29 @@
         <!-- Credibility stats - prominent display -->
         <div class="flex gap-8 mb-8">
           <div class="flex flex-col">
-            <span class="font-heading text-4xl font-bold text-accent-teal">10+</span>
+            <span class="font-heading text-4xl font-bold text-yellow">10+</span>
             <span class="font-body text-sm text-text-muted-light dark:text-text-muted-dark">Years Experience</span>
           </div>
           <div class="flex flex-col">
-            <span class="font-heading text-4xl font-bold text-accent-teal">50+</span>
+            <span class="font-heading text-4xl font-bold text-yellow">50+</span>
             <span class="font-body text-sm text-text-muted-light dark:text-text-muted-dark">Projects Delivered</span>
           </div>
         </div>
 
         <!-- Narrative paragraphs -->
-        <p class="font-body text-base leading-relaxed text-text-light dark:text-text-dark">
-          I've been building custom software for small businesses for over 10 years, working with more than 50 clients to solve problems that off-the-shelf tools can't handle.
-        </p>
+        <div class="border-l-[4px] border-yellow pl-6 space-y-6">
+          <p class="font-body text-base leading-relaxed text-text-light dark:text-text-dark">
+            I've been building custom software for small businesses for over 10 years, working with more than 50 clients to solve problems that off-the-shelf tools can't handle.
+          </p>
 
-        <p class="font-body text-base leading-relaxed text-text-light dark:text-text-dark">
-          I focus on helping businesses get exactly what they need without the enterprise price tag. Whether it's a custom web app, automating tedious workflows, or adding AI features to your product.
-        </p>
+          <p class="font-body text-base leading-relaxed text-text-light dark:text-text-dark">
+            I focus on helping businesses get exactly what they need without the enterprise price tag. Whether it's a custom web app, automating tedious workflows, or adding AI features to your product.
+          </p>
 
-        <p class="font-body text-base leading-relaxed text-text-light dark:text-text-dark">
-          When I'm not coding, you'll find me exploring new technologies, mentoring developers, and enjoying outdoor adventures with my family.
-        </p>
+          <p class="font-body text-base leading-relaxed text-text-light dark:text-text-dark">
+            When I'm not coding, you'll find me exploring new technologies, mentoring developers, and enjoying outdoor adventures with my family.
+          </p>
+        </div>
       </div>
     </div>
   </div>
