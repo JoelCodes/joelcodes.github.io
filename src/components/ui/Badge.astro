@@ -1,0 +1,49 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends Omit<HTMLAttributes<'div'>, 'class'> {
+  label: string;           // Accessible label for screen readers (aria-label)
+  value: string;           // The metric value displayed (e.g., "500+ hours")
+  description?: string;    // Optional subtext (e.g., "saved per year")
+  variant?: 'yellow' | 'turquoise' | 'magenta';
+  class?: string;
+}
+
+const {
+  label,
+  value,
+  description,
+  variant = 'yellow',
+  class: className = '',
+  ...rest
+} = Astro.props;
+
+const variantClasses = {
+  yellow: 'text-yellow-text dark:text-yellow-text-dark',
+  turquoise: 'text-turquoise-text dark:text-turquoise-text-dark',
+  magenta: 'text-text-light dark:text-text-dark'
+};
+---
+
+<div
+  class:list={[
+    'inline-flex flex-col items-center justify-center',
+    'px-6 py-4',
+    'border-[3px] border-text-light dark:border-text-dark',
+    'iso-shadow',
+    variantClasses[variant],
+    className
+  ]}
+  role="group"
+  aria-label={label}
+  {...rest}
+>
+  <span class="text-2xl md:text-3xl font-heading font-bold uppercase">
+    {value}
+  </span>
+  {description && (
+    <span class="text-sm md:text-base font-body text-text-muted-light dark:text-text-muted-dark mt-1">
+      {description}
+    </span>
+  )}
+</div>
