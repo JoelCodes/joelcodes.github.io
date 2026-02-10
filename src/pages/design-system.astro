@@ -469,32 +469,316 @@ import Badge from '../components/ui/Badge.astro';
 
           <!-- Card Component -->
           <div id="component-card" class="mb-12">
-            <h3 class="font-heading text-2xl font-semibold mb-4">
-              Card
-            </h3>
-            <p class="text-text-muted-light dark:text-text-muted-dark mb-4">
-              Card component documentation will be added here.
-            </p>
+            <ComponentShowcase
+              title="Card"
+              description="Container component with colored shadow. Supports three variants and optional stacked effect. Shadows transform to soft glows in dark mode."
+              code={`<Card variant="yellow">
+  <h3>Card Title</h3>
+  <p>Card content goes here.</p>
+</Card>
+
+<Card variant="turquoise" stacked>
+  <h3>Stacked Card</h3>
+  <p>Multiple layer effect.</p>
+</Card>`}
+            >
+              <!-- Color Variants -->
+              <div class="w-full mb-6">
+                <h4 class="font-heading text-lg font-semibold mb-3">Color Variants</h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <Card variant="yellow">
+                    <h4 class="font-heading font-semibold mb-2">Yellow</h4>
+                    <p class="text-sm">Primary accent shadow</p>
+                  </Card>
+                  <Card variant="turquoise">
+                    <h4 class="font-heading font-semibold mb-2">Turquoise</h4>
+                    <p class="text-sm">Secondary accent shadow</p>
+                  </Card>
+                  <Card variant="magenta">
+                    <h4 class="font-heading font-semibold mb-2">Magenta</h4>
+                    <p class="text-sm">Tertiary accent shadow</p>
+                  </Card>
+                </div>
+              </div>
+
+              <!-- Stacked Effect -->
+              <div class="w-full">
+                <h4 class="font-heading text-lg font-semibold mb-3">Stacked Effect</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <Card variant="turquoise" stacked>
+                    <h4 class="font-heading font-semibold mb-2">Stacked Card</h4>
+                    <p class="text-sm">Multiple layers create depth effect</p>
+                  </Card>
+                  <Card variant="magenta" stacked>
+                    <h4 class="font-heading font-semibold mb-2">Stacked Card</h4>
+                    <p class="text-sm">Works with all color variants</p>
+                  </Card>
+                </div>
+              </div>
+            </ComponentShowcase>
+
+            <!-- Props Table -->
+            <div class="mt-6 overflow-x-auto">
+              <h4 class="font-heading text-lg font-semibold mb-3">Props</h4>
+              <table class="w-full border-3 border-text-light dark:border-text-dark">
+                <thead class="bg-turquoise/10 dark:bg-turquoise-dark/10">
+                  <tr>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Prop</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Type</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Default</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">variant</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">'yellow' | 'turquoise' | 'magenta'</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">'yellow'</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">Shadow/glow color</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">stacked</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">boolean</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">false</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">Enable multi-layer stacked effect</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 font-mono text-sm">class</td>
+                    <td class="px-4 py-2 font-mono text-sm">string</td>
+                    <td class="px-4 py-2 font-mono text-sm">''</td>
+                    <td class="px-4 py-2 text-sm">Additional CSS classes</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Dark Mode Behavior -->
+            <div class="mt-6">
+              <h4 class="font-heading text-lg font-semibold mb-3">Dark Mode</h4>
+              <p class="text-text-muted-light dark:text-text-muted-dark">
+                In dark mode, offset shadows transform to soft glows (box-shadow: 0 0 20px) for a futuristic feel. Stacked cards remove the offset shadow in dark mode to maintain clean aesthetics.
+              </p>
+            </div>
           </div>
 
           <!-- Input Component -->
           <div id="component-input" class="mb-12">
-            <h3 class="font-heading text-2xl font-semibold mb-4">
-              Input
-            </h3>
-            <p class="text-text-muted-light dark:text-text-muted-dark mb-4">
-              Input component documentation will be added here.
-            </p>
+            <ComponentShowcase
+              title="Input"
+              description="Form input with label, validation, and WCAG 2.4.13 compliant focus states. Supports three color variants for focus border."
+              code={`<Input
+  label="Email"
+  type="email"
+  placeholder="you@example.com"
+/>
+
+<Input
+  label="Name"
+  error="Name is required"
+/>
+
+<Input
+  variant="turquoise"
+  label="Turquoise Focus"
+/>`}
+            >
+              <!-- Standard Inputs -->
+              <div class="w-full mb-6">
+                <h4 class="font-heading text-lg font-semibold mb-3">Standard Input</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <Input label="Email" type="email" placeholder="you@example.com" />
+                  <Input label="Full Name" type="text" placeholder="Jane Doe" />
+                </div>
+              </div>
+
+              <!-- Error State -->
+              <div class="w-full mb-6">
+                <h4 class="font-heading text-lg font-semibold mb-3">Error State</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <Input label="Email" type="email" error="Email is required" />
+                  <Input label="Name" type="text" error="Name must be at least 2 characters" />
+                </div>
+              </div>
+
+              <!-- Focus Variants -->
+              <div class="w-full">
+                <h4 class="font-heading text-lg font-semibold mb-3">Focus Color Variants</h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <Input label="Yellow Focus" variant="yellow" placeholder="Focus me" />
+                  <Input label="Turquoise Focus" variant="turquoise" placeholder="Focus me" />
+                  <Input label="Magenta Focus" variant="magenta" placeholder="Focus me" />
+                </div>
+              </div>
+            </ComponentShowcase>
+
+            <!-- Props Table -->
+            <div class="mt-6 overflow-x-auto">
+              <h4 class="font-heading text-lg font-semibold mb-3">Props</h4>
+              <table class="w-full border-3 border-text-light dark:border-text-dark">
+                <thead class="bg-turquoise/10 dark:bg-turquoise-dark/10">
+                  <tr>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Prop</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Type</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Default</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">variant</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">'yellow' | 'turquoise' | 'magenta'</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">'yellow'</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">Focus border color</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">label</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">string</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">undefined</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">Input label text</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">error</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">string</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">undefined</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">Error message (triggers error state)</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">id</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">string</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">auto-generated</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">Input ID (auto-links label)</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 font-mono text-sm">...rest</td>
+                    <td class="px-4 py-2 font-mono text-sm">HTMLInputAttributes</td>
+                    <td class="px-4 py-2 font-mono text-sm">-</td>
+                    <td class="px-4 py-2 text-sm">All standard input attributes (type, placeholder, required, etc.)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Accessibility Features -->
+            <div class="mt-6">
+              <h4 class="font-heading text-lg font-semibold mb-3">Accessibility Features</h4>
+              <ul class="list-disc list-inside space-y-2 text-text-muted-light dark:text-text-muted-dark">
+                <li><strong>aria-invalid:</strong> Set to "true" when error prop is present</li>
+                <li><strong>aria-describedby:</strong> Links to error message ID for screen readers</li>
+                <li><strong>Focus ring:</strong> Double ring technique (2px gap + 4px ring) for WCAG 2.4.13 compliance</li>
+                <li><strong>Auto-generated IDs:</strong> Ensures label-input association without manual ID management</li>
+                <li><strong>Color-coded borders:</strong> Focus border changes to variant color for visual feedback</li>
+              </ul>
+            </div>
           </div>
 
           <!-- Badge Component -->
           <div id="component-badge" class="mb-12">
-            <h3 class="font-heading text-2xl font-semibold mb-4">
-              Badge
-            </h3>
-            <p class="text-text-muted-light dark:text-text-muted-dark mb-4">
-              Badge component documentation will be added here.
-            </p>
+            <ComponentShowcase
+              title="Badge"
+              description="Metric display badge with value and optional description. Used for trust signals and key statistics. Features isometric shadow effect."
+              code={`<Badge
+  label="Hours saved"
+  value="500+"
+  description="per year"
+  variant="yellow"
+/>
+
+<Badge
+  label="Projects"
+  value="50+"
+  variant="turquoise"
+/>`}
+            >
+              <!-- Color Variants with Values -->
+              <div class="w-full">
+                <h4 class="font-heading text-lg font-semibold mb-3">Color Variants</h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div class="flex flex-col items-center gap-2">
+                    <Badge
+                      label="Hours saved"
+                      value="500+"
+                      description="per year"
+                      variant="yellow"
+                    />
+                    <p class="text-xs text-text-muted-light dark:text-text-muted-dark">Yellow variant</p>
+                  </div>
+                  <div class="flex flex-col items-center gap-2">
+                    <Badge
+                      label="Projects"
+                      value="50+"
+                      description="completed"
+                      variant="turquoise"
+                    />
+                    <p class="text-xs text-text-muted-light dark:text-text-muted-dark">Turquoise variant</p>
+                  </div>
+                  <div class="flex flex-col items-center gap-2">
+                    <Badge
+                      label="Success Rate"
+                      value="98%"
+                      variant="magenta"
+                    />
+                    <p class="text-xs text-text-muted-light dark:text-text-muted-dark">Magenta variant (no description)</p>
+                  </div>
+                </div>
+              </div>
+            </ComponentShowcase>
+
+            <!-- Props Table -->
+            <div class="mt-6 overflow-x-auto">
+              <h4 class="font-heading text-lg font-semibold mb-3">Props</h4>
+              <table class="w-full border-3 border-text-light dark:border-text-dark">
+                <thead class="bg-turquoise/10 dark:bg-turquoise-dark/10">
+                  <tr>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Prop</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Type</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Default</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">label</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">string</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">required</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">Accessible label for screen readers (aria-label)</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">value</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">string</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">required</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">The metric value (e.g., "500+", "98%")</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">description</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">string</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">undefined</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">Optional subtext (e.g., "per year")</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">variant</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">'yellow' | 'turquoise' | 'magenta'</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">'yellow'</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">Text color variant</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 font-mono text-sm">class</td>
+                    <td class="px-4 py-2 font-mono text-sm">string</td>
+                    <td class="px-4 py-2 font-mono text-sm">''</td>
+                    <td class="px-4 py-2 text-sm">Additional CSS classes</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Accessibility -->
+            <div class="mt-6">
+              <h4 class="font-heading text-lg font-semibold mb-3">Accessibility</h4>
+              <ul class="list-disc list-inside space-y-2 text-text-muted-light dark:text-text-muted-dark">
+                <li><strong>role="group":</strong> Groups value and description semantically</li>
+                <li><strong>aria-label:</strong> Uses label prop for screen reader context</li>
+                <li><strong>Isometric shadow:</strong> Uses iso-shadow utility class for neobrutalist aesthetic</li>
+              </ul>
+            </div>
           </div>
         </section>
 
