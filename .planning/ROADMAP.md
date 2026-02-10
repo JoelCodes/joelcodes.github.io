@@ -79,12 +79,12 @@ Plans:
   3. Contact form has neobrutalist styling with accessible focus states
   4. FAQ relocated from homepage to footer or separate page
   5. Header and footer use neobrutalist elements while maintaining navigation clarity
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 09-01: TBD
-- [ ] 09-02: TBD
-- [ ] 09-03: TBD
+- [ ] 09-01-PLAN.md — Update Header, Footer, MobileNav with neobrutalist styling and FAQ accordion
+- [ ] 09-02-PLAN.md — Create TechSection and ContactSection components
+- [ ] 09-03-PLAN.md — Transform homepage with narrative section order and neobrutalist styling
 
 #### Phase 10: Projects & Blog
 **Goal**: Apply neobrutalist styling to portfolio and blog while maintaining readability
