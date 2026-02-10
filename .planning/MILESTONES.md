@@ -58,3 +58,32 @@
 
 ---
 
+
+## v1.2 Homepage Refinement (Shipped: 2026-02-10)
+
+**Delivered:** Enhanced homepage sections to better communicate outcomes and working style through outcome-focused messaging, isometric illustrations, and improved FAQ discoverability for small business clients.
+
+**Phases completed:** 12-16 (10 plans total)
+
+**Key accomplishments:**
+
+- Migrated icon library to @lucide/astro with tree-shaking (200KB+ bundle reduction)
+- Hero section reframed with outcome-focused messaging and 3 visual trust badges
+- Process section enhanced with 5 isometric illustrations and user-focused descriptions
+- Technology section restructured into 3 categories (AI, Automations, Web Apps) with illustrations
+- Dedicated FAQ page created with FAQPage JSON-LD schema for SEO rich results
+- Established isometric CSS utilities (iso-shadow, iso-glow, iso-rotate) with dark mode glow transformation
+
+**Stats:**
+
+- 34 source files modified
+- 3,649 lines of Astro/TypeScript/CSS
+- 5 phases, 10 plans
+- 1 day build (Feb 10, 2026)
+
+**Git range:** feat(12-01) → feat(16-01)
+
+**What's next:** Configure Formspree, add real project screenshots, v1.3 Enhancements
+
+---
+

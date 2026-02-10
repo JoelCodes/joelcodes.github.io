@@ -2,14 +2,14 @@
 
 ## Milestones
 
-- v1.0 MVP - Phases 1-6 (shipped 2026-01-27)
-- v1.1 Design Updates - Phases 7-11 (shipped 2026-02-10)
-- v1.2 Homepage Refinement - Phases 12-16 (in progress)
+- ✅ **v1.0 MVP** — Phases 1-6 (shipped 2026-01-27)
+- ✅ **v1.1 Design Updates** — Phases 7-11 (shipped 2026-02-10)
+- ✅ **v1.2 Homepage Refinement** — Phases 12-16 (shipped 2026-02-10)
 
 ## Phases
 
 <details>
-<summary>v1.0 MVP (Phases 1-6) - SHIPPED 2026-01-27</summary>
+<summary>✅ v1.0 MVP (Phases 1-6) — SHIPPED 2026-01-27</summary>
 
 Complete lead-generation focused portfolio website with responsive design, blog platform, portfolio showcase, contact form, and Lighthouse 90+ performance.
 
@@ -28,7 +28,7 @@ See: `.planning/milestones/v1.0-ROADMAP.md` for full details.
 </details>
 
 <details>
-<summary>v1.1 Design Updates (Phases 7-11) - SHIPPED 2026-02-10</summary>
+<summary>✅ v1.1 Design Updates (Phases 7-11) — SHIPPED 2026-02-10</summary>
 
 Distinctive neobrutalist design transformation with narrative homepage, WCAG 2.2 AA accessibility compliance, and 3/10 aesthetic density.
 
@@ -46,115 +46,24 @@ See: `.planning/milestones/v1.1-ROADMAP.md` for full details.
 
 </details>
 
-### v1.2 Homepage Refinement (In Progress)
+<details>
+<summary>✅ v1.2 Homepage Refinement (Phases 12-16) — SHIPPED 2026-02-10</summary>
 
-**Milestone Goal:** Improve each homepage section to be more detailed, interesting, and better communicate outcomes and working style with outcome-focused messaging, isometric illustrations, and improved FAQ discoverability.
+Enhanced homepage sections with outcome-focused messaging, isometric illustrations, and improved FAQ discoverability for small business clients.
 
-#### Phase 12: Foundation
+**Stats:** 34 source files, 3,649 lines, 10 plans, 1-day build (Feb 10, 2026)
 
-**Goal**: Performance and design system foundation for isometric enhancements established
+**Key accomplishments:**
+- Icon library migrated to @lucide/astro with tree-shaking (200KB+ bundle reduction)
+- Hero section reframed with outcome-focused messaging and 3 visual trust badges
+- Process section enhanced with 5 isometric illustrations and user-focused descriptions
+- Technology section restructured into 3 categories (AI, Automations, Web Apps) with illustrations
+- Dedicated FAQ page with FAQPage JSON-LD schema for SEO rich results
+- Isometric CSS utilities (iso-shadow, iso-glow, iso-rotate) with dark mode glow transformation
 
-**Depends on**: Phase 11 (v1.1 complete)
+See: `.planning/milestones/v1.2-ROADMAP.md` for full details.
 
-**Requirements**: FOUND-01, FOUND-02, FOUND-03
-
-**Success Criteria** (what must be TRUE):
-  1. Icon library migrated from lucide-static to @lucide/astro with bundle size reduced by 200KB+
-  2. Isometric CSS utilities available in global.css (transform-style: preserve-3d patterns)
-  3. Isometric shadow utilities support dark mode glow transformation
-  4. All existing pages render correctly with new icon library
-
-**Plans**: 3 plans in 2 waves
-
-Plans:
-- [x] 12-01-PLAN.md - Migrate icon library (lucide-static to @lucide/astro)
-- [x] 12-02-PLAN.md - Add isometric CSS utilities and test page
-- [x] 12-03-PLAN.md - Create visual regression tests for icons
-
-#### Phase 13: Hero Section
-
-**Goal**: Hero section communicates outcomes and value proposition through badges
-
-**Depends on**: Phase 12
-
-**Requirements**: HERO-01, HERO-02, HERO-03
-
-**Success Criteria** (what must be TRUE):
-  1. Hero headline reframes from "what I build" to "outcomes you get" (time saved, money saved, customers satisfied)
-  2. Visual outcome badges display maximum 3 key metrics below headline
-  3. Badges use design system shadow utilities
-  4. All badge color combinations pass WCAG 2.2 AA contrast checks
-  5. Hero passes "5-second test" for clarity
-
-**Plans**: 1 plan in 1 wave
-
-Plans:
-- [x] 13-01-PLAN.md - Create Badge component and update Hero with outcome-focused content
-
-#### Phase 14: Process Section
-
-**Goal**: Process section explains workflow with detailed descriptions and visual illustrations
-
-**Depends on**: Phase 12 (isometric utilities)
-
-**Requirements**: PROC-01, PROC-02, PROC-03, PROC-04
-
-**Success Criteria** (what must be TRUE):
-  1. Each of 5 process steps has 1-2 sentence description explaining what happens
-  2. Each process step has an isometric mini-illustration
-  3. All 5 illustrations follow consistent style guide (45 degree light angle, neobrutalist palette, flat colors)
-  4. Illustrations optimized (each <20KB) and have descriptive alt text
-  5. Illustrations recognizable on mobile (375px viewport)
-  6. Largest Contentful Paint (LCP) increase <200ms from baseline
-
-**Plans**: 3 plans in 2 waves
-
-Plans:
-- [x] 14-01-PLAN.md - Create 5 isometric SVG illustrations for process steps
-- [x] 14-02-PLAN.md - Update Process.astro with illustrations and descriptions
-- [x] 14-03-PLAN.md - Fix illustration positioning (gap closure)
-
-#### Phase 15: Technology Section
-
-**Goal**: Technology section distinguishes service offerings with clear categories and illustrations
-
-**Depends on**: Phase 14 (isometric style guide established)
-
-**Requirements**: TECH-01, TECH-02, TECH-03, TECH-04
-
-**Success Criteria** (what must be TRUE):
-  1. Technology section reorganized into 3 categories: AI, Automations, Web Apps
-  2. Each category has 1-2 sentence description explaining the offering
-  3. Each category has an isometric illustration matching process section style
-  4. Grid layout responsive (stacked mobile, 3-column desktop)
-  5. Services visually distinct from each other
-
-**Plans**: 2 plans in 2 waves
-
-Plans:
-- [x] 15-01-PLAN.md - Create 3 isometric SVG illustrations for technology categories
-- [x] 15-02-PLAN.md - Restructure TechSection with 3-column grid and illustrations
-
-#### Phase 16: FAQ Page
-
-**Goal**: FAQ content discoverable through dedicated page with strong accessibility
-
-**Depends on**: Nothing (independent)
-
-**Requirements**: FAQ-01, FAQ-02, FAQ-03, FAQ-04, FAQ-05
-
-**Success Criteria** (what must be TRUE):
-  1. Dedicated /faq page created with existing FAQ content
-  2. FAQ page includes JSON-LD structured data for SEO
-  3. Navigation includes FAQ link
-  4. Footer FAQ section removed or replaced with link to /faq page
-  5. FAQ accordion passes keyboard accessibility (Enter/Space toggle, Tab navigation)
-  6. Lighthouse Accessibility score 100%
-
-**Plans**: 1 plan in 1 wave
-
-Plans:
-- [x] 16-01-PLAN.md — Create FAQ page with JSON-LD, update navigation and footer
+</details>
 
 ## Progress
 
@@ -174,7 +83,7 @@ Phases execute in numeric order: 1 -> 2 -> ... -> 16
 | 9. Homepage & Navigation | v1.1 | 4/4 | Complete | 2026-02-09 |
 | 10. Projects & Blog | v1.1 | 2/2 | Complete | 2026-02-09 |
 | 11. Testing & Accessibility | v1.1 | 3/3 | Complete | 2026-02-10 |
-| 12. Foundation | v1.2 | 3/3 | Complete | 2026-02-09 |
+| 12. Foundation | v1.2 | 3/3 | Complete | 2026-02-10 |
 | 13. Hero Section | v1.2 | 1/1 | Complete | 2026-02-10 |
 | 14. Process Section | v1.2 | 3/3 | Complete | 2026-02-10 |
 | 15. Technology Section | v1.2 | 2/2 | Complete | 2026-02-10 |

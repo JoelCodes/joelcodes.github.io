@@ -2,20 +2,20 @@
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-02-09)
+See: .planning/PROJECT.md (updated 2026-02-10)
 
 **Core value:** Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
 
-**Current focus:** Phase 16 - FAQ Page (v1.2 Homepage Refinement)
+**Current focus:** Planning next milestone
 
 ## Current Position
 
-Phase: 16 of 16 (FAQ Page) — COMPLETE
-Plan: All plans complete
-Status: v1.2 milestone complete — ready for `/gsd:complete-milestone`
-Last activity: 2026-02-10 - Phase 16 verified complete
+Phase: None — between milestones
+Plan: None
+Status: v1.2 shipped — ready for `/gsd:new-milestone`
+Last activity: 2026-02-10 - v1.2 milestone completed
 
-Progress: [████████████████████████████████] 100% (57 of 57 plans complete)
+Progress: All v1.2 plans complete (57 total across v1.0-v1.2)
 
 ## Milestone History
 
@@ -23,6 +23,7 @@ Progress: [███████████████████████
 |---------|------|--------|---------|
 | v1.0 | MVP | 1-6 | 2026-01-27 |
 | v1.1 | Design Updates | 7-11 | 2026-02-10 |
+| v1.2 | Homepage Refinement | 12-16 | 2026-02-10 |
 
 See `.planning/MILESTONES.md` for full milestone details.
 See `.planning/milestones/` for archived roadmaps and requirements.
@@ -132,10 +133,10 @@ Recent decisions affecting v1.2:
 ## Session Continuity
 
 Last session: 2026-02-10
-Stopped at: v1.2 milestone complete
+Stopped at: v1.2 milestone shipped
 Resume file: None
-Next action: `/gsd:complete-milestone`
+Next action: `/gsd:new-milestone`
 
 ---
 *State initialized: 2026-01-26*
-*Last updated: 2026-02-10 (v1.2 milestone complete: Homepage Refinement with 5 phases, 10 plans)*
+*Last updated: 2026-02-10 (v1.2 shipped: Homepage Refinement with 5 phases, 10 plans)*

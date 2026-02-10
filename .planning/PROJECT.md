@@ -2,19 +2,9 @@
 
 ## What This Is
 
-A lead-generation focused portfolio website for Joel Shinness targeting small business clients. The site communicates expertise in web apps, automation, and AI development through distinctive neobrutalist design, narrative storytelling, and clear calls to action.
+A lead-generation focused portfolio website for Joel Shinness targeting small business clients. The site communicates expertise in web apps, automation, and AI development through distinctive neobrutalist design with isometric illustrations, outcome-focused messaging, and clear calls to action.
 
-**Current state:** v1.2 in progress. Refining homepage sections to better communicate value and working style.
-
-## Current Milestone: v1.2 Homepage Refinement
-
-**Goal:** Improve each homepage section to be more detailed, interesting, and better communicate outcomes and what it's like to work with Joel.
-
-**Target features:**
-- Hero section reframed around outcomes (time/money saved, customers satisfied) with visual badges
-- Process section with detailed descriptions and isometric illustrations per step
-- Technology section distinguishing AI, Automations, and Web Apps with illustrations
-- FAQ moved to dedicated page
+**Current state:** v1.2 shipped. Homepage sections refined with outcome-focused messaging, isometric illustrations, and dedicated FAQ page.
 
 ## Core Value
 
@@ -47,18 +37,26 @@ Small business owners can understand what Joel does, trust his process, and easi
 - ✓ Homepage narrative structure (Solutions → Process → Tech → About → Contact) — v1.1
 - ✓ Projects page with neobrutalist cards and case study format — v1.1
 - ✓ Blog index and tag pages with turquoise accents — v1.1
-- ✓ FAQ relocated to footer accordion — v1.1
 - ✓ WCAG 2.2 AA accessibility compliance (98.7% manual audit) — v1.1
+
+*Shipped in v1.2:*
+
+- ✓ Hero section with outcome-focused messaging and 3 visual trust badges — v1.2
+- ✓ Process section with detailed descriptions (1-2 sentences per step) — v1.2
+- ✓ Process section with 5 isometric mini-illustrations — v1.2
+- ✓ Technology section split into AI, Automations, Web Apps with illustrations — v1.2
+- ✓ Dedicated /faq page with JSON-LD FAQPage schema — v1.2
+- ✓ Isometric CSS utilities (iso-shadow, iso-glow, iso-rotate) — v1.2
+- ✓ Icon library tree-shaking (@lucide/astro migration) — v1.2
 
 ### Active
 
-*v1.2 Homepage Refinement:*
+*Future enhancements (candidates for v1.3+):*
 
-- [ ] Hero section with outcome-focused messaging and visual badges
-- [ ] Process section with detailed descriptions (1-2 sentences per step)
-- [ ] Process section with isometric mini-illustrations per step
-- [ ] Technology section split into AI, Automations, Web Apps with illustrations
-- [ ] FAQ moved to dedicated /faq page
+- [ ] Testimonials section with client quotes
+- [ ] Newsletter signup integration
+- [ ] Animated hover states for isometric illustrations
+- [ ] Real project screenshots (replace placeholders)
 
 ### Out of Scope
 
@@ -67,6 +65,7 @@ Small business owners can understand what Joel does, trust his process, and easi
 - CMS backend — Joel can edit code directly
 - Individual blog post redesign — two-tier typography works well
 - Color block sections — asymmetric layouts preferred
+- Animated isometric scenes — file size bloat, accessibility issues, static aesthetic is on-brand
 
 ## Context
 
@@ -75,8 +74,8 @@ Small business owners can understand what Joel does, trust his process, and easi
 - **Differentiator:** Low-risk process with prototype before full commitment
 - **Tech stack:** Astro 5.x, Tailwind CSS 4.x, MDX, TypeScript
 - **Hosting:** GitHub Pages (static, free)
-- **Current LOC:** 3,139 lines across 37 source files
-- **Design system:** Neobrutalism — yellow/turquoise/magenta palette, 3/10 density, quirky headings, bold borders
+- **Current LOC:** 3,649 lines across 34 source files
+- **Design system:** Neobrutalism — yellow/turquoise/magenta OKLCH palette, isometric illustrations, shadow-to-glow dark mode
 
 ## Constraints
 
@@ -102,6 +101,10 @@ Small business owners can understand what Joel does, trust his process, and easi
 | Playwright + axe-core | Automated WCAG validation in CI | ✓ Good — v1.1 |
 | Two-tier typography | Neobrutalist headings, readable body | ✓ Good — v1.1 |
 | Native HTML accordion (FAQ) | Zero JS, built-in accessibility | ✓ Good — v1.1 |
+| Outcome-focused hero badges | Trust signals with quantified metrics | ✓ Good — v1.2 |
+| Isometric currentColor SVGs | Single SVG works with any color, <1KB each | ✓ Good — v1.2 |
+| Dedicated FAQ page | SEO-friendly with JSON-LD, reduces footer weight | ✓ Good — v1.2 |
+| @lucide/astro tree-shaking | 200KB+ bundle reduction vs lucide-static | ✓ Good — v1.2 |
 
 ---
-*Last updated: 2026-02-09 after v1.2 milestone start*
+*Last updated: 2026-02-10 after v1.2 milestone*
