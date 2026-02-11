@@ -131,10 +131,12 @@ Plans:
   1. User can submit contact form and receive clear success/error feedback
   2. Form submits to n8n webhook (placeholder URL, configurable)
   3. Form fields are optimized based on freelance developer lead generation best practices
-**Plans**: TBD
+**Plans**: 3 plans in 3 waves
 
 Plans:
-- [ ] 20-01: TBD
+- [ ] 20-01-PLAN.md — Foundation components (CheckboxGroup component, thank-you page)
+- [ ] 20-02-PLAN.md — Contact form enhancement (new fields, webhook integration, redirect)
+- [ ] 20-03-PLAN.md — Homepage sync and verification (ContactSection update, design system docs)
 
 #### Phase 21: Navigation Cleanup
 **Goal**: Simplified header navigation and contact page redirect implemented
@@ -189,10 +191,10 @@ Phases execute in numeric order: 1 -> 2 -> ... -> 16 -> 17 -> 18 -> 19 -> 20 -> 
 | 17. Design System Reference Page | v1.3 | 5/5 | Complete | 2026-02-10 |
 | 18. Component Consistency Audit | v1.3 | 1/1 | Complete | 2026-02-10 |
 | 19. Component Migration (Tiered) | v1.3 | 6/6 | Complete | 2026-02-11 |
-| 20. Contact Form Enhancement | v1.3 | 0/? | Not started | - |
+| 20. Contact Form Enhancement | v1.3 | 0/3 | Not started | - |
 | 21. Navigation Cleanup | v1.3 | 0/? | Not started | - |
 | 22. Footer Enhancement | v1.3 | 0/? | Not started | - |
 
 ---
 *Roadmap initialized: 2026-01-26 for v1.0*
-*Last updated: 2026-02-11 after Phase 19 execution*
+*Last updated: 2026-02-10 after Phase 20 planning*
