@@ -69,7 +69,7 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString('en-US', {
               {post.data.tags.map((tag: string) => (
                 <a
                   href={`/blog/tags/${tag}`}
-                  class="px-3 py-1 text-sm rounded-full border-[3px] border-turquoise/50 dark:border-turquoise-dark/50 bg-turquoise/10 dark:bg-turquoise-dark/10 text-text-light dark:text-text-dark hover:bg-turquoise hover:text-bg-dark dark:hover:bg-turquoise-dark dark:hover:text-bg-dark transition-colors"
+                  class="px-3 py-1 text-sm rounded-full border-[3px] border-turquoise dark:border-turquoise-dark bg-turquoise/10 dark:bg-turquoise-dark/10 text-text-light dark:text-text-dark hover:bg-turquoise hover:text-bg-dark dark:hover:bg-turquoise-dark dark:hover:text-bg-dark transition-colors"
                 >
                   {tag}
                 </a>
