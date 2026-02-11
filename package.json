@@ -11,6 +11,7 @@
     "test:a11y:ui": "playwright test tests/accessibility --ui"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.6",
     "@astrojs/mdx": "^4.3.13",
     "@astrojs/sitemap": "^3.7.0",
     "@lucide/astro": "^0.563.0",
@@ -19,7 +20,8 @@
     "astro-expressive-code": "^0.41.6",
     "astro-robots-txt": "^1.0.0",
     "reading-time-estimator": "^2.1.1",
-    "tailwindcss": "^4.1.18"
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.11.1",

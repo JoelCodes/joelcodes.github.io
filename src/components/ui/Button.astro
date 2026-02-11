@@ -2,7 +2,7 @@
 import type { HTMLAttributes } from 'astro/types';
 
 interface Props extends Omit<HTMLAttributes<'button'>, 'class'> {
-  variant?: 'yellow' | 'turquoise' | 'magenta';
+  variant?: 'yellow' | 'turquoise' | 'magenta' | 'outline';
   size?: 'sm' | 'md' | 'lg';
   href?: string;
   class?: string;
@@ -77,6 +77,19 @@ const sizeClasses = {
     --btn-shadow: oklch(0.55 0.12 350);
   }
 
+  /* Outline variant: transparent background with border (inactive filter state) */
+  .btn-outline {
+    --btn-bg: transparent;
+    --btn-accent: var(--color-text-light);
+    --btn-shadow: oklch(0.85 0.02 95);
+  }
+
+  :global(.dark) .btn-outline {
+    --btn-bg: transparent;
+    --btn-accent: var(--color-text-dark);
+    --btn-shadow: oklch(0.25 0.02 95);
+  }
+
   /* Dark mode: black background, colored text/border */
   :global(.dark) .btn-yellow {
     --btn-bg: var(--color-bg-dark);
@@ -132,6 +145,15 @@ const sizeClasses = {
   .btn:hover .btn-front {
     transform: translateY(-2px);
     box-shadow: calc(var(--btn-offset) + 2px) calc(var(--btn-offset) + 2px) 0 var(--btn-shadow);
+  }
+
+  /* Outline variant hover: subtle background tint */
+  .btn-outline:hover .btn-front {
+    background: oklch(0.95 0.01 95 / 0.1);
+  }
+
+  :global(.dark) .btn-outline:hover .btn-front {
+    background: oklch(0.35 0.01 95 / 0.1);
   }
 
   /* Hover + focus: preserve focus ring while lifting */
