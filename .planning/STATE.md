@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-02-10)
 
 ## Current Position
 
-Phase: 21 of 22 (Navigation Cleanup)
+Phase: 22 of 22 (Footer Enhancement)
 Plan: 1 of 1 in current phase
 Status: Phase complete
-Last activity: 2026-02-11 — Completed 21-01-PLAN.md (Simplified Navigation Structure)
+Last activity: 2026-02-11 — Completed 22-01-PLAN.md (Footer Enhancement)
 
-Progress: [███████████████████████████████] 96% (21 phases complete, 1 phase remaining)
+Progress: [████████████████████████████████] 100% (22 phases complete, 0 phases remaining)
 
 ## Milestone History
 
@@ -30,7 +30,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 63 (v1.0: 23, v1.1: 14, v1.2: 10, v1.3: 16)
+- Total plans completed: 64 (v1.0: 23, v1.1: 14, v1.2: 10, v1.3: 17)
 - Average duration: ~1-5 min/plan (recent trend)
 - Total execution time: ~5 days across 3 milestones
 
@@ -58,6 +58,11 @@ See `.planning/MILESTONES.md` for full milestone details.
 Key decisions are logged in PROJECT.md Key Decisions table.
 
 Recent decisions affecting v1.3:
+- **22-01**: Social icon package — simple-icons-astro chosen over Lucide (Lucide Instagram is deprecated)
+- **22-01**: Footer visual hierarchy — Social icons at top (most prominent), navigation middle, copyright bottom (minimal weight)
+- **22-01**: Social icon touch targets — 24px visual size with 44x44px clickable area for WCAG 2.5.5 compliance
+- **22-01**: Footer navigation structure — Bullet separators (·) with aria-hidden for screen reader clarity
+- **22-01**: ProjectCard text contrast fix — Changed description from text-text-muted-light to text-text-light for WCAG AA compliance
 - **21-01**: Navigation order — Blog, Projects, FAQ, Contact (content pages first, action last for logical user flow)
 - **21-01**: Contact page deletion — File-based routes take precedence over redirects, so /contact.astro must be deleted for redirect to function
 - **21-01**: Footer FAQ removal — FAQ available in header nav, no need for footer duplication
@@ -121,6 +126,21 @@ Recent decisions affecting v1.3:
 
 ### Blockers/Concerns
 
+**Phase 22 complete (verified):**
+- ✅ Instagram and Substack social icons added to footer with 44x44px touch targets
+- ✅ Secondary navigation mirroring header (Blog, Projects, FAQ, Contact)
+- ✅ All footer elements have proper aria-labels and focus indicators
+- ✅ Zero axe-core accessibility violations (8 test scenarios pass)
+- ✅ ProjectCard WCAG color contrast violations fixed (badge and description text)
+- ✅ simple-icons-astro package integrated for maintained brand icons
+- ✅ Footer visual hierarchy established (social → nav → copyright)
+
+**Phase 21 complete (verified):**
+- ✅ Header navigation reduced to 4 links (Blog, Projects, FAQ, Contact)
+- ✅ /contact page deleted, redirects to /#contact via astro.config.mjs
+- ✅ Footer FAQ link removed (FAQ available in header)
+- ✅ Navigation order optimized (content first, action last)
+
 **Phase 20 complete (verified):**
 - ✅ CheckboxGroup component created with neobrutalist styling and 3 color variants
 - ✅ Thank-you page with confirmation message and Calendly placeholder
@@ -146,10 +166,10 @@ Recent decisions affecting v1.3:
 ## Session Continuity
 
 Last session: 2026-02-11
-Stopped at: Completed 21-01-PLAN.md (Simplified Navigation Structure)
+Stopped at: Completed 22-01-PLAN.md (Footer Enhancement)
 Resume file: None
-Next action: Continue to Phase 22 (if exists) or complete v1.3 milestone
+Next action: v1.3 milestone complete — all phases finished
 
 ---
 *State initialized: 2026-01-26*
-*Last updated: 2026-02-11 (Completed 21-01: Simplified Navigation Structure — Header navigation reduced to 4 links (Blog, Projects, FAQ, Contact), /contact redirects to /#contact, footer FAQ link removed)*
+*Last updated: 2026-02-11 (Completed 22-01: Footer Enhancement — Instagram and Substack social icons with secondary navigation, 44x44px touch targets, WCAG 2.2 AA compliant, ProjectCard contrast violations fixed)*
