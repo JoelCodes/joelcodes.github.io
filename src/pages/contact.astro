@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Input from '../components/ui/Input.astro';
+import Button from '../components/ui/Button.astro';
 import { Loader2 } from '@lucide/astro';
 ---
 
@@ -29,14 +31,14 @@ import { Loader2 } from '@lucide/astro';
           <label for="name" class="block font-body font-medium mb-2 text-text-light dark:text-text-dark">
             Name <span class="text-red-600">*</span>
           </label>
-          <input
+          <Input
+            variant="yellow"
             type="text"
             id="name"
             name="name"
             required
-            minlength="2"
+            minlength={2}
             autocomplete="name"
-            class="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-text-light dark:text-text-dark font-body focus:outline-none focus:ring-2 focus:ring-accent-teal focus:border-transparent transition-colors"
             placeholder="Your name"
           />
           <span id="name-error" class="block text-sm text-red-600 mt-1 min-h-5" aria-live="polite"></span>
@@ -47,13 +49,13 @@ import { Loader2 } from '@lucide/astro';
           <label for="email" class="block font-body font-medium mb-2 text-text-light dark:text-text-dark">
             Email <span class="text-red-600">*</span>
           </label>
-          <input
+          <Input
+            variant="yellow"
             type="email"
             id="email"
             name="email"
             required
             autocomplete="email"
-            class="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-text-light dark:text-text-dark font-body focus:outline-none focus:ring-2 focus:ring-accent-teal focus:border-transparent transition-colors"
             placeholder="you@example.com"
           />
           <span id="email-error" class="block text-sm text-red-600 mt-1 min-h-5" aria-live="polite"></span>
@@ -64,17 +66,18 @@ import { Loader2 } from '@lucide/astro';
           <label for="project-type" class="block font-body font-medium mb-2 text-text-light dark:text-text-dark">
             Project Type
           </label>
-          <select
+          <Input
+            as="select"
+            variant="yellow"
             id="project-type"
             name="project-type"
-            class="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-text-light dark:text-text-dark font-body focus:outline-none focus:ring-2 focus:ring-accent-teal focus:border-transparent transition-colors"
           >
             <option value="">Select a project type (optional)</option>
             <option value="Web App">Web App</option>
             <option value="Automation">Automation</option>
             <option value="AI Development">AI Development</option>
             <option value="Other">Other</option>
-          </select>
+          </Input>
         </div>
 
         <!-- Message Field -->
@@ -82,15 +85,16 @@ import { Loader2 } from '@lucide/astro';
           <label for="message" class="block font-body font-medium mb-2 text-text-light dark:text-text-dark">
             Message <span class="text-red-600">*</span>
           </label>
-          <textarea
+          <Input
+            as="textarea"
+            variant="yellow"
             id="message"
             name="message"
             required
-            minlength="10"
-            rows="6"
-            class="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-text-light dark:text-text-dark font-body focus:outline-none focus:ring-2 focus:ring-accent-teal focus:border-transparent transition-colors resize-y"
+            minlength={10}
+            rows={6}
             placeholder="Tell me about your project..."
-          ></textarea>
+          />
           <span id="message-error" class="block text-sm text-red-600 mt-1 min-h-5" aria-live="polite"></span>
         </div>
 
@@ -100,15 +104,17 @@ import { Loader2 } from '@lucide/astro';
         </div>
 
         <!-- Submit Button -->
-        <button
+        <Button
           type="submit"
-          class="w-full font-heading font-semibold text-lg px-8 py-4 bg-accent-teal hover:bg-accent-teal-hover text-white rounded-lg transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          variant="turquoise"
+          size="lg"
+          class="w-full"
         >
           <span class="button-text">Send Message</span>
           <span class="loading-icon hidden">
             <Loader2 size={20} />
           </span>
-        </button>
+        </Button>
 
         <!-- Privacy Reassurance -->
         <p class="text-sm text-text-muted-light dark:text-text-muted-dark text-center">
@@ -143,18 +149,6 @@ import { Loader2 } from '@lucide/astro';
 </BaseLayout>
 
 <style>
-  /* Validation styling - only after user interaction */
-  input:user-invalid,
-  textarea:user-invalid {
-    border-color: #dc2626;
-    border-width: 2px;
-  }
-
-  input:user-valid,
-  textarea:user-valid {
-    border-color: #16a34a;
-  }
-
   /* Loading spinner animation */
   .loading-icon svg {
     width: 1.25rem;
@@ -171,7 +165,7 @@ import { Loader2 } from '@lucide/astro';
 <script>
   // Contact form validation and submission handler
   const form = document.getElementById('contact-form') as HTMLFormElement;
-  const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+  const submitButton = form.querySelector('[type="submit"]') as HTMLButtonElement;
   const buttonText = submitButton.querySelector('.button-text') as HTMLSpanElement;
   const loadingIcon = submitButton.querySelector('.loading-icon') as HTMLSpanElement;
   const formError = document.getElementById('form-error') as HTMLDivElement;
