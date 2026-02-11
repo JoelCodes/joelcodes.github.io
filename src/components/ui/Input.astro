@@ -3,22 +3,27 @@ import type { HTMLAttributes } from 'astro/types';
 
 interface Props extends Omit<HTMLAttributes<'input'>, 'class'> {
   variant?: 'yellow' | 'turquoise' | 'magenta';
+  as?: 'input' | 'textarea' | 'select';
   label?: string;
   error?: string;
   id?: string;
+  rows?: number;
   class?: string;
 }
 
 const {
   variant = 'yellow',
+  as = 'input',
   label,
   error,
   id = `input-${Math.random().toString(36).slice(2, 9)}`,
+  rows,
   class: className = '',
   ...rest
 } = Astro.props;
 
 const errorId = error ? `${id}-error` : undefined;
+const Tag = as === 'textarea' ? 'textarea' : as === 'select' ? 'select' : 'input';
 ---
 
 <div class={`input-wrapper ${className}`}>
@@ -27,13 +32,16 @@ const errorId = error ? `${id}-error` : undefined;
       {label}
     </label>
   )}
-  <input
+  <Tag
     id={id}
     class={`input input-${variant} ${error ? 'input-error' : ''}`}
     aria-invalid={error ? 'true' : undefined}
     aria-describedby={errorId}
+    rows={as === 'textarea' ? rows : undefined}
     {...rest}
-  />
+  >
+    {as === 'select' && <slot />}
+  </Tag>
   {error && (
     <p id={errorId} class="input-error-message">
       {error}
@@ -69,6 +77,18 @@ const errorId = error ? `${id}-error` : undefined;
     border: var(--border-neo) solid var(--color-text-light);
     border-radius: 0.25rem;
     transition: border-color 200ms;
+    width: 100%;
+  }
+
+  /* Textarea specific styles */
+  textarea.input {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  /* Select specific styles */
+  select.input {
+    cursor: pointer;
   }
 
   :global(.dark) .input {
