@@ -1,0 +1,220 @@
+---
+interface Option {
+  value: string;
+  label: string;
+}
+
+interface Props {
+  name: string;
+  legend: string;
+  options: Option[];
+  variant?: 'yellow' | 'turquoise' | 'magenta';
+  class?: string;
+}
+
+const {
+  name,
+  legend,
+  options,
+  variant = 'yellow',
+  class: className = '',
+} = Astro.props;
+---
+
+<fieldset class={`checkbox-group ${className}`}>
+  <legend class="checkbox-group-legend">
+    {legend} <span class="optional-hint">(optional)</span>
+  </legend>
+  <div class="checkbox-items">
+    {options.map((option) => (
+      <label class="checkbox-label">
+        <input
+          type="checkbox"
+          name={name}
+          value={option.value}
+          class={`checkbox-neo checkbox-neo-${variant}`}
+        />
+        <span class="checkbox-text">{option.label}</span>
+      </label>
+    ))}
+  </div>
+</fieldset>
+
+<style>
+  .checkbox-group {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .checkbox-group-legend {
+    font-family: var(--font-heading);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text-light);
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  :global(.dark) .checkbox-group-legend {
+    color: var(--color-text-dark);
+  }
+
+  .optional-hint {
+    color: var(--color-text-muted-light);
+    font-weight: 400;
+  }
+
+  :global(.dark) .optional-hint {
+    color: var(--color-text-muted-dark);
+  }
+
+  .checkbox-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    transition: background-color 150ms ease;
+  }
+
+  .checkbox-label:hover {
+    background-color: oklch(0.95 0.01 95);
+  }
+
+  :global(.dark) .checkbox-label:hover {
+    background-color: oklch(0.25 0.01 95);
+  }
+
+  .checkbox-neo {
+    appearance: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    min-width: 1.25rem;
+    border: 3px solid var(--color-text-light);
+    background: var(--color-bg-light);
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background 150ms, box-shadow 150ms, border-color 150ms;
+    position: relative;
+  }
+
+  :global(.dark) .checkbox-neo {
+    border-color: var(--color-text-dark);
+    background: var(--color-bg-dark);
+  }
+
+  /* Checked state with variant colors */
+  .checkbox-neo-yellow:checked {
+    background: var(--color-yellow);
+    border-color: var(--color-text-light);
+    box-shadow: 3px 3px 0 var(--color-text-light);
+  }
+
+  .checkbox-neo-turquoise:checked {
+    background: var(--color-turquoise);
+    border-color: var(--color-text-light);
+    box-shadow: 3px 3px 0 var(--color-text-light);
+  }
+
+  .checkbox-neo-magenta:checked {
+    background: var(--color-magenta);
+    border-color: var(--color-text-light);
+    box-shadow: 3px 3px 0 var(--color-text-light);
+  }
+
+  /* Dark mode checked states */
+  :global(.dark) .checkbox-neo-yellow:checked {
+    background: var(--color-yellow-dark);
+    border-color: var(--color-text-dark);
+    box-shadow: 3px 3px 0 var(--color-text-dark);
+  }
+
+  :global(.dark) .checkbox-neo-turquoise:checked {
+    background: var(--color-turquoise-dark);
+    border-color: var(--color-text-dark);
+    box-shadow: 3px 3px 0 var(--color-text-dark);
+  }
+
+  :global(.dark) .checkbox-neo-magenta:checked {
+    background: var(--color-magenta-dark);
+    border-color: var(--color-text-dark);
+    box-shadow: 3px 3px 0 var(--color-text-dark);
+  }
+
+  /* Checkmark indicator using ::after pseudo-element */
+  .checkbox-neo:checked::after {
+    content: '';
+    position: absolute;
+    left: 0.25rem;
+    top: 0.05rem;
+    width: 0.35rem;
+    height: 0.6rem;
+    border: solid var(--color-text-light);
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+  }
+
+  :global(.dark) .checkbox-neo:checked::after {
+    border-color: var(--color-text-dark);
+  }
+
+  /* WCAG 2.4.13 compliant focus state: double ring technique */
+  .checkbox-neo:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-bg-light), 0 0 0 4px var(--color-text-light);
+  }
+
+  :global(.dark) .checkbox-neo:focus-visible {
+    box-shadow: 0 0 0 2px var(--color-bg-dark), 0 0 0 4px var(--color-text-dark);
+  }
+
+  /* Focus + checked state - preserve both focus ring and checkbox shadow */
+  .checkbox-neo-yellow:checked:focus-visible {
+    box-shadow:
+      0 0 0 2px var(--color-bg-light),
+      0 0 0 4px var(--color-text-light),
+      3px 3px 0 var(--color-text-light);
+  }
+
+  .checkbox-neo-turquoise:checked:focus-visible {
+    box-shadow:
+      0 0 0 2px var(--color-bg-light),
+      0 0 0 4px var(--color-text-light),
+      3px 3px 0 var(--color-text-light);
+  }
+
+  .checkbox-neo-magenta:checked:focus-visible {
+    box-shadow:
+      0 0 0 2px var(--color-bg-light),
+      0 0 0 4px var(--color-text-light),
+      3px 3px 0 var(--color-text-light);
+  }
+
+  :global(.dark) .checkbox-neo-yellow:checked:focus-visible,
+  :global(.dark) .checkbox-neo-turquoise:checked:focus-visible,
+  :global(.dark) .checkbox-neo-magenta:checked:focus-visible {
+    box-shadow:
+      0 0 0 2px var(--color-bg-dark),
+      0 0 0 4px var(--color-text-dark),
+      3px 3px 0 var(--color-text-dark);
+  }
+
+  .checkbox-text {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    color: var(--color-text-light);
+    user-select: none;
+  }
+
+  :global(.dark) .checkbox-text {
+    color: var(--color-text-dark);
+  }
+</style>
