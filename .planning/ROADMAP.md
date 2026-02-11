@@ -112,10 +112,15 @@ Plans:
   1. All CRITICAL accessibility inconsistencies are fixed (focus states, ARIA attributes)
   2. All HIGH visual inconsistencies are fixed (shadow offsets, border widths, color variants)
   3. All pages use components that match design system reference
-**Plans**: TBD
+**Plans**: 6 plans in 4 waves
 
 Plans:
-- [ ] 19-01: TBD
+- [ ] 19-01-PLAN.md — Component extension (Button outline variant, Input textarea/select support)
+- [ ] 19-02-PLAN.md — Contact page migration (form inputs, submit button)
+- [ ] 19-03-PLAN.md — Filter buttons migration (Portfolio index, Blog index)
+- [ ] 19-04-PLAN.md — Remaining HIGH items (portfolio badges, ContactSection textarea)
+- [ ] 19-05-PLAN.md — Blog tag border fix (MEDIUM priority)
+- [ ] 19-06-PLAN.md — Final verification (axe-core, Lighthouse CI, visual QA)
 
 #### Phase 20: Contact Form Enhancement
 **Goal**: Contact form optimized for lead generation with n8n webhook integration
@@ -182,11 +187,11 @@ Phases execute in numeric order: 1 -> 2 -> ... -> 16 -> 17 -> 18 -> 19 -> 20 -> 
 | 16. FAQ Page | v1.2 | 1/1 | Complete | 2026-02-10 |
 | 17. Design System Reference Page | v1.3 | 5/5 | Complete | 2026-02-10 |
 | 18. Component Consistency Audit | v1.3 | 1/1 | Complete | 2026-02-10 |
-| 19. Component Migration (Tiered) | v1.3 | 0/? | Not started | - |
+| 19. Component Migration (Tiered) | v1.3 | 0/6 | Not started | - |
 | 20. Contact Form Enhancement | v1.3 | 0/? | Not started | - |
 | 21. Navigation Cleanup | v1.3 | 0/? | Not started | - |
 | 22. Footer Enhancement | v1.3 | 0/? | Not started | - |
 
 ---
 *Roadmap initialized: 2026-01-26 for v1.0*
-*Last updated: 2026-02-10 after Phase 18 execution*
+*Last updated: 2026-02-10 after Phase 19 planning*
