@@ -7,6 +7,8 @@ import Button from '../components/ui/Button.astro';
 import Card from '../components/ui/Card.astro';
 import Input from '../components/ui/Input.astro';
 import Badge from '../components/ui/Badge.astro';
+import CheckboxGroup from '../components/ui/CheckboxGroup.astro';
+import CodeBlock from '../components/design-system/CodeBlock.astro';
 ---
 
 <BaseLayout title="Design System | Joel Shinness" description="Internal design system reference for Joel and AI coding agents">
@@ -777,6 +779,131 @@ import Badge from '../components/ui/Badge.astro';
                 <li><strong>role="group":</strong> Groups value and description semantically</li>
                 <li><strong>aria-label:</strong> Uses label prop for screen reader context</li>
                 <li><strong>Isometric shadow:</strong> Uses iso-shadow utility class for neobrutalist aesthetic</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- CheckboxGroup Component -->
+          <div id="component-checkboxgroup" class="mb-12">
+            <ComponentShowcase
+              title="CheckboxGroup"
+              description="Accessible multi-select checkbox group with neobrutalist styling. Uses fieldset/legend for screen reader compatibility."
+            >
+              <div slot="demo" class="space-y-8">
+                <!-- Yellow variant -->
+                <CheckboxGroup
+                  name="demo-solutions-yellow"
+                  legend="Example options (yellow)"
+                  variant="yellow"
+                  options={[
+                    { value: 'opt1', label: 'Option One' },
+                    { value: 'opt2', label: 'Option Two' },
+                    { value: 'opt3', label: 'Option Three' }
+                  ]}
+                />
+
+                <!-- Turquoise variant -->
+                <CheckboxGroup
+                  name="demo-solutions-turquoise"
+                  legend="Example options (turquoise)"
+                  variant="turquoise"
+                  options={[
+                    { value: 'opt1', label: 'Option One' },
+                    { value: 'opt2', label: 'Option Two' }
+                  ]}
+                />
+
+                <!-- Magenta variant -->
+                <CheckboxGroup
+                  name="demo-solutions-magenta"
+                  legend="Example options (magenta)"
+                  variant="magenta"
+                  options={[
+                    { value: 'opt1', label: 'Option One' },
+                    { value: 'opt2', label: 'Option Two' },
+                    { value: 'opt3', label: 'Option Three' }
+                  ]}
+                />
+              </div>
+
+              <CodeBlock slot="code" code={`<CheckboxGroup
+  name="solutions"
+  legend="What solutions do you need?"
+  variant="yellow"
+  options={[
+    { value: "AI", label: "AI" },
+    { value: "Automations", label: "Automations" },
+    { value: "Web Apps", label: "Web Apps" }
+  ]}
+/>`} />
+            </ComponentShowcase>
+
+            <!-- Props Table -->
+            <div class="mt-6 overflow-x-auto">
+              <h4 class="font-heading text-lg font-semibold mb-3">Props</h4>
+              <table class="w-full border-3 border-text-light dark:border-text-dark">
+                <thead class="bg-turquoise/10 dark:bg-turquoise-dark/10">
+                  <tr>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Prop</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Type</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Default</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">name</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">string</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">required</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">Form field name for checkbox values</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">legend</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">string</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">required</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">Accessible group label (renders in fieldset legend)</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">options</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">Array&lt;{value, label}&gt;</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">required</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">Checkbox options to render</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">variant</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">'yellow' | 'turquoise' | 'magenta'</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">'yellow'</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">Color variant for checked state</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 font-mono text-sm">class</td>
+                    <td class="px-4 py-2 font-mono text-sm">string</td>
+                    <td class="px-4 py-2 font-mono text-sm">''</td>
+                    <td class="px-4 py-2 text-sm">Additional CSS classes</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Accessibility Features -->
+            <div class="mt-6">
+              <h4 class="font-heading text-lg font-semibold mb-3">Accessibility Features</h4>
+              <ul class="list-disc list-inside space-y-2 text-text-muted-light dark:text-text-muted-dark">
+                <li><strong>fieldset/legend:</strong> Semantic HTML grouping for screen readers (WCAG H71)</li>
+                <li><strong>Focus ring:</strong> Double ring technique (2px gap + 4px ring) for WCAG 2.4.13 compliance</li>
+                <li><strong>Hover target:</strong> Entire label is interactive for larger touch target</li>
+                <li><strong>Checkmark indicator:</strong> Pure CSS ::after pseudo-element for themability</li>
+                <li><strong>Dark mode:</strong> Automatic color inversion for checkboxes and labels</li>
+              </ul>
+            </div>
+
+            <!-- Interactive States -->
+            <div class="mt-6">
+              <h4 class="font-heading text-lg font-semibold mb-3">Interactive States</h4>
+              <ul class="list-disc list-inside space-y-2 text-text-muted-light dark:text-text-muted-dark">
+                <li><strong>Hover:</strong> Label background lightens (light mode) or darkens (dark mode)</li>
+                <li><strong>Checked:</strong> Checkbox fills with variant color + 3px shadow + checkmark appears</li>
+                <li><strong>Focus:</strong> Double ring technique preserves both focus ring and checkbox shadow</li>
               </ul>
             </div>
           </div>
