@@ -130,23 +130,23 @@ const {
     box-shadow: 3px 3px 0 var(--color-text-light);
   }
 
-  /* Dark mode checked states */
+  /* Dark mode checked states - shadow becomes glow */
   :global(.dark) .checkbox-neo-yellow:checked {
     background: var(--color-yellow-dark);
     border-color: var(--color-text-dark);
-    box-shadow: 3px 3px 0 var(--color-text-dark);
+    box-shadow: 0 0 10px color-mix(in oklch, var(--color-yellow-dark) 75%, transparent);
   }
 
   :global(.dark) .checkbox-neo-turquoise:checked {
     background: var(--color-turquoise-dark);
     border-color: var(--color-text-dark);
-    box-shadow: 3px 3px 0 var(--color-text-dark);
+    box-shadow: 0 0 10px color-mix(in oklch, var(--color-turquoise-dark) 75%, transparent);
   }
 
   :global(.dark) .checkbox-neo-magenta:checked {
     background: var(--color-magenta-dark);
     border-color: var(--color-text-dark);
-    box-shadow: 3px 3px 0 var(--color-text-dark);
+    box-shadow: 0 0 10px color-mix(in oklch, var(--color-magenta-dark) 75%, transparent);
   }
 
   /* Checkmark indicator using ::after pseudo-element */
@@ -198,13 +198,25 @@ const {
       3px 3px 0 var(--color-text-light);
   }
 
-  :global(.dark) .checkbox-neo-yellow:checked:focus-visible,
-  :global(.dark) .checkbox-neo-turquoise:checked:focus-visible,
+  :global(.dark) .checkbox-neo-yellow:checked:focus-visible {
+    box-shadow:
+      0 0 0 2px var(--color-bg-dark),
+      0 0 0 4px var(--color-text-dark),
+      0 0 10px color-mix(in oklch, var(--color-yellow-dark) 75%, transparent);
+  }
+
+  :global(.dark) .checkbox-neo-turquoise:checked:focus-visible {
+    box-shadow:
+      0 0 0 2px var(--color-bg-dark),
+      0 0 0 4px var(--color-text-dark),
+      0 0 10px color-mix(in oklch, var(--color-turquoise-dark) 75%, transparent);
+  }
+
   :global(.dark) .checkbox-neo-magenta:checked:focus-visible {
     box-shadow:
       0 0 0 2px var(--color-bg-dark),
       0 0 0 4px var(--color-text-dark),
-      3px 3px 0 var(--color-text-dark);
+      0 0 10px color-mix(in oklch, var(--color-magenta-dark) 75%, transparent);
   }
 
   .checkbox-text {
