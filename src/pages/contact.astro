@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Input from '../components/ui/Input.astro';
 import Button from '../components/ui/Button.astro';
+import CheckboxGroup from '../components/ui/CheckboxGroup.astro';
 import { Loader2 } from '@lucide/astro';
 ---
 
@@ -21,8 +22,6 @@ import { Loader2 } from '@lucide/astro';
       <!-- Contact Form -->
       <form
         id="contact-form"
-        action="https://formspree.io/f/YOUR_FORM_ID"
-        method="POST"
         class="space-y-6"
         novalidate
       >
@@ -61,22 +60,86 @@ import { Loader2 } from '@lucide/astro';
           <span id="email-error" class="block text-sm text-red-600 mt-1 min-h-5" aria-live="polite"></span>
         </div>
 
-        <!-- Project Type Field (Optional) -->
+        <!-- Company Field (Optional) -->
         <div>
-          <label for="project-type" class="block font-body font-medium mb-2 text-text-light dark:text-text-dark">
-            Project Type
+          <label for="company" class="block font-body font-medium mb-2 text-text-light dark:text-text-dark">
+            Company <span class="text-text-muted-light dark:text-text-muted-dark text-sm">(optional)</span>
+          </label>
+          <Input
+            variant="yellow"
+            type="text"
+            id="company"
+            name="company"
+            autocomplete="organization"
+            placeholder="Company name (if applicable)"
+          />
+        </div>
+
+        <!-- Challenges Field (Optional) -->
+        <div>
+          <label for="challenges" class="block font-body font-medium mb-2 text-text-light dark:text-text-dark">
+            What challenges are you facing? <span class="text-text-muted-light dark:text-text-muted-dark text-sm">(optional)</span>
+          </label>
+          <Input
+            as="textarea"
+            variant="yellow"
+            id="challenges"
+            name="challenges"
+            rows={4}
+            placeholder="What challenge are you facing? What's your timeline?"
+          />
+        </div>
+
+        <!-- Solutions Field (Optional) -->
+        <CheckboxGroup
+          name="solutions"
+          legend="What kinds of solutions do you think you'll need?"
+          variant="yellow"
+          options={[
+            { value: 'AI', label: 'AI' },
+            { value: 'Automations', label: 'Automations' },
+            { value: 'Web Apps', label: 'Web Apps' },
+            { value: 'Consultation', label: 'Consultation' },
+            { value: 'Not Sure', label: 'Not Sure' }
+          ]}
+        />
+
+        <!-- Budget Field (Optional) -->
+        <div>
+          <label for="budget" class="block font-body font-medium mb-2 text-text-light dark:text-text-dark">
+            Budget <span class="text-text-muted-light dark:text-text-muted-dark text-sm">(optional)</span>
           </label>
           <Input
             as="select"
             variant="yellow"
-            id="project-type"
-            name="project-type"
+            id="budget"
+            name="budget"
           >
-            <option value="">Select a project type (optional)</option>
-            <option value="Web App">Web App</option>
-            <option value="Automation">Automation</option>
-            <option value="AI Development">AI Development</option>
-            <option value="Other">Other</option>
+            <option value="">Select budget range (optional)</option>
+            <option value="Under $2K">Under $2K</option>
+            <option value="$2K-5K">$2K-5K</option>
+            <option value="$5K-10K">$5K-10K</option>
+            <option value="$10K-25K">$10K-25K</option>
+            <option value="$25K+">$25K+</option>
+          </Input>
+        </div>
+
+        <!-- Timeline Field (Optional) -->
+        <div>
+          <label for="timeline" class="block font-body font-medium mb-2 text-text-light dark:text-text-dark">
+            Timeline <span class="text-text-muted-light dark:text-text-muted-dark text-sm">(optional)</span>
+          </label>
+          <Input
+            as="select"
+            variant="yellow"
+            id="timeline"
+            name="timeline"
+          >
+            <option value="">Select timeline (optional)</option>
+            <option value="This week">This week</option>
+            <option value="This month">This month</option>
+            <option value="This quarter">This quarter</option>
+            <option value="Flexible">Flexible</option>
           </Input>
         </div>
 
@@ -91,9 +154,8 @@ import { Loader2 } from '@lucide/astro';
             id="message"
             name="message"
             required
-            minlength={10}
             rows={6}
-            placeholder="Tell me about your project..."
+            placeholder="Tell me more about your project..."
           />
           <span id="message-error" class="block text-sm text-red-600 mt-1 min-h-5" aria-live="polite"></span>
         </div>
@@ -130,22 +192,6 @@ import { Loader2 } from '@lucide/astro';
       </div>
     </div>
   </section>
-
-  <!-- Success Message (shown after form submission) -->
-  <template id="success-template">
-    <div class="py-16 px-6">
-      <div class="container max-w-2xl mx-auto">
-        <div class="p-8 rounded-lg border-2 border-green-500 bg-green-50 dark:bg-green-900/20 text-center">
-          <h2 class="font-heading text-2xl md:text-3xl font-bold mb-4 text-green-700 dark:text-green-400">
-            Thanks for reaching out!
-          </h2>
-          <p class="font-body text-lg text-green-600 dark:text-green-300">
-            I'll email you within 48 hours with next steps.
-          </p>
-        </div>
-      </div>
-    </div>
-  </template>
 </BaseLayout>
 
 <style>
@@ -170,7 +216,9 @@ import { Loader2 } from '@lucide/astro';
   const loadingIcon = submitButton.querySelector('.loading-icon') as HTMLSpanElement;
   const formError = document.getElementById('form-error') as HTMLDivElement;
   const formErrorText = formError.querySelector('p') as HTMLParagraphElement;
-  const successTemplate = document.getElementById('success-template') as HTMLTemplateElement;
+
+  // n8n webhook URL from environment variable
+  const webhookURL = import.meta.env.PUBLIC_N8N_WEBHOOK_URL || 'https://placeholder.n8n.webhook';
 
   // Field validation configuration
   const validationConfig = {
@@ -198,7 +246,7 @@ import { Loader2 } from '@lucide/astro';
       messages: {
         valueMissing: 'Please enter a message.',
         typeMismatch: '',
-        tooShort: 'Message must be at least 10 characters.'
+        tooShort: ''
       }
     }
   };
@@ -269,15 +317,6 @@ import { Loader2 } from '@lucide/astro';
     }
   }
 
-  // Replace form with success message
-  function showSuccessMessage() {
-    const section = form.closest('section');
-    if (section && successTemplate) {
-      const successContent = successTemplate.content.cloneNode(true);
-      section.replaceWith(successContent);
-    }
-  }
-
   // Form submission handler
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -305,37 +344,44 @@ import { Loader2 } from '@lucide/astro';
     try {
       const formData = new FormData(form);
 
-      const response = await fetch(form.action, {
+      // Build JSON payload with only non-empty fields
+      const payload = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        company: formData.get('company') || undefined,
+        challenges: formData.get('challenges') || undefined,
+        solutions: formData.getAll('solutions'),
+        budget: formData.get('budget') || undefined,
+        timeline: formData.get('timeline') || undefined,
+        message: formData.get('message')
+      };
+
+      // Filter out undefined/empty optional fields
+      const cleanPayload = Object.fromEntries(
+        Object.entries(payload).filter(([key, value]) =>
+          value !== undefined && value !== '' &&
+          !(Array.isArray(value) && value.length === 0)
+        )
+      );
+
+      const response = await fetch(webhookURL, {
         method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(cleanPayload)
       });
 
       // Must check response.ok explicitly - fetch doesn't reject on HTTP errors
       if (!response.ok) {
-        let errorMessage = 'Oops! Something went wrong. Email me directly at joel@joelshinness.com';
-
-        try {
-          const data = await response.json();
-          if (data.errors && data.errors.length > 0) {
-            errorMessage = data.errors[0].message || errorMessage;
-          }
-        } catch {
-          // JSON parsing failed, use default error message
-        }
-
-        showFormError(errorMessage);
+        showFormError('Could not send message. Email me directly at joel@joelshinness.com');
         return;
       }
 
-      // Success - show confirmation message
-      showSuccessMessage();
+      // Success - redirect to thank you page
+      window.location.href = '/thank-you';
 
     } catch (error) {
       // Network error (no internet, DNS failure, etc.)
-      showFormError('Connection error. Please email me directly at joel@joelshinness.com');
+      showFormError('Could not send message. Email me directly at joel@joelshinness.com');
     } finally {
       // Re-enable button (if form wasn't replaced)
       if (submitButton.parentElement) {
