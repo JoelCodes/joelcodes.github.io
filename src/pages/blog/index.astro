@@ -81,13 +81,13 @@ const postsWithMeta = sortedPosts.map((post) => {
       <!-- Load more button (shown only if more than 9 posts) -->
       {postsWithMeta.length > 9 && (
         <div class="text-center mt-12">
-          <button
+          <Button
             id="load-more-btn"
-            class="px-8 py-3 rounded-full transition-colors duration-200 bg-turquoise hover:bg-turquoise-hover text-bg-dark border-[3px] border-text-light dark:border-text-dark font-bold"
-            onclick="loadMorePosts()"
+            variant="turquoise"
+            size="lg"
           >
             Load More Posts
-          </button>
+          </Button>
         </div>
       )}
     </div>
@@ -163,6 +163,12 @@ const postsWithMeta = sortedPosts.map((post) => {
         filterSelection(filter);
       }
     });
+
+    // Add event listener for Load More button
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener('click', loadMorePosts);
+    }
 
     // Initialize with all posts visible
     filterSelection('all');
