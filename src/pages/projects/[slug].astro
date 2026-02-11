@@ -131,9 +131,12 @@ const { project } = Astro.props;
         </h2>
         <div class="flex flex-wrap gap-3">
           {project.technologies.map((tech) => (
-            <span class="px-4 py-2 border-[3px] border-text-light dark:border-text-dark rounded-full text-sm font-bold text-text-light dark:text-text-dark bg-bg-light dark:bg-bg-dark">
-              {tech}
-            </span>
+            <Badge
+              label={`Technology: ${tech}`}
+              value={tech}
+              variant="turquoise"
+              class="rounded-full text-sm"
+            />
           ))}
         </div>
       </section>
