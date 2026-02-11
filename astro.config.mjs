@@ -14,6 +14,7 @@ export default defineConfig({
   redirects: {
     '/portfolio': '/projects',
     '/portfolio/[slug]': '/projects/[slug]',
+    '/contact': '/#contact',
   },
 
   // base: '/joel-shinness-website', // Uncomment if not using custom domain
