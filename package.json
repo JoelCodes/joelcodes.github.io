@@ -20,6 +20,7 @@
     "astro-expressive-code": "^0.41.6",
     "astro-robots-txt": "^1.0.0",
     "reading-time-estimator": "^2.1.1",
+    "simple-icons-astro": "^16.1.0",
     "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3"
   },
