@@ -10,9 +10,9 @@ See: .planning/PROJECT.md (updated 2026-02-10)
 ## Current Position
 
 Phase: 20 of 22 (Contact Form Enhancement)
-Plan: 1 of 3 in current phase
+Plan: 2 of 3 in current phase
 Status: In progress
-Last activity: 2026-02-11 — Completed 20-01-PLAN.md (Foundation Components)
+Last activity: 2026-02-11 — Completed 20-02-PLAN.md (Contact Form Enhancement)
 
 Progress: [█████████████████████████████] 91% (19 phases complete, 3 phases remaining)
 
@@ -30,7 +30,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 60 (v1.0: 23, v1.1: 14, v1.2: 10, v1.3: 13)
+- Total plans completed: 61 (v1.0: 23, v1.1: 14, v1.2: 10, v1.3: 14)
 - Average duration: ~1-5 min/plan (recent trend)
 - Total execution time: ~5 days across 3 milestones
 
@@ -58,6 +58,9 @@ See `.planning/MILESTONES.md` for full milestone details.
 Key decisions are logged in PROJECT.md Key Decisions table.
 
 Recent decisions affecting v1.3:
+- **20-02**: Payload filtering strategy — Filter out undefined/empty optional fields from JSON webhook payload for cleaner n8n workflow data
+- **20-02**: Webhook URL configuration — PUBLIC_N8N_WEBHOOK_URL environment variable with placeholder fallback for development
+- **20-02**: Success redirect pattern — Redirect to /thank-you page instead of inline success message for better UX and Calendly integration
 - **20-01**: CheckboxGroup checkmark indicator — Pure CSS ::after pseudo-element instead of icon library for performance and themability
 - **20-01**: CheckboxGroup hover target — Entire label gets hover effect (not just checkbox) for larger interactive area
 - **20-01**: Calendly placeholder URL — Used https://calendly.com/joelshinness as placeholder to unblock development
@@ -101,9 +104,10 @@ Recent decisions affecting v1.3:
 ### Pending Todos
 
 **Before deployment:**
-1. Configure Formspree or n8n webhook (replace form endpoint in ContactSection.astro)
-2. Add real social links (Instagram, Substack URLs)
-3. Replace placeholder images with real content
+1. Configure n8n webhook - Set PUBLIC_N8N_WEBHOOK_URL environment variable and create n8n workflow
+2. Update Calendly booking link on /thank-you page with real URL
+3. Add real social links (Instagram, Substack URLs)
+4. Replace placeholder images with real content
 
 **Nice to have:**
 1. Add real project screenshots (currently using placeholder SVGs)
@@ -126,10 +130,10 @@ Recent decisions affecting v1.3:
 ## Session Continuity
 
 Last session: 2026-02-11
-Stopped at: Completed 20-01-PLAN.md (Foundation Components)
+Stopped at: Completed 20-02-PLAN.md (Contact Form Enhancement)
 Resume file: None
-Next action: Continue to 20-02-PLAN.md (Contact Form Enhancement)
+Next action: Continue to 20-03-PLAN.md (if exists) or next phase
 
 ---
 *State initialized: 2026-01-26*
-*Last updated: 2026-02-11 (Completed 20-01: Foundation Components — Created CheckboxGroup component with neobrutalist styling and thank-you page with Calendly CTA)*
+*Last updated: 2026-02-11 (Completed 20-02: Contact Form Enhancement — Enhanced contact form with 8 lead qualification fields, n8n webhook integration, and thank-you redirect)*
