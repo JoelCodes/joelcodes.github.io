@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
+import Button from '../../components/ui/Button.astro';
 import projects from '../../data/projects.json';
 ---
 
@@ -20,31 +21,40 @@ import projects from '../../data/projects.json';
       </header>
 
       <!-- Filter buttons -->
-      <div class="flex flex-wrap justify-center gap-3 mb-12">
-        <button
-          class="filter-btn active px-6 py-2 rounded-full transition-colors duration-200 bg-yellow dark:bg-yellow-dark border-[3px] border-text-light dark:border-text-dark font-bold text-text-light dark:text-text-dark hover:bg-yellow-600 dark:hover:bg-yellow-500"
-          onclick="filterSelection('all'); setActiveButton(this)"
+      <div class="flex flex-wrap justify-center gap-3 mb-12" id="filter-container">
+        <Button
+          variant="yellow"
+          size="md"
+          data-filter="all"
+          data-active="true"
+          class="filter-btn rounded-full"
         >
           All Projects
-        </button>
-        <button
-          class="filter-btn px-6 py-2 rounded-full transition-colors duration-200 bg-transparent border-[3px] border-text-light dark:border-text-dark font-bold text-text-light dark:text-text-dark hover:bg-text-muted-light/10 dark:hover:bg-text-muted-dark/10"
-          onclick="filterSelection('web-apps'); setActiveButton(this)"
+        </Button>
+        <Button
+          variant="outline"
+          size="md"
+          data-filter="web-apps"
+          class="filter-btn rounded-full"
         >
           Web Apps
-        </button>
-        <button
-          class="filter-btn px-6 py-2 rounded-full transition-colors duration-200 bg-transparent border-[3px] border-text-light dark:border-text-dark font-bold text-text-light dark:text-text-dark hover:bg-text-muted-light/10 dark:hover:bg-text-muted-dark/10"
-          onclick="filterSelection('automation'); setActiveButton(this)"
+        </Button>
+        <Button
+          variant="outline"
+          size="md"
+          data-filter="automation"
+          class="filter-btn rounded-full"
         >
           Automation
-        </button>
-        <button
-          class="filter-btn px-6 py-2 rounded-full transition-colors duration-200 bg-transparent border-[3px] border-text-light dark:border-text-dark font-bold text-text-light dark:text-text-dark hover:bg-text-muted-light/10 dark:hover:bg-text-muted-dark/10"
-          onclick="filterSelection('ai-dev'); setActiveButton(this)"
+        </Button>
+        <Button
+          variant="outline"
+          size="md"
+          data-filter="ai-dev"
+          class="filter-btn rounded-full"
         >
           AI Development
-        </button>
+        </Button>
       </div>
 
       <!-- Projects grid -->
@@ -65,20 +75,11 @@ import projects from '../../data/projects.json';
     </div>
   </main>
 
-  <style>
-    /* Active filter buttons always use dark text for contrast against yellow background */
-    .filter-btn.active {
-      color: var(--color-text-light);
-    }
-  </style>
-
   <script is:inline>
     function filterSelection(category) {
       const cards = document.getElementsByClassName('project-card');
-
       for (let i = 0; i < cards.length; i++) {
         cards[i].classList.remove('show');
-
         const cardCategory = cards[i].getAttribute('data-category');
         if (category === 'all' || cardCategory === category) {
           cards[i].classList.add('show');
@@ -86,15 +87,31 @@ import projects from '../../data/projects.json';
       }
     }
 
-    function setActiveButton(btn) {
-      const buttons = document.getElementsByClassName('filter-btn');
-      for (let i = 0; i < buttons.length; i++) {
-        buttons[i].classList.remove('active', 'bg-yellow', 'dark:bg-yellow-dark');
-        buttons[i].classList.add('bg-transparent');
-      }
-      btn.classList.remove('bg-transparent');
-      btn.classList.add('active', 'bg-yellow', 'dark:bg-yellow-dark');
+    function setActiveButton(category) {
+      const buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(btn => {
+        const isActive = btn.getAttribute('data-filter') === category;
+        btn.setAttribute('data-active', isActive ? 'true' : 'false');
+        // Toggle Button CSS classes for variant swap
+        if (isActive) {
+          btn.classList.remove('btn-outline');
+          btn.classList.add('btn-yellow');
+        } else {
+          btn.classList.remove('btn-yellow');
+          btn.classList.add('btn-outline');
+        }
+      });
     }
+
+    // Add click handlers via event delegation
+    document.getElementById('filter-container').addEventListener('click', (e) => {
+      const btn = e.target.closest('.filter-btn');
+      if (btn) {
+        const filter = btn.getAttribute('data-filter');
+        filterSelection(filter);
+        setActiveButton(filter);
+      }
+    });
 
     // Initialize with all projects visible
     filterSelection('all');
