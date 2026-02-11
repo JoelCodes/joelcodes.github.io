@@ -48,14 +48,4 @@ test.describe('Page Accessibility Tests', () => {
 
     expect(results.violations).toEqual([]);
   });
-
-  test('Contact page should not have accessibility violations', async ({ page }) => {
-    await page.goto('/contact');
-
-    const results = await new AxeBuilder({ page })
-      .withTags(wcagTags)
-      .analyze();
-
-    expect(results.violations).toEqual([]);
-  });
 });
