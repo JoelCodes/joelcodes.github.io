@@ -1,5 +1,5 @@
 ---
-status: complete
+status: diagnosed
 phase: 20-contact-form-enhancement
 source: 20-01-SUMMARY.md, 20-02-SUMMARY.md, 20-03-SUMMARY.md
 started: 2026-02-11T00:00:00Z
@@ -65,11 +65,14 @@ skipped: 0
 ## Gaps
 
 - truth: "Checkbox shadows transform to glows in dark mode"
-  status: failed
+  status: fixed
   reason: "User reported: The shadows on the checkboxes are not glows in dark mode."
   severity: minor
   test: 9
-  root_cause: ""
-  artifacts: []
+  root_cause: "CheckboxGroup dark mode uses offset shadow (3px 3px 0) instead of glow effect. Card.astro uses 'box-shadow: 0 0 20px color-mix(...)' in dark mode but CheckboxGroup doesn't follow this pattern."
+  fix_commit: "95a024e"
+  artifacts:
+    - path: "src/components/ui/CheckboxGroup.astro"
+      issue: "Lines 134-150: Dark mode checked states use 'box-shadow: 3px 3px 0' instead of glow"
   missing: []
   debug_session: ""
