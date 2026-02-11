@@ -4,7 +4,7 @@
 
 A lead-generation focused portfolio website for Joel Shinness targeting small business clients. The site communicates expertise in web apps, automation, and AI development through distinctive neobrutalist design with isometric illustrations, outcome-focused messaging, and clear calls to action.
 
-**Current state:** v1.3 in progress. Design system consolidation and navigation cleanup.
+**Current state:** v1.3 shipped. Design system consolidation and navigation cleanup complete.
 
 ## Core Value
 
@@ -49,15 +49,22 @@ Small business owners can understand what Joel does, trust his process, and easi
 - ✓ Isometric CSS utilities (iso-shadow, iso-glow, iso-rotate) — v1.2
 - ✓ Icon library tree-shaking (@lucide/astro migration) — v1.2
 
+*Shipped in v1.3:*
+
+- ✓ Design system reference page at /design-system with JSON API — v1.3
+- ✓ Component consistency audit with 16 findings resolved — v1.3
+- ✓ All pages using design system components (Button, Input, Badge, Card) — v1.3
+- ✓ CheckboxGroup component for multi-select form fields — v1.3
+- ✓ Enhanced contact form with 8 lead qualification fields — v1.3
+- ✓ n8n webhook integration for contact form submissions — v1.3
+- ✓ Simplified header navigation (Blog, Projects, FAQ, Contact) — v1.3
+- ✓ /contact page redirect to /#contact section — v1.3
+- ✓ Footer with Instagram/Substack social icons (44x44px touch targets) — v1.3
+- ✓ Footer secondary navigation mirroring header — v1.3
+- ✓ Zero axe-core accessibility violations across all pages — v1.3
+- ✓ 100% Lighthouse scores (Performance, Accessibility, Best Practices, SEO) — v1.3
+
 ### Active
-
-*v1.3 Design System & Navigation Cleanup:*
-
-- [ ] Design system reference page (internal, hidden from nav)
-- [ ] Component consistency audit across all pages
-- [ ] Navigation cleanup (remove homepage section links from header)
-- [ ] Delete /contact page with redirect to /#contact
-- [ ] Footer cleanup: add Instagram/Substack icons, mirror header links (subtle)
 
 *Future enhancements (candidates for v1.4+):*
 
@@ -82,7 +89,7 @@ Small business owners can understand what Joel does, trust his process, and easi
 - **Differentiator:** Low-risk process with prototype before full commitment
 - **Tech stack:** Astro 5.x, Tailwind CSS 4.x, MDX, TypeScript
 - **Hosting:** GitHub Pages (static, free)
-- **Current LOC:** 3,649 lines across 34 source files
+- **Current LOC:** 5,498 lines across 40+ source files
 - **Design system:** Neobrutalism — yellow/turquoise/magenta OKLCH palette, isometric illustrations, shadow-to-glow dark mode
 
 ## Constraints
@@ -113,17 +120,31 @@ Small business owners can understand what Joel does, trust his process, and easi
 | Isometric currentColor SVGs | Single SVG works with any color, <1KB each | ✓ Good — v1.2 |
 | Dedicated FAQ page | SEO-friendly with JSON-LD, reduces footer weight | ✓ Good — v1.2 |
 | @lucide/astro tree-shaking | 200KB+ bundle reduction vs lucide-static | ✓ Good — v1.2 |
+| Design system reference page | Internal docs for components and tokens | ✓ Good — v1.3 |
+| Component consistency migration | All pages use design system components | ✓ Good — v1.3 |
+| 8-field lead qualification form | Better leads without overwhelming users | ✓ Good — v1.3 |
+| n8n webhook over Formspree | More control, better automation options | ✓ Good — v1.3 |
+| simple-icons-astro for social | Maintained brand icons, tree-shakeable | ✓ Good — v1.3 |
+| 44x44px touch targets | WCAG 2.5.5 compliance for mobile | ✓ Good — v1.3 |
 
-## Current Milestone: v1.3 Design System & Navigation Cleanup
+## Shipped: v1.3 Design System & Navigation Cleanup
 
-**Goal:** Consolidate design system into a reference page, ensure consistent component usage across all pages, and streamline navigation for cleaner user experience.
+**Delivered:** 2026-02-11
 
-**Target features:**
-- Design system reference page with all components, typography, colors
-- Component consistency audit and migration
-- Simplified header (Blog, Projects, FAQ, Contact only)
-- Footer cleanup with social icons (Instagram, Substack) and subtle nav links
-- /contact page removal with redirect to /#contact
+Consolidated design system into reference page, achieved 100% component consistency, streamlined navigation to 4 links, enhanced contact form for lead generation.
+
+**Key accomplishments:**
+- Design system reference page with component documentation and JSON API
+- All pages using design system components (zero raw HTML forms/buttons)
+- Zero axe-core accessibility violations
+- 100% Lighthouse scores across all categories
+- Enhanced 8-field contact form with n8n webhook integration
+- Footer with Instagram/Substack social icons and secondary navigation
+
+**Pending deployment tasks:**
+- Configure PUBLIC_N8N_WEBHOOK_URL environment variable
+- Update Calendly placeholder URL on /thank-you page
+- Add real social profile URLs (Instagram, Substack)
 
 ---
-*Last updated: 2026-02-10 after v1.3 milestone start*
+*Last updated: 2026-02-11 after v1.3 milestone shipped*

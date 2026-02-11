@@ -5,7 +5,7 @@
 - ✅ **v1.0 MVP** — Phases 1-6 (shipped 2026-01-27)
 - ✅ **v1.1 Design Updates** — Phases 7-11 (shipped 2026-02-10)
 - ✅ **v1.2 Homepage Refinement** — Phases 12-16 (shipped 2026-02-10)
-- 🚧 **v1.3 Design System & Navigation Cleanup** — Phases 17-22 (in progress)
+- ✅ **v1.3 Design System & Navigation Cleanup** — Phases 17-22 (shipped 2026-02-11)
 
 ## Phases
 
@@ -66,107 +66,26 @@ See: `.planning/milestones/v1.2-ROADMAP.md` for full details.
 
 </details>
 
-### 🚧 v1.3 Design System & Navigation Cleanup (In Progress)
+<details>
+<summary>✅ v1.3 Design System & Navigation Cleanup (Phases 17-22) — SHIPPED 2026-02-11</summary>
 
-**Milestone Goal:** Consolidate design system into a reference page, ensure consistent component usage across all pages, and streamline navigation for cleaner user experience.
+Consolidated design system into reference page, achieved 100% component consistency, streamlined navigation to 4 links, enhanced contact form for lead generation.
 
-#### Phase 17: Design System Reference Page
-**Goal**: Internal design system documentation page exists with all components, tokens, and utilities
-**Depends on**: Nothing (first phase of milestone)
-**Requirements**: DS-01, DS-02, DS-03, DS-04, DS-05, DS-06, DS-07, DS-08, DS-09
-**Success Criteria** (what must be TRUE):
-  1. Developer can view all Button variants (primary, secondary, turquoise, disabled) on /design-system page
-  2. Developer can view all Card, Input, and Badge component variants with examples
-  3. Developer can view OKLCH color palette with hex/oklch values for both light and dark modes
-  4. Developer can view typography scale (Bricolage Grotesque, DM Sans) with size examples
-  5. Developer can view isometric utilities (iso-shadow, iso-glow, iso-rotate) with visual examples
-**Plans**: 5 plans in 3 waves
-**Completed**: 2026-02-10
+**Stats:** 40+ source files, 5,498 lines, 17 plans, 2-day build (Feb 10-11, 2026)
 
-Plans:
-- [x] 17-01-PLAN.md — Page infrastructure (layout, sidebar nav, code toggle/copy)
-- [x] 17-02-PLAN.md — Design tokens (colors, typography sections)
-- [x] 17-03-PLAN.md — Components (Button, Card, Input, Badge documentation)
-- [x] 17-04-PLAN.md — Utilities (isometric utilities, JSON endpoint, CLAUDE.md update)
-- [x] 17-05-PLAN.md — UAT gap closure (CodeBlock padding, Card stacked isolation, Badge colors)
+**Key accomplishments:**
+- Design system reference page at /design-system with JSON API endpoint
+- Component consistency audit with 16 findings resolved (zero raw HTML forms/buttons)
+- CheckboxGroup component for multi-select form fields
+- Enhanced 8-field contact form with n8n webhook integration
+- Simplified header navigation (Blog, Projects, FAQ, Contact only)
+- Footer with Instagram/Substack social icons (44x44px touch targets)
+- Zero axe-core accessibility violations across all pages
+- 100% Lighthouse scores (Performance, Accessibility, Best Practices, SEO)
 
-#### Phase 18: Component Consistency Audit
-**Goal**: Complete inventory of component usage across all pages with severity-tiered findings
-**Depends on**: Phase 17
-**Requirements**: AUDIT-01, AUDIT-02, AUDIT-03
-**Success Criteria** (what must be TRUE):
-  1. Developer can read audit document listing all component usage inconsistencies
-  2. Audit findings are categorized by severity (CRITICAL/HIGH/MEDIUM/LOW)
-  3. Prioritized migration plan exists identifying which findings to address
-**Plans**: 1 plan in 1 wave
-**Completed**: 2026-02-10
+See: `.planning/milestones/v1.3-ROADMAP.md` for full details.
 
-Plans:
-- [x] 18-01-PLAN.md — Component inventory, page verification, and audit documentation
-
-#### Phase 19: Component Migration (Tiered)
-**Goal**: CRITICAL and HIGH severity inconsistencies resolved, components match design system
-**Depends on**: Phase 18
-**Requirements**: AUDIT-02 (migration execution)
-**Success Criteria** (what must be TRUE):
-  1. All CRITICAL accessibility inconsistencies are fixed (focus states, ARIA attributes)
-  2. All HIGH visual inconsistencies are fixed (shadow offsets, border widths, color variants)
-  3. All pages use components that match design system reference
-**Plans**: 6 plans in 4 waves
-**Completed**: 2026-02-11
-
-Plans:
-- [x] 19-01-PLAN.md — Component extension (Button outline variant, Input textarea/select support)
-- [x] 19-02-PLAN.md — Contact page migration (form inputs, submit button)
-- [x] 19-03-PLAN.md — Filter buttons migration (Portfolio index, Blog index)
-- [x] 19-04-PLAN.md — Remaining HIGH items (portfolio badges, ContactSection textarea)
-- [x] 19-05-PLAN.md — Blog tag border fix (MEDIUM priority)
-- [x] 19-06-PLAN.md — Final verification (axe-core, Lighthouse CI, visual QA)
-
-#### Phase 20: Contact Form Enhancement
-**Goal**: Contact form optimized for lead generation with n8n webhook integration
-**Depends on**: Phase 17 (design system exists for form components)
-**Requirements**: FORM-01, FORM-02, FORM-03, FORM-04
-**Success Criteria** (what must be TRUE):
-  1. User can submit contact form and receive clear success/error feedback
-  2. Form submits to n8n webhook (placeholder URL, configurable)
-  3. Form fields are optimized based on freelance developer lead generation best practices
-**Plans**: 3 plans in 3 waves
-**Completed**: 2026-02-11
-
-Plans:
-- [x] 20-01-PLAN.md — Foundation components (CheckboxGroup component, thank-you page)
-- [x] 20-02-PLAN.md — Contact form enhancement (new fields, webhook integration, redirect)
-- [x] 20-03-PLAN.md — Homepage sync and verification (ContactSection update, design system docs)
-
-#### Phase 21: Navigation Cleanup
-**Goal**: Simplified header navigation and contact page redirect implemented
-**Depends on**: Phase 19 (component consistency complete)
-**Requirements**: NAV-01, NAV-02, NAV-03
-**Success Criteria** (what must be TRUE):
-  1. User sees only Blog, Projects, FAQ, Contact links in header (homepage section links removed)
-  2. User visiting /contact is automatically redirected to /#contact
-  3. Footer FAQ standalone link is removed
-**Plans**: 1 plan in 1 wave
-**Completed**: 2026-02-10
-
-Plans:
-- [x] 21-01-PLAN.md — Navigation simplification (header, mobile nav, footer, redirect, delete contact page)
-
-#### Phase 22: Footer Enhancement
-**Goal**: Footer contains social icons and secondary navigation
-**Depends on**: Phase 21
-**Requirements**: NAV-04, NAV-05, NAV-06, NAV-07
-**Success Criteria** (what must be TRUE):
-  1. User can see Instagram and Substack social icons in footer with 44x44px touch targets
-  2. User can navigate to Blog, Projects, FAQ, Contact from footer (mirrors header)
-  3. Screen reader users hear "Follow Joel on Instagram" and "Follow Joel on Substack" (proper aria-labels)
-  4. All social icons pass WCAG 2.2 AA accessibility (axe-core validation)
-**Plans**: 1 plan in 1 wave
-**Completed**: 2026-02-11
-
-Plans:
-- [x] 22-01-PLAN.md — Social icons (Instagram, Substack) and secondary navigation with accessibility
+</details>
 
 ## Progress
 
@@ -200,4 +119,4 @@ Phases execute in numeric order: 1 -> 2 -> ... -> 16 -> 17 -> 18 -> 19 -> 20 -> 
 
 ---
 *Roadmap initialized: 2026-01-26 for v1.0*
-*Last updated: 2026-02-11 after Phase 22 execution*
+*Last updated: 2026-02-11 after v1.3 milestone shipped*
