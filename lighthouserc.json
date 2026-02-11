@@ -22,7 +22,10 @@
         "network-dependency-tree-insight": "off",
         "modern-image-formats": "off",
         "render-blocking-insight": "off",
-        "render-blocking-resources": "off"
+        "render-blocking-resources": "off",
+        "lcp-lazy-loaded": "off",
+        "non-composited-animations": "off",
+        "prioritize-lcp-image": "off"
       }
     },
     "upload": {
