@@ -1,5 +1,5 @@
 ---
-status: complete
+status: diagnosed
 phase: 19-component-migration
 source: 19-01-SUMMARY.md, 19-02-SUMMARY.md, 19-03-SUMMARY.md, 19-04-SUMMARY.md, 19-05-SUMMARY.md, 19-06-SUMMARY.md
 started: 2026-02-10T19:00:00Z
@@ -59,18 +59,21 @@ result: pass
 
 total: 10
 passed: 8
-issues: 1
+issues: 1 (fixed)
 pending: 0
 skipped: 1
 
 ## Gaps
 
 - truth: "Blog post tag links have 3px borders matching neobrutalist design"
-  status: failed
+  status: fixed
   reason: "User reported: There are tag links at the top, and they are capsules with thin borders, not matching the neobrutalist style."
   severity: minor
   test: 8
-  root_cause: ""
-  artifacts: []
+  root_cause: "Border width is 3px but color uses 50% opacity (border-turquoise/50) making it appear thin/faint. Neobrutalist style requires solid opaque borders."
+  fix_commit: "07c325a"
+  artifacts:
+    - path: "src/pages/blog/[slug].astro"
+      issue: "Line 72: border-turquoise/50 uses 50% opacity"
   missing: []
   debug_session: ""
