@@ -788,9 +788,20 @@ import CodeBlock from '../components/design-system/CodeBlock.astro';
             <ComponentShowcase
               title="CheckboxGroup"
               description="Accessible multi-select checkbox group with neobrutalist styling. Uses fieldset/legend for screen reader compatibility."
+              code={`<CheckboxGroup
+  name="solutions"
+  legend="What solutions do you need?"
+  variant="yellow"
+  options={[
+    { value: "AI", label: "AI" },
+    { value: "Automations", label: "Automations" },
+    { value: "Web Apps", label: "Web Apps" }
+  ]}
+/>`}
             >
-              <div slot="demo" class="space-y-8">
-                <!-- Yellow variant -->
+              <!-- Yellow variant -->
+              <div class="w-full mb-6">
+                <h4 class="font-heading text-lg font-semibold mb-3">Yellow Variant</h4>
                 <CheckboxGroup
                   name="demo-solutions-yellow"
                   legend="Example options (yellow)"
@@ -801,8 +812,11 @@ import CodeBlock from '../components/design-system/CodeBlock.astro';
                     { value: 'opt3', label: 'Option Three' }
                   ]}
                 />
+              </div>
 
-                <!-- Turquoise variant -->
+              <!-- Turquoise variant -->
+              <div class="w-full mb-6">
+                <h4 class="font-heading text-lg font-semibold mb-3">Turquoise Variant</h4>
                 <CheckboxGroup
                   name="demo-solutions-turquoise"
                   legend="Example options (turquoise)"
@@ -812,8 +826,11 @@ import CodeBlock from '../components/design-system/CodeBlock.astro';
                     { value: 'opt2', label: 'Option Two' }
                   ]}
                 />
+              </div>
 
-                <!-- Magenta variant -->
+              <!-- Magenta variant -->
+              <div class="w-full">
+                <h4 class="font-heading text-lg font-semibold mb-3">Magenta Variant</h4>
                 <CheckboxGroup
                   name="demo-solutions-magenta"
                   legend="Example options (magenta)"
@@ -825,17 +842,6 @@ import CodeBlock from '../components/design-system/CodeBlock.astro';
                   ]}
                 />
               </div>
-
-              <CodeBlock slot="code" code={`<CheckboxGroup
-  name="solutions"
-  legend="What solutions do you need?"
-  variant="yellow"
-  options={[
-    { value: "AI", label: "AI" },
-    { value: "Automations", label: "Automations" },
-    { value: "Web Apps", label: "Web Apps" }
-  ]}
-/>`} />
             </ComponentShowcase>
 
             <!-- Props Table -->
@@ -865,7 +871,7 @@ import CodeBlock from '../components/design-system/CodeBlock.astro';
                   </tr>
                   <tr>
                     <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">options</td>
-                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">Array&lt;{value, label}&gt;</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">Array&lt;{'{'} value, label {'}'}&gt;</td>
                     <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">required</td>
                     <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">Checkbox options to render</td>
                   </tr>
