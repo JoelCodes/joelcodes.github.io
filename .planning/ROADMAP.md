@@ -162,10 +162,10 @@ Plans:
   2. User can navigate to Blog, Projects, FAQ, Contact from footer (mirrors header)
   3. Screen reader users hear "Follow Joel on Instagram" and "Follow Joel on Substack" (proper aria-labels)
   4. All social icons pass WCAG 2.2 AA accessibility (axe-core validation)
-**Plans**: TBD
+**Plans**: 1 plan in 1 wave
 
 Plans:
-- [ ] 22-01: TBD
+- [ ] 22-01-PLAN.md — Social icons (Instagram, Substack) and secondary navigation with accessibility
 
 ## Progress
 
@@ -195,8 +195,8 @@ Phases execute in numeric order: 1 -> 2 -> ... -> 16 -> 17 -> 18 -> 19 -> 20 -> 
 | 19. Component Migration (Tiered) | v1.3 | 6/6 | Complete | 2026-02-11 |
 | 20. Contact Form Enhancement | v1.3 | 3/3 | Complete | 2026-02-11 |
 | 21. Navigation Cleanup | v1.3 | 1/1 | Complete | 2026-02-10 |
-| 22. Footer Enhancement | v1.3 | 0/? | Not started | - |
+| 22. Footer Enhancement | v1.3 | 0/1 | Not started | - |
 
 ---
 *Roadmap initialized: 2026-01-26 for v1.0*
-*Last updated: 2026-02-10 after Phase 21 execution*
+*Last updated: 2026-02-10 after Phase 22 planning*
