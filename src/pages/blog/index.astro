@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BlogCard from '../../components/BlogCard.astro';
+import Button from '../../components/ui/Button.astro';
 import { getCollection } from 'astro:content';
 import { readingTime } from 'reading-time-estimator';
 
@@ -39,20 +40,25 @@ const postsWithMeta = sortedPosts.map((post) => {
       </header>
 
       <!-- Filter buttons -->
-      <div class="flex flex-wrap justify-center gap-3 mb-12">
-        <button
-          class="filter-btn active px-6 py-2 rounded-full transition-colors duration-200 bg-turquoise text-bg-dark border-[3px] border-text-light dark:border-text-dark font-bold"
-          onclick="filterSelection('all'); setActiveButton(this)"
+      <div class="flex flex-wrap justify-center gap-3 mb-12" id="filter-container">
+        <Button
+          variant="turquoise"
+          size="md"
+          data-filter="all"
+          data-active="true"
+          class="filter-btn rounded-full"
         >
           All Posts
-        </button>
+        </Button>
         {allTags.map((tag) => (
-          <button
-            class="filter-btn px-6 py-2 rounded-full transition-colors duration-200 bg-transparent border-[3px] border-text-light dark:border-text-dark text-text-light dark:text-text-dark hover:bg-turquoise/10 dark:hover:bg-turquoise-dark/10 font-medium"
-            onclick={`filterSelection('${tag}'); setActiveButton(this)`}
+          <Button
+            variant="outline"
+            size="md"
+            data-filter={tag}
+            class="filter-btn rounded-full"
           >
             {tag}
-          </button>
+          </Button>
         ))}
       </div>
 
@@ -112,16 +118,23 @@ const postsWithMeta = sortedPosts.map((post) => {
       // Reset load more state when filtering
       visiblePosts = INITIAL_POSTS;
       updateLoadMoreVisibility();
+      setActiveButton(tag);
     }
 
-    function setActiveButton(btn) {
-      const buttons = document.getElementsByClassName('filter-btn');
-      for (let i = 0; i < buttons.length; i++) {
-        buttons[i].classList.remove('active', 'bg-turquoise', 'text-bg-dark', 'font-bold');
-        buttons[i].classList.add('bg-transparent', 'text-text-light', 'dark:text-text-dark', 'hover:bg-turquoise/10', 'dark:hover:bg-turquoise-dark/10', 'font-medium');
-      }
-      btn.classList.remove('bg-transparent', 'text-text-light', 'dark:text-text-dark', 'hover:bg-turquoise/10', 'dark:hover:bg-turquoise-dark/10', 'font-medium');
-      btn.classList.add('active', 'bg-turquoise', 'text-bg-dark', 'font-bold');
+    function setActiveButton(tag) {
+      const buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(btn => {
+        const isActive = btn.getAttribute('data-filter') === tag;
+        btn.setAttribute('data-active', isActive ? 'true' : 'false');
+        // Toggle Button CSS classes for variant swap
+        if (isActive) {
+          btn.classList.remove('btn-outline');
+          btn.classList.add('btn-turquoise');
+        } else {
+          btn.classList.remove('btn-turquoise');
+          btn.classList.add('btn-outline');
+        }
+      });
     }
 
     function loadMorePosts() {
@@ -141,6 +154,15 @@ const postsWithMeta = sortedPosts.map((post) => {
         }
       }
     }
+
+    // Add click handlers via event delegation for filter buttons
+    document.getElementById('filter-container').addEventListener('click', (e) => {
+      const btn = e.target.closest('.filter-btn');
+      if (btn) {
+        const filter = btn.getAttribute('data-filter');
+        filterSelection(filter);
+      }
+    });
 
     // Initialize with all posts visible
     filterSelection('all');
