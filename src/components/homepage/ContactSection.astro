@@ -2,6 +2,7 @@
 import Card from '../ui/Card.astro';
 import Input from '../ui/Input.astro';
 import Button from '../ui/Button.astro';
+import CheckboxGroup from '../ui/CheckboxGroup.astro';
 ---
 
 <section
@@ -25,39 +26,146 @@ import Button from '../ui/Button.astro';
     <div class="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-8 md:gap-12 items-start">
       <!-- Left: Contact form -->
       <div>
-        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="space-y-6">
+        <form id="homepage-contact-form" class="space-y-6" novalidate>
           <!-- Name field -->
-          <Input
-            variant="turquoise"
-            label="Name *"
-            type="text"
-            name="name"
-            required
-            minlength={2}
-            placeholder="Your name"
-          />
+          <div>
+            <label for="hp-name" class="block font-body font-medium mb-2 text-text-light dark:text-text-dark">
+              Name <span class="text-red-600">*</span>
+            </label>
+            <Input
+              variant="turquoise"
+              type="text"
+              id="hp-name"
+              name="name"
+              required
+              minlength={2}
+              autocomplete="name"
+              placeholder="Your name"
+            />
+            <span id="hp-name-error" class="block text-sm text-red-600 mt-1 min-h-5" aria-live="polite"></span>
+          </div>
 
           <!-- Email field -->
-          <Input
+          <div>
+            <label for="hp-email" class="block font-body font-medium mb-2 text-text-light dark:text-text-dark">
+              Email <span class="text-red-600">*</span>
+            </label>
+            <Input
+              variant="turquoise"
+              type="email"
+              id="hp-email"
+              name="email"
+              required
+              autocomplete="email"
+              placeholder="you@example.com"
+            />
+            <span id="hp-email-error" class="block text-sm text-red-600 mt-1 min-h-5" aria-live="polite"></span>
+          </div>
+
+          <!-- Company field (Optional) -->
+          <div>
+            <label for="hp-company" class="block font-body font-medium mb-2 text-text-light dark:text-text-dark">
+              Company <span class="text-text-muted-light dark:text-text-muted-dark text-sm">(optional)</span>
+            </label>
+            <Input
+              variant="turquoise"
+              type="text"
+              id="hp-company"
+              name="company"
+              autocomplete="organization"
+              placeholder="Company name (if applicable)"
+            />
+          </div>
+
+          <!-- Challenges field (Optional) -->
+          <div>
+            <label for="hp-challenges" class="block font-body font-medium mb-2 text-text-light dark:text-text-dark">
+              What challenges are you facing? <span class="text-text-muted-light dark:text-text-muted-dark text-sm">(optional)</span>
+            </label>
+            <Input
+              as="textarea"
+              variant="turquoise"
+              id="hp-challenges"
+              name="challenges"
+              rows={4}
+              placeholder="What challenge are you facing? What's your timeline?"
+            />
+          </div>
+
+          <!-- Solutions field (Optional) -->
+          <CheckboxGroup
+            name="solutions"
+            legend="What kinds of solutions do you think you'll need?"
             variant="turquoise"
-            label="Email *"
-            type="email"
-            name="email"
-            required
-            placeholder="your@email.com"
+            options={[
+              { value: 'AI', label: 'AI' },
+              { value: 'Automations', label: 'Automations' },
+              { value: 'Web Apps', label: 'Web Apps' },
+              { value: 'Consultation', label: 'Consultation' },
+              { value: 'Not Sure', label: 'Not Sure' }
+            ]}
           />
 
-          <!-- Message textarea -->
-          <Input
-            as="textarea"
-            variant="turquoise"
-            label="Message *"
-            id="message"
-            name="message"
-            required
-            rows={6}
-            placeholder="Tell me about your project..."
-          />
+          <!-- Budget field (Optional) -->
+          <div>
+            <label for="hp-budget" class="block font-body font-medium mb-2 text-text-light dark:text-text-dark">
+              Budget <span class="text-text-muted-light dark:text-text-muted-dark text-sm">(optional)</span>
+            </label>
+            <Input
+              as="select"
+              variant="turquoise"
+              id="hp-budget"
+              name="budget"
+            >
+              <option value="">Select budget range (optional)</option>
+              <option value="Under $2K">Under $2K</option>
+              <option value="$2K-5K">$2K-5K</option>
+              <option value="$5K-10K">$5K-10K</option>
+              <option value="$10K-25K">$10K-25K</option>
+              <option value="$25K+">$25K+</option>
+            </Input>
+          </div>
+
+          <!-- Timeline field (Optional) -->
+          <div>
+            <label for="hp-timeline" class="block font-body font-medium mb-2 text-text-light dark:text-text-dark">
+              Timeline <span class="text-text-muted-light dark:text-text-muted-dark text-sm">(optional)</span>
+            </label>
+            <Input
+              as="select"
+              variant="turquoise"
+              id="hp-timeline"
+              name="timeline"
+            >
+              <option value="">Select timeline (optional)</option>
+              <option value="This week">This week</option>
+              <option value="This month">This month</option>
+              <option value="This quarter">This quarter</option>
+              <option value="Flexible">Flexible</option>
+            </Input>
+          </div>
+
+          <!-- Message field -->
+          <div>
+            <label for="hp-message" class="block font-body font-medium mb-2 text-text-light dark:text-text-dark">
+              Message <span class="text-red-600">*</span>
+            </label>
+            <Input
+              as="textarea"
+              variant="turquoise"
+              id="hp-message"
+              name="message"
+              required
+              rows={6}
+              placeholder="Tell me more about your project..."
+            />
+            <span id="hp-message-error" class="block text-sm text-red-600 mt-1 min-h-5" aria-live="polite"></span>
+          </div>
+
+          <!-- Form Error Message Container -->
+          <div id="hp-form-error" class="hidden p-4 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800" role="alert">
+            <p class="text-red-700 dark:text-red-400 font-body"></p>
+          </div>
 
           <!-- Submit button -->
           <Button variant="turquoise" type="submit">
@@ -94,4 +202,178 @@ import Button from '../ui/Button.astro';
     </div>
   </div>
 </section>
+
+<script>
+  // Homepage contact form validation and submission handler
+  const form = document.getElementById('homepage-contact-form') as HTMLFormElement;
+  const submitButton = form.querySelector('[type="submit"]') as HTMLButtonElement;
+  const formError = document.getElementById('hp-form-error') as HTMLDivElement;
+  const formErrorText = formError.querySelector('p') as HTMLParagraphElement;
+
+  // n8n webhook URL from environment variable
+  const webhookURL = import.meta.env.PUBLIC_N8N_WEBHOOK_URL || 'https://placeholder.n8n.webhook';
+
+  // Field validation configuration
+  const validationConfig = {
+    name: {
+      element: document.getElementById('hp-name') as HTMLInputElement,
+      errorElement: document.getElementById('hp-name-error') as HTMLSpanElement,
+      messages: {
+        valueMissing: 'Please enter your name.',
+        typeMismatch: '',
+        tooShort: 'Name must be at least 2 characters.'
+      }
+    },
+    email: {
+      element: document.getElementById('hp-email') as HTMLInputElement,
+      errorElement: document.getElementById('hp-email-error') as HTMLSpanElement,
+      messages: {
+        valueMissing: 'Please enter your email address.',
+        typeMismatch: 'Please enter a valid email address.',
+        tooShort: ''
+      }
+    },
+    message: {
+      element: document.getElementById('hp-message') as HTMLTextAreaElement,
+      errorElement: document.getElementById('hp-message-error') as HTMLSpanElement,
+      messages: {
+        valueMissing: 'Please enter a message.',
+        typeMismatch: '',
+        tooShort: ''
+      }
+    }
+  };
+
+  // Show field-level error
+  function showFieldError(fieldName: keyof typeof validationConfig) {
+    const config = validationConfig[fieldName];
+    const validity = config.element.validity;
+
+    if (validity.valueMissing) {
+      config.errorElement.textContent = config.messages.valueMissing;
+    } else if (validity.typeMismatch) {
+      config.errorElement.textContent = config.messages.typeMismatch;
+    } else if (validity.tooShort) {
+      config.errorElement.textContent = config.messages.tooShort;
+    } else {
+      config.errorElement.textContent = '';
+    }
+  }
+
+  // Clear field error
+  function clearFieldError(fieldName: keyof typeof validationConfig) {
+    validationConfig[fieldName].errorElement.textContent = '';
+  }
+
+  // Setup field validation listeners
+  Object.entries(validationConfig).forEach(([fieldName, config]) => {
+    const field = config.element;
+
+    // Validate on input
+    field.addEventListener('input', () => {
+      if (field.validity.valid) {
+        clearFieldError(fieldName as keyof typeof validationConfig);
+      } else {
+        showFieldError(fieldName as keyof typeof validationConfig);
+      }
+    });
+
+    // Validate on blur
+    field.addEventListener('blur', () => {
+      if (!field.validity.valid) {
+        showFieldError(fieldName as keyof typeof validationConfig);
+      }
+    });
+  });
+
+  // Show form-level error
+  function showFormError(message: string) {
+    formErrorText.textContent = message;
+    formError.classList.remove('hidden');
+  }
+
+  // Hide form-level error
+  function hideFormError() {
+    formError.classList.add('hidden');
+    formErrorText.textContent = '';
+  }
+
+  // Set loading state
+  function setLoadingState(loading: boolean) {
+    submitButton.disabled = loading;
+  }
+
+  // Form submission handler
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Hide any previous form errors
+    hideFormError();
+
+    // Validate all fields first
+    let isValid = true;
+    Object.keys(validationConfig).forEach((fieldName) => {
+      const config = validationConfig[fieldName as keyof typeof validationConfig];
+      if (!config.element.validity.valid) {
+        showFieldError(fieldName as keyof typeof validationConfig);
+        isValid = false;
+      }
+    });
+
+    if (!isValid) {
+      return;
+    }
+
+    // Start loading state
+    setLoadingState(true);
+
+    try {
+      const formData = new FormData(form);
+
+      // Build JSON payload with only non-empty fields
+      const payload = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        company: formData.get('company') || undefined,
+        challenges: formData.get('challenges') || undefined,
+        solutions: formData.getAll('solutions'),
+        budget: formData.get('budget') || undefined,
+        timeline: formData.get('timeline') || undefined,
+        message: formData.get('message')
+      };
+
+      // Filter out undefined/empty optional fields
+      const cleanPayload = Object.fromEntries(
+        Object.entries(payload).filter(([key, value]) =>
+          value !== undefined && value !== '' &&
+          !(Array.isArray(value) && value.length === 0)
+        )
+      );
+
+      const response = await fetch(webhookURL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(cleanPayload)
+      });
+
+      // Must check response.ok explicitly - fetch doesn't reject on HTTP errors
+      if (!response.ok) {
+        showFormError('Could not send message. Email me directly at joel@joelshinness.com');
+        return;
+      }
+
+      // Success - redirect to thank you page
+      window.location.href = '/thank-you';
+
+    } catch (error) {
+      // Network error (no internet, DNS failure, etc.)
+      showFormError('Could not send message. Email me directly at joel@joelshinness.com');
+    } finally {
+      // Re-enable button (if form wasn't replaced)
+      if (submitButton.parentElement) {
+        setLoadingState(false);
+      }
+    }
+  });
+</script>
 
