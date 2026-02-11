@@ -1,45 +1,75 @@
 ---
-// Footer component with copyright and basic info
-import { Github, Linkedin } from '@lucide/astro';
+// Footer component with social icons, navigation, and copyright
+import Instagram from 'simple-icons-astro/Instagram';
+import Substack from 'simple-icons-astro/Substack';
 
 const currentYear = new Date().getFullYear();
 ---
 
 <footer class="border-t-[3px] border-text-light dark:border-text-dark py-8 mt-auto bg-bg-light dark:bg-bg-dark">
   <div class="container mx-auto px-4">
+    <!-- Social icons (top, most prominent) -->
+    <div class="flex justify-center gap-8 mb-8">
+      <a
+        href="https://instagram.com/joelshinness"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Follow Joel on Instagram (opens in new tab)"
+        class="inline-flex items-center justify-center min-w-[44px] min-h-[44px] text-text-muted-light dark:text-text-muted-dark hover:text-turquoise transition-colors focus-visible:outline-none focus-visible:shadow-[0_0_0_2px_var(--color-bg-light),0_0_0_6px_var(--color-text-light)] dark:focus-visible:shadow-[0_0_0_2px_var(--color-bg-dark),0_0_0_6px_var(--color-text-dark)]"
+      >
+        <Instagram size={24} />
+      </a>
+      <a
+        href="https://joelshinness.substack.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Follow Joel on Substack (opens in new tab)"
+        class="inline-flex items-center justify-center min-w-[44px] min-h-[44px] text-text-muted-light dark:text-text-muted-dark hover:text-turquoise transition-colors focus-visible:outline-none focus-visible:shadow-[0_0_0_2px_var(--color-bg-light),0_0_0_6px_var(--color-text-light)] dark:focus-visible:shadow-[0_0_0_2px_var(--color-bg-dark),0_0_0_6px_var(--color-text-dark)]"
+      >
+        <Substack size={24} />
+      </a>
+    </div>
+
+    <!-- Navigation (middle) -->
+    <nav aria-label="Footer navigation" class="flex items-center justify-center gap-4 flex-wrap mb-6">
+      <a
+        href="/blog"
+        class="font-heading font-bold text-text-light dark:text-text-dark hover:text-accent-yellow transition-colors focus-visible:outline-none focus-visible:shadow-[0_0_0_2px_var(--color-bg-light),0_0_0_6px_var(--color-text-light)] dark:focus-visible:shadow-[0_0_0_2px_var(--color-bg-dark),0_0_0_6px_var(--color-text-dark)]"
+      >
+        Blog
+      </a>
+      <span aria-hidden="true" class="text-text-muted-light dark:text-text-muted-dark">·</span>
+      <a
+        href="/projects"
+        class="font-heading font-bold text-text-light dark:text-text-dark hover:text-accent-yellow transition-colors focus-visible:outline-none focus-visible:shadow-[0_0_0_2px_var(--color-bg-light),0_0_0_6px_var(--color-text-light)] dark:focus-visible:shadow-[0_0_0_2px_var(--color-bg-dark),0_0_0_6px_var(--color-text-dark)]"
+      >
+        Projects
+      </a>
+      <span aria-hidden="true" class="text-text-muted-light dark:text-text-muted-dark">·</span>
+      <a
+        href="/faq"
+        class="font-heading font-bold text-text-light dark:text-text-dark hover:text-accent-yellow transition-colors focus-visible:outline-none focus-visible:shadow-[0_0_0_2px_var(--color-bg-light),0_0_0_6px_var(--color-text-light)] dark:focus-visible:shadow-[0_0_0_2px_var(--color-bg-dark),0_0_0_6px_var(--color-text-dark)]"
+      >
+        FAQ
+      </a>
+      <span aria-hidden="true" class="text-text-muted-light dark:text-text-muted-dark">·</span>
+      <a
+        href="/#contact"
+        class="font-heading font-bold text-text-light dark:text-text-dark hover:text-accent-yellow transition-colors focus-visible:outline-none focus-visible:shadow-[0_0_0_2px_var(--color-bg-light),0_0_0_6px_var(--color-text-light)] dark:focus-visible:shadow-[0_0_0_2px_var(--color-bg-dark),0_0_0_6px_var(--color-text-dark)]"
+      >
+        Contact
+      </a>
+    </nav>
+
+    <!-- Copyright (bottom, minimal weight) -->
     <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-      <!-- Copyright -->
       <p class="text-text-muted-light dark:text-text-muted-dark text-sm text-center md:text-left">
         &copy; {currentYear} Joel Shinness. All rights reserved.
       </p>
 
-      <!-- Built with credit -->
       <p class="text-text-muted-light dark:text-text-muted-dark text-sm text-center md:text-right">
         Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="text-accent-teal hover:text-accent-teal-hover transition-colors underline">Astro</a>
       </p>
     </div>
-
-    <!-- Social links -->
-    <div class="mt-6 flex justify-center gap-6">
-      <a
-        href="https://linkedin.com/in/joelshinness"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="LinkedIn (opens in new tab)"
-        class="social-link text-text-muted-light dark:text-text-muted-dark hover:text-turquoise transition-colors"
-      >
-        <Linkedin size={20} />
-      </a>
-      <a
-        href="https://github.com/joelshinness"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="GitHub (opens in new tab)"
-        class="social-link text-text-muted-light dark:text-text-muted-dark hover:text-turquoise transition-colors"
-      >
-        <Github size={20} />
-      </a>
-    </div>
   </div>
 </footer>
-
