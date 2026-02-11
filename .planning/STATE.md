@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-02-10)
 
 ## Current Position
 
-Phase: 20 of 22 (Contact Form Enhancement)
-Plan: 3 of 3 in current phase
+Phase: 21 of 22 (Navigation Cleanup)
+Plan: 1 of 1 in current phase
 Status: Phase complete
-Last activity: 2026-02-11 — Completed 20-03-PLAN.md (Homepage Contact Section Enhancement)
+Last activity: 2026-02-11 — Completed 21-01-PLAN.md (Simplified Navigation Structure)
 
-Progress: [██████████████████████████████] 95% (20 phases complete, 2 phases remaining)
+Progress: [███████████████████████████████] 96% (21 phases complete, 1 phase remaining)
 
 ## Milestone History
 
@@ -30,7 +30,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 62 (v1.0: 23, v1.1: 14, v1.2: 10, v1.3: 15)
+- Total plans completed: 63 (v1.0: 23, v1.1: 14, v1.2: 10, v1.3: 16)
 - Average duration: ~1-5 min/plan (recent trend)
 - Total execution time: ~5 days across 3 milestones
 
@@ -58,6 +58,9 @@ See `.planning/MILESTONES.md` for full milestone details.
 Key decisions are logged in PROJECT.md Key Decisions table.
 
 Recent decisions affecting v1.3:
+- **21-01**: Navigation order — Blog, Projects, FAQ, Contact (content pages first, action last for logical user flow)
+- **21-01**: Contact page deletion — File-based routes take precedence over redirects, so /contact.astro must be deleted for redirect to function
+- **21-01**: Footer FAQ removal — FAQ available in header nav, no need for footer duplication
 - **20-03**: ID prefixing strategy — Prefix homepage form field IDs with 'hp-' to avoid conflicts with /contact page when both exist in browser history
 - **20-03**: Inline script for homepage — Self-contained script block in ContactSection component instead of external JS file for better component encapsulation
 - **20-03**: Design system documentation completeness — Document all public components (CheckboxGroup added with 3 color variant demos)
@@ -143,10 +146,10 @@ Recent decisions affecting v1.3:
 ## Session Continuity
 
 Last session: 2026-02-11
-Stopped at: Completed 20-03-PLAN.md (Homepage Contact Section Enhancement)
+Stopped at: Completed 21-01-PLAN.md (Simplified Navigation Structure)
 Resume file: None
-Next action: Continue to Phase 21 (if exists) or complete v1.3 milestone
+Next action: Continue to Phase 22 (if exists) or complete v1.3 milestone
 
 ---
 *State initialized: 2026-01-26*
-*Last updated: 2026-02-11 (Completed 20-03: Homepage Contact Section Enhancement — Homepage contact form now mirrors /contact page with 8 lead qualification fields, n8n webhook integration, and CheckboxGroup documented in design system)*
+*Last updated: 2026-02-11 (Completed 21-01: Simplified Navigation Structure — Header navigation reduced to 4 links (Blog, Projects, FAQ, Contact), /contact redirects to /#contact, footer FAQ link removed)*
