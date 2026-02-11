@@ -12,7 +12,7 @@
   /* Dark mode variants (reduced L by 5%, reduced C by 0.02) */
   --color-yellow-dark: oklch(0.80 0.16 95);
   --color-turquoise-dark: oklch(0.65 0.13 195);
-  --color-magenta-dark: oklch(0.60 0.18 350);
+  --color-magenta-dark: oklch(0.63 0.18 350); /* Increased L from 0.60 to 0.63 for WCAG AA contrast */
 
   /* WCAG-compliant text variants for accessibility */
   --color-yellow-text: oklch(0.55 0.15 95); /* 3:1+ contrast on white for large text */
