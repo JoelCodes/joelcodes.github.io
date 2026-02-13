@@ -19,9 +19,9 @@ const {
 } = Astro.props;
 
 const variantClasses = {
-  yellow: 'bg-yellow text-text-light dark:bg-yellow-dark dark:text-text-light',
-  turquoise: 'bg-turquoise text-text-light dark:bg-turquoise-dark dark:text-text-light',
-  magenta: 'bg-magenta text-text-light dark:bg-magenta-dark dark:text-text-light'
+  yellow: 'bg-yellow text-text-light dark:bg-yellow-dark dark:text-text-dark',
+  turquoise: 'bg-turquoise text-text-light dark:bg-turquoise-dark dark:text-text-dark',
+  magenta: 'bg-magenta text-text-light dark:bg-magenta-dark dark:text-text-dark'
 };
 ---
 
@@ -42,7 +42,7 @@ const variantClasses = {
     {value}
   </span>
   {description && (
-    <span class="text-sm md:text-base font-body mt-1">
+    <span class="text-sm md:text-base font-body opacity-80 mt-1">
       {description}
     </span>
   )}
