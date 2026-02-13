@@ -58,29 +58,35 @@ const {
   .card-stacked::after {
     content: '';
     position: absolute;
-    inset: -4px;
-    border: 2px solid;
+    inset: 0;
+    border: 3px solid;
     border-radius: 0.5rem;
     z-index: -1;
+    background: var(--color-bg-light);
   }
 
   .card-stacked::before {
     transform: translate(4px, 4px);
-    border-color: oklch(0.25 0 0 / 0.6); /* 60% opacity black - closer */
+    border-color: oklch(0.25 0 0 / 0.8); /* 80% opacity black - closer layer */
   }
 
   .card-stacked::after {
     transform: translate(8px, 8px);
-    border-color: oklch(0.25 0 0 / 0.3); /* 30% opacity black - further */
+    border-color: oklch(0.25 0 0 / 0.5); /* 50% opacity black - further layer */
     box-shadow: 4px 4px 0 var(--card-shadow);
   }
 
+  :global(.dark) .card-stacked::before,
+  :global(.dark) .card-stacked::after {
+    background: var(--color-bg-dark);
+  }
+
   :global(.dark) .card-stacked::before {
-    border-color: oklch(0.95 0 0 / 0.6); /* 60% opacity white - closer */
+    border-color: oklch(0.95 0 0 / 0.8); /* 80% opacity white - closer layer */
   }
 
   :global(.dark) .card-stacked::after {
-    border-color: oklch(0.95 0 0 / 0.3); /* 30% opacity white - further */
+    border-color: oklch(0.95 0 0 / 0.5); /* 50% opacity white - further layer */
     box-shadow: none; /* Remove offset shadow in dark mode */
   }
 </style>
