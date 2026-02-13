@@ -9,9 +9,9 @@ See: .planning/PROJECT.md (updated 2026-02-11)
 
 ## Current Position
 
-Milestone: v1.3 shipped
-Status: Ready for next milestone
-Last activity: 2026-02-11 — Shipped v1.3 Design System & Navigation Cleanup
+Milestone: v1.3 in progress
+Status: UAT gap closure
+Last activity: 2026-02-13 — Completed 17-06 Badge Readability Fix
 
 Progress: 4 milestones shipped (v1.0, v1.1, v1.2, v1.3)
 
@@ -22,14 +22,14 @@ Progress: 4 milestones shipped (v1.0, v1.1, v1.2, v1.3)
 | v1.0 | MVP | 1-6 | 2026-01-27 |
 | v1.1 | Design Updates | 7-11 | 2026-02-10 |
 | v1.2 | Homepage Refinement | 12-16 | 2026-02-10 |
-| v1.3 | Design System & Nav Cleanup | 17-22 | 2026-02-11 |
+| v1.3 | Design System & Nav Cleanup | 17-22 | 2026-02-13 |
 
 See `.planning/MILESTONES.md` for full milestone details.
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 64 (v1.0: 23, v1.1: 14, v1.2: 10, v1.3: 17)
+- Total plans completed: 65 (v1.0: 23, v1.1: 14, v1.2: 10, v1.3: 18)
 - Average duration: ~1-5 min/plan (recent trend)
 - Total execution time: ~5 days across 3 milestones
 
@@ -40,7 +40,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 | v1.0 MVP | 1-6 | 23 | 2 days |
 | v1.1 Design Updates | 7-11 | 14 | 2 days |
 | v1.2 Homepage Refinement | 12-16 | 10 | 1 day |
-| v1.3 Design System & Nav | 17-22 | 17 | 2 days |
+| v1.3 Design System & Nav | 17-22 | 18 | 2 days |
 
 **Recent Trend:**
 - v1.0: 2 days for 23 plans (foundational work)
@@ -57,6 +57,8 @@ See `.planning/MILESTONES.md` for full milestone details.
 Key decisions are logged in PROJECT.md Key Decisions table.
 
 Recent decisions affecting v1.3:
+- **17-06**: Badge dark mode text inversion — Use `dark:text-text-dark` instead of `dark:text-text-light` for proper contrast on colored backgrounds
+- **17-06**: Badge description opacity — Use `opacity-80` instead of muted color class for better color inheritance on backgrounds
 - **22-01**: Social icon package — simple-icons-astro chosen over Lucide (Lucide Instagram is deprecated)
 - **22-01**: Footer visual hierarchy — Social icons at top (most prominent), navigation middle, copyright bottom (minimal weight)
 - **22-01**: Social icon touch targets — 24px visual size with 44x44px clickable area for WCAG 2.5.5 compliance
@@ -164,11 +166,11 @@ Recent decisions affecting v1.3:
 
 ## Session Continuity
 
-Last session: 2026-02-11
-Stopped at: Shipped v1.3 milestone
+Last session: 2026-02-13
+Stopped at: Completed 17-06-PLAN.md
 Resume file: None
-Next action: `/gsd:new-milestone` to start v1.4 planning
+Next action: Continue UAT gap closure plans (17-07, 17-08, 17-09)
 
 ---
 *State initialized: 2026-01-26*
-*Last updated: 2026-02-11 (Shipped v1.3: Design System & Navigation Cleanup — 6 phases, 17 plans, 23 requirements delivered)*
+*Last updated: 2026-02-13 (Completed 17-06: Badge Readability Fix — UAT gap closure in progress)*
