@@ -11,7 +11,7 @@ See: .planning/PROJECT.md (updated 2026-02-11)
 
 Milestone: v1.3 in progress
 Status: UAT gap closure
-Last activity: 2026-02-13 — Completed 17-07 Code Block Padding Enhancement
+Last activity: 2026-02-13 — Completed 17-08 Stacked Card Isolation Fix
 
 Progress: 4 milestones shipped (v1.0, v1.1, v1.2, v1.3)
 
@@ -57,6 +57,9 @@ See `.planning/MILESTONES.md` for full milestone details.
 Key decisions are logged in PROJECT.md Key Decisions table.
 
 Recent decisions affecting v1.3:
+- **17-08**: Stacked card inset positioning — Changed inset from -4px to 0 for proper pseudo-element layer visibility
+- **17-08**: Stacked card solid backgrounds — Added matching background fills to pseudo-elements for true stacked paper effect
+- **17-08**: Stacked card border opacity — Increased from 60%/30% to 80%/50% for better contrast on light/dark backgrounds
 - **17-07**: Code block padding enhancement — Increased padding from 1rem to 1.25rem for better readability and breathing room
 - **17-07**: Code block overflow handling — Added overflow-x auto and border-radius for visual polish and proper horizontal scroll
 - **17-06**: Badge dark mode text inversion — Use `dark:text-text-dark` instead of `dark:text-text-light` for proper contrast on colored backgrounds
@@ -169,10 +172,10 @@ Recent decisions affecting v1.3:
 ## Session Continuity
 
 Last session: 2026-02-13
-Stopped at: Completed 17-07-PLAN.md
+Stopped at: Completed 17-08-PLAN.md
 Resume file: None
-Next action: Continue UAT gap closure plans (17-08, 17-09)
+Next action: Continue UAT gap closure plans (17-09 if exists)
 
 ---
 *State initialized: 2026-01-26*
-*Last updated: 2026-02-13 (Completed 17-07: Code Block Padding Enhancement — UAT gap closure in progress)*
+*Last updated: 2026-02-13 (Completed 17-08: Stacked Card Isolation Fix — UAT gap closure in progress)*
