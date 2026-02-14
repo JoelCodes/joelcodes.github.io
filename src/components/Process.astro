@@ -1,5 +1,5 @@
 ---
-// Process component - 5-step vertical timeline showing collaborative workflow
+// Process component - 5-step workflow showing collaborative process
 import ProcessDiscovery from './illustrations/ProcessDiscovery.svg';
 import ProcessPrototype from './illustrations/ProcessPrototype.svg';
 import ProcessProposal from './illustrations/ProcessProposal.svg';
@@ -7,91 +7,86 @@ import ProcessBuild from './illustrations/ProcessBuild.svg';
 import ProcessHandover from './illustrations/ProcessHandover.svg';
 ---
 
-<section id="process" aria-labelledby="process-heading" class="py-24 md:py-32 px-4">
-  <div class="container mx-auto max-w-4xl">
+<section id="process" aria-labelledby="process-heading" class="py-24 md:py-32 px-6">
+  <div class="container mx-auto max-w-6xl">
     <h2 id="process-heading" class="font-heading text-4xl font-bold text-text-light dark:text-text-dark mb-12 text-center">
       How We Work Together
     </h2>
 
-    <div class="flex flex-col gap-8">
-      <!-- Step 1: Discovery -->
-      <article class="relative pl-24 md:pl-32 pb-8 border-l-[4px] border-turquoise">
-        <div class="absolute left-0 top-0 -ml-4.5 w-8 h-8 rounded-full bg-turquoise flex items-center justify-center border-[3px] border-text-light dark:border-text-dark">
-          <span class="font-heading text-lg font-bold text-bg-light">1</span>
-        </div>
-        <div class="absolute left-8 md:left-10 top-0 text-yellow iso-shadow-sm rounded">
+    <div class="flex flex-col gap-8 max-w-2xl mx-auto">
+      <!-- Discovery -->
+      <article class="flex gap-6 items-start">
+        <div class="text-yellow iso-shadow-sm rounded flex-shrink-0">
           <ProcessDiscovery class="w-12 h-12 md:w-16 md:h-16" />
         </div>
-        <h3 class="font-heading text-2xl font-semibold text-text-light dark:text-text-dark mb-3">
-          Discovery
-        </h3>
-        <p class="text-text-muted-light dark:text-text-muted-dark leading-relaxed max-w-xl">
-          We start by understanding your specific workflow challenges and business goals through a collaborative discovery session.
-        </p>
+        <div>
+          <h3 class="font-heading text-2xl font-semibold text-text-light dark:text-text-dark mb-2">
+            Discovery
+          </h3>
+          <p class="text-text-muted-light dark:text-text-muted-dark leading-relaxed">
+            We start by understanding your workflow challenges and business goals.
+          </p>
+        </div>
       </article>
 
-      <!-- Step 2: Prototype -->
-      <article class="relative pl-24 md:pl-32 pb-8 border-l-[4px] border-turquoise">
-        <div class="absolute left-0 top-0 -ml-4.5 w-8 h-8 rounded-full bg-turquoise flex items-center justify-center border-[3px] border-text-light dark:border-text-dark">
-          <span class="font-heading text-lg font-bold text-bg-light">2</span>
-        </div>
-        <div class="absolute left-8 md:left-10 top-0 text-turquoise iso-shadow-sm rounded">
+      <!-- Prototype -->
+      <article class="flex gap-6 items-start">
+        <div class="text-turquoise iso-shadow-sm rounded flex-shrink-0">
           <ProcessPrototype class="w-12 h-12 md:w-16 md:h-16" />
         </div>
-        <h3 class="font-heading text-2xl font-semibold text-text-light dark:text-text-dark mb-3">
-          Prototype
-        </h3>
-        <p class="text-text-muted-light dark:text-text-muted-dark leading-relaxed max-w-xl">
-          You'll see a working demo of the solution before committing, so you can validate the approach and provide feedback early.
-        </p>
+        <div>
+          <h3 class="font-heading text-2xl font-semibold text-text-light dark:text-text-dark mb-2">
+            Prototype
+          </h3>
+          <p class="text-text-muted-light dark:text-text-muted-dark leading-relaxed">
+            You'll see a working demo before committing, so you can validate the approach early.
+          </p>
+        </div>
       </article>
 
-      <!-- Step 3: Proposal -->
-      <article class="relative pl-24 md:pl-32 pb-8 border-l-[4px] border-turquoise">
-        <div class="absolute left-0 top-0 -ml-4.5 w-8 h-8 rounded-full bg-turquoise flex items-center justify-center border-[3px] border-text-light dark:border-text-dark">
-          <span class="font-heading text-lg font-bold text-bg-light">3</span>
-        </div>
-        <div class="absolute left-8 md:left-10 top-0 text-magenta iso-shadow-sm rounded">
+      <!-- Proposal -->
+      <article class="flex gap-6 items-start">
+        <div class="text-magenta iso-shadow-sm rounded flex-shrink-0">
           <ProcessProposal class="w-12 h-12 md:w-16 md:h-16" />
         </div>
-        <h3 class="font-heading text-2xl font-semibold text-text-light dark:text-text-dark mb-3">
-          Proposal
-        </h3>
-        <p class="text-text-muted-light dark:text-text-muted-dark leading-relaxed max-w-xl">
-          We outline the project scope, timeline, and investment clearly so you can make an informed decision with no surprises.
-        </p>
+        <div>
+          <h3 class="font-heading text-2xl font-semibold text-text-light dark:text-text-dark mb-2">
+            Proposal
+          </h3>
+          <p class="text-text-muted-light dark:text-text-muted-dark leading-relaxed">
+            We outline scope, timeline, and investment clearly—no surprises.
+          </p>
+        </div>
       </article>
 
-      <!-- Step 4: Build -->
-      <article class="relative pl-24 md:pl-32 pb-8 border-l-[4px] border-turquoise">
-        <div class="absolute left-0 top-0 -ml-4.5 w-8 h-8 rounded-full bg-turquoise flex items-center justify-center border-[3px] border-text-light dark:border-text-dark">
-          <span class="font-heading text-lg font-bold text-bg-light">4</span>
-        </div>
-        <div class="absolute left-8 md:left-10 top-0 text-yellow iso-shadow-sm rounded">
+      <!-- Build -->
+      <article class="flex gap-6 items-start">
+        <div class="text-yellow iso-shadow-sm rounded flex-shrink-0">
           <ProcessBuild class="w-12 h-12 md:w-16 md:h-16" />
         </div>
-        <h3 class="font-heading text-2xl font-semibold text-text-light dark:text-text-dark mb-3">
-          Build
-        </h3>
-        <p class="text-text-muted-light dark:text-text-muted-dark leading-relaxed max-w-xl">
-          Your solution takes shape with regular updates keeping you in the loop throughout the development process.
-        </p>
+        <div>
+          <h3 class="font-heading text-2xl font-semibold text-text-light dark:text-text-dark mb-2">
+            Build
+          </h3>
+          <p class="text-text-muted-light dark:text-text-muted-dark leading-relaxed">
+            Your solution takes shape with regular updates keeping you in the loop.
+          </p>
+        </div>
       </article>
 
-      <!-- Step 5: Handover -->
-      <article class="relative pl-24 md:pl-32 border-l-[4px] border-turquoise">
-        <div class="absolute left-0 top-0 -ml-4.5 w-8 h-8 rounded-full bg-turquoise flex items-center justify-center border-[3px] border-text-light dark:border-text-dark">
-          <span class="font-heading text-lg font-bold text-bg-light">5</span>
-        </div>
-        <div class="absolute left-8 md:left-10 top-0 text-turquoise iso-shadow-sm rounded">
+      <!-- Handover -->
+      <article class="flex gap-6 items-start">
+        <div class="text-turquoise iso-shadow-sm rounded flex-shrink-0">
           <ProcessHandover class="w-12 h-12 md:w-16 md:h-16" />
         </div>
-        <h3 class="font-heading text-2xl font-semibold text-text-light dark:text-text-dark mb-3">
-          Handover
-        </h3>
-        <p class="text-text-muted-light dark:text-text-muted-dark leading-relaxed max-w-xl">
-          We deploy your solution and provide training so you feel confident using it from day one.
-        </p>
+        <div>
+          <h3 class="font-heading text-2xl font-semibold text-text-light dark:text-text-dark mb-2">
+            Handover
+          </h3>
+          <p class="text-text-muted-light dark:text-text-muted-dark leading-relaxed">
+            We deploy and provide training so you feel confident from day one.
+          </p>
+        </div>
       </article>
     </div>
   </div>

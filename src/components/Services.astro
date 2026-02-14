@@ -2,22 +2,31 @@
 // Services component: Three equal service cards with descriptions and examples
 import Card from './ui/Card.astro';
 import Button from './ui/Button.astro';
+import TechWebApps from './illustrations/TechWebApps.svg';
+import TechAutomations from './illustrations/TechAutomations.svg';
+import TechAI from './illustrations/TechAI.svg';
 
 const services = [
   {
-    title: "Web Apps",
-    description: "Custom applications built for your exact workflow.",
-    example: "Like a custom CRM for your sales team"
+    title: "AI Development",
+    description: "Intelligent features that enhance your product.",
+    Icon: TechAI,
+    variant: "yellow" as const,
+    circleClass: "bg-bg-light dark:bg-bg-dark shadow-neo-yellow"
   },
   {
     title: "Automation",
     description: "Connect your tools and eliminate manual work.",
-    example: "Like syncing orders to your fulfillment system"
+    Icon: TechAutomations,
+    variant: "turquoise" as const,
+    circleClass: "bg-bg-light dark:bg-bg-dark shadow-neo-turquoise"
   },
   {
-    title: "AI Development",
-    description: "Intelligent features that enhance your product.",
-    example: "Like smart document processing for your team"
+    title: "Web Apps",
+    description: "Custom applications built for your exact workflow.",
+    Icon: TechWebApps,
+    variant: "magenta" as const,
+    circleClass: "bg-bg-light dark:bg-bg-dark shadow-neo-magenta"
   }
 ];
 ---
@@ -27,19 +36,27 @@ const services = [
     <h2 id="solutions-heading" class="font-heading font-bold text-3xl md:text-4xl mb-8 text-center text-text-light dark:text-text-dark">
       Solutions That Fit
     </h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 pt-10">
       {services.map(service => (
-        <Card variant="yellow">
-          <h3 class="font-heading text-xl md:text-2xl font-semibold mb-3">
-            {service.title}
-          </h3>
-          <p class="font-body text-base mb-3">
-            {service.description}
-          </p>
-          <p class="font-body text-sm italic text-text-muted-light dark:text-text-muted-dark">
-            {service.example}
-          </p>
-        </Card>
+        <div class="service-card-wrapper relative">
+          <!-- Icon circle positioned on top edge -->
+          <div class:list={[
+            "absolute left-1/2 -translate-x-1/2 -top-10 z-10",
+            "w-20 h-20 rounded-full flex items-center justify-center",
+            "border-[3px] border-text-light dark:border-text-dark",
+            service.circleClass
+          ]}>
+            <service.Icon class="w-14 h-14" />
+          </div>
+          <Card variant={service.variant} class="text-center">
+            <h3 class="font-heading text-xl md:text-2xl font-semibold mb-3 mt-8">
+              {service.title}
+            </h3>
+            <p class="font-body text-base">
+              {service.description}
+            </p>
+          </Card>
+        </div>
       ))}
     </div>
     <div class="text-center">
