@@ -88,7 +88,7 @@ import CheckboxGroup from '../ui/CheckboxGroup.astro';
               id="hp-challenges"
               name="challenges"
               rows={4}
-              placeholder="What challenge are you facing? What's your timeline?"
+              placeholder="What problems are slowing you down, causing headaches, or just keeping you from doing the work you love?"
             />
           </div>
 
@@ -109,7 +109,7 @@ import CheckboxGroup from '../ui/CheckboxGroup.astro';
           <!-- Budget field (Optional) -->
           <div>
             <label for="hp-budget" class="block font-body font-medium mb-2 text-text-light dark:text-text-dark">
-              Budget <span class="text-text-muted-light dark:text-text-muted-dark text-sm">(optional)</span>
+              Do you have a budget in mind? <span class="text-text-muted-light dark:text-text-muted-dark text-sm">(optional)</span>
             </label>
             <Input
               as="select"
@@ -129,7 +129,7 @@ import CheckboxGroup from '../ui/CheckboxGroup.astro';
           <!-- Timeline field (Optional) -->
           <div>
             <label for="hp-timeline" class="block font-body font-medium mb-2 text-text-light dark:text-text-dark">
-              Timeline <span class="text-text-muted-light dark:text-text-muted-dark text-sm">(optional)</span>
+              Do you have a timeline in mind? <span class="text-text-muted-light dark:text-text-muted-dark text-sm">(optional)</span>
             </label>
             <Input
               as="select"
@@ -148,16 +148,15 @@ import CheckboxGroup from '../ui/CheckboxGroup.astro';
           <!-- Message field -->
           <div>
             <label for="hp-message" class="block font-body font-medium mb-2 text-text-light dark:text-text-dark">
-              Message <span class="text-red-600">*</span>
+              Message <span class="text-text-muted-light dark:text-text-muted-dark text-sm">(optional)</span>
             </label>
             <Input
               as="textarea"
               variant="turquoise"
               id="hp-message"
               name="message"
-              required
               rows={6}
-              placeholder="Tell me more about your project..."
+              placeholder="Anything else you'd like to share about your project, goals, or how I can help?"
             />
             <span id="hp-message-error" class="block text-sm text-red-600 mt-1 min-h-5" aria-live="polite"></span>
           </div>
@@ -179,24 +178,25 @@ import CheckboxGroup from '../ui/CheckboxGroup.astro';
         </form>
       </div>
 
-      <!-- Right: Alternative contact -->
+      <!-- Right: Schedule a call -->
       <div>
         <Card variant="turquoise">
           <h3 class="font-heading font-bold text-xl mb-3 text-text-light dark:text-text-dark">
-            Prefer Email?
+            Ready to chat?
           </h3>
           <p class="mb-4 text-text-light dark:text-text-dark">
-            Reach me directly at:
+            Schedule a discovery call with me directly!
           </p>
           <a
-            href="mailto:joel@joelshinness.com"
-            class="text-lg font-semibold text-turquoise-text hover:underline break-all"
+            href="https://calendly.com/me--juoi/discovery-call"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-block"
           >
-            joel@joelshinness.com
+            <Button variant="turquoise">
+              Book a Call
+            </Button>
           </a>
-          <p class="mt-4 text-sm text-text-muted-light dark:text-text-muted-dark">
-            I respond to every message within 48 hours.
-          </p>
         </Card>
       </div>
     </div>
