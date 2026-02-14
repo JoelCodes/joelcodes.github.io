@@ -3,7 +3,6 @@
 import Button from './ui/Button.astro';
 
 interface Outcome {
-  icon: string;
   title: string;
   description: string;
   variant: 'yellow' | 'turquoise' | 'magenta';
@@ -13,41 +12,36 @@ interface Outcome {
 
 const outcomes: Outcome[] = [
   {
-    icon: '⏱',
-    title: 'Hours back',
-    description: 'Stop doing the same thing twice',
+    title: 'Time & Money Saved',
+    description: 'Automate repetitive tasks and cut operational costs. Spend less time on busywork and more on growth.',
     variant: 'yellow',
     delay: '0.5s',
     gridArea: 'hours'
   },
   {
-    icon: '💰',
-    title: 'Costs cut',
-    description: 'Automate expensive manual work',
+    title: 'Integration Between Systems',
+    description: 'Connect your tools so data flows seamlessly. No more copying between spreadsheets or juggling logins.',
     variant: 'turquoise',
     delay: '0.65s',
     gridArea: 'costs'
   },
   {
-    icon: '🔍',
-    title: 'See clearly',
-    description: "Know what's happening, when",
+    title: 'Insight Into Your Business',
+    description: 'See what\'s happening across your operations in real time. Make decisions based on data, not guesswork.',
     variant: 'magenta',
     delay: '0.8s',
     gridArea: 'see'
   },
   {
-    icon: '🔗',
-    title: 'Works with you',
-    description: 'Connects to tools you already use',
+    title: 'Communication With Clients & Partners',
+    description: 'Keep everyone in the loop automatically. Updates, notifications, and reports that send themselves.',
     variant: 'yellow',
     delay: '0.95s',
     gridArea: 'works'
   },
   {
-    icon: '🚀',
-    title: 'Focus on growth',
-    description: 'Spend time on what actually matters',
+    title: 'Focus On What\'s Important',
+    description: 'Let software handle the routine so you can focus on strategy, relationships, and the work that matters.',
     variant: 'turquoise',
     delay: '1.1s',
     gridArea: 'focus'
@@ -67,7 +61,6 @@ const outcomes: Outcome[] = [
         style={`--delay: ${outcome.delay}; grid-area: ${outcome.gridArea};`}
         data-variant={outcome.variant}
       >
-        <span class="tile-icon" aria-hidden="true">{outcome.icon}</span>
         <h3 class="tile-title">{outcome.title}</h3>
         <p class="tile-description">{outcome.description}</p>
       </div>
@@ -111,7 +104,6 @@ const outcomes: Outcome[] = [
           style={`--delay: ${outcome.delay};`}
           data-variant={outcome.variant}
         >
-          <span class="tile-icon-mobile" aria-hidden="true">{outcome.icon}</span>
           <h3 class="tile-title-mobile">{outcome.title}</h3>
           <p class="tile-description-mobile">{outcome.description}</p>
         </div>
@@ -405,13 +397,6 @@ const outcomes: Outcome[] = [
     transform: translateX(4px);
   }
 
-  .tile-icon {
-    display: block;
-    font-size: 1.75rem;
-    margin-bottom: 0.5rem;
-    line-height: 1;
-  }
-
   .tile-title {
     font-family: var(--font-heading);
     font-size: 1.125rem;
@@ -471,12 +456,6 @@ const outcomes: Outcome[] = [
   }
   :global(.dark) [data-variant="magenta"].outcome-tile-mobile {
     box-shadow: 0 0 15px color-mix(in oklch, var(--color-magenta-dark) 50%, transparent);
-  }
-
-  .tile-icon-mobile {
-    font-size: 1.5rem;
-    display: block;
-    margin-bottom: 0.25rem;
   }
 
   .tile-title-mobile {
