@@ -3,6 +3,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import Button from '../../components/ui/Button.astro';
 import projects from '../../data/projects.json';
+
+// Filter out draft projects for the public listing
+const publishedProjects = projects.filter((project) => !project.draft);
 ---
 
 <BaseLayout
@@ -20,70 +23,97 @@ import projects from '../../data/projects.json';
         </p>
       </header>
 
-      <!-- Filter buttons -->
-      <div class="flex flex-wrap justify-center gap-3 mb-12" id="filter-container">
-        <Button
-          variant="yellow"
-          size="md"
-          data-filter="all"
-          data-active="true"
-          class="filter-btn rounded-full"
-        >
-          All Projects
-        </Button>
-        <Button
-          variant="outline"
-          size="md"
-          data-filter="web-apps"
-          class="filter-btn rounded-full"
-        >
-          Web Apps
-        </Button>
-        <Button
-          variant="outline"
-          size="md"
-          data-filter="automation"
-          class="filter-btn rounded-full"
-        >
-          Automation
-        </Button>
-        <Button
-          variant="outline"
-          size="md"
-          data-filter="ai-dev"
-          class="filter-btn rounded-full"
-        >
-          AI Development
-        </Button>
-      </div>
+      {publishedProjects.length > 0 ? (
+        <>
+          <!-- Filter buttons -->
+          <div class="flex flex-wrap justify-center gap-3 mb-12" id="filter-container">
+            <Button
+              variant="yellow"
+              size="md"
+              data-filter="all"
+              data-active="true"
+              class="filter-btn rounded-full"
+            >
+              All Projects
+            </Button>
+            <Button
+              variant="outline"
+              size="md"
+              data-filter="web-apps"
+              class="filter-btn rounded-full"
+            >
+              Web Apps
+            </Button>
+            <Button
+              variant="outline"
+              size="md"
+              data-filter="automation"
+              class="filter-btn rounded-full"
+            >
+              Automation
+            </Button>
+            <Button
+              variant="outline"
+              size="md"
+              data-filter="ai-dev"
+              class="filter-btn rounded-full"
+            >
+              AI Development
+            </Button>
+          </div>
 
-      <!-- Projects grid -->
-      <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projects.map((project) => (
-          <article class={`project-card show`} data-category={project.category}>
-            <ProjectCard
-              title={project.title}
-              slug={project.slug}
-              thumbnail={project.thumbnail}
-              category={project.category}
-              categoryLabel={project.categoryLabel}
-              problem={project.problem}
-            />
-          </article>
-        ))}
-      </section>
+          <!-- Projects grid -->
+          <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid">
+            {publishedProjects.map((project) => (
+              <article class={`project-card show`} data-category={project.category}>
+                <ProjectCard
+                  title={project.title}
+                  slug={project.slug}
+                  thumbnail={project.thumbnail}
+                  category={project.category}
+                  categoryLabel={project.categoryLabel}
+                  problem={project.problem}
+                />
+              </article>
+            ))}
+          </section>
+
+          <!-- Empty state for filtered results -->
+          <p id="no-projects-message" class="hidden text-center text-2xl md:text-3xl font-bold text-text-muted-light dark:text-text-muted-dark py-12">
+            No projects in this category yet. Check back soon!
+          </p>
+        </>
+      ) : (
+        <!-- Coming Soon message -->
+        <p class="text-center text-2xl md:text-3xl font-bold text-text-muted-light dark:text-text-muted-dark py-12">
+          Coming soon! I'm currently working on some exciting projects. Check back soon to see case studies of my work.
+        </p>
+      )}
     </div>
   </main>
 
   <script is:inline>
     function filterSelection(category) {
       const cards = document.getElementsByClassName('project-card');
+      let visibleCount = 0;
       for (let i = 0; i < cards.length; i++) {
         cards[i].classList.remove('show');
         const cardCategory = cards[i].getAttribute('data-category');
         if (category === 'all' || cardCategory === category) {
           cards[i].classList.add('show');
+          visibleCount++;
         }
+      }
+
+      // Show/hide empty state message
+      const emptyMessage = document.getElementById('no-projects-message');
+      const projectsGrid = document.getElementById('projects-grid');
+      if (visibleCount === 0) {
+        emptyMessage.classList.remove('hidden');
+        projectsGrid.classList.add('hidden');
+      } else {
+        emptyMessage.classList.add('hidden');
+        projectsGrid.classList.remove('hidden');
       }
     }
 

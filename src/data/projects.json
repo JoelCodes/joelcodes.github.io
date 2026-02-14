@@ -21,6 +21,32 @@
       "quote": "This system gave me my evenings back. I used to stay up until midnight organizing orders. Now everything's done automatically, and I can focus on baking.",
       "author": "Sarah Johnson",
       "role": "Owner, Sweet Delights Bakery"
-    }
+    },
+    "draft": true
+  },
+  {
+    "slug": "inventory-sync-automation",
+    "title": "Multi-Channel Inventory Sync",
+    "category": "automation",
+    "categoryLabel": "Automation",
+    "thumbnail": "/images/portfolio/inventory-thumb.jpg",
+    "problem": "A growing e-commerce retailer was selling on Amazon, Shopify, and eBay simultaneously. Inventory counts were updated manually across platforms, leading to overselling, angry customers, and hours of daily reconciliation work.",
+    "solution": "We built an automation that syncs inventory levels in real-time across all sales channels. When a sale happens on any platform, stock counts update everywhere within seconds. The system also alerts the team when items run low and generates reorder reports automatically.",
+    "results": [
+      { "metric": "100%", "label": "Reduction in overselling incidents" },
+      { "metric": "15hrs", "label": "Saved weekly on manual updates" },
+      { "metric": "3x", "label": "Increase in sales capacity" }
+    ],
+    "technologies": ["n8n", "REST APIs", "PostgreSQL", "Slack Integration"],
+    "screenshots": [
+      { "src": "/images/portfolio/inventory-dashboard.jpg", "alt": "Real-time inventory dashboard" },
+      { "src": "/images/portfolio/inventory-alerts.jpg", "alt": "Low stock alert system" }
+    ],
+    "testimonial": {
+      "quote": "We went from constant fires and customer complaints to smooth operations overnight. This automation paid for itself in the first week.",
+      "author": "Marcus Chen",
+      "role": "Operations Manager, TrendGoods Co."
+    },
+    "draft": true
   }
 ]

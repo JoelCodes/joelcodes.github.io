@@ -14,6 +14,9 @@ const { project } = Astro.props;
 ---
 
 <BaseLayout title={`${project.title} - Case Study | Joel Shinness`} description={project.problem}>
+  {project.draft && (
+    <meta slot="head" name="robots" content="noindex, nofollow" />
+  )}
   <article class="py-16 px-4">
     <div class="max-w-4xl mx-auto">
       <!-- Back navigation -->
