@@ -42,7 +42,7 @@ import CheckboxGroup from '../ui/CheckboxGroup.astro';
               autocomplete="name"
               placeholder="Your name"
             />
-            <span id="hp-name-error" class="block text-sm text-red-600 mt-1 min-h-5" aria-live="polite"></span>
+            <span id="hp-name-error" class="block text-sm text-red-600 mt-1 empty:hidden" aria-live="polite"></span>
           </div>
 
           <!-- Email field -->
@@ -59,7 +59,7 @@ import CheckboxGroup from '../ui/CheckboxGroup.astro';
               autocomplete="email"
               placeholder="you@example.com"
             />
-            <span id="hp-email-error" class="block text-sm text-red-600 mt-1 min-h-5" aria-live="polite"></span>
+            <span id="hp-email-error" class="block text-sm text-red-600 mt-1 empty:hidden" aria-live="polite"></span>
           </div>
 
           <!-- Company field (Optional) -->
@@ -158,7 +158,7 @@ import CheckboxGroup from '../ui/CheckboxGroup.astro';
               rows={6}
               placeholder="Anything else you'd like to share about your project, goals, or how I can help?"
             />
-            <span id="hp-message-error" class="block text-sm text-red-600 mt-1 min-h-5" aria-live="polite"></span>
+            <span id="hp-message-error" class="block text-sm text-red-600 mt-1 empty:hidden" aria-live="polite"></span>
           </div>
 
           <!-- Form Error Message Container -->
