@@ -1,41 +1,497 @@
 ---
-// Hero component: Outcome-focused value proposition with trust badges
+// HeroV2: Bento grid with centered headline and asymmetric outcome tiles
 import Button from './ui/Button.astro';
-import Badge from './ui/Badge.astro';
+
+interface Outcome {
+  title: string;
+  description: string;
+  variant: 'yellow' | 'turquoise' | 'magenta';
+  delay: string;
+  gridArea: string;
+}
+
+const outcomes: Outcome[] = [
+  {
+    title: 'Time & Money Saved',
+    description: 'How often have you thought, "There\'s got to be a better way!?" We can give you time back, reduce errors, and save you money.',
+    variant: 'yellow',
+    delay: '0.5s',
+    gridArea: 'hours'
+  },
+  {
+    title: 'Integration Between Systems',
+    description: 'No one wants one more app or webpage to deal with. We integrate with the apps you already use, letting you get more done.',
+    variant: 'turquoise',
+    delay: '0.65s',
+    gridArea: 'costs'
+  },
+  {
+    title: 'Insight Into Your Business',
+    description: 'When everything\'s everywhere, it\'s hard to know what\'s important. Let\'s put what matters back at your fingertips.',
+    variant: 'magenta',
+    delay: '0.8s',
+    gridArea: 'see'
+  },
+  {
+    title: 'Timely Communication',
+    description: 'Respond nimbly to clients, send emails when problems arise, and use just the right amount of AI until a human\'s available.',
+    variant: 'yellow',
+    delay: '0.95s',
+    gridArea: 'works'
+  },
+  {
+    title: 'Focus On What Matters',
+    description: 'Focus on customers, improve processes, or experiment with your next big idea. You have important work to do—leave the busy work to us.',
+    variant: 'turquoise',
+    delay: '1.1s',
+    gridArea: 'focus'
+  }
+];
 ---
 
-<section id="hero" class="hero min-h-[80vh] flex items-center justify-center px-6 py-24 md:py-32">
-  <div class="container max-w-4xl mx-auto text-center">
-    <div class="border-[3px] border-text-light dark:border-text-dark p-6 md:p-8 inline-block iso-shadow mb-8 bg-yellow dark:bg-yellow-dark" role="group" aria-label="Main value proposition">
-      <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase text-text-light dark:text-text-light">
-        Save 500+ hours on repetitive tasks
+<section id="hero" class="hero-v2 min-h-[100vh] flex items-center justify-center px-4 md:px-8 py-16 md:py-24">
+
+  <!-- Desktop: Bento Grid -->
+  <div class="bento-grid" aria-label="Hero with key outcomes">
+
+    <!-- Outcome tiles -->
+    {outcomes.map((outcome) => (
+      <div
+        class="bento-tile"
+        style={`--delay: ${outcome.delay}; grid-area: ${outcome.gridArea};`}
+        data-variant={outcome.variant}
+      >
+        <h3 class="tile-title">{outcome.title}</h3>
+        <p class="tile-description">{outcome.description}</p>
+      </div>
+    ))}
+
+    <!-- Center: Main headline -->
+    <div class="bento-center" style="grid-area: main;">
+      <h1 class="font-heading text-4xl xl:text-5xl font-bold uppercase leading-tight text-text-light dark:text-text-dark animate-fade-in">
+        Your business needs more than software, it needs<span class="text-yellow-text dark:text-yellow-text-dark">...</span>
       </h1>
     </div>
-    <p class="font-body text-xl md:text-2xl mb-8 text-text-muted-light dark:text-text-muted-dark max-w-2xl mx-auto">
-      Custom automation that works exactly how your team works
-    </p>
-    <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-4 sm:gap-6 mb-8">
-      <Badge
-        label="Time saved by clients"
-        value="500+ hours"
-        description="saved per year"
-        variant="yellow"
-      />
-      <Badge
-        label="Customer satisfaction rate"
-        value="100%"
-        description="satisfied clients"
-        variant="turquoise"
-      />
-      <Badge
-        label="Projects delivered"
-        value="12+"
-        description="projects delivered"
-        variant="magenta"
-      />
+
+    <!-- Bottom right: CTA -->
+    <a href="#contact" class="bento-cta animate-fade-in" style="grid-area: cta; --delay: 1.25s;">
+      <div class="cta-content">
+        <span class="cta-subtext">Ready to get started?</span>
+        <span class="cta-text">Let's talk!</span>
+      </div>
+      <span class="cta-arrow" aria-hidden="true">→</span>
+    </a>
+  </div>
+
+  <!-- Mobile/Tablet: Stacked layout -->
+  <div class="mobile-layout flex flex-col items-center w-full max-w-lg mx-auto">
+
+    <!-- Headline first -->
+    <div class="text-center mb-10 px-2">
+      <h1 class="font-heading text-3xl md:text-4xl font-bold uppercase leading-tight text-text-light dark:text-text-dark animate-fade-in">
+        Your business needs more than software, it needs<span class="text-yellow-text dark:text-yellow-text-dark">...</span>
+      </h1>
     </div>
-    <Button variant="yellow" size="lg" href="/contact">
-      Start a Conversation
-    </Button>
+
+    <!-- Tiles below -->
+    <div class="outcome-mobile grid grid-cols-2 gap-3 w-full mb-8" aria-label="Key outcomes">
+      {outcomes.map((outcome, index) => (
+        <div
+          class:list={[
+            "outcome-tile-mobile",
+            index === outcomes.length - 1 ? "col-span-2" : ""
+          ]}
+          style={`--delay: ${outcome.delay};`}
+          data-variant={outcome.variant}
+        >
+          <h3 class="tile-title-mobile">{outcome.title}</h3>
+          <p class="tile-description-mobile">{outcome.description}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- CTA below tiles -->
+    <a href="#contact" class="mobile-cta animate-fade-in" style="--delay: 1.2s;">
+      <div class="cta-content">
+        <span class="cta-subtext">Ready to get started?</span>
+        <span class="cta-text">Let's talk!</span>
+      </div>
+      <span class="cta-arrow" aria-hidden="true">→</span>
+    </a>
   </div>
 </section>
+
+<style>
+  /* Base animations */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes tile-enter {
+    from {
+      opacity: 0;
+      transform: scale(0.92);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes tile-enter-mobile {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  .animation-delay-1 { animation-delay: 0.15s; }
+  .animation-delay-2 { animation-delay: 0.3s; }
+  .animation-delay-3 { animation-delay: 0.45s; }
+
+  /* ===========================================
+     RESPONSIVE VISIBILITY
+     =========================================== */
+  .bento-grid {
+    display: none;
+  }
+
+  .mobile-layout {
+    display: flex;
+  }
+
+  /* ===========================================
+     BENTO GRID - Desktop (lg: 1024px+)
+     Asymmetric layout with center headline
+     =========================================== */
+  @media (min-width: 1024px) {
+    .mobile-layout {
+      display: none !important;
+    }
+
+    .bento-grid {
+      /*
+        Grid structure (4-column for equal bottom halves):
+        ┌─────────┬───────────────────────────┬─────────┐
+        │  hours  │                           │  costs  │
+        │         │                           │         │
+        ├─────────┤          main             ├─────────┤
+        │   see   │                           │  works  │
+        │         │                           │         │
+        ├─────────┴─────────┬─────────────────┴─────────┤
+        │      focus        │           cta             │
+        └───────────────────┴───────────────────────────┘
+      */
+      display: grid;
+      gap: 1rem;
+      width: 100%;
+      max-width: 1200px;
+      grid-template-columns: minmax(140px, 1fr) minmax(140px, 1.25fr) minmax(140px, 1.25fr) minmax(140px, 1fr);
+      grid-template-rows: auto auto auto;
+      grid-template-areas:
+        "hours  main   main   costs"
+        "see    main   main   works"
+        "focus  focus  cta    cta";
+    }
+  }
+
+  /* Wider screens: add some visual breathing room */
+  @media (min-width: 1280px) {
+    .bento-grid {
+      gap: 1.25rem;
+      grid-template-columns: minmax(160px, 1fr) minmax(180px, 1.25fr) minmax(180px, 1.25fr) minmax(160px, 1fr);
+    }
+  }
+
+  /* Center content area */
+  .bento-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  /* Bento tiles */
+  .bento-tile {
+    padding: 1.25rem;
+    border: 3px solid var(--color-text-light);
+    background: var(--color-bg-light);
+    animation: tile-enter 0.5s ease-out forwards;
+    animation-delay: var(--delay);
+    opacity: 0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  :global(.dark) .bento-tile {
+    border-color: var(--color-text-dark);
+    background: var(--color-bg-dark);
+  }
+
+  .bento-tile:hover {
+    transform: translateY(-3px);
+  }
+
+  /* Variant shadows */
+  [data-variant="yellow"].bento-tile {
+    box-shadow: 5px 5px 0 var(--color-yellow);
+  }
+  [data-variant="turquoise"].bento-tile {
+    box-shadow: 5px 5px 0 var(--color-turquoise);
+  }
+  [data-variant="magenta"].bento-tile {
+    box-shadow: 5px 5px 0 var(--color-magenta);
+  }
+
+  [data-variant="yellow"].bento-tile:hover {
+    box-shadow: 7px 7px 0 var(--color-yellow);
+  }
+  [data-variant="turquoise"].bento-tile:hover {
+    box-shadow: 7px 7px 0 var(--color-turquoise);
+  }
+  [data-variant="magenta"].bento-tile:hover {
+    box-shadow: 7px 7px 0 var(--color-magenta);
+  }
+
+  /* Dark mode: glow instead of offset shadow */
+  :global(.dark) [data-variant="yellow"].bento-tile {
+    box-shadow: 0 0 20px color-mix(in oklch, var(--color-yellow-dark) 60%, transparent);
+  }
+  :global(.dark) [data-variant="turquoise"].bento-tile {
+    box-shadow: 0 0 20px color-mix(in oklch, var(--color-turquoise-dark) 60%, transparent);
+  }
+  :global(.dark) [data-variant="magenta"].bento-tile {
+    box-shadow: 0 0 20px color-mix(in oklch, var(--color-magenta-dark) 60%, transparent);
+  }
+
+  :global(.dark) [data-variant="yellow"].bento-tile:hover {
+    box-shadow: 0 0 30px color-mix(in oklch, var(--color-yellow-dark) 80%, transparent);
+  }
+  :global(.dark) [data-variant="turquoise"].bento-tile:hover {
+    box-shadow: 0 0 30px color-mix(in oklch, var(--color-turquoise-dark) 80%, transparent);
+  }
+  :global(.dark) [data-variant="magenta"].bento-tile:hover {
+    box-shadow: 0 0 30px color-mix(in oklch, var(--color-magenta-dark) 80%, transparent);
+  }
+
+  /* CTA Tile */
+  .bento-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.5rem;
+    border: 3px solid var(--color-text-light);
+    background: var(--color-yellow);
+    box-shadow: 5px 5px 0 var(--color-text-light);
+    text-decoration: none;
+    animation: tile-enter 0.5s ease-out forwards;
+    animation-delay: var(--delay);
+    opacity: 0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  :global(.dark) .bento-cta {
+    border-color: var(--color-text-dark);
+    background: var(--color-yellow-dark);
+    box-shadow: 0 0 20px color-mix(in oklch, var(--color-yellow-dark) 60%, transparent);
+  }
+
+  .bento-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 7px 7px 0 var(--color-text-light);
+  }
+
+  :global(.dark) .bento-cta:hover {
+    box-shadow: 0 0 30px color-mix(in oklch, var(--color-yellow-dark) 80%, transparent);
+  }
+
+  .cta-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .cta-subtext {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+    opacity: 0.8;
+  }
+
+  .cta-text {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-text-light);
+  }
+
+  .cta-arrow {
+    font-size: 1.5rem;
+    color: var(--color-text-light);
+    transition: transform 0.2s ease;
+  }
+
+  .bento-cta:hover .cta-arrow {
+    transform: translateX(4px);
+  }
+
+  /* Mobile CTA - same style as bento-cta */
+  .mobile-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    padding: 1.25rem 1.5rem;
+    border: 3px solid var(--color-text-light);
+    background: var(--color-yellow);
+    box-shadow: 5px 5px 0 var(--color-text-light);
+    text-decoration: none;
+    animation: tile-enter-mobile 0.4s ease-out forwards;
+    animation-delay: var(--delay);
+    opacity: 0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  :global(.dark) .mobile-cta {
+    border-color: var(--color-text-dark);
+    background: var(--color-yellow-dark);
+    box-shadow: 0 0 20px color-mix(in oklch, var(--color-yellow-dark) 60%, transparent);
+  }
+
+  .mobile-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 7px 7px 0 var(--color-text-light);
+  }
+
+  :global(.dark) .mobile-cta:hover {
+    box-shadow: 0 0 30px color-mix(in oklch, var(--color-yellow-dark) 80%, transparent);
+  }
+
+  .mobile-cta .cta-arrow {
+    transition: transform 0.2s ease;
+  }
+
+  .mobile-cta:hover .cta-arrow {
+    transform: translateX(4px);
+  }
+
+  .tile-title {
+    font-family: var(--font-heading);
+    font-size: 1.125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-text-light);
+    margin-bottom: 0.25rem;
+  }
+
+  :global(.dark) .tile-title {
+    color: var(--color-text-dark);
+  }
+
+  .tile-description {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: var(--color-text-muted-light);
+    line-height: 1.4;
+  }
+
+  :global(.dark) .tile-description {
+    color: var(--color-text-muted-dark);
+  }
+
+  /* ===========================================
+     MOBILE TILES
+     =========================================== */
+  .outcome-tile-mobile {
+    padding: 1rem;
+    border: 3px solid var(--color-text-light);
+    background: var(--color-bg-light);
+    animation: tile-enter-mobile 0.4s ease-out forwards;
+    animation-delay: var(--delay);
+    opacity: 0;
+  }
+
+  :global(.dark) .outcome-tile-mobile {
+    border-color: var(--color-text-dark);
+    background: var(--color-bg-dark);
+  }
+
+  [data-variant="yellow"].outcome-tile-mobile {
+    box-shadow: 4px 4px 0 var(--color-yellow);
+  }
+  [data-variant="turquoise"].outcome-tile-mobile {
+    box-shadow: 4px 4px 0 var(--color-turquoise);
+  }
+  [data-variant="magenta"].outcome-tile-mobile {
+    box-shadow: 4px 4px 0 var(--color-magenta);
+  }
+
+  :global(.dark) [data-variant="yellow"].outcome-tile-mobile {
+    box-shadow: 0 0 15px color-mix(in oklch, var(--color-yellow-dark) 50%, transparent);
+  }
+  :global(.dark) [data-variant="turquoise"].outcome-tile-mobile {
+    box-shadow: 0 0 15px color-mix(in oklch, var(--color-turquoise-dark) 50%, transparent);
+  }
+  :global(.dark) [data-variant="magenta"].outcome-tile-mobile {
+    box-shadow: 0 0 15px color-mix(in oklch, var(--color-magenta-dark) 50%, transparent);
+  }
+
+  .tile-title-mobile {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-text-light);
+  }
+
+  :global(.dark) .tile-title-mobile {
+    color: var(--color-text-dark);
+  }
+
+  .tile-description-mobile {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--color-text-muted-light);
+    line-height: 1.3;
+  }
+
+  :global(.dark) .tile-description-mobile {
+    color: var(--color-text-muted-dark);
+  }
+
+  /* ===========================================
+     REDUCED MOTION
+     =========================================== */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in,
+    .bento-tile,
+    .bento-cta,
+    .outcome-tile-mobile {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>
