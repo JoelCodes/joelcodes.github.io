@@ -358,7 +358,7 @@ import CheckboxGroup from '../ui/CheckboxGroup.astro';
 
       // Must check response.ok explicitly - fetch doesn't reject on HTTP errors
       if (!response.ok) {
-        showFormError('Could not send message. Email me directly at discovery@joelshinness.com');
+        showFormError('Could not send message. Email me directly at contact@joelshinness.com');
         return;
       }
 
@@ -367,7 +367,7 @@ import CheckboxGroup from '../ui/CheckboxGroup.astro';
 
     } catch (error) {
       // Network error (no internet, DNS failure, etc.)
-      showFormError('Could not send message. Email me directly at discovery@joelshinness.com');
+      showFormError('Could not send message. Email me directly at contact@joelshinness.com');
     } finally {
       // Re-enable button (if form wasn't replaced)
       if (submitButton.parentElement) {
