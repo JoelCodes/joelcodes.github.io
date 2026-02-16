@@ -1,5 +1,7 @@
 ---
 // About component: Personal story with credibility signals
+import { Image } from 'astro:assets';
+import selfie from '../assets/images/selfie.jpg';
 ---
 
 <section id="about" aria-labelledby="about-heading" class="py-24 md:py-32 px-6">
@@ -11,9 +13,11 @@
     <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8 items-start">
       <!-- Image column -->
       <figure class="border-[4px] border-text-light dark:border-text-dark bg-gray-200 dark:bg-gray-700 shadow-neo-yellow aspect-[3/4] overflow-hidden">
-        <img
-          src="/images/selfie.jpg"
+        <Image
+          src={selfie}
           alt="Joel Shinness"
+          width={400}
+          height={533}
           class="w-full h-full object-cover"
           loading="lazy"
         />
