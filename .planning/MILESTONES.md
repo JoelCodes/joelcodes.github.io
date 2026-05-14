@@ -90,10 +90,30 @@
 
 ## v1.3 Design System & Navigation Cleanup (Shipped: 2026-02-11)
 
-**Phases completed:** 22 phases, 65 plans, 12 tasks
+**Delivered:** Consolidated design system into a reference page, achieved 100% component consistency across all pages, streamlined navigation to 4 links, and enhanced the contact form into an 8-field lead qualification flow with n8n webhook integration.
+
+**Phases completed:** 17-22 (20 plans total)
 
 **Key accomplishments:**
-- (none recorded)
+
+- Design system reference page at /design-system with JSON API endpoint, ComponentShowcase wrapper, and live token swatches
+- Component consistency audit identified 16 findings; all HIGH and MEDIUM severity issues migrated to design system components (zero raw HTML forms/buttons in interactive UI)
+- CheckboxGroup component added for multi-select form fields with 3 color variants and full design system documentation
+- Enhanced 8-field contact form (homepage and /contact) with n8n webhook integration, payload filtering, and /thank-you redirect flow
+- Simplified header navigation to Blog, Projects, FAQ, Contact; /contact route consolidated as redirect to homepage section
+- Footer with social icons (44x44px touch targets, WCAG 2.5.5) and secondary navigation mirroring header
+- Zero axe-core accessibility violations across 9 pages and 100% Lighthouse scores in all categories
+
+**Stats:**
+
+- 26 source files modified
+- 2,492 insertions / 525 deletions in src/
+- 6 phases, 20 plans, ~29 phase commits
+- 2-day build (Feb 10-11, 2026)
+
+**Git range:** feat(17-01) → feat(22-01)
+
+**What's next:** Configure PUBLIC_N8N_WEBHOOK_URL, replace placeholder Calendly link on /thank-you, add real social profile URLs, plan v1.4
 
 ---
 
