@@ -446,4 +446,98 @@ test.describe('v2 Primitives Accessibility (Phase 24)', () => {
     expect(footerTaglineWidthPx).toBeGreaterThanOrEqual(300);
   });
 
+  // -------------------------------------------------------------------------
+  // Test 10: Input error <p> renders in --color-danger (red-dominant), not
+  // --color-text (body navy). Closes UAT Gap 3 ("error state is not red").
+  //
+  // Strategy: Read the computed `color` of the first p[role="alert"] inside
+  // section#input. Parse the rgb(r, g, b) channels. Assert red-dominance
+  // (r > g AND r > b) and a minimum r-channel of 120 (chosen as the lower
+  // bound that admits the entire darken ladder 0.50 → 0.45 → 0.40 → 0.35
+  // — even the darkest documented L produces R well above 120 — while
+  // still rejecting body navy (rgb(20, 31, 57) where r = 20 fails the
+  // R >= 120 gate AND fails red-dominance since r < g (g=31) AND r < b
+  // (b=57)). Belt-and-suspenders: also direct-literal-compare against
+  // the deterministic broken-state rgb string so a future regression
+  // pointing text-danger back at --color-text is caught explicitly.
+  //
+  // The axe-core test at the top of this file (test #1) remains the WCAG
+  // 2.2 AA color-contrast hard gate — if the chosen --color-danger value
+  // fails contrast on white at 14px, axe will flag it and the executor
+  // must darken via the ladder until axe passes.
+  //
+  // Robustness: literal comparison ('rgb(20, 31, 57)') is layout-
+  // independent. We deliberately do NOT compare to peer elements like
+  // 'section#input h2' because layout-dependent comparisons regress
+  // silently when the page structure changes.
+  // -------------------------------------------------------------------------
+  test('Input error <p> renders in danger color (red-dominant, not body-text-color)', async ({ page }) => {
+    await page.goto('/design-system');
+
+    const errorP = page.locator('section#input p[role="alert"]').first();
+    await expect(errorP).toBeVisible();
+
+    const errorColor = await errorP.evaluate(
+      (el) => window.getComputedStyle(el as Element).color
+    );
+
+    // Modern Chromium (v105+) preserves OKLCH values as-is when the CSS color
+    // space is supported — it may emit 'oklch(0.5 0.22 27)' rather than
+    // converting to 'rgb(...)'. Both formats must be handled.
+    //
+    // Strategy A: rgb(r, g, b) or rgba(r, g, b, a) path — legacy Chromium.
+    // Strategy B: oklch(L C H) path — modern Chromium with OKLCH support.
+    // For OKLCH: L is lightness (0-1), C is chroma (0+), H is hue (degrees).
+    // Hue ~27° is in the red range (0-40° is red/orange-red).
+    // --color-danger = oklch(0.50 0.22 27) — red hue confirmed.
+    // --color-text   = oklch(0.225 0.044 264.6) — blue-navy hue; H ~265°.
+    //
+    // Guard A: if oklch, assert H is in red range (< 60° or > 300°) and
+    //          NOT the body-text hue (~264-265°).
+    // Guard B: if rgb, assert red dominance and R >= 120.
+
+    if (errorColor.startsWith('oklch(') || errorColor.startsWith('oklch ')) {
+      // Parse oklch(L C H) — values are space-separated inside the parens.
+      const inner = errorColor.replace(/^oklch\(/, '').replace(/\)$/, '');
+      const parts = inner.trim().split(/[\s,]+/);
+      const hue = parseFloat(parts[2]);
+
+      // (a) Hue in red range: 0-60° (red/orange-red). Danger token hue is ~27°.
+      // Body navy hue is ~265°, well outside this range.
+      expect(hue).toBeGreaterThanOrEqual(0);
+      expect(hue).toBeLessThan(60);
+
+      // (b) Chroma > 0.1 (not a neutral gray/white/black).
+      const chroma = parseFloat(parts[1]);
+      expect(chroma).toBeGreaterThan(0.1);
+
+      // (c) Literal guard — body-text OKLCH value must not be used.
+      // --color-text = oklch(0.225 0.044 264.6). Any of these substrings
+      // would indicate the text-danger utility is pointing at --color-text.
+      expect(errorColor).not.toMatch(/264\.6/);
+      expect(errorColor).not.toMatch(/0\.044/);
+    } else {
+      // rgb(r, g, b) or rgba(r, g, b, a) path.
+      const stripped = errorColor.replace(/^rgba?\(/, '').replace(/\)$/, '');
+      const channels = stripped.split(',').map((s) => parseInt(s.trim(), 10));
+      const [r, g, b] = channels;
+
+      // (a) Red dominance — the error color must have more red than green AND
+      // more red than blue. Body navy (rgb(20, 31, 57)) fails this on both axes.
+      expect(r).toBeGreaterThan(g);
+      expect(r).toBeGreaterThan(b);
+
+      // (b) Minimum red intensity — 120 is the floor that admits the entire
+      // documented darken ladder (oklch L 0.50 → 0.35) while still rejecting
+      // body navy (r = 20). DO NOT raise to 150 — that would lock out the
+      // ladder's darker escalation steps.
+      expect(r).toBeGreaterThanOrEqual(120);
+
+      // (c) Direct literal guard against the deterministic broken state.
+      // --color-text = oklch(0.225 0.044 264.6) converts to rgb(20, 31, 57)
+      // on some Chromium versions. Layout-independent — no peer-element comparison.
+      expect(errorColor).not.toBe('rgb(20, 31, 57)');
+    }
+  });
+
 });
