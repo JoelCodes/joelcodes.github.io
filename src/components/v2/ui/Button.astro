@@ -1,0 +1,87 @@
+---
+import { ArrowRight } from '@lucide/astro';
+import type { AstroComponent } from '@lucide/astro';
+
+export interface Props {
+  variant?: 'primary' | 'ghost' | 'link';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  iconLeft?: AstroComponent;
+  iconRight?: AstroComponent | null;
+  disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+  [key: string]: unknown;
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  href,
+  iconLeft: IconLeft,
+  iconRight: IconRightProp,
+  disabled = false,
+  type = 'button',
+  class: className,
+  ...rest
+} = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+
+// link-variant default: ArrowRight unless caller explicitly passes null to suppress
+const IconRight =
+  variant === 'link'
+    ? (IconRightProp === null ? null : (IconRightProp ?? ArrowRight))
+    : IconRightProp;
+
+const iconSize = size === 'sm' ? 14 : 16;
+
+const sizeClasses = {
+  sm: 'px-sm py-3 text-small',
+  md: 'px-5 py-sm text-body',
+  lg: 'px-lg py-5 text-body',
+};
+
+const variantClasses = {
+  primary: 'bg-accent text-text hover:opacity-90 transition-opacity',
+  ghost:
+    'bg-transparent text-text border border-border hover:bg-surface-muted transition-colors',
+  link: 'bg-transparent text-text hover:text-accent transition-colors link-variant',
+};
+---
+
+<Tag
+  class:list={[
+    'inline-flex items-center gap-xs font-display font-medium rounded-md',
+    variantClasses[variant],
+    sizeClasses[size],
+    disabled && 'opacity-50 cursor-not-allowed pointer-events-none',
+    className,
+  ]}
+  href={href}
+  type={!href ? type : undefined}
+  disabled={!href ? disabled : undefined}
+  aria-disabled={href && disabled ? 'true' : undefined}
+  {...rest}
+>
+  {IconLeft && <IconLeft size={iconSize} aria-hidden="true" class="shrink-0" />}
+  <slot />
+  {IconRight && <IconRight size={iconSize} aria-hidden="true" class="shrink-0" />}
+</Tag>
+
+<style>
+  /* Focus ring — accent outline per D-18. Only rule that requires scoped CSS. */
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  /* link-variant hover arrow nudge — optional per UI-SPEC.
+     :global(svg) inside a scoped style is anchored to .link-variant on the component root;
+     this is NOT a top-level global directive. */
+  .link-variant:hover :global(svg) {
+    transform: translateX(2px);
+    transition: transform 150ms ease;
+  }
+</style>
