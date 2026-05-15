@@ -232,7 +232,7 @@ Border-radius: `--radius-md` (10px, Crito-verified) for all sizes/variants.
 |-------|------------|--------|---------------|--------|-----------|
 | default | `--color-surface` | 1px `--color-border` | `--radius-lg` (16px Crito-verified) | none | none |
 | elevated | `--color-surface` | 1px `--color-border` | `--radius-lg` | small drop shadow (token TBD per CONTEXT discretion: either new `--shadow-md` token in 24-02 OR scoped literal — implementer's choice, prefer token if any other primitive ends up needing it) | none |
-| interactive (hover) | unchanged | unchanged | unchanged | optional: small lift shadow added | `translateY(-2px)` with 200ms ease |
+| interactive (hover) | unchanged | unchanged | unchanged | optional: small lift shadow added | `translateY(-4px)` with 200ms ease |
 | interactive (`:focus-visible`) | unchanged | unchanged | unchanged | unchanged | `outline: 2px solid var(--color-accent); outline-offset: 2px;` |
 
 CardHeader / CardBody / CardFooter padding: each uses tokens from spacing scale; default suggestion is `--space-md` (24px) all-around for CardBody, `--space-md` top/`--space-md` sides/0 bottom for CardHeader, mirror-flipped for CardFooter. Plan 24-02 locks final values.
@@ -313,7 +313,7 @@ No nested palettes, no `dark` variants (none exist), no v1 token bleed-through.
 | Button `primary` | Hover | Background opacity → 0.9 |
 | Button `ghost` | Hover | Background → `--color-surface-muted` |
 | Button `link` | Hover | Text color → `--color-accent`; arrow icon translateX 2px |
-| Card `interactive=true` | Hover | `translateY(-2px)` + 200ms ease |
+| Card `interactive=true` | Hover | `translateY(-4px)` + 200ms ease |
 | Card `interactive=true` | Tab focus | Same accent focus ring |
 | Input | Tab focus | Same accent focus ring; placeholder remains visible |
 | Input `error` | (set by parent) | `aria-invalid="true"` + `role="alert"` element appears below; SR announces |
