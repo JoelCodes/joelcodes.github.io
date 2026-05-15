@@ -31,6 +31,21 @@
   --spacing-2xl:  5rem;    /* 80px — section breathing room (Q4 resolved) */
 
   /* ---------------------------------------------------------------------- */
+  /* Max-widths (5) — Tailwind v4 max-w-{size} highest-priority namespace.  */
+  /* Tailwind v4 resolves max-w-{name} by checking --max-width-{name} FIRST */
+  /* (before --spacing-{name} and --container-{name}). Declaring these      */
+  /* ensures max-w-sm/md/lg/xl/2xl resolve to container widths, not the     */
+  /* t-shirt spacing values (1/1.5/2/3/5 rem = 16/24/32/48/80 px).         */
+  /* Values match Tailwind v4 defaults so .max-w-sm = 24rem (384px), etc.  */
+  /* See .planning/debug/select-too-thin-no-text.md for full diagnosis.    */
+  /* ---------------------------------------------------------------------- */
+  --max-width-sm:  24rem;  /* 384px — Tailwind v4 default */
+  --max-width-md:  28rem;  /* 448px — Tailwind v4 default */
+  --max-width-lg:  32rem;  /* 512px — Tailwind v4 default */
+  --max-width-xl:  36rem;  /* 576px — Tailwind v4 default */
+  --max-width-2xl: 42rem;  /* 672px — Tailwind v4 default */
+
+  /* ---------------------------------------------------------------------- */
   /* Radii (4) — Crito-anchored                                              */
   /* ---------------------------------------------------------------------- */
   --radius-sm:    0.375rem; /* 6px  — inputs, small chips */
