@@ -85,13 +85,22 @@ Small business owners can understand what Joel does, trust his process, and easi
 - ✓ Zero axe-core accessibility violations across all pages — v1.3
 - ✓ 100% Lighthouse scores (Performance, Accessibility, Best Practices, SEO) — v1.3
 
+*Shipped in v1.4 (in progress):*
+
+- ✓ v2 design tokens: OKLCH palette + spacing/radii/typography in `src/styles/v2/global.css` (33 tokens) — Phase 23
+- ✓ Self-hosted variable fonts (Plus Jakarta Sans + Inter) via `@fontsource-variable/*` — Phase 23
+- ✓ v2 BaseLayout shell (light-mode-only, no FOUC, no theme toggle) — Phase 23
+- ✓ v2 Header / Footer / MobileNav layout components (focus-trapped overlay; 2-col footer; 44x44 social) — Phase 23
+- ✓ `design/design-system.pen` source of truth with factored Header + Footer + Token Reference frame — Phase 23
+- ✓ D-08 strict-no-collision invariant enforced by `tests/check-token-collision.cjs` — Phase 23
+- ✓ FOUND-06 coexistence guarantee verified (v1.3 pages render unchanged) — Phase 23
+
 ### Active
 
-*v1.4 Design Overhaul scope:*
+*v1.4 Design Overhaul scope (Phase 24 onward):*
 
-- [ ] Design system .pen file with reusable components factored from Crito reference
-- [ ] New visual brand tokens (palette, typography, spacing) replacing neobrutalist OKLCH system
-- [ ] New code component library (built alongside v1.3 in a separate namespace)
+- [ ] v2 primitive components (Button, Card, Input, Badge) factored in design-system.pen and shipped in code — Phase 24
+- [ ] /design-system reference page rebuilt to document the v2 library — Phase 24
 - [ ] Homepage refactored to new design (Hero, Services, Process, Technology, About, Contact sections)
 - [ ] Projects index + project detail pages refactored
 - [ ] Blog index + post layout + tag pages refactored
@@ -203,4 +212,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-05-14 after v1.4 milestone started*
+*Last updated: 2026-05-14 after Phase 23 (v2 design system foundation) shipped*
