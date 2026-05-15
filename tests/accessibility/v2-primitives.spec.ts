@@ -319,4 +319,54 @@ test.describe('v2 Primitives Accessibility (Phase 24)', () => {
     expect(inputPadding.bottom).toBe('12px');
   });
 
+  // -------------------------------------------------------------------------
+  // Test 9: max-w-sm wrapper around the select demo AND Footer max-w-md
+  // tagline both render at the intended container widths (>= 300px), not
+  // the broken --spacing-* fallback (16px / 24px). Guards the
+  // namespace-collision class of bug fixed in plan 24-05 — Tailwind v4
+  // max-w-{size} prefers --container-{size} over --spacing-{size} when
+  // both exist, so adding --container-sm:24rem and --container-md:28rem
+  // restores 384px / 448px behavior at both sites. The Footer assertion
+  // catches a hypothetical future regression where only --container-md is
+  // removed (single-token regression would otherwise ship silently).
+  // See .planning/debug/select-too-thin-no-text.md for full diagnosis.
+  // -------------------------------------------------------------------------
+  test('select demo wrapper AND Footer tagline render at >= 300px (container-namespace regression guard)', async ({ page }) => {
+    await page.goto('/design-system');
+
+    // (a) Select demo wrapper — the only .max-w-sm in section#input.
+    const wrapper = page.locator('section#input div.max-w-sm').first();
+    await expect(wrapper).toBeVisible();
+
+    const wrapperWidthPx = await wrapper.evaluate((el) => {
+      const w = window.getComputedStyle(el as Element).width;
+      return parseFloat(w); // "384px" -> 384
+    });
+    expect(wrapperWidthPx).toBeGreaterThanOrEqual(300);
+
+    // (b) The select itself is w-full inside the wrapper — its width must
+    // also clear the 300px threshold (broken state was ~34px).
+    const select = page.locator('section#input #ds-budget');
+    await expect(select).toBeVisible();
+
+    const selectWidthPx = await select.evaluate((el) => {
+      const w = window.getComputedStyle(el as Element).width;
+      return parseFloat(w);
+    });
+    expect(selectWidthPx).toBeGreaterThanOrEqual(300);
+
+    // (c) Footer.astro tagline uses max-w-md — same defect class as the
+    // select wrapper, must clear the same threshold. Without this
+    // assertion, a future commit could remove only --container-md and
+    // Footer would silently regress to ~24px.
+    const footerTagline = page.locator('footer p.max-w-md').first();
+    await expect(footerTagline).toBeVisible();
+
+    const footerTaglineWidthPx = await footerTagline.evaluate((el) => {
+      const w = window.getComputedStyle(el as Element).width;
+      return parseFloat(w);
+    });
+    expect(footerTaglineWidthPx).toBeGreaterThanOrEqual(300);
+  });
+
 });
