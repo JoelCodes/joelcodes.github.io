@@ -1,5 +1,5 @@
 ---
-status: complete
+status: diagnosed
 phase: 24-v2-primitive-library-design-system-page
 source:
   - 24-01-SUMMARY.md
@@ -8,6 +8,7 @@ source:
   - 24-04-SUMMARY.md
 started: 2026-05-15T00:00:00Z
 updated: 2026-05-15T00:00:00Z
+diagnosed: 2026-05-15T00:00:00Z
 ---
 
 ## Current Test
@@ -84,24 +85,80 @@ distinct_gaps: 3
   reason: "User reported on Test 1: The dropdown is way too thin, and doesn't show text, even when something is selected. Reconfirmed on Test 6: The select doesn't show default or selected text."
   severity: major
   tests: [1, 6]
-  scope: "Likely root cause in src/components/v2/ui/Input.astro select branch — width constraints and/or select element styling (text color, padding, native vs styled rendering)"
-  artifacts: []
-  missing: []
+  root_cause: |
+    Namespace collision in v2 @theme. src/styles/v2/global.css:26-31 defines --spacing-sm/md/lg/xl/2xl
+    in Tailwind v4's spacing-scale namespace, which v4's max-w-{size} generator falls back to when
+    no --container-{size} is defined. Compiled CSS contains .max-w-sm{max-width:var(--spacing-sm)} —
+    so .max-w-sm resolves to 16px instead of the intended 384px. The select demo wrapper in
+    src/pages/design-system.astro:258 (`<div class="max-w-sm mb-lg">`) is therefore clamped to 16px,
+    which forces the select's w-full down to 16px content area (rendered ~34px total with padding).
+    The "too thin" and "no visible text" symptoms are the same defect — no room to render the
+    selected option text. Latent same-namespace hijack also affects max-w-md in
+    src/components/v2/layout/Footer.astro. Confirmed via Playwright getComputedStyle and emitted
+    CSS inspection. Side-effect of commit 8932a76 (--space-* → --spacing-* rename).
+  artifacts:
+    - path: "src/styles/v2/global.css"
+      issue: "lines 26-31 define --spacing-sm/md/lg/xl/2xl in v4 spacing namespace, hijacking max-w-{size} fallback"
+    - path: "src/pages/design-system.astro"
+      issue: "line 258 uses max-w-sm expecting 384px but receives 16px"
+    - path: "src/components/v2/layout/Footer.astro"
+      issue: "max-w-md latent same-defect site (not flagged in UAT but will be incidentally fixed)"
+  missing:
+    - "Declare explicit --container-sm/md/lg/xl/2xl values in v2/global.css @theme so v4 prefers the container namespace for max-w-{size} (Tailwind v4 prefers container over spacing when both exist)"
+    - "Add a Plan-24-03-style computed-style regression guard asserting the select demo wrapper renders at width >= ~300px"
+  debug_session: .planning/debug/select-too-thin-no-text.md
 
 - truth: "Interactive Card lifts on hover via hover:-translate-y-0.5"
   status: failed
   reason: "User reported: The interactive card does not lift on hover, but it does get an accent green focus."
   severity: minor
   test: 5
-  scope: "src/components/v2/ui/Card.astro — hover:-translate-y-0.5 utility may not be generating CSS in Tailwind v4 (possibly related to spacing-scale rename in commit 8932a76). Focus ring works, so component is otherwise correct."
-  artifacts: []
-  missing: []
+  root_cause: |
+    Spec magnitude defect, NOT a Tailwind generation issue. hover:-translate-y-0.5 IS generating
+    valid CSS and IS applying on :hover — Playwright headless probe of /design-system confirms
+    computed translate becomes "0px -2px" on hover, and the emitted CSS contains the rule with
+    --tw-translate-y resolving via the default v4 --spacing: .25rem. The defect is that -2px is
+    below the threshold of human visual perception on a ~120px-tall card, especially on Retina.
+    For comparison, v1 ProjectCard.astro and BlogCard.astro use hover:-translate-y-2 = -8px and
+    read clearly as a "lift". UI-SPEC line 235 prescribed -2px; the spec value itself is the bug.
+    No translate assertion in v2-primitives.spec.ts Test 7 — defect was undetectable by automation.
+  artifacts:
+    - path: "src/components/v2/ui/Card.astro"
+      issue: "line 22 hover:-translate-y-0.5 (-2px) is below visual perception threshold"
+    - path: ".planning/phases/24-v2-primitive-library-design-system-page/24-UI-SPEC.md"
+      issue: "lines 235, 316 prescribe -2px; spec value is too small"
+    - path: "tests/accessibility/v2-primitives.spec.ts"
+      issue: "Test 7 missing assertion that interactive Card produces non-zero translate on :hover"
+  missing:
+    - "Change Card.astro:22 to hover:-translate-y-1 (-4px) or hover:-translate-y-1.5 (-6px) — perceptible but still subtle, closer to v1 8px idiom"
+    - "Update 24-UI-SPEC.md lines 235/316 to match the chosen magnitude (replace -2px)"
+    - "Add Playwright assertion in v2-primitives.spec.ts Test 7 verifying hover translate is non-zero (regression guard)"
+  debug_session: .planning/debug/interactive-card-no-hover-lift.md
 
 - truth: "Input error state shows red color treatment on the error message"
   status: failed
   reason: "User reported: The error state is not red."
   severity: cosmetic
   test: 7
-  scope: "src/components/v2/ui/Input.astro — error message paragraph likely uses a token that isn't defined or isn't resolving to red. Check whether v2 token system has a danger/error color and whether the error-text class wires it up."
-  artifacts: []
-  missing: []
+  root_cause: |
+    Code matches Plan 24-02 spec exactly — defect is at the SPEC level, not the implementation.
+    src/components/v2/ui/Input.astro:56 applies class="text-small font-text text-text" on the
+    error <p>, which resolves to --color-text (Crito navy oklch(0.225 0.044 264.6)) — the same
+    color as body copy. Plan 24-02 explicitly mandated "no red" (lines 28, 220, 297) due to an
+    upstream gap in the Phase 24 UI-SPEC's destructive-color section. The v2 @theme defines
+    exactly 8 color tokens and NO --color-danger/--color-error. Differentiation currently relies
+    entirely on aria-invalid="true", role="alert", and a ⚠ glyph prefix — visually weak.
+  artifacts:
+    - path: "src/components/v2/ui/Input.astro"
+      issue: "line 56 error <p> uses text-text (body navy) by spec"
+    - path: "src/styles/v2/global.css"
+      issue: "lines 7-78 @theme defines 8 color tokens; no danger/error/red token"
+    - path: ".planning/phases/24-v2-primitive-library-design-system-page/24-02-PLAN.md"
+      issue: "lines 28, 220, 297 mandated 'no red' — upstream spec gap"
+  missing:
+    - "Add --color-danger: oklch(...) to v2 @theme (Crito-tone red, e.g. oklch(0.55 0.22 27))"
+    - "Change Input.astro:56 from text-text to text-danger"
+    - "Run tests/check-token-collision.cjs to confirm no v1 collision"
+    - "Update src/pages/design-system.json.ts and design-system.astro colorTokens array to include danger swatch"
+    - "Update 24-UI-SPEC.md to close the destructive-color gap"
+  debug_session: .planning/debug/input-error-not-red.md
