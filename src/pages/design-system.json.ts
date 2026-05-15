@@ -44,6 +44,10 @@ export async function GET() {
         cssVar: '--color-accent',
         oklch: 'oklch(0.79 0.184 148.5)',
       },
+      danger: {
+        cssVar: '--color-danger',
+        oklch: 'oklch(0.50 0.22 27)',
+      },
     },
 
     spacing: {
