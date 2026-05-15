@@ -61,7 +61,7 @@ const typographyTokens = [
       </p>
       <p class="font-text text-small text-text-muted">
         Machine-readable token endpoint:
-        <a href="/design-system.json" class="text-accent hover:opacity-80 transition-opacity underline ml-xs">
+        <a href="/design-system.json" class="text-text underline hover:text-text-muted transition-colors ml-xs">
           /design-system.json
         </a>
       </p>
@@ -81,7 +81,7 @@ const typographyTokens = [
               style={`background-color: var(${token.var})`}
             />
             <span class="font-text text-caption text-text-muted">{token.name}</span>
-            <span class="font-text text-caption text-text-muted opacity-70">{token.var}</span>
+            <span class="font-text text-caption text-text-muted">{token.var}</span>
           </div>
         ))}
       </div>
