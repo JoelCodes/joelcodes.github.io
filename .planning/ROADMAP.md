@@ -150,10 +150,22 @@ Plans:
 
 Plans:
 
+**Wave 1**
+
 - [ ] 24-01: Build v2 Button primitive (all variants, keyboard focus, WCAG contrast)
 - [ ] 24-02: Build v2 Card, Input, and Badge primitives (variants, accessible labels, error states)
-- [ ] 24-03: Run Playwright keyboard navigation + axe-core tests against all interactive v2 components; fix any violations
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
 - [ ] 24-04: Rebuild `/design-system` page on `BaseLayoutV2` with live component demos; update `/design-system.json` endpoint to v2 token values
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
+- [ ] 24-03: Run Playwright keyboard navigation + axe-core tests against all interactive v2 components; fix any violations
+
+**Cross-cutting constraints:**
+
+- npm run build completes with zero errors
 
 ---
 
