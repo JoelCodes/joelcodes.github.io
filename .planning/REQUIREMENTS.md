@@ -143,66 +143,66 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FOUND-01 | TBD | Pending |
-| FOUND-02 | TBD | Pending |
-| FOUND-03 | TBD | Pending |
-| FOUND-04 | TBD | Pending |
-| FOUND-05 | TBD | Pending |
-| FOUND-06 | TBD | Pending |
-| COMP-01 | TBD | Pending |
-| COMP-02 | TBD | Pending |
-| COMP-03 | TBD | Pending |
-| COMP-04 | TBD | Pending |
-| COMP-05 | TBD | Pending |
-| COMP-06 | TBD | Pending |
-| COMP-07 | TBD | Pending |
-| HOME-01 | TBD | Pending |
-| HOME-02 | TBD | Pending |
-| HOME-03 | TBD | Pending |
-| HOME-04 | TBD | Pending |
-| HOME-05 | TBD | Pending |
-| HOME-06 | TBD | Pending |
-| HOME-07 | TBD | Pending |
-| HOME-08 | TBD | Pending |
-| SERV-01 | TBD | Pending |
-| SERV-02 | TBD | Pending |
-| SERV-03 | TBD | Pending |
-| SERV-04 | TBD | Pending |
-| PROJ-01 | TBD | Pending |
-| PROJ-02 | TBD | Pending |
-| PROJ-03 | TBD | Pending |
-| PROJ-04 | TBD | Pending |
-| PROJ-05 | TBD | Pending |
-| PROJ-06 | TBD | Pending |
-| BLOG-01 | TBD | Pending |
-| BLOG-02 | TBD | Pending |
-| BLOG-03 | TBD | Pending |
-| BLOG-04 | TBD | Pending |
-| BLOG-05 | TBD | Pending |
-| BLOG-06 | TBD | Pending |
-| BLOG-07 | TBD | Pending |
-| LEAF-01 | TBD | Pending |
-| LEAF-02 | TBD | Pending |
-| LEAF-03 | TBD | Pending |
-| LEAF-04 | TBD | Pending |
-| CONT-01 | TBD | Pending |
-| CONT-02 | TBD | Pending |
-| CONT-03 | TBD | Pending |
-| CONT-04 | TBD | Pending |
-| CONT-05 | TBD | Pending |
-| QUAL-01 | TBD | Pending |
-| QUAL-02 | TBD | Pending |
-| QUAL-03 | TBD | Pending |
-| QUAL-04 | TBD | Pending |
-| QUAL-05 | TBD | Pending |
-| QUAL-06 | TBD | Pending |
-| QUAL-07 | TBD | Pending |
+| FOUND-01 | Phase 23 | Pending |
+| FOUND-02 | Phase 23 | Pending |
+| FOUND-03 | Phase 23 | Pending |
+| FOUND-04 | Phase 23 | Pending |
+| FOUND-05 | Phase 23 | Pending |
+| FOUND-06 | Phase 23 | Pending |
+| COMP-01 | Phase 24 | Pending |
+| COMP-02 | Phase 24 | Pending |
+| COMP-03 | Phase 24 | Pending |
+| COMP-04 | Phase 24 | Pending |
+| COMP-05 | Phase 23 | Pending |
+| COMP-06 | Phase 23 | Pending |
+| COMP-07 | Phase 24 | Pending |
+| HOME-01 | Phase 29 | Pending |
+| HOME-02 | Phase 29 | Pending |
+| HOME-03 | Phase 29 | Pending |
+| HOME-04 | Phase 29 | Pending |
+| HOME-05 | Phase 29 | Pending |
+| HOME-06 | Phase 29 | Pending |
+| HOME-07 | Phase 29 | Pending |
+| HOME-08 | Phase 29 | Pending |
+| SERV-01 | Phase 27 | Pending |
+| SERV-02 | Phase 27 | Pending |
+| SERV-03 | Phase 27 | Pending |
+| SERV-04 | Phase 27 | Pending |
+| PROJ-01 | Phase 27 | Pending |
+| PROJ-02 | Phase 27 | Pending |
+| PROJ-03 | Phase 27 | Pending |
+| PROJ-04 | Phase 27 | Pending |
+| PROJ-05 | Phase 27 | Pending |
+| PROJ-06 | Phase 27 | Pending |
+| BLOG-01 | Phase 26 | Pending |
+| BLOG-02 | Phase 26 | Pending |
+| BLOG-03 | Phase 26 | Pending |
+| BLOG-04 | Phase 26 | Pending |
+| BLOG-05 | Phase 26 | Pending |
+| BLOG-06 | Phase 26 | Pending |
+| BLOG-07 | Phase 26 | Pending |
+| LEAF-01 | Phase 25 | Pending |
+| LEAF-02 | Phase 25 | Pending |
+| LEAF-03 | Phase 25 | Pending |
+| LEAF-04 | Phase 24 | Pending |
+| CONT-01 | Phase 28 | Pending |
+| CONT-02 | Phase 28 | Pending |
+| CONT-03 | Phase 28 | Pending |
+| CONT-04 | Phase 28 | Pending |
+| CONT-05 | Phase 28 | Pending |
+| QUAL-01 | Phase 30 | Pending |
+| QUAL-02 | Phase 30 | Pending |
+| QUAL-03 | Phase 30 | Pending |
+| QUAL-04 | Phase 30 | Pending |
+| QUAL-05 | Phase 30 | Pending |
+| QUAL-06 | Phase 30 | Pending |
+| QUAL-07 | Phase 30 | Pending |
 
 **Coverage:**
-- v1.4 requirements: 53 total
-- Mapped to phases: 0 (filled by roadmap)
-- Unmapped: 53 ⚠️ (until roadmap creates the mapping)
+- v1.4 requirements: 54 total (6 FOUND + 7 COMP + 8 HOME + 4 SERV + 6 PROJ + 7 BLOG + 4 LEAF + 5 CONT + 7 QUAL)
+- Mapped to phases: 54 ✓
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-05-14*
-*Last updated: 2026-05-14 after initial definition*
+*Last updated: 2026-05-14 — traceability table filled after roadmap creation*
