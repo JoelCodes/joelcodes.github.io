@@ -18,6 +18,18 @@
   --color-accent:         oklch(0.79 0.184 148.5);  /* Crito CTA green #38da71 — actionable accent */
 
   /* ---------------------------------------------------------------------- */
+  /* Destructive (1) — closes Phase 24 UI-SPEC Color gap (was deferred to   */
+  /* Phase 28). Promoted to v2 contract token in plan 24-07 after UAT       */
+  /* Gap 3 ("error state is not red"). Baseline ≈ #b91c1c (≈ 5.5:1 on      */
+  /* white at 14px — passes WCAG 2.2 AA normal-text 4.5:1). If axe-core    */
+  /* color-contrast still fails on the rendered error <p>, darken along   */
+  /* the ladder 0.50 → 0.45 → 0.40 → 0.35 until axe passes. Do NOT change */
+  /* the token NAME — only the L channel. See .planning/debug/             */
+  /* input-error-not-red.md for full diagnosis.                            */
+  /* ---------------------------------------------------------------------- */
+  --color-danger:         oklch(0.50 0.22 27);     /* ≈ #b91c1c — WCAG AA on white */
+
+  /* ---------------------------------------------------------------------- */
   /* Spacing (6) — t-shirt scale per D-07; 8pt-rhythm anchored to Crito.    */
   /* MUST use Tailwind v4's `--spacing-*` namespace so utilities like       */
   /* `px-sm`, `py-md`, `gap-xs` actually generate (NOT `--space-*`, which   */
