@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Design Overhaul
 status: executing
-stopped_at: Phase 24 Plan 04 complete
-last_updated: "2026-05-15T18:23:08Z"
-last_activity: 2026-05-15 -- Completed 24-04-PLAN.md (/design-system page + /design-system.json on v2 BaseLayout)
+stopped_at: Phase 24 Plan 03 complete — Phase 24 ALL PLANS COMPLETE
+last_updated: "2026-05-15T18:33:00Z"
+last_activity: 2026-05-15 -- Completed 24-03-PLAN.md (Playwright + axe-core a11y suite; zero axe violations on /design-system)
 progress:
   total_phases: 8
   completed_phases: 1
-  total_plans: 8
-  completed_plans: 8
-  percent: 25
+  total_plans: 9
+  completed_plans: 9
+  percent: 28
 ---
 
 # Project State
@@ -25,12 +25,12 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 
 ## Current Position
 
-Phase: 24 (v2-primitive-library-design-system-page) — EXECUTING
-Plan: 4 of 4 COMPLETE → Phase 24 complete; next: Plan 24-03 was skipped per orchestrator
-Status: Executing Phase 24 — Wave 2 complete
-Last activity: 2026-05-15 -- Completed 24-04 /design-system page + /design-system.json on v2 BaseLayout
+Phase: 24 (v2-primitive-library-design-system-page) — COMPLETE
+Plan: All 4 plans complete (01, 02, 04, 03)
+Status: Phase 24 complete — all v2 primitives built, /design-system page shipped, a11y validated
+Last activity: 2026-05-15 -- Completed 24-03 Playwright + axe-core accessibility suite (zero violations)
 
-Progress: [███░░░░░░░] 25% (v1.4)
+Progress: [███░░░░░░░] 28% (v1.4)
 
 ## Milestone History
 
@@ -80,6 +80,9 @@ See `.planning/MILESTONES.md` for full milestone details.
 - **24-04 2026-05-15**: Flat token endpoint shape (5 top-level keys) — no nested per-palette, no dark variants; consistent with D-16 and RESEARCH flat-semantic conclusion
 - **24-04 2026-05-15**: /design-system page uses single-column layout, no sidebar nav — D-21 Claude's Discretion; sidebar deferred; simple anchor sections sufficient for reference use
 - **24-04 2026-05-15**: TDD: static parse test (CJS Node script, 19 assertions) written for JSON endpoint before implementation — RED confirmed, GREEN after implementation
+- **24-03 2026-05-15**: All 4 v2 primitive components were WCAG 2.2 AA compliant — color-contrast violations were in design-system.astro page markup (text-accent link at 1.8:1; opacity-70 caption at 4.1:1), not primitive components
+- **24-03 2026-05-15**: text-accent (#53da74 green) must NEVER be used as text color — fails 4.5:1 WCAG AA for normal text; only valid for non-text (focus rings, button backgrounds, decorative fills)
+- **24-03 2026-05-15**: opacity-* utilities must not be applied to text-text-muted at caption/small sizes — text-text-muted at 12px is at the WCAG AA contrast boundary; opacity reduces it below 4.5:1
 
 ### Pending Todos
 
@@ -97,7 +100,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 ## Session Continuity
 
-Last session: 2026-05-15T18:23:08Z
-Stopped at: Completed 24-04-PLAN.md (/design-system page + /design-system.json on v2 BaseLayout)
-Resume file: .planning/phases/24-v2-primitive-library-design-system-page/24-04-SUMMARY.md
-Next action: Execute Plan 24-03 (Playwright + axe-core accessibility tests for /design-system) — Wave 3
+Last session: 2026-05-15T18:33:00Z
+Stopped at: Completed 24-03-PLAN.md — Phase 24 fully complete (all plans 01/02/04/03 done)
+Resume file: .planning/phases/24-v2-primitive-library-design-system-page/24-03-SUMMARY.md
+Next action: Execute Phase 25 (first v2 page migration — begin with orchestrator to select next phase)
