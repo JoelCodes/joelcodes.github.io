@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Design Overhaul
 status: executing
-stopped_at: Completed 24-05-PLAN.md — UAT Gap 1 closed (select wrapper max-w-sm fix + regression guard)
-last_updated: "2026-05-15T21:47:00Z"
-last_activity: 2026-05-15 -- Phase 24 gap closure plan 24-05 complete
+stopped_at: Completed 24-06-PLAN.md — UAT Gap 2 closed (Card hover lift raised from -2px to -4px)
+last_updated: "2026-05-15T21:53:00Z"
+last_activity: 2026-05-15 -- Phase 24 gap closure plan 24-06 complete
 progress:
   total_phases: 8
   completed_phases: 1
   total_plans: 11
-  completed_plans: 8
+  completed_plans: 9
   percent: 13
 ---
 
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 ## Current Position
 
 Phase: 24 (v2-primitive-library-design-system-page) — EXECUTING
-Plan: 1 of 7
-Status: Executing Phase 24
-Last activity: 2026-05-15 -- Phase 24 execution started
+Plan: 6 of 7 complete
+Status: Executing Phase 24 (gap closure — 24-06 done, 24-07 remaining)
+Last activity: 2026-05-15 -- Phase 24 UAT Gap 2 closed (24-06)
 
-Progress: [███░░░░░░░] 28% (v1.4)
+Progress: [███░░░░░░░] 29% (v1.4)
 
 ## Milestone History
 
@@ -85,6 +85,9 @@ See `.planning/MILESTONES.md` for full milestone details.
 - **24-03 2026-05-15**: opacity-* utilities must not be applied to text-text-muted at caption/small sizes — text-text-muted at 12px is at the WCAG AA contrast boundary; opacity reduces it below 4.5:1
   - **24-05 2026-05-15**: Use --max-width-* tokens (not --container-*) for max-w-{size} fix — Tailwind v4.1.18 lookup order is [--max-width, --spacing, --container]; --spacing wins over --container so container tokens alone cannot override the spacing fallback
   - **24-05 2026-05-15**: --max-width-sm/md/lg/xl/2xl declared in v2 @theme at Tailwind v4 defaults (24/28/32/36/42 rem) — no v1 collision; fixes select wrapper (max-w-sm: 16px to 384px) and Footer tagline (max-w-md: 24px to 448px)
+  - **24-06 2026-05-15**: hover:-translate-y-1 (-4px) chosen over -1.5 (-6px) — smallest perceptible step above -2px threshold; stays subtle; v1 uses -8px for comparison
+  - **24-06 2026-05-15**: Tailwind v4 translate utility sets CSS `translate` individual property (not `transform` matrix) — `getComputedStyle.transform` returns "none" always; must read `getComputedStyle.translate` and whitespace-split for Playwright hover assertions
+  - **24-06 2026-05-15**: page.waitForTimeout(300) required after interactiveCard.hover() — CSS duration-200 transition runs async; immediate getComputedStyle read captures ~0 mid-animation; 300ms ensures full settlement
 
 ### Pending Todos
 
@@ -102,7 +105,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 ## Session Continuity
 
-Last session: 2026-05-15T21:47:00Z
-Stopped at: Completed 24-05-PLAN.md — UAT Gap 1 closed (select demo max-w-sm fix + regression guard)
-Resume file: .planning/phases/24-v2-primitive-library-design-system-page/24-05-SUMMARY.md
-Next action: Execute 24-06 (UAT Gap 2 closure) and 24-07 (UAT Gap 3 closure)
+Last session: 2026-05-15T21:53:00Z
+Stopped at: Completed 24-06-PLAN.md — UAT Gap 2 closed (Card hover lift -2px → -4px + regression guard)
+Resume file: .planning/phases/24-v2-primitive-library-design-system-page/24-06-SUMMARY.md
+Next action: Execute 24-07 (UAT Gap 3 closure)
