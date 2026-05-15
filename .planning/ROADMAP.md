@@ -113,24 +113,24 @@ See: `.planning/milestones/v1.3-ROADMAP.md` for full details.
   4. `src/components/v2/layout/Header.astro` renders a sticky nav with 4 links (Blog, Projects, FAQ, Contact) and a "Let's Talk" CTA with no dark mode toggle; `src/components/v2/layout/Footer.astro` renders a 2-column layout with social icons that meet 44x44px touch targets
   5. All existing v1.3 pages continue to render correctly (zero visual regression on the v1.3 page set)
 
-**Plans:** 4 plans
+**Plans:** 4/4 plans complete
 
 Plans:
 **Wave 1**
 
-- [ ] 23-01-PLAN.md *(Wave 1)* — Inspect Crito `.pen` via Pencil MCP; record fonts/palette/spacing/radii into 23-01-CRITO-INSPECTION.md; confirm `@fontsource-variable/*` package names on npm; resolve `--font-heading`/`--font-body` v1 collision via `--font-display`/`--font-text` rename
+- [x] 23-01-PLAN.md *(Wave 1)* — Inspect Crito `.pen` via Pencil MCP; record fonts/palette/spacing/radii into 23-01-CRITO-INSPECTION.md; confirm `@fontsource-variable/*` package names on npm; resolve `--font-heading`/`--font-body` v1 collision via `--font-display`/`--font-text` rename
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 23-02-PLAN.md *(Wave 2, blocked on 23-01)* — Create `src/styles/v2/global.css` with full `@theme` block (semantic tokens, no v1 name collisions); install pinned `@fontsource-variable/*` packages; ship `tests/check-token-collision.cjs` Wave 0 guard
+- [x] 23-02-PLAN.md *(Wave 2, blocked on 23-01)* — Create `src/styles/v2/global.css` with full `@theme` block (semantic tokens, no v1 name collisions); install pinned `@fontsource-variable/*` packages; ship `tests/check-token-collision.cjs` Wave 0 guard
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
-- [ ] 23-03-PLAN.md *(Wave 3, blocked on 23-01 + 23-02)* — Create `src/layouts/v2/BaseLayout.astro` (light-mode-only, no FOUC script, no theme-toggle, self-hosted-font preload); create `design/design-system.pen` with 33+ variables, factored Header + Footer, and inline Token Reference frame
+- [x] 23-03-PLAN.md *(Wave 3, blocked on 23-01 + 23-02)* — Create `src/layouts/v2/BaseLayout.astro` (light-mode-only, no FOUC script, no theme-toggle, self-hosted-font preload); create `design/design-system.pen` with 33+ variables, factored Header + Footer, and inline Token Reference frame
 
 **Wave 4** *(blocked on Wave 3 completion)*
 
-- [ ] 23-04-PLAN.md *(Wave 4, blocked on 23-02 + 23-03)* — Build `src/components/v2/layout/{Header,Footer,MobileNav}.astro` (sticky header + 4 links + CTA, focus-trapped overlay, 2-column footer with 44x44 social icons); add `tests/accessibility/v2-layout.spec.ts`; verify FOUND-06 v1.3 coexistence as final gate
+- [x] 23-04-PLAN.md *(Wave 4, blocked on 23-02 + 23-03)* — Build `src/components/v2/layout/{Header,Footer,MobileNav}.astro` (sticky header + 4 links + CTA, focus-trapped overlay, 2-column footer with 44x44 social icons); add `tests/accessibility/v2-layout.spec.ts`; verify FOUND-06 v1.3 coexistence as final gate
 
 ---
 
@@ -322,7 +322,7 @@ Phases execute in numeric order: 1 -> 2 -> ... -> 22 -> 23 -> 24 -> 25 -> 26 -> 
 | 20. Contact Form Enhancement | v1.3 | 3/3 | Complete | 2026-02-11 |
 | 21. Navigation Cleanup | v1.3 | 1/1 | Complete | 2026-02-10 |
 | 22. Footer Enhancement | v1.3 | 1/1 | Complete | 2026-02-11 |
-| 23. Design System Foundation | v1.4 | 0/4 | Not started | - |
+| 23. Design System Foundation | v1.4 | 4/4 | Complete    | 2026-05-15 |
 | 24. v2 Primitive Library + Design System Page | v1.4 | 0/4 | Not started | - |
 | 25. Leaf Page Migrations | v1.4 | 0/2 | Not started | - |
 | 26. Blog Migration | v1.4 | 0/4 | Not started | - |
