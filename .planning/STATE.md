@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Design Overhaul
 status: executing
-stopped_at: Completed 24-06-PLAN.md — UAT Gap 2 closed (Card hover lift raised from -2px to -4px)
-last_updated: "2026-05-15T21:53:00Z"
-last_activity: 2026-05-15 -- Phase 24 gap closure plan 24-06 complete
+stopped_at: Completed 24-07-PLAN.md — UAT Gap 3 closed (Input error now renders in --color-danger red)
+last_updated: "2026-05-15T22:03:00Z"
+last_activity: 2026-05-15 -- Phase 24 gap closure plan 24-07 complete (all 3 UAT gaps closed)
 progress:
   total_phases: 8
   completed_phases: 1
@@ -25,12 +25,12 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 
 ## Current Position
 
-Phase: 24 (v2-primitive-library-design-system-page) — EXECUTING
-Plan: 6 of 7 complete
-Status: Executing Phase 24 (gap closure — 24-06 done, 24-07 remaining)
-Last activity: 2026-05-15 -- Phase 24 UAT Gap 2 closed (24-06)
+Phase: 24 (v2-primitive-library-design-system-page) — COMPLETE
+Plan: 7 of 7 complete
+Status: Phase 24 complete — all 7 plans done, all 3 UAT gaps closed
+Last activity: 2026-05-15 -- Phase 24 UAT Gap 3 closed (24-07)
 
-Progress: [███░░░░░░░] 29% (v1.4)
+Progress: [████░░░░░░] 36% (v1.4)
 
 ## Milestone History
 
@@ -88,6 +88,9 @@ See `.planning/MILESTONES.md` for full milestone details.
   - **24-06 2026-05-15**: hover:-translate-y-1 (-4px) chosen over -1.5 (-6px) — smallest perceptible step above -2px threshold; stays subtle; v1 uses -8px for comparison
   - **24-06 2026-05-15**: Tailwind v4 translate utility sets CSS `translate` individual property (not `transform` matrix) — `getComputedStyle.transform` returns "none" always; must read `getComputedStyle.translate` and whitespace-split for Playwright hover assertions
   - **24-06 2026-05-15**: page.waitForTimeout(300) required after interactiveCard.hover() — CSS duration-200 transition runs async; immediate getComputedStyle read captures ~0 mid-animation; 300ms ensures full settlement
+  - **24-07 2026-05-15**: --color-danger: oklch(0.50 0.22 27) baseline passes axe-core WCAG AA without ladder escalation (≈5.5:1 on white at 14px) — promotes 9th v2 color token; text-danger Tailwind utility auto-generated
+  - **24-07 2026-05-15**: Modern Chromium (v105+) returns oklch(...) from getComputedStyle.color — does NOT convert to rgb(); Playwright tests asserting color values must handle both OKLCH and RGB formats with an if-branch
+  - **24-07 2026-05-15**: Phase 24 is now COMPLETE — all 7 plans done, all 3 UAT gaps closed (Gap 1: max-width tokens 24-05, Gap 2: card hover 24-06, Gap 3: input error color 24-07)
 
 ### Pending Todos
 
@@ -105,7 +108,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 ## Session Continuity
 
-Last session: 2026-05-15T21:53:00Z
-Stopped at: Completed 24-06-PLAN.md — UAT Gap 2 closed (Card hover lift -2px → -4px + regression guard)
-Resume file: .planning/phases/24-v2-primitive-library-design-system-page/24-06-SUMMARY.md
-Next action: Execute 24-07 (UAT Gap 3 closure)
+Last session: 2026-05-15T22:03:00Z
+Stopped at: Completed 24-07-PLAN.md — Phase 24 COMPLETE (all 3 UAT gaps closed)
+Resume file: .planning/phases/24-v2-primitive-library-design-system-page/24-07-SUMMARY.md
+Next action: Begin Phase 25 (next phase in roadmap)

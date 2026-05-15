@@ -167,7 +167,7 @@ Plans:
 
 - [x] 24-05: Close UAT Gap 1 — add --max-width-sm/md/lg/xl/2xl tokens so max-w-{size} resolves to container widths; add Playwright regression guard (Test 9)
 - [x] 24-06: Close UAT Gap 2 — raise Card hover lift from -2px (imperceptible) to -4px; update UI-SPEC lines 235+316; add Playwright hover translate regression guard (Test 7 extended)
-- [ ] 24-07: Close UAT Gap 3 (TBD)
+- [x] 24-07: Close UAT Gap 3 — add --color-danger to v2 @theme; wire text-danger on Input error <p>; sweep --space-* → --spacing-* in JSON endpoint; add Test 10 (red-dominant color regression guard)
 
 **Cross-cutting constraints:**
 
