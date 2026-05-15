@@ -2,7 +2,7 @@
 phase: 23-design-system-foundation
 requirement: FOUND-06
 title: Coexistence verification — v1.3 pages render unchanged after v2 foundation lands
-status: PENDING USER VISUAL SMOKE CHECK
+status: VERIFIED
 date_executed: 2026-05-14
 commit_sha: e28e0a498c72768ede3632a326c51b76ca4a13d9
 ---
@@ -90,8 +90,6 @@ Visit `/v2-smoke` in the same dev session and confirm:
 
 ## FOUND-06 status
 
-**PENDING USER VISUAL SMOKE CHECK.**
+**VERIFIED** — user approved 2026-05-14.
 
-All automated gates pass. The user is the only authorised actor to flip this to `VERIFIED` after the manual visual check above. Phase 23 cannot close until that flip happens.
-
-If a regression is found, this file becomes the gap report — open a v1 fix in a follow-up phase (likely Phase 23.1 or rolled into Phase 25), do NOT modify Phase 23 files retroactively.
+All automated gates passed and the user confirmed v1.3 routes render unchanged and `/v2-smoke` renders the v2 shell correctly. Phase 23 coexistence guarantee holds.

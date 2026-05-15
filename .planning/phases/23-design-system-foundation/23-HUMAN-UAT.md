@@ -1,31 +1,31 @@
 ---
-status: partial
+status: complete
 phase: 23-design-system-foundation
 source: [23-VERIFICATION.md, 23-FOUND-06-VERIFICATION.md]
 started: 2026-05-14T05:54:00Z
-updated: 2026-05-14T05:54:00Z
+updated: 2026-05-14T05:56:00Z
 ---
 
 ## Current Test
 
-[awaiting human testing of FOUND-06 visual smoke]
+[done — user approved on 2026-05-14]
 
 ## Tests
 
 ### 1. /v1 routes visually unchanged
 expected: Each of /, /blog, /blog/<slug>, /projects, /portfolio/<slug>, /faq, /thank-you, /design-system renders byte-equivalent to its pre-Phase-23 baseline (v1 sticky neobrutalist header with theme-toggle, v1 footer, Bricolage Grotesque headings, yellow/turquoise/magenta accents).
-result: [pending]
+result: passed — user approved 2026-05-14
 
 ### 2. /v2-smoke renders v2 layout shell correctly
 expected: Header is the new v2 sticky bar with NO theme toggle; footer is the 2-column layout; fonts are Plus Jakarta Sans + Inter (not Bricolage / DM Sans); page renders in light mode regardless of OS preference; `document.querySelectorAll('#theme-toggle').length === 0` returns true in DevTools console.
-result: [pending]
+result: passed — user approved 2026-05-14
 
 ## Summary
 
 total: 2
-passed: 0
+passed: 2
 issues: 0
-pending: 2
+pending: 0
 skipped: 0
 blocked: 0
 
