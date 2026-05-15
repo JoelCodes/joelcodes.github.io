@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Design Overhaul
-status: executing
-stopped_at: Completed 24-07-PLAN.md — UAT Gap 3 closed (Input error now renders in --color-danger red)
-last_updated: "2026-05-15T22:03:00Z"
+status: ready_to_plan
+stopped_at: Phase 24 complete (7/7) — ready to discuss Phase 25
+last_updated: 2026-05-15T22:13:19.107Z
 last_activity: 2026-05-15 -- Phase 24 gap closure plan 24-07 complete (all 3 UAT gaps closed)
 progress:
   total_phases: 8
   completed_phases: 1
   total_plans: 11
-  completed_plans: 9
+  completed_plans: 11
   percent: 13
 ---
 
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-14)
 
 **Core value:** Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
-**Current focus:** Phase 24 — v2-primitive-library-design-system-page
+**Current focus:** Phase 25 — leaf page migrations (faq, thank you, 404)
 
 ## Current Position
 
-Phase: 24 (v2-primitive-library-design-system-page) — COMPLETE
-Plan: 7 of 7 complete
-Status: Phase 24 complete — all 7 plans done, all 3 UAT gaps closed
-Last activity: 2026-05-15 -- Phase 24 UAT Gap 3 closed (24-07)
+Phase: 25
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-05-15
 
 Progress: [████░░░░░░] 36% (v1.4)
 
@@ -48,7 +48,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 **Velocity:**
 
-- Total plans completed: 71 (v1.0: 23, v1.1: 14, v1.2: 10, v1.3: 20)
+- Total plans completed: 78 (v1.0: 23, v1.1: 14, v1.2: 10, v1.3: 20)
 - Average duration: ~1-5 min/plan (recent trend)
 - Total execution time: ~5 days across 4 milestones
 

@@ -20,13 +20,13 @@ Requirements for this milestone. Each maps to roadmap phases.
 
 ### Components — v2 Library
 
-- [ ] **COMP-01**: v2 Button primitive with keyboard-accessible focus states meeting WCAG 2.2 AA (Crito visual language)
-- [ ] **COMP-02**: v2 Card primitive with documented variants matching Crito patterns
-- [ ] **COMP-03**: v2 Input primitive with accessible labels, error states, and consistent typography
-- [ ] **COMP-04**: v2 Badge primitive
+- [x] **COMP-01**: v2 Button primitive with keyboard-accessible focus states meeting WCAG 2.2 AA (Crito visual language)
+- [x] **COMP-02**: v2 Card primitive with documented variants matching Crito patterns
+- [x] **COMP-03**: v2 Input primitive with accessible labels, error states, and consistent typography
+- [x] **COMP-04**: v2 Badge primitive
 - [x] **COMP-05**: `src/components/v2/layout/Header.astro` with 4 nav links (Blog, Projects, FAQ, Contact), "Let's Talk" CTA, sticky positioning, mobile hamburger; no theme toggle
 - [x] **COMP-06**: `src/components/v2/layout/Footer.astro` with 2-column layout, social icons (44x44 touch targets), secondary nav; no newsletter bar
-- [ ] **COMP-07**: All interactive v2 components validated for WCAG 2.2 AA color contrast and keyboard navigation
+- [x] **COMP-07**: All interactive v2 components validated for WCAG 2.2 AA color contrast and keyboard navigation
 
 ### Homepage
 
@@ -70,7 +70,7 @@ Requirements for this milestone. Each maps to roadmap phases.
 - [ ] **LEAF-01**: `/faq` migrated to `BaseLayoutV2`; FAQPage JSON-LD schema preserved; CTA block added at bottom
 - [ ] **LEAF-02**: `/thank-you` migrated to `BaseLayoutV2`
 - [ ] **LEAF-03**: `/404` migrated to `BaseLayoutV2` with helpful navigation back to homepage and key pages
-- [ ] **LEAF-04**: `/design-system` page rebuilt to document all v2 components with live demos; `/design-system.json` endpoint values updated to v2 tokens
+- [x] **LEAF-04**: `/design-system` page rebuilt to document all v2 components with live demos; `/design-system.json` endpoint values updated to v2 tokens
 
 ### Contact Flow
 
@@ -149,13 +149,13 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FOUND-04 | Phase 23 | Complete |
 | FOUND-05 | Phase 23 | Complete |
 | FOUND-06 | Phase 23 | Complete |
-| COMP-01 | Phase 24 | Pending |
-| COMP-02 | Phase 24 | Pending |
-| COMP-03 | Phase 24 | Pending |
-| COMP-04 | Phase 24 | Pending |
+| COMP-01 | Phase 24 | Complete |
+| COMP-02 | Phase 24 | Complete |
+| COMP-03 | Phase 24 | Complete |
+| COMP-04 | Phase 24 | Complete |
 | COMP-05 | Phase 23 | Complete |
 | COMP-06 | Phase 23 | Complete |
-| COMP-07 | Phase 24 | Pending |
+| COMP-07 | Phase 24 | Complete |
 | HOME-01 | Phase 29 | Pending |
 | HOME-02 | Phase 29 | Pending |
 | HOME-03 | Phase 29 | Pending |
@@ -184,7 +184,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | LEAF-01 | Phase 25 | Pending |
 | LEAF-02 | Phase 25 | Pending |
 | LEAF-03 | Phase 25 | Pending |
-| LEAF-04 | Phase 24 | Pending |
+| LEAF-04 | Phase 24 | Complete |
 | CONT-01 | Phase 28 | Pending |
 | CONT-02 | Phase 28 | Pending |
 | CONT-03 | Phase 28 | Pending |
