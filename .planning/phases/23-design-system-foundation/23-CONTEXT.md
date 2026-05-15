@@ -28,7 +28,7 @@ Stand up the v2 visual foundation that every later phase (24–30) builds on:
   - Layout: `src/layouts/v2/BaseLayout.astro`
   - Styles: `src/styles/v2/global.css`
 - **D-02:** This means ROADMAP/REQUIREMENTS wording (`BaseLayoutV2.astro`, `HeaderV2.astro`, `src/styles/v2.css`) is **superseded** by the v2/ namespace layout. Plans MUST use the namespaced paths above. The semantic intent of those requirement names is preserved; only the path representation differs.
-- **D-03:** Phase 30 cleanup becomes: delete `src/components/{ui,layout}/`, delete `src/layouts/BaseLayout.astro`, delete `src/styles/global.css`, then rename `src/components/v2/` → `src/components/`, `src/layouts/v2/` → `src/layouts/`, `src/styles/v2/` → `src/styles/`. Symmetric, low-risk, no per-file renaming.
+- **D-03:** [informational — Phase 30 scope] Phase 30 cleanup becomes: delete `src/components/{ui,layout}/`, delete `src/layouts/BaseLayout.astro`, delete `src/styles/global.css`, then rename `src/components/v2/` → `src/components/`, `src/layouts/v2/` → `src/layouts/`, `src/styles/v2/` → `src/styles/`. Symmetric, low-risk, no per-file renaming. Captured here because it justifies D-01/D-02 (the v2/ namespace shape is chosen specifically to make Phase 30 a pure delete + dir-rename); not actionable in Phase 23.
 
 ### Token Naming Convention
 - **D-04:** Token scheme is **semantic role-based** across colors, typography, AND spacing. No Tailwind-style numeric scales.
