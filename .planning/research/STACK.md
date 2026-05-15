@@ -1,271 +1,366 @@
 # Stack Research
 
-**Domain:** Design system reference page and component documentation
-**Researched:** 2026-02-10
-**Confidence:** HIGH
+**Domain:** Static portfolio/agency site — full visual design overhaul (v1.4)
+**Researched:** 2026-05-14
+**Confidence:** HIGH (all critical claims verified against official Astro docs, Tailwind v4 docs, npm registry, or motion.dev official site)
 
-## Executive Summary
+---
 
-For adding a design system reference page with component documentation and navigation cleanup to an existing Astro 5 portfolio, **NO new dependencies are required**. The existing stack (Astro 5.16.15, astro-expressive-code 0.41.6, @astrojs/mdx 4.3.13, TypeScript) already provides all necessary capabilities. Redirect handling is already configured in astro.config.mjs.
+## Context
 
-This milestone is a **pure implementation task** using existing tools, not a technology addition task.
+This is a SUBSEQUENT MILESTONE research document. The base stack is locked and not re-researched. The questions answered here are strictly about what to ADD or CHANGE to support the v1.4 design overhaul of an existing Astro 5.16 / Tailwind CSS 4.1 site.
 
-## Existing Stack Capabilities (Already Validated)
+**Locked base stack (verified in package.json):**
+- `astro@^5.16.15` + `@tailwindcss/vite@^4.1.18` + `tailwindcss@^4.1.18`
+- `@astrojs/mdx`, `astro-expressive-code`, `@astrojs/sitemap`, `astro-robots-txt`
+- `@lucide/astro`, `simple-icons-astro`, TypeScript strict
+- Playwright + `@axe-core/playwright` for CI accessibility testing
+- GitHub Pages (static-only, no SSR)
 
-### Core Technologies
+**Crito typography note:** The Crito .pen file must be inspected via Pencil MCP during the design system phase (Phase 23) to confirm exact font names before installing @fontsource packages. The analysis below documents the recommended strategy and likely candidates based on the agency template category; font names are flagged as MEDIUM confidence.
 
-| Technology | Current Version | Latest Version | Purpose | Capabilities for New Features |
-|------------|-----------------|----------------|---------|-------------------------------|
-| Astro | 5.16.15 | 5.17.1 | Static site generator | ✅ File-based routing for /design-system page<br/>✅ TypeScript props documentation via Props interface<br/>✅ Redirect configuration built-in<br/>✅ Component composition |
-| @astrojs/mdx | 4.3.13 | 4.3.13 (current) | MDX processing | ✅ Component documentation in markdown<br/>✅ Import components into .mdx files<br/>✅ Embed live examples |
-| astro-expressive-code | 0.41.6 | 0.41.6 (current) | Syntax highlighting | ✅ Fenced code blocks with syntax highlighting<br/>✅ Inline code via CSS selectors (`p > code`)<br/>✅ 100+ languages including Astro, TypeScript, HTML<br/>✅ Powers official Astro docs |
-| TypeScript | Installed | - | Type safety | ✅ Component Props interface auto-detection<br/>✅ HTMLAttributes type for HTML element mirroring<br/>✅ Polymorphic component support via HTMLTag |
-| @lucide/astro | 0.563.0 | - | Icon system | ✅ Already integrated and used |
-| Tailwind CSS | 4.1.18 | - | Styling | ✅ Design tokens already defined in global.css |
+---
 
-### Redirect Handling
+## Recommended Additions for v1.4
 
-| Capability | Status | Implementation |
-|-----------|--------|----------------|
-| Astro redirects config | ✅ Already configured | `astro.config.mjs` lines 14-17 |
-| Static site redirects | ✅ Generates `<meta http-equiv="refresh">` | Built-in for `output: static` mode |
-| Route priority | ✅ Understood | Redirects lower precedence than actual files |
-| Dynamic route redirects | ✅ Supported | Same parameters required for dynamic routes |
+### 1. Font Hosting
+
+| Technology | Version | Purpose | Why Recommended |
+|------------|---------|---------|-----------------|
+| `@fontsource-variable/*` | latest | Self-hosted variable fonts | Zero CDN round-trip, GDPR safe, version-locked, works at build time for GitHub Pages static output |
+| `@fontsource/*` | latest | Self-hosted static fonts (fallback if variable not available) | Same benefits; use only when variable font unavailable on Fontsource |
+
+**Recommended strategy: `@fontsource-variable/*` packages, NOT the Astro experimental Fonts API.**
+
+Rationale: The Astro Fonts API was introduced as **experimental** in Astro 5.7 (April 2025). It reached **stable** only in Astro 6.0 (March 2026), which requires Node 22 and Vite 7 — a breaking upgrade from the current stack. Using the experimental flag on Astro 5.x for a production site with 100% Lighthouse targets is inadvisable. `@fontsource-variable/*` packages achieve the same outcome (fonts self-hosted from `node_modules`, served via the `_astro/` output path) without the experimental risk. They are used by the Fontsource provider inside the Astro Fonts API anyway.
+
+**Likely Crito fonts (MEDIUM confidence — verify in .pen file before installing):**
+- Display/heading: `@fontsource-variable/plus-jakarta-sans` — geometric sans-serif common in contemporary agency templates
+- Body: `@fontsource-variable/inter` or `@fontsource/dm-sans` — both common clean body pairings in this category
+- Serif accent (if used): `@fontsource/dm-serif-display` — popular display serif in Figma agency templates
+
+**Import pattern in `src/layouts/BaseLayout.astro` (or a shared Head component):**
+```ts
+import "@fontsource-variable/plus-jakarta-sans";        // wght axis, all weights
+import "@fontsource-variable/inter";                     // wght axis, all weights
+```
+
+**CSS variable declaration in `src/styles/global.css` under `@theme`:**
+```css
+@theme {
+  --font-heading: 'Plus Jakarta Sans Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+}
+```
+
+**No new Astro integrations needed** — fontsource packages are standard npm imports; Astro's Vite pipeline bundles the CSS automatically.
+
+---
+
+### 2. Component Library Coexistence (v1 + v2 namespacing)
+
+**No new packages needed.** This is a directory + CSS token convention problem, solved entirely within the existing Tailwind v4 + Astro setup.
+
+**Approach: Dual `@theme` namespace with v2-prefixed tokens**
+
+Tailwind v4's `@theme` directive emits all token variables to `:root`. Old and new tokens coexist without collision as long as variable names differ. The clean approach:
+
+```css
+/* src/styles/global.css — existing v1 tokens stay untouched */
+@theme {
+  --color-yellow: oklch(0.85 0.18 95);   /* v1 — kept until migration complete */
+  --font-heading: 'Bricolage Grotesque', ...;
+
+  /* v2 tokens added alongside — new namespace prefix */
+  --color-v2-primary: oklch(...);
+  --color-v2-neutral-900: oklch(...);
+  --font-v2-heading: 'Plus Jakarta Sans Variable', ...;
+  --font-v2-body: 'Inter Variable', ...;
+}
+```
+
+v2 Tailwind utility classes are generated automatically: `bg-v2-primary`, `text-v2-neutral-900`, `font-v2-heading`.
+
+**Component directory convention:**
+```
+src/components/
+  ui/             # v1 components (Button, Card, Input, Badge) — untouched
+  v2/             # New v2 components built to new design system
+    Button.astro
+    Card.astro
+    ...
+```
+
+Pages migrate one at a time. When a page imports from `src/components/v2/`, it uses v2 tokens. When it imports from `src/components/ui/`, it uses v1. No Tailwind scoping plugins needed — the prefix approach is sufficient.
+
+**`@theme inline` for cross-token references (Tailwind v4 pattern):**
+```css
+@theme inline {
+  --font-v2-heading: var(--font-plus-jakarta-sans);  /* references fontsource-injected var */
+}
+```
+Use `@theme inline` when a theme variable references another CSS variable — this prevents resolution failures in nested contexts.
+
+**Deletion phase:** After all pages migrate to v2, a single PR removes the `--color-yellow`, `--color-turquoise`, `--color-magenta` etc. block from `@theme`, and deletes `src/components/ui/`. The `--v2-` prefix can be dropped in the same PR via a find-and-replace.
+
+**CSS `@scope` — NOT recommended for this use case.** `@scope` is useful for shadow-DOM-like isolation in embedded widgets, not for a migration where components are co-authored. It adds complexity without benefit here. Tailwind v4's `@layer` has no awareness of component scope either — layers are a cascade ordering mechanism, not a component isolation mechanism.
+
+---
+
+### 3. Image Optimization for Agency Layouts
+
+**No new packages needed.** Astro 5.10 shipped responsive images as stable. The existing `astro:assets` pipeline covers everything.
+
+**Stable features in current Astro 5.16.x (verified):**
+
+| Feature | API | Notes |
+|---------|-----|-------|
+| Responsive srcset + sizes | `<Image layout="full-width" />` | Stable since 5.10; generates srcset/sizes automatically |
+| LCP priority | `<Image priority />` | Sets `loading="eager"`, `decoding="sync"`, `fetchpriority="high"` |
+| Multi-format output | `<Picture formats={['avif', 'webp']} />` | Use for hero images; AVIF ~50% smaller than WebP |
+| Sharp default service | Built-in | No configuration needed; sharp is Astro's default image service |
+
+**Recommended pattern for hero images (LCP element):**
+```astro
+---
+import { Image } from 'astro:assets';
+import heroImg from '../assets/hero.jpg';
+---
+<Image
+  src={heroImg}
+  alt="..."
+  layout="full-width"
+  priority
+  widths={[640, 1024, 1440, 1920]}
+/>
+```
+
+**For project showcase galleries:**
+```astro
+<Picture
+  src={projectImg}
+  formats={['avif', 'webp']}
+  alt="..."
+  layout="constrained"
+  width={800}
+  widths={[400, 800]}
+/>
+```
+
+**Blur-up / LQIP placeholders:** Astro 5.x has no built-in LQIP. The `placeholder="blur"` option does NOT exist in `astro:assets` as of Astro 5.16 (confirmed: not in official docs). External options exist (`thumbhash` + inline script, ~2.5kb overhead) but add JS complexity. Recommendation: skip LQIP for v1.4 given existing 100% Lighthouse scores. Re-evaluate if scores drop after adding hero imagery.
+
+**Sharp configuration:** No custom `sharp` config needed. Astro's defaults (quality 80, format conversion) are appropriate. If fine-tuning is needed later, `astro.config.mjs` accepts an `image.service` option, but this is not needed for v1.4.
+
+**No new image packages to install.** `sharp` ships as an Astro dependency.
+
+---
+
+### 4. Animation and Interaction
+
+**Recommendation: CSS-first with native Intersection Observer. No Motion/GSAP.**
+
+Rationale: Adding Motion (formerly Framer Motion) requires its React flavor to need `@astrojs/react` integration (+React runtime cost), or its vanilla JS flavor (`motion` package, 18kb gzipped for hybrid `animate()`). Either approach conflicts with the Lighthouse 90+ constraint and adds JS weight to a currently zero-framework static site.
+
+**What to use instead:**
+
+| Technique | Mechanism | Cost | Use For |
+|-----------|-----------|------|---------|
+| CSS `@starting-style` + `transition` | Native CSS | 0kb | Fade-in on mount, panel reveals |
+| CSS `animation` + `@keyframes` | Native CSS | 0kb | Hero text entrance, hover micro-interactions |
+| Intersection Observer API (inline `<script>`) | ~0.5kb per usage | Per-component | Scroll-reveal sections |
+| Astro View Transitions (`@view-transition { navigation: auto; }`) | CSS only, native browser | 0kb | Page-to-page transitions |
+| `prefers-reduced-motion` media query | Native CSS | 0kb | Accessibility compliance |
+
+**View Transitions implementation for v1.4 (CSS-only, stable):**
+```css
+/* In src/layouts/BaseLayout.astro <style is:global> */
+@view-transition {
+  navigation: auto;
+}
+```
+Browser support: Chrome 126+, Edge 126+, Safari 18+ (85%+ global). Graceful degradation — unsupported browsers get standard navigation.
+
+**Scroll-reveal pattern (Intersection Observer, no framework):**
+```astro
+<!-- In any Astro component -->
+<div class="reveal-on-scroll opacity-0 translate-y-4 transition-all duration-500">
+  ...
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.remove('opacity-0', 'translate-y-4');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+</script>
+```
+
+**`prefers-reduced-motion` pattern (required for WCAG 2.3.3):**
+```css
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+```
+
+**`@starting-style` (Tailwind v4 compatible, Chrome 117+, Safari 17.5+):**
+```css
+.card {
+  transition: opacity 0.3s, transform 0.3s;
+  @starting-style {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+```
+Applies only at initial paint — no JS needed for mount animations.
+
+**What NOT to add:** Motion/Framer Motion (React dependency or 18kb vanilla), GSAP (39kb+), AOS library (adds JS + CSS, reinvents Intersection Observer), Anime.js. All add payload that competes with Lighthouse performance budget.
+
+---
+
+### 5. CSS Design Token System for v1.4
+
+**No new packages needed.** Tailwind v4's `@theme` directive is the complete solution.
+
+**v1.4 token architecture — three-layer pattern:**
+
+```
+Layer 1: Raw values (--primitive-*)     → Exact color/size values, not semantic
+Layer 2: Semantic tokens (--color-*)    → Tailwind utility class generators, --v2- prefix during migration
+Layer 3: Component aliases (in @layer)  → .btn-primary { @apply bg-v2-primary ... }
+```
+
+**Recommended `@theme` structure for v1.4:**
+
+```css
+@theme {
+  /* === EXISTING v1 TOKENS — left untouched until migration === */
+  --color-yellow: oklch(0.85 0.18 95);
+  /* ... all current v1 tokens ... */
+
+  /* === v2 PRIMITIVE VALUES === */
+  --primitive-v2-neutral-50:  oklch(0.98 0 0);
+  --primitive-v2-neutral-900: oklch(0.12 0 0);
+  --primitive-v2-accent-hue:  oklch(0.60 0.18 240);  /* actual values from .pen file */
+
+  /* === v2 SEMANTIC TOKENS (generate Tailwind utilities) === */
+  --color-v2-bg:        var(--primitive-v2-neutral-50);
+  --color-v2-text:      var(--primitive-v2-neutral-900);
+  --color-v2-accent:    var(--primitive-v2-accent-hue);
+
+  /* === v2 TYPOGRAPHY === */
+  --font-v2-heading: 'Plus Jakarta Sans Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-v2-body:    'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+
+  /* === v2 SPACING (if different from Tailwind defaults) === */
+  --spacing-v2-section: 6rem;   /* agency-style generous section padding */
+}
+```
+
+**Why this structure satisfies the three design goals:**
+
+| Goal | How Met |
+|------|---------|
+| Parity with .pen file variables | Primitive layer mirrors .pen variable names directly |
+| Future dark mode without restructuring | Add `@custom-variant dark (&:where(.dark, .dark *));` (already in global.css) and add `--color-v2-bg-dark:` etc. alongside light tokens — no restructuring needed |
+| Clean alongside-old-tokens transition | `--v2-` prefix prevents collision; deletion is a single `@theme` block removal after migration |
+
+**After migration complete:** rename pass removes `--v2-` prefix (find-and-replace in `global.css` and all `v2/` components), deletes old v1 `@theme` block.
+
+**`@theme inline` for font variable references:**
+```css
+@theme inline {
+  --font-v2-heading: var(--font-plus-jakarta-sans);
+}
+```
+Use `inline` when the theme variable's value is itself a CSS variable (prevents broken lookups in nested selector contexts).
+
+---
+
+## Full Installation Summary
+
+```bash
+# Fonts — install AFTER confirming exact font names from .pen file in Phase 23
+npm install @fontsource-variable/plus-jakarta-sans
+npm install @fontsource-variable/inter
+
+# Optional if serif display accent font used in Crito:
+npm install @fontsource/dm-serif-display
+
+# No other new packages needed for v1.4
+```
+
+**No changes to `astro.config.mjs`** — fontsource packages are CSS imports handled by Vite, not Astro integrations.
+
+---
+
+## Alternatives Considered
+
+| Recommended | Alternative | Why Not |
+|-------------|-------------|---------|
+| `@fontsource-variable/*` | Astro experimental Fonts API | Experimental in Astro 5.x; stable only in Astro 6.0 (requires Node 22 + Vite 7 upgrade — too risky for v1.4) |
+| `@fontsource-variable/*` | Google Fonts CDN | Extra DNS round-trip, no privacy guarantee, cache partitioning eliminated CDN sharing benefit in modern browsers |
+| CSS Intersection Observer | Motion (vanilla JS) | 18kb gzip for hybrid animate(); conflicts with Lighthouse perf budget on a static site |
+| CSS Intersection Observer | GSAP | 39kb+ gzip; overkill for scroll reveals and hover effects |
+| CSS Intersection Observer | AOS library | Reinvents native Intersection Observer; ~6kb JS + CSS for no extra benefit |
+| `--v2-` token prefix in `@theme` | CSS `@scope` for component isolation | `@scope` is for embedded/injected widgets; adds complexity without benefit in a co-authored migration |
+| `astro:assets` `<Image layout>` | `@unpic/astro` | `@unpic/astro` adds an external dependency for something Astro 5.10 handles natively; use core features first |
+| `astro:assets` `<Image layout>` | `astro-imagetools` | Unmaintained; last commit 2022; superseded by `astro:assets` |
+| View Transitions CSS `@view-transition` | `<ViewTransitions />` component | The component-based approach requires JS injection; zero-JS CSS approach works for static MPA with no `transition:persist` needs |
+
+---
 
 ## What NOT to Add
 
-| Avoid | Why | Existing Alternative |
-|-------|-----|---------------------|
-| Storybook | Overkill for 4 components, requires build tooling, separate dev server | Astro page with component showcase |
-| react-live | Requires React runtime, client-side JavaScript bundle | Static examples with astro-expressive-code |
-| Docusaurus | Separate framework, documentation-specific, too heavy | Astro with MDX already handles this |
-| Sandpack | Client-side code playground, unnecessary JavaScript weight | Pre-rendered examples sufficient |
-| Component library extractors (react-docgen, etc.) | Not needed for Astro components | Manual Props interface documentation |
-| Additional syntax highlighters (Shiki, Prism standalone) | Redundant | astro-expressive-code already uses Shiki |
+| Avoid | Why | Use Instead |
+|-------|-----|-------------|
+| `@astrojs/react` | Adds React runtime to a zero-framework static site; destroys Lighthouse perf budget | Astro components for all v2 UI |
+| Motion / Framer Motion | Requires React or 18kb vanilla JS; animation complexity not justified by Crito reference | CSS `@starting-style` + `transition` + Intersection Observer |
+| GSAP | 39kb+ gzip; enterprise animation library for hover effects on a portfolio site is massive overkill | CSS keyframes + `transition` |
+| Astro experimental Fonts API (`experimental.fonts`) | Still experimental in Astro 5.x; stable only after Node 22 upgrade (Astro 6.0) | `@fontsource-variable/*` npm packages |
+| `@tailwindcss/typography` plugin | v1.4 design has custom prose styles; the plugin generates opinionated defaults that conflict with agency aesthetics and require significant overrides | Custom `@layer components` prose rules |
+| Any CSS-in-JS library | Static site context; all styling is build-time | Tailwind utilities + custom `@layer` rules |
+| Dark mode tooling (next-themes, etc.) | Dark mode explicitly deferred to v1.5+ | Deferred; `@custom-variant dark` already in global.css for when needed |
+| CMS or headless content layer | Static-only hosting; Joel edits code directly | Content collections (already in place) |
 
-## Implementation Patterns for New Features
+---
 
-### 1. Design System Page Structure
+## Version Compatibility Notes
 
-**Pattern:** Single Astro page at `/src/pages/design-system.astro`
+| Package | Current Version | Compatibility Notes |
+|---------|-----------------|---------------------|
+| `astro` | ^5.16.15 | Responsive images stable (5.10+), Fonts API experimental — do NOT upgrade to 6.0 in v1.4 |
+| `tailwindcss` | ^4.1.18 | `@theme`, `@layer`, `@theme inline` all stable |
+| `@tailwindcss/vite` | ^4.1.18 | Must match `tailwindcss` version exactly |
+| `@fontsource-variable/*` | latest | No Astro version dependency; pure CSS npm packages |
+| `@fontsource/*` | latest | Same as above |
 
-```typescript
-// No new dependencies needed
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Button from '../components/ui/Button.astro';
-import Card from '../components/ui/Card.astro';
-import { Code } from 'astro:components';
-```
-
-### 2. Component Documentation Pattern
-
-**Pattern:** TypeScript Props interface + usage examples
-
-```typescript
-// Already supported - Props interface auto-detected
-interface Props extends HTMLAttributes<'button'> {
-  variant?: 'yellow' | 'turquoise' | 'magenta';
-  size?: 'sm' | 'md' | 'lg';
-}
-```
-
-**Display:** Show props table using TypeScript definitions, not automatic extraction.
-
-### 3. Code Examples Pattern
-
-**Pattern:** Fenced code blocks with astro-expressive-code + live component examples
-
-```astro
-<!-- Code example with syntax highlighting -->
-```astro
-<Button variant="yellow" size="lg">
-  Click me
-</Button>
-\`\`\`
-
-<!-- Live example right below -->
-<div class="example-container">
-  <Button variant="yellow" size="lg">
-    Click me
-  </Button>
-</div>
-```
-
-**Inline code:** Styled with `p > code` CSS selector (already in global.css lines 417-426).
-
-### 4. Redirect Handling
-
-**Status:** Already configured in `astro.config.mjs`
-
-```javascript
-redirects: {
-  '/portfolio': '/projects',
-  '/portfolio/[slug]': '/projects/[slug]',
-}
-```
-
-**For navigation cleanup:** Add redirects as needed, no library required.
-
-### 5. Component Variant Showcase
-
-**Pattern:** Grid layout with component instances
-
-```astro
-<!-- No JavaScript runtime needed -->
-<div class="variant-grid">
-  <Button variant="yellow">Yellow</Button>
-  <Button variant="turquoise">Turquoise</Button>
-  <Button variant="magenta">Magenta</Button>
-</div>
-```
-
-**Interactive:** Components are interactive by default (CSS hover/active states).
-
-## Version Compatibility
-
-All existing packages are compatible and current:
-
-| Package | Current | Latest | Action |
-|---------|---------|--------|--------|
-| astro | 5.16.15 | 5.17.1 | Optional: Update to 5.17.1 for latest features |
-| @astrojs/mdx | 4.3.13 | 4.3.13 | ✅ Current |
-| astro-expressive-code | 0.41.6 | 0.41.6 | ✅ Current |
-| @tailwindcss/vite | 4.1.18 | - | ✅ Current |
-
-**Recommendation:** Stay on current versions unless specific bug fixes are needed. Astro 5.17.1 is a minor patch release.
-
-## Architecture Considerations
-
-### Design System Page Organization
-
-```
-/src/pages/design-system.astro          # Main design system page
-/src/components/design-system/
-  ├── ComponentShowcase.astro           # Reusable component demo wrapper
-  └── PropsTable.astro                  # Props documentation table
-```
-
-**Why this structure:**
-- Keeps design system code separate from production components
-- ComponentShowcase can wrap any component with example container
-- PropsTable is reusable for all component documentation sections
-
-### Component Documentation Approach
-
-**Manual documentation** (recommended for 4 components):
-- Define props in TypeScript Props interface
-- Document in PropsTable component manually
-- Show usage examples with code + live preview
-
-**Why not automated:**
-- Only 4 components to document (Button, Card, Input, Badge)
-- Astro components don't have runtime prop extraction
-- Manual documentation is clearer and more controlled
-- No additional build complexity
-
-## Integration Points
-
-### With Existing Design System
-
-**Color tokens:** Already defined in `/src/styles/global.css` lines 3-68
-- Use CSS custom properties for color swatches
-- No need to parse/extract programmatically
-
-**Typography tokens:** Already defined in `/src/styles/global.css` lines 43-67
-- Display using existing CSS variables
-- No additional tools needed
-
-**Components:** Import from `/src/components/ui/`
-- Button, Card, Input, Badge already built
-- Import and render directly in design system page
-
-### With Navigation
-
-**Current navigation:** `/src/components/layout/Header.astro`
-- Add "Design System" link to nav array
-- No routing library needed (file-based routing)
-
-**Redirects:** Configured in `astro.config.mjs`
-- Add new redirects as needed
-- Static site generates `<meta>` redirects automatically
-
-## Best Practices for Implementation
-
-### 1. Code Example Pattern
-
-```astro
-<section class="component-section">
-  <h2>Button Component</h2>
-
-  <!-- Props documentation -->
-  <PropsTable component="Button" props={buttonProps} />
-
-  <!-- Code example -->
-  <div class="code-example">
-    <Code code={`<Button variant="yellow">Click me</Button>`} lang="astro" />
-  </div>
-
-  <!-- Live preview -->
-  <div class="live-preview">
-    <Button variant="yellow">Click me</Button>
-  </div>
-</section>
-```
-
-### 2. Variant Showcase Pattern
-
-```astro
-<!-- Show all variants in a grid -->
-<div class="variant-showcase">
-  {['yellow', 'turquoise', 'magenta'].map(variant => (
-    <div class="variant-demo">
-      <Button variant={variant}>{variant}</Button>
-      <span class="variant-label">{variant}</span>
-    </div>
-  ))}
-</div>
-```
-
-### 3. Design Token Display Pattern
-
-```astro
-<!-- Show color tokens -->
-<div class="color-grid">
-  <div class="color-swatch" style="background: var(--color-yellow)">
-    <span>--color-yellow</span>
-    <code>oklch(0.85 0.18 95)</code>
-  </div>
-</div>
-```
+---
 
 ## Sources
 
-### Official Documentation (HIGH confidence)
-- [Astro Components Documentation](https://docs.astro.build/en/basics/astro-components/) — Component composition and usage
-- [Astro TypeScript Guide](https://docs.astro.build/en/guides/typescript/) — Props interface and type checking
-- [Astro Syntax Highlighting](https://docs.astro.build/en/guides/syntax-highlighting/) — Code block configuration
-- [Astro Routing Documentation](https://docs.astro.build/en/guides/routing/) — File-based routing and redirects
-- [Astro Configuration Reference](https://docs.astro.build/en/reference/configuration-reference/) — Redirect configuration
-
-### Package Verification (HIGH confidence)
-- npm registry: astro@5.17.1 (latest), astro-expressive-code@0.41.6 (current), @astrojs/mdx@4.3.13 (current)
-
-### Design System Patterns (MEDIUM confidence)
-- [Building the Ultimate Design System: Architecture Guide for 2026](https://medium.com/@padmacnu/building-the-ultimate-design-system-a-complete-architecture-guide-for-2026-6dfcab0e9999) — Modern architecture approaches
-- [The Design System Guide](https://thedesignsystem.guide/documentation) — Documentation best practices
-- [Backlight: Design System Documentation Best Practices](https://backlight.dev/blog/design-system-documentation-best-practices) — Documentation patterns
-
-### Astro Design System Examples (MEDIUM confidence)
-- [Astro Design System Theme](https://astro.build/themes/details/astro-design-system-docs/) — Reference implementation
-- [GitHub: astro-design-system by jordienr](https://github.com/jordienr/astro-design-system) — Starter template pattern
-- [What's new in Astro - January 2026](https://astro.build/blog/whats-new-january-2026/) — Latest features and integrations
-
-### Code Examples and Syntax Highlighting (MEDIUM confidence)
-- [Expressive Code Documentation](https://expressive-code.com/key-features/syntax-highlighting/) — Syntax highlighting features
-- [Astro Starlight: Code Component](https://starlight.astro.build/components/code/) — Code component usage patterns
-- [Add inline syntax highlighting to Astro](https://camdecoster.dev/posts/add-inline-syntax-highlighting-to-astro/) — Inline code patterns
+- Official Astro docs: https://docs.astro.build/en/guides/images/ — Image/Picture component, `layout` prop, `priority` prop, stable in 5.10 (Verified 2026-05-14)
+- Astro 5.10 blog: https://astro.build/blog/astro-5100/ — responsive images stable, `priority` prop confirmed (Verified 2026-05-14)
+- Astro 6.0 blog: https://astro.build/blog/astro-6/ — Fonts API stable in 6.0, requires Node 22 + Vite 7 (Verified 2026-05-14)
+- Astro experimental Fonts API docs: https://docs.astro.build/en/reference/experimental-flags/fonts/ — config syntax, Font component, caching behavior (Verified 2026-05-14)
+- Zero-JS View Transitions blog: https://astro.build/blog/future-of-astro-zero-js-view-transitions/ — `@view-transition { navigation: auto }` pattern, browser support (Verified 2026-05-14)
+- Tailwind v4 @theme docs: https://tailwindcss.com/docs/theme — namespace conventions, `@theme inline`, migration patterns (Verified 2026-05-14)
+- Fontsource install docs: https://fontsource.org/docs/getting-started/install — `@fontsource-variable/*` import pattern (Verified 2026-05-14)
+- motion.dev: https://motion.dev/ — vanilla JS support confirmed, hybrid animate() = 18kb gzip (Verified 2026-05-14)
+- LQIP in Astro (Pinelab.studio): https://pinelab.studio/blog/implementing-low-quality-image-placeholders-lqip-in-astro/ — ThumbHash pattern, ~2.5kb inline script (MEDIUM confidence — single source)
+- Fontsource @fontsource-variable/plus-jakarta-sans on npm: https://www.npmjs.com/package/@fontsource-variable/plus-jakarta-sans
+- Fontsource @fontsource-variable/inter on npm: https://www.npmjs.com/package/@fontsource-variable/inter
 
 ---
-*Stack research for: Design system reference page and component documentation*
-*Researched: 2026-02-10*
-*Confidence: HIGH — All capabilities verified in existing dependencies*
+*Stack research for: v1.4 Design Overhaul — Joel Shinness Website*
+*Researched: 2026-05-14*
