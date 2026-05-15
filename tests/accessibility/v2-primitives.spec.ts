@@ -246,6 +246,83 @@ test.describe('v2 Primitives Accessibility (Phase 24)', () => {
     expect(outlineColor).not.toBe('rgba(0, 0, 0, 0)');
     expect(outlineColor).not.toBe('');
 
+    // -------------------------------------------------------------------------
+    // Hover lift magnitude — closes UAT Gap 2 (plan 24-06). The interactive
+    // Card must produce a non-zero translateY on :hover (was previously -2px,
+    // below perception threshold — raised to -4px / -translate-y-1 per UAT
+    // fix). Regression guard: any future change that re-introduces an
+    // imperceptible or zero lift will fail this assertion.
+    // See .planning/debug/interactive-card-no-hover-lift.md for diagnosis.
+    //
+    // Robustness notes:
+    //   (a) Test 7 above called `await interactiveCard.focus()` — focus state
+    //       can produce sub-pixel layout drift on Chromium and (more
+    //       importantly) means document.activeElement === the card, which
+    //       confuses subsequent mouse-baseline reads. Explicitly blur the
+    //       active element before establishing the no-hover baseline.
+    //   (b) Tailwind v4's `translate` individual CSS property (not `transform`)
+    //       is the correct readout. When Chromium generates `hover:-translate-y-1`,
+    //       `getComputedStyle(el).transform` returns `"none"` because the utility
+    //       maps to the CSS `translate` individual property, not a `transform`
+    //       matrix. Reading `getComputedStyle(el).translate` and splitting on
+    //       whitespace is the robust approach:
+    //         - "0px -4px" (X Y) → parts[1] = "-4px"
+    //         - "-4px" (Y only, when X=0 and Chromium omits it) → parts[0] = "-4px"
+    //       This avoids the fragile `matrix(a,b,c,d,tx,ty)` regex which is only
+    //       relevant when the `transform` CSS property is used instead.
+    //
+    //   Observed values in Playwright headless Chromium (v4.1.18, translate utility):
+    //     - baseline (no hover): getComputedStyle.translate = "none" → ty = 0
+    //     - hovered: getComputedStyle.translate = "0px -4px" → ty = -4
+    // -------------------------------------------------------------------------
+    // (a) Clear residual focus so it doesn't bias baseline measurement.
+    await page.evaluate(() => {
+      const active = document.activeElement as HTMLElement | null;
+      if (active && typeof active.blur === 'function') active.blur();
+    });
+    await page.mouse.move(0, 0);
+
+    // Baseline (no hover, no focus) — translateY component of the
+    // computed `translate` property should be 0.
+    //
+    // parseTranslateTy: whitespace-split parser for the CSS `translate` property.
+    //   "none"    → 0  (no translation active)
+    //   "0px -4px" → -4  (X Y form — Chromium emits this when X=0 and Y≠0)
+    //   "-4px"     → -4  (Y-only form — if X is exactly 0 and omitted)
+    //   "0px 0px"  → 0
+    const parseTranslateTy = (translate: string): number => {
+      if (!translate || translate === 'none') return 0;
+      const parts = translate.split(/\s+/).filter(Boolean);
+      // "X Y" form: length >= 2, Y is parts[1]
+      if (parts.length >= 2) return parseFloat(parts[1]);
+      // single-value form: length === 1, treated as Y
+      return parseFloat(parts[0]);
+    };
+
+    const baselineTranslate = await interactiveCard.evaluate(
+      (el) => window.getComputedStyle(el as Element).translate
+    );
+    const baselineTy = parseTranslateTy(baselineTranslate);
+    // Baseline ty must be 0 (or close to it — allow ±0.5px sub-pixel slack)
+    expect(Math.abs(baselineTy)).toBeLessThanOrEqual(0.5);
+
+    // Hover the card and re-read the computed translate property.
+    // Wait for the CSS transition to complete (duration-200 = 200ms) before
+    // sampling the final translateY value. Playwright's .hover() triggers the
+    // :hover pseudo-class synchronously but the CSS transition runs
+    // asynchronously — without the wait, getComputedStyle returns the
+    // mid-animation interpolated value (near 0), not the target value (-4px).
+    await interactiveCard.hover();
+    await page.waitForTimeout(300); // 300ms > 200ms transition = fully settled
+    const hoverTranslate = await interactiveCard.evaluate(
+      (el) => window.getComputedStyle(el as Element).translate
+    );
+    const hoverTy = parseTranslateTy(hoverTranslate);
+
+    // Assertion: ty must be meaningfully negative (≤ -3px guards both -4
+    // and -6; the broken -2px state would fail this assertion).
+    expect(hoverTy).toBeLessThanOrEqual(-3);
+
     // Non-interactive Cards in section#card must NOT have tabindex="0"
     // (they should have no tabindex attribute or tabindex="-1")
     const nonInteractiveCards = page.locator('section#card > div > div:not([tabindex="0"]), section#card > div:not([tabindex="0"])');
