@@ -4,11 +4,32 @@
 
 A lead-generation focused portfolio website for Joel Shinness targeting small business clients. The site communicates expertise in web apps, automation, and AI development through distinctive neobrutalist design with isometric illustrations, outcome-focused messaging, and clear calls to action.
 
-**Current state:** v1.3 shipped. Design system consolidation and navigation cleanup complete.
+**Current state:** v1.3 shipped. v1.4 Design Overhaul in planning — full visual refresh adopting the Crito agency template structure on a new component library.
 
 ## Core Value
 
 Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
+
+## Current Milestone: v1.4 Design Overhaul
+
+**Goal:** Replace the neobrutalist visual language with the Crito agency template's structure and aesthetic across the entire site, built on a fresh component library and Pencil-documented design system, while preserving lead-gen positioning and all existing content.
+
+**Reference design:** `design/Consulting & Agency Website Template I Crito (Community).pen` (converted from Figma; inspected via the Pencil MCP).
+
+**Target outcomes:**
+- New Pencil-documented design system (.pen file) defining tokens, typography, and reusable components factored from the Crito reference
+- New code component library built alongside v1.3 components (`src/components/v2/` or similar namespace), enabling per-page migration without breaking existing pages
+- Every page refactored onto the new library: Homepage, Projects (index + detail), Blog (index + post + tag), FAQ, Contact, Thank-you, Design system reference page, 404
+- v1.3 design system components deleted after all pages migrate
+- Lead-gen contact flow (8-field n8n webhook form + /thank-you redirect) preserved with reskinned visual presentation
+- WCAG 2.2 AA + Lighthouse 90+ thresholds maintained across all refactored pages
+
+**Key context:**
+- Crito reference .pen contains 15 page frames but zero reusable components (Figma → Pen conversion flattened them); the v1.4 design system phase factors the components ourselves
+- Crito page structure does not map 1:1 to current site (e.g. Crito has separate Service / About Me / Information / View More pages; ours embeds About in homepage and uses Projects for service showcase) — page-structure mapping resolved during requirements
+- Build-alongside-then-swap strategy keeps existing v1.3 components functional until each page is migrated (no big-bang break)
+- Dark mode deferred — light-mode only for v1.4, revisit after the new design lands
+- Phase numbering continues from v1.3 → starts at **Phase 23**
 
 ## Requirements
 
@@ -66,21 +87,39 @@ Small business owners can understand what Joel does, trust his process, and easi
 
 ### Active
 
-*Future enhancements (candidates for v1.4+):*
+*v1.4 Design Overhaul scope:*
+
+- [ ] Design system .pen file with reusable components factored from Crito reference
+- [ ] New visual brand tokens (palette, typography, spacing) replacing neobrutalist OKLCH system
+- [ ] New code component library (built alongside v1.3 in a separate namespace)
+- [ ] Homepage refactored to new design (Hero, Services, Process, Technology, About, Contact sections)
+- [ ] Projects index + project detail pages refactored
+- [ ] Blog index + post layout + tag pages refactored
+- [ ] FAQ page refactored
+- [ ] Contact + /thank-you pages refactored (form behavior preserved)
+- [ ] /design-system reference page rebuilt to document the new library
+- [ ] 404 page refactored
+- [ ] v1.3 design system components deleted after migration completes
+- [ ] WCAG 2.2 AA validated across all refactored pages (zero axe-core violations)
+- [ ] Lighthouse 90+ across all categories maintained
+
+*Future enhancements (carry-over candidates for v1.5+):*
 
 - [ ] Testimonials section with client quotes
 - [ ] Newsletter signup integration
-- [ ] Animated hover states for isometric illustrations
 - [ ] Real project screenshots (replace placeholders)
+- [ ] Dark mode for the new design (deferred from v1.4)
 
 ### Out of Scope
 
 - Booking/calendar integration — contact form sufficient
 - Pricing information — custom work requires conversation
 - CMS backend — Joel can edit code directly
-- Individual blog post redesign — two-tier typography works well
-- Color block sections — asymmetric layouts preferred
-- Animated isometric scenes — file size bloat, accessibility issues, static aesthetic is on-brand
+- Dark mode redesign in v1.4 — deferred to a later milestone; light-mode only for this overhaul
+- Changing form behavior or contact flow — only visual presentation reskinned in v1.4
+- Editing copy or projects.json content — content carried over unchanged in v1.4
+- Adopting Crito page set wholesale (View More, Information, Free Design Sample pages) — Joel's existing page architecture is retained
+- Neobrutalist palette / isometric illustrations / Bricolage Grotesque + DM Sans / shadow-to-glow dark mode — explicitly being replaced by v1.4
 
 ## Context
 
@@ -146,5 +185,22 @@ Consolidated design system into reference page, achieved 100% component consiste
 - Update Calendly placeholder URL on /thank-you page
 - Add real social profile URLs (Instagram, Substack)
 
+## Evolution
+
+This document evolves at phase transitions and milestone boundaries.
+
+**After each phase transition** (via `/gsd-transition`):
+1. Requirements invalidated? → Move to Out of Scope with reason
+2. Requirements validated? → Move to Validated with phase reference
+3. New requirements emerged? → Add to Active
+4. Decisions to log? → Add to Key Decisions
+5. "What This Is" still accurate? → Update if drifted
+
+**After each milestone** (via `/gsd-complete-milestone`):
+1. Full review of all sections
+2. Core Value check — still the right priority?
+3. Audit Out of Scope — reasons still valid?
+4. Update Context with current state
+
 ---
-*Last updated: 2026-02-11 after v1.3 milestone shipped*
+*Last updated: 2026-05-14 after v1.4 milestone started*

@@ -1,19 +1,33 @@
+---
+gsd_state_version: 1.0
+milestone: v1.4
+milestone_name: Design Overhaul
+status: planning
+last_updated: "2026-05-15T02:21:58.869Z"
+last_activity: 2026-05-15
+progress:
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
+---
+
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-02-11)
+See: .planning/PROJECT.md (updated 2026-05-14)
 
 **Core value:** Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
-**Current focus:** Between milestones — ready for v1.4 planning
+**Current focus:** v1.4 Design Overhaul — defining requirements
 
 ## Current Position
 
-Milestone: v1.3 complete (archived 2026-02-11)
-Status: Between milestones
-Last activity: 2026-05-14 — Closed out v1.3 milestone entry in MILESTONES.md
-
-Progress: 4 milestones shipped (v1.0, v1.1, v1.2, v1.3)
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-05-15 — Milestone v1.4 started
 
 ## Milestone History
 
@@ -29,6 +43,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 ## Performance Metrics
 
 **Velocity:**
+
 - Total plans completed: 67 (v1.0: 23, v1.1: 14, v1.2: 10, v1.3: 20)
 - Average duration: ~1-5 min/plan (recent trend)
 - Total execution time: ~5 days across 3 milestones
@@ -43,6 +58,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 | v1.3 Design System & Nav | 17-22 | 20 | 2 days |
 
 **Recent Trend:**
+
 - v1.0: 2 days for 23 plans (foundational work)
 - v1.1: 2 days for 14 plans (design transformation)
 - v1.2: 1 day for 10 plans (incremental enhancements)
@@ -57,6 +73,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 Key decisions are logged in PROJECT.md Key Decisions table.
 
 Recent decisions affecting v1.3:
+
 - **17-08**: Stacked card inset positioning — Changed inset from -4px to 0 for proper pseudo-element layer visibility
 - **17-08**: Stacked card solid backgrounds — Added matching background fills to pseudo-elements for true stacked paper effect
 - **17-08**: Stacked card border opacity — Increased from 60%/30% to 80%/50% for better contrast on light/dark backgrounds
@@ -121,18 +138,21 @@ Recent decisions affecting v1.3:
 ### Pending Todos
 
 **Before deployment:**
+
 1. Configure n8n webhook - Set PUBLIC_N8N_WEBHOOK_URL environment variable and create n8n workflow
 2. Update Calendly booking link on /thank-you page with real URL
 3. Add real social links (Instagram, Substack URLs)
 4. Replace placeholder images with real content
 
 **Nice to have:**
+
 1. Add real project screenshots (currently using placeholder SVGs)
 2. Expand project dataset to 5-10 projects for credibility
 
 ### Blockers/Concerns
 
 **Phase 22 complete (verified):**
+
 - ✅ Instagram and Substack social icons added to footer with 44x44px touch targets
 - ✅ Secondary navigation mirroring header (Blog, Projects, FAQ, Contact)
 - ✅ All footer elements have proper aria-labels and focus indicators
@@ -142,12 +162,14 @@ Recent decisions affecting v1.3:
 - ✅ Footer visual hierarchy established (social → nav → copyright)
 
 **Phase 21 complete (verified):**
+
 - ✅ Header navigation reduced to 4 links (Blog, Projects, FAQ, Contact)
 - ✅ /contact page deleted, redirects to /#contact via astro.config.mjs
 - ✅ Footer FAQ link removed (FAQ available in header)
 - ✅ Navigation order optimized (content first, action last)
 
 **Phase 20 complete (verified):**
+
 - ✅ CheckboxGroup component created with neobrutalist styling and 3 color variants
 - ✅ Thank-you page with confirmation message and Calendly placeholder
 - ✅ Enhanced /contact page with 8 lead qualification fields (Name, Email, Company, Challenges, Solutions, Budget, Timeline, Message)
@@ -158,6 +180,7 @@ Recent decisions affecting v1.3:
 - ✅ Complete contact form flow tested and verified in light and dark modes
 
 **Phase 19 complete (verified):**
+
 - ✅ All HIGH severity findings remediated (contact form, filter buttons, portfolio badges, homepage textarea)
 - ✅ All MEDIUM severity findings resolved (blog tag border consistency)
 - ✅ Zero raw HTML form elements or buttons in interactive UI
