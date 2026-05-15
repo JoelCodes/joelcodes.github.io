@@ -66,6 +66,12 @@
   /* ---------------------------------------------------------------------- */
   --leading-display: 1.4; /* Crito heading lineHeight verified */
   --leading-text:    1.6; /* Crito body lineHeight verified (1.5–1.625 observed) */
+
+  /* ---------------------------------------------------------------------- */
+  /* Shadows (1) — promoted in plan 24-02; no v1 collision (v1 uses neo      */
+  /* utility classes, not CSS custom-property shadow tokens)                 */
+  /* ---------------------------------------------------------------------- */
+  --shadow-md: 0 4px 6px -1px oklch(0 0 0 / 0.1), 0 2px 4px -2px oklch(0 0 0 / 0.1);
 }
 
 /* See .planning/phases/23-design-system-foundation/23-01-CRITO-INSPECTION.md for token-value provenance. */
