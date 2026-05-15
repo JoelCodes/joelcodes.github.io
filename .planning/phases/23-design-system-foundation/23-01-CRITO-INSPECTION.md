@@ -98,11 +98,11 @@ Single source of truth for plans 23-02 (CSS custom properties in `src/styles/v2/
 | `size/caption` | `--text-caption` |
 | `font/display` | `--font-display` |
 | `font/text` | `--font-text` |
-| `weight/regular` | `--font-weight-regular` |
-| `weight/medium` | `--font-weight-medium` |
-| `weight/bold` | `--font-weight-bold` |
-| `leading/tight` | `--leading-tight` |
-| `leading/normal` | `--leading-normal` |
+| `weight/display` | `--font-weight-display` |
+| `weight/text` | `--font-weight-text` |
+| `weight/text-bold` | `--font-weight-text-bold` |
+| `leading/display` | `--leading-display` |
+| `leading/text` | `--leading-text` |
 
 Recommended values (plan 23-02 ships these):
 
@@ -144,11 +144,11 @@ Recommended values (plan 23-02 ships these):
 /* Typography */
 --font-display: "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, sans-serif;
 --font-text:    "Inter Variable", ui-sans-serif, system-ui, sans-serif;
---font-weight-regular: 400;
---font-weight-medium:  500;  /* Crito nav verified */
---font-weight-bold:    700;  /* Crito heading + footer column header verified */
---leading-tight:  1.4;       /* Crito heading lineHeight verified */
---leading-normal: 1.6;       /* Crito body lineHeight verified (1.5–1.625 range) */
+--font-weight-display:    700; /* Crito heading verified — renamed from --font-weight-bold to avoid v1's --font-weight-h1..h4/body family */
+--font-weight-text:       400; /* Crito body verified */
+--font-weight-text-bold:  500; /* Crito nav verified */
+--leading-display: 1.4;        /* Crito heading lineHeight verified — renamed from --leading-tight to avoid v1's --leading-tight/normal/relaxed (D-08) */
+--leading-text:    1.6;        /* Crito body lineHeight verified (1.5–1.625 observed) */
 ```
 
 ## npm Package Confirmation
