@@ -1,8 +1,10 @@
 ---
-status: diagnosed
+status: resolved
 trigger: "Interactive Card does not lift on hover (UAT Phase 24 Gap)"
 created: 2026-05-15T00:00:00Z
-updated: 2026-05-15T00:30:00Z
+updated: 2026-05-15T22:08:00Z
+resolved: 2026-05-15T22:08:00Z
+closed_by: 24-06-PLAN.md
 ---
 
 ## Current Focus

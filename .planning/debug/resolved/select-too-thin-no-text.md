@@ -1,8 +1,10 @@
 ---
-status: diagnosed
+status: resolved
 trigger: "Select primitive (Input as='select') renders too thin and shows no selected text"
 created: 2026-05-15T00:00:00Z
-updated: 2026-05-15T00:00:00Z
+updated: 2026-05-15T22:08:00Z
+resolved: 2026-05-15T22:08:00Z
+closed_by: 24-05-PLAN.md
 ---
 
 ## Current Focus

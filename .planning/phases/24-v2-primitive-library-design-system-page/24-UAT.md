@@ -1,5 +1,5 @@
 ---
-status: diagnosed
+status: resolved
 phase: 24-v2-primitive-library-design-system-page
 source:
   - 24-01-SUMMARY.md
@@ -7,8 +7,9 @@ source:
   - 24-03-SUMMARY.md
   - 24-04-SUMMARY.md
 started: 2026-05-15T00:00:00Z
-updated: 2026-05-15T00:00:00Z
+updated: 2026-05-15T22:08:00Z
 diagnosed: 2026-05-15T00:00:00Z
+resolved: 2026-05-15T22:08:00Z
 ---
 
 ## Current Test
@@ -81,7 +82,8 @@ distinct_gaps: 3
 ## Gaps
 
 - truth: "Select primitive (Input as=\"select\") renders at usable width and shows the selected option's text"
-  status: failed
+  status: resolved
+  closed_by: 24-05-PLAN.md
   reason: "User reported on Test 1: The dropdown is way too thin, and doesn't show text, even when something is selected. Reconfirmed on Test 6: The select doesn't show default or selected text."
   severity: major
   tests: [1, 6]
@@ -109,7 +111,8 @@ distinct_gaps: 3
   debug_session: .planning/debug/select-too-thin-no-text.md
 
 - truth: "Interactive Card lifts on hover via hover:-translate-y-0.5"
-  status: failed
+  status: resolved
+  closed_by: 24-06-PLAN.md
   reason: "User reported: The interactive card does not lift on hover, but it does get an accent green focus."
   severity: minor
   test: 5
@@ -136,7 +139,8 @@ distinct_gaps: 3
   debug_session: .planning/debug/interactive-card-no-hover-lift.md
 
 - truth: "Input error state shows red color treatment on the error message"
-  status: failed
+  status: resolved
+  closed_by: 24-07-PLAN.md
   reason: "User reported: The error state is not red."
   severity: cosmetic
   test: 7
