@@ -18,14 +18,17 @@
   --color-accent:         oklch(0.79 0.184 148.5);  /* Crito CTA green #38da71 — actionable accent */
 
   /* ---------------------------------------------------------------------- */
-  /* Spacing (6) — t-shirt scale per D-07; 8pt-rhythm anchored to Crito     */
+  /* Spacing (6) — t-shirt scale per D-07; 8pt-rhythm anchored to Crito.    */
+  /* MUST use Tailwind v4's `--spacing-*` namespace so utilities like       */
+  /* `px-sm`, `py-md`, `gap-xs` actually generate (NOT `--space-*`, which   */
+  /* is silently ignored by the utility generator).                         */
   /* ---------------------------------------------------------------------- */
-  --space-xs:   0.5rem;  /* 8px  — icon→label gaps */
-  --space-sm:   1rem;    /* 16px — link row gap, button inner gap */
-  --space-md:   1.5rem;  /* 24px — heading→body gap */
-  --space-lg:   2rem;    /* 32px — container side padding */
-  --space-xl:   3rem;    /* 48px — block-level breathing room */
-  --space-2xl:  5rem;    /* 80px — section breathing room (Q4 resolved) */
+  --spacing-xs:   0.5rem;  /* 8px  — icon→label gaps */
+  --spacing-sm:   1rem;    /* 16px — link row gap, button inner gap */
+  --spacing-md:   1.5rem;  /* 24px — heading→body gap */
+  --spacing-lg:   2rem;    /* 32px — container side padding */
+  --spacing-xl:   3rem;    /* 48px — block-level breathing room */
+  --spacing-2xl:  5rem;    /* 80px — section breathing room (Q4 resolved) */
 
   /* ---------------------------------------------------------------------- */
   /* Radii (4) — Crito-anchored                                              */
