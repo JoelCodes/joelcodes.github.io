@@ -24,3 +24,6 @@ pnpm-debug.log*
 .idea/
 
 .claude/
+
+# design source files (Figma binaries — too large for git, keep locally)
+design/**/*.fig
