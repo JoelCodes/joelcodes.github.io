@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Design Overhaul
 status: executing
-stopped_at: Phase 24 Plan 02 complete
-last_updated: "2026-05-15T18:17:09Z"
-last_activity: 2026-05-15 -- Completed 24-02-PLAN.md (v2 Card composition, Input, Badge primitives)
+stopped_at: Phase 24 Plan 04 complete
+last_updated: "2026-05-15T18:23:08Z"
+last_activity: 2026-05-15 -- Completed 24-04-PLAN.md (/design-system page + /design-system.json on v2 BaseLayout)
 progress:
   total_phases: 8
   completed_phases: 1
   total_plans: 8
-  completed_plans: 6
-  percent: 19
+  completed_plans: 8
+  percent: 25
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 ## Current Position
 
 Phase: 24 (v2-primitive-library-design-system-page) — EXECUTING
-Plan: 2 of 4 COMPLETE → next: Plan 3 of 4
-Status: Executing Phase 24
-Last activity: 2026-05-15 -- Completed 24-02 v2 Card composition, Input, Badge primitives
+Plan: 4 of 4 COMPLETE → Phase 24 complete; next: Plan 24-03 was skipped per orchestrator
+Status: Executing Phase 24 — Wave 2 complete
+Last activity: 2026-05-15 -- Completed 24-04 /design-system page + /design-system.json on v2 BaseLayout
 
-Progress: [██░░░░░░░░] 19% (v1.4)
+Progress: [███░░░░░░░] 25% (v1.4)
 
 ## Milestone History
 
@@ -77,6 +77,9 @@ See `.planning/MILESTONES.md` for full milestone details.
 - **24-02 2026-05-15**: --shadow-md token promoted to v2/global.css @theme block (no v1 collision) — enables shadow-md Tailwind utility for elevated Card and downstream reuse in Phase 27 service cards
 - **24-02 2026-05-15**: aria-describedby uses error-priority single-ref (errorId ?? helperId) — only ONE id referenced at a time; avoids orphan aria-describedby when referenced element doesn't exist (RESEARCH Pitfall 3)
 - **24-02 2026-05-15**: No unit tests written for Card/Input/Badge — Wave 3 Playwright + axe-core (Plan 24-03) covers polymorphic rendering and aria wiring on /design-system page
+- **24-04 2026-05-15**: Flat token endpoint shape (5 top-level keys) — no nested per-palette, no dark variants; consistent with D-16 and RESEARCH flat-semantic conclusion
+- **24-04 2026-05-15**: /design-system page uses single-column layout, no sidebar nav — D-21 Claude's Discretion; sidebar deferred; simple anchor sections sufficient for reference use
+- **24-04 2026-05-15**: TDD: static parse test (CJS Node script, 19 assertions) written for JSON endpoint before implementation — RED confirmed, GREEN after implementation
 
 ### Pending Todos
 
@@ -94,7 +97,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 ## Session Continuity
 
-Last session: 2026-05-15T18:17:09Z
-Stopped at: Completed 24-02-PLAN.md (v2 Card composition, Input, Badge primitives)
-Resume file: .planning/phases/24-v2-primitive-library-design-system-page/24-02-SUMMARY.md
-Next action: Execute Plan 24-03 (Playwright + axe-core accessibility tests for /design-system)
+Last session: 2026-05-15T18:23:08Z
+Stopped at: Completed 24-04-PLAN.md (/design-system page + /design-system.json on v2 BaseLayout)
+Resume file: .planning/phases/24-v2-primitive-library-design-system-page/24-04-SUMMARY.md
+Next action: Execute Plan 24-03 (Playwright + axe-core accessibility tests for /design-system) — Wave 3
