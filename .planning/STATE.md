@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Design Overhaul
 status: executing
-stopped_at: Phase 24 UI-SPEC approved
-last_updated: "2026-05-15T17:32:37.232Z"
-last_activity: 2026-05-15 -- Phase 24 planning complete
+stopped_at: Phase 24 Plan 01 complete
+last_updated: "2026-05-15T18:12:27Z"
+last_activity: 2026-05-15 -- Completed 24-01-PLAN.md (v2 Button primitive)
 progress:
   total_phases: 8
   completed_phases: 1
   total_plans: 8
-  completed_plans: 4
-  percent: 13
+  completed_plans: 5
+  percent: 16
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-14)
 
 **Core value:** Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
-**Current focus:** Phase 24 — v2 primitive library + design system page
+**Current focus:** Phase 24 — v2-primitive-library-design-system-page
 
 ## Current Position
 
-Phase: 24
-Plan: Not started
-Status: Ready to execute
-Last activity: 2026-05-15 -- Phase 24 planning complete
+Phase: 24 (v2-primitive-library-design-system-page) — EXECUTING
+Plan: 1 of 4 COMPLETE → next: Plan 2 of 4
+Status: Executing Phase 24
+Last activity: 2026-05-15 -- Completed 24-01 v2 Button primitive
 
-Progress: [░░░░░░░░░░] 0% (v1.4)
+Progress: [█░░░░░░░░░] 16% (v1.4)
 
 ## Milestone History
 
@@ -71,6 +71,9 @@ See `.planning/MILESTONES.md` for full milestone details.
 - **Roadmap 2026-05-14**: Exact Crito font/palette values are MEDIUM confidence — Phase 23 must begin with Pencil MCP inspection; no @fontsource-variable/* packages named until inspection confirms them
 - **Roadmap 2026-05-14**: Services page (SERV-01..04) bundled into Phase 27 with Projects — card component from Phase 24 makes the new page low-effort; risk isolation preserved by ordering after Blog
 - **Roadmap 2026-05-14**: Contact reskin (Phase 28) isolated from homepage — e2e form test is a mandatory merge gate; isolating prevents form regression from homepage scope creep
+- **24-01 2026-05-15**: font-medium (Tailwind built-in 500) used for Button labels over custom font-text-bold token utility — Header.astro precedent confirms built-in weight utilities are reliable; custom --font-weight-text-bold utility name unverified
+- **24-01 2026-05-15**: :global(svg) inside scoped style accepted for link-variant arrow-nudge — anchored to .link-variant marker class, not a top-level is:global directive
+- **24-01 2026-05-15**: No unit test written for Button.astro — presentational primitive; Wave 3 Playwright + axe-core (Plan 24-03) covers polymorphic tag and focus ring behavior
 
 ### Pending Todos
 
@@ -88,7 +91,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 ## Session Continuity
 
-Last session: 2026-05-15T06:11:07.483Z
-Stopped at: Phase 24 UI-SPEC approved
-Resume file: .planning/phases/24-v2-primitive-library-design-system-page/24-UI-SPEC.md
-Next action: Run `/gsd:plan-phase 23` to plan Phase 23: Design System Foundation
+Last session: 2026-05-15T18:12:27Z
+Stopped at: Completed 24-01-PLAN.md (v2 Button primitive)
+Resume file: .planning/phases/24-v2-primitive-library-design-system-page/24-01-SUMMARY.md
+Next action: Execute Plan 24-02 (v2 Card composition, Input, Badge primitives)
