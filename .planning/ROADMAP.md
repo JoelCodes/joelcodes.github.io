@@ -97,22 +97,22 @@ See: `.planning/milestones/v1.3-ROADMAP.md` for full details.
 ---
 
 #### Phase 23: Design System Foundation
-**Goal:** The v2 design token system, `BaseLayoutV2`, and the global Header/Footer components exist and are validated — every subsequent phase can build on them without risk of v1/v2 token collision or dark-mode contamination.
+**Goal:** The v2 design token system, `src/layouts/v2/BaseLayout.astro`, and the global Header/Footer components (`src/components/v2/layout/Header.astro`, `Footer.astro`) exist and are validated — every subsequent phase can build on them without risk of v1/v2 token collision or dark-mode contamination.
 **Depends on:** Phase 22 (all v1.3 work complete)
 **Requirements:** FOUND-01, FOUND-02, FOUND-03, FOUND-04, FOUND-05, FOUND-06, COMP-05, COMP-06
 **Success Criteria** (what must be TRUE):
-  1. Visiting any page on `BaseLayoutV2` renders in light mode regardless of OS dark-mode preference — no flash of dark styles, no `#theme-toggle` in the DOM
-  2. `src/styles/v2.css` declares a complete v2 token set using semantic names (e.g. `--color-primary`, `--color-surface`) that share no names with v1 tokens in `global.css`; both files coexist without visual interference on any v1.3 page
+  1. Visiting any page on `src/layouts/v2/BaseLayout.astro` renders in light mode regardless of OS dark-mode preference — no flash of dark styles, no `#theme-toggle` in the DOM
+  2. `src/styles/v2/global.css` declares a complete v2 token set using semantic names (e.g. `--color-primary`, `--color-surface`) that share no names with v1 tokens in `global.css`; both files coexist without visual interference on any v1.3 page
   3. `design/design-system.pen` exists with a token-mapping table (Pencil variable → CSS custom property) derived from inspecting the Crito `.pen` file; font packages installed match the names extracted from that inspection
-  4. `HeaderV2.astro` renders a sticky nav with 4 links (Blog, Projects, FAQ, Contact) and a "Let's Talk" CTA with no dark mode toggle; `FooterV2.astro` renders a 2-column layout with social icons that meet 44x44px touch targets
+  4. `src/components/v2/layout/Header.astro` renders a sticky nav with 4 links (Blog, Projects, FAQ, Contact) and a "Let's Talk" CTA with no dark mode toggle; `src/components/v2/layout/Footer.astro` renders a 2-column layout with social icons that meet 44x44px touch targets
   5. All existing v1.3 pages continue to render correctly (zero visual regression on the v1.3 page set)
-**Plans:** TBD
+**Plans:** 4 plans
 
 Plans:
-- [ ] 23-01: Inspect Crito `.pen` file via Pencil MCP; extract and record fonts, palette, spacing, and radii; confirm font package names; create token-mapping table
-- [ ] 23-02: Create `src/styles/v2.css` with full `@theme` block; install confirmed `@fontsource-variable/*` packages; verify zero token name collision with `global.css`
-- [ ] 23-03: Create `BaseLayoutV2.astro` with no dark-mode FOUC script, no `#theme-toggle`; create `design/design-system.pen` with extracted variables
-- [ ] 23-04: Build `HeaderV2.astro` (sticky, 4 nav links, CTA, mobile hamburger) and `FooterV2.astro` (2-column, social icons, secondary nav)
+- [ ] 23-01-PLAN.md *(Wave 1)* — Inspect Crito `.pen` via Pencil MCP; record fonts/palette/spacing/radii into 23-01-CRITO-INSPECTION.md; confirm `@fontsource-variable/*` package names on npm; resolve `--font-heading`/`--font-body` v1 collision via `--font-display`/`--font-text` rename
+- [ ] 23-02-PLAN.md *(Wave 2, blocked on 23-01)* — Create `src/styles/v2/global.css` with full `@theme` block (semantic tokens, no v1 name collisions); install pinned `@fontsource-variable/*` packages; ship `tests/check-token-collision.cjs` Wave 0 guard
+- [ ] 23-03-PLAN.md *(Wave 3, blocked on 23-01 + 23-02)* — Create `src/layouts/v2/BaseLayout.astro` (light-mode-only, no FOUC script, no theme-toggle, self-hosted-font preload); create `design/design-system.pen` with 33+ variables, factored Header + Footer, and inline Token Reference frame
+- [ ] 23-04-PLAN.md *(Wave 4, blocked on 23-02 + 23-03)* — Build `src/components/v2/layout/{Header,Footer,MobileNav}.astro` (sticky header + 4 links + CTA, focus-trapped overlay, 2-column footer with 44x44 social icons); add `tests/accessibility/v2-layout.spec.ts`; verify FOUND-06 v1.3 coexistence as final gate
 
 ---
 

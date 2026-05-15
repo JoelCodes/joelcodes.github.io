@@ -13,9 +13,9 @@ Requirements for this milestone. Each maps to roadmap phases.
 
 - [ ] **FOUND-01**: Crito `.pen` file inspected via Pencil MCP; exact fonts, OKLCH palette, spacing, and radii extracted and recorded
 - [ ] **FOUND-02**: `design/design-system.pen` file created with extracted variables and factored reusable components
-- [ ] **FOUND-03**: `src/styles/v2.css` declares the full v2 token system using Tailwind v4 `@theme` with semantic, collision-safe names (no overlap with `global.css` v1 tokens)
+- [ ] **FOUND-03**: `src/styles/v2/global.css` declares the full v2 token system using Tailwind v4 `@theme` with semantic, collision-safe names (no overlap with `global.css` v1 tokens)
 - [ ] **FOUND-04**: Self-hosted variable fonts installed via `@fontsource-variable/*` packages (names confirmed after Pencil inspection)
-- [ ] **FOUND-05**: `BaseLayoutV2.astro` created with no dark-mode FOUC script, no `localStorage.theme` code, no `#theme-toggle` element — v2 pages render light-mode only regardless of OS preference
+- [ ] **FOUND-05**: `src/layouts/v2/BaseLayout.astro` created with no dark-mode FOUC script, no `localStorage.theme` code, no `#theme-toggle` element — v2 pages render light-mode only regardless of OS preference
 - [ ] **FOUND-06**: v1.3 pages and `BaseLayout.astro` continue to render unchanged during the transition (parallel libraries coexist without collision)
 
 ### Components — v2 Library
@@ -24,8 +24,8 @@ Requirements for this milestone. Each maps to roadmap phases.
 - [ ] **COMP-02**: v2 Card primitive with documented variants matching Crito patterns
 - [ ] **COMP-03**: v2 Input primitive with accessible labels, error states, and consistent typography
 - [ ] **COMP-04**: v2 Badge primitive
-- [ ] **COMP-05**: `HeaderV2.astro` with 4 nav links (Blog, Projects, FAQ, Contact), "Let's Talk" CTA, sticky positioning, mobile hamburger; no theme toggle
-- [ ] **COMP-06**: `FooterV2.astro` with 2-column layout, social icons (44x44 touch targets), secondary nav; no newsletter bar
+- [ ] **COMP-05**: `src/components/v2/layout/Header.astro` with 4 nav links (Blog, Projects, FAQ, Contact), "Let's Talk" CTA, sticky positioning, mobile hamburger; no theme toggle
+- [ ] **COMP-06**: `src/components/v2/layout/Footer.astro` with 2-column layout, social icons (44x44 touch targets), secondary nav; no newsletter bar
 - [ ] **COMP-07**: All interactive v2 components validated for WCAG 2.2 AA color contrast and keyboard navigation
 
 ### Homepage

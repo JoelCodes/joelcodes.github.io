@@ -39,7 +39,7 @@ Stand up the v2 visual foundation that every later phase (24–30) builds on:
   - `--color-border`
   - `--color-accent`
 - **D-06:** Typography tokens:
-  - Families: `--font-heading`, `--font-body`
+  - Families: ~~`--font-heading`, `--font-body`~~ → **RENAMED to `--font-display` (heading) and `--font-text` (body)** per Phase 23 RESEARCH §5 collision audit. The original names collide with v1 `--font-heading` / `--font-body` in `src/styles/global.css`, which violates D-08 strict-no-collision. All v2 plans use `--font-display` / `--font-text`; downstream phases MUST use the renamed tokens, not the originals.
   - Sizes: `--text-display`, `--text-h1`, `--text-h2`, `--text-h3`, `--text-h4`, `--text-body`, `--text-small`, `--text-caption`
 - **D-07:** Spacing tokens (t-shirt scale, NOT numeric): `--space-xs`, `--space-sm`, `--space-md`, `--space-lg`, `--space-xl`, `--space-2xl`. Values follow whatever rhythm Crito uses (likely 8pt grid).
 - **D-08:** Strict v1-collision rule: every v2 token name must be string-distinct from every v1 token name in `src/styles/global.css`. v2 must not depend on any v1 token. Any shared concept (e.g., "primary text color") gets a brand-new variable, never a shared one. This makes Phase 30 a pure delete with no risky renames.
