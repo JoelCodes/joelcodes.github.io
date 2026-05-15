@@ -1,0 +1,75 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+export interface Props extends Omit<HTMLAttributes<'input'>, 'class'> {
+  as?: 'input' | 'textarea' | 'select';
+  label: string;
+  id: string;
+  error?: string;
+  helper?: string;
+  disabled?: boolean;
+  required?: boolean;
+  rows?: number;
+  class?: string;
+}
+
+const {
+  as = 'input',
+  label,
+  id,
+  error,
+  helper,
+  disabled = false,
+  required = false,
+  rows,
+  class: className = '',
+  ...rest
+} = Astro.props;
+
+const errorId = error ? `${id}-error` : undefined;
+const helperId = helper && !error ? `${id}-helper` : undefined;
+const describedBy = errorId ?? helperId;
+
+const Tag = as === 'textarea' ? 'textarea' : as === 'select' ? 'select' : 'input';
+---
+
+<div class:list={['flex flex-col gap-xs', className]}>
+  <label for={id} class="text-small font-text font-medium text-text">
+    {label}{required && <span aria-hidden="true"> *</span>}
+  </label>
+  <Tag
+    id={id}
+    aria-invalid={error ? 'true' : undefined}
+    aria-describedby={describedBy}
+    rows={as === 'textarea' ? rows : undefined}
+    disabled={disabled}
+    class:list={[
+      'w-full bg-surface text-text font-text text-body border border-border rounded-sm px-sm py-3',
+      'placeholder:text-text-muted',
+      disabled && 'bg-surface-muted text-text-muted cursor-not-allowed',
+    ]}
+    {...rest}
+  >
+    {as === 'select' && <slot />}
+  </Tag>
+  {error && (
+    <p id={errorId} role="alert" class="text-small font-text text-text">
+      <span aria-hidden="true">&#9888; </span>{error}
+    </p>
+  )}
+  {helper && !error && (
+    <p id={helperId} class="text-small font-text text-text-muted">
+      {helper}
+    </p>
+  )}
+</div>
+
+<style>
+  /* Focus ring — accent outline per D-18. Only rule that requires scoped CSS. */
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+</style>
