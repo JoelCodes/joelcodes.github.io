@@ -263,4 +263,60 @@ test.describe('v2 Primitives Accessibility (Phase 24)', () => {
     expect(tabIndexableCount).toBe(1); // Only the interactive card
   });
 
+  // -------------------------------------------------------------------------
+  // Test 8: Computed-style spacing regression — guards the token-namespace
+  // class of bug (e.g. --space-* vs --spacing-* in Tailwind v4). If named
+  // spacing utilities (px-sm, py-md, gap-xs ...) stop generating, padding
+  // collapses to 0 and these assertions fail.
+  // -------------------------------------------------------------------------
+  test('Button / Card / Input have correct computed padding (named-spacing regression guard)', async ({ page }) => {
+    await page.goto('/design-system');
+
+    const padding = (locator: ReturnType<typeof page.locator>) =>
+      locator.evaluate((el) => {
+        const cs = window.getComputedStyle(el as Element);
+        return {
+          top: cs.paddingTop,
+          right: cs.paddingRight,
+          bottom: cs.paddingBottom,
+          left: cs.paddingLeft,
+        };
+      });
+
+    // Button size ramp must produce a strict sm < md < lg progression in both axes.
+    // sm: px-sm / py-3      → 16px / 12px
+    // md: px-5 / py-sm      → 20px / 16px
+    // lg: px-lg / py-5      → 32px / 20px
+    expect(await padding(page.getByRole('button', { name: 'Primary sm' }))).toEqual({
+      top: '12px', right: '16px', bottom: '12px', left: '16px',
+    });
+    expect(await padding(page.getByRole('button', { name: 'Primary md' }))).toEqual({
+      top: '16px', right: '20px', bottom: '16px', left: '20px',
+    });
+    expect(await padding(page.getByRole('button', { name: 'Primary lg' }))).toEqual({
+      top: '20px', right: '32px', bottom: '20px', left: '32px',
+    });
+
+    // CardBody uses px-md / py-md → 24px / 24px (the most visibly broken slot
+    // when --space-* was wrong — text touched the card edges).
+    const cardBody = page
+      .locator('section#card div', {
+        hasText: 'CardHeader + CardBody + CardFooter slot wrappers with token padding.',
+      })
+      .filter({ has: page.locator('> p') })
+      .first();
+    expect(await padding(cardBody)).toEqual({
+      top: '24px', right: '24px', bottom: '24px', left: '24px',
+    });
+
+    // Input field uses px-sm / py-3 → 16px / 12px. Asserting left+top is enough
+    // to catch the named-namespace regression on Input.
+    const firstInput = page.locator('section#input input:not([disabled])').first();
+    const inputPadding = await padding(firstInput);
+    expect(inputPadding.left).toBe('16px');
+    expect(inputPadding.right).toBe('16px');
+    expect(inputPadding.top).toBe('12px');
+    expect(inputPadding.bottom).toBe('12px');
+  });
+
 });
