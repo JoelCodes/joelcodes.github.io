@@ -146,22 +146,28 @@ Plans:
   3. `/design-system.json` endpoint returns v2 token values (colors, fonts, spacing) — not v1 values
   4. No `is:global` Astro style blocks appear in any v2 component; all component styles are scoped or use Tailwind utility classes
 
-**Plans:** TBD
+**Plans:** 5/8 plans complete
 
 Plans:
 
 **Wave 1**
 
-- [ ] 24-01: Build v2 Button primitive (all variants, keyboard focus, WCAG contrast)
-- [ ] 24-02: Build v2 Card, Input, and Badge primitives (variants, accessible labels, error states)
+- [x] 24-01: Build v2 Button primitive (all variants, keyboard focus, WCAG contrast)
+- [x] 24-02: Build v2 Card, Input, and Badge primitives (variants, accessible labels, error states)
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 24-04: Rebuild `/design-system` page on `BaseLayoutV2` with live component demos; update `/design-system.json` endpoint to v2 token values
+- [x] 24-04: Rebuild `/design-system` page on `BaseLayoutV2` with live component demos; update `/design-system.json` endpoint to v2 token values
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
-- [ ] 24-03: Run Playwright keyboard navigation + axe-core tests against all interactive v2 components; fix any violations
+- [x] 24-03: Run Playwright keyboard navigation + axe-core tests against all interactive v2 components; fix any violations
+
+**Gap Closure** *(post-UAT fixes)*
+
+- [x] 24-05: Close UAT Gap 1 — add --max-width-sm/md/lg/xl/2xl tokens so max-w-{size} resolves to container widths; add Playwright regression guard (Test 9)
+- [ ] 24-06: Close UAT Gap 2 (TBD)
+- [ ] 24-07: Close UAT Gap 3 (TBD)
 
 **Cross-cutting constraints:**
 

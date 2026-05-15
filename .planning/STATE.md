@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Design Overhaul
-status: completed
-stopped_at: Completed 24-03-PLAN.md — Phase 24 fully complete (all plans 01/02/04/03 done)
-last_updated: "2026-05-15T18:35:34.275Z"
-last_activity: 2026-05-15 -- Phase 24 marked complete
+status: executing
+stopped_at: Completed 24-05-PLAN.md — UAT Gap 1 closed (select wrapper max-w-sm fix + regression guard)
+last_updated: "2026-05-15T21:47:00Z"
+last_activity: 2026-05-15 -- Phase 24 gap closure plan 24-05 complete
 progress:
   total_phases: 8
-  completed_phases: 2
-  total_plans: 8
+  completed_phases: 1
+  total_plans: 11
   completed_plans: 8
-  percent: 25
+  percent: 13
 ---
 
 # Project State
@@ -25,10 +25,10 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 
 ## Current Position
 
-Phase: 24 — COMPLETE
-Plan: All 4 plans complete (01, 02, 04, 03)
-Status: Phase 24 complete
-Last activity: 2026-05-15 -- Phase 24 marked complete
+Phase: 24 (v2-primitive-library-design-system-page) — EXECUTING
+Plan: 1 of 7
+Status: Executing Phase 24
+Last activity: 2026-05-15 -- Phase 24 execution started
 
 Progress: [███░░░░░░░] 28% (v1.4)
 
@@ -83,6 +83,8 @@ See `.planning/MILESTONES.md` for full milestone details.
 - **24-03 2026-05-15**: All 4 v2 primitive components were WCAG 2.2 AA compliant — color-contrast violations were in design-system.astro page markup (text-accent link at 1.8:1; opacity-70 caption at 4.1:1), not primitive components
 - **24-03 2026-05-15**: text-accent (#53da74 green) must NEVER be used as text color — fails 4.5:1 WCAG AA for normal text; only valid for non-text (focus rings, button backgrounds, decorative fills)
 - **24-03 2026-05-15**: opacity-* utilities must not be applied to text-text-muted at caption/small sizes — text-text-muted at 12px is at the WCAG AA contrast boundary; opacity reduces it below 4.5:1
+  - **24-05 2026-05-15**: Use --max-width-* tokens (not --container-*) for max-w-{size} fix — Tailwind v4.1.18 lookup order is [--max-width, --spacing, --container]; --spacing wins over --container so container tokens alone cannot override the spacing fallback
+  - **24-05 2026-05-15**: --max-width-sm/md/lg/xl/2xl declared in v2 @theme at Tailwind v4 defaults (24/28/32/36/42 rem) — no v1 collision; fixes select wrapper (max-w-sm: 16px to 384px) and Footer tagline (max-w-md: 24px to 448px)
 
 ### Pending Todos
 
@@ -100,7 +102,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 ## Session Continuity
 
-Last session: 2026-05-15T18:33:00Z
-Stopped at: Completed 24-03-PLAN.md — Phase 24 fully complete (all plans 01/02/04/03 done)
-Resume file: .planning/phases/24-v2-primitive-library-design-system-page/24-03-SUMMARY.md
-Next action: Execute Phase 25 (first v2 page migration — begin with orchestrator to select next phase)
+Last session: 2026-05-15T21:47:00Z
+Stopped at: Completed 24-05-PLAN.md — UAT Gap 1 closed (select demo max-w-sm fix + regression guard)
+Resume file: .planning/phases/24-v2-primitive-library-design-system-page/24-05-SUMMARY.md
+Next action: Execute 24-06 (UAT Gap 2 closure) and 24-07 (UAT Gap 3 closure)
