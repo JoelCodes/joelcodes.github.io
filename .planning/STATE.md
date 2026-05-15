@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Design Overhaul
 status: executing
-stopped_at: Phase 24 Plan 01 complete
-last_updated: "2026-05-15T18:12:27Z"
-last_activity: 2026-05-15 -- Completed 24-01-PLAN.md (v2 Button primitive)
+stopped_at: Phase 24 Plan 02 complete
+last_updated: "2026-05-15T18:17:09Z"
+last_activity: 2026-05-15 -- Completed 24-02-PLAN.md (v2 Card composition, Input, Badge primitives)
 progress:
   total_phases: 8
   completed_phases: 1
   total_plans: 8
-  completed_plans: 5
-  percent: 16
+  completed_plans: 6
+  percent: 19
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 ## Current Position
 
 Phase: 24 (v2-primitive-library-design-system-page) — EXECUTING
-Plan: 1 of 4 COMPLETE → next: Plan 2 of 4
+Plan: 2 of 4 COMPLETE → next: Plan 3 of 4
 Status: Executing Phase 24
-Last activity: 2026-05-15 -- Completed 24-01 v2 Button primitive
+Last activity: 2026-05-15 -- Completed 24-02 v2 Card composition, Input, Badge primitives
 
-Progress: [█░░░░░░░░░] 16% (v1.4)
+Progress: [██░░░░░░░░] 19% (v1.4)
 
 ## Milestone History
 
@@ -74,6 +74,9 @@ See `.planning/MILESTONES.md` for full milestone details.
 - **24-01 2026-05-15**: font-medium (Tailwind built-in 500) used for Button labels over custom font-text-bold token utility — Header.astro precedent confirms built-in weight utilities are reliable; custom --font-weight-text-bold utility name unverified
 - **24-01 2026-05-15**: :global(svg) inside scoped style accepted for link-variant arrow-nudge — anchored to .link-variant marker class, not a top-level is:global directive
 - **24-01 2026-05-15**: No unit test written for Button.astro — presentational primitive; Wave 3 Playwright + axe-core (Plan 24-03) covers polymorphic tag and focus ring behavior
+- **24-02 2026-05-15**: --shadow-md token promoted to v2/global.css @theme block (no v1 collision) — enables shadow-md Tailwind utility for elevated Card and downstream reuse in Phase 27 service cards
+- **24-02 2026-05-15**: aria-describedby uses error-priority single-ref (errorId ?? helperId) — only ONE id referenced at a time; avoids orphan aria-describedby when referenced element doesn't exist (RESEARCH Pitfall 3)
+- **24-02 2026-05-15**: No unit tests written for Card/Input/Badge — Wave 3 Playwright + axe-core (Plan 24-03) covers polymorphic rendering and aria wiring on /design-system page
 
 ### Pending Todos
 
@@ -91,7 +94,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 ## Session Continuity
 
-Last session: 2026-05-15T18:12:27Z
-Stopped at: Completed 24-01-PLAN.md (v2 Button primitive)
-Resume file: .planning/phases/24-v2-primitive-library-design-system-page/24-01-SUMMARY.md
-Next action: Execute Plan 24-02 (v2 Card composition, Input, Badge primitives)
+Last session: 2026-05-15T18:17:09Z
+Stopped at: Completed 24-02-PLAN.md (v2 Card composition, Input, Badge primitives)
+Resume file: .planning/phases/24-v2-primitive-library-design-system-page/24-02-SUMMARY.md
+Next action: Execute Plan 24-03 (Playwright + axe-core accessibility tests for /design-system)
