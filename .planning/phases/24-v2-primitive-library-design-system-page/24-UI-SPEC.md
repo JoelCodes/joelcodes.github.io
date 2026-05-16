@@ -95,7 +95,7 @@ Locked by Phase 23 token system. Only **3 sizes** plus **1 display size** are us
 | Accent (10%) | `--color-accent` | `oklch(0.79 0.184 148.5)` (#38da71 Crito green) | Reserved (see "Accent reserved for" below) |
 | Border / hairline | `--color-border` | `oklch(0.864 0.005 286.3)` (#d4d4d8) | Card default 1px outline; Input field 1px border (default + disabled); Button `ghost` 1px outline; Badge `outline` 1px stroke; section hairlines on `/design-system`; HeaderV2 bottom border (already in use) |
 | Primary-hover | `--color-primary-hover` | `oklch(0.286 0.054 264.6)` (#1d2a4c) | Button `ghost` hover background tint (or text color shift); link hover state on text-only links inside CardBody |
-| Destructive | (none — no token in Phase 23) | n/a | **Not declared.** Phase 24 has no destructive action. Input error state uses semantic markup (`role="alert"`, `aria-invalid="true"`, `aria-describedby`) and a left-border or text treatment using `--color-text` weight + ✱ asterisk; NO red color is added. If Phase 28 (contact form) needs an error red, it adds the token then. Documented as a deliberate gap. |
+| Destructive | `--color-danger` | `oklch(0.50 0.22 27)` (≈ #b91c1c) | Input error message text (`text-danger` on the `role="alert"` <p>). Closes the Phase 24 SPEC-level gap originally deferred to Phase 28 — promoted into the v2 contract by plan 24-07 after UAT Gap 3. WCAG 2.2 AA passing (≈ 5.5:1 on white at 14px); if axe-core flags the rendered contrast, darken L along ladder 0.50 → 0.45 → 0.40 → 0.35. NOT used for buttons, borders, or backgrounds in Phase 24 — text color only. |
 
 **Accent reserved for** (explicit list — `--color-accent` green is NEVER used elsewhere in this phase):
 
@@ -232,7 +232,7 @@ Border-radius: `--radius-md` (10px, Crito-verified) for all sizes/variants.
 |-------|------------|--------|---------------|--------|-----------|
 | default | `--color-surface` | 1px `--color-border` | `--radius-lg` (16px Crito-verified) | none | none |
 | elevated | `--color-surface` | 1px `--color-border` | `--radius-lg` | small drop shadow (token TBD per CONTEXT discretion: either new `--shadow-md` token in 24-02 OR scoped literal — implementer's choice, prefer token if any other primitive ends up needing it) | none |
-| interactive (hover) | unchanged | unchanged | unchanged | optional: small lift shadow added | `translateY(-2px)` with 200ms ease |
+| interactive (hover) | unchanged | unchanged | unchanged | optional: small lift shadow added | `translateY(-4px)` with 200ms ease |
 | interactive (`:focus-visible`) | unchanged | unchanged | unchanged | unchanged | `outline: 2px solid var(--color-accent); outline-offset: 2px;` |
 
 CardHeader / CardBody / CardFooter padding: each uses tokens from spacing scale; default suggestion is `--space-md` (24px) all-around for CardBody, `--space-md` top/`--space-md` sides/0 bottom for CardHeader, mirror-flipped for CardFooter. Plan 24-02 locks final values.
@@ -254,7 +254,7 @@ CardHeader / CardBody / CardFooter padding: each uses tokens from spacing scale;
 |-------|------------------|--------------|------------|-------|
 | default | `--color-surface` | 1px `--color-border`, `--radius-sm` (6px) | `--color-text` | placeholder = `--color-text-muted` |
 | focused (`:focus-visible`) | `--color-surface` | unchanged or thicker (Claude's discretion per CONTEXT — choose 1px or 2px) | `--color-text` | adds `outline: 2px solid var(--color-accent); outline-offset: 2px;` per D-18 |
-| error | `--color-surface` | 1px `--color-border` (NO red — see Color section "Destructive" gap) | `--color-text` | `aria-invalid="true"`; below-field `role="alert"` element with helper copy. Visual error indicator is the asterisk in label + the inline message; no color signal. Phase 28 may add `--color-error` if/when contact form needs it. |
+| error | `--color-surface` | 1px `--color-border`, `--radius-sm` (6px) | `--color-text` on field; error <p> below uses `--color-danger` via `text-danger` utility (closed by plan 24-07; was deferred to Phase 28 in original spec) | `aria-invalid="true"`; below-field `role="alert"` element with error copy in danger color and ⚠ glyph prefix. Field border stays neutral — the inline message carries the color signal. |
 | disabled | `--color-surface-muted` | 1px `--color-border` | `--color-text-muted` | `cursor: not-allowed`; no focus ring |
 
 Demo states required on `/design-system` per D-13: default + focused + error + disabled, plus one `as='textarea'` and one `as='select'` example.
@@ -313,7 +313,7 @@ No nested palettes, no `dark` variants (none exist), no v1 token bleed-through.
 | Button `primary` | Hover | Background opacity → 0.9 |
 | Button `ghost` | Hover | Background → `--color-surface-muted` |
 | Button `link` | Hover | Text color → `--color-accent`; arrow icon translateX 2px |
-| Card `interactive=true` | Hover | `translateY(-2px)` + 200ms ease |
+| Card `interactive=true` | Hover | `translateY(-4px)` + 200ms ease |
 | Card `interactive=true` | Tab focus | Same accent focus ring |
 | Input | Tab focus | Same accent focus ring; placeholder remains visible |
 | Input `error` | (set by parent) | `aria-invalid="true"` + `role="alert"` element appears below; SR announces |
@@ -330,7 +330,7 @@ No nested palettes, no `dark` variants (none exist), no v1 token bleed-through.
 
 ## What this phase does NOT specify (deferred contracts)
 
-- **Destructive color (red).** No use case in Phase 24. Phase 28 (contact form) adds `--color-error` if needed.
+- ~~**Destructive color (red).**~~ — Closed by plan 24-07. `--color-danger: oklch(0.50 0.22 27)` is now a v2 contract token; the Input error <p> uses `text-danger`. See plan 24-07 and `.planning/debug/input-error-not-red.md`.
 - **Hover overlay reveal pattern on Card.** Implementation deferred to Phase 27 ProjectCard, which composes `Card interactive=true` and adds its own overlay layer.
 - **Stat-card typography combination.** Phase 27 / Phase 29 lock the exact `<Card><CardBody>` + `text-display`/`text-small` pairing per D-08. Phase 24 demonstrates the primitive Card; not a Stat composition.
 - **Dark-mode variants.** Explicitly out of scope for v1.4 (REQUIREMENTS "Out of Scope"). No `dark:` utilities, no `prefers-color-scheme`, no `.dark` selector — even speculatively.

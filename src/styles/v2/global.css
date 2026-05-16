@@ -18,6 +18,18 @@
   --color-accent:         oklch(0.79 0.184 148.5);  /* Crito CTA green #38da71 — actionable accent */
 
   /* ---------------------------------------------------------------------- */
+  /* Destructive (1) — closes Phase 24 UI-SPEC Color gap (was deferred to   */
+  /* Phase 28). Promoted to v2 contract token in plan 24-07 after UAT       */
+  /* Gap 3 ("error state is not red"). Baseline ≈ #b91c1c (≈ 5.5:1 on      */
+  /* white at 14px — passes WCAG 2.2 AA normal-text 4.5:1). If axe-core    */
+  /* color-contrast still fails on the rendered error <p>, darken along   */
+  /* the ladder 0.50 → 0.45 → 0.40 → 0.35 until axe passes. Do NOT change */
+  /* the token NAME — only the L channel. See .planning/debug/             */
+  /* input-error-not-red.md for full diagnosis.                            */
+  /* ---------------------------------------------------------------------- */
+  --color-danger:         oklch(0.50 0.22 27);     /* ≈ #b91c1c — WCAG AA on white */
+
+  /* ---------------------------------------------------------------------- */
   /* Spacing (6) — t-shirt scale per D-07; 8pt-rhythm anchored to Crito.    */
   /* MUST use Tailwind v4's `--spacing-*` namespace so utilities like       */
   /* `px-sm`, `py-md`, `gap-xs` actually generate (NOT `--space-*`, which   */
@@ -29,6 +41,21 @@
   --spacing-lg:   2rem;    /* 32px — container side padding */
   --spacing-xl:   3rem;    /* 48px — block-level breathing room */
   --spacing-2xl:  5rem;    /* 80px — section breathing room (Q4 resolved) */
+
+  /* ---------------------------------------------------------------------- */
+  /* Max-widths (5) — Tailwind v4 max-w-{size} highest-priority namespace.  */
+  /* Tailwind v4 resolves max-w-{name} by checking --max-width-{name} FIRST */
+  /* (before --spacing-{name} and --container-{name}). Declaring these      */
+  /* ensures max-w-sm/md/lg/xl/2xl resolve to container widths, not the     */
+  /* t-shirt spacing values (1/1.5/2/3/5 rem = 16/24/32/48/80 px).         */
+  /* Values match Tailwind v4 defaults so .max-w-sm = 24rem (384px), etc.  */
+  /* See .planning/debug/select-too-thin-no-text.md for full diagnosis.    */
+  /* ---------------------------------------------------------------------- */
+  --max-width-sm:  24rem;  /* 384px — Tailwind v4 default */
+  --max-width-md:  28rem;  /* 448px — Tailwind v4 default */
+  --max-width-lg:  32rem;  /* 512px — Tailwind v4 default */
+  --max-width-xl:  36rem;  /* 576px — Tailwind v4 default */
+  --max-width-2xl: 42rem;  /* 672px — Tailwind v4 default */
 
   /* ---------------------------------------------------------------------- */
   /* Radii (4) — Crito-anchored                                              */
