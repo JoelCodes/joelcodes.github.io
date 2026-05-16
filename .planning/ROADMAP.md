@@ -191,7 +191,12 @@ Plans:
 
 Plans:
 
+**Wave 1**
+
 - [ ] 25-01: Migrate `/faq` to `BaseLayoutV2`; add CTA block; verify FAQPage JSON-LD; axe-core pass
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
 - [ ] 25-02: Migrate `/thank-you` and `/404` to `BaseLayoutV2`; verify content and navigation intact; axe-core pass
 
 ---
