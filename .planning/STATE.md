@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Design Overhaul
 status: executing
-stopped_at: Plan 25-01 complete; Plan 25-02 ready to execute
-last_updated: "2026-05-16T06:05:27Z"
-last_activity: 2026-05-16 -- Plan 25-01 complete (FAQ migrated to BaseLayoutV2)
+stopped_at: Phase 25 complete; Phase 26 (blog migration) ready to enter context
+last_updated: "2026-05-16T06:17:37Z"
+last_activity: 2026-05-16 -- Plan 25-02 complete (Phase 25 done — /thank-you migrated, /404 created; all 3 leaf pages on BaseLayoutV2)
 progress:
   total_phases: 8
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 13
-  completed_plans: 12
-  percent: 33
+  completed_plans: 13
+  percent: 38
 ---
 
 # Project State
@@ -25,12 +25,12 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 
 ## Current Position
 
-Phase: 25 (leaf-page-migrations-faq-thank-you-404) — EXECUTING
-Plan: 2 of 2 (ready to execute; Plan 25-01 complete)
-Status: Executing Phase 25
-Last activity: 2026-05-16 -- Plan 25-01 complete (FAQ migrated to BaseLayoutV2; v2-leaf-pages spec created)
+Phase: 25 (leaf-page-migrations-faq-thank-you-404) — COMPLETE
+Plan: 2 of 2 complete (Plan 25-01: FAQ migration; Plan 25-02: thank-you migration + new /404)
+Status: Phase 25 complete; ready for Phase 26 (blog migration) context gathering
+Last activity: 2026-05-16 -- Plan 25-02 complete (/thank-you on BaseLayoutV2 with elevated Card + MailCheck icon; /404 created with single Return home Button + noindex meta; all 4 v2-leaf-pages.spec.ts tests green; dist/404.html auto-emitted by Astro static build)
 
-Progress: [█████░░░░░] 45% (v1.4)
+Progress: [██████░░░░] 50% (v1.4 — Phases 23-25 of 23-30 complete)
 
 ## Milestone History
 
@@ -96,6 +96,12 @@ See `.planning/MILESTONES.md` for full milestone details.
   - **25-01 2026-05-16**: SEO.astro globally emits a Person JSON-LD on every page — pages emitting page-specific schema (e.g. /faq emits FAQPage) produce 2 JSON-LD scripts in <head>; tests asserting on schema content MUST filter by @type, never assert global JSON-LD count
   - **25-01 2026-05-16**: Empirical finding — /thank-you and /404 axe tests pass on the v1 baseline (originally documented as expected-RED contract gate). Contract gate for Plan 25-02 is now "no regression", not "turn red into green"
   - **25-01 2026-05-16**: Centered elevated CTA Card composition LOCKED — `<Card elevated={true} class="max-w-2xl mx-auto text-center"><CardBody>...<Button variant="primary" size="md" href="/#contact">...</Button></CardBody></Card>` is the visual family for the three Phase 25 leaf pages; /thank-you and /404 reuse exactly in Plan 25-02
+  - **25-02 2026-05-16**: Astro 5 static-build empirically auto-emits dist/404.html for GitHub Pages — drop src/pages/404.astro, build, ship; no astro.config.mjs change, no SSR adapter, no 404-specific routing config (D-09 verified, dist/404.html = 10006 bytes containing "Page not found")
+  - **25-02 2026-05-16**: @astrojs/sitemap auto-excludes /404 from dist/sitemap-0.xml by default — VALIDATION belt-and-suspenders check returned `OK: /404 not in sitemap` without any manual filter; the noindex meta (D-13) is the primary defense and sitemap exclusion is automatic
+  - **25-02 2026-05-16**: v2 success-state visual cue pattern via Lucide icon at text-accent + elevated Card replaces v1 Card variant="turquoise" pattern — accent color sits on the icon (non-text per WCAG 1.4.3), not on a Card surface; H1/body stay text-text for WCAG AA contrast (D-14, D-15)
+  - **25-02 2026-05-16**: Calendly URL preserved verbatim (https://calendly.com/joelshinness, exactly 1 grep match) per D-16 — real-URL swap remains a separately tracked v1.3 todo, NOT folded into Phase 25
+  - **25-02 2026-05-16**: 404 nav locked to single "Return home" Button per D-11 — HeaderV2 carries Blog/Projects/FAQ/Contact on every page including /404; no key-pages link list added (deliberate scope tightening of roadmap success-criterion 3 wording)
+  - **25-02 2026-05-16**: Phase 25 COMPLETE — all 3 leaf-page migrations shipped (LEAF-01 FAQ from Plan 25-01; LEAF-02 thank-you + LEAF-03 /404 from Plan 25-02); centered-Card composition validated across 3 surfaces; ready for /gsd:verify-work + Lighthouse CI sign-off + PR merge
 
 ### Pending Todos
 
@@ -113,7 +119,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 ## Session Continuity
 
-Last session: 2026-05-16T06:05:27Z
-Stopped at: Plan 25-01 complete
-Resume file: .planning/phases/25-leaf-page-migrations-faq-thank-you-404/25-02-PLAN.md
-Next action: Execute Plan 25-02 (migrate /thank-you to BaseLayoutV2 + create src/pages/404.astro)
+Last session: 2026-05-16T06:17:37Z
+Stopped at: Plan 25-02 complete (Phase 25 done — all 3 leaf-page migrations shipped on branch feature/phase-25-leaf-pages)
+Resume file: None (Phase 25 complete; next action is /gsd:verify-work and PR merge, then Phase 26 context gathering)
+Next action: Run /gsd:verify-work for Phase 25 → open PR for feature/phase-25-leaf-pages → after merge, /gsd:context-phase 26 (blog migration)
