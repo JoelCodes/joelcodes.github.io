@@ -53,7 +53,7 @@ const Tag = as === 'textarea' ? 'textarea' : as === 'select' ? 'select' : 'input
     {as === 'select' && <slot />}
   </Tag>
   {error && (
-    <p id={errorId} role="alert" class="text-small font-text text-danger">
+    <p id={errorId} role="alert" class="text-small font-text text-text">
       <span aria-hidden="true">&#9888; </span>{error}
     </p>
   )}

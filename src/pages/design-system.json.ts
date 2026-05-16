@@ -44,19 +44,15 @@ export async function GET() {
         cssVar: '--color-accent',
         oklch: 'oklch(0.79 0.184 148.5)',
       },
-      danger: {
-        cssVar: '--color-danger',
-        oklch: 'oklch(0.50 0.22 27)',
-      },
     },
 
     spacing: {
-      xs: { cssVar: '--spacing-xs', rem: '0.5rem' },
-      sm: { cssVar: '--spacing-sm', rem: '1rem' },
-      md: { cssVar: '--spacing-md', rem: '1.5rem' },
-      lg: { cssVar: '--spacing-lg', rem: '2rem' },
-      xl: { cssVar: '--spacing-xl', rem: '3rem' },
-      '2xl': { cssVar: '--spacing-2xl', rem: '5rem' },
+      xs: { cssVar: '--space-xs', rem: '0.5rem' },
+      sm: { cssVar: '--space-sm', rem: '1rem' },
+      md: { cssVar: '--space-md', rem: '1.5rem' },
+      lg: { cssVar: '--space-lg', rem: '2rem' },
+      xl: { cssVar: '--space-xl', rem: '3rem' },
+      '2xl': { cssVar: '--space-2xl', rem: '5rem' },
     },
 
     radii: {

@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Design Overhaul
-status: executing
-stopped_at: Phase 25 complete; Phase 26 (blog migration) ready to enter context
-last_updated: "2026-05-16T06:17:37Z"
-last_activity: 2026-05-16 -- Plan 25-02 complete (Phase 25 done — /thank-you migrated, /404 created; all 3 leaf pages on BaseLayoutV2)
+status: completed
+stopped_at: Completed 24-03-PLAN.md — Phase 24 fully complete (all plans 01/02/04/03 done)
+last_updated: "2026-05-15T18:35:34.275Z"
+last_activity: 2026-05-15 -- Phase 24 marked complete
 progress:
   total_phases: 8
-  completed_phases: 3
-  total_plans: 13
-  completed_plans: 13
-  percent: 38
+  completed_phases: 2
+  total_plans: 8
+  completed_plans: 8
+  percent: 25
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-14)
 
 **Core value:** Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
-**Current focus:** Phase 25 — leaf-page-migrations-faq-thank-you-404
+**Current focus:** Phase 24 — v2-primitive-library-design-system-page
 
 ## Current Position
 
-Phase: 25 (leaf-page-migrations-faq-thank-you-404) — COMPLETE
-Plan: 2 of 2 complete (Plan 25-01: FAQ migration; Plan 25-02: thank-you migration + new /404)
-Status: Phase 25 complete; ready for Phase 26 (blog migration) context gathering
-Last activity: 2026-05-16 -- Plan 25-02 complete (/thank-you on BaseLayoutV2 with elevated Card + MailCheck icon; /404 created with single Return home Button + noindex meta; all 4 v2-leaf-pages.spec.ts tests green; dist/404.html auto-emitted by Astro static build)
+Phase: 24 — COMPLETE
+Plan: All 4 plans complete (01, 02, 04, 03)
+Status: Phase 24 complete
+Last activity: 2026-05-15 -- Phase 24 marked complete
 
-Progress: [██████░░░░] 50% (v1.4 — Phases 23-25 of 23-30 complete)
+Progress: [███░░░░░░░] 28% (v1.4)
 
 ## Milestone History
 
@@ -48,7 +48,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 **Velocity:**
 
-- Total plans completed: 78 (v1.0: 23, v1.1: 14, v1.2: 10, v1.3: 20)
+- Total plans completed: 71 (v1.0: 23, v1.1: 14, v1.2: 10, v1.3: 20)
 - Average duration: ~1-5 min/plan (recent trend)
 - Total execution time: ~5 days across 4 milestones
 
@@ -83,25 +83,6 @@ See `.planning/MILESTONES.md` for full milestone details.
 - **24-03 2026-05-15**: All 4 v2 primitive components were WCAG 2.2 AA compliant — color-contrast violations were in design-system.astro page markup (text-accent link at 1.8:1; opacity-70 caption at 4.1:1), not primitive components
 - **24-03 2026-05-15**: text-accent (#53da74 green) must NEVER be used as text color — fails 4.5:1 WCAG AA for normal text; only valid for non-text (focus rings, button backgrounds, decorative fills)
 - **24-03 2026-05-15**: opacity-* utilities must not be applied to text-text-muted at caption/small sizes — text-text-muted at 12px is at the WCAG AA contrast boundary; opacity reduces it below 4.5:1
-  - **24-05 2026-05-15**: Use --max-width-* tokens (not --container-*) for max-w-{size} fix — Tailwind v4.1.18 lookup order is [--max-width, --spacing, --container]; --spacing wins over --container so container tokens alone cannot override the spacing fallback
-  - **24-05 2026-05-15**: --max-width-sm/md/lg/xl/2xl declared in v2 @theme at Tailwind v4 defaults (24/28/32/36/42 rem) — no v1 collision; fixes select wrapper (max-w-sm: 16px to 384px) and Footer tagline (max-w-md: 24px to 448px)
-  - **24-06 2026-05-15**: hover:-translate-y-1 (-4px) chosen over -1.5 (-6px) — smallest perceptible step above -2px threshold; stays subtle; v1 uses -8px for comparison
-  - **24-06 2026-05-15**: Tailwind v4 translate utility sets CSS `translate` individual property (not `transform` matrix) — `getComputedStyle.transform` returns "none" always; must read `getComputedStyle.translate` and whitespace-split for Playwright hover assertions
-  - **24-06 2026-05-15**: page.waitForTimeout(300) required after interactiveCard.hover() — CSS duration-200 transition runs async; immediate getComputedStyle read captures ~0 mid-animation; 300ms ensures full settlement
-  - **24-07 2026-05-15**: --color-danger: oklch(0.50 0.22 27) baseline passes axe-core WCAG AA without ladder escalation (≈5.5:1 on white at 14px) — promotes 9th v2 color token; text-danger Tailwind utility auto-generated
-  - **24-07 2026-05-15**: Modern Chromium (v105+) returns oklch(...) from getComputedStyle.color — does NOT convert to rgb(); Playwright tests asserting color values must handle both OKLCH and RGB formats with an if-branch
-  - **24-07 2026-05-15**: Phase 24 is now COMPLETE — all 7 plans done, all 3 UAT gaps closed (Gap 1: max-width tokens 24-05, Gap 2: card hover 24-06, Gap 3: input error color 24-07)
-  - **25-01 2026-05-16**: FAQ row padding p-md (24px) chosen over p-sm (16px) — UI-SPEC discretion confirmed; reads cleaner with 24px H3 question text
-  - **25-01 2026-05-16**: ChevronDown rotation duration-200 ease-out — matches v2 Card hover transition (Card.astro line 22) for single motion vocabulary across v2 system
-  - **25-01 2026-05-16**: SEO.astro globally emits a Person JSON-LD on every page — pages emitting page-specific schema (e.g. /faq emits FAQPage) produce 2 JSON-LD scripts in <head>; tests asserting on schema content MUST filter by @type, never assert global JSON-LD count
-  - **25-01 2026-05-16**: Empirical finding — /thank-you and /404 axe tests pass on the v1 baseline (originally documented as expected-RED contract gate). Contract gate for Plan 25-02 is now "no regression", not "turn red into green"
-  - **25-01 2026-05-16**: Centered elevated CTA Card composition LOCKED — `<Card elevated={true} class="max-w-2xl mx-auto text-center"><CardBody>...<Button variant="primary" size="md" href="/#contact">...</Button></CardBody></Card>` is the visual family for the three Phase 25 leaf pages; /thank-you and /404 reuse exactly in Plan 25-02
-  - **25-02 2026-05-16**: Astro 5 static-build empirically auto-emits dist/404.html for GitHub Pages — drop src/pages/404.astro, build, ship; no astro.config.mjs change, no SSR adapter, no 404-specific routing config (D-09 verified, dist/404.html = 10006 bytes containing "Page not found")
-  - **25-02 2026-05-16**: @astrojs/sitemap auto-excludes /404 from dist/sitemap-0.xml by default — VALIDATION belt-and-suspenders check returned `OK: /404 not in sitemap` without any manual filter; the noindex meta (D-13) is the primary defense and sitemap exclusion is automatic
-  - **25-02 2026-05-16**: v2 success-state visual cue pattern via Lucide icon at text-accent + elevated Card replaces v1 Card variant="turquoise" pattern — accent color sits on the icon (non-text per WCAG 1.4.3), not on a Card surface; H1/body stay text-text for WCAG AA contrast (D-14, D-15)
-  - **25-02 2026-05-16**: Calendly URL preserved verbatim (https://calendly.com/joelshinness, exactly 1 grep match) per D-16 — real-URL swap remains a separately tracked v1.3 todo, NOT folded into Phase 25
-  - **25-02 2026-05-16**: 404 nav locked to single "Return home" Button per D-11 — HeaderV2 carries Blog/Projects/FAQ/Contact on every page including /404; no key-pages link list added (deliberate scope tightening of roadmap success-criterion 3 wording)
-  - **25-02 2026-05-16**: Phase 25 COMPLETE — all 3 leaf-page migrations shipped (LEAF-01 FAQ from Plan 25-01; LEAF-02 thank-you + LEAF-03 /404 from Plan 25-02); centered-Card composition validated across 3 surfaces; ready for /gsd:verify-work + Lighthouse CI sign-off + PR merge
 
 ### Pending Todos
 
@@ -119,7 +100,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 ## Session Continuity
 
-Last session: 2026-05-16T06:17:37Z
-Stopped at: Plan 25-02 complete (Phase 25 done — all 3 leaf-page migrations shipped on branch feature/phase-25-leaf-pages)
-Resume file: None (Phase 25 complete; next action is /gsd:verify-work and PR merge, then Phase 26 context gathering)
-Next action: Run /gsd:verify-work for Phase 25 → open PR for feature/phase-25-leaf-pages → after merge, /gsd:context-phase 26 (blog migration)
+Last session: 2026-05-15T18:33:00Z
+Stopped at: Completed 24-03-PLAN.md — Phase 24 fully complete (all plans 01/02/04/03 done)
+Resume file: .planning/phases/24-v2-primitive-library-design-system-page/24-03-SUMMARY.md
+Next action: Execute Phase 25 (first v2 page migration — begin with orchestrator to select next phase)
