@@ -146,28 +146,22 @@ Plans:
   3. `/design-system.json` endpoint returns v2 token values (colors, fonts, spacing) — not v1 values
   4. No `is:global` Astro style blocks appear in any v2 component; all component styles are scoped or use Tailwind utility classes
 
-**Plans:** 7/7 plans complete
+**Plans:** TBD
 
 Plans:
 
 **Wave 1**
 
-- [x] 24-01: Build v2 Button primitive (all variants, keyboard focus, WCAG contrast)
-- [x] 24-02: Build v2 Card, Input, and Badge primitives (variants, accessible labels, error states)
+- [ ] 24-01: Build v2 Button primitive (all variants, keyboard focus, WCAG contrast)
+- [ ] 24-02: Build v2 Card, Input, and Badge primitives (variants, accessible labels, error states)
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [x] 24-04: Rebuild `/design-system` page on `BaseLayoutV2` with live component demos; update `/design-system.json` endpoint to v2 token values
+- [ ] 24-04: Rebuild `/design-system` page on `BaseLayoutV2` with live component demos; update `/design-system.json` endpoint to v2 token values
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
-- [x] 24-03: Run Playwright keyboard navigation + axe-core tests against all interactive v2 components; fix any violations
-
-**Gap Closure** *(post-UAT fixes)*
-
-- [x] 24-05: Close UAT Gap 1 — add --max-width-sm/md/lg/xl/2xl tokens so max-w-{size} resolves to container widths; add Playwright regression guard (Test 9)
-- [x] 24-06: Close UAT Gap 2 — raise Card hover lift from -2px (imperceptible) to -4px; update UI-SPEC lines 235+316; add Playwright hover translate regression guard (Test 7 extended)
-- [x] 24-07: Close UAT Gap 3 — add --color-danger to v2 @theme; wire text-danger on Input error <p>; sweep --space-* → --spacing-* in JSON endpoint; add Test 10 (red-dominant color regression guard)
+- [ ] 24-03: Run Playwright keyboard navigation + axe-core tests against all interactive v2 components; fix any violations
 
 **Cross-cutting constraints:**
 
@@ -187,16 +181,11 @@ Plans:
   3. `/404` renders on `BaseLayoutV2` with navigation links back to the homepage and key pages
   4. All three pages pass axe-core with zero violations and Lighthouse 90+ across all categories
 
-**Plans:** 2 plans
+**Plans:** TBD
 
 Plans:
 
-**Wave 1**
-
 - [ ] 25-01: Migrate `/faq` to `BaseLayoutV2`; add CTA block; verify FAQPage JSON-LD; axe-core pass
-
-**Wave 2** *(blocked on Wave 1 completion)*
-
 - [ ] 25-02: Migrate `/thank-you` and `/404` to `BaseLayoutV2`; verify content and navigation intact; axe-core pass
 
 ---
@@ -346,7 +335,7 @@ Phases execute in numeric order: 1 -> 2 -> ... -> 22 -> 23 -> 24 -> 25 -> 26 -> 
 | 21. Navigation Cleanup | v1.3 | 1/1 | Complete | 2026-02-10 |
 | 22. Footer Enhancement | v1.3 | 1/1 | Complete | 2026-02-11 |
 | 23. Design System Foundation | v1.4 | 4/4 | Complete    | 2026-05-15 |
-| 24. v2 Primitive Library + Design System Page | v1.4 | 7/7 | Complete    | 2026-05-15 |
+| 24. v2 Primitive Library + Design System Page | v1.4 | 4/4 | Complete    | 2026-05-15 |
 | 25. Leaf Page Migrations | v1.4 | 0/2 | Not started | - |
 | 26. Blog Migration | v1.4 | 0/4 | Not started | - |
 | 27. Projects + Services Migration | v1.4 | 0/3 | Not started | - |
