@@ -187,7 +187,7 @@ Plans:
   3. `/404` renders on `BaseLayoutV2` with navigation links back to the homepage and key pages
   4. All three pages pass axe-core with zero violations and Lighthouse 90+ across all categories
 
-**Plans:** TBD
+**Plans:** 2 plans
 
 Plans:
 
