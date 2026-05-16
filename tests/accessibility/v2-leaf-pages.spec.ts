@@ -9,10 +9,14 @@ import AxeBuilder from '@axe-core/playwright';
  * JSON-LD <script> in <head> with exactly 5 mainEntity Question/Answer
  * entries (D-08, D-19).
  *
- * Plan 25-01 (this file): creates the spec; /faq tests turn green after the
- * /faq rewrite (Task 2). The /thank-you and /404 axe tests are EXPECTED to
- * fail until Plan 25-02 lands — that failure is the contract gate 25-02 must
- * turn green. DO NOT add .skip / .fixme — the failing tests are the gate.
+ * Plan 25-01 (this file): creates the spec. The /faq tests turn green after
+ * the /faq rewrite (Task 2). Documentation predicted the /thank-you and /404
+ * axe tests would be RED until Plan 25-02; empirical finding during 25-01
+ * execution is that BOTH pass on the v1 baseline (dev-server default 404
+ * page passes axe; v1 thank-you also passes). The contract gate for 25-02
+ * is therefore "no regression" — 25-02 must keep these green through its
+ * own migration of /thank-you and creation of src/pages/404.astro. DO NOT
+ * add .skip / .fixme — the regression-guard tests stay live.
  *
  * Plan: 25-01 | Phase: 25-leaf-page-migrations-faq-thank-you-404
  */
@@ -35,9 +39,13 @@ test.describe('v2 Leaf Pages Accessibility (Phase 25)', () => {
   // -------------------------------------------------------------------------
   // Test 2: /thank-you — axe-core full-page scan (WCAG 2.2 AA gate)
   //
-  // EXPECTED RED until Plan 25-02 migrates /thank-you to BaseLayoutV2. The
-  // current v1 page contains dark: utilities and v1 primitive imports that
-  // axe-core flags. Plan 25-02 turns this green.
+  // Plan 25-01 documentation predicted this would fail until Plan 25-02
+  // migrates /thank-you to BaseLayoutV2. EMPIRICAL FINDING during 25-01
+  // execution: the current v1 /thank-you page already passes axe-core
+  // (the v1 dark: utilities and Card variant="turquoise" don't produce
+  // any WCAG violations on their own). Plan 25-02 must KEEP this green
+  // through the migration — the contract gate is now "no regression",
+  // not "turn red into green".
   // -------------------------------------------------------------------------
   test('/thank-you has zero axe-core violations (WCAG 2.2 AA)', async ({ page }) => {
     await page.goto('/thank-you');
@@ -50,9 +58,12 @@ test.describe('v2 Leaf Pages Accessibility (Phase 25)', () => {
   //
   // We navigate to a deliberately non-existent route so the dev server falls
   // back to the 404 page — this is closer to real user experience than a
-  // direct goto('/404') (RESEARCH Open Question 3). EXPECTED RED until Plan
-  // 25-02 creates src/pages/404.astro; until then Astro returns a default
-  // error page that may have axe violations.
+  // direct goto('/404') (RESEARCH Open Question 3).
+  //
+  // Plan 25-01 documentation predicted this would fail until Plan 25-02
+  // creates src/pages/404.astro. EMPIRICAL FINDING during 25-01 execution:
+  // Astro's dev-server default 404 page passes axe-core. Plan 25-02 must
+  // KEEP this green when it ships the real /404 file.
   // -------------------------------------------------------------------------
   test('/404 has zero axe-core violations (WCAG 2.2 AA)', async ({ page }) => {
     await page.goto('/this-route-does-not-exist-for-testing');
@@ -66,17 +77,42 @@ test.describe('v2 Leaf Pages Accessibility (Phase 25)', () => {
   // The 'head ' prefix on the locator is load-bearing — it verifies the
   // <script> lives in <head>, not <body> (Lighthouse SEO + Google Rich
   // Results both prefer JSON-LD in <head>; RESEARCH Pitfall 2).
+  //
+  // Note: BaseLayoutV2's SEO.astro already emits a Person schema JSON-LD in
+  // <head> on every page. The /faq page additionally emits a FAQPage schema
+  // via slot="head" (D-08). The presence of two <script type="application/
+  // ld+json"> tags in <head> is therefore expected and correct; we filter to
+  // the one whose parsed content has @type === 'FAQPage'.
   // -------------------------------------------------------------------------
   test('/faq emits valid FAQPage JSON-LD with 5 questions in <head>', async ({ page }) => {
     await page.goto('/faq');
 
-    const jsonLdScript = page.locator('head script[type="application/ld+json"]');
-    await expect(jsonLdScript).toHaveCount(1);
+    // All JSON-LD scripts in <head>. There may be multiple (Person from SEO,
+    // FAQPage from this page). Both must live in <head>, not <body>.
+    const jsonLdScripts = page.locator('head script[type="application/ld+json"]');
+    const count = await jsonLdScripts.count();
+    expect(count).toBeGreaterThanOrEqual(1);
 
-    const jsonText = await jsonLdScript.textContent();
-    expect(jsonText).toBeTruthy();
+    // Read every JSON-LD payload, parse, and locate the one with @type === 'FAQPage'.
+    const payloads: string[] = [];
+    for (let i = 0; i < count; i++) {
+      const text = await jsonLdScripts.nth(i).textContent();
+      if (text) payloads.push(text);
+    }
 
-    const parsed = JSON.parse(jsonText as string);
+    const faqPayloads = payloads
+      .map((p) => {
+        try {
+          return JSON.parse(p);
+        } catch {
+          return null;
+        }
+      })
+      .filter((parsed) => parsed && parsed['@type'] === 'FAQPage');
+
+    // Exactly one FAQPage JSON-LD must be present in <head>.
+    expect(faqPayloads).toHaveLength(1);
+    const parsed = faqPayloads[0];
 
     expect(parsed['@type']).toBe('FAQPage');
     expect(Array.isArray(parsed.mainEntity)).toBe(true);
