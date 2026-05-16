@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Design Overhaul
 status: executing
-stopped_at: Phase 25 context gathered
-last_updated: "2026-05-16T03:46:47.403Z"
-last_activity: 2026-05-16 -- Phase 25 planning complete
+stopped_at: Plan 25-01 complete; Plan 25-02 ready to execute
+last_updated: "2026-05-16T06:05:27Z"
+last_activity: 2026-05-16 -- Plan 25-01 complete (FAQ migrated to BaseLayoutV2)
 progress:
   total_phases: 8
   completed_phases: 2
   total_plans: 13
-  completed_plans: 11
-  percent: 25
+  completed_plans: 12
+  percent: 33
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-14)
 
 **Core value:** Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
-**Current focus:** Phase 25 — leaf page migrations (faq, thank you, 404)
+**Current focus:** Phase 25 — leaf-page-migrations-faq-thank-you-404
 
 ## Current Position
 
-Phase: 25
-Plan: Not started
-Status: Ready to execute
-Last activity: 2026-05-16 -- Phase 25 planning complete
+Phase: 25 (leaf-page-migrations-faq-thank-you-404) — EXECUTING
+Plan: 2 of 2 (ready to execute; Plan 25-01 complete)
+Status: Executing Phase 25
+Last activity: 2026-05-16 -- Plan 25-01 complete (FAQ migrated to BaseLayoutV2; v2-leaf-pages spec created)
 
-Progress: [████░░░░░░] 36% (v1.4)
+Progress: [█████░░░░░] 45% (v1.4)
 
 ## Milestone History
 
@@ -91,6 +91,11 @@ See `.planning/MILESTONES.md` for full milestone details.
   - **24-07 2026-05-15**: --color-danger: oklch(0.50 0.22 27) baseline passes axe-core WCAG AA without ladder escalation (≈5.5:1 on white at 14px) — promotes 9th v2 color token; text-danger Tailwind utility auto-generated
   - **24-07 2026-05-15**: Modern Chromium (v105+) returns oklch(...) from getComputedStyle.color — does NOT convert to rgb(); Playwright tests asserting color values must handle both OKLCH and RGB formats with an if-branch
   - **24-07 2026-05-15**: Phase 24 is now COMPLETE — all 7 plans done, all 3 UAT gaps closed (Gap 1: max-width tokens 24-05, Gap 2: card hover 24-06, Gap 3: input error color 24-07)
+  - **25-01 2026-05-16**: FAQ row padding p-md (24px) chosen over p-sm (16px) — UI-SPEC discretion confirmed; reads cleaner with 24px H3 question text
+  - **25-01 2026-05-16**: ChevronDown rotation duration-200 ease-out — matches v2 Card hover transition (Card.astro line 22) for single motion vocabulary across v2 system
+  - **25-01 2026-05-16**: SEO.astro globally emits a Person JSON-LD on every page — pages emitting page-specific schema (e.g. /faq emits FAQPage) produce 2 JSON-LD scripts in <head>; tests asserting on schema content MUST filter by @type, never assert global JSON-LD count
+  - **25-01 2026-05-16**: Empirical finding — /thank-you and /404 axe tests pass on the v1 baseline (originally documented as expected-RED contract gate). Contract gate for Plan 25-02 is now "no regression", not "turn red into green"
+  - **25-01 2026-05-16**: Centered elevated CTA Card composition LOCKED — `<Card elevated={true} class="max-w-2xl mx-auto text-center"><CardBody>...<Button variant="primary" size="md" href="/#contact">...</Button></CardBody></Card>` is the visual family for the three Phase 25 leaf pages; /thank-you and /404 reuse exactly in Plan 25-02
 
 ### Pending Todos
 
@@ -108,7 +113,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 ## Session Continuity
 
-Last session: 2026-05-16T03:01:24.010Z
-Stopped at: Phase 25 context gathered
-Resume file: .planning/phases/25-leaf-page-migrations-faq-thank-you-404/25-CONTEXT.md
-Next action: Begin Phase 25 (next phase in roadmap)
+Last session: 2026-05-16T06:05:27Z
+Stopped at: Plan 25-01 complete
+Resume file: .planning/phases/25-leaf-page-migrations-faq-thank-you-404/25-02-PLAN.md
+Next action: Execute Plan 25-02 (migrate /thank-you to BaseLayoutV2 + create src/pages/404.astro)
