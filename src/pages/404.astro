@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/v2/BaseLayout.astro';
+import Card from '../components/v2/ui/Card.astro';
+import CardBody from '../components/v2/ui/CardBody.astro';
+import Button from '../components/v2/ui/Button.astro';
+
+// D-25-15: Destination grid in declared order (Home / Projects / Blog / FAQ)
+const destinations = [
+  { href: '/',         label: 'Home',     desc: 'Back to the start.' },
+  { href: '/projects', label: 'Projects', desc: "See work I've shipped." },
+  { href: '/blog',     label: 'Blog',     desc: 'Read recent posts.' },
+  { href: '/faq',      label: 'FAQ',      desc: 'Common questions, answered.' },
+];
+---
+
+<BaseLayout
+  title="Page not found"
+  description="The page you're looking for has wandered off."
+>
+  <!-- D-25-18: noindex on system-state page (true 404 — fully suppress indexing) -->
+  <meta slot="head" name="robots" content="noindex" />
+
+  <div class="container mx-auto px-md">
+    <!-- D-25-14 / D-25-17: Typographic hero — no banner chrome, the numeral IS the chrome -->
+    <section class="mt-2xl text-center">
+      <h1 class="font-display font-bold text-8xl md:text-9xl text-primary leading-none">404</h1>
+      <h2 class="mt-md font-display font-bold text-h2 text-text">This page wandered off.</h2>
+    </section>
+
+    <!-- D-25-15: 2x2 destination grid. Anchor-wraps-Card per BlogCard CR-02 (RESEARCH OQ-4):
+         inner Card is NOT interactive — outer <a> carries the focus ring + hover-lift -->
+    <div class="mt-xl mx-auto max-w-4xl">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+        {destinations.map(d => (
+          <a href={d.href} class="dest-card" aria-label={`Go to ${d.label}`}>
+            <Card>
+              <CardBody>
+                <h3 class="font-display font-bold text-h3 text-text">{d.label}</h3>
+                <p class="font-text text-small text-text-muted mt-xs">{d.desc}</p>
+              </CardBody>
+            </Card>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- D-25-16: Soft 5th destination — link-variant auto-renders ArrowRight (Phase 24 D-04) -->
+    <div class="mt-xl mb-2xl text-center">
+      <Button variant="link" href="/#contact">Or get in touch</Button>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  /* Outer anchor owns the navigation + focus ring + hover-lift.
+     Inner Card is NOT interactive (no double-tabindex per BlogCard CR-02 precedent). */
+  .dest-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 200ms ease;
+    border-radius: 0.5rem; /* match Card rounded-lg so focus ring traces the right shape */
+  }
+
+  .dest-card:hover {
+    transform: translateY(-2px);
+  }
+
+  /* WCAG 2.4.7 — visible focus indicator on the navigating element (D-18 accent ring). */
+  .dest-card:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+</style>
