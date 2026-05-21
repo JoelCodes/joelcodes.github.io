@@ -2,10 +2,10 @@
 gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Design Overhaul
-status: executing
+status: completed
 stopped_at: Phase 25 context gathered
-last_updated: "2026-05-21T20:24:00.687Z"
-last_activity: 2026-05-21 -- Phase 25 execution started
+last_updated: "2026-05-21T20:30:08.088Z"
+last_activity: 2026-05-21 -- Phase 25 marked complete
 progress:
   total_phases: 8
   completed_phases: 4
@@ -25,10 +25,10 @@ See: .planning/PROJECT.md (updated 2026-05-14)
 
 ## Current Position
 
-Phase: 25 (Leaf Page Migrations (FAQ, Thank-You, 404)) — EXECUTING
+Phase: 25 — COMPLETE
 Plan: 1 of 2
-Status: Executing Phase 25
-Last activity: 2026-05-21 -- Phase 25 execution started
+Status: Phase 25 complete
+Last activity: 2026-05-21 -- Phase 25 marked complete
 
 Progress: [██████████] 100%
 
