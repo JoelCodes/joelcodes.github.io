@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Design Overhaul
-status: completed
-stopped_at: Completed 24-03-PLAN.md — Phase 24 fully complete (all plans 01/02/04/03 done)
-last_updated: "2026-05-15T18:35:34.275Z"
-last_activity: 2026-05-15 -- Phase 24 marked complete
+status: planning
+stopped_at: Phase 25 context gathered
+last_updated: "2026-05-21T19:08:55.310Z"
+last_activity: 2026-05-21
 progress:
   total_phases: 8
-  completed_phases: 2
-  total_plans: 8
-  completed_plans: 8
-  percent: 25
+  completed_phases: 3
+  total_plans: 12
+  completed_plans: 12
+  percent: 38
 ---
 
 # Project State
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-14)
 
 **Core value:** Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
-**Current focus:** Phase 24 — v2-primitive-library-design-system-page
+**Current focus:** Phase 27 — projects + services migration
 
 ## Current Position
 
-Phase: 24 — COMPLETE
-Plan: All 4 plans complete (01, 02, 04, 03)
-Status: Phase 24 complete
-Last activity: 2026-05-15 -- Phase 24 marked complete
+Phase: 27
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-05-21
 
 Progress: [███░░░░░░░] 28% (v1.4)
 
@@ -48,7 +48,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 **Velocity:**
 
-- Total plans completed: 71 (v1.0: 23, v1.1: 14, v1.2: 10, v1.3: 20)
+- Total plans completed: 75 (v1.0: 23, v1.1: 14, v1.2: 10, v1.3: 20)
 - Average duration: ~1-5 min/plan (recent trend)
 - Total execution time: ~5 days across 4 milestones
 
@@ -100,7 +100,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 ## Session Continuity
 
-Last session: 2026-05-15T18:33:00Z
-Stopped at: Completed 24-03-PLAN.md — Phase 24 fully complete (all plans 01/02/04/03 done)
-Resume file: .planning/phases/24-v2-primitive-library-design-system-page/24-03-SUMMARY.md
+Last session: 2026-05-21T19:08:55.300Z
+Stopped at: Phase 25 context gathered
+Resume file: .planning/phases/25-leaf-page-migrations-faq-thank-you-404/25-CONTEXT.md
 Next action: Execute Phase 25 (first v2 page migration — begin with orchestrator to select next phase)
