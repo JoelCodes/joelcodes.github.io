@@ -181,12 +181,17 @@ Plans:
   3. `/404` renders on `BaseLayoutV2` with navigation links back to the homepage and key pages
   4. All three pages pass axe-core with zero violations and Lighthouse 90+ across all categories
 
-**Plans:** TBD
+**Plans:** 2 plans
 
 Plans:
 
-- [ ] 25-01: Migrate `/faq` to `BaseLayoutV2`; add CTA block; verify FAQPage JSON-LD; axe-core pass
-- [ ] 25-02: Migrate `/thank-you` and `/404` to `BaseLayoutV2`; verify content and navigation intact; axe-core pass
+**Wave 1**
+
+- [ ] 25-01-PLAN.md *(Wave 1)* — Migrate `/faq` to `BaseLayoutV2` (page-header banner + divider-list accordion with ChevronDown rotation + bottom CTA banner); preserve FAQPage JSON-LD verbatim; ship Wave 0 test scaffold `tests/accessibility/v2-leaf.spec.ts` with /faq Category A tests
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [ ] 25-02-PLAN.md *(Wave 2, blocked on 25-01)* — Rewrite `/thank-you` on `BaseLayoutV2` (elevated Card + env-var Calendly URL); create `/404` on `BaseLayoutV2` (typographic hero + 2x2 destination grid + link-variant contact CTA + noindex meta); extend v2-leaf.spec.ts with /thank-you + /404 tests; add `PUBLIC_CALENDLY_URL` to deploy.yml; Pencil mirror /404 frame + FAQ accordion-row variant
 
 ---
 
@@ -345,4 +350,4 @@ Phases execute in numeric order: 1 -> 2 -> ... -> 22 -> 23 -> 24 -> 25 -> 26 -> 
 
 ---
 *Roadmap initialized: 2026-01-26 for v1.0*
-*Last updated: 2026-05-14 — v1.4 Design Overhaul phases 23-30 added*
+*Last updated: 2026-05-21 — Phase 25 plans finalized (25-01 + 25-02)*
