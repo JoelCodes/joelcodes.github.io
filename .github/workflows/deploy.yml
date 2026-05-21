@@ -34,6 +34,7 @@ jobs:
         run: npm run build
         env:
           PUBLIC_N8N_WEBHOOK_URL: ${{ secrets.PUBLIC_N8N_WEBHOOK_URL }}
+          PUBLIC_CALENDLY_URL: ${{ secrets.PUBLIC_CALENDLY_URL }}
 
       - name: Run Lighthouse CI
         uses: treosh/lighthouse-ci-action@v12
