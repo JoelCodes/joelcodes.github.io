@@ -4,8 +4,8 @@ milestone: v1.4
 milestone_name: Design Overhaul
 status: executing
 stopped_at: Phase 25 context gathered
-last_updated: "2026-05-21T19:58:42.952Z"
-last_activity: 2026-05-21 -- Phase 25 planning complete
+last_updated: "2026-05-21T19:59:41.188Z"
+last_activity: 2026-05-21 -- Phase 25 execution started
 progress:
   total_phases: 8
   completed_phases: 3
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-14)
 
 **Core value:** Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
-**Current focus:** Phase 27 — projects + services migration
+**Current focus:** Phase 25 — Leaf Page Migrations (FAQ, Thank-You, 404)
 
 ## Current Position
 
-Phase: 27
-Plan: Not started
-Status: Ready to execute
-Last activity: 2026-05-21 -- Phase 25 planning complete
+Phase: 25 (Leaf Page Migrations (FAQ, Thank-You, 404)) — EXECUTING
+Plan: 1 of 2
+Status: Executing Phase 25
+Last activity: 2026-05-21 -- Phase 25 execution started
 
 Progress: [███░░░░░░░] 28% (v1.4)
 
