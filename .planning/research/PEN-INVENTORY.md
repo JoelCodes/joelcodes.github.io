@@ -250,7 +250,9 @@ Per D-10 schema. All flags raised during Plan 23-01 audit.
 | OPEN-23-07 | token | minor | Spacing scale shows two parallel tracks: dominant 4-multiple ladder (`16, 24, 32, 40, 60`) and a secondary `10/20` track from Hero CTAs + Crito banner frames. Resolution: tokenize the 4-multiple ladder as the primary `space-primitive-*` scale (likely `4, 8, 12, 16, 20, 24, 32, 40, 48, 60`), keep `10` as a one-off if Hero CTA exactly requires it (or round to `12`). Decided during plan 23-03 with explicit source-evidence per token. | none |
 | OPEN-23-08 | token | minor | Sub-pixel corner-radius and shadow-blur values (`16.0556`, `24.0833`, `32.11`, `19.27`, etc.) inside the Dashboard sub-frame are Crito scale-down artifacts, not intended design intent. Round to clean integers (`16`, `24`, `32`, `20`) when tokenizing. | none |
 | OPEN-23-09 | token | minor | Three Crito-template-only fonts (`Poppins`, `Nunito`, `Chivo`) are used by OUT-OF-SCOPE frames (View More, About Me, banners, Footer). Decide during plan 23-03 whether to include them in `type-primitive-*` tokens (and let Phase 31 decide if Joel's Homepage uses Poppins for visual fidelity) or exclude them entirely. **Resolved in plan 23-03:** included `Plus Jakarta Sans` + `Inter` as primitives; included `Chivo` (Footer-conditional, Phase 24+ may remove); excluded `Poppins` + `Nunito` entirely. | 31 (Homepage rebuild may revisit if Crito visual fidelity needs Poppins) |
-| OPEN-23-10 | token | notable | Typography size scale gap: primitive sizes from IN-SCOPE Home Page are `14, 16, 18, 48, 70` — missing intermediate h2/h3/h4 sizes (typical `24, 32, 36`). Crito's Home Page does not depict an h2/h3 hierarchy beyond the section-heading size 48 → body 16. Phase 26+ (FAQ, Blog, Service-Details reconstruction) will need intermediate sizes. Resolution: add semantic aliases in later phases that interpolate (e.g., `type-semantic-heading-2` = 36 via Crito .fig consult per D-04), OR design from scratch using Joel's content hierarchy needs. Do not invent primitives now (Pitfall 1). | 26 (FAQ + 404), 28 (Blog), 29 (Service Details) |
+| OPEN-23-10 | token | notable | Typography size scale gap: primitive sizes from IN-SCOPE Home Page are `14, 16, 18, 48, 70` — missing intermediate h2/h3/h4 sizes (typical `24, 32, 36`). Crito's Home Page does not depict an h2/h3 hierarchy beyond the section-heading size 48 → body 16. Phase 26+ (FAQ, Blog, Service-Details reconstruction) will need intermediate sizes. Resolution: add semantic aliases in later phases that interpolate (e.g., `type-semantic-heading-2` = 36 via Crito .fig consult per D-04), OR design from scratch using Joel's content hierarchy needs. Do not invent primitives now (Pitfall 1). Plan 23-04 wrote `type-semantic-heading-1` only; heading-2 through heading-6 are NOT in the semantic surface and Phase 24+ component plans should NOT reference them — use display + heading-1 + body + body-sm + caption + button. | 26 (FAQ + 404), 28 (Blog), 29 (Service Details) |
+| OPEN-23-11 | token | notable | **New (plan 23-04).** Prose semantic aliases prose-link, prose-list, prose-inline-code are NOT written. D-15 specifies derivation from Crito Blog + FAQ frames only. Crito has no standalone FAQ frame (OPEN-23-06) and Blog frame `DzqTm` is a flat raster (OPEN-23-05) — neither is mineable for prose styling via Pencil MCP. `type-semantic-prose-paragraph-*` was written as a Home Page body proxy with `source-detail` flagged provisional pending Crito .fig consultation. Phase 26 (FAQ reconstruction) and Phase 28 (Blog reconstruction) must consult `design/images/Consulting & Agency Website Template I Crito (Community).fig` per D-04 to derive link styling (color + underline behavior), list bullet style + indent, and inline code styling. Inline-code specifically may not be depicted even in the .fig (agency marketing prose rarely shows code) — likely escalates to a Joel design decision in Phase 28. | 26 (FAQ — prose-link + prose-list), 28 (Blog — all four prose roles, inline-code potentially escalates to Joel decision) |
+| OPEN-23-12 | token | minor | **New (plan 23-04).** `radius-semantic-pill` is NOT written. No large/pill-shaped radius primitive in audit — IN-SCOPE Home Page CTA buttons use `radius-primitive-10` (small cornerRadius, not pill). View More frame (OUT-OF-SCOPE) uses `radius-primitive-60` (large) but that was excluded per OPEN-23-09. If Phase 24 component primitives need pill shapes (e.g., badge component, tag chips), add a primitive at that time. | 24 (component primitives) |
 
 ---
 
@@ -349,3 +351,89 @@ Coverage thresholds (per CONTEXT D-05: `N_colors ≥ 5 AND N_sizes ≥ 3 AND spa
 **Count summary:** 12 color + 8 space + 5 type-size + 3 type-weight + 3 type-family + 5 type-lh + 3 radius = **39 primitives**.
 
 **Zero-mutation spot-check (VAL-23-05 line 2):** Post-write `batch_get(readDepth=1)` on `MIXGf`, `ujMLJ`, `QdwxP` confirmed direct-child id sets match the baseline at `.planning/research/exports/v2.0/baseline-23/id-inventory.json` exactly. No existing Crito frame was modified by the `set_variables` call.
+
+---
+
+## Aliasing Strategy (resolved in plan 23-04 probe)
+
+**Aliasing Path: NATIVE.** Pencil supports variable-to-variable aliasing using the `$<name>` reference syntax in the `value` field of `set_variables`. Probe call wrote `{"color-semantic-bg-accent": {"type": "color", "value": "$color-primitive-amber-500"}}` and `get_variables({})` returned the reference preserved verbatim (not flattened to `#fdba09`). All 56 semantic aliases use this shape; downstream phases can reference semantic names directly and Pencil resolves through to the primitive value at render time.
+
+No DESCRIPTION-FALLBACK needed. RESEARCH Open Question 2 is resolved.
+
+---
+
+## Tokens Written — Semantic Aliases
+
+**Written:** 2026-05-31 by plan 23-04 via `mcp__pencil__set_variables` (one probe call + one batch call of 55 aliases; verified via `get_variables({})`). Every alias uses NATIVE `$<primitive-name>` reference syntax. Per CONTEXT D-14, components in Phases 24-32 reference these semantic names only — primitives are not exposed to component-author plans.
+
+| semantic_name | primitive_referenced | aliasing_path | source | source-detail |
+|---|---|---|---|---|
+| color-semantic-bg-page | color-primitive-white | NATIVE | search_all_unique_properties | Home Page outer frame `ujMLJ` fill (`#ffffffff`). |
+| color-semantic-bg-surface | color-primitive-neutral-50 | NATIVE | search_all_unique_properties | Footer bg + "Why will you choose" + "How to grow your business" + "Why-will-you-choose" section backgrounds. |
+| color-semantic-bg-surface-elevated | color-primitive-neutral-100 | NATIVE | search_all_unique_properties | Dashboard `Rectangle 8` (1156×722 light surface inside "We help to grow"). |
+| color-semantic-bg-inverse | color-primitive-navy-900 | NATIVE | search_all_unique_properties | Hero `Rectangle 1531` (1600×1246); Testimonial section bg; Performance is the key section bg. Primary dark-surface role. |
+| color-semantic-bg-accent | color-primitive-amber-500 | NATIVE | search_all_unique_properties | Crito banner accent (distinctive brand color). Probe alias from Task 1. |
+| color-semantic-bg-brand | color-primitive-cyan-500 | NATIVE | search_all_unique_properties | Hero `Logo` group Rectangle 1532 (partner-logo strip bg). Secondary brand surface. |
+| color-semantic-bg-cta-primary | color-primitive-green-500 | NATIVE | search_all_unique_properties | Hero `Button/Primary/With Icon` fill (200×60 primary CTA). |
+| color-semantic-text-primary | color-primitive-navy-900 | NATIVE | search_all_unique_properties | Primary text color on light surfaces (Hero section headings, body text on white sections). |
+| color-semantic-text-secondary | color-primitive-neutral-700 | NATIVE | search_all_unique_properties | Footer body text + copyright (Chivo); supporting/muted text role. |
+| color-semantic-text-inverse | color-primitive-white | NATIVE | search_all_unique_properties | Hero headline + subtitle text on navy bg; menu items; CTA bullet text. |
+| color-semantic-text-accent | color-primitive-amber-500 | NATIVE | search_all_unique_properties | Accent text role (rare use; reserved for highlight text against neutral surfaces). |
+| color-semantic-text-error | color-primitive-red-400 | NATIVE | search_all_unique_properties | Error/destructive text role. |
+| color-semantic-border-default | color-primitive-neutral-200 | NATIVE | search_all_unique_properties | Home Page "Better security" `Line 94` stroke (1px). |
+| color-semantic-decorative-coral | color-primitive-coral-400 | NATIVE | search_all_unique_properties | Hero `Ellipse 476` decorative shape (286×225); "We help to grow" shape (88×88). |
+| space-semantic-section-y | space-primitive-60 | NATIVE | search_all_unique_properties | Home Page Hero Menu bar gap; About Me top-level frame gap. Large section-spacing. |
+| space-semantic-container-x | space-primitive-24 | NATIVE | search_all_unique_properties | Home Page Hero `Auto Layout Vertical` gap. Common container horizontal-padding role. |
+| space-semantic-stack-sm | space-primitive-16 | NATIVE | search_all_unique_properties | Home Page testimonial cards layout + Hero CTA frame inner gaps. |
+| space-semantic-stack-md | space-primitive-24 | NATIVE | search_all_unique_properties | Form-field-vertical-gap-equivalent + card-grid-gap-equivalent. |
+| space-semantic-stack-lg | space-primitive-40 | NATIVE | search_all_unique_properties | About Me My Profile gFfJG inner gap; Frame 1 ("Want to Donate?") gap. |
+| space-semantic-inline-sm | space-primitive-9 | NATIVE | search_all_unique_properties | Home Page Hero check-icon-text group gap ("No credit card", "Get 15 days free trial"). |
+| space-semantic-inline-md | space-primitive-16 | NATIVE | search_all_unique_properties | Inline elements default gap. |
+| space-semantic-inline-lg | space-primitive-20 | NATIVE | search_all_unique_properties | Hero CTA `Button/Primary/With Icon` internal horizontal padding (`[16, 20]` → horizontal=20). |
+| space-semantic-button-px | space-primitive-20 | NATIVE | search_all_unique_properties | Hero CTA buttons horizontal padding. |
+| space-semantic-button-py | space-primitive-16 | NATIVE | search_all_unique_properties | Hero CTA buttons vertical padding. |
+| type-semantic-display-family | type-primitive-family-display | NATIVE | search_all_unique_properties | Hero headline "Smart-Thinking & Innovative Solution." (Plus Jakarta Sans). |
+| type-semantic-display-size | type-primitive-size-70 | NATIVE | search_all_unique_properties | Hero headline 70px. |
+| type-semantic-display-weight | type-primitive-weight-700 | NATIVE | search_all_unique_properties | Hero headline fw 700. |
+| type-semantic-display-lh | type-primitive-lh-tight | NATIVE | search_all_unique_properties | Hero headline `1.2` line-height. |
+| type-semantic-heading-1-family | type-primitive-family-display | NATIVE | search_all_unique_properties | Home Page section headings (Plus Jakarta Sans). |
+| type-semantic-heading-1-size | type-primitive-size-48 | NATIVE | search_all_unique_properties | Home Page section headings 48px. |
+| type-semantic-heading-1-weight | type-primitive-weight-700 | NATIVE | search_all_unique_properties | Home Page section headings fw 700. |
+| type-semantic-heading-1-lh | type-primitive-lh-heading | NATIVE | search_all_unique_properties | Home Page section headings `1.4` line-height. |
+| type-semantic-body-family | type-primitive-family-body | NATIVE | search_all_unique_properties | Home Page body text (Inter). |
+| type-semantic-body-size | type-primitive-size-16 | NATIVE | search_all_unique_properties | Home Page body 16px (Inter). |
+| type-semantic-body-weight | type-primitive-weight-400 | NATIVE | search_all_unique_properties | Home Page body fw normal/400. |
+| type-semantic-body-lh | type-primitive-lh-normal | NATIVE | search_all_unique_properties | Home Page body `1.6` line-height. |
+| type-semantic-body-sm-family | type-primitive-family-body | NATIVE | search_all_unique_properties | Home Page small body (Inter). |
+| type-semantic-body-sm-size | type-primitive-size-14 | NATIVE | search_all_unique_properties | Home Page Footer copyright 14px / supporting text. |
+| type-semantic-body-sm-weight | type-primitive-weight-400 | NATIVE | search_all_unique_properties | Home Page small body fw normal/400. |
+| type-semantic-body-sm-lh | type-primitive-lh-snug | NATIVE | search_all_unique_properties | Home Page Footer Inter 16/1.5 + supporting 16px text. |
+| type-semantic-caption-family | type-primitive-family-footer | NATIVE | search_all_unique_properties | Home Page Footer copyright (Chivo). |
+| type-semantic-caption-size | type-primitive-size-14 | NATIVE | search_all_unique_properties | Home Page Footer copyright 14px. |
+| type-semantic-caption-weight | type-primitive-weight-400 | NATIVE | search_all_unique_properties | Home Page Footer copyright fw normal/400. |
+| type-semantic-caption-lh | type-primitive-lh-snug | NATIVE | search_all_unique_properties | Home Page Footer Chivo 14/1.4286 (rounded to lh-snug=1.5; exact 1.4286 deferred per OPEN-23-08-style sub-pixel). |
+| type-semantic-button-family | type-primitive-family-body | NATIVE | search_all_unique_properties | Home Page Hero CTA labels + menu items (Inter). |
+| type-semantic-button-size | type-primitive-size-16 | NATIVE | search_all_unique_properties | Hero CTA labels 16px. |
+| type-semantic-button-weight | type-primitive-weight-500 | NATIVE | search_all_unique_properties | Hero menu items fw 500 (used here for button label hierarchy — Hero CTA labels are at fw 500 per audit). |
+| type-semantic-button-lh | type-primitive-lh-snug | NATIVE | search_all_unique_properties | Hero menu lh 1.5; button labels follow same. |
+| type-semantic-prose-paragraph-family | type-primitive-family-body | NATIVE | search_all_unique_properties (Home Page body proxy — see OPEN-23-11) | Home Page body Inter; provisional prose paragraph family pending Crito Blog frame consultation (OPEN-23-06: Blog frame is flat raster, so this provisional value will be confirmed via Crito .fig per D-04 during Phase 28). |
+| type-semantic-prose-paragraph-size | type-primitive-size-16 | NATIVE | search_all_unique_properties (Home Page body proxy — see OPEN-23-11) | Home Page body 16px (provisional). |
+| type-semantic-prose-paragraph-weight | type-primitive-weight-400 | NATIVE | search_all_unique_properties (Home Page body proxy — see OPEN-23-11) | Home Page body fw normal/400 (provisional). |
+| type-semantic-prose-paragraph-lh | type-primitive-lh-normal | NATIVE | search_all_unique_properties (Home Page body proxy — see OPEN-23-11) | Home Page body `1.6` line-height (provisional). |
+| radius-semantic-button | radius-primitive-10 | NATIVE | search_all_unique_properties | Hero `Button/Primary/With Icon` cornerRadius 10. |
+| radius-semantic-card | radius-primitive-10 | NATIVE | search_all_unique_properties | Testimonial Review 2 + Review 3 cards cornerRadius 10. |
+| radius-semantic-input | radius-primitive-10 | NATIVE | search_all_unique_properties (provisional — no input shown in Home Page; matches button radius by convention) | Default input radius proxied to button radius until Phase 24 component-primitive surface confirms. |
+| radius-semantic-surface | radius-primitive-24 | NATIVE | search_all_unique_properties | Home Page "We help to grow" Dashboard outer frame (`A65lo` 1156×722 sub-pixel `24.0833` rounded). |
+
+**Count summary:** 14 color + 10 space + 24 type (6 roles × 4 sub-properties) + 4 prose (paragraph only — link/list/inline-code OPEN per OPEN-23-11) + 4 radius = **56 semantic aliases**.
+
+**Cumulative variables in `design/Crito.pen`:** 39 primitives + 56 semantic = **95**. Audit unique-property count was 66; total 95 / 66 = 1.44× — within drift cap.
+
+**Coverage vs TOKEN-02..TOKEN-06 role checklist:**
+- ✓ Color: bg-page, bg-surface, bg-surface-elevated, bg-inverse, bg-accent, bg-brand, bg-cta-primary, text-primary, text-secondary, text-inverse, text-accent, text-error, border-default, decorative-coral.
+- ✓ Spacing: section-y, container-x, stack-{sm,md,lg}, inline-{sm,md,lg}, button-px, button-py.
+- ✓ Typography: display, heading-1, body, body-sm, caption, button. ⚠ heading-2..heading-6 OPEN per OPEN-23-10 (no intermediate primitives).
+- ✓ Prose paragraph (provisional). ⚠ prose-link, prose-list, prose-inline-code OPEN per OPEN-23-11.
+- ✓ Radius: button, card, input, surface. ⚠ pill OPEN per OPEN-23-12.
+
+**Zero-mutation spot-check (VAL-23-05 line 2):** Post-write `batch_get(readDepth=1)` on `ujMLJ` (10 children, IN-SCOPE Home Page), `cl8tt` (flat-raster Contact frame, 0 children), `maDc3` (flat-raster Business Consulting, 0 children) confirmed direct-child id sets unchanged from baseline. `set_variables` aliasing writes to the document-level variables map only.
