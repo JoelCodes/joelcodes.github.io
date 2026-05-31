@@ -1,291 +1,1202 @@
 ---
-/**
- * /design-system — v2 Design System Reference Page
- *
- * TDD note: This page is markup/composition. No meaningful unit-level test exists
- * for the rendering logic. Wave 3 Plan 24-03 Playwright + axe-core tests will
- * validate this page at the integration level (keyboard navigation, focus rings,
- * aria wiring, zero accessibility violations). Test intent documented here per
- * the TDD directive for Plan 24-04.
- */
-import BaseLayout from '../layouts/v2/BaseLayout.astro';
-import Button from '../components/v2/ui/Button.astro';
-import Card from '../components/v2/ui/Card.astro';
-import CardHeader from '../components/v2/ui/CardHeader.astro';
-import CardBody from '../components/v2/ui/CardBody.astro';
-import CardFooter from '../components/v2/ui/CardFooter.astro';
-import Input from '../components/v2/ui/Input.astro';
-import Badge from '../components/v2/ui/Badge.astro';
-import { ArrowRight, Sparkles, Mail } from '@lucide/astro';
-
-const colorTokens = [
-  { name: 'primary',       var: '--color-primary'      },
-  { name: 'primary-hover', var: '--color-primary-hover' },
-  { name: 'surface',       var: '--color-surface'       },
-  { name: 'surface-muted', var: '--color-surface-muted' },
-  { name: 'text',          var: '--color-text'          },
-  { name: 'text-muted',    var: '--color-text-muted'    },
-  { name: 'border',        var: '--color-border'        },
-  { name: 'accent',        var: '--color-accent'        },
-];
-
-const typographyTokens = [
-  { name: 'display', utility: 'text-display', sample: 'Display — 3rem (48px)' },
-  { name: 'h1',      utility: 'text-h1',      sample: 'Heading 1 — 2.25rem (36px)' },
-  { name: 'h2',      utility: 'text-h2',      sample: 'Heading 2 — 1.875rem (30px)' },
-  { name: 'h3',      utility: 'text-h3',      sample: 'Heading 3 — 1.5rem (24px)' },
-  { name: 'h4',      utility: 'text-h4',      sample: 'Heading 4 — 1.25rem (20px)' },
-  { name: 'body',    utility: 'text-body',    sample: 'Body — 1rem (16px)' },
-  { name: 'small',   utility: 'text-small',   sample: 'Small — 0.875rem (14px)' },
-  { name: 'caption', utility: 'text-caption', sample: 'Caption — 0.75rem (12px)' },
-];
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DesignSystemNav from '../components/design-system/DesignSystemNav.astro';
+import TokenSwatch from '../components/design-system/TokenSwatch.astro';
+import ComponentShowcase from '../components/design-system/ComponentShowcase.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+import Input from '../components/ui/Input.astro';
+import Badge from '../components/ui/Badge.astro';
+import CheckboxGroup from '../components/ui/CheckboxGroup.astro';
+import CodeBlock from '../components/design-system/CodeBlock.astro';
 ---
 
-<BaseLayout
-  title="Design System (v2) | Joel Shinness"
-  description="Internal v2 design system reference. Live demos of Button, Card, Input, and Badge primitives built on the Crito-anchored token foundation."
->
+<BaseLayout title="Design System | Joel Shinness" description="Internal design system reference for Joel and AI coding agents">
+  <!-- Noindex meta tag for internal-only page -->
   <meta slot="head" name="robots" content="noindex, follow" />
 
-  <div class="container mx-auto px-lg py-2xl max-w-5xl">
+  <div class="container mx-auto px-4 py-12">
+    <!-- Two-column grid: sidebar + main content -->
+    <div class="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-8">
+      <!-- Sidebar: sticky navigation (desktop only) -->
+      <aside class="hidden lg:block">
+        <div class="sticky top-[76px] max-h-[calc(100vh-92px)] overflow-y-auto">
+          <DesignSystemNav />
+        </div>
+      </aside>
 
-    <!-- Introduction -->
-    <section id="introduction" class="mb-2xl">
-      <h1 class="font-display text-display font-bold text-text mb-md">
-        Design System (v2)
-      </h1>
-      <p class="font-text text-body text-text-muted mb-sm">
-        Internal reference for Joel and AI coding agents. Live demos of all four v2 primitives
-        built on the Crito-anchored token foundation (Plans 24-01 and 24-02).
-        Zero v1 token references, zero is&#58;global, zero dark-mode utilities.
-      </p>
-      <p class="font-text text-small text-text-muted">
-        Machine-readable token endpoint:
-        <a href="/design-system.json" class="text-text underline hover:text-text-muted transition-colors ml-xs">
-          /design-system.json
-        </a>
-      </p>
-    </section>
+      <!-- Main content area -->
+      <main class="max-w-5xl">
+        <!-- Introduction Section -->
+        <section id="introduction" class="mb-16">
+          <h1 class="font-heading text-4xl md:text-5xl font-bold uppercase mb-6">
+            Design System
+          </h1>
+          <p class="text-lg leading-relaxed mb-4 text-text-muted-light dark:text-text-muted-dark">
+            Internal reference for Joel and AI coding agents. Components, tokens, and utilities for consistent development.
+          </p>
+          <p class="text-sm text-text-muted-light dark:text-text-muted-dark">
+            <strong>Machine-readable format:</strong>
+            <a
+              href="/design-system.json"
+              class="text-turquoise hover:text-turquoise-hover dark:text-turquoise-dark dark:hover:text-turquoise underline ml-1"
+            >
+              /design-system.json
+            </a>
+          </p>
+        </section>
 
-    <!-- Tokens -->
-    <section id="tokens" class="mb-2xl">
-      <h2 class="font-display text-h2 font-bold text-text mb-md">Tokens</h2>
+        <!-- Colors Section -->
+        <section id="colors" class="mb-16">
+          <h2 class="font-heading text-3xl font-bold uppercase mb-6 border-l-4 border-turquoise dark:border-turquoise-dark pl-4">
+            Colors
+          </h2>
+          <p class="text-lg leading-relaxed mb-6 text-text-muted-light dark:text-text-muted-dark">
+            All colors use <strong>OKLCH</strong> (Oklab Lightness Chroma Hue) color space for perceptually uniform color representation. Dark mode variants reduce lightness by 5% and chroma by 0.02 for consistent visual hierarchy.
+          </p>
 
-      <!-- Color swatches -->
-      <h3 class="font-display text-h3 font-semibold text-text mb-sm">Colors</h3>
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-md mb-xl">
-        {colorTokens.map((token) => (
-          <div class="flex flex-col gap-xs">
-            <div
-              class="h-12 rounded-md border border-border"
-              style={`background-color: var(${token.var})`}
+          <!-- Primary Accent Colors -->
+          <h3 class="font-heading text-xl font-semibold mb-4 mt-8">Primary Accent Colors</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <TokenSwatch
+              name="Yellow"
+              cssVar="--color-yellow"
+              oklch="oklch(0.85 0.18 95)"
+              hex="#ffef6a"
+              darkOklch="oklch(0.80 0.16 95)"
+              darkHex="#f5e03b"
             />
-            <span class="font-text text-caption text-text-muted">{token.name}</span>
-            <span class="font-text text-caption text-text-muted">{token.var}</span>
+            <TokenSwatch
+              name="Turquoise"
+              cssVar="--color-turquoise"
+              oklch="oklch(0.70 0.15 195)"
+              hex="#4dd4c0"
+              darkOklch="oklch(0.65 0.13 195)"
+              darkHex="#2dbfaa"
+            />
+            <TokenSwatch
+              name="Magenta"
+              cssVar="--color-magenta"
+              oklch="oklch(0.65 0.20 350)"
+              hex="#d946ef"
+              darkOklch="oklch(0.60 0.18 350)"
+              darkHex="#c026d3"
+            />
           </div>
-        ))}
-      </div>
 
-      <!-- Typography scale -->
-      <h3 class="font-display text-h3 font-semibold text-text mb-sm">Typography</h3>
-      <div class="flex flex-col gap-sm mb-xl border border-border rounded-lg p-md bg-surface">
-        {typographyTokens.map((t) => (
-          <div class="flex items-baseline gap-md border-b border-border pb-sm last:border-b-0 last:pb-0">
-            <span class={`font-display font-semibold text-text leading-none ${t.utility}`}>
-              Aa
-            </span>
-            <span class="font-text text-small text-text-muted">{t.sample}</span>
-            <code class="font-text text-caption text-text-muted bg-surface-muted px-xs py-1 rounded-sm ml-auto">{t.utility}</code>
+          <!-- Text Color Variants -->
+          <h3 class="font-heading text-xl font-semibold mb-4 mt-8">Text Color Variants (WCAG Compliant)</h3>
+          <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4">
+            Adjusted for sufficient contrast on light/dark backgrounds to meet accessibility standards.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <TokenSwatch
+              name="Yellow Text"
+              cssVar="--color-yellow-text"
+              oklch="oklch(0.55 0.15 95)"
+              hex="#b3a617"
+              darkOklch="oklch(0.85 0.18 95)"
+              darkHex="#ffef6a"
+            />
+            <TokenSwatch
+              name="Turquoise Text"
+              cssVar="--color-turquoise-text"
+              oklch="oklch(0.45 0.12 195)"
+              hex="#0d8577"
+              darkOklch="oklch(0.70 0.15 195)"
+              darkHex="#4dd4c0"
+            />
           </div>
-        ))}
-      </div>
-    </section>
 
-    <!-- Button -->
-    <section id="button" class="mb-2xl">
-      <h2 class="font-display text-h2 font-bold text-text mb-md">Button</h2>
-      <p class="font-text text-small text-text-muted mb-lg">
-        3 variants (primary, ghost, link) &times; 3 sizes (sm, md, lg). Polymorphic href&#8594;&lt;a&gt;/&lt;button&gt;. Lucide icon props. Accent focus ring.
-      </p>
-
-      <!-- Primary variant -->
-      <h3 class="font-display text-h4 font-semibold text-text mb-sm">Primary</h3>
-      <div class="flex flex-wrap items-center gap-md mb-lg">
-        <Button variant="primary" size="sm">Primary sm</Button>
-        <Button variant="primary" size="md">Primary md</Button>
-        <Button variant="primary" size="lg">Primary lg</Button>
-      </div>
-
-      <!-- Ghost variant -->
-      <h3 class="font-display text-h4 font-semibold text-text mb-sm">Ghost</h3>
-      <div class="flex flex-wrap items-center gap-md mb-lg">
-        <Button variant="ghost" size="sm">Ghost sm</Button>
-        <Button variant="ghost" size="md">Ghost md</Button>
-        <Button variant="ghost" size="lg">Ghost lg</Button>
-      </div>
-
-      <!-- Link variant -->
-      <h3 class="font-display text-h4 font-semibold text-text mb-sm">Link</h3>
-      <div class="flex flex-wrap items-center gap-md mb-lg">
-        <Button variant="link" size="sm">Link sm</Button>
-        <Button variant="link" size="md">Link md</Button>
-        <Button variant="link" size="lg">Link lg</Button>
-      </div>
-
-      <!-- Icon and state demos -->
-      <h3 class="font-display text-h4 font-semibold text-text mb-sm">Icons &amp; States</h3>
-      <div class="flex flex-wrap items-center gap-md mb-lg">
-        <Button variant="primary" iconLeft={Sparkles}>With iconLeft</Button>
-        <Button variant="primary" iconRight={ArrowRight}>With iconRight</Button>
-        <Button variant="ghost" href="/faq">Polymorphic &lt;a&gt;</Button>
-        <Button variant="primary" disabled={true}>Disabled</Button>
-      </div>
-    </section>
-
-    <!-- Card -->
-    <section id="card" class="mb-2xl">
-      <h2 class="font-display text-h2 font-bold text-text mb-md">Card</h2>
-      <p class="font-text text-small text-text-muted mb-lg">
-        Default, elevated (shadow-md), interactive (hover lift + focus ring), and composition with CardHeader+CardBody+CardFooter.
-      </p>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-md mb-lg">
-        <!-- Default card -->
-        <Card>
-          <div class="p-md">
-            <p class="font-display text-h4 font-semibold text-text mb-xs">Default Card</p>
-            <p class="font-text text-small text-text-muted">bg-surface, border-border, rounded-lg</p>
+          <!-- Neutral Colors -->
+          <h3 class="font-heading text-xl font-semibold mb-4 mt-8">Neutral Colors</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <TokenSwatch
+              name="Background Light"
+              cssVar="--color-bg-light"
+              oklch="oklch(1.0 0 0)"
+              hex="#ffffff"
+            />
+            <TokenSwatch
+              name="Background Dark"
+              cssVar="--color-bg-dark"
+              oklch="oklch(0.15 0 0)"
+              hex="#1a1a1a"
+            />
+            <TokenSwatch
+              name="Text Light"
+              cssVar="--color-text-light"
+              oklch="oklch(0.2 0 0)"
+              hex="#2b2b2b"
+            />
+            <TokenSwatch
+              name="Text Dark"
+              cssVar="--color-text-dark"
+              oklch="oklch(0.95 0 0)"
+              hex="#f2f2f2"
+            />
+            <TokenSwatch
+              name="Text Muted Light"
+              cssVar="--color-text-muted-light"
+              oklch="oklch(0.5 0 0)"
+              hex="#808080"
+            />
+            <TokenSwatch
+              name="Text Muted Dark"
+              cssVar="--color-text-muted-dark"
+              oklch="oklch(0.7 0 0)"
+              hex="#b3b3b3"
+            />
           </div>
-        </Card>
 
-        <!-- Elevated card -->
-        <Card elevated={true}>
-          <div class="p-md">
-            <p class="font-display text-h4 font-semibold text-text mb-xs">Elevated Card</p>
-            <p class="font-text text-small text-text-muted">elevated=true adds shadow-md token</p>
+          <!-- Usage Guidelines -->
+          <h3 class="font-heading text-xl font-semibold mb-4 mt-8">Usage Guidelines</h3>
+          <div class="bg-yellow/10 dark:bg-yellow-dark/10 border-3 border-yellow dark:border-yellow-dark rounded-lg p-6 space-y-4">
+            <div>
+              <h4 class="font-heading font-semibold mb-2">Yellow</h4>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark">
+                Primary CTA buttons, hero accents, important highlights. High energy and attention-grabbing.
+              </p>
+            </div>
+            <div>
+              <h4 class="font-heading font-semibold mb-2">Turquoise</h4>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark">
+                Secondary actions, card shadows/glows, section accents. Calm and modern, supports hierarchy.
+              </p>
+            </div>
+            <div>
+              <h4 class="font-heading font-semibold mb-2">Magenta</h4>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark">
+                Tertiary accents, hover states, decorative elements. Creative and energetic, use sparingly.
+              </p>
+            </div>
+            <div>
+              <h4 class="font-heading font-semibold mb-2">Dark Mode Transformation</h4>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark">
+                All dark mode variants reduce lightness (L) by 5% and chroma (C) by 0.02. Shadows transform to glows using the same color values for futuristic dark mode feel.
+              </p>
+            </div>
           </div>
-        </Card>
+        </section>
 
-        <!-- Interactive card -->
-        <Card interactive={true}>
-          <div class="p-md">
-            <p class="font-display text-h4 font-semibold text-text mb-xs">Interactive Card</p>
-            <p class="font-text text-small text-text-muted">interactive=true: tabindex=0, hover lift, focus ring</p>
-          </div>
-        </Card>
+        <!-- Typography Section -->
+        <section id="typography" class="mb-16">
+          <h2 class="font-heading text-3xl font-bold uppercase mb-6 border-l-4 border-turquoise dark:border-turquoise-dark pl-4">
+            Typography
+          </h2>
+          <p class="text-lg leading-relaxed mb-6 text-text-muted-light dark:text-text-muted-dark">
+            Two-tier typography system using <strong>Bricolage Grotesque</strong> for headings and <strong>DM Sans</strong> for body text. All sizes follow a 1.25 ratio scale.
+          </p>
 
-        <!-- Composed card with CardHeader + CardBody + CardFooter -->
-        <Card elevated={true}>
-          <CardHeader>
-            <p class="font-display text-h4 font-semibold text-text">Card Composition</p>
-          </CardHeader>
-          <CardBody>
-            <p class="font-text text-small text-text-muted">
-              CardHeader + CardBody + CardFooter slot wrappers with token padding.
+          <!-- Font Specimens -->
+          <h3 id="typography-families" class="font-heading text-xl font-semibold mb-4 mt-8">Font Families</h3>
+
+          <!-- Bricolage Grotesque -->
+          <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-6 mb-6 bg-bg-light dark:bg-bg-dark shadow-neo-turquoise dark:shadow-neo-turquoise">
+            <h4 class="font-heading text-lg font-semibold mb-3">Bricolage Grotesque</h4>
+            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4">
+              CSS Variable: <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">var(--font-heading)</code>
             </p>
-          </CardBody>
-          <CardFooter>
-            <Button variant="primary" size="sm">Action</Button>
-          </CardFooter>
-        </Card>
-      </div>
-    </section>
+            <div class="space-y-3 mb-4">
+              <p class="font-heading text-2xl">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+              <p class="font-heading text-2xl">abcdefghijklmnopqrstuvwxyz</p>
+              <p class="font-heading text-2xl">0123456789</p>
+            </div>
+            <div class="space-y-2">
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-1">Weight Examples:</p>
+              <p class="font-heading text-lg font-semibold">Weight 600 (Semibold) — H3, H4</p>
+              <p class="font-heading text-lg font-bold">Weight 700 (Bold) — H2</p>
+              <p class="font-heading text-lg" style="font-weight: 800;">Weight 800 (Extrabold) — H1, Buttons, Labels</p>
+            </div>
+            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mt-4">
+              <strong>Usage:</strong> All headings (H1-H4), buttons, labels, section titles
+            </p>
+          </div>
 
-    <!-- Input -->
-    <section id="input" class="mb-2xl">
-      <h2 class="font-display text-h2 font-bold text-text mb-md">Input</h2>
-      <p class="font-text text-small text-text-muted mb-lg">
-        Polymorphic (input / textarea / select). Required label + id. error, helper, disabled, required props. aria-describedby error-priority wiring. Accent focus ring.
-      </p>
+          <!-- DM Sans -->
+          <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-6 mb-6 bg-bg-light dark:bg-bg-dark shadow-neo-turquoise dark:shadow-neo-turquoise">
+            <h4 class="font-heading text-lg font-semibold mb-3">DM Sans</h4>
+            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4">
+              CSS Variable: <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">var(--font-body)</code>
+            </p>
+            <div class="space-y-3 mb-4">
+              <p class="font-body text-2xl">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+              <p class="font-body text-2xl">abcdefghijklmnopqrstuvwxyz</p>
+              <p class="font-body text-2xl">0123456789</p>
+            </div>
+            <div class="space-y-2">
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-1">Weight Examples:</p>
+              <p class="font-body text-lg font-normal">Weight 400 (Regular) — Body text, paragraphs</p>
+              <p class="font-body text-lg font-medium">Weight 500 (Medium) — Emphasized text</p>
+              <p class="font-body text-lg font-semibold">Weight 600 (Semibold) — Strong emphasis</p>
+            </div>
+            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mt-4">
+              <strong>Usage:</strong> Body text, paragraphs, form inputs, navigation, captions
+            </p>
+          </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-md mb-lg">
-        <!-- Default text input -->
-        <Input
-          label="Name"
-          id="ds-name"
-          name="name"
-          placeholder="Jane Smith"
-        />
+          <!-- Type Scale -->
+          <h3 id="typography-scale" class="font-heading text-xl font-semibold mb-4 mt-8">Type Scale</h3>
+          <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4">
+            1.25 ratio scale for consistent vertical rhythm.
+          </p>
 
-        <!-- Error state -->
-        <Input
-          label="Email"
-          id="ds-email"
-          name="email"
-          value="not-an-email"
-          error="Please enter a valid email address"
-        />
+          <div class="space-y-4">
+            <!-- XS -->
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <div class="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 items-center">
+                <div>
+                  <p class="font-heading font-semibold text-sm">xs</p>
+                  <p class="text-xs text-text-muted-light dark:text-text-muted-dark">0.75rem (12px)</p>
+                </div>
+                <p class="text-xs">The quick brown fox jumps over the lazy dog</p>
+              </div>
+            </div>
 
-        <!-- Helper text -->
-        <Input
-          label="Phone"
-          id="ds-phone"
-          name="phone"
-          placeholder="+1 (555) 000-0000"
-          helper="Optional — we will not call without your permission"
-        />
+            <!-- SM -->
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <div class="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 items-center">
+                <div>
+                  <p class="font-heading font-semibold text-sm">sm</p>
+                  <p class="text-xs text-text-muted-light dark:text-text-muted-dark">0.875rem (14px)</p>
+                </div>
+                <p class="text-sm">The quick brown fox jumps over the lazy dog</p>
+              </div>
+            </div>
 
-        <!-- Required field -->
-        <Input
-          label="Subject"
-          id="ds-subject"
-          name="subject"
-          placeholder="How can I help?"
-          required={true}
-        />
+            <!-- Base -->
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <div class="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 items-center">
+                <div>
+                  <p class="font-heading font-semibold text-sm">base</p>
+                  <p class="text-xs text-text-muted-light dark:text-text-muted-dark">1rem (16px)</p>
+                </div>
+                <p class="text-base">The quick brown fox jumps over the lazy dog</p>
+              </div>
+            </div>
 
-        <!-- Disabled state -->
-        <Input
-          label="Submitted"
-          id="ds-submitted"
-          name="submitted"
-          value="Locked"
-          disabled={true}
-        />
+            <!-- LG -->
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <div class="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 items-center">
+                <div>
+                  <p class="font-heading font-semibold text-sm">lg</p>
+                  <p class="text-xs text-text-text-muted-light dark:text-text-muted-dark">1.125rem (18px)</p>
+                </div>
+                <p class="text-lg">The quick brown fox jumps over the lazy dog</p>
+              </div>
+            </div>
 
-        <!-- Textarea (as="textarea") -->
-        <Input
-          as="textarea"
-          label="Message"
-          id="ds-message"
-          name="message"
-          placeholder="Tell me about your project..."
-          rows={4}
-        />
-      </div>
+            <!-- XL -->
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <div class="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 items-center">
+                <div>
+                  <p class="font-heading font-semibold text-sm">xl</p>
+                  <p class="text-xs text-text-muted-light dark:text-text-muted-dark">1.25rem (20px)</p>
+                </div>
+                <p class="text-xl">The quick brown fox jumps over the lazy dog</p>
+              </div>
+            </div>
 
-      <!-- Select (as="select") -->
-      <div class="max-w-sm mb-lg">
-        <Input
-          as="select"
-          label="Budget"
-          id="ds-budget"
-          name="budget"
-        >
-          <option value="">Select a range</option>
-          <option value="1k-5k">$1,000 – $5,000</option>
-          <option value="5k-15k">$5,000 – $15,000</option>
-          <option value="15k-plus">$15,000+</option>
-        </Input>
-      </div>
-    </section>
+            <!-- 2XL -->
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <div class="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 items-center">
+                <div>
+                  <p class="font-heading font-semibold text-sm">2xl</p>
+                  <p class="text-xs text-text-muted-light dark:text-text-muted-dark">1.5rem (24px)</p>
+                </div>
+                <p class="text-2xl">The quick brown fox jumps over the lazy dog</p>
+              </div>
+            </div>
 
-    <!-- Badge -->
-    <section id="badge" class="mb-2xl">
-      <h2 class="font-display text-h2 font-bold text-text mb-md">Badge</h2>
-      <p class="font-text text-small text-text-muted mb-lg">
-        Non-interactive chip/tag &lt;span&gt;. 3 variants (accent, muted, outline). Optional iconLeft Lucide prop.
-      </p>
+            <!-- 3XL -->
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <div class="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 items-center">
+                <div>
+                  <p class="font-heading font-semibold text-sm">3xl</p>
+                  <p class="text-xs text-text-muted-light dark:text-text-muted-dark">1.875rem (30px)</p>
+                </div>
+                <p class="text-3xl">The quick brown fox jumps over the lazy dog</p>
+              </div>
+            </div>
 
-      <div class="flex flex-wrap items-center gap-sm mb-lg">
-        <Badge variant="accent">New</Badge>
-        <Badge variant="muted">Beta</Badge>
-        <Badge variant="outline">Draft</Badge>
-        <Badge variant="accent" iconLeft={Mail}>Inbox</Badge>
-        <Badge variant="muted" iconLeft={Sparkles}>AI-assisted</Badge>
-        <Badge variant="outline" iconLeft={ArrowRight}>In progress</Badge>
-      </div>
-    </section>
+            <!-- 4XL -->
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <div class="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 items-center">
+                <div>
+                  <p class="font-heading font-semibold text-sm">4xl</p>
+                  <p class="text-xs text-text-muted-light dark:text-text-muted-dark">2.25rem (36px)</p>
+                </div>
+                <p class="text-4xl">The quick brown fox jumps over the lazy dog</p>
+              </div>
+            </div>
+          </div>
 
+          <!-- Font Weight Tokens -->
+          <h3 class="font-heading text-xl font-semibold mb-4 mt-8">Font Weight Tokens</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">--font-weight-h1: 800</code>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark mt-2">Extrabold — H1 headings</p>
+            </div>
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">--font-weight-h2: 700</code>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark mt-2">Bold — H2 headings</p>
+            </div>
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">--font-weight-h3: 600</code>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark mt-2">Semibold — H3 headings</p>
+            </div>
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">--font-weight-h4: 500</code>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark mt-2">Medium — H4 headings</p>
+            </div>
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">--font-weight-body: 400</code>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark mt-2">Regular — Body text</p>
+            </div>
+          </div>
+
+          <!-- Line Height Tokens -->
+          <h3 class="font-heading text-xl font-semibold mb-4 mt-8">Line Height Tokens</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">--leading-tight: 1.25</code>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark mt-2">Headings, labels</p>
+            </div>
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">--leading-normal: 1.5</code>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark mt-2">Body text default</p>
+            </div>
+            <div class="border-3 border-text-light dark:border-text-dark rounded-lg p-4 bg-bg-light dark:bg-bg-dark">
+              <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">--leading-relaxed: 1.75</code>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark mt-2">Long-form content</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Components Section -->
+        <section id="components" class="mb-16">
+          <h2 class="font-heading text-3xl font-bold uppercase mb-6 border-l-4 border-turquoise dark:border-turquoise-dark pl-4">
+            Components
+          </h2>
+
+          <!-- Button Component -->
+          <div id="component-button" class="mb-12">
+            <ComponentShowcase
+              title="Button"
+              description="Neobrutalist buttons with 2-layer shadow effect. Supports three color variants and three sizes."
+              code={`<Button variant="yellow">Primary Action</Button>
+<Button variant="turquoise" size="lg">Large Button</Button>
+<Button href="/contact" variant="magenta">Link Button</Button>`}
+            >
+              <!-- Color Variants -->
+              <div class="w-full mb-6">
+                <h4 class="font-heading text-lg font-semibold mb-3">Color Variants</h4>
+                <div class="flex flex-wrap gap-4">
+                  <Button variant="yellow">Yellow (Default)</Button>
+                  <Button variant="turquoise">Turquoise</Button>
+                  <Button variant="magenta">Magenta</Button>
+                </div>
+              </div>
+
+              <!-- Size Variants -->
+              <div class="w-full mb-6">
+                <h4 class="font-heading text-lg font-semibold mb-3">Size Variants</h4>
+                <div class="flex flex-wrap gap-4 items-center">
+                  <Button size="sm" variant="yellow">Small</Button>
+                  <Button size="md" variant="turquoise">Medium (Default)</Button>
+                  <Button size="lg" variant="magenta">Large</Button>
+                </div>
+              </div>
+
+              <!-- Link Variant -->
+              <div class="w-full">
+                <h4 class="font-heading text-lg font-semibold mb-3">As Link</h4>
+                <Button href="#component-button" variant="turquoise">Link Button</Button>
+              </div>
+            </ComponentShowcase>
+
+            <!-- Props Table -->
+            <div class="mt-6 overflow-x-auto">
+              <h4 class="font-heading text-lg font-semibold mb-3">Props</h4>
+              <table class="w-full border-3 border-text-light dark:border-text-dark">
+                <thead class="bg-turquoise/10 dark:bg-turquoise-dark/10">
+                  <tr>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Prop</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Type</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Default</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Options</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">variant</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">string</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">'yellow'</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">'yellow' | 'turquoise' | 'magenta'</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">size</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">string</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">'md'</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">'sm' | 'md' | 'lg'</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">href</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">string</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">undefined</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">Any valid URL (renders as &lt;a&gt; instead of &lt;button&gt;)</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 font-mono text-sm">type</td>
+                    <td class="px-4 py-2 text-sm">string</td>
+                    <td class="px-4 py-2 font-mono text-sm">'button'</td>
+                    <td class="px-4 py-2 font-mono text-sm">'button' | 'submit' | 'reset'</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- States Documentation -->
+            <div class="mt-6">
+              <h4 class="font-heading text-lg font-semibold mb-3">Interactive States</h4>
+              <ul class="list-disc list-inside space-y-2 text-text-muted-light dark:text-text-muted-dark">
+                <li><strong>Hover:</strong> Button lifts up (-2px), shadow grows by 2px</li>
+                <li><strong>Active:</strong> Button presses down (+2px), shadow shrinks to 2px</li>
+                <li><strong>Focus:</strong> Double ring technique (WCAG 2.4.13 compliant) - 2px gap + 4px ring</li>
+                <li><strong>Disabled:</strong> Reduced opacity (not shown in demo, use disabled attribute)</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Card Component -->
+          <div id="component-card" class="mb-12">
+            <ComponentShowcase
+              title="Card"
+              description="Container component with colored shadow. Supports three variants and optional stacked effect. Shadows transform to soft glows in dark mode."
+              code={`<Card variant="yellow">
+  <h3>Card Title</h3>
+  <p>Card content goes here.</p>
+</Card>
+
+<Card variant="turquoise" stacked>
+  <h3>Stacked Card</h3>
+  <p>Multiple layer effect.</p>
+</Card>`}
+            >
+              <!-- Color Variants -->
+              <div class="w-full mb-6">
+                <h4 class="font-heading text-lg font-semibold mb-3">Color Variants</h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <Card variant="yellow">
+                    <h4 class="font-heading font-semibold mb-2">Yellow</h4>
+                    <p class="text-sm">Primary accent shadow</p>
+                  </Card>
+                  <Card variant="turquoise">
+                    <h4 class="font-heading font-semibold mb-2">Turquoise</h4>
+                    <p class="text-sm">Secondary accent shadow</p>
+                  </Card>
+                  <Card variant="magenta">
+                    <h4 class="font-heading font-semibold mb-2">Magenta</h4>
+                    <p class="text-sm">Tertiary accent shadow</p>
+                  </Card>
+                </div>
+              </div>
+
+              <!-- Stacked Effect -->
+              <div class="w-full">
+                <h4 class="font-heading text-lg font-semibold mb-3">Stacked Effect</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <Card variant="turquoise" stacked>
+                    <h4 class="font-heading font-semibold mb-2">Stacked Card</h4>
+                    <p class="text-sm">Multiple layers create depth effect</p>
+                  </Card>
+                  <Card variant="magenta" stacked>
+                    <h4 class="font-heading font-semibold mb-2">Stacked Card</h4>
+                    <p class="text-sm">Works with all color variants</p>
+                  </Card>
+                </div>
+              </div>
+            </ComponentShowcase>
+
+            <!-- Props Table -->
+            <div class="mt-6 overflow-x-auto">
+              <h4 class="font-heading text-lg font-semibold mb-3">Props</h4>
+              <table class="w-full border-3 border-text-light dark:border-text-dark">
+                <thead class="bg-turquoise/10 dark:bg-turquoise-dark/10">
+                  <tr>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Prop</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Type</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Default</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">variant</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">'yellow' | 'turquoise' | 'magenta'</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">'yellow'</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">Shadow/glow color</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">stacked</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">boolean</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">false</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">Enable multi-layer stacked effect</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 font-mono text-sm">class</td>
+                    <td class="px-4 py-2 font-mono text-sm">string</td>
+                    <td class="px-4 py-2 font-mono text-sm">''</td>
+                    <td class="px-4 py-2 text-sm">Additional CSS classes</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Dark Mode Behavior -->
+            <div class="mt-6">
+              <h4 class="font-heading text-lg font-semibold mb-3">Dark Mode</h4>
+              <p class="text-text-muted-light dark:text-text-muted-dark">
+                In dark mode, offset shadows transform to soft glows (box-shadow: 0 0 20px) for a futuristic feel. Stacked cards remove the offset shadow in dark mode to maintain clean aesthetics.
+              </p>
+            </div>
+          </div>
+
+          <!-- Input Component -->
+          <div id="component-input" class="mb-12">
+            <ComponentShowcase
+              title="Input"
+              description="Form input with label, validation, and WCAG 2.4.13 compliant focus states. Supports three color variants for focus border."
+              code={`<Input
+  label="Email"
+  type="email"
+  placeholder="you@example.com"
+/>
+
+<Input
+  label="Name"
+  error="Name is required"
+/>
+
+<Input
+  variant="turquoise"
+  label="Turquoise Focus"
+/>`}
+            >
+              <!-- Standard Inputs -->
+              <div class="w-full mb-6">
+                <h4 class="font-heading text-lg font-semibold mb-3">Standard Input</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <Input label="Email" type="email" placeholder="you@example.com" />
+                  <Input label="Full Name" type="text" placeholder="Jane Doe" />
+                </div>
+              </div>
+
+              <!-- Error State -->
+              <div class="w-full mb-6">
+                <h4 class="font-heading text-lg font-semibold mb-3">Error State</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <Input label="Email" type="email" error="Email is required" />
+                  <Input label="Name" type="text" error="Name must be at least 2 characters" />
+                </div>
+              </div>
+
+              <!-- Focus Variants -->
+              <div class="w-full">
+                <h4 class="font-heading text-lg font-semibold mb-3">Focus Color Variants</h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <Input label="Yellow Focus" variant="yellow" placeholder="Focus me" />
+                  <Input label="Turquoise Focus" variant="turquoise" placeholder="Focus me" />
+                  <Input label="Magenta Focus" variant="magenta" placeholder="Focus me" />
+                </div>
+              </div>
+            </ComponentShowcase>
+
+            <!-- Props Table -->
+            <div class="mt-6 overflow-x-auto">
+              <h4 class="font-heading text-lg font-semibold mb-3">Props</h4>
+              <table class="w-full border-3 border-text-light dark:border-text-dark">
+                <thead class="bg-turquoise/10 dark:bg-turquoise-dark/10">
+                  <tr>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Prop</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Type</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Default</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">variant</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">'yellow' | 'turquoise' | 'magenta'</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">'yellow'</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">Focus border color</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">label</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">string</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">undefined</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">Input label text</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">error</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">string</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">undefined</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">Error message (triggers error state)</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">id</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">string</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">auto-generated</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">Input ID (auto-links label)</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 font-mono text-sm">...rest</td>
+                    <td class="px-4 py-2 font-mono text-sm">HTMLInputAttributes</td>
+                    <td class="px-4 py-2 font-mono text-sm">-</td>
+                    <td class="px-4 py-2 text-sm">All standard input attributes (type, placeholder, required, etc.)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Accessibility Features -->
+            <div class="mt-6">
+              <h4 class="font-heading text-lg font-semibold mb-3">Accessibility Features</h4>
+              <ul class="list-disc list-inside space-y-2 text-text-muted-light dark:text-text-muted-dark">
+                <li><strong>aria-invalid:</strong> Set to "true" when error prop is present</li>
+                <li><strong>aria-describedby:</strong> Links to error message ID for screen readers</li>
+                <li><strong>Focus ring:</strong> Double ring technique (2px gap + 4px ring) for WCAG 2.4.13 compliance</li>
+                <li><strong>Auto-generated IDs:</strong> Ensures label-input association without manual ID management</li>
+                <li><strong>Color-coded borders:</strong> Focus border changes to variant color for visual feedback</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Badge Component -->
+          <div id="component-badge" class="mb-12">
+            <ComponentShowcase
+              title="Badge"
+              description="Metric display badge with value and optional description. Used for trust signals and key statistics. Features isometric shadow effect."
+              code={`<Badge
+  label="Hours saved"
+  value="500+"
+  description="per year"
+  variant="yellow"
+/>
+
+<Badge
+  label="Projects"
+  value="50+"
+  variant="turquoise"
+/>`}
+            >
+              <!-- Color Variants with Values -->
+              <div class="w-full">
+                <h4 class="font-heading text-lg font-semibold mb-3">Color Variants</h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div class="flex flex-col items-center gap-2">
+                    <Badge
+                      label="Hours saved"
+                      value="500+"
+                      description="per year"
+                      variant="yellow"
+                    />
+                    <p class="text-xs text-text-muted-light dark:text-text-muted-dark">Yellow variant</p>
+                  </div>
+                  <div class="flex flex-col items-center gap-2">
+                    <Badge
+                      label="Projects"
+                      value="50+"
+                      description="completed"
+                      variant="turquoise"
+                    />
+                    <p class="text-xs text-text-muted-light dark:text-text-muted-dark">Turquoise variant</p>
+                  </div>
+                  <div class="flex flex-col items-center gap-2">
+                    <Badge
+                      label="Success Rate"
+                      value="98%"
+                      variant="magenta"
+                    />
+                    <p class="text-xs text-text-muted-light dark:text-text-muted-dark">Magenta variant (no description)</p>
+                  </div>
+                </div>
+              </div>
+            </ComponentShowcase>
+
+            <!-- Props Table -->
+            <div class="mt-6 overflow-x-auto">
+              <h4 class="font-heading text-lg font-semibold mb-3">Props</h4>
+              <table class="w-full border-3 border-text-light dark:border-text-dark">
+                <thead class="bg-turquoise/10 dark:bg-turquoise-dark/10">
+                  <tr>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Prop</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Type</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Default</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">label</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">string</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">required</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">Accessible label for screen readers (aria-label)</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">value</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">string</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">required</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">The metric value (e.g., "500+", "98%")</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">description</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">string</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">undefined</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">Optional subtext (e.g., "per year")</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">variant</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">'yellow' | 'turquoise' | 'magenta'</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">'yellow'</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">Text color variant</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 font-mono text-sm">class</td>
+                    <td class="px-4 py-2 font-mono text-sm">string</td>
+                    <td class="px-4 py-2 font-mono text-sm">''</td>
+                    <td class="px-4 py-2 text-sm">Additional CSS classes</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Accessibility -->
+            <div class="mt-6">
+              <h4 class="font-heading text-lg font-semibold mb-3">Accessibility</h4>
+              <ul class="list-disc list-inside space-y-2 text-text-muted-light dark:text-text-muted-dark">
+                <li><strong>role="group":</strong> Groups value and description semantically</li>
+                <li><strong>aria-label:</strong> Uses label prop for screen reader context</li>
+                <li><strong>Isometric shadow:</strong> Uses iso-shadow utility class for neobrutalist aesthetic</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- CheckboxGroup Component -->
+          <div id="component-checkboxgroup" class="mb-12">
+            <ComponentShowcase
+              title="CheckboxGroup"
+              description="Accessible multi-select checkbox group with neobrutalist styling. Uses fieldset/legend for screen reader compatibility."
+              code={`<CheckboxGroup
+  name="solutions"
+  legend="What solutions do you need?"
+  variant="yellow"
+  options={[
+    { value: "AI", label: "AI" },
+    { value: "Automations", label: "Automations" },
+    { value: "Web Apps", label: "Web Apps" }
+  ]}
+/>`}
+            >
+              <!-- Yellow variant -->
+              <div class="w-full mb-6">
+                <h4 class="font-heading text-lg font-semibold mb-3">Yellow Variant</h4>
+                <CheckboxGroup
+                  name="demo-solutions-yellow"
+                  legend="Example options (yellow)"
+                  variant="yellow"
+                  options={[
+                    { value: 'opt1', label: 'Option One' },
+                    { value: 'opt2', label: 'Option Two' },
+                    { value: 'opt3', label: 'Option Three' }
+                  ]}
+                />
+              </div>
+
+              <!-- Turquoise variant -->
+              <div class="w-full mb-6">
+                <h4 class="font-heading text-lg font-semibold mb-3">Turquoise Variant</h4>
+                <CheckboxGroup
+                  name="demo-solutions-turquoise"
+                  legend="Example options (turquoise)"
+                  variant="turquoise"
+                  options={[
+                    { value: 'opt1', label: 'Option One' },
+                    { value: 'opt2', label: 'Option Two' }
+                  ]}
+                />
+              </div>
+
+              <!-- Magenta variant -->
+              <div class="w-full">
+                <h4 class="font-heading text-lg font-semibold mb-3">Magenta Variant</h4>
+                <CheckboxGroup
+                  name="demo-solutions-magenta"
+                  legend="Example options (magenta)"
+                  variant="magenta"
+                  options={[
+                    { value: 'opt1', label: 'Option One' },
+                    { value: 'opt2', label: 'Option Two' },
+                    { value: 'opt3', label: 'Option Three' }
+                  ]}
+                />
+              </div>
+            </ComponentShowcase>
+
+            <!-- Props Table -->
+            <div class="mt-6 overflow-x-auto">
+              <h4 class="font-heading text-lg font-semibold mb-3">Props</h4>
+              <table class="w-full border-3 border-text-light dark:border-text-dark">
+                <thead class="bg-turquoise/10 dark:bg-turquoise-dark/10">
+                  <tr>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Prop</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Type</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Default</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">name</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">string</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">required</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">Form field name for checkbox values</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">legend</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">string</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">required</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">Accessible group label (renders in fieldset legend)</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">options</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">Array&lt;{'{'} value, label {'}'}&gt;</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">required</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">Checkbox options to render</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">variant</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">'yellow' | 'turquoise' | 'magenta'</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">'yellow'</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark text-sm">Color variant for checked state</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 font-mono text-sm">class</td>
+                    <td class="px-4 py-2 font-mono text-sm">string</td>
+                    <td class="px-4 py-2 font-mono text-sm">''</td>
+                    <td class="px-4 py-2 text-sm">Additional CSS classes</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Accessibility Features -->
+            <div class="mt-6">
+              <h4 class="font-heading text-lg font-semibold mb-3">Accessibility Features</h4>
+              <ul class="list-disc list-inside space-y-2 text-text-muted-light dark:text-text-muted-dark">
+                <li><strong>fieldset/legend:</strong> Semantic HTML grouping for screen readers (WCAG H71)</li>
+                <li><strong>Focus ring:</strong> Double ring technique (2px gap + 4px ring) for WCAG 2.4.13 compliance</li>
+                <li><strong>Hover target:</strong> Entire label is interactive for larger touch target</li>
+                <li><strong>Checkmark indicator:</strong> Pure CSS ::after pseudo-element for themability</li>
+                <li><strong>Dark mode:</strong> Automatic color inversion for checkboxes and labels</li>
+              </ul>
+            </div>
+
+            <!-- Interactive States -->
+            <div class="mt-6">
+              <h4 class="font-heading text-lg font-semibold mb-3">Interactive States</h4>
+              <ul class="list-disc list-inside space-y-2 text-text-muted-light dark:text-text-muted-dark">
+                <li><strong>Hover:</strong> Label background lightens (light mode) or darkens (dark mode)</li>
+                <li><strong>Checked:</strong> Checkbox fills with variant color + 3px shadow + checkmark appears</li>
+                <li><strong>Focus:</strong> Double ring technique preserves both focus ring and checkbox shadow</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Utilities Section -->
+        <section id="utilities" class="mb-16">
+          <h2 class="font-heading text-3xl font-bold uppercase mb-6 border-l-4 border-turquoise dark:border-turquoise-dark pl-4">
+            Utilities
+          </h2>
+
+          <p class="text-lg leading-relaxed mb-8 text-text-muted-light dark:text-text-muted-dark">
+            Isometric utilities provide hard offset shadows in light mode that transform to soft glows in dark mode, 3D rotation effects, and explicit glow effects for neobrutalist aesthetics.
+          </p>
+
+          <!-- Isometric Shadow -->
+          <div id="utility-iso-shadow" class="mb-12">
+            <h3 class="font-heading text-2xl font-semibold mb-4">
+              Shadow Utilities
+            </h3>
+            <p class="text-text-muted-light dark:text-text-muted-dark mb-6">
+              Hard offset shadows in light mode, soft glows in dark mode. All shadows use <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">currentColor</code> to inherit text color.
+            </p>
+
+            <!-- Visual Examples -->
+            <div class="bg-gray-100 dark:bg-gray-900 border-3 border-text-light dark:border-text-dark rounded-lg p-6 mb-6">
+              <h4 class="font-heading text-lg font-semibold mb-4">Size Variants</h4>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Small Shadow -->
+                <div class="flex flex-col items-center gap-3">
+                  <div class="border-3 border-turquoise dark:border-turquoise-dark iso-shadow-sm text-turquoise dark:text-turquoise-dark bg-bg-light dark:bg-bg-dark rounded-lg px-6 py-4 w-32 h-32 flex items-center justify-center">
+                    <span class="font-heading font-bold text-center">iso-shadow-sm</span>
+                  </div>
+                  <p class="text-sm text-text-muted-light dark:text-text-muted-dark">3px offset</p>
+                </div>
+
+                <!-- Default Shadow -->
+                <div class="flex flex-col items-center gap-3">
+                  <div class="border-3 border-turquoise dark:border-turquoise-dark iso-shadow text-turquoise dark:text-turquoise-dark bg-bg-light dark:bg-bg-dark rounded-lg px-6 py-4 w-32 h-32 flex items-center justify-center">
+                    <span class="font-heading font-bold text-center">iso-shadow</span>
+                  </div>
+                  <p class="text-sm text-text-muted-light dark:text-text-muted-dark">5px offset (default)</p>
+                </div>
+
+                <!-- Large Shadow -->
+                <div class="flex flex-col items-center gap-3">
+                  <div class="border-3 border-turquoise dark:border-turquoise-dark iso-shadow-lg text-turquoise dark:text-turquoise-dark bg-bg-light dark:bg-bg-dark rounded-lg px-6 py-4 w-32 h-32 flex items-center justify-center">
+                    <span class="font-heading font-bold text-center">iso-shadow-lg</span>
+                  </div>
+                  <p class="text-sm text-text-muted-light dark:text-text-muted-dark">8px offset</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Classes Table -->
+            <div class="mb-6 overflow-x-auto">
+              <h4 class="font-heading text-lg font-semibold mb-3">Classes</h4>
+              <table class="w-full border-3 border-text-light dark:border-text-dark">
+                <thead class="bg-turquoise/10 dark:bg-turquoise-dark/10">
+                  <tr>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Class</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Light Mode</th>
+                    <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Dark Mode</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">.iso-shadow-sm</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-xs">3px 3px 0 currentColor</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-xs">0 0 15px color-mix(20%)</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">.iso-shadow</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-xs">5px 5px 0 currentColor</td>
+                    <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-xs">0 0 20px color-mix(40%)</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2 font-mono text-sm">.iso-shadow-lg</td>
+                    <td class="px-4 py-2 font-mono text-xs">8px 8px 0 currentColor</td>
+                    <td class="px-4 py-2 font-mono text-xs">0 0 30px color-mix(60%)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Dark Mode Transformation -->
+            <div class="bg-yellow/10 dark:bg-yellow-dark/10 border-3 border-yellow dark:border-yellow-dark rounded-lg p-6 mb-6">
+              <h4 class="font-heading text-lg font-semibold mb-3">Dark Mode Transformation</h4>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4">
+                The same element automatically transforms from a hard offset shadow to a soft glow based on theme. Toggle dark mode to see the transformation.
+              </p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <p class="text-xs font-mono mb-2 text-text-muted-light dark:text-text-muted-dark">Light Mode: Hard Shadow</p>
+                  <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded block">box-shadow: 5px 5px 0 currentColor</code>
+                </div>
+                <div>
+                  <p class="text-xs font-mono mb-2 text-text-muted-light dark:text-text-muted-dark">Dark Mode: Soft Glow</p>
+                  <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded block">box-shadow: 0 0 20px color-mix(in oklch, currentColor 40%, transparent)</code>
+                </div>
+              </div>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark mt-4">
+                <strong>Why this matters:</strong> Maintains visual hierarchy while creating a futuristic dark mode feel. The glow preserves the accent color while adapting to the darker background.
+              </p>
+            </div>
+
+            <!-- Code Example -->
+            <div class="bg-gray-100 dark:bg-gray-900 border-3 border-text-light dark:border-text-dark rounded-lg p-4">
+              <h4 class="font-heading text-lg font-semibold mb-3">Usage Example</h4>
+              <pre class="font-mono text-sm overflow-x-auto"><code>&lt;div class="border-3 border-turquoise iso-shadow text-turquoise"&gt;
+  Shadow becomes glow in dark mode
+&lt;/div&gt;</code></pre>
+            </div>
+          </div>
+
+          <!-- Isometric Glow -->
+          <div id="utility-iso-glow" class="mb-12">
+            <h3 class="font-heading text-2xl font-semibold mb-4">
+              Glow Utilities
+            </h3>
+            <p class="text-text-muted-light dark:text-text-muted-dark mb-6">
+              Explicit glow effects that always glow, regardless of theme. Use when you want glow in light mode too.
+            </p>
+
+            <!-- Visual Examples -->
+            <div class="bg-gray-100 dark:bg-gray-900 border-3 border-text-light dark:border-text-dark rounded-lg p-6 mb-6">
+              <h4 class="font-heading text-lg font-semibold mb-4">Intensity Variants</h4>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Subtle Glow -->
+                <div class="flex flex-col items-center gap-3">
+                  <div class="border-3 border-magenta dark:border-magenta-dark iso-glow-subtle text-magenta dark:text-magenta-dark bg-bg-light dark:bg-bg-dark rounded-lg px-6 py-4 w-32 h-32 flex items-center justify-center">
+                    <span class="font-heading font-bold text-center text-sm">iso-glow-subtle</span>
+                  </div>
+                  <p class="text-sm text-text-muted-light dark:text-text-muted-dark">15px, 20% opacity</p>
+                </div>
+
+                <!-- Default Glow -->
+                <div class="flex flex-col items-center gap-3">
+                  <div class="border-3 border-magenta dark:border-magenta-dark iso-glow text-magenta dark:text-magenta-dark bg-bg-light dark:bg-bg-dark rounded-lg px-6 py-4 w-32 h-32 flex items-center justify-center">
+                    <span class="font-heading font-bold text-center">iso-glow</span>
+                  </div>
+                  <p class="text-sm text-text-muted-light dark:text-text-muted-dark">20px, 40% opacity</p>
+                </div>
+
+                <!-- Strong Glow -->
+                <div class="flex flex-col items-center gap-3">
+                  <div class="border-3 border-magenta dark:border-magenta-dark iso-glow-strong text-magenta dark:text-magenta-dark bg-bg-light dark:bg-bg-dark rounded-lg px-6 py-4 w-32 h-32 flex items-center justify-center">
+                    <span class="font-heading font-bold text-center text-sm">iso-glow-strong</span>
+                  </div>
+                  <p class="text-sm text-text-muted-light dark:text-text-muted-dark">30px, 60% opacity</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Use Cases -->
+            <div class="bg-yellow/10 dark:bg-yellow-dark/10 border-3 border-yellow dark:border-yellow-dark rounded-lg p-6 mb-6">
+              <h4 class="font-heading text-lg font-semibold mb-3">Use Cases</h4>
+              <ul class="list-disc list-inside space-y-2 text-text-muted-light dark:text-text-muted-dark">
+                <li>Accent elements that should glow in both light and dark mode</li>
+                <li>Hover states (see .iso-hover-glow below)</li>
+                <li>Decorative elements that need consistent glow across themes</li>
+                <li>CTAs or highlights that benefit from extra visual emphasis</li>
+              </ul>
+            </div>
+
+            <!-- Code Example -->
+            <div class="bg-gray-100 dark:bg-gray-900 border-3 border-text-light dark:border-text-dark rounded-lg p-4">
+              <h4 class="font-heading text-lg font-semibold mb-3">Usage Example</h4>
+              <pre class="font-mono text-sm overflow-x-auto"><code>&lt;div class="iso-glow-strong text-magenta"&gt;
+  Always glows
+&lt;/div&gt;</code></pre>
+            </div>
+          </div>
+
+          <!-- Isometric Rotate -->
+          <div id="utility-iso-rotate" class="mb-12">
+            <h3 class="font-heading text-2xl font-semibold mb-4">
+              Rotation Utilities
+            </h3>
+            <p class="text-text-muted-light dark:text-text-muted-dark mb-6">
+              3D isometric rotation transforms for creating depth effects. Use with <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">.iso-container</code> wrapper for proper 3D rendering.
+            </p>
+
+            <!-- Visual Examples -->
+            <div class="bg-gray-100 dark:bg-gray-900 border-3 border-text-light dark:border-text-dark rounded-lg p-6 mb-6">
+              <h4 class="font-heading text-lg font-semibold mb-4">Rotation Variants</h4>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Subtle Rotation -->
+                <div class="flex flex-col items-center gap-3">
+                  <div class="iso-container" style="perspective: 500px;">
+                    <div class="iso-rotate-subtle bg-yellow border-3 border-text-light dark:border-text-dark rounded-lg w-24 h-24 flex items-center justify-center">
+                      <span class="font-heading font-bold text-sm text-center">30°</span>
+                    </div>
+                  </div>
+                  <p class="text-sm text-text-muted-light dark:text-text-muted-dark">.iso-rotate-subtle</p>
+                  <p class="text-xs font-mono text-text-muted-light dark:text-text-muted-dark">rotateX(30deg) rotateZ(30deg)</p>
+                </div>
+
+                <!-- Standard Rotation -->
+                <div class="flex flex-col items-center gap-3">
+                  <div class="iso-container" style="perspective: 500px;">
+                    <div class="iso-rotate bg-yellow border-3 border-text-light dark:border-text-dark rounded-lg w-24 h-24 flex items-center justify-center">
+                      <span class="font-heading font-bold text-sm text-center">45°</span>
+                    </div>
+                  </div>
+                  <p class="text-sm text-text-muted-light dark:text-text-muted-dark">.iso-rotate (standard)</p>
+                  <p class="text-xs font-mono text-text-muted-light dark:text-text-muted-dark">rotateX(45deg) rotateZ(45deg)</p>
+                </div>
+
+                <!-- Steep Rotation -->
+                <div class="flex flex-col items-center gap-3">
+                  <div class="iso-container" style="perspective: 500px;">
+                    <div class="iso-rotate-steep bg-yellow border-3 border-text-light dark:border-text-dark rounded-lg w-24 h-24 flex items-center justify-center">
+                      <span class="font-heading font-bold text-sm text-center">60°X 45°Z</span>
+                    </div>
+                  </div>
+                  <p class="text-sm text-text-muted-light dark:text-text-muted-dark">.iso-rotate-steep</p>
+                  <p class="text-xs font-mono text-text-muted-light dark:text-text-muted-dark">rotateX(60deg) rotateZ(45deg)</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Face Positioning Classes -->
+            <div class="mb-6">
+              <h4 class="font-heading text-lg font-semibold mb-3">Face Positioning Classes</h4>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4">
+                For multi-face isometric elements (cubes, boxes). Use with <code class="font-mono text-xs bg-bg-dark/5 dark:bg-bg-light/5 px-2 py-1 rounded">.iso-container</code> parent.
+              </p>
+              <div class="overflow-x-auto">
+                <table class="w-full border-3 border-text-light dark:border-text-dark">
+                  <thead class="bg-turquoise/10 dark:bg-turquoise-dark/10">
+                    <tr>
+                      <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Class</th>
+                      <th class="px-4 py-2 text-left font-heading font-semibold border-b-3 border-text-light dark:border-text-dark">Transform</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">.iso-face-front</td>
+                      <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-xs">translateZ(20px)</td>
+                    </tr>
+                    <tr>
+                      <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-sm">.iso-face-top</td>
+                      <td class="px-4 py-2 border-b border-text-light dark:border-text-dark font-mono text-xs">rotateX(90deg) translateZ(20px)</td>
+                    </tr>
+                    <tr>
+                      <td class="px-4 py-2 font-mono text-sm">.iso-face-side</td>
+                      <td class="px-4 py-2 font-mono text-xs">rotateY(90deg) translateZ(20px)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Hover Utilities -->
+            <div class="mb-6">
+              <h4 class="font-heading text-lg font-semibold mb-3">Hover Utilities</h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-gray-100 dark:bg-gray-900 border-3 border-text-light dark:border-text-dark rounded-lg p-4">
+                  <h5 class="font-heading font-semibold mb-2">.iso-hover-lift</h5>
+                  <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-3">Lifts element -8px on hover with 200ms transition.</p>
+                  <div class="iso-hover-lift border-3 border-turquoise dark:border-turquoise-dark bg-turquoise/10 dark:bg-turquoise-dark/10 rounded-lg px-4 py-3 cursor-pointer">
+                    <span class="font-heading font-semibold">Hover me</span>
+                  </div>
+                </div>
+                <div class="bg-gray-100 dark:bg-gray-900 border-3 border-text-light dark:border-text-dark rounded-lg p-4">
+                  <h5 class="font-heading font-semibold mb-2">.iso-hover-glow</h5>
+                  <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-3">Adds glow on hover with 200ms transition.</p>
+                  <div class="iso-hover-glow border-3 border-magenta dark:border-magenta-dark text-magenta dark:text-magenta-dark bg-bg-light dark:bg-bg-dark rounded-lg px-4 py-3 cursor-pointer">
+                    <span class="font-heading font-semibold">Hover me</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Code Example -->
+            <div class="bg-gray-100 dark:bg-gray-900 border-3 border-text-light dark:border-text-dark rounded-lg p-4">
+              <h4 class="font-heading text-lg font-semibold mb-3">Usage Example</h4>
+              <pre class="font-mono text-sm overflow-x-auto"><code>&lt;div class="iso-container"&gt;
+  &lt;div class="iso-rotate iso-shadow bg-yellow w-24 h-24"&gt;
+    Isometric box
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
   </div>
 </BaseLayout>

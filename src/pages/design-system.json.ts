@@ -1,103 +1,115 @@
-/**
- * GET /design-system.json
- *
- * Machine-readable v2 design token endpoint — flat semantic shape.
- * Five top-level keys: colors, spacing, radii, typography, fonts.
- * Values copied verbatim from src/styles/v2/global.css @theme block.
- *
- * Intended for: AI coding agents discovering v2 design tokens,
- * design tooling, and internal reference (noindex — not search-indexed).
- */
-
 export async function GET() {
   const tokens = {
     colors: {
       primary: {
-        cssVar: '--color-primary',
-        oklch: 'oklch(0.225 0.044 264.6)',
-      },
-      'primary-hover': {
-        cssVar: '--color-primary-hover',
-        oklch: 'oklch(0.286 0.054 264.6)',
-      },
-      surface: {
-        cssVar: '--color-surface',
-        oklch: 'oklch(1 0 0)',
-      },
-      'surface-muted': {
-        cssVar: '--color-surface-muted',
-        oklch: 'oklch(0.985 0 0)',
+        yellow: {
+          cssVar: '--color-yellow',
+          oklch: 'oklch(0.85 0.18 95)',
+          hex: '#ffef6a',
+          dark: {
+            cssVar: '--color-yellow-dark',
+            oklch: 'oklch(0.80 0.16 95)',
+            hex: '#f5e03b'
+          }
+        },
+        turquoise: {
+          cssVar: '--color-turquoise',
+          oklch: 'oklch(0.70 0.15 195)',
+          hex: '#4dd4c0',
+          dark: {
+            cssVar: '--color-turquoise-dark',
+            oklch: 'oklch(0.65 0.13 195)',
+            hex: '#2dbfaa'
+          }
+        },
+        magenta: {
+          cssVar: '--color-magenta',
+          oklch: 'oklch(0.65 0.20 350)',
+          hex: '#d946ef',
+          dark: {
+            cssVar: '--color-magenta-dark',
+            oklch: 'oklch(0.60 0.18 350)',
+            hex: '#c026d3'
+          }
+        }
       },
       text: {
-        cssVar: '--color-text',
-        oklch: 'oklch(0.225 0.044 264.6)',
+        yellowText: { cssVar: '--color-yellow-text', oklch: 'oklch(0.55 0.15 95)' },
+        turquoiseText: { cssVar: '--color-turquoise-text', oklch: 'oklch(0.45 0.12 195)' }
       },
-      'text-muted': {
-        cssVar: '--color-text-muted',
-        oklch: 'oklch(0.395 0.011 274.7)',
-      },
-      border: {
-        cssVar: '--color-border',
-        oklch: 'oklch(0.864 0.005 286.3)',
-      },
-      accent: {
-        cssVar: '--color-accent',
-        oklch: 'oklch(0.79 0.184 148.5)',
-      },
+      neutral: {
+        bgLight: { cssVar: '--color-bg-light', oklch: 'oklch(1.0 0 0)', hex: '#ffffff' },
+        bgDark: { cssVar: '--color-bg-dark', oklch: 'oklch(0.15 0 0)', hex: '#1a1a1a' },
+        textLight: { cssVar: '--color-text-light', oklch: 'oklch(0.2 0 0)', hex: '#1a1a1a' },
+        textDark: { cssVar: '--color-text-dark', oklch: 'oklch(0.95 0 0)', hex: '#f5f5f5' }
+      }
     },
-
-    spacing: {
-      xs: { cssVar: '--space-xs', rem: '0.5rem' },
-      sm: { cssVar: '--space-sm', rem: '1rem' },
-      md: { cssVar: '--space-md', rem: '1.5rem' },
-      lg: { cssVar: '--space-lg', rem: '2rem' },
-      xl: { cssVar: '--space-xl', rem: '3rem' },
-      '2xl': { cssVar: '--space-2xl', rem: '5rem' },
-    },
-
-    radii: {
-      sm: { cssVar: '--radius-sm', value: '0.375rem' },
-      md: { cssVar: '--radius-md', value: '0.625rem' },
-      lg: { cssVar: '--radius-lg', value: '1rem' },
-      full: { cssVar: '--radius-full', value: '9999px' },
-    },
-
     typography: {
-      display: { cssVar: '--text-display', rem: '3rem' },
-      h1: { cssVar: '--text-h1', rem: '2.25rem' },
-      h2: { cssVar: '--text-h2', rem: '1.875rem' },
-      h3: { cssVar: '--text-h3', rem: '1.5rem' },
-      h4: { cssVar: '--text-h4', rem: '1.25rem' },
-      body: { cssVar: '--text-body', rem: '1rem' },
-      small: { cssVar: '--text-small', rem: '0.875rem' },
-      caption: { cssVar: '--text-caption', rem: '0.75rem' },
-    },
-
-    fonts: {
-      display: {
-        cssVar: '--font-display',
-        stack: 'Plus Jakarta Sans Variable, ui-sans-serif, system-ui, sans-serif',
+      families: {
+        heading: 'Bricolage Grotesque',
+        body: 'DM Sans'
       },
-      text: {
-        cssVar: '--font-text',
-        stack: 'Inter Variable, ui-sans-serif, system-ui, sans-serif',
+      scale: {
+        xs: { rem: '0.75rem', px: '12px' },
+        sm: { rem: '0.875rem', px: '14px' },
+        base: { rem: '1rem', px: '16px' },
+        lg: { rem: '1.125rem', px: '18px' },
+        xl: { rem: '1.25rem', px: '20px' },
+        '2xl': { rem: '1.5rem', px: '24px' },
+        '3xl': { rem: '1.875rem', px: '30px' },
+        '4xl': { rem: '2.25rem', px: '36px' }
       },
       weights: {
-        display: 700,
-        text: 400,
-        textBold: 500,
-      },
-      leading: {
-        display: 1.4,
-        text: 1.6,
-      },
+        h1: 800, h2: 700, h3: 600, h4: 500, body: 400
+      }
     },
+    components: {
+      Button: {
+        variants: ['yellow', 'turquoise', 'magenta'],
+        sizes: ['sm', 'md', 'lg'],
+        props: {
+          variant: { type: 'string', default: 'yellow' },
+          size: { type: 'string', default: 'md' },
+          href: { type: 'string', optional: true }
+        }
+      },
+      Card: {
+        variants: ['yellow', 'turquoise', 'magenta'],
+        props: {
+          variant: { type: 'string', default: 'yellow' },
+          stacked: { type: 'boolean', default: false }
+        }
+      },
+      Input: {
+        variants: ['yellow', 'turquoise', 'magenta'],
+        props: {
+          variant: { type: 'string', default: 'yellow' },
+          label: { type: 'string', optional: true },
+          error: { type: 'string', optional: true }
+        }
+      },
+      Badge: {
+        variants: ['yellow', 'turquoise', 'magenta'],
+        props: {
+          label: { type: 'string', required: true },
+          value: { type: 'string', required: true },
+          description: { type: 'string', optional: true },
+          variant: { type: 'string', default: 'yellow' }
+        }
+      }
+    },
+    utilities: {
+      shadow: ['iso-shadow-sm', 'iso-shadow', 'iso-shadow-lg'],
+      glow: ['iso-glow-subtle', 'iso-glow', 'iso-glow-strong'],
+      rotate: ['iso-rotate', 'iso-rotate-subtle', 'iso-rotate-steep'],
+      hover: ['iso-hover-lift', 'iso-hover-glow']
+    }
   };
 
   return new Response(JSON.stringify(tokens, null, 2), {
     status: 200,
     headers: {
-      'Content-Type': 'application/json',
-    },
+      'Content-Type': 'application/json'
+    }
   });
 }

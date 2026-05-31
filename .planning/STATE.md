@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Design Overhaul
-status: planning
-stopped_at: Phase 25 context gathered
-last_updated: "2026-05-21T19:08:55.310Z"
-last_activity: 2026-05-21
+status: ready_to_plan
+stopped_at: Phase 24 undone — ready to re-plan v2 primitive library from scratch
+last_updated: 2026-05-31T00:00:00Z
+last_activity: 2026-05-31 -- Phase 24 reverted via file-restore strategy
 progress:
   total_phases: 8
-  completed_phases: 3
-  total_plans: 12
-  completed_plans: 12
-  percent: 38
+  completed_phases: 0
+  total_plans: 4
+  completed_plans: 4
+  percent: 0
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-14)
 
 **Core value:** Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
-**Current focus:** Phase 27 — projects + services migration
+**Current focus:** Phase 24 — v2 primitive library + design system page (rebuild from scratch)
 
 ## Current Position
 
-Phase: 27
+Phase: 24
 Plan: Not started
 Status: Ready to plan
-Last activity: 2026-05-21
+Last activity: 2026-05-31
 
-Progress: [███░░░░░░░] 28% (v1.4)
+Progress: [░░░░░░░░░░] 0% (v1.4)
 
 ## Milestone History
 
@@ -48,7 +48,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 **Velocity:**
 
-- Total plans completed: 75 (v1.0: 23, v1.1: 14, v1.2: 10, v1.3: 20)
+- Total plans completed: 71 (v1.0: 23, v1.1: 14, v1.2: 10, v1.3: 20)
 - Average duration: ~1-5 min/plan (recent trend)
 - Total execution time: ~5 days across 4 milestones
 
@@ -71,18 +71,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 - **Roadmap 2026-05-14**: Exact Crito font/palette values are MEDIUM confidence — Phase 23 must begin with Pencil MCP inspection; no @fontsource-variable/* packages named until inspection confirms them
 - **Roadmap 2026-05-14**: Services page (SERV-01..04) bundled into Phase 27 with Projects — card component from Phase 24 makes the new page low-effort; risk isolation preserved by ordering after Blog
 - **Roadmap 2026-05-14**: Contact reskin (Phase 28) isolated from homepage — e2e form test is a mandatory merge gate; isolating prevents form regression from homepage scope creep
-- **24-01 2026-05-15**: font-medium (Tailwind built-in 500) used for Button labels over custom font-text-bold token utility — Header.astro precedent confirms built-in weight utilities are reliable; custom --font-weight-text-bold utility name unverified
-- **24-01 2026-05-15**: :global(svg) inside scoped style accepted for link-variant arrow-nudge — anchored to .link-variant marker class, not a top-level is:global directive
-- **24-01 2026-05-15**: No unit test written for Button.astro — presentational primitive; Wave 3 Playwright + axe-core (Plan 24-03) covers polymorphic tag and focus ring behavior
-- **24-02 2026-05-15**: --shadow-md token promoted to v2/global.css @theme block (no v1 collision) — enables shadow-md Tailwind utility for elevated Card and downstream reuse in Phase 27 service cards
-- **24-02 2026-05-15**: aria-describedby uses error-priority single-ref (errorId ?? helperId) — only ONE id referenced at a time; avoids orphan aria-describedby when referenced element doesn't exist (RESEARCH Pitfall 3)
-- **24-02 2026-05-15**: No unit tests written for Card/Input/Badge — Wave 3 Playwright + axe-core (Plan 24-03) covers polymorphic rendering and aria wiring on /design-system page
-- **24-04 2026-05-15**: Flat token endpoint shape (5 top-level keys) — no nested per-palette, no dark variants; consistent with D-16 and RESEARCH flat-semantic conclusion
-- **24-04 2026-05-15**: /design-system page uses single-column layout, no sidebar nav — D-21 Claude's Discretion; sidebar deferred; simple anchor sections sufficient for reference use
-- **24-04 2026-05-15**: TDD: static parse test (CJS Node script, 19 assertions) written for JSON endpoint before implementation — RED confirmed, GREEN after implementation
-- **24-03 2026-05-15**: All 4 v2 primitive components were WCAG 2.2 AA compliant — color-contrast violations were in design-system.astro page markup (text-accent link at 1.8:1; opacity-70 caption at 4.1:1), not primitive components
-- **24-03 2026-05-15**: text-accent (#53da74 green) must NEVER be used as text color — fails 4.5:1 WCAG AA for normal text; only valid for non-text (focus rings, button backgrounds, decorative fills)
-- **24-03 2026-05-15**: opacity-* utilities must not be applied to text-text-muted at caption/small sizes — text-text-muted at 12px is at the WCAG AA contrast boundary; opacity reduces it below 4.5:1
+- **Undo 2026-05-31**: Phase 24 reverted via file-restore strategy — components, tests, and design-system page reset to pre-phase-24 baseline (d1b9aed^). Reason: rebuild v2 design system from scratch
 
 ### Pending Todos
 
@@ -100,7 +89,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 ## Session Continuity
 
-Last session: 2026-05-21T19:08:55.300Z
-Stopped at: Phase 25 context gathered
-Resume file: .planning/phases/25-leaf-page-migrations-faq-thank-you-404/25-CONTEXT.md
-Next action: Execute Phase 25 (first v2 page migration — begin with orchestrator to select next phase)
+Last session: 2026-05-31T00:00:00Z
+Stopped at: Phase 24 undone — ready to re-plan
+Resume file: (none — phase 24 directory removed)
+Next action: Run `/gsd:discuss-phase 24` to begin re-planning v2 primitive library

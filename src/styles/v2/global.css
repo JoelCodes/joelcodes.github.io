@@ -18,17 +18,14 @@
   --color-accent:         oklch(0.79 0.184 148.5);  /* Crito CTA green #38da71 — actionable accent */
 
   /* ---------------------------------------------------------------------- */
-  /* Spacing (6) — t-shirt scale per D-07; 8pt-rhythm anchored to Crito.    */
-  /* MUST use Tailwind v4's `--spacing-*` namespace so utilities like       */
-  /* `px-sm`, `py-md`, `gap-xs` actually generate (NOT `--space-*`, which   */
-  /* is silently ignored by the utility generator).                         */
+  /* Spacing (6) — t-shirt scale per D-07; 8pt-rhythm anchored to Crito     */
   /* ---------------------------------------------------------------------- */
-  --spacing-xs:   0.5rem;  /* 8px  — icon→label gaps */
-  --spacing-sm:   1rem;    /* 16px — link row gap, button inner gap */
-  --spacing-md:   1.5rem;  /* 24px — heading→body gap */
-  --spacing-lg:   2rem;    /* 32px — container side padding */
-  --spacing-xl:   3rem;    /* 48px — block-level breathing room */
-  --spacing-2xl:  5rem;    /* 80px — section breathing room (Q4 resolved) */
+  --space-xs:   0.5rem;  /* 8px  — icon→label gaps */
+  --space-sm:   1rem;    /* 16px — link row gap, button inner gap */
+  --space-md:   1.5rem;  /* 24px — heading→body gap */
+  --space-lg:   2rem;    /* 32px — container side padding */
+  --space-xl:   3rem;    /* 48px — block-level breathing room */
+  --space-2xl:  5rem;    /* 80px — section breathing room (Q4 resolved) */
 
   /* ---------------------------------------------------------------------- */
   /* Radii (4) — Crito-anchored                                              */
@@ -69,12 +66,6 @@
   /* ---------------------------------------------------------------------- */
   --leading-display: 1.4; /* Crito heading lineHeight verified */
   --leading-text:    1.6; /* Crito body lineHeight verified (1.5–1.625 observed) */
-
-  /* ---------------------------------------------------------------------- */
-  /* Shadows (1) — promoted in plan 24-02; no v1 collision (v1 uses neo      */
-  /* utility classes, not CSS custom-property shadow tokens)                 */
-  /* ---------------------------------------------------------------------- */
-  --shadow-md: 0 4px 6px -1px oklch(0 0 0 / 0.1), 0 2px 4px -2px oklch(0 0 0 / 0.1);
 }
 
 /* See .planning/phases/23-design-system-foundation/23-01-CRITO-INSPECTION.md for token-value provenance. */
