@@ -3,11 +3,11 @@ gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Prep Crito Design File
 status: planning
-stopped_at: Milestone v2.0 started — defining requirements
+stopped_at: Roadmap created — ready to plan Phase 23
 last_updated: 2026-05-31T00:00:00Z
-last_activity: 2026-05-31 -- Milestone v2.0 started after v1.4 abandoned
+last_activity: 2026-05-31 -- v2.0 roadmap created (Phases 23-32)
 progress:
-  total_phases: 0
+  total_phases: 10
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -25,12 +25,12 @@ See: .planning/PROJECT.md (updated 2026-05-31)
 
 ## Current Position
 
-Phase: Not started (defining requirements)
+Phase: Not started (Phase 23 ready to plan)
 Plan: —
-Status: Defining requirements
-Last activity: 2026-05-31 — Milestone v2.0 started
+Status: Roadmap created — ready for `/gsd:plan-phase 23`
+Last activity: 2026-05-31 — v2.0 roadmap created (Phases 23-32)
 
-Progress: [░░░░░░░░░░] 0% (v2.0)
+Progress: [░░░░░░░░░░] 0% (v2.0 — 0/10 phases)
 
 ## Milestone History
 
@@ -40,8 +40,8 @@ Progress: [░░░░░░░░░░] 0% (v2.0)
 | v1.1 | Design Updates | 7-11 | 2026-02-10 |
 | v1.2 | Homepage Refinement | 12-16 | 2026-02-10 |
 | v1.3 | Design System & Nav Cleanup | 17-22 | 2026-02-11 |
-| v1.4 | Design Overhaul | 23-30 | Abandoned 2026-05-31 |
-| v2.0 | Prep Crito Design File | 23+ | — |
+| v1.4 | Design Overhaul | (23-30 attempted) | Abandoned 2026-05-31 |
+| v2.0 | Prep Crito Design File | 23-32 | — |
 
 See `.planning/MILESTONES.md` for full milestone details.
 
@@ -68,6 +68,11 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 ### Key Decisions (v2.0)
 
+- **Roadmap 2026-05-31**: v2.0 spans Phases 23-32 (10 phases). Phase 23 = Audit + Token Foundation; 24 = Layout Primitives + Primitive Components; 25 = Section + Compound Components; 26-31 = per-page reconstruction (FAQ + 404 first, Homepage last) with per-section calibration as definition-of-done; 32 = Fidelity Sweep + Handoff
+- **Roadmap 2026-05-31**: Per-section calibration (VALID-01 + VALID-02) is mandatory definition-of-done inside every per-page phase — NOT deferred to a final QA pass (reversing this discipline is exactly how v1.4 failed)
+- **Roadmap 2026-05-31**: Variables-first non-negotiable — Phase 23 audit + token foundation MUST land before any component or page work; Phase 23 first concrete task is a live Pencil MCP audit (`get_editor_state(include_schema: true)` → `get_guidelines` → `batch_get` → `search_all_unique_properties` → `get_variables`); audit output may invalidate inference-only recommendations from the research summary
+- **Roadmap 2026-05-31**: Single-file strategy — everything lives in `design/Crito.pen` (reverses v1.4 Decision 4 to split into `design/design-system.pen`); library frames at top of canvas with `_` prefix
+- **Roadmap 2026-05-31**: Desktop only for v2.0 — mobile-breakpoint reconstruction explicitly deferred to a later milestone (PAGE-09)
 - **Milestone start 2026-05-31**: v2.0 is Pencil-MCP-centric — focus is reconstructing the Crito `.pen` file (recreating flat raster sections as editable components with proper tokens) before any code work resumes
 - **Milestone start 2026-05-31**: Phase numbering continues from 23 — v1.4 phase numbers freed up since nothing v1.4 actually shipped
 - **Lesson from v1.4 abandonment**: Building code from a flat-image .pen produces generic-looking results because typography, spacing, and component structure get guessed; v2.0 fixes the .pen first so downstream code has high-fidelity ground truth
@@ -79,6 +84,12 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 ### Pending Todos
 
+**Open questions surfaced by the roadmap (resolve during Phase 23):**
+
+1. Dark-mode token slots — encode `@light,@dark` now (with dark mirroring light) or defer entirely? Decision made in Phase 23 plan 23-02 with the user, recorded in PEN-INVENTORY.md
+2. Crito `.fig` accessibility — confirm whether the original `.fig` opens cleanly and exposes variables as ground truth for token values (filename ambiguity: design folder contains both an Alliatus-named and a Crito-named `.fig` per PITFALLS research)
+3. OPEN-flag policy — does each OPEN block phase close, or does milestone close gate only on critical-category OPENs? Recommendation: OPENs do not block phase close; resolve during Phase 23 with user
+
 **Before deployment (carried from v1.3):**
 
 1. Configure n8n webhook — set PUBLIC_N8N_WEBHOOK_URL environment variable
@@ -87,11 +98,11 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 ### Blockers/Concerns
 
-None currently.
+None currently. Phase 23 first plan (the live Pencil MCP audit) is the gating dependency for everything that follows; if Pencil MCP tools turn out to be unavailable to the executing agent, the milestone cannot proceed (flagged as Hard Block #1 in research SUMMARY).
 
 ## Session Continuity
 
 Last session: 2026-05-31T00:00:00Z
-Stopped at: Milestone v2.0 started — defining requirements
-Resume file: (none — defining requirements next)
-Next action: Complete v2.0 requirements and roadmap, then `/gsd:discuss-phase 23`
+Stopped at: Roadmap created — ready to plan Phase 23
+Resume file: .planning/ROADMAP.md
+Next action: `/gsd:plan-phase 23` to plan Phase 23 (Audit + Token Foundation)

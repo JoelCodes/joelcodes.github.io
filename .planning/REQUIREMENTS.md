@@ -99,7 +99,7 @@ This document scopes what v2.0 will deliver. Each requirement is testable, atomi
 
 ## Traceability (Requirement → Phase)
 
-Filled in by the roadmapper after phase structure is approved.
+Mapped by the roadmapper after phase structure approval. Every v2.0 requirement maps to exactly one phase; cross-cutting policies (e.g. COMP-09 zero-raw-values, VALID-04 sweep) are owned by a single phase but enforced throughout — see ROADMAP.md "Cross-cutting policies" note.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
@@ -114,31 +114,31 @@ Filled in by the roadmapper after phase structure is approved.
 | TOKEN-06 | Phase 23 | Pending |
 | TOKEN-07 | Phase 23 | Pending |
 | TOKEN-08 | Phase 23 | Pending |
-| LAYOUT-01 | (set by roadmapper) | Pending |
-| LAYOUT-02 | (set by roadmapper) | Pending |
-| COMP-01 | (set by roadmapper) | Pending |
-| COMP-02 | (set by roadmapper) | Pending |
-| COMP-03 | (set by roadmapper) | Pending |
-| COMP-04 | (set by roadmapper) | Pending |
-| COMP-05 | (set by roadmapper) | Pending |
-| COMP-06 | (set by roadmapper) | Pending |
-| COMP-07 | (set by roadmapper) | Pending |
-| COMP-08 | (set by roadmapper) | Pending |
-| COMP-09 | (set by roadmapper) | Pending |
-| PAGE-01 | (set by roadmapper) | Pending |
-| PAGE-02 | (set by roadmapper) | Pending |
-| PAGE-03 | (set by roadmapper) | Pending |
-| PAGE-04 | (set by roadmapper) | Pending |
-| PAGE-05 | (set by roadmapper) | Pending |
-| PAGE-06 | (set by roadmapper) | Pending |
-| PAGE-07 | (set by roadmapper) | Pending |
-| PAGE-08 | (set by roadmapper) | Pending |
-| PAGE-09 | (set by roadmapper) | Pending |
-| PAGE-10 | (set by roadmapper) | Pending |
-| PAGE-11 | (set by roadmapper) | Pending |
-| VALID-01 | (set by roadmapper) | Pending |
-| VALID-02 | (set by roadmapper) | Pending |
-| VALID-03 | (set by roadmapper) | Pending |
-| VALID-04 | (set by roadmapper) | Pending |
-| VALID-05 | (set by roadmapper) | Pending |
-| VALID-06 | (set by roadmapper) | Pending |
+| LAYOUT-01 | Phase 24 | Pending |
+| LAYOUT-02 | Phase 24 | Pending |
+| COMP-01 | Phase 24 | Pending |
+| COMP-02 | Phase 24 | Pending |
+| COMP-03 | Phase 24 | Pending |
+| COMP-04 | Phase 24 | Pending |
+| COMP-05 | Phase 25 | Pending |
+| COMP-06 | Phase 25 | Pending |
+| COMP-07 | Phase 25 | Pending |
+| COMP-08 | Phase 24 | Pending |
+| COMP-09 | Phase 24 | Pending |
+| PAGE-01 | Phase 31 | Pending |
+| PAGE-02 | Phase 29 | Pending |
+| PAGE-03 | Phase 28 | Pending |
+| PAGE-04 | Phase 26 | Pending |
+| PAGE-05 | Phase 27 | Pending |
+| PAGE-06 | Phase 27 | Pending |
+| PAGE-07 | Phase 30 | Pending |
+| PAGE-08 | Phase 26 | Pending |
+| PAGE-09 | Phase 26 | Pending |
+| PAGE-10 | Phase 32 | Pending |
+| PAGE-11 | Phase 26 | Pending |
+| VALID-01 | Phase 26 | Pending |
+| VALID-02 | Phase 26 | Pending |
+| VALID-03 | Phase 26 | Pending |
+| VALID-04 | Phase 32 | Pending |
+| VALID-05 | Phase 32 | Pending |
+| VALID-06 | Phase 32 | Pending |
