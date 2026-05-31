@@ -265,3 +265,28 @@ Per D-10 schema. All flags raised during Plan 23-01 audit.
 **Action:** Proceed to plan 23-02 / 23-03 / 23-04 / 23-05.
 
 Coverage thresholds (per CONTEXT D-05: `N_colors ≥ 5 AND N_sizes ≥ 3 AND spacing pattern visible`) all met. Audit revealed nine OPEN flags (1 notable for export_nodes tooling, 3 notable for token-mining surface limitations, 5 minor for scale resolution decisions); none are blockers for Phase 23 close per D-09. Plans 23-03 and 23-04 will populate the primitive and semantic token tiers respectively, drawing primary evidence from Home Page (`ujMLJ`) editable nodes + this catalog. Crito .fig fallback per D-04 remains available if any specific token value needs ground-truth confirmation during 23-03 execution.
+
+---
+
+## Dark-Mode Omission Rationale (TOKEN-07 + D-01)
+
+**Decision (CONTEXT D-01):** Omit dark slots entirely from the v2.0 token surface. No `@light,@dark` Pencil variable syntax. Tokens are single-theme for v2.0.
+
+**Why this is not an oversight:** STACK.md originally recommended encoding `@light,@dark` at definition time with dark stubbed to mirror light (retrofitting later is more expensive). CONTEXT D-01 reverses that recommendation for v2.0 because:
+
+- Pre-naming `--color-surface-dark` slots is a form of premature commitment (PITFALLS O3).
+- Dark mode is explicitly deferred per TOKEN-07 and the v2.0 PROJECT.md scope.
+- A future milestone will design dark values from scratch with fresh decisions — no pre-named slots.
+
+**Forbidden token-name patterns in this milestone:**
+
+- Anything containing `@dark`, `@light`, `-dark`, `-light` as a suffix or theme marker.
+- Anything carrying a per-theme variant in the value field (no `{value, theme}` arrays in `set_variables` calls).
+
+**For downstream readers (Phase 24+ planners, Phase 32 handoff writer, next code milestone):**
+
+- The absence of dark token slots in `get_variables({})` is intentional and load-bearing.
+- Do not add `@light,@dark` syntax retroactively in any v2.0 phase.
+- Dark mode lives in a later milestone; pre-emptive slots in this one are out of scope.
+
+**Cross-reference:** CONTEXT.md D-01 (decision), D-02 (this documentation requirement), TOKEN-07 (requirement), RESEARCH.md `## State of the Art` (the reversed STACK recommendation). Per D-02, this rationale also appears as a visible note inside the `_Tokens & Foundations` reference frame built by plan 23-05.
