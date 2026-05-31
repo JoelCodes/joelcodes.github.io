@@ -181,17 +181,12 @@ Plans:
   3. `/404` renders on `BaseLayoutV2` with navigation links back to the homepage and key pages
   4. All three pages pass axe-core with zero violations and Lighthouse 90+ across all categories
 
-**Plans:** 2/2 plans complete
+**Plans:** TBD
 
 Plans:
 
-**Wave 1**
-
-- [x] 25-01-PLAN.md *(Wave 1)* — Migrate `/faq` to `BaseLayoutV2` (page-header banner + divider-list accordion with ChevronDown rotation + bottom CTA banner); preserve FAQPage JSON-LD verbatim; ship Wave 0 test scaffold `tests/accessibility/v2-leaf.spec.ts` with /faq Category A tests
-
-**Wave 2** *(blocked on Wave 1 completion)*
-
-- [x] 25-02-PLAN.md *(Wave 2, blocked on 25-01)* — Rewrite `/thank-you` on `BaseLayoutV2` (elevated Card + env-var Calendly URL); create `/404` on `BaseLayoutV2` (typographic hero + 2x2 destination grid + link-variant contact CTA + noindex meta); extend v2-leaf.spec.ts with /thank-you + /404 tests; add `PUBLIC_CALENDLY_URL` to deploy.yml; Pencil mirror /404 frame + FAQ accordion-row variant
+- [ ] 25-01: Migrate `/faq` to `BaseLayoutV2`; add CTA block; verify FAQPage JSON-LD; axe-core pass
+- [ ] 25-02: Migrate `/thank-you` and `/404` to `BaseLayoutV2`; verify content and navigation intact; axe-core pass
 
 ---
 
@@ -212,12 +207,7 @@ Plans:
 
 Plans:
 
-**Wave 1**
-
 - [ ] 26-01: Migrate blog post layout (`/blog/[slug]`) to `BaseLayoutV2`; audit ancestor `overflow` for TOC; verify Expressive Code and `.prose` styles
-
-**Wave 2** *(blocked on Wave 1 completion)*
-
 - [ ] 26-02: Add right sidebar with related-posts component (static, from content collection)
 - [ ] 26-03: Add share buttons (LinkedIn + copy-URL) to blog post layout
 - [ ] 26-04: Migrate blog index (`/blog`) and tag pages (`/blog/tags/[tag]`) to `BaseLayoutV2`; verify filter behavior
@@ -346,8 +336,8 @@ Phases execute in numeric order: 1 -> 2 -> ... -> 22 -> 23 -> 24 -> 25 -> 26 -> 
 | 22. Footer Enhancement | v1.3 | 1/1 | Complete | 2026-02-11 |
 | 23. Design System Foundation | v1.4 | 4/4 | Complete    | 2026-05-15 |
 | 24. v2 Primitive Library + Design System Page | v1.4 | 4/4 | Complete    | 2026-05-15 |
-| 25. Leaf Page Migrations | v1.4 | 2/2 | Complete   | 2026-05-21 |
-| 26. Blog Migration | v1.4 | 4/4 | Complete    | 2026-05-21 |
+| 25. Leaf Page Migrations | v1.4 | 0/2 | Not started | - |
+| 26. Blog Migration | v1.4 | 0/4 | Not started | - |
 | 27. Projects + Services Migration | v1.4 | 0/3 | Not started | - |
 | 28. Contact Reskin | v1.4 | 0/2 | Not started | - |
 | 29. Homepage Migration | v1.4 | 0/3 | Not started | - |
@@ -355,4 +345,4 @@ Phases execute in numeric order: 1 -> 2 -> ... -> 22 -> 23 -> 24 -> 25 -> 26 -> 
 
 ---
 *Roadmap initialized: 2026-01-26 for v1.0*
-*Last updated: 2026-05-21 — Phase 25 plans finalized (25-01 + 25-02)*
+*Last updated: 2026-05-14 — v1.4 Design Overhaul phases 23-30 added*

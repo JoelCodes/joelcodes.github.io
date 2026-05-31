@@ -1,44 +1,58 @@
 ---
-import BaseLayout from '../layouts/v2/BaseLayout.astro';
-import Card from '../components/v2/ui/Card.astro';
-import CardBody from '../components/v2/ui/CardBody.astro';
-import Button from '../components/v2/ui/Button.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Card from '../components/ui/Card.astro';
+import Button from '../components/ui/Button.astro';
 import { CheckCircle2 } from '@lucide/astro';
-
-// D-25-11: Calendly URL — env var with placeholder fallback (mirrors PUBLIC_N8N_WEBHOOK_URL pattern)
-const calendlyUrl = import.meta.env.PUBLIC_CALENDLY_URL || 'https://calendly.com/joelshinness';
 ---
 
 <BaseLayout
-  title="Thanks!"
+  title="Thanks! | Joel Shinness"
   description="Thank you for reaching out. I'll respond within 48 hours."
 >
-  <div class="min-h-[70vh] flex items-center justify-center container mx-auto px-md">
-    <Card elevated={true} class="max-w-2xl w-full">
-      <CardBody class="flex flex-col items-center text-center gap-md px-lg py-xl">
-        <CheckCircle2 size={64} stroke-width={2} class="text-accent" aria-hidden="true" />
-        <h1 class="font-display font-bold text-display text-text">
+  <div class="container mx-auto px-4 py-16 min-h-[70vh] flex items-center justify-center">
+    <Card variant="turquoise" class="max-w-2xl text-center">
+      <div class="flex flex-col items-center gap-6">
+        <!-- Success icon -->
+        <div class="text-turquoise dark:text-turquoise-dark">
+          <CheckCircle2 size={64} strokeWidth={2} />
+        </div>
+
+        <!-- Heading -->
+        <h1 class="font-heading font-bold text-4xl uppercase tracking-tight text-text-light dark:text-text-dark">
           Thanks for reaching out!
         </h1>
-        <p class="font-text text-body text-text max-w-md">
+
+        <!-- Confirmation message -->
+        <p class="font-body text-lg text-text-light dark:text-text-dark max-w-md">
           I'll email you within 48 hours with next steps. Looking forward to learning more about your project!
         </p>
-        <Button
-          variant="primary"
-          size="lg"
-          href={calendlyUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Skip the wait &mdash; book a call
-        </Button>
+
+        <!-- Calendar booking CTA -->
+        <div class="mt-4">
+          <Button
+            variant="turquoise"
+            size="lg"
+            href="https://calendly.com/joelshinness"
+            class="inline-block"
+          >
+            Skip the wait - book a call
+          </Button>
+        </div>
+
+        <!-- Secondary link to return home -->
         <a
           href="/"
-          class="font-text text-small text-text-muted underline underline-offset-2 hover:text-accent transition-colors"
+          class="text-sm text-text-muted-light dark:text-text-muted-dark hover:text-turquoise dark:hover:text-turquoise-dark transition-colors underline"
         >
           Return to homepage
         </a>
-      </CardBody>
+      </div>
     </Card>
   </div>
 </BaseLayout>
+
+<style>
+  .container {
+    max-width: 1280px;
+  }
+</style>

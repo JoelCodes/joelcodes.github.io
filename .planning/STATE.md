@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Design Overhaul
-status: completed
-stopped_at: Phase 25 marked complete
-last_updated: "2026-05-21T20:30:08.088Z"
-last_activity: 2026-05-21 -- Phase 25 marked complete
+status: planning
+stopped_at: Phase 25 context gathered
+last_updated: "2026-05-21T19:08:55.310Z"
+last_activity: 2026-05-21
 progress:
   total_phases: 8
   completed_phases: 3
-  total_plans: 10
-  completed_plans: 10
+  total_plans: 12
+  completed_plans: 12
   percent: 38
 ---
 
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-14)
 
 **Core value:** Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
-**Current focus:** Phase 25 — Leaf Page Migrations (FAQ, Thank-You, 404)
+**Current focus:** Phase 27 — projects + services migration
 
 ## Current Position
 
-Phase: 25 — COMPLETE
-Plan: 1 of 2
-Status: Phase 25 complete
-Last activity: 2026-05-21 -- Phase 25 marked complete
+Phase: 27
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-05-21
 
-Progress: [██████████] 100%
+Progress: [███░░░░░░░] 28% (v1.4)
 
 ## Milestone History
 
