@@ -1,0 +1,53 @@
+{
+  "captured": "2026-05-31",
+  "phase": "23",
+  "source": "design/Crito.pen via mcp__pencil__batch_get readDepth=2",
+  "purpose": "Baseline for VAL-23-05 zero-mutation diff. At end of phase 23, re-run batch_get with the same readDepth and confirm: (a) same 15 top-level frame ids, (b) same direct-child id set per frame, (c) one and only one NEW top-level frame: _Tokens & Foundations.",
+  "baseline_file_state": {
+    "path": "design/Crito.pen",
+    "size_bytes": 755302,
+    "git_blob_sha": "d5e8d45d22524db068362056cb6b4de2c4526d0e",
+    "format": "plain JSON (version 2.13)"
+  },
+  "top_level_count": 15,
+  "top_level_frames": [
+    { "id": "MIXGf", "name": "View More", "type": "frame", "width": 3230, "height": 1200, "direct_child_ids": ["tzlLM", "2aaZb"] },
+    { "id": "QdwxP", "name": "About Me", "type": "frame", "width": 1400, "height": 3392, "direct_child_ids": ["0I2s6", "QRY7O", "6kSNQ", "b1VZE", "f1QWb", "HcrUD", "wK0ZL", "qp2pQ", "XNm67"] },
+    { "id": "kicJ8", "name": "Information", "type": "frame", "width": 4890, "height": null, "direct_child_ids": ["tgHOV"] },
+    { "id": "ujMLJ", "name": "Home Page", "type": "frame", "width": 1600, "height": 8043, "direct_child_ids": ["sHon5", "Y1ldm", "6gRu1", "35XXR", "DzW46", "9sik7", "sxhcf", "XH3uk", "lUyFD", "Wx9kx"] },
+    { "id": "VleVl", "name": "Free Design Sample", "type": "frame", "width": 5200, "height": null, "direct_child_ids": ["lJ6pk"] },
+    { "id": "cl8tt", "name": "09_Contact", "type": "frame", "width": 1920, "height": 2846, "direct_child_ids": [] },
+    { "id": "w1m3x", "name": "08_Blog Details", "type": "frame", "width": 1920, "height": 4486, "direct_child_ids": [] },
+    { "id": "DzqTm", "name": "07_Blog", "type": "frame", "width": 1920, "height": 3871, "direct_child_ids": [] },
+    { "id": "cYlRH", "name": "06_Service Details", "type": "frame", "width": 1920, "height": 3960, "direct_child_ids": [] },
+    { "id": "Y2isa", "name": "05_Service", "type": "frame", "width": 1920, "height": 4589, "direct_child_ids": [] },
+    { "id": "WDGxc", "name": "04_About", "type": "frame", "width": 1920, "height": 5440, "direct_child_ids": [] },
+    { "id": "1nLS3", "name": "03_SaaS Agency", "type": "frame", "width": 1920, "height": 8497, "direct_child_ids": [] },
+    { "id": "Jmdw0", "name": "02_Creative Agency", "type": "frame", "width": 1920, "height": 10054, "direct_child_ids": [] },
+    { "id": "maDc3", "name": "01_ Business Consulting", "type": "frame", "width": 1920, "height": 9778, "direct_child_ids": [] },
+    { "id": "IKAu3", "name": "FULL DESIGN PREVIEW", "type": "frame", "width": 19680, "height": null, "direct_child_ids": ["zPnR4"] }
+  ],
+  "image_imports_in_use": [
+    "images/image-import.jpg",
+    "images/image-import-2.png",
+    "images/image-import-4.png",
+    "images/image-import-4.jpg",
+    "images/image-import-8.jpg",
+    "images/image-import-11.png",
+    "images/image-import-12.jpg",
+    "images/image-import-14.jpg",
+    "images/image-import-15.jpg",
+    "images/image-import-18.jpg",
+    "images/image-import-20.jpg",
+    "images/image-import-22.jpg",
+    "images/image-import-25.jpg",
+    "images/image-import-37.png",
+    "images/image-import-38.png"
+  ],
+  "diff_protocol": {
+    "step_1": "Run mcp__pencil__batch_get with the same 15 nodeIds and readDepth=2",
+    "step_2": "Verify every direct_child_ids array above matches the post-phase output exactly (no additions, no removals, no renames)",
+    "step_3": "Run mcp__pencil__batch_get with no patterns/nodeIds (returns top-level children of the document) and verify the only new top-level frame id is the one added by plan 23-05 (_Tokens & Foundations); all 15 ids above must still be present",
+    "step_4": "Optional belt-and-suspenders: `git diff --stat design/Crito.pen` shows only a single file changed; the diff should only touch the document-level variables map and the new top-level frame"
+  }
+}
