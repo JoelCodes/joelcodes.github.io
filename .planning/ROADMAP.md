@@ -134,15 +134,15 @@ See `.planning/MILESTONES.md` "v1.4 Design Overhaul (Abandoned)" entry for the f
   4. Every token value is traceable to source evidence: color tokens derive from the Crito Figma source (or its published documentation) rather than from JPG eyedropping; spacing/typography values come from the original `.fig` or from `search_all_unique_properties` over already-editable nodes in the `.pen`
   5. Page frames in `design/Crito.pen` are unchanged — the audit and token work introduce no visual mutation to any IN-SCOPE page frame
 
-**Plans:** 5 plans
+**Plans:** 5/5 plans complete
 
 Plans:
 
-- [ ] 23-01-PLAN.md — Live Pencil MCP audit + baseline screenshots: `get_editor_state(include_schema: true)` → `get_guidelines` → `batch_get` → `search_all_unique_properties` → `get_variables({})`; write `.planning/research/PEN-INVENTORY.md` with every frame catalogued, classified, and coverage-checkpoint PASS/PAUSE gate
-- [ ] 23-02-PLAN.md — Document the dark-mode omission rationale in PEN-INVENTORY.md (collapsed to doc-only per CONTEXT D-01: dark slots omitted entirely for v2.0)
-- [ ] 23-03-PLAN.md — Write primitive tokens (color / spacing / typography / radii) via `set_variables` with probe-first pattern; verify via `get_variables({})`; log source-evidence per token
-- [ ] 23-04-PLAN.md — Write semantic aliases (`color-semantic-*`, `space-semantic-*`, `type-semantic-*` including prose styles for blog/FAQ, `radius-semantic-*`) via `set_variables`; probe-first to resolve aliasing strategy
-- [ ] 23-05-PLAN.md — Build `_Tokens & Foundations` reference frame via `batch_design`; archive `get_screenshot` to `.planning/research/exports/v2.0/tokens-foundations-23.png` (D-19); capture end-of-phase Crito frame screenshots for VAL-23-05 zero-mutation diff
+- [x] 23-01-PLAN.md — Live Pencil MCP audit + baseline screenshots: `get_editor_state(include_schema: true)` → `get_guidelines` → `batch_get` → `search_all_unique_properties` → `get_variables({})`; write `.planning/research/PEN-INVENTORY.md` with every frame catalogued, classified, and coverage-checkpoint PASS/PAUSE gate
+- [x] 23-02-PLAN.md — Document the dark-mode omission rationale in PEN-INVENTORY.md (collapsed to doc-only per CONTEXT D-01: dark slots omitted entirely for v2.0)
+- [x] 23-03-PLAN.md — Write primitive tokens (color / spacing / typography / radii) via `set_variables` with probe-first pattern; verify via `get_variables({})`; log source-evidence per token
+- [x] 23-04-PLAN.md — Write semantic aliases (`color-semantic-*`, `space-semantic-*`, `type-semantic-*` including prose styles for blog/FAQ, `radius-semantic-*`) via `set_variables`; probe-first to resolve aliasing strategy
+- [x] 23-05-PLAN.md — Build `_Tokens & Foundations` reference frame via `batch_design`; archive `get_screenshot` to `.planning/research/exports/v2.0/tokens-foundations-23.png` (D-19); capture end-of-phase Crito frame screenshots for VAL-23-05 zero-mutation diff
 
 ---
 
@@ -166,7 +166,7 @@ Plans:
 - [ ] 24-01: Stub the four library parent frames at top of canvas (`_Components / Primitives`, `_Components / Compounds`, `_Components / Sections`); confirm `_Tokens & Foundations` is the top neighbor; use `find_empty_space_on_canvas` to avoid overlap with the 15 existing page frames
 - [ ] 24-02: Build `Primitive / Button` with variants justified by source evidence (purpose / size / state); reference semantic tokens only; `snapshot_layout` problems-only check
 - [ ] 24-03: Build `Primitive / Input` (label + control + helper text + error slot) and `Primitive / Badge` (pill/metric styles as they appear in Crito heroes and project cards); semantic-token-only; `snapshot_layout`
-- [ ] 24-04: Build `Primitive / Icon` (size variants 16/20/24/32) with documented glyph-swap mechanism (instance swap or component property per Pencil's slot model from Phase 23 audit); semantic-token-only; `snapshot_layout`
+- [x] 24-04: Build `Primitive / Icon` (size variants 16/20/24/32) with documented glyph-swap mechanism (instance swap or component property per Pencil's slot model from Phase 23 audit); semantic-token-only; `snapshot_layout` (completed 2026-05-31)
 - [ ] 24-05: Sweep — `search_all_unique_properties` over primitive frames, confirm zero raw values; `get_screenshot` each primitive for the reference set
 
 ---
@@ -373,7 +373,7 @@ Phases execute in numeric order: 1 → 2 → ... → 22 → 23 → 24 → 25 →
 | 20. Contact Form Enhancement | v1.3 | 3/3 | Complete | 2026-02-11 |
 | 21. Navigation Cleanup | v1.3 | 1/1 | Complete | 2026-02-10 |
 | 22. Footer Enhancement | v1.3 | 1/1 | Complete | 2026-02-11 |
-| 23. Audit + Token Foundation | v2.0 | 0/5 | Not started | - |
+| 23. Audit + Token Foundation | v2.0 | 5/5 | Complete    | 2026-05-31 |
 | 24. Layout Primitives + Primitive Components | v2.0 | 0/TBD | Not started | - |
 | 25. Section + Compound Components | v2.0 | 0/TBD | Not started | - |
 | 26. FAQ + 404 Reconstruction | v2.0 | 0/TBD | Not started | - |

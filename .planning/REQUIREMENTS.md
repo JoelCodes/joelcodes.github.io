@@ -11,20 +11,20 @@ This document scopes what v2.0 will deliver. Each requirement is testable, atomi
 
 ### Audit & Inventory
 
-- [ ] **AUDIT-01**: Live Pencil MCP audit of `design/Crito.pen` produces a versioned `.planning/research/PEN-INVENTORY.md` covering: schema version (from `get_editor_state(include_schema: true)`), guidelines (from `get_guidelines`), every top-level frame's children (from `batch_get`), all raw property values (from `search_all_unique_properties`), and current variable surface (from `get_variables`)
-- [ ] **AUDIT-02**: Every top-level page frame in the `.pen` is classified IN-SCOPE (maps to a Joel page: Homepage, Projects, Blog, FAQ, Contact, Thank-you, Design system, 404) or OUT-OF-SCOPE (Crito-only: View More, Information, Free Design Sample, etc.); only IN-SCOPE frames are reconstructed
-- [ ] **AUDIT-03**: Every section inside every IN-SCOPE page frame is catalogued in `PEN-INVENTORY.md` with status (`[FLAT]` raster image / partially editable / already factored) and reconstruction priority
+- [x] **AUDIT-01**: Live Pencil MCP audit of `design/Crito.pen` produces a versioned `.planning/research/PEN-INVENTORY.md` covering: schema version (from `get_editor_state(include_schema: true)`), guidelines (from `get_guidelines`), every top-level frame's children (from `batch_get`), all raw property values (from `search_all_unique_properties`), and current variable surface (from `get_variables`)
+- [x] **AUDIT-02**: Every top-level page frame in the `.pen` is classified IN-SCOPE (maps to a Joel page: Homepage, Projects, Blog, FAQ, Contact, Thank-you, Design system, 404) or OUT-OF-SCOPE (Crito-only: View More, Information, Free Design Sample, etc.); only IN-SCOPE frames are reconstructed
+- [x] **AUDIT-03**: Every section inside every IN-SCOPE page frame is catalogued in `PEN-INVENTORY.md` with status (`[FLAT]` raster image / partially editable / already factored) and reconstruction priority
 
 ### Token Foundation
 
-- [ ] **TOKEN-01**: Two-tier Pencil variable system established — **primitive tokens** (raw values: `color-primitive-orange-500`, `space-primitive-24`, `type-primitive-size-24`) and **semantic aliases** (role-based: `color-semantic-bg-accent`, `space-semantic-section-y`, `type-semantic-heading-1`); components reference semantic only, never primitives. Naming uses flat-dash convention (locked by Phase 23 CONTEXT.md D-12).
-- [ ] **TOKEN-02**: Color palette tokens cover the Crito palette derived from the original Figma source (not eyedropped from raster) — primary accent ramp, neutral ramp, surface, text, border roles
-- [ ] **TOKEN-03**: Typography tokens cover the Crito font families, sizes, weights, and line-heights — at minimum: display, h1-h6, body, body-sm, caption, button
-- [ ] **TOKEN-04**: Spacing scale tokens cover Crito's grid (e.g. 0/4/8/12/16/24/32/48/64/96) with semantic aliases (`space-semantic-section-y`, `space-semantic-container-x`, `space-semantic-stack-sm/md/lg`, `space-semantic-inline-sm/md/lg`)
-- [ ] **TOKEN-05**: Radius tokens cover Crito's radii (likely 2-4 named values: sm / md / lg / pill)
-- [ ] **TOKEN-06**: Prose typography tokens covering content-heavy surfaces (blog/FAQ): paragraph spacing, link color + underline behavior, inline code styling, list bullet styles
-- [ ] **TOKEN-07**: Dark-mode token slots **deferred** — tokens remain single-theme for v2.0; dark mode picked up in a later milestone
-- [ ] **TOKEN-08**: A `_Tokens & Foundations` reference frame inside the `.pen` shows live swatches for every color token, type specimens for every typography token, and a spacing-scale visualization
+- [x] **TOKEN-01**: Two-tier Pencil variable system established — **primitive tokens** (raw values: `color-primitive-orange-500`, `space-primitive-24`, `type-primitive-size-24`) and **semantic aliases** (role-based: `color-semantic-bg-accent`, `space-semantic-section-y`, `type-semantic-heading-1`); components reference semantic only, never primitives. Naming uses flat-dash convention (locked by Phase 23 CONTEXT.md D-12).
+- [x] **TOKEN-02**: Color palette tokens cover the Crito palette derived from the original Figma source (not eyedropped from raster) — primary accent ramp, neutral ramp, surface, text, border roles
+- [x] **TOKEN-03**: Typography tokens cover the Crito font families, sizes, weights, and line-heights — at minimum: display, h1-h6, body, body-sm, caption, button
+- [x] **TOKEN-04**: Spacing scale tokens cover Crito's grid (e.g. 0/4/8/12/16/24/32/48/64/96) with semantic aliases (`space-semantic-section-y`, `space-semantic-container-x`, `space-semantic-stack-sm/md/lg`, `space-semantic-inline-sm/md/lg`)
+- [x] **TOKEN-05**: Radius tokens cover Crito's radii (likely 2-4 named values: sm / md / lg / pill)
+- [x] **TOKEN-06**: Prose typography tokens covering content-heavy surfaces (blog/FAQ): paragraph spacing, link color + underline behavior, inline code styling, list bullet styles
+- [x] **TOKEN-07**: Dark-mode token slots **deferred** — tokens remain single-theme for v2.0; dark mode picked up in a later milestone
+- [x] **TOKEN-08**: A `_Tokens & Foundations` reference frame inside the `.pen` shows live swatches for every color token, type specimens for every typography token, and a spacing-scale visualization
 
 ### Layout Primitives
 
@@ -103,17 +103,17 @@ Mapped by the roadmapper after phase structure approval. Every v2.0 requirement 
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| AUDIT-01 | Phase 23 | Pending |
-| AUDIT-02 | Phase 23 | Pending |
-| AUDIT-03 | Phase 23 | Pending |
-| TOKEN-01 | Phase 23 | Pending |
-| TOKEN-02 | Phase 23 | Pending |
-| TOKEN-03 | Phase 23 | Pending |
-| TOKEN-04 | Phase 23 | Pending |
-| TOKEN-05 | Phase 23 | Pending |
-| TOKEN-06 | Phase 23 | Pending |
-| TOKEN-07 | Phase 23 | Pending |
-| TOKEN-08 | Phase 23 | Pending |
+| AUDIT-01 | Phase 23 | Complete |
+| AUDIT-02 | Phase 23 | Complete |
+| AUDIT-03 | Phase 23 | Complete |
+| TOKEN-01 | Phase 23 | Complete |
+| TOKEN-02 | Phase 23 | Complete |
+| TOKEN-03 | Phase 23 | Complete |
+| TOKEN-04 | Phase 23 | Complete |
+| TOKEN-05 | Phase 23 | Complete |
+| TOKEN-06 | Phase 23 | Complete |
+| TOKEN-07 | Phase 23 | Complete |
+| TOKEN-08 | Phase 23 | Complete |
 | LAYOUT-01 | Phase 24 | Pending |
 | LAYOUT-02 | Phase 24 | Pending |
 | COMP-01 | Phase 24 | Pending |
