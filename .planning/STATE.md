@@ -2,10 +2,10 @@
 gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Prep Crito Design File
-status: planning
-stopped_at: Roadmap created — ready to plan Phase 23
-last_updated: 2026-05-31T00:00:00Z
-last_activity: 2026-05-31 -- v2.0 roadmap created (Phases 23-32)
+status: "Roadmap created — ready for `/gsd:plan-phase 23`"
+stopped_at: Phase 23 context gathered
+last_updated: "2026-05-31T20:08:23.098Z"
+last_activity: 2026-05-31 — v2.0 roadmap created (Phases 23-32)
 progress:
   total_phases: 10
   completed_phases: 0
@@ -102,7 +102,7 @@ None currently. Phase 23 first plan (the live Pencil MCP audit) is the gating de
 
 ## Session Continuity
 
-Last session: 2026-05-31T00:00:00Z
-Stopped at: Roadmap created — ready to plan Phase 23
-Resume file: .planning/ROADMAP.md
+Last session: 2026-05-31T20:08:23.091Z
+Stopped at: Phase 23 context gathered
+Resume file: .planning/phases/23-audit-token-foundation/23-CONTEXT.md
 Next action: `/gsd:plan-phase 23` to plan Phase 23 (Audit + Token Foundation)
