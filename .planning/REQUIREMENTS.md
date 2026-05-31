@@ -1,208 +1,144 @@
-# Requirements: Joel Shinness Website — v1.4 Design Overhaul
+# Requirements: v2.0 Prep Crito Design File
 
-**Defined:** 2026-05-14
-**Core Value:** Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
+**Milestone:** v2.0 Prep Crito Design File
+**Last updated:** 2026-05-31
 
-**Milestone goal:** Replace the neobrutalist visual language with the Crito agency template's structure and aesthetic across the entire site, built on a fresh component library and Pencil-documented design system, while preserving lead-gen positioning and all existing content.
+This document scopes what v2.0 will deliver. Each requirement is testable, atomic, and traceable to one phase. Categories follow the FEATURES.md building-block grouping.
 
-## v1.4 Requirements
+---
 
-Requirements for this milestone. Each maps to roadmap phases.
+## Active Requirements (v2.0 Scope)
 
-### Foundation — Design System
+### Audit & Inventory
 
-- [ ] **FOUND-01**: Crito `.pen` file inspected via Pencil MCP; exact fonts, OKLCH palette, spacing, and radii extracted and recorded
-- [ ] **FOUND-02**: `design/design-system.pen` file created with extracted variables and factored reusable components
-- [ ] **FOUND-03**: `src/styles/v2/global.css` declares the full v2 token system using Tailwind v4 `@theme` with semantic, collision-safe names (no overlap with `global.css` v1 tokens)
-- [ ] **FOUND-04**: Self-hosted variable fonts installed via `@fontsource-variable/*` packages (names confirmed after Pencil inspection)
-- [ ] **FOUND-05**: `src/layouts/v2/BaseLayout.astro` created with no dark-mode FOUC script, no `localStorage.theme` code, no `#theme-toggle` element — v2 pages render light-mode only regardless of OS preference
-- [ ] **FOUND-06**: v1.3 pages and `BaseLayout.astro` continue to render unchanged during the transition (parallel libraries coexist without collision)
+- [ ] **AUDIT-01**: Live Pencil MCP audit of `design/Crito.pen` produces a versioned `.planning/research/PEN-INVENTORY.md` covering: schema version (from `get_editor_state(include_schema: true)`), guidelines (from `get_guidelines`), every top-level frame's children (from `batch_get`), all raw property values (from `search_all_unique_properties`), and current variable surface (from `get_variables`)
+- [ ] **AUDIT-02**: Every top-level page frame in the `.pen` is classified IN-SCOPE (maps to a Joel page: Homepage, Projects, Blog, FAQ, Contact, Thank-you, Design system, 404) or OUT-OF-SCOPE (Crito-only: View More, Information, Free Design Sample, etc.); only IN-SCOPE frames are reconstructed
+- [ ] **AUDIT-03**: Every section inside every IN-SCOPE page frame is catalogued in `PEN-INVENTORY.md` with status (`[FLAT]` raster image / partially editable / already factored) and reconstruction priority
 
-### Components — v2 Library
+### Token Foundation
 
-- [ ] **COMP-01**: v2 Button primitive with keyboard-accessible focus states meeting WCAG 2.2 AA (Crito visual language)
-- [ ] **COMP-02**: v2 Card primitive with documented variants matching Crito patterns
-- [ ] **COMP-03**: v2 Input primitive with accessible labels, error states, and consistent typography
-- [ ] **COMP-04**: v2 Badge primitive
-- [ ] **COMP-05**: `src/components/v2/layout/Header.astro` with 4 nav links (Blog, Projects, FAQ, Contact), "Let's Talk" CTA, sticky positioning, mobile hamburger; no theme toggle
-- [ ] **COMP-06**: `src/components/v2/layout/Footer.astro` with 2-column layout, social icons (44x44 touch targets), secondary nav; no newsletter bar
-- [ ] **COMP-07**: All interactive v2 components validated for WCAG 2.2 AA color contrast and keyboard navigation
+- [ ] **TOKEN-01**: Two-tier Pencil variable system established — **primitive tokens** (raw values: `color/primitive/orange-500`, `space/primitive/24`, `type/primitive/size-24`) and **semantic aliases** (role-based: `color/semantic/bg/accent`, `space/semantic/section-y`, `type/semantic/heading-1`); components reference semantic only, never primitives
+- [ ] **TOKEN-02**: Color palette tokens cover the Crito palette derived from the original Figma source (not eyedropped from raster) — primary accent ramp, neutral ramp, surface, text, border roles
+- [ ] **TOKEN-03**: Typography tokens cover the Crito font families, sizes, weights, and line-heights — at minimum: display, h1-h6, body, body-sm, caption, button
+- [ ] **TOKEN-04**: Spacing scale tokens cover Crito's grid (e.g. 0/4/8/12/16/24/32/48/64/96) with semantic aliases (`section-y`, `container-x`, `stack-sm/md/lg`, `inline-sm/md/lg`)
+- [ ] **TOKEN-05**: Radius tokens cover Crito's radii (likely 2-4 named values: sm / md / lg / pill)
+- [ ] **TOKEN-06**: Prose typography tokens covering content-heavy surfaces (blog/FAQ): paragraph spacing, link color + underline behavior, inline code styling, list bullet styles
+- [ ] **TOKEN-07**: Dark-mode token slots **deferred** — tokens remain single-theme for v2.0; dark mode picked up in a later milestone
+- [ ] **TOKEN-08**: A `_Tokens & Foundations` reference frame inside the `.pen` shows live swatches for every color token, type specimens for every typography token, and a spacing-scale visualization
 
-### Homepage
+### Layout Primitives
 
-- [ ] **HOME-01**: Split-layout hero replaces the bento-grid: headline + dual CTA (primary + ghost) + 1 trust stat left, Joel's portrait right
-- [ ] **HOME-02**: Hero portrait image loads with `loading="eager"` + `fetchpriority="high"` + `<link rel="preload" as="image">` to preserve LCP
-- [ ] **HOME-03**: Stats strip below hero presents key trust metrics (e.g. 15+ years, 200+ students, 3 domains)
-- [ ] **HOME-04**: Services rendered as a 3-card grid (AI, Automations, Web Apps); no inflation to 8 cards
-- [ ] **HOME-05**: Process section uses numbered grid layout (Steps 1–4 in a 2x2 grid, Step 5 as standalone CTA-adjacent block) with simple line icons (`@lucide/astro`)
-- [ ] **HOME-06**: Why-Choose-Us section added between Process and About — headline + 4 bullets (factored from existing About copy) + photo
-- [ ] **HOME-07**: About section preserved with new visual treatment; copy unchanged
-- [ ] **HOME-08**: ContactSection reskinned to 2-column layout (form left, trust signals right); all form behavior preserved
+- [ ] **LAYOUT-01**: Every reconstructed section uses Pencil's auto-layout (flex) or grid frames — no absolute-positioned children at section level
+- [ ] **LAYOUT-02**: Auto-layout padding and gap values reference spacing tokens (TOKEN-04), never raw px
 
-### Services Page (new)
+### Component Library
 
-- [ ] **SERV-01**: `/services` route created with dedicated landing page on `BaseLayoutV2`
-- [ ] **SERV-02**: 3 service offerings presented (AI, Automations, Web Apps) with longer-form descriptions than the homepage card grid
-- [ ] **SERV-03**: Page includes JSON-LD structured data appropriate for a services page and contact CTAs throughout
-- [ ] **SERV-04**: HeaderV2 navigation updated to surface /services discoverably (TBD in design: standalone link vs grouped)
+- [ ] **COMP-01**: `Primitive / Button` component with variants for purpose (primary, secondary, ghost), size (sm/md/lg), and state (default/hover/focus/disabled) — variants justified by source evidence, not invented pre-emptively
+- [ ] **COMP-02**: `Primitive / Input` component covering Crito's input style with label, helper text, and error state slots
+- [ ] **COMP-03**: `Primitive / Badge` component for small metric/label pills as they appear in Crito heroes and project cards
+- [ ] **COMP-04**: `Primitive / Icon` component with size variants (16/20/24/32) and a glyph-swap mechanism (instance swap or component property, per Pencil's slot model)
+- [ ] **COMP-05**: `Section / Header` component — Crito's top nav (logo + links + CTA)
+- [ ] **COMP-06**: `Section / Footer` component — Crito's footer (links + social + copyright)
+- [ ] **COMP-07**: `Compound / Card` component using slots for content variation (project card, blog card, service card) rather than three separate variants — verifies D-2 (Pencil slot mechanics)
+- [ ] **COMP-08**: Component library lives in `design/Crito.pen` (single-file strategy) inside `_Components / Primitives`, `_Components / Compounds`, `_Components / Sections` parent frames at the top of the canvas
+- [ ] **COMP-09**: Zero raw color hex / px values inside any component — every fill, stroke, padding, gap references a token
 
-### Projects
+### Page Reconstruction
 
-- [ ] **PROJ-01**: Project detail pages (`/projects/[slug]`) migrated to `BaseLayoutV2` with Problem → Solution → Results → Testimonial narrative preserved
-- [ ] **PROJ-02**: Results displayed as a stat-card strip (large numerals) replacing the v1.3 neobrutalist bordered metric boxes
-- [ ] **PROJ-03**: Inline CTA strip ("Ready to solve a similar problem? Let's talk →") rendered at the bottom of every case study
-- [ ] **PROJ-04**: Projects index (`/projects`) migrated; ProjectCard reveals result metric overlay on hover
-- [ ] **PROJ-05**: `featured` boolean field added to project schema; existing projects.json content otherwise unchanged
-- [ ] **PROJ-06**: All project images use `astro:assets <Image>` with explicit width/height (zero CLS)
+- [ ] **PAGE-01**: Homepage frame in `.pen` reconstructed — every flat raster section replaced with a layout-driven composition of section components instancing primitives and compounds
+- [ ] **PAGE-02**: Projects index + project detail frames reconstructed (Crito's "Projects" / "Project" frames mapped to Joel's `/projects` route family)
+- [ ] **PAGE-03**: Blog index + blog post + tag-page frames reconstructed (mapped to Joel's `/blog` route family) — section components for post header, prose body, related-posts strip, tag-filter strip
+- [ ] **PAGE-04**: FAQ frame reconstructed (FAQ accordion section, CTA section)
+- [ ] **PAGE-05**: Contact frame reconstructed including the 8-field lead-qualification form using `Primitive / Input` instances
+- [ ] **PAGE-06**: Thank-you frame reconstructed (post-submission message + Calendly placeholder section)
+- [ ] **PAGE-07**: Design-system reference frame reconstructed (token gallery, component gallery for the `/design-system` route)
+- [ ] **PAGE-08**: 404 frame reconstructed (helpful navigation back to home + key pages)
+- [ ] **PAGE-09**: All reconstruction is **desktop-only** for v2.0 — mobile breakpoint reconstruction deferred to a later milestone
+- [ ] **PAGE-10**: Every IN-SCOPE page frame ends in zero `[FLAT]` status markers in the `_Inventory` frame
+- [ ] **PAGE-11**: Original raster nodes are removed (or kept hidden/locked as archival reference) only after the replacement composition has been visually verified to match
 
-### Blog
+### Validation
 
-- [ ] **BLOG-01**: Blog post layout (`/blog/[slug]`) migrated to `BaseLayoutV2`; `.prose` wrapper class preserved so all MDX prose styles render
-- [ ] **BLOG-02**: Astro Expressive Code blocks render correctly (syntax highlighting, copy button) on migrated post layout
-- [ ] **BLOG-03**: Sticky TOC continues to function on blog posts (ancestor `overflow` audit performed)
-- [ ] **BLOG-04**: Blog index (`/blog`) migrated to `BaseLayoutV2`
-- [ ] **BLOG-05**: Blog tag pages (`/blog/tags/[tag]`) migrated to `BaseLayoutV2`
-- [ ] **BLOG-06**: Blog post pages display a sidebar with related posts derived statically from content collections
-- [ ] **BLOG-07**: Blog post pages include share buttons (LinkedIn + copy-URL)
+- [ ] **VALID-01**: Each reconstructed section carries an explicit fidelity label — `EXACT` (pixel-faithful), `APPROXIMATE` (visually close, gaps documented), or `STUB` (placeholder, full reconstruction deferred)
+- [ ] **VALID-02**: Every reconstructed section has a side-by-side calibration artifact — `get_screenshot` of the reconstructed frame next to the matching raster in `design/images/` — saved to `.planning/ui-reviews/v2.0/`
+- [ ] **VALID-03**: Gaps the source doesn't reveal are **declared as OPEN flags** (Pencil notes / inventory entries), never silently filled with personal style choices
+- [ ] **VALID-04**: Milestone-close fidelity sweep: `search_all_unique_properties` across the full `.pen` returns zero raw color hex / px values inside components or sections (only tokens are referenced)
+- [ ] **VALID-05**: Milestone-close archival: `export_nodes({ format: "png" })` produces a PNG per reconstructed IN-SCOPE page frame, saved to `.planning/research/exports/v2.0/`
+- [ ] **VALID-06**: Handoff doc `.planning/research/v2.0-HANDOFF.md` describes how the reconstructed `.pen` is organized for the next milestone's code-side roadmapper (token namespaces, component locations, slot conventions)
 
-### Standalone Pages
+---
 
-- [ ] **LEAF-01**: `/faq` migrated to `BaseLayoutV2`; FAQPage JSON-LD schema preserved; CTA block added at bottom
-- [ ] **LEAF-02**: `/thank-you` migrated to `BaseLayoutV2`
-- [ ] **LEAF-03**: `/404` migrated to `BaseLayoutV2` with helpful navigation back to homepage and key pages
-- [ ] **LEAF-04**: `/design-system` page rebuilt to document all v2 components with live demos; `/design-system.json` endpoint values updated to v2 tokens
+## Future Requirements (deferred to later milestones)
 
-### Contact Flow
+- [ ] Dark-mode token slots and semantic dark variants (deferred per TOKEN-07)
+- [ ] Mobile-breakpoint frames per section (deferred per PAGE-09)
+- [ ] Code-side v2 component library implementing the `.pen` primitives (next milestone)
+- [ ] Page-by-page code migration from v1.3 to v2 layout (later milestones)
+- [ ] Token sync pipeline from `.pen` variables to CSS/Tailwind (later — code-side concern)
+- [ ] WCAG 2.2 AA validation across migrated pages (code milestone)
+- [ ] Lighthouse 90+ across all categories on migrated pages (code milestone)
 
-- [ ] **CONT-01**: ContactSection visually reskinned to Crito 2-column pattern with trust micro-copy near submit
-- [ ] **CONT-02**: All `hp-*` DOM IDs preserved OR renamed atomically with JavaScript handler updates in a single commit
-- [ ] **CONT-03**: n8n webhook integration (`PUBLIC_N8N_WEBHOOK_URL`) verified working post-migration; payload filtering preserved
-- [ ] **CONT-04**: Successful submission still redirects to `/thank-you`
-- [ ] **CONT-05**: Playwright e2e test verifies form submission → /thank-you redirect; this test is a mandatory merge gate for the contact reskin
+---
 
-### Cleanup + Quality
+## Out of Scope (explicit exclusions)
 
-- [ ] **QUAL-01**: v1.3 components in `src/components/ui/` and `src/components/layout/` deleted after all pages migrated
-- [ ] **QUAL-02**: `BaseLayout.astro` (v1) deleted; `src/styles/global.css` (v1) deleted; `v2.css` renamed to `global.css`
-- [ ] **QUAL-03**: All Playwright test selectors audited and migrated to ARIA roles — no remaining `#theme-toggle`, `.btn-turquoise`, or other v1-only selectors
-- [ ] **QUAL-04**: Zero axe-core violations across all pages (WCAG 2.2 AA)
-- [ ] **QUAL-05**: Lighthouse CI passes 90+ thresholds across Performance, Accessibility, Best Practices, SEO on every page
-- [ ] **QUAL-06**: CLAUDE.md updated to document the new v2 design system (component library location, token system, design system page reference)
-- [ ] **QUAL-07**: SEO audit confirms `<head>` slot inventory unchanged — `Article` schema on blog posts, `FAQPage` on /faq, canonical URLs, sitemap, robots.txt all preserved
+- **Any code changes** — `src/`, `tests/`, `package.json`, and other code paths are untouched in v2.0. Pages continue to render on v1.3 components throughout.
+- **Reconstructing Crito frames Joel doesn't adopt** (View More, Information, Free Design Sample, Crito-only secondary pages) — AUDIT-02 explicitly filters these out
+- **Crito's page architecture / IA** — Joel's existing page set is retained; v2.0 is about visual/component vocabulary, not site map
+- **Dark mode** — explicitly deferred (PROJECT.md + TOKEN-07)
+- **Mobile breakpoint reconstructions** — desktop only for v2.0 (PAGE-09)
+- **Prototyping flows / interactive states / hover animations beyond static variant states** — downstream consumer is Astro code, not a clickable prototype
+- **Atomic-design taxonomy (atoms/molecules/organisms)** — the primitive/compound/section grouping is sufficient at ~10 components
+- **Component variants for every legitimate-looking state** — variants are added on demand as recreated sections need them, never pre-emptively
+- **Reconstructing the Alliatus `.fig` file in `design/`** — Crito is the reference, not Alliatus
+- **Custom illustration / asset recreation** — Crito photos and decorative illustrations stay as image references; v2.0 does not recreate them in vector
+- **Token sync to code / CSS variable export pipeline** — code-side concern handled in next milestone
+- **Editing copy or projects.json content** — content untouched in v2.0
 
-## v1.5+ Requirements
+---
 
-Deferred to future releases. Tracked but not in current roadmap.
+## Traceability (Requirement → Phase)
 
-### About Page
-
-- **ABOUT-01**: Dedicated `/about` page with bio, photo, credentials, manifesto, social proof
-- **ABOUT-02**: Homepage About section either kept or condensed if /about ships
-
-### Dark Mode
-
-- **DARK-01**: Dark mode design language defined for the v2 system
-- **DARK-02**: Dark mode tokens added alongside light tokens in `global.css`
-- **DARK-03**: Dark mode toggle in HeaderV2 + FOUC-prevention script
-
-### Content
-
-- **CNT-01**: Real project screenshots replace placeholder SVGs in projects.json
-- **CNT-02**: Expanded project dataset (5–10 projects) for credibility
-- **CNT-03**: Testimonials section with real client quotes
-- **CNT-04**: Newsletter signup integration
-
-## Out of Scope
-
-Explicitly excluded from v1.4. Reasons documented to prevent scope creep.
-
-| Feature | Reason |
-|---------|--------|
-| Dark mode | Deferred — build light first; revisit after the new design lands |
-| Editing copy, projects.json data, MDX posts | v1.4 is visual-only; content is carried over unchanged |
-| /about page | Stretch goal moved to v1.5; v1.4 already covers 9 pages |
-| Team members section | Joel is a solo consultant; fabricated team grid is dishonest |
-| Utility bar above nav | Team-agency signal; wrong for solo consultant |
-| 4-column footer | Sized for an agency; 2-column is correctly sized |
-| Newsletter bar above footer | No newsletter configured; false promise if shipped without backend |
-| 8-cell services catalog | Joel has 3 services; 8 implies capabilities he doesn't offer |
-| Auto-rotating testimonial carousel | Dark pattern; WCAG 1.4.13 risk |
-| Stock photography | Destroys trust for a solo consultant; personal relationship is the product |
-| Multi-CTA clusters (3+ buttons per section) | Decision fatigue; one primary CTA per section |
-| Over-animated hero entrance | ≤1 hero animation, ≤400ms; Crito-style clean entrance |
-| Astro experimental Fonts API | Stable only in Astro 6.0 (requires Node 22 upgrade); too risky for 100% Lighthouse site |
-| Motion / GSAP / AOS libraries | JS weight conflicts with Lighthouse performance budget; CSS-only animation strategy |
-| `@astrojs/react` | Adds React runtime to a zero-framework static site |
-| `@tailwindcss/typography` | Generates opinionated defaults that conflict with agency aesthetics |
-| Neobrutalist palette / isometric SVGs / Bricolage Grotesque + DM Sans / shadow-to-glow dark mode | Explicitly being replaced by v1.4 |
-| Booking/calendar integration, CMS backend, pricing pages | Already out of scope at the project level |
-
-## Traceability
-
-Which phases cover which requirements. Updated during roadmap creation.
+Filled in by the roadmapper after phase structure is approved.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FOUND-01 | Phase 23 | Pending |
-| FOUND-02 | Phase 23 | Pending |
-| FOUND-03 | Phase 23 | Pending |
-| FOUND-04 | Phase 23 | Pending |
-| FOUND-05 | Phase 23 | Pending |
-| FOUND-06 | Phase 23 | Pending |
-| COMP-01 | Phase 24 | Pending |
-| COMP-02 | Phase 24 | Pending |
-| COMP-03 | Phase 24 | Pending |
-| COMP-04 | Phase 24 | Pending |
-| COMP-05 | Phase 23 | Pending |
-| COMP-06 | Phase 23 | Pending |
-| COMP-07 | Phase 24 | Pending |
-| HOME-01 | Phase 29 | Pending |
-| HOME-02 | Phase 29 | Pending |
-| HOME-03 | Phase 29 | Pending |
-| HOME-04 | Phase 29 | Pending |
-| HOME-05 | Phase 29 | Pending |
-| HOME-06 | Phase 29 | Pending |
-| HOME-07 | Phase 29 | Pending |
-| HOME-08 | Phase 29 | Pending |
-| SERV-01 | Phase 27 | Pending |
-| SERV-02 | Phase 27 | Pending |
-| SERV-03 | Phase 27 | Pending |
-| SERV-04 | Phase 27 | Pending |
-| PROJ-01 | Phase 27 | Pending |
-| PROJ-02 | Phase 27 | Pending |
-| PROJ-03 | Phase 27 | Pending |
-| PROJ-04 | Phase 27 | Pending |
-| PROJ-05 | Phase 27 | Pending |
-| PROJ-06 | Phase 27 | Pending |
-| BLOG-01 | Phase 26 | Pending |
-| BLOG-02 | Phase 26 | Pending |
-| BLOG-03 | Phase 26 | Pending |
-| BLOG-04 | Phase 26 | Pending |
-| BLOG-05 | Phase 26 | Pending |
-| BLOG-06 | Phase 26 | Pending |
-| BLOG-07 | Phase 26 | Pending |
-| LEAF-01 | Phase 25 | Pending |
-| LEAF-02 | Phase 25 | Pending |
-| LEAF-03 | Phase 25 | Pending |
-| LEAF-04 | Phase 24 | Pending |
-| CONT-01 | Phase 28 | Pending |
-| CONT-02 | Phase 28 | Pending |
-| CONT-03 | Phase 28 | Pending |
-| CONT-04 | Phase 28 | Pending |
-| CONT-05 | Phase 28 | Pending |
-| QUAL-01 | Phase 30 | Pending |
-| QUAL-02 | Phase 30 | Pending |
-| QUAL-03 | Phase 30 | Pending |
-| QUAL-04 | Phase 30 | Pending |
-| QUAL-05 | Phase 30 | Pending |
-| QUAL-06 | Phase 30 | Pending |
-| QUAL-07 | Phase 30 | Pending |
-
-**Coverage:**
-- v1.4 requirements: 54 total (6 FOUND + 7 COMP + 8 HOME + 4 SERV + 6 PROJ + 7 BLOG + 4 LEAF + 5 CONT + 7 QUAL)
-- Mapped to phases: 54 ✓
-- Unmapped: 0 ✓
-
----
-*Requirements defined: 2026-05-14*
-*Last updated: 2026-05-14 — traceability table filled after roadmap creation*
+| AUDIT-01 | Phase 23 | Pending |
+| AUDIT-02 | Phase 23 | Pending |
+| AUDIT-03 | Phase 23 | Pending |
+| TOKEN-01 | Phase 23 | Pending |
+| TOKEN-02 | Phase 23 | Pending |
+| TOKEN-03 | Phase 23 | Pending |
+| TOKEN-04 | Phase 23 | Pending |
+| TOKEN-05 | Phase 23 | Pending |
+| TOKEN-06 | Phase 23 | Pending |
+| TOKEN-07 | Phase 23 | Pending |
+| TOKEN-08 | Phase 23 | Pending |
+| LAYOUT-01 | (set by roadmapper) | Pending |
+| LAYOUT-02 | (set by roadmapper) | Pending |
+| COMP-01 | (set by roadmapper) | Pending |
+| COMP-02 | (set by roadmapper) | Pending |
+| COMP-03 | (set by roadmapper) | Pending |
+| COMP-04 | (set by roadmapper) | Pending |
+| COMP-05 | (set by roadmapper) | Pending |
+| COMP-06 | (set by roadmapper) | Pending |
+| COMP-07 | (set by roadmapper) | Pending |
+| COMP-08 | (set by roadmapper) | Pending |
+| COMP-09 | (set by roadmapper) | Pending |
+| PAGE-01 | (set by roadmapper) | Pending |
+| PAGE-02 | (set by roadmapper) | Pending |
+| PAGE-03 | (set by roadmapper) | Pending |
+| PAGE-04 | (set by roadmapper) | Pending |
+| PAGE-05 | (set by roadmapper) | Pending |
+| PAGE-06 | (set by roadmapper) | Pending |
+| PAGE-07 | (set by roadmapper) | Pending |
+| PAGE-08 | (set by roadmapper) | Pending |
+| PAGE-09 | (set by roadmapper) | Pending |
+| PAGE-10 | (set by roadmapper) | Pending |
+| PAGE-11 | (set by roadmapper) | Pending |
+| VALID-01 | (set by roadmapper) | Pending |
+| VALID-02 | (set by roadmapper) | Pending |
+| VALID-03 | (set by roadmapper) | Pending |
+| VALID-04 | (set by roadmapper) | Pending |
+| VALID-05 | (set by roadmapper) | Pending |
+| VALID-06 | (set by roadmapper) | Pending |
