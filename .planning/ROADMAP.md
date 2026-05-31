@@ -208,19 +208,19 @@ Plans:
   4. Share buttons (LinkedIn + copy-URL) appear on blog posts and function without JavaScript errors
   5. Blog index (`/blog`) and tag pages (`/blog/tags/[tag]`) render on `BaseLayoutV2` with the existing tag-filter behavior preserved
 
-**Plans:** 4/4 plans complete
+**Plans:** TBD
 
 Plans:
 
 **Wave 1**
 
-- [x] 26-01: Migrate blog post layout (`/blog/[slug]`) to `BaseLayoutV2`; audit ancestor `overflow` for TOC; verify Expressive Code and `.prose` styles
+- [ ] 26-01: Migrate blog post layout (`/blog/[slug]`) to `BaseLayoutV2`; audit ancestor `overflow` for TOC; verify Expressive Code and `.prose` styles
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [x] 26-02: Add right sidebar with related-posts component (static, from content collection)
-- [x] 26-03: Add share buttons (LinkedIn + copy-URL) to blog post layout
-- [x] 26-04: Migrate blog index (`/blog`) and tag pages (`/blog/tags/[tag]`) to `BaseLayoutV2`; verify filter behavior
+- [ ] 26-02: Add right sidebar with related-posts component (static, from content collection)
+- [ ] 26-03: Add share buttons (LinkedIn + copy-URL) to blog post layout
+- [ ] 26-04: Migrate blog index (`/blog`) and tag pages (`/blog/tags/[tag]`) to `BaseLayoutV2`; verify filter behavior
 
 ---
 
