@@ -17,10 +17,10 @@ This document scopes what v2.0 will deliver. Each requirement is testable, atomi
 
 ### Token Foundation
 
-- [ ] **TOKEN-01**: Two-tier Pencil variable system established — **primitive tokens** (raw values: `color/primitive/orange-500`, `space/primitive/24`, `type/primitive/size-24`) and **semantic aliases** (role-based: `color/semantic/bg/accent`, `space/semantic/section-y`, `type/semantic/heading-1`); components reference semantic only, never primitives
+- [ ] **TOKEN-01**: Two-tier Pencil variable system established — **primitive tokens** (raw values: `color-primitive-orange-500`, `space-primitive-24`, `type-primitive-size-24`) and **semantic aliases** (role-based: `color-semantic-bg-accent`, `space-semantic-section-y`, `type-semantic-heading-1`); components reference semantic only, never primitives. Naming uses flat-dash convention (locked by Phase 23 CONTEXT.md D-12).
 - [ ] **TOKEN-02**: Color palette tokens cover the Crito palette derived from the original Figma source (not eyedropped from raster) — primary accent ramp, neutral ramp, surface, text, border roles
 - [ ] **TOKEN-03**: Typography tokens cover the Crito font families, sizes, weights, and line-heights — at minimum: display, h1-h6, body, body-sm, caption, button
-- [ ] **TOKEN-04**: Spacing scale tokens cover Crito's grid (e.g. 0/4/8/12/16/24/32/48/64/96) with semantic aliases (`section-y`, `container-x`, `stack-sm/md/lg`, `inline-sm/md/lg`)
+- [ ] **TOKEN-04**: Spacing scale tokens cover Crito's grid (e.g. 0/4/8/12/16/24/32/48/64/96) with semantic aliases (`space-semantic-section-y`, `space-semantic-container-x`, `space-semantic-stack-sm/md/lg`, `space-semantic-inline-sm/md/lg`)
 - [ ] **TOKEN-05**: Radius tokens cover Crito's radii (likely 2-4 named values: sm / md / lg / pill)
 - [ ] **TOKEN-06**: Prose typography tokens covering content-heavy surfaces (blog/FAQ): paragraph spacing, link color + underline behavior, inline code styling, list bullet styles
 - [ ] **TOKEN-07**: Dark-mode token slots **deferred** — tokens remain single-theme for v2.0; dark mode picked up in a later milestone
