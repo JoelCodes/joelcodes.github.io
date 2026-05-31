@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Prep Crito Design File
-status: "Roadmap created — ready for `/gsd:plan-phase 23`"
-stopped_at: Phase 23 context gathered
-last_updated: "2026-05-31T20:08:23.098Z"
-last_activity: 2026-05-31 — v2.0 roadmap created (Phases 23-32)
+status: paused — Pencil MCP unavailable; see 23-PAUSE-NOTE.md
+stopped_at: Phase 23 execution paused (Pencil MCP unreachable; no commits)
+last_updated: "2026-05-31T20:55:00.000Z"
+last_activity: 2026-05-31 — Phase 23 paused before Plan 23-01 Task 1 (Pencil MCP blocker)
 progress:
   total_phases: 10
   completed_phases: 0
-  total_plans: 0
+  total_plans: 5
   completed_plans: 0
   percent: 0
 ---
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-31)
 
 **Core value:** Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
-**Current focus:** v2.0 Prep Crito Design File — reconstruct the .pen file before any code work
+**Current focus:** Phase 23 — audit-token-foundation
 
 ## Current Position
 
-Phase: Not started (Phase 23 ready to plan)
-Plan: —
-Status: Roadmap created — ready for `/gsd:plan-phase 23`
-Last activity: 2026-05-31 — v2.0 roadmap created (Phases 23-32)
+Phase: 23 (audit-token-foundation) — PAUSED (Pencil MCP unavailable)
+Plan: 1 of 5 (not started — no commits)
+Status: Paused before Plan 23-01 Task 1; resume after Pencil MCP setup (see 23-PAUSE-NOTE.md)
+Last activity: 2026-05-31 — Phase 23 paused before Plan 23-01 Task 1 (Pencil MCP blocker)
 
 Progress: [░░░░░░░░░░] 0% (v2.0 — 0/10 phases)
 
