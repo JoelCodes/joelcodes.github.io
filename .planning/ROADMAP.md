@@ -134,15 +134,15 @@ See `.planning/MILESTONES.md` "v1.4 Design Overhaul (Abandoned)" entry for the f
   4. Every token value is traceable to source evidence: color tokens derive from the Crito Figma source (or its published documentation) rather than from JPG eyedropping; spacing/typography values come from the original `.fig` or from `search_all_unique_properties` over already-editable nodes in the `.pen`
   5. Page frames in `design/Crito.pen` are unchanged — the audit and token work introduce no visual mutation to any IN-SCOPE page frame
 
-**Plans**: TBD
+**Plans:** 5 plans
 
 Plans:
 
-- [ ] 23-01: Live Pencil MCP audit — `get_editor_state(include_schema: true)` → `get_guidelines({ topic: "design-system" })` and `get_guidelines({ topic: "landing-page" })` → `batch_get` across all top-level frames → `search_all_unique_properties` → `get_variables({})`; write `.planning/research/PEN-INVENTORY.md` with every frame catalogued and classified
-- [ ] 23-02: Resolve the dark-mode token-slot question (T7 conflict from research) with the user — decision: encode `@light,@dark` now with dark mirroring light, or defer dark slots entirely; record decision in PEN-INVENTORY.md
-- [ ] 23-03: Write primitive tokens (color ramp, neutral ramp, spacing scale, radii, type primitives) via `set_variables`; verify via `get_variables({})`
-- [ ] 23-04: Write semantic aliases (`color/semantic/*`, `space/semantic/*`, `type/semantic/*` including prose styles for blog/FAQ) via `set_variables`; verify
-- [ ] 23-05: Build the `_Tokens & Foundations` reference frame at the top of canvas (color swatches, type specimens, spacing-scale visualization) via `batch_design`; `get_screenshot` for archival
+- [ ] 23-01-PLAN.md — Live Pencil MCP audit + baseline screenshots: `get_editor_state(include_schema: true)` → `get_guidelines` → `batch_get` → `search_all_unique_properties` → `get_variables({})`; write `.planning/research/PEN-INVENTORY.md` with every frame catalogued, classified, and coverage-checkpoint PASS/PAUSE gate
+- [ ] 23-02-PLAN.md — Document the dark-mode omission rationale in PEN-INVENTORY.md (collapsed to doc-only per CONTEXT D-01: dark slots omitted entirely for v2.0)
+- [ ] 23-03-PLAN.md — Write primitive tokens (color / spacing / typography / radii) via `set_variables` with probe-first pattern; verify via `get_variables({})`; log source-evidence per token
+- [ ] 23-04-PLAN.md — Write semantic aliases (`color-semantic-*`, `space-semantic-*`, `type-semantic-*` including prose styles for blog/FAQ, `radius-semantic-*`) via `set_variables`; probe-first to resolve aliasing strategy
+- [ ] 23-05-PLAN.md — Build `_Tokens & Foundations` reference frame via `batch_design`; archive `get_screenshot` to `.planning/research/exports/v2.0/tokens-foundations-23.png` (D-19); capture end-of-phase Crito frame screenshots for VAL-23-05 zero-mutation diff
 
 ---
 
@@ -373,7 +373,7 @@ Phases execute in numeric order: 1 → 2 → ... → 22 → 23 → 24 → 25 →
 | 20. Contact Form Enhancement | v1.3 | 3/3 | Complete | 2026-02-11 |
 | 21. Navigation Cleanup | v1.3 | 1/1 | Complete | 2026-02-10 |
 | 22. Footer Enhancement | v1.3 | 1/1 | Complete | 2026-02-11 |
-| 23. Audit + Token Foundation | v2.0 | 0/TBD | Not started | - |
+| 23. Audit + Token Foundation | v2.0 | 0/5 | Not started | - |
 | 24. Layout Primitives + Primitive Components | v2.0 | 0/TBD | Not started | - |
 | 25. Section + Compound Components | v2.0 | 0/TBD | Not started | - |
 | 26. FAQ + 404 Reconstruction | v2.0 | 0/TBD | Not started | - |
