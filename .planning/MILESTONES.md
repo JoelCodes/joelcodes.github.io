@@ -117,3 +117,22 @@
 
 ---
 
+
+## v1.4 Design Overhaul (Abandoned: 2026-05-31)
+
+**Status:** Abandoned — both attempted foundation phases reverted; no code or design artifacts shipped.
+
+**What was tried:**
+- Phase 23 (Design System Foundation): v2 token system in `src/styles/v2/global.css`, self-hosted variable fonts (Plus Jakarta Sans + Inter), BaseLayoutV2, v2 Header/Footer/MobileNav, seed `design/design-system.pen`, token-collision guard. **Reverted** via `revert(23)` on 2026-05-31 (21 commits undone, `5accd46`).
+- Phase 24 (v2 Primitive Library + Design System Page): Button/Card/Input/Badge primitives, rebuilt `/design-system` page on BaseLayoutV2. **Reverted** via `revert(24)` on 2026-05-31 (file-restore strategy after reverse-revert hit irreconcilable conflicts, `7f53a1c`).
+- Phase 25 (Leaf Page Migrations): `/faq`, `/thank-you`, `/404` migrated to BaseLayoutV2. **Reverted** on 2026-05-31 (`abd140d`).
+
+**Why abandoned:** Implementations drifted from the intended Crito design. Root cause: the Crito `.pen` file is mostly flat raster exports (from Figma → Pencil conversion), so the design system phase had to make best-guess decisions on typography, spacing, and component structure that ended up generic rather than capturing the design's character.
+
+**Resolution:** Replaced by **v2.0 Prep Crito Design File** — a Pencil-MCP-centric milestone that reconstructs the `.pen` file itself (recreating flat sections as editable components with proper tokens) before any code work resumes.
+
+**Phase numbers (23-30) returned to pool** — v2.0 reuses Phase 23 onward since nothing v1.4 actually shipped.
+
+---
+
+

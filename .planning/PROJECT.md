@@ -4,32 +4,31 @@
 
 A lead-generation focused portfolio website for Joel Shinness targeting small business clients. The site communicates expertise in web apps, automation, and AI development through distinctive neobrutalist design with isometric illustrations, outcome-focused messaging, and clear calls to action.
 
-**Current state:** v1.3 shipped. v1.4 Design Overhaul in planning — full visual refresh adopting the Crito agency template structure on a new component library.
+**Current state:** v1.3 shipped. v1.4 Design Overhaul **abandoned** after both attempted foundation phases (23 and 24) were reverted — the .pen file's mostly-flat raster sections forced "best guesses" in code that came out generic and lost the design's vibe. v2.0 starts fresh by reconstructing the .pen file itself before any code work.
 
 ## Core Value
 
 Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
 
-## Current Milestone: v1.4 Design Overhaul
+## Current Milestone: v2.0 Prep Crito Design File
 
-**Goal:** Replace the neobrutalist visual language with the Crito agency template's structure and aesthetic across the entire site, built on a fresh component library and Pencil-documented design system, while preserving lead-gen positioning and all existing content.
+**Goal:** Transform the Crito `.pen` file from mostly-flat raster exports into a high-fidelity, fully factored design source — every page section recreated as editable Pencil components with proper tokens — so downstream code milestones can build pages that actually match the design vibe instead of guessing from flat images.
 
-**Reference design:** `design/Consulting & Agency Website Template I Crito (Community).pen` (converted from Figma; inspected via the Pencil MCP).
+**Reference design:** `design/Consulting & Agency Website Template I Crito (Community).pen` (converted from Figma; most page sections are baked-in raster images rather than editable components).
 
 **Target outcomes:**
-- New Pencil-documented design system (.pen file) defining tokens, typography, and reusable components factored from the Crito reference
-- New code component library built alongside v1.3 components (`src/components/v2/` or similar namespace), enabling per-page migration without breaking existing pages
-- Every page refactored onto the new library: Homepage, Projects (index + detail), Blog (index + post + tag), FAQ, Contact, Thank-you, Design system reference page, 404
-- v1.3 design system components deleted after all pages migrate
-- Lead-gen contact flow (8-field n8n webhook form + /thank-you redirect) preserved with reskinned visual presentation
-- WCAG 2.2 AA + Lighthouse 90+ thresholds maintained across all refactored pages
+- Audit of the current `.pen` file: catalogue every page section as flat-image vs. already-editable
+- Each flat section recreated as editable Pencil components (typography styles, color tokens, spacing, layout structure visible and editable)
+- Token foundation defined inside the `.pen` (colors, typography, spacing, radii) and consumed by the recreated components
+- Original Crito source consulted as ground truth to fill in details the flattened exports don't reveal
+- Spot-check validation that recreated sections match the original visual fidelity
 
 **Key context:**
-- Crito reference .pen contains 15 page frames but zero reusable components (Figma → Pen conversion flattened them); the v1.4 design system phase factors the components ourselves
-- Crito page structure does not map 1:1 to current site (e.g. Crito has separate Service / About Me / Information / View More pages; ours embeds About in homepage and uses Projects for service showcase) — page-structure mapping resolved during requirements
-- Build-alongside-then-swap strategy keeps existing v1.3 components functional until each page is migrated (no big-bang break)
-- Dark mode deferred — light-mode only for v1.4, revisit after the new design lands
-- Phase numbering continues from v1.3 → starts at **Phase 23**
+- v1.4 Design Overhaul abandoned: phases 23 (v2 token system + BaseLayoutV2 + v2 layout components) and 24 (v2 primitive library + design-system page) both reverted on 2026-05-31 because the implementations drifted from the intended design — root cause was the flat-image .pen forcing "best-guess" interpretations
+- "Jurassic Park" framing: reconstruct from incomplete DNA, using whatever is editable plus the original design as reference
+- v2.0 is Pencil-MCP-centric — minimal code changes; code-side migration is a future milestone built on top of this reconstructed `.pen`
+- Phase numbering continues from v1.3 → starts at **Phase 23** (v1.4 phase numbers are free since nothing shipped)
+- Dark mode still deferred — out of scope for v2.0 as well
 
 ## Requirements
 
@@ -85,50 +84,48 @@ Small business owners can understand what Joel does, trust his process, and easi
 - ✓ Zero axe-core accessibility violations across all pages — v1.3
 - ✓ 100% Lighthouse scores (Performance, Accessibility, Best Practices, SEO) — v1.3
 
-*Shipped in v1.4 (in progress):*
+*Attempted in v1.4 (abandoned, all reverted 2026-05-31):*
 
-- ✓ v2 design tokens: OKLCH palette + spacing/radii/typography in `src/styles/v2/global.css` (33 tokens) — Phase 23
-- ✓ Self-hosted variable fonts (Plus Jakarta Sans + Inter) via `@fontsource-variable/*` — Phase 23
-- ✓ v2 BaseLayout shell (light-mode-only, no FOUC, no theme toggle) — Phase 23
-- ✓ v2 Header / Footer / MobileNav layout components (focus-trapped overlay; 2-col footer; 44x44 social) — Phase 23
-- ✓ `design/design-system.pen` source of truth with factored Header + Footer + Token Reference frame — Phase 23
-- ✓ D-08 strict-no-collision invariant enforced by `tests/check-token-collision.cjs` — Phase 23
-- ✓ FOUND-06 coexistence guarantee verified (v1.3 pages render unchanged) — Phase 23
+- ✗ Phase 23 (Design System Foundation) — v2 tokens, BaseLayoutV2, v2 Header/Footer/MobileNav, design-system.pen seed, font packages. Reverted.
+- ✗ Phase 24 (v2 Primitive Library) — Button/Card/Input/Badge primitives, design-system page rebuild. Reverted.
+- *Root cause:* flat-image .pen forced best-guess code interpretations that didn't capture the design vibe. v2.0 fixes the .pen first.
 
 ### Active
 
-*v1.4 Design Overhaul scope (Phase 24 onward):*
+*v2.0 Prep Crito Design File scope (Phase 23 onward):*
 
-- [ ] v2 primitive components (Button, Card, Input, Badge) factored in design-system.pen and shipped in code — Phase 24
-- [ ] /design-system reference page rebuilt to document the v2 library — Phase 24
-- [ ] Homepage refactored to new design (Hero, Services, Process, Technology, About, Contact sections)
-- [ ] Projects index + project detail pages refactored
-- [ ] Blog index + post layout + tag pages refactored
-- [ ] FAQ page refactored
-- [ ] Contact + /thank-you pages refactored (form behavior preserved)
-- [ ] /design-system reference page rebuilt to document the new library
-- [ ] 404 page refactored
-- [ ] v1.3 design system components deleted after migration completes
-- [ ] WCAG 2.2 AA validated across all refactored pages (zero axe-core violations)
-- [ ] Lighthouse 90+ across all categories maintained
+- [ ] Inventory the Crito `.pen` — every page section catalogued as flat-image vs. editable
+- [ ] Reusable token foundation defined inside the `.pen` (colors, typography, spacing, radii)
+- [ ] Flat homepage sections recreated as editable Pencil components
+- [ ] Flat secondary-page sections (Service, About, Project, FAQ, Blog, etc.) recreated as editable components
+- [ ] Component library factored in the `.pen` — shared primitives (buttons, cards, inputs) usable across page frames
+- [ ] Spot-check validation that reconstructed sections match original visual fidelity (side-by-side with the Figma original)
 
-*Future enhancements (carry-over candidates for v1.5+):*
+*Deferred to future code milestones (will build on v2.0 .pen):*
+
+- [ ] v2 code component library (code-side primitives)
+- [ ] Page migrations (Homepage, Projects, Blog, FAQ, Contact, Thank-you, Design system, 404)
+- [ ] WCAG 2.2 AA validation across refactored pages
+- [ ] Lighthouse 90+ thresholds maintained
+
+*Future enhancements (carry-over candidates):*
 
 - [ ] Testimonials section with client quotes
 - [ ] Newsletter signup integration
 - [ ] Real project screenshots (replace placeholders)
-- [ ] Dark mode for the new design (deferred from v1.4)
+- [ ] Dark mode for the new design
 
 ### Out of Scope
 
 - Booking/calendar integration — contact form sufficient
 - Pricing information — custom work requires conversation
 - CMS backend — Joel can edit code directly
-- Dark mode redesign in v1.4 — deferred to a later milestone; light-mode only for this overhaul
-- Changing form behavior or contact flow — only visual presentation reskinned in v1.4
-- Editing copy or projects.json content — content carried over unchanged in v1.4
+- Code changes in v2.0 — this milestone is `.pen`-file-only; code-side migration is a future milestone built on top of v2.0
+- Dark mode — still deferred (was deferred in v1.4; remains out of scope for v2.0)
+- Changing form behavior or contact flow — code-side behavior untouched in v2.0
+- Editing copy or projects.json content — content untouched in v2.0
 - Adopting Crito page set wholesale (View More, Information, Free Design Sample pages) — Joel's existing page architecture is retained
-- Neobrutalist palette / isometric illustrations / Bricolage Grotesque + DM Sans / shadow-to-glow dark mode — explicitly being replaced by v1.4
+- Neobrutalist palette / isometric illustrations / Bricolage Grotesque + DM Sans / shadow-to-glow dark mode — still planned to be replaced when code milestones run on top of v2.0
 
 ## Context
 
@@ -212,4 +209,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-05-14 after Phase 23 (v2 design system foundation) shipped*
+*Last updated: 2026-05-31 — v1.4 abandoned (phases 23 + 24 reverted), v2.0 "Prep Crito Design File" started*

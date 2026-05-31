@@ -1,13 +1,13 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.4
-milestone_name: Design Overhaul
-status: ready_to_plan
-stopped_at: Phases 23 and 24 undone — milestone v1.4 reset to pre-foundation state
+milestone: v2.0
+milestone_name: Prep Crito Design File
+status: planning
+stopped_at: Milestone v2.0 started — defining requirements
 last_updated: 2026-05-31T00:00:00Z
-last_activity: 2026-05-31 -- Phase 23 reverted via git-revert + manual cleanup
+last_activity: 2026-05-31 -- Milestone v2.0 started after v1.4 abandoned
 progress:
-  total_phases: 8
+  total_phases: 0
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -18,19 +18,19 @@ progress:
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-05-14)
+See: .planning/PROJECT.md (updated 2026-05-31)
 
 **Core value:** Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
-**Current focus:** Phase 23 — Design System Foundation (rebuild from scratch)
+**Current focus:** v2.0 Prep Crito Design File — reconstruct the .pen file before any code work
 
 ## Current Position
 
-Phase: 23
-Plan: Not started
-Status: Ready to plan
-Last activity: 2026-05-31
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-05-31 — Milestone v2.0 started
 
-Progress: [░░░░░░░░░░] 0% (v1.4)
+Progress: [░░░░░░░░░░] 0% (v2.0)
 
 ## Milestone History
 
@@ -40,7 +40,8 @@ Progress: [░░░░░░░░░░] 0% (v1.4)
 | v1.1 | Design Updates | 7-11 | 2026-02-10 |
 | v1.2 | Homepage Refinement | 12-16 | 2026-02-10 |
 | v1.3 | Design System & Nav Cleanup | 17-22 | 2026-02-11 |
-| v1.4 | Design Overhaul | 23-30 | — |
+| v1.4 | Design Overhaul | 23-30 | Abandoned 2026-05-31 |
+| v2.0 | Prep Crito Design File | 23+ | — |
 
 See `.planning/MILESTONES.md` for full milestone details.
 
@@ -65,14 +66,16 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 ## Accumulated Context
 
-### Key Decisions (v1.4)
+### Key Decisions (v2.0)
 
-- **Roadmap 2026-05-14**: Phase 23 is gating dependency — tokens, BaseLayoutV2, HeaderV2, FooterV2 all ship together before any page migrates
-- **Roadmap 2026-05-14**: Exact Crito font/palette values are MEDIUM confidence — Phase 23 must begin with Pencil MCP inspection; no @fontsource-variable/* packages named until inspection confirms them
-- **Roadmap 2026-05-14**: Services page (SERV-01..04) bundled into Phase 27 with Projects — card component from Phase 24 makes the new page low-effort; risk isolation preserved by ordering after Blog
-- **Roadmap 2026-05-14**: Contact reskin (Phase 28) isolated from homepage — e2e form test is a mandatory merge gate; isolating prevents form regression from homepage scope creep
-- **Undo 2026-05-31**: Phase 24 reverted via file-restore strategy — components, tests, and design-system page reset to pre-phase-24 baseline (d1b9aed^). Reason: rebuild v2 design system from scratch
-- **Undo 2026-05-31**: Phase 23 reverted via reverse-chronological git revert (21 commits) — v2 token system, BaseLayoutV2, v2 Header/Footer/MobileNav, design-system.pen, v2-smoke page, font packages all removed. Recent footer-style commit (8704170) became a no-op. Reason: rebuild v1.4 design system from scratch
+- **Milestone start 2026-05-31**: v2.0 is Pencil-MCP-centric — focus is reconstructing the Crito `.pen` file (recreating flat raster sections as editable components with proper tokens) before any code work resumes
+- **Milestone start 2026-05-31**: Phase numbering continues from 23 — v1.4 phase numbers freed up since nothing v1.4 actually shipped
+- **Lesson from v1.4 abandonment**: Building code from a flat-image .pen produces generic-looking results because typography, spacing, and component structure get guessed; v2.0 fixes the .pen first so downstream code has high-fidelity ground truth
+
+### Key Decisions (carried from v1.4 lessons)
+
+- **Roadmap 2026-05-14**: Exact Crito font/palette values are MEDIUM confidence — Pencil MCP inspection of the original Crito source is the source of truth; do not name packages or token values before inspection confirms them
+- **Roadmap 2026-05-14**: Crito reference `.pen` contains 15 page frames but originally zero reusable components (Figma → Pen conversion flattened them) — recreating them is the entire v2.0 deliverable
 
 ### Pending Todos
 
@@ -84,13 +87,11 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 ### Blockers/Concerns
 
-**Phase 23 pre-condition:**
-
-- Pencil MCP inspection of `design/Consulting & Agency Website Template I Crito (Community).pen` is required as the FIRST task of Phase 23 — do not write v2.css or install font packages before inspection completes
+None currently.
 
 ## Session Continuity
 
 Last session: 2026-05-31T00:00:00Z
-Stopped at: Phase 24 undone — ready to re-plan
-Resume file: (none — phases 23 and 24 directories removed)
-Next action: Run `/gsd:discuss-phase 23` to begin re-planning the v1.4 design system foundation
+Stopped at: Milestone v2.0 started — defining requirements
+Resume file: (none — defining requirements next)
+Next action: Complete v2.0 requirements and roadmap, then `/gsd:discuss-phase 23`
