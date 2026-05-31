@@ -249,7 +249,8 @@ Per D-10 schema. All flags raised during Plan 23-01 audit.
 | OPEN-23-06 | token | notable | No standalone Crito FAQ frame exists; CONTEXT D-15 specifies prose tokens derive from "Crito Blog frame + Crito FAQ frame only". Falls back to Blog frame (DzqTm, also flat raster — see OPEN-23-05) → effectively no Crito source for prose typography. Phase 26 will need to design prose tokens from Joel's content needs + the type scale established here, OR consult the Crito .fig per D-04. | 26 (FAQ reconstruction) |
 | OPEN-23-07 | token | minor | Spacing scale shows two parallel tracks: dominant 4-multiple ladder (`16, 24, 32, 40, 60`) and a secondary `10/20` track from Hero CTAs + Crito banner frames. Resolution: tokenize the 4-multiple ladder as the primary `space-primitive-*` scale (likely `4, 8, 12, 16, 20, 24, 32, 40, 48, 60`), keep `10` as a one-off if Hero CTA exactly requires it (or round to `12`). Decided during plan 23-03 with explicit source-evidence per token. | none |
 | OPEN-23-08 | token | minor | Sub-pixel corner-radius and shadow-blur values (`16.0556`, `24.0833`, `32.11`, `19.27`, etc.) inside the Dashboard sub-frame are Crito scale-down artifacts, not intended design intent. Round to clean integers (`16`, `24`, `32`, `20`) when tokenizing. | none |
-| OPEN-23-09 | token | minor | Three Crito-template-only fonts (`Poppins`, `Nunito`, `Chivo`) are used by OUT-OF-SCOPE frames (View More, About Me, banners, Footer). Decide during plan 23-03 whether to include them in `type-primitive-*` tokens (and let Phase 31 decide if Joel's Homepage uses Poppins for visual fidelity) or exclude them entirely. Provisional decision: include `Plus Jakarta Sans` and `Inter` as primitives; include `Chivo` if Footer copy needs it; exclude `Poppins` + `Nunito` (template-only). | 31 (Homepage rebuild) |
+| OPEN-23-09 | token | minor | Three Crito-template-only fonts (`Poppins`, `Nunito`, `Chivo`) are used by OUT-OF-SCOPE frames (View More, About Me, banners, Footer). Decide during plan 23-03 whether to include them in `type-primitive-*` tokens (and let Phase 31 decide if Joel's Homepage uses Poppins for visual fidelity) or exclude them entirely. **Resolved in plan 23-03:** included `Plus Jakarta Sans` + `Inter` as primitives; included `Chivo` (Footer-conditional, Phase 24+ may remove); excluded `Poppins` + `Nunito` entirely. | 31 (Homepage rebuild may revisit if Crito visual fidelity needs Poppins) |
+| OPEN-23-10 | token | notable | Typography size scale gap: primitive sizes from IN-SCOPE Home Page are `14, 16, 18, 48, 70` — missing intermediate h2/h3/h4 sizes (typical `24, 32, 36`). Crito's Home Page does not depict an h2/h3 hierarchy beyond the section-heading size 48 → body 16. Phase 26+ (FAQ, Blog, Service-Details reconstruction) will need intermediate sizes. Resolution: add semantic aliases in later phases that interpolate (e.g., `type-semantic-heading-2` = 36 via Crito .fig consult per D-04), OR design from scratch using Joel's content hierarchy needs. Do not invent primitives now (Pitfall 1). | 26 (FAQ + 404), 28 (Blog), 29 (Service Details) |
 
 ---
 
@@ -290,3 +291,61 @@ Coverage thresholds (per CONTEXT D-05: `N_colors ≥ 5 AND N_sizes ≥ 3 AND spa
 - Dark mode lives in a later milestone; pre-emptive slots in this one are out of scope.
 
 **Cross-reference:** CONTEXT.md D-01 (decision), D-02 (this documentation requirement), TOKEN-07 (requirement), RESEARCH.md `## State of the Art` (the reversed STACK recommendation). Per D-02, this rationale also appears as a visible note inside the `_Tokens & Foundations` reference frame built by plan 23-05.
+
+---
+
+## Tokens Written — Primitives
+
+**Written:** 2026-05-31 by plan 23-03 via `mcp__pencil__set_variables` (one probe call + one batch call; verified via `get_variables({})`).
+
+**Source label convention (per VAL-23-04):** `source: search_all_unique_properties` refers to the manual `batch_get` enumeration that substituted for the missing Pencil tool (see OPEN-23-02). Every value traces to a specific frame documented in `## Audit Findings — Unique Property Values` above. `source: Crito .fig` would be used for values pulled from the fig fallback per D-04 (none in this batch — all values came from the live Pencil audit). `source: OPEN flag` would tag any token whose value is intentionally placeholder pending downstream phase resolution (none in this batch).
+
+**Probe outcome:** Pencil `set_variables` argument shape is `{ "<token-name>": { "type": "color"|"number"|"string", "value": <hex|number|string> } }` per Pencil schema; merge-by-default (no `replace: true` flag needed). Probe token `color-primitive-amber-500 = "#fdba09"` written and verified before the batch call.
+
+**Drift sanity check (RESEARCH Pitfall 1):** 39 primitives vs ~66 distinct unique-property values in `## Audit Findings`. Drift = 0.59× — well below the ~2× cap. In fact the primitive set is *smaller* than the audit's unique-property set because OPEN-23-09 culled Crito-template-marketplace-only fonts (Poppins, Nunito) and OPEN-23-03 culled the extreme display size (300).
+
+| name | value | source | source-detail |
+|---|---|---|---|
+| color-primitive-amber-500 | `#fdba09` | search_all_unique_properties | Distinctive Crito brand color; appears as fill on 3 banner frames (Information, Free Design Sample, FULL DESIGN PREVIEW). Candidate primary brand color for Joel. |
+| color-primitive-cyan-500 | `#15bee3` | search_all_unique_properties | Home Page Hero `Logo` group Rectangle 1532 (1600×96 partner-logo strip bg). |
+| color-primitive-green-500 | `#38da71` | search_all_unique_properties | Home Page Hero primary CTA button fill (`Button/Primary/With Icon` 200×60 cornerRadius 10). |
+| color-primitive-coral-400 | `#ff928a` | search_all_unique_properties | Home Page Hero `Ellipse 476` (286×225 decorative shape behind hero headline); also `We help to grow` shape (88×88). |
+| color-primitive-red-400 | `#eb5757` | search_all_unique_properties | About Me email text (Poppins 40/600). OUT-OF-SCOPE-frame source but kept as universal error/destructive primitive. |
+| color-primitive-navy-900 | `#141f39` | search_all_unique_properties | Home Page Hero `Rectangle 1531` (1600×1246 hero bg); Testimonial section bg; Performance is the key section bg; primary text-on-light color throughout Home Page. Primary surface-dark + text-primary value. |
+| color-primitive-neutral-700 | `#52525b` | search_all_unique_properties | Home Page Footer body text (Chivo 16 / Chivo 14 copyright). Primary mid-tone neutral. |
+| color-primitive-neutral-200 | `#d4d4d8` | search_all_unique_properties | Home Page "Better security" `Line 94` stroke (1px). Border/divider candidate. |
+| color-primitive-neutral-100 | `#f2f2f7` | search_all_unique_properties | Home Page "We help to grow" Dashboard `Rectangle 8` (1156×722 light surface). |
+| color-primitive-neutral-50 | `#fafafa` | search_all_unique_properties | Home Page Footer bg, "Why will you choose" bg, "How to grow your business" bg. Primary off-white surface. |
+| color-primitive-white | `#ffffff` | search_all_unique_properties | Home Page bg, Card bgs throughout, hero/subtitle text on dark surfaces. |
+| color-primitive-black | `#000000` | search_all_unique_properties | Crito banner text (Information / Free Design Sample / FULL DESIGN PREVIEW — Poppins 300). Universal pure black. |
+| space-primitive-9 | `9` | search_all_unique_properties | Home Page Hero `Frame 1` check-icon-text group gap (CTA bullet items "No credit card", "Get 15 days free trial"). Crito-specific half-step per OPEN-23-07; kept for accurate primitive coverage. |
+| space-primitive-10 | `10` | search_all_unique_properties | Home Page Hero CTA buttons gap; Crito section banner frame gap. Crito-specific half-step per OPEN-23-07. |
+| space-primitive-16 | `16` | search_all_unique_properties | Home Page testimonial spacing (cards layout); Hero CTA frame stroke + inner gaps. Foundational 4-multiple. |
+| space-primitive-20 | `20` | search_all_unique_properties | Home Page Hero CTA `Button/Primary/With Icon` internal padding-horizontal `[16, 20]`. |
+| space-primitive-24 | `24` | search_all_unique_properties | Home Page Hero `Auto Layout Vertical` (gFfJG) gap (`My Profile` profile-text spacing). Common form-field + card-grid gap per Pencil guideline. |
+| space-primitive-32 | `32` | search_all_unique_properties | About Me `Frame 2` ("Need Custom Design?" group) gap. Common screen-section gap per Pencil guideline. |
+| space-primitive-40 | `40` | search_all_unique_properties | About Me `My Profile` profile gFfJG inner gap (40 between major child groups); `Frame 1` ("Want to Donate?") gap. |
+| space-primitive-60 | `60` | search_all_unique_properties | Home Page Hero Menu bar gap; About Me top-level frame gap; My Profile horizontal-row gap. Large section-spacing value. |
+| type-primitive-size-14 | `14` | search_all_unique_properties | Home Page Footer copyright text (Chivo 14 normal). Smallest text size in IN-SCOPE frames. |
+| type-primitive-size-16 | `16` | search_all_unique_properties | Home Page Hero menu items (Inter 16/500); Home Page CTA bullet text (Inter 16/normal); Home Page Footer "Phasellus..." body (Chivo 16/normal). Primary body size. |
+| type-primitive-size-18 | `18` | search_all_unique_properties | Home Page Hero subtitle (Inter 18/normal opacity 0.7). Sub-headline / large-body candidate. |
+| type-primitive-size-48 | `48` | search_all_unique_properties | Home Page section headings (Plus Jakarta Sans 48/700 — "Why Will You Choose", "How To Grow Your Business", "Ready To Use Our App", "We Help To Grow Your Business"). Primary section-heading size. |
+| type-primitive-size-70 | `70` | search_all_unique_properties | Home Page Hero headline "Smart-Thinking & Innovative Solution." (Plus Jakarta Sans 70/700). Display-tier size. |
+| type-primitive-weight-400 | `"400"` | search_all_unique_properties | Inter body text (`fontWeight: "normal"` → 400); Chivo body text. Stored as string per Pencil schema. |
+| type-primitive-weight-500 | `"500"` | search_all_unique_properties | Home Page Hero menu items (Inter 16/500). |
+| type-primitive-weight-700 | `"700"` | search_all_unique_properties | Home Page Plus Jakarta Sans section headings + Hero headline (all 700). |
+| type-primitive-family-display | `"Plus Jakarta Sans"` | search_all_unique_properties | Home Page section headings + Hero headline. Per OPEN-23-09: included. |
+| type-primitive-family-body | `"Inter"` | search_all_unique_properties | Home Page body text + descriptions + menu + bullets + testimonial. Primary body family. Per OPEN-23-09: included. |
+| type-primitive-family-footer | `"Chivo"` | search_all_unique_properties | Home Page Footer copyright + Footer paragraph. Per OPEN-23-09: included conditionally. Phase 24+ may decide to replace with Inter and remove this primitive — kept for now for fidelity. |
+| type-primitive-lh-tight | `1.2` | search_all_unique_properties | Home Page Hero headline (Plus Jakarta Sans 70/700). |
+| type-primitive-lh-heading | `1.4` | search_all_unique_properties | Home Page Plus Jakarta Sans section headings (`1.399999976158142` rounded). |
+| type-primitive-lh-snug | `1.5` | search_all_unique_properties | Home Page Hero menu (Inter 16/500); various 16px supporting text. |
+| type-primitive-lh-normal | `1.6` | search_all_unique_properties | Home Page Inter body text (`1.600000023841858` rounded). Default body line-height. |
+| type-primitive-lh-loose | `1.625` | search_all_unique_properties | Home Page Footer body (Chivo 16/normal). |
+| radius-primitive-10 | `10` | search_all_unique_properties | Home Page Hero CTA buttons (`Button/Primary/With Icon` 200×60); Testimonial Review 2 + Review 3 cards (416×250). |
+| radius-primitive-16 | `16` | search_all_unique_properties | Home Page "We help to grow" Dashboard internal frames (`Frame 1334`, `Frame 1341`, `Frame 32`) — sub-pixel `16.0556` rounded to `16` per OPEN-23-08. |
+| radius-primitive-24 | `24` | search_all_unique_properties | Home Page "We help to grow" Dashboard outer frame (`A65lo` 1156×722) — sub-pixel `24.0833` rounded to `24` per OPEN-23-08. |
+
+**Count summary:** 12 color + 8 space + 5 type-size + 3 type-weight + 3 type-family + 5 type-lh + 3 radius = **39 primitives**.
+
+**Zero-mutation spot-check (VAL-23-05 line 2):** Post-write `batch_get(readDepth=1)` on `MIXGf`, `ujMLJ`, `QdwxP` confirmed direct-child id sets match the baseline at `.planning/research/exports/v2.0/baseline-23/id-inventory.json` exactly. No existing Crito frame was modified by the `set_variables` call.
