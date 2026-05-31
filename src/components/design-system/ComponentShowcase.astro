@@ -1,11 +1,12 @@
 ---
 import CodeBlock from './CodeBlock.astro';
+import type { ComponentProps } from 'astro/types';
 
 interface Props {
   title: string;
   description: string;
   code: string;
-  lang?: string;
+  lang?: ComponentProps<typeof CodeBlock>['lang'];
 }
 
 const { title, description, code, lang = 'astro' } = Astro.props;

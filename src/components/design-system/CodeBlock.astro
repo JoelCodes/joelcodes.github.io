@@ -1,9 +1,10 @@
 ---
 import { Code } from 'astro:components';
+import type { ComponentProps } from 'astro/types';
 
 interface Props {
   code: string;
-  lang?: string;
+  lang?: ComponentProps<typeof Code>['lang'];
   title?: string;
 }
 
@@ -58,9 +59,9 @@ const { code, lang = 'astro', title } = Astro.props;
     const codeBlocks = document.querySelectorAll('.code-block-wrapper');
 
     codeBlocks.forEach(block => {
-      const toggleBtn = block.querySelector('.toggle-btn');
-      const copyBtn = block.querySelector('.copy-btn');
-      const codeContent = block.querySelector('.code-content');
+      const toggleBtn = block.querySelector<HTMLButtonElement>('.toggle-btn');
+      const copyBtn = block.querySelector<HTMLButtonElement>('.copy-btn');
+      const codeContent = block.querySelector<HTMLElement>('.code-content');
       const codeElement = codeContent?.querySelector('code');
 
       if (!toggleBtn || !copyBtn || !codeContent) return;
