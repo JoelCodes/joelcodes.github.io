@@ -1,534 +1,327 @@
-# Feature Landscape: v1.4 Design Overhaul
+# v2.0 FEATURES Research — Design-File Reconstruction Building Blocks
 
-**Domain:** Solo consultant lead-gen portfolio — web apps, automation, AI for small businesses
-**Researched:** 2026-05-14
-**Scope:** Visual redesign only; content, copy, form behavior, and data preserved unchanged
-
----
-
-## Context: What the Crito Template Shows
-
-From direct inspection of the Crito reference design (images 8, 12–15):
-
-**Homepage (Business Consulting variant):**
-- Clean top navigation: logo left, links center, CTA button right — no dark mode toggle, no utility links
-- Hero: large editorial headline ("We Provide Best Business Solutions"), single portrait photo right, two CTA buttons (primary + secondary "Learn More"), star rating + client count trust signal below buttons
-- Client logo strip immediately below hero — 5-6 greyscale logos
-- Social proof hook ("Less Accounting is trusted by thousands of companies") with a supporting Learn More link
-- Services grid: 4-col card grid with category label, title, description, arrow icon — no illustrations, no color variants
-- Split section: image left, value statement + 4 bullet points with icons right
-- Stats strip: 4 numbers in a row (5310 each — placeholder) — clean, typography-only
-- Why-choose-us: headline + 4 bulleted differentiators left, single editorial photo right
-- Projects/case studies: tabbed filter row, 2x2 masonry grid, "All Recent Projects" button
-- Team members: horizontal scrolling cards with name/title
-- Testimonials: 3-column card carousel with stars, quote, name
-- Latest news/blog: 3-col card strip, "Browse All" button
-- Newsletter signup bar above footer
-- Footer: 4-column layout (brand description, Company links, Help links, Resources/Links)
-
-**Services page (05_Service):**
-- Breadcrumb header with page title
-- "We Provide The Best Service For Consulting" headline + description
-- 8-card grid with category label, title, description, arrow CTA — one card highlighted yellow
-- Why-choose-us split section with photo
-- Stats strip
-- Projects grid with category tabs
-- Newsletter bar + footer
-
-**Service Details page (06_Service Details = Crito's equivalent of project/case study):**
-- Breadcrumb header
-- Split opener: photo left, "Why choose [service]?" headline + 2-para body right
-- "How We Works for Your Service" — 4-step numbered grid (Analysis, Strategy, Performance, Improvements)
-- Second split section: headline + 2 feature bullets with icons
-- 2-column content blocks with accordion-style benefit lists
-- CTA strip: "Get Business Consulting Service" + request free consultation button
-- Footer
-
-**About Me page (Crito's 04_About):**
-- Breadcrumb header
-- Split opener: image left with floating stat card overlay, headline + CTA right
-- Why-choose-us bullet list
-- Stats strip (4 numbers)
-- Full-width editorial image section
-- Team members horizontal scroll
-- Newsletter bar + footer
-
-**Blog index (07_Blog):**
-- "Latest Articles" section (3-col grid)
-- "Featured Articles" section (3-col grid)
-- "Popular Articles" section (mixed 3-col and 4-col grid)
-- Pagination at bottom
-- Newsletter bar + footer
-
-**Blog detail (08_Blog Details):**
-- Left column: article content with pullquote, tags, comments form
-- Right sidebar: search, recent posts, categories, social follow
-- Comments section with avatar + reply structure
-
-**Contact page:** Standard form page (visible in nav but not shown in inspected images)
+**Milestone:** v2.0 Prep Crito Design File
+**Researched:** 2026-05-31
+**Mode:** Ecosystem — what's the building-block landscape for factoring a flat Figma-export .pen into editable Pencil components
+**Overall confidence:** MEDIUM-HIGH (Pencil concepts verified against docs.pencil.dev; general design-system reconstruction patterns verified against current Figma/DTCG guidance; .pen-specific node-type details deferred to phase-time `get_editor_state` calls)
 
 ---
 
-## 1. Hero Section
+## Context Recap (what makes this milestone unusual)
 
-### Table Stakes
+This is **not** a green-field design system. The .pen at `design/Crito.pen` was converted from a Figma community template, and that conversion flattened most page sections into raster images. v1.4 abandoned because code was authored from those flat images and the "best guesses" came out generic. v2.0 says: don't write code yet — reconstruct the .pen itself so downstream phases have ground truth.
 
-| Feature | Why Expected | Complexity | Static-only? | Dependencies |
-|---------|--------------|------------|--------------|--------------|
-| Large editorial headline, single main CTA | Visitors form impression in 8 seconds; single CTA is conversion best practice | Low | Yes | None |
-| Readable subhead / supporting copy | Explains what Joel does and for whom | Low | Yes | None |
-| Trust signal below CTA (years, projects, reviews, or client count) | Reduces first-impression skepticism; Crito uses star rating + client count | Low | Yes | None |
-| Responsive layout (stacked on mobile) | Non-negotiable in 2026 | Low | Yes | None |
-| Neutral/warm off-white background | Crito's aesthetic; replaces yellow/turquoise | Low | Yes | New token system |
+Critical constraints that shape what counts as "table stakes" vs "anti-feature":
 
-**What the current hero does that maps to table stakes:**
-The current bento-grid with outcome tiles expresses *what* Joel delivers. The CTA tile drives to `#contact`. These structural goals carry over; only the visual execution changes.
+- **Single-site, single-consumer** — there is no second product, no shared library, no other team consuming this. Anything justified by "scale" or "multi-product reuse" is suspect.
+- **Downstream is code, not more design work** — Joel's site is the only thing this .pen feeds. Optimizing for design-team handoff (annotations, prototyping flows, multi-page navigation prototypes) is wasted effort.
+- **Reference is the original Figma Crito** — the source-of-truth for "what should this section look like" is the original Crito template (consult via Pencil MCP or the Figma community page). The flat raster in the current .pen is the *target appearance*, not the source.
+- **15 page frames, ~0 reusable components today** — per STATE.md "Crito reference .pen contains 15 page frames but originally zero reusable components." So everything is "build, don't refactor."
 
-### Differentiators
-
-| Feature | Value Proposition | Complexity | Static-only? | Dependencies |
-|---------|-------------------|------------|--------------|--------------|
-| Single authentic portrait (Joel) in hero | Consulting is a people business; photo builds personal trust faster than any copy | Low | Yes (static image) | Real headshot asset |
-| One specific trust number below CTA | "15+ years" or "20+ projects" is more credible than generic trust badges | Low | Yes | None |
-| Dual CTA pattern: primary + ghost | "Get Consulting" primary + "Learn More" ghost gives earlier-funnel visitors an escape hatch without diluting primary action | Low | Yes | None |
-
-**Recommendation:** Adopt Crito's split-hero pattern — headline + subhead + dual CTA left, editorial portrait right. Drop the bento-grid entirely; it was a v1.1 neobrutalist device, not a timeless pattern. Trust signal (star rating chip or "15+ years" stat) sits beneath the CTA pair.
-
-**Question for requirements:** Use Joel's actual selfie in the hero, or keep hero photo-free and use photo only in About section? Answer affects hero layout structure significantly.
+> **Note on .pen inspection:** Per the milestone context, the roadmapper / phase-discussion agents should call `get_editor_state(include_schema: true)` then `batch_get` on top-level frames and `snapshot_layout` to confirm exactly which frames are flat raster vs. partially editable, then `get_variables` to see whether any tokens already exist. This FEATURES doc is grounded in the planning record (PROJECT.md, STATE.md) which is consistent on the "mostly flat, zero shared components" state, but per-frame triage is a Phase 23 deliverable.
 
 ---
 
-## 2. Client Logo Strip / Social Proof Hook
+## Table Stakes
 
-### Table Stakes
+These are the building blocks the reconstructed .pen **must** have for downstream code milestones to have a chance at high-fidelity output. Each one earns its keep by preventing a known v1.4-style "best guess" failure.
 
-| Feature | Why Expected | Complexity | Static-only? | Dependencies |
-|---------|--------------|------------|--------------|--------------|
-| Trust-signal zone immediately below hero | Anchors credibility before user scrolls; Crito places client logos here | Low | Yes | Real client logos or credible alternatives |
-| Greyscale treatment | Consistent with premium agency standard; reduces visual noise | Low | Yes | None |
+### TS-1. Token foundation: color, typography, spacing, radius variables
+**What:** A defined set of Pencil `variables` (the .pen equivalent of design tokens) covering at minimum:
+- **Color** — Crito's actual palette as named tokens (primary, secondary, neutral ramp, surface, text-on-*). Verified by inspecting the original Crito source via Pencil MCP.
+- **Typography** — Font family, size, weight, line-height pairs as named text styles. At least: display, h1-h3, body, body-sm, caption.
+- **Spacing** — A spacing scale (e.g. 4/8/12/16/24/32/48/64/96) used for padding/gaps.
+- **Radius** — 2-4 named radii (sm, md, lg, pill) — Crito appears to use rounded corners consistently.
 
-### Differentiators
+**Why table stakes:** Without named tokens, every recreated component would re-encode raw color hex / px values, and downstream code would have no signal about which values are "the same thing." This was the precise root cause of v1.4's drift.
 
-| Feature | Value Proposition | Complexity | Static-only? | Dependencies |
-|---------|-------------------|------------|--------------|--------------|
-| "Trusted by" stat inline with logos | Adds weight — "15+ clients over 15 years" works even without brand logos | Low | Yes | None |
-| Outcome-stat strip as substitute | If real client logos are unavailable (likely for a solo consultant), a "15+ years / 20+ projects / 3 domains" stats strip serves the same trust function | Low | Yes | None |
+**Complexity:** Low-Medium. The set is small; the work is in *deciding the names* and inspecting the original to extract exact values.
 
-**Recommendation:** Joel likely cannot show client logos publicly (NDA, small business clients). Use an outcome-stats strip in this zone instead (format: large number + label, 3–4 stats in a row). Crito's stats strip pattern (4 numbers in a row) is the right model. This is a visual-only change — no new data needed, current About section already has 15+ years and 200+ students.
+**Dependencies:** None — this is the foundation everything else binds to.
 
-**Question for requirements:** What stats should appear? Current candidates: 15+ years experience, 200+ students/mentees, 3 service domains. Are there project completion counts or time-saved metrics available?
-
----
-
-## 3. Services / Solutions Section
-
-### Table Stakes
-
-| Feature | Why Expected | Complexity | Static-only? | Dependencies |
-|---------|--------------|------------|--------------|--------------|
-| Named service categories visible on homepage | Visitors must understand the offering without clicking away | Low | Yes | Existing content (AI, Automations, Web Apps) |
-| Brief per-service description | Scan-readable; lets prospects self-identify | Low | Yes | Existing copy |
-| Arrow or link affordance on service cards | Invites deeper exploration; Crito uses arrow icon per card | Low | Yes | None |
-
-### Differentiators
-
-| Feature | Value Proposition | Complexity | Static-only? | Dependencies |
-|---------|-------------------|------------|--------------|--------------|
-| Dedicated /services page | SEO: a /services page can rank for "[service] consultant [city]" queries a homepage section cannot; also gives social-media / email link destinations | Low | Yes (static) | None new — builds on existing Services component |
-| Category label above card title (Crito pattern: small orange label like "Our Services" above section heading) | Increases scan-ability, establishes visual hierarchy | Low | Yes | New token for label color |
-| Grid of 4+ service cards vs 3-column | Mirrors Crito's Services page (8-card grid); exposes more granularity — e.g. could split "AI" into "AI Chatbots" and "AI Research" | Med | Yes | Content decisions |
-
-**Services-page-or-embedded decision:**
-
-Keep the homepage section (table stakes — users need to see services without clicking). *Also add a /services page* for SEO and link-worthy destinations. The homepage section becomes a 3–4 card summary with "View All Services" linking to /services. Complexity: Low — it is a new static page consuming the same service data, styled with the new component library.
-
-**Important caveat for v1.4:** The /services page is a new page not currently in the site. It is in scope if the design system refactor creates the card component anyway — the page itself is trivial to assemble. Flag for requirements: is adding /services in v1.4 scope, or deferred to v1.5?
+**Verification approach:** `get_variables` on the existing .pen to see what's there today; `get_screenshot` + visual comparison of original Crito sections to nail down values.
 
 ---
 
-## 4. Process / How We Work Section
+### TS-2. Audit / inventory of every page frame (flat vs editable)
+**What:** A written catalogue (file or section in PROJECT.md / a new INVENTORY.md) listing each of the 15 page frames with:
+- Frame name
+- Sections within the frame
+- Per-section status: flat raster | partially editable | already factored
+- Priority / reconstruction order
 
-### Table Stakes
+**Why table stakes:** You cannot scope phases without knowing what's actually flat. This is also the only way to detect frames that are *already* editable and don't need reconstruction (saves work).
 
-| Feature | Why Expected | Complexity | Static-only? | Dependencies |
-|---------|--------------|------------|--------------|--------------|
-| Numbered steps (1–N) | Makes the engagement feel concrete and low-risk; standard on all consulting/agency sites | Low | Yes | Existing 5-step copy |
-| Step label + short description | Scan-readable explanation of each step | Low | Yes | Existing copy |
-| Visual connector or implied sequence | Communicates order — line, numbered circles, or vertical layout | Low | Yes | None |
+**Complexity:** Low. Mechanical — `batch_get` top-level frames, `snapshot_layout` each one, record findings.
 
-### Differentiators
-
-| Feature | Value Proposition | Complexity | Static-only? | Dependencies |
-|---------|-------------------|------------|--------------|--------------|
-| Numbered 2x2 grid (Crito's 06_Service Details pattern: Analysis 01, Strategy 02, Performance 03, Improvements 04) | More compact than a linear vertical list; feels professional rather than bullet-list-ish | Low | Yes | None |
-| Icon per step (simple line icons, not isometric) | Replaces the isometric SVGs being dropped; Crito uses simple line icons from Lucide or similar | Low | Yes | @lucide/astro (already installed) |
-| "Low-risk prototype" messaging callout | Joel's actual differentiator is the prototype-before-contract step; a subtle highlight box or accent on Step 2 communicates this visually | Low | Yes | None |
-
-**Replacing isometric SVGs:**
-Crito uses simple outlined icons (4–6px stroke, minimal detail) against a white or light-grey background circle. No illustrations. This is the correct replacement pattern — isometric CSS illustrations were a neobrutalist device. @lucide/astro is already installed; use `FileSearch`, `Lightbulb`, `FileCheck`, `Hammer`, `Handshake` or similar. The icon should be decorative support, not the visual centrepiece.
-
-**Process layout recommendation:** Adopt Crito's numbered 2x2 grid for steps 1–4, with step 5 (Handoff & Support) spanning full width or treated as a standalone CTA-adjacent block. This is more compact than the current vertical stack.
+**Dependencies:** None. Should happen first (Phase 23 candidate).
 
 ---
 
-## 5. Why-Choose-Us / Differentiators Section
+### TS-3. Layout primitives via auto-layout (Stack / Grid frames)
+**What:** Every recreated section uses Pencil's auto-layout (flex) and CSS Grid frames rather than absolute-positioned children. At minimum:
+- Vertical stacks (sections, card content)
+- Horizontal stacks (nav bars, button rows, badge rows)
+- Grid frames for card grids (project cards, blog cards, service cards)
+- Padding/gap defined via spacing tokens (TS-1)
 
-Crito's homepage has a dedicated "Reasons Why We are Best Business Consulting Agency" split section that does not have a direct equivalent in the current site. The current site embeds these points implicitly in the Hero tiles.
+**Why table stakes:** Auto-layout is what makes a component "editable" rather than a frozen arrangement. Per current Figma/Pencil guidance, "components without auto-layout break when content changes length" — and downstream code generation reads layout structure from these primitives.
 
-### Table Stakes
+**Complexity:** Medium. Conceptually simple but tedious — every section needs its hierarchy decided (which axis stacks where, which children grow vs. hug, where padding lives).
 
-| Feature | Why Expected | Complexity | Static-only? | Dependencies |
-|---------|--------------|------------|--------------|--------------|
-| Named differentiators with icons | Converts generic "about me" into scannable competitive reasons | Low | Yes | New copy bullets; existing About copy as source |
-| Image adjacent to bullet list | Crito pattern: photo right, bullets left; human element adds trust | Low | Yes | Real photo asset |
-
-### Differentiators
-
-| Feature | Value Proposition | Complexity | Static-only? | Dependencies |
-|---------|-------------------|------------|--------------|--------------|
-| Process Excellence, Listening, Plain-Language Communication, Small-Business Focus | Joel's actual differentiators as identified in his About copy — translating these into scan-worthy bullets rather than paragraphs | Low | Yes | Existing copy in About.astro |
-
-**Recommendation:** Extract the differentiator bullets from the About narrative (15+ years breadth, plain-language communication, listen-first approach, low-risk prototype) and place them in a dedicated homepage section between Process and About. Keep the About section for the full personal story + photo. This mirrors Crito's pattern without requiring new content.
+**Dependencies:** TS-1 (so gaps/padding use tokens).
 
 ---
 
-## 6. About Section (Homepage vs Dedicated Page)
+### TS-4. A small shared component library (the ~5-8 things that appear on every page)
+**What:** Define as Pencil components, not copy-paste, the elements that recur across multiple page frames:
+- **Button** — primary, secondary, ghost (variants for color + size + state)
+- **Card** — the project/blog/service card shell with slots for content
+- **Header / Nav** — top nav bar (logo + links + CTA)
+- **Footer** — bottom footer (links + social + copyright)
+- **Section wrapper** — the recurring "padded section with title" container
+- **Input / Form field** — label + input + helper (for contact form on Contact page)
+- **Badge** — small metric/label pill (used in hero, project cards)
 
-### Table Stakes
+**Why table stakes:** Without these as components, the same button gets redrawn 30 times with slightly different padding and the code can't tell which variations are intentional. Per current design-system guidance, "variants describe state, slots describe content" — a card with a slot for body content is one component, not 15 variants.
 
-| Feature | Why Expected | Complexity | Static-only? | Dependencies |
-|---------|--------------|------------|--------------|--------------|
-| Professional photo | Consulting is a people business; the face of the consultant is critical trust signal | Low | Yes | Joel's selfie (already in assets) |
-| Credibility stats (years, volume) | Social proof; current 15+/200+ stat display is correct pattern | Low | Yes | Existing data |
-| Personal narrative (brief version for homepage) | Contextualizes who Joel is for prospects who need it | Low | Yes | Existing copy |
+**Complexity:** Medium-High. Each component needs: variants for legitimate state differences (size, color), slots for content variation, auto-layout from TS-3, and token bindings from TS-1.
 
-### Differentiators for Dedicated /about Page
-
-About pages for solo consultants are reportedly the second most-visited page after the homepage. Crito has a dedicated About Me page with: opener split (image + headline + CTA), why-choose-us bullets, stats strip, full editorial image, team section.
-
-For Joel, the "team section" is irrelevant (solo). The relevant blocks are:
-
-| Content Block | Purpose | Complexity | Static-only? | Dependencies |
-|---------------|---------|------------|--------------|--------------|
-| Full portrait (not cropped thumbnail) | Warm, human; bigger than homepage treatment | Low | Yes | selfie.jpg |
-| Origin story (why Joel started this, who he helps) | Story creates empathy per research | Low | Yes | Existing paragraphs |
-| Credentials + years stat (prominent display) | Authority proof | Low | Yes | Existing data |
-| Differentiator bullets (plain language, listen-first) | Makes credentials concrete | Low | Yes | Existing copy |
-| Hobby/personality section (kayaking, music) | Approachability; differentiates from corporate consultant | Low | Yes | Existing copy |
-| CTA to contact | Closes the loop | Low | Yes | None |
-
-**About-page-or-embedded decision:**
-
-The current site embeds About in the homepage. The current decision log records this as "Good — removed nav link." For v1.4, keep the homepage About section (it's already there and working for scroll conversion) *and* consider adding a dedicated /about page for users who arrived via search or social and want deeper background. The /about page is a new page not in the current site.
-
-**Flag for requirements:** Is /about page in v1.4 scope or deferred to v1.5? Adding it is Low complexity (reuses existing copy + photo). Argument for deferring: v1.4 already has many pages to migrate; /about adds a new build on top of all the refactors. Argument for including: the Crito template explicitly has it, and the research confirms it's the second most visited page type on consultant sites. Recommend flagging as a stretch goal for v1.4.
+**Dependencies:** TS-1, TS-3. Should be built before page-level reconstruction starts because page sections will instance these.
 
 ---
 
-## 7. Case Study / Project Detail Layout
+### TS-5. Reconstructed page sections that consume tokens + components
+**What:** Every flat raster section recreated using TS-1 (tokens), TS-3 (auto-layout), and TS-4 (shared components). Recreated sections should:
+- Use color/spacing/typography tokens (no raw hex/px in section-level styles)
+- Use instances of shared components (no copy-pasted buttons/cards)
+- Match the original visually within ~95% (small spacing/font tweaks acceptable)
 
-### Table Stakes
+**Why table stakes:** This is the actual milestone deliverable. TS-1 through TS-4 exist to enable this.
 
-| Feature | Why Expected | Complexity | Static-only? | Dependencies |
-|---------|--------------|------------|--------------|--------------|
-| Problem → Solution → Results narrative flow | Prospects skip to results first (63% per research); the structure must deliver them in order | Low | Yes | Existing projects.json shape |
-| Named section headers | "The Challenge", "The Solution", "The Results" — removes ambiguity | Low | Yes | Already in [slug].astro |
-| Metrics display (large numbers) | 78% of decision-makers trust case studies with specific metrics — current results array is the right data | Low | Yes | Existing results[] in projects.json |
-| Screenshots/image gallery | Visual proof of the work | Low | Yes | Existing screenshots[] |
-| Technology stack list | Credibility signal for technical buyers | Low | Yes | Existing technologies[] |
-| Back-to-projects navigation | Standard UX | Low | Yes | Existing |
+**Complexity:** High. Bulk of the milestone work. Per-section work is conceptually similar (look at original → trace structure → assemble from primitives + components) but volume is large (~15 frames × multiple sections each).
 
-### Differentiators
-
-| Feature | Value Proposition | Complexity | Static-only? | Dependencies |
-|---------|-------------------|------------|--------------|--------------|
-| Testimonial blockquote above results (not below) | Puts the client voice next to proof; current layout buries testimonial after the results grid | Low | Yes | Existing testimonial{} in projects.json |
-| Results as a visually isolated "stat card" strip (not inside a bordered box) | Crito's projects section uses clean typographic number treatments; the current yellow-bordered results box is neobrutalist and must change | Low | Yes | New Card component |
-| Project category tag as styled chip at top | Sets context before reading; current Badge component does this | Low | Yes | Existing Badge component → new v2 chip |
-| Inline CTA strip at bottom of case study | "Ready to solve a similar problem? Let's talk →" | Low | Yes | None new |
-
-**Crito's 06_Service Details pattern adapted for case studies:**
-Crito doesn't have case studies in the traditional sense — its "Service Details" page is a service description page, not a client story. The 2x2 numbered process grid from that page is useful for the Process section (see above) but doesn't map to Joel's case study format. Joel's existing Problem→Solution→Results→Testimonial→Tech structure is *stronger* than Crito's approach for a portfolio site. Keep the narrative structure; change only the visual presentation.
+**Dependencies:** TS-1, TS-2, TS-3, TS-4.
 
 ---
 
-## 8. Projects Index Page
+### TS-6. Side-by-side visual validation against original
+**What:** For each recreated section, capture `get_screenshot` of the recreated frame and compare against the original Crito source (also via screenshot from the original .pen or the Figma community file). Validate:
+- Hero composition
+- Card layouts and spacing
+- Typography hierarchy
+- Color usage
 
-### Table Stakes
+Document any intentional deviations.
 
-| Feature | Why Expected | Complexity | Static-only? | Dependencies |
-|---------|--------------|------------|--------------|--------------|
-| Category filter tabs | Lets visitors self-select by service type; current implementation works | Low | Yes | Existing filter JS |
-| Card grid (2 or 3 columns) | Standard portfolio layout | Low | Yes | Existing ProjectCard component → new v2 |
-| Card: thumbnail, title, category chip, teaser | Scan-readable; existing shape is correct | Low | Yes | Existing |
-| Empty-state message | Current implementation handles "no projects yet" case | Low | Yes | Existing |
+**Why table stakes:** The whole point of v2.0 is "downstream code has ground truth." If recreated sections silently drift from the original, the milestone solves nothing.
 
-### Differentiators
+**Complexity:** Low (per section). Use Pencil MCP's `get_screenshot` + the original. Could be done as a check at the end of each reconstruction phase.
 
-| Feature | Value Proposition | Complexity | Static-only? | Dependencies |
-|---------|-------------------|------------|--------------|--------------|
-| Featured/highlight card (larger, top of grid) | Draws attention to Joel's best case study first | Med | Yes | Requires knowing which project to feature; projects.json would need a `featured` field |
-| Project card hover state showing result metric | "85% time reduction →" as overlay on hover | Low | Yes | New CSS only |
+**Dependencies:** Each TS-5 deliverable.
 
 ---
 
-## 9. Blog Index Page
+## Differentiators
 
-### Table Stakes
+These would meaningfully improve downstream code fidelity but aren't strictly required to ship v2.0. Worth doing if Phase budget allows; safe to defer otherwise.
 
-| Feature | Why Expected | Complexity | Static-only? | Dependencies |
-|---------|--------------|------------|--------------|--------------|
-| Category/tag filter | Currently implemented with filter buttons | Low | Yes | Existing |
-| Reading time per post | Currently calculated via reading-time-estimator | Low | Yes | Existing |
-| 3-col card grid | Standard; current implementation | Low | Yes | Existing |
-| Featured image per card | Current BlogCard uses featuredImage | Low | Yes | Existing |
-| Pagination or load-more | Current "Load More" button handles this | Low | Yes | Existing JS |
+### D-1. Token tiering (primitive → semantic)
+**What:** Two layers of tokens instead of one. Primitives like `color-yellow-500` defined once, semantic tokens like `color-bg-cta` referencing the primitive. Downstream code can mirror the same structure.
 
-### Crito Blog Pattern (from image-import-14)
+**Why differentiator:** Industry standard (W3C DTCG, current Figma practice). Makes future theme changes mechanical — change a primitive once, semantic tokens follow. Per DTCG: "Three tiers is the most common structure: primitive, semantic, and component" — but two tiers is the meaningful jump from zero.
 
-Crito's blog index groups posts into **Latest Articles**, **Featured Articles**, and **Popular Articles** sections — three separate labeled groups rather than one filtered grid. Each group is a 3-col card row. Cards show: date stamp with colored background, category label, title, short description.
+**Complexity:** Low-Medium (additive on top of TS-1).
 
-| Feature | Value Proposition | Complexity | Static-only? | Dependencies |
-|---------|-------------------|------------|--------------|--------------|
-| Section grouping (Latest / Featured) instead of flat tag-filtered grid | Gives editorial structure; "Featured" surfacing is a editorial decision, not algorithmic | Med | Yes | Requires `featured` boolean in content schema |
-| Date stamp chip on card image | Crito pattern: colored overlay chip top-left of card image with day + abbreviated month | Low | Yes | New BlogCard styling |
-| Category label below date | Replaces the neobrutalist tag chips | Low | Yes | New styling |
+**Dependencies:** TS-1.
 
-**Recommendation on blog grouping:** The Crito multi-section approach adds editorial value but requires content decisions (which posts are "featured"?). For v1.4, simplify: Latest/All posts grid with the existing tag filter. Add a `featured` flag to the content schema as a stretch goal so a "Featured Post" hero card can be added above the grid without a layout rebuild.
-
-### Differentiators
-
-| Feature | Value Proposition | Complexity | Static-only? | Dependencies |
-|---------|-------------------|------------|--------------|--------------|
-| Author surface (photo + name) on cards | For a solo consultant, the author IS the brand; putting Joel's face on posts connects blog to personal brand | Low | Yes | Static — author data in BaseLayout or config |
-| "Subscribe" or newsletter prompt within blog index | Converts blog readers into leads; currently no capture mechanism on blog | Med | Yes (static form → webhook) | Newsletter destination (not yet configured) |
+**Skip if:** Time-constrained. A flat token set with good semantic names ("color-cta-bg" not "yellow") gets 80% of the value.
 
 ---
 
-## 10. Blog Post Detail
+### D-2. Slots-based composition for flexible components (Card, Section)
+**What:** Use Pencil slots so that a single `Card` component handles project cards, blog cards, and service cards via slotted content — rather than three Card variants. Same for `Section` (slot for content area).
 
-### Table Stakes
+**Why differentiator:** "Slots create the most impact in places where structure stays consistent but content changes frequently" — exactly Crito's card-based sections. Reduces variant explosion. Per current guidance: "Variants handle the logic (state, size, type), while Slots handle the content."
 
-| Feature | Why Expected | Complexity | Static-only? | Dependencies |
-|---------|--------------|------------|--------------|--------------|
-| Readable typography at comfortable line length | max-width ~65ch on body text | Low | Yes | New typography tokens |
-| Date, reading time, tags in byline | Standard metadata; existing blog [slug].astro has these | Low | Yes | Existing |
-| Syntax highlighting | Already implemented via astro-expressive-code | Low | Yes | Existing |
-| Sticky TOC (table of contents) | Already implemented in v1.0; check if still present | Low | Yes | Existing |
+**Complexity:** Medium. Requires understanding Pencil's slot model (verify via docs.pencil.dev and `get_editor_state` schema before relying on it).
 
-### From Crito's 08_Blog Details (image-import-13)
+**Dependencies:** TS-4.
 
-Crito shows: article left column (~65%), right sidebar (~35%) with search, recent posts, categories, social follow, comments form below article. For a static site with no server-side search or comments, most sidebar elements are irrelevant. What is relevant:
-
-| Feature | Value Proposition | Complexity | Static-only? | Dependencies |
-|---------|-------------------|------------|--------------|--------------|
-| Right sidebar with related posts | Keeps readers on site; can be static (Astro getCollection filtered by tag) | Med | Yes | Existing content collection |
-| Pullquote styling | Editorial credibility; Crito shows this in the article body | Low | Yes | MDX prose styles |
-| "Share" links (LinkedIn, copy-URL) | Easy for solo consultant content; LinkedIn is primary for B2B | Low | Yes (static JS) | None |
+**Skip if:** Pencil's slot support is immature or hard to use from MCP — fall back to variants + instance swap for cards.
 
 ---
 
-## 11. FAQ Page
+### D-3. Typography styles with prose defaults (line-height, paragraph spacing, link styles)
+**What:** Beyond TS-1's heading/body styles, define prose-level details: paragraph spacing, link color/underline, inline code styling, list bullet styles. Useful because the blog renders MDX.
 
-### Table Stakes
+**Why differentiator:** Blog and FAQ are content-heavy. Without prose tokens, downstream code rebuilds prose styles from scratch (drift risk).
 
-| Feature | Why Expected | Complexity | Static-only? | Dependencies |
-|---------|--------------|------------|--------------|--------------|
-| Accordion/disclosure pattern | Reduces page length; native HTML `<details>` already implemented | Low | Yes | Existing |
-| FAQPage JSON-LD schema | Already implemented; important for SEO rich results | Low | Yes | Existing |
-| Readable Q&A typography | Clear visual hierarchy between question and answer | Low | Yes | New tokens |
+**Complexity:** Low.
 
-### Differentiators
+**Dependencies:** TS-1.
 
-| Feature | Value Proposition | Complexity | Static-only? | Dependencies |
-|---------|-------------------|------------|--------------|--------------|
-| CTA at bottom of FAQ ("Still have questions? Let's talk.") | Converts FAQ visitors directly into leads; not currently present | Low | Yes | None new |
-| Grouping FAQs by topic | If FAQ grows beyond 5 questions, grouped sections (Process, Pricing, Tech) aid scan-ability | Low | Yes | Content decision |
+**Skip if:** Blog/FAQ frames in the Crito .pen don't include rich prose examples — defer to a later phase that adds them.
 
 ---
 
-## 12. Contact Section / Page
+### D-4. Iconography token / icon component
+**What:** Define an `Icon` component with size variants (16/20/24/32) and a way to swap the underlying glyph. Document the icon style (line weight, corner style) so downstream code picks the right Lucide / Heroicons / custom set.
 
-### Table Stakes
+**Why differentiator:** Icons appear in nav, buttons, cards, footer. Without an Icon primitive, sizing/spacing drifts.
 
-| Feature | Why Expected | Complexity | Static-only? | Dependencies |
-|---------|--------------|------------|--------------|--------------|
-| Name, email, message at minimum | Standard form fields | Low | Yes (webhook) | Existing n8n webhook |
-| Clear submit button | Non-negotiable | Low | Yes | Existing |
-| /thank-you redirect after submission | Confirms form worked; existing flow | Low | Yes | Existing |
-| Trust signal adjacent to form | Research confirms trust signals near forms increase conversion | Low | Yes | None new |
+**Complexity:** Low-Medium. Pencil's icon handling needs verification (does it have a glyph swap, or do you instance-swap an SVG?).
 
-### Current Form State
+**Dependencies:** TS-1 (size = spacing token), TS-4.
 
-The current form has 8 lead-qualification fields (from v1.3): name, email, business type, project type (multi-select), budget range, timeline, message. The n8n webhook integration is built. v1.4 is visual-reskin only — no field changes.
-
-### Visual Pattern Recommendations
-
-| Pattern | What Changes | Complexity | Static-only? |
-|---------|-------------|------------|--------------|
-| Two-column layout: form left, contact info + trust signals right | Crito's contact pages typically place contact info and social proof alongside the form | Low | Yes |
-| Inline error + success states | Replace any neobrutalist validation styling with clean inline feedback | Low | Yes |
-| Trust micro-copy near submit button ("No spam. Typically reply within 24 hours.") | Reduces friction at the moment of commitment | Low | Yes |
-
-**Form vs scheduler:** Research shows hybrid (form + scheduler link) converts best. The /thank-you page currently has a placeholder Calendly link — this is the right hybrid pattern. After the form submits, the /thank-you page surfaces the Calendly link. No change to v1.4 scope — this is already the design intent.
+**Skip if:** Crito uses very few icons, or icon style is unambiguous from the original.
 
 ---
 
-## 13. Navigation & Header
+### D-5. Responsive breakpoint frames (desktop + mobile per section)
+**What:** For each reconstructed page, build the section at two widths (e.g. 1440 desktop, 375 mobile). Document how stacks collapse, what hides, how typography scales.
 
-### Table Stakes
+**Why differentiator:** The site is responsive. Without mobile frames, downstream code has to guess (which is exactly what v1.4 did, badly).
 
-| Feature | Why Expected | Complexity | Static-only? | Dependencies |
-|---------|--------------|------------|--------------|--------------|
-| Logo left, links center, CTA button right | Crito pattern; standard 2026 agency layout | Low | Yes | Existing Header.astro |
-| 4-5 nav links maximum | Current: Blog, Projects, FAQ, Contact — correct count | Low | Yes | Existing |
-| Sticky header | Expected on content-heavy sites | Low | Yes | CSS only |
-| Mobile hamburger → drawer | Current mobile nav exists; reskin only | Low | Yes | Existing MobileNav.astro |
-| No dark mode toggle | v1.4 is light-mode only; toggle removed | Low | Yes | Decision per PROJECT.md |
+**Complexity:** Medium-High. Doubles the section count to recreate.
 
-### Differentiators
+**Dependencies:** TS-5.
 
-| Feature | Value Proposition | Complexity | Static-only? | Dependencies |
-|---------|-------------------|------------|--------------|--------------|
-| Header contact info strip (Crito shows phone + email + hours at very top) | Signals accessibility; Crito's top utility bar | Low | Yes | Joel's contact info |
-
-**Flag for requirements:** Crito's header includes a top utility bar (phone, email, hours, social icons). This is a team-agency pattern. For a solo consultant, it may look overwrought. Recommend omitting the utility bar; keep just logo + nav + CTA button in header. The contact info lives on the contact form.
+**Skip if:** The original Crito .pen only has desktop frames anyway — match what's available, defer mobile reconstruction to a later milestone or rely on auto-layout's responsive defaults.
 
 ---
 
-## 14. Footer
+### D-6. Component documentation / usage notes
+**What:** In Pencil, annotate each shared component with a short note: "Use this Button for primary CTAs only" / "Card with image: use this variant." Or maintain a `COMPONENTS.md` alongside.
 
-### Table Stakes
+**Why differentiator:** Downstream code agents reading the .pen + the doc make fewer "which variant?" mistakes.
 
-| Feature | Why Expected | Complexity | Static-only? | Dependencies |
-|---------|--------------|------------|--------------|--------------|
-| Brand + description column | Standard; Crito pattern | Low | Yes | Existing Footer.astro |
-| Navigation columns (Company, links) | Existing footer has secondary nav; reskin only | Low | Yes | Existing |
-| Social icons | Already implemented with simple-icons-astro | Low | Yes | Existing |
-| Copyright line | Standard | Low | Yes | Existing |
+**Complexity:** Low.
 
-### Differentiators from Crito
+**Dependencies:** TS-4.
 
-| Feature | Value Proposition | Complexity | Static-only? | Dependencies |
-|---------|-------------------|------------|--------------|--------------|
-| Newsletter signup bar above footer | Crito places a full-width "Get update by signup newsletter" bar above the footer on every page | Med | Yes (static form → webhook/service) | Newsletter service (not yet configured) |
-| 4-column footer layout (Company / Help / Resources / Links) | Crito's full 4-col footer; for a solo consultant, 2–3 columns is enough | Low | Yes | Content decision |
-
-**Recommendation:** Skip the newsletter bar in v1.4 (newsletter integration is deferred to v1.5+ per PROJECT.md). Footer: 2 columns (nav links + social). Crito's 4-column footer is sized for an agency with many pages; Joel's current footer is right-sized.
+**Skip if:** Components are self-explanatory once named clearly (often true at ~5-8 components).
 
 ---
 
-## Decision Summary: Open Questions for Requirements
+## Anti-Features (Skip)
 
-| Decision | Options | Recommended | Rationale |
-|----------|---------|-------------|-----------|
-| /services page in v1.4? | Add new page vs keep homepage-only | Add, Low complexity | SEO value; card component already needed |
-| /about page in v1.4? | Add new page vs keep homepage section | Stretch goal / defer to v1.5 | v1.4 already has 10+ pages to refactor; /about is additive new work |
-| Hero with Joel's photo? | Portrait in hero vs photo in About only | Portrait in hero | Crito pattern; solo consultant trust signal |
-| Stats strip vs client logo strip? | Real logos (unavailable) vs stats (15+ years / 200+ mentees) | Stats strip | Joel is a solo consultant without B2B client logos |
-| Newsletter bar above footer? | Include vs omit | Omit in v1.4 | Newsletter not configured; defer to v1.5 |
-| Blog grouping (Latest/Featured/Popular)? | Crito multi-section vs current tag-filtered grid | Tag-filtered grid (current) + featured boolean for future | Multi-section requires editorial decisions not in scope |
-| Utility bar in header? | Phone/email/hours strip vs clean logo+nav | Omit | Solo consultant, not a team agency |
+Tempting features that look like "real design system" work but burn time without improving downstream code fidelity for a single-site site.
 
----
+### AF-1. Full multi-theme token system (light/dark/brand variants)
+**Why skip:** Dark mode is **explicitly out of scope for v2.0** (per PROJECT.md). Building theme infrastructure now is speculative; revisit when dark mode becomes scope.
 
-## Anti-Features
+### AF-2. Prototyping flows / interactive states / hover animations in Pencil
+**Why skip:** Downstream consumer is Astro code, not a clickable prototype. Hover/active state visuals can be defined as component variants without wiring interactive prototyping.
 
-Features to explicitly avoid in v1.4. These are agency-template clichés that actively harm a solo consultant's credibility or conversion.
+### AF-3. Page-frame "perfection" — pixel-exact reconstruction of every flat section
+**Why skip:** Crito frames include pages Joel **isn't adopting** (per Out of Scope: "View More, Information, Free Design Sample"). Reconstructing those is pure waste. Inventory (TS-2) should explicitly mark which frames feed which Joel page; skip frames that map to nothing.
 
-### 1. Generic Stock Photography (Critical)
+### AF-4. Adopting Crito's exact page architecture / IA
+**Why skip:** PROJECT.md is explicit: "Joel's existing page architecture is retained." v2.0 is about the *visual/component vocabulary*, not the site map. Don't get sucked into restructuring the page set.
 
-**What:** Team-in-conference-room photos, handshakes, diverse-group-at-whiteboard, laptop-on-desk. Crito's design images (image-import-16) show exactly this pattern.
-**Why avoid:** Stock photos are widely recognized as inauthentic. For a solo consultant where the personal relationship is the product, stock photos destroy trust. 80%+ of prospects visit the website before doing business; a stock-heavy site signals "I don't take this seriously."
-**Instead:** Joel's own photo in the hero and About section. For case studies, real screenshots of the work. For decorative sections, use abstract illustrations, clean typography, or subtle geometric patterns rather than generic photography.
+### AF-5. A formal component naming system (BEM-style, atomic design layers)
+**Why skip:** With ~5-8 components, naming overhead exceeds value. "Button / Card / Header / Footer / Section / Input / Badge" is enough vocabulary. Skip atomic-design layering (atoms/molecules/organisms) — adds taxonomy without adding clarity at this scale.
 
-### 2. Team Members Section
+### AF-6. Token sync to code / CSS variable export pipeline
+**Why skip:** This is a code-side concern handled in the next milestone. The .pen needs *correct tokens*; how code consumes them (CSS vars, Tailwind config, design-tokens JSON) is a downstream decision. Don't build the bridge before v2.0 ships the design side.
 
-**What:** Crito includes an "Experience Team Members" section with 4 headshots.
-**Why avoid:** Joel is a solo consultant. A team section with placeholder/stock faces is dishonest and creates confusion about who the client is actually hiring.
-**Instead:** The About section with Joel's story IS the "team" section. If Joel needs to signal capacity, use a "trusted network of specialists" sentence in copy, not a fabricated team grid.
+### AF-7. Component variants for every legitimate-looking state
+**Why skip:** Easy to make 20 Button variants (3 colors × 3 sizes × hover/active/disabled × icon-left/right/none). Most won't be used. Build variants on demand as recreated sections actually need them — additive, not pre-emptive.
 
-### 3. "Lorem Ipsum" or Placeholder Case Studies
+### AF-8. Building components for the **current** neobrutalist v1.3 design
+**Why skip:** v2.0 is reconstructing **Crito**, not preserving the current yellow/turquoise/magenta isometric look. Per PROJECT.md Out of Scope: "Neobrutalist palette / isometric illustrations / Bricolage Grotesque + DM Sans / shadow-to-glow dark mode — still planned to be replaced." Don't conflate "factor the current design system" with this milestone.
 
-**What:** Launching with empty case study shells or placeholder projects that go to a "Coming Soon" state.
-**Why avoid:** Projects index currently shows "Coming Soon" because all projects have `draft: true`. A "Coming Soon" portfolio page signals inexperience, not growth. It's worse than having no portfolio page at all.
-**Instead:** Launch with 1–2 real (even anonymized) case studies with real outcomes. If client confidentiality prevents publication, Joel's 200+ students/mentees and 15+ years provide enough material for at least one generalized case study. Alternatively, remove the /projects link from nav until cases are ready.
+### AF-9. Reconstructing the Alliatus .fig file in design/
+**Why skip:** There's a 38MB Alliatus Figma file in `design/` alongside Crito. Out of scope — Crito is the reference per PROJECT.md.
 
-### 4. Over-Animated Hero
-
-**What:** Entrance animations on every element, cascading stagger delays, particles or background video.
-**Why avoid:** The current bento-grid hero has 5 separately-animated tiles with opacity 0 entrance animations. This is appropriate for the current neobrutalist design, but for the Crito-inspired clean aesthetic it reads as trying too hard. Animation creates cognitive load when the goal is immediate clarity.
-**Instead:** One subtle entrance animation on the headline + subhead (fade-in, ≤ 400ms). The portrait can slide in gently. Everything else renders at full opacity. Respect `prefers-reduced-motion` (already wired up in the codebase).
-
-### 5. Multi-CTA Button Clusters
-
-**What:** Three or more CTA buttons in the hero or section footers (Get Started, Learn More, See Portfolio, Book a Call, Subscribe).
-**Why avoid:** Decision fatigue. Each additional CTA reduces the probability any of them get clicked. Research consensus is one primary CTA per viewport.
-**Instead:** One primary CTA per section. Use a secondary ghost/outline button only in the hero (where dual-CTA is justified by funnel stage diversity). All other sections: single CTA.
-
-### 6. Testimonial Carousels with Auto-Rotation
-
-**What:** Testimonials that auto-advance on a timer.
-**Why avoid:** Auto-rotating carousels are a dark pattern — they remove user control, can cause WCAG failures (1.4.13 — content that disappears automatically is a problem for users with disabilities), and research consistently shows static testimonials outperform carousels for credibility.
-**Instead:** Static testimonial cards, max 3 visible on desktop. If more testimonials exist in future, a user-controlled carousel (no auto-rotation) is acceptable.
-
-### 7. The Services Catalog Dump
-
-**What:** Listing every possible service variation in a 8-cell grid (Crito's 05_Service page has Business Advice, Startup Business, Financial Advice, Risk Management, and 4 more variants).
-**Why avoid:** Joel has 3 service domains. An 8-cell grid implies 8 services he may not actually offer, and forces prospects to figure out which applies to them. For a solo consultant, more services = more confusion, not more credibility.
-**Instead:** Keep 3 service cards matching actual capabilities (AI, Automations, Web Apps). The Services page, if added, can expand with 2–3 sub-items per category, but the card count stays tight.
-
-### 8. Vanity Metrics
-
-**What:** Counters like "5310 / 5310 / 5310 / 5310" (Crito's stats strip placeholder). Or "100+ projects" when the portfolio has 2 live case studies.
-**Why avoid:** Sophisticated buyers cross-check claims. Inflated numbers are immediately spotted.
-**Instead:** Only claim metrics that can be defended: 15+ years, 200+ students, specific project outcomes from projects.json.
-
-### 9. Dark Mode Toggle in v1.4
-
-**What:** Keeping the existing dark mode toggle in the header.
-**Why avoid:** Dark mode is explicitly deferred in v1.4 per PROJECT.md. Shipping a broken or half-implemented toggle is worse than removing it.
-**Instead:** Remove the toggle completely in v1.4. Add it back as a v1.5 feature when the new design has a validated dark mode variant.
-
-### 10. Newsletter Signup Without a Newsletter
-
-**What:** Crito puts a newsletter signup bar above the footer. Including this in v1.4 with no newsletter configured.
-**Why avoid:** A subscribe form that either does nothing or emails Joel with no automation creates a false promise. Small business clients who sign up and receive nothing lose trust.
-**Instead:** Omit until the newsletter is configured. The form widget is a one-day implementation when ready.
+### AF-10. Custom illustration / asset reconstruction
+**Why skip:** Crito uses photos, illustrations, and decorative graphics. Recreating these as vector in Pencil is enormous work for no code-fidelity gain — downstream code can reference image assets directly. Treat illustrations as opaque image slots in components.
 
 ---
 
-## Feature Dependencies Map
+## Feature Dependencies
+
+Build order, with rationale:
 
 ```
-New token system (colors, typography, spacing)
-  └── All v2 components
-      ├── Hero v2 → hero portrait asset
-      ├── Services v2 → existing services copy
-      ├── Stats Strip → existing About credibility numbers
-      ├── Process v2 → existing 5-step copy, @lucide/astro icons
-      ├── Differentiators section → extracted from existing About copy
-      ├── About v2 → selfie.jpg, existing narrative copy
-      ├── ProjectCard v2 → projects.json (unchanged)
-      ├── ProjectDetail v2 → projects.json (unchanged)
-      ├── BlogCard v2 → content collection (unchanged)
-      ├── BlogPost layout v2 → MDX files (unchanged)
-      ├── FAQ v2 → existing faqs[] array + JSON-LD
-      ├── ContactSection v2 → n8n webhook (unchanged)
-      └── /thank-you v2 → existing Calendly placeholder
+Phase A: Foundation (must come first)
+├── TS-2  Inventory          (no dependencies — pure read)
+└── TS-1  Token foundation   (no dependencies — informed by TS-2 inspection)
+         └── D-1 Token tiering (optional, additive on TS-1)
+
+Phase B: Layout vocabulary
+└── TS-3  Auto-layout primitives    (depends on TS-1 for spacing)
+
+Phase C: Shared components
+└── TS-4  Component library         (depends on TS-1 + TS-3)
+         ├── D-2 Slots composition  (optional, refines TS-4)
+         ├── D-4 Icon component     (optional)
+         └── D-6 Doc annotations    (optional)
+
+Phase D: Page section reconstruction (the bulk of the work)
+└── TS-5  Recreated sections        (depends on TS-1 + TS-2 + TS-3 + TS-4)
+         ├── D-3 Prose typography   (optional, when blog/FAQ sections reconstructed)
+         └── D-5 Responsive frames  (optional, per section)
+
+Phase E: Validation
+└── TS-6  Side-by-side checks       (depends on TS-5, can run incrementally)
 ```
 
-**No backend changes required for any table-stakes features.** All features are static-site compatible (Astro + Tailwind). The n8n webhook form behavior is preserved unchanged. The blog content collection is unchanged.
+**Suggested phase grouping for the roadmapper:**
+1. **Phase 23 — Inventory + Tokens** (TS-2 + TS-1, optionally D-1). Small, foundational, unblocks everything.
+2. **Phase 24 — Shared component library** (TS-3 + TS-4, optionally D-4 + D-6). Builds the vocabulary used by all sections.
+3. **Phases 25-N — Page section reconstruction** (TS-5), grouped by page (Homepage / Projects / Blog / FAQ / Contact / Thank-you / Design-system / 404). Each phase reconstructs the sections for one or two Joel pages, includes its own TS-6 validation pass.
+4. **Phase N+1 — Final validation sweep + handoff doc** (TS-6 across all pages, plus a short "how the .pen is organized" note for the next milestone's roadmapper).
+
+This ordering minimizes rework: tokens before components, components before sections, validation as a continuous check.
 
 ---
 
-## Sources
+## Open Questions
 
-- Crito template inspection (direct images from `/design/images/`, images 3–15)
-- [Consultant website trust elements — logotio.com](https://logotio.com/blog/consultant-website-trust-elements-essential-pages)
-- [Consulting website examples — melisaliberman.com](https://www.melisaliberman.com/blog/consulting-website-examples)
-- [About page for consultants — knapsackcreative.com](https://knapsackcreative.com/blog-industry/consulting-about-page)
-- [Hero section best practices 2026 — perfectafternoon.com](https://www.perfectafternoon.com/2025/hero-section-design/)
-- [Web design trends 2026 — kontra.agency](https://kontra.agency/top-web-design-trends-for-2026/)
-- [Form vs scheduler — revenuehero.io](https://www.revenuehero.io/blog/form-vs-scheduler)
-- WebSearch: solo consultant hero patterns, services page SEO, case study layouts, blog design patterns, agency anti-patterns (2025–2026 queries)
+Items the roadmapper and Joel should resolve before / during Phase 23:
+
+1. **Which Joel pages are in scope?** PROJECT.md lists Homepage, Projects, Blog, FAQ, Contact, Thank-you, Design system, 404. Crito has 15 frames including pages Joel won't use. Confirmed mapping needed: which Crito frame(s) feed which Joel page, and which Crito frames are simply ignored.
+
+2. **What's the exact state of the .pen today?** This research is grounded in PROJECT.md/STATE.md claims ("mostly flat raster, zero shared components"). Phase 23 should call `get_editor_state`, `batch_get`, `snapshot_layout`, and `get_variables` to confirm per-frame and surface any surprises (e.g. some frames may already be partially factored).
+
+3. **How does Pencil model slots vs variants today?** Differentiator D-2 assumes Pencil supports slots in a way comparable to Figma. Verify via `get_editor_state(include_schema: true)` and docs.pencil.dev before depending on slots. If slots are immature, the fallback is variants + instance swap — still works, just more variant explosion.
+
+4. **Is there a canonical "original Crito" reference available beyond the flat raster?** The raster *is* the appearance, but per-section spacing/typography values are easier to verify if the original Figma Crito source (Figma community link) is available alongside the .pen. If yes, the validation step (TS-6) uses both; if no, the raster is the only reference.
+
+5. **Should the reconstructed .pen also include "design-system" frames (token gallery, component gallery)?** Useful for the design-system page Joel ships at `/design-system`, but adds work. Recommendation: defer — generate gallery frames as part of the future code-side `/design-system` page milestone, not v2.0.
+
+6. **Component variant explosion threshold.** When should a property become a variant vs. a slot vs. an instance swap? Sensible default: state = variant (hover/disabled), structure = slot (card content area), distinct asset = instance swap (icon). Worth documenting up front to avoid relitigating per component.
+
+7. **Asset handling for raster images** — Crito uses photos and illustrations. Confirm: are these stored as separate files in `design/images/` (looks like yes — 76 entries in the directory listing), and is the plan to keep referencing them rather than recreate? Almost certainly yes, but worth making explicit (AF-10).
+
+---
+
+## Confidence & Sources
+
+**HIGH confidence** (consistent across PROJECT.md, STATE.md, and current docs):
+- Token foundation + auto-layout + shared components are table stakes for any design-system reconstruction
+- Dark mode / multi-theme / interactive prototyping are out of scope for v2.0
+- Crito .pen is mostly flat with ~0 reusable components today
+
+**MEDIUM confidence** (general design-system guidance, applies to Pencil by analogy):
+- Two-tier primitive→semantic token structure is industry standard but Pencil-specific syntax needs verification
+- Slots vs variants tradeoff — verified Figma practice, Pencil claims support but exact MCP affordances should be confirmed at phase time
+
+**LOW confidence** (needs phase-time verification):
+- Exact set of components in the current .pen and which frames are partially editable — must be confirmed via `get_editor_state` + `batch_get` + `snapshot_layout` in Phase 23
+- Whether the original Crito Figma source is reachable for spot-check validation
+- Pencil's exact slot mechanics from the MCP side
+
+**Sources:**
+- [Pencil .pen Files docs](https://docs.pencil.dev/core-concepts/pen-files)
+- [Pencil AI Integration docs](https://docs.pencil.dev/getting-started/ai-integration)
+- [Figma — Supercharge your Design System with Slots](https://www.figma.com/blog/supercharge-your-design-system-with-slots/)
+- [Figma — Difference between slots, instance swaps, and variants](https://help.figma.com/hc/en-us/articles/38741465279895-The-difference-between-slots-instance-swaps-and-variants)
+- [How to Build a Design System in Figma — Practical Guide 2026 (Muzli)](https://muz.li/blog/how-to-build-a-design-system-in-figma-a-practical-guide-2026/)
+- [Figma Design System Best Practices 2026 (Atomize)](https://atomize.tools/blog/figma-design-system-best-practices/)
+- [W3C DTCG — Design Tokens Specification Stable v2025.10](https://www.w3.org/community/design-tokens/2025/10/28/design-tokens-specification-reaches-first-stable-version/)
+- [DTCG Format Module](https://www.designtokens.org/tr/drafts/format/)
+- [Essential Layout Components For Your Design System (Nayaab Khan)](https://dev.to/nayaabkhan/essential-layout-components-for-your-design-system-26p)
+- [MVP Software Development 2026 (UXPin) — over-engineering risks](https://www.uxpin.com/studio/blog/mvp-software-development-how-to/)
