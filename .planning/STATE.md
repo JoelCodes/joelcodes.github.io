@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Design Overhaul
 status: ready_to_plan
-stopped_at: Phase 24 undone — ready to re-plan v2 primitive library from scratch
+stopped_at: Phases 23 and 24 undone — milestone v1.4 reset to pre-foundation state
 last_updated: 2026-05-31T00:00:00Z
-last_activity: 2026-05-31 -- Phase 24 reverted via file-restore strategy
+last_activity: 2026-05-31 -- Phase 23 reverted via git-revert + manual cleanup
 progress:
   total_phases: 8
   completed_phases: 0
-  total_plans: 4
-  completed_plans: 4
+  total_plans: 0
+  completed_plans: 0
   percent: 0
 ---
 
@@ -21,11 +21,11 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-14)
 
 **Core value:** Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
-**Current focus:** Phase 24 — v2 primitive library + design system page (rebuild from scratch)
+**Current focus:** Phase 23 — Design System Foundation (rebuild from scratch)
 
 ## Current Position
 
-Phase: 24
+Phase: 23
 Plan: Not started
 Status: Ready to plan
 Last activity: 2026-05-31
@@ -72,6 +72,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 - **Roadmap 2026-05-14**: Services page (SERV-01..04) bundled into Phase 27 with Projects — card component from Phase 24 makes the new page low-effort; risk isolation preserved by ordering after Blog
 - **Roadmap 2026-05-14**: Contact reskin (Phase 28) isolated from homepage — e2e form test is a mandatory merge gate; isolating prevents form regression from homepage scope creep
 - **Undo 2026-05-31**: Phase 24 reverted via file-restore strategy — components, tests, and design-system page reset to pre-phase-24 baseline (d1b9aed^). Reason: rebuild v2 design system from scratch
+- **Undo 2026-05-31**: Phase 23 reverted via reverse-chronological git revert (21 commits) — v2 token system, BaseLayoutV2, v2 Header/Footer/MobileNav, design-system.pen, v2-smoke page, font packages all removed. Recent footer-style commit (8704170) became a no-op. Reason: rebuild v1.4 design system from scratch
 
 ### Pending Todos
 
@@ -91,5 +92,5 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 Last session: 2026-05-31T00:00:00Z
 Stopped at: Phase 24 undone — ready to re-plan
-Resume file: (none — phase 24 directory removed)
-Next action: Run `/gsd:discuss-phase 24` to begin re-planning v2 primitive library
+Resume file: (none — phases 23 and 24 directories removed)
+Next action: Run `/gsd:discuss-phase 23` to begin re-planning the v1.4 design system foundation
