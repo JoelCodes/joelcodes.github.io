@@ -27,7 +27,7 @@ const { tag, posts } = Astro.props;
 
 // Calculate reading time for each post
 const postsWithMeta = posts.map((post) => {
-  const stats = readingTime(post.body || '', 265);
+  const stats = readingTime(post.body || '', { wordsPerMinute: 265 });
   return { ...post, readingTime: Math.ceil(stats.minutes) };
 });
 
