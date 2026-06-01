@@ -171,7 +171,7 @@ Plans:
 
 - [x] 24-02: Build `Primitive / Button` with variants justified by source evidence (purpose / size / state); reference semantic tokens only; `snapshot_layout` problems-only check
 - [x] 24-03: Build `Primitive / Input` (label + control + helper text + error slot) and `Primitive / Badge` (pill/metric styles as they appear in Crito heroes and project cards); semantic-token-only; `snapshot_layout`
-- [ ] 24-04: Build `Primitive / Icon` (size variants 16/20/24/32) with documented glyph-swap mechanism — Pattern A (Pencil-native `library: "lucide"` per RESEARCH supersession of D-25) or Pattern B (D-25 atomic-glyph fallback) per probe outcome; source-driven glyph enumeration per D-26; semantic-token-only; `snapshot_layout`
+- [x] 24-04: Build `Primitive / Icon` (size variants 16/20/24/32) with documented glyph-swap mechanism — Pattern A (Pencil-native `library: "lucide"` per RESEARCH supersession of D-25) or Pattern B (D-25 atomic-glyph fallback) per probe outcome; source-driven glyph enumeration per D-26; semantic-token-only; `snapshot_layout`
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
@@ -386,7 +386,7 @@ Phases execute in numeric order: 1 → 2 → ... → 22 → 23 → 24 → 25 →
 | 21. Navigation Cleanup | v1.3 | 1/1 | Complete | 2026-02-10 |
 | 22. Footer Enhancement | v1.3 | 1/1 | Complete | 2026-02-11 |
 | 23. Audit + Token Foundation | v2.0 | 5/5 | Complete    | 2026-05-31 |
-| 24. Layout Primitives + Primitive Components | v2.0 | 3/5 | In Progress|  |
+| 24. Layout Primitives + Primitive Components | v2.0 | 4/5 | In Progress|  |
 | 25. Section + Compound Components | v2.0 | 0/TBD | Not started | - |
 | 26. FAQ + 404 Reconstruction | v2.0 | 0/TBD | Not started | - |
 | 27. Thank-you + Contact Reconstruction | v2.0 | 0/TBD | Not started | - |

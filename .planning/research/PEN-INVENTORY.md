@@ -277,6 +277,7 @@ Populated by plans 24-02, 24-03, 24-04 per D-22 (compositional minimum forward v
 | OPEN-24-10 | token | minor | Badge inferred gap `8` and padding `[4, 12]` — these literals don't perfectly match Phase 23 primitive scale (9, 10, 16, 20, 24, 32, 40, 60). Per D-33, no new tokens added; literals carry forward. | TBD | If Phase 25 Header / Compound consumer needs semantic alignment, add `space-semantic-badge-*` aliases then. Phase 27 may have project-card metric badges that drive token decisions |
 | OPEN-24-11 | variant | notable | **Retroactive refinement of OPEN-24-05.** Crito source DOES depict a Secondary outline-button pattern via Home Page Hero `mkw8g` ("Discover More" — fill: none, stroke: white, strokeWidth: 0.5, strokeAlignment: inner, same padding+radius+layout as primary CTA). Plan 24-02 OPEN-24-05 (Secondary not source-evidenced) is incorrect on this point. Discovered during Plan 24-03 Badge-probe walk of Hero subtree. | 25 (likely Header secondary CTA) or 26 (Joel's About sub-CTAs) | Build `Primitive / Button / Secondary` (fill: none, stroke: source) when first consumer needs the visual. Plan 24-02's Default variant cell stands; this is an addition, not a replacement |
 | OPEN-24-12 | source-coverage | notable | D-32 + D-34 Badge probes returned **no Crito source** for badge components — IN-SCOPE non-raster frames (Home Page Hero) contain buttons and bullet-row groups, but no pill/tag/metric-badge elements. `Primitive / Badge` is therefore fully inferred (D-32 Case B reuse `radius-semantic-button=10`; D-34 Case I single component). Pitfall 7 prevention: no new tokens added to support an inferred component. | 25 (Header may show badges? unlikely) / 27 (project cards may show metric badges per code milestone) | First concrete badge consumer locks the radius + fill + typography; current build is a placeholder until then |
+| OPEN-24-13 | source-coverage | minor | Joel-brand glyphs (Instagram, Substack) — D-28 explicitly defers these to Phase 25 Section/Footer. Crito source provides LinkedIn + Twitter (akar-icons) but Joel uses Instagram + Substack instead. Phase 24 ships ZERO brand glyphs. | 25 (Section/Footer footer-social row) | Phase 25 plan 25-02 Footer owns the brand-glyph audit; if lucide doesn't have Instagram/Substack in its set, switch to a different `library` value (e.g., `simple-icons`) or use Pattern B fallback for those two glyphs only |
 
 ---
 
@@ -311,6 +312,10 @@ Populated by plans 24-02, 24-03, 24-04 per D-22 (compositional minimum forward v
 | `Primitive / Badge` (single, D-34 Case I) | parent frame | layout / gap / padding | `horizontal` / `8` / `[4, 12]` | (no perfect semantic — gap is 8 not in primitive scale; OPEN-24-10) | inferred — no badge source in IN-SCOPE Crito (plan 24-03 Task 3) | Compact inline component with horizontal layout; gap 8 doesn't match `space-semantic-inline-{sm,md,lg}` exactly |
 | `Primitive / Badge` (single, D-34 Case I) | parent frame | fill / cornerRadius | `#15bee3ff` / `10` | `color-semantic-bg-brand` (→ `color-primitive-cyan-500`) / `radius-semantic-button` (D-32 Case B reuse) | inferred (plan 24-03 Task 3) | Brand-blue fill placeholder until consumer specifies; D-32 reused button radius rather than extending token surface (Pitfall 7) |
 | `Primitive / Badge` (single, D-34 Case I) | label text | fontFamily / fontSize / fontWeight / fill | `Inter` / `14` / `500` / `#ffffffff` | `type-semantic-body-sm-family` / `type-semantic-body-sm-size` / `type-primitive-weight-500` / `color-primitive-white` | inferred (plan 24-03 Task 3) | Body-sm typography weight 500 (button-grade weight) for readable inline badge |
+| `Primitive / Icon / 16` (Pattern A — Pencil-native lucide) | icon node | type / library / icon / width / height / fill | `icon` / `lucide` / `chevron-right` / `16` / `16` / `#141f39ff` | (Pencil-native — no semantic alias needed) / `color-semantic-text-primary` | Q4 probe + source audit (plan 24-04 Task 1-3) | 16px size variant per COMP-04 + D-27; default glyph chevron-right per D-26 source audit; supersedes D-25 |
+| `Primitive / Icon / 20` (Pattern A) | icon node | type / library / icon / width / height / fill | `icon` / `lucide` / `chevron-right` / `20` / `20` / `#141f39ff` | (Pencil-native) / `color-semantic-text-primary` | plan 24-04 Task 3 | 20px size variant per COMP-04 |
+| `Primitive / Icon / 24` (Pattern A) | icon node | type / library / icon / width / height / fill | `icon` / `lucide` / `chevron-right` / `24` / `24` / `#141f39ff` | (Pencil-native) / `color-semantic-text-primary` | plan 24-04 Task 3 | 24px size variant per COMP-04 (default in Pencil guidelines § 3 example) |
+| `Primitive / Icon / 32` (Pattern A) | icon node | type / library / icon / width / height / fill | `icon` / `lucide` / `chevron-right` / `32` / `32` / `#141f39ff` | (Pencil-native) / `color-semantic-text-primary` | plan 24-04 Task 3 | 32px size variant per COMP-04 |
 
 Populated by plans 24-02, 24-03, 24-04. Each row binds a literal value used in a `batch_design` payload to the semantic token name it conceptually references (OPEN-23-13 dual-track workaround). Plan 24-05 sweep cross-refs every literal in `_Components / Primitives` against this table.
 
@@ -322,6 +327,44 @@ Populated by plans 24-02, 24-03, 24-04. Each row binds a literal value used in a
 |------------|---------------|--------------------------------------|-----------|
 
 Populated conditionally by plan 24-03 if D-32 Badge radius probe surfaces a needed token. Each row must answer: 'Does any other primitive need this token, or does it serve only [Plan 24-NN's primitive]?' Plan 24-05 sweep verifies every NEW token (beyond Phase 23's 95) has a row here.
+
+**Phase 24 outcome:** ZERO token extensions added. D-32 Case B reuse + Pitfall 7 enforcement prevented any `set_variables` call. Phase 23's 95-variable surface intact at end of Phase 24.
+
+---
+
+## Icon Glyphs (Phase 24)
+
+Source-driven enumeration per D-26. Every shipped glyph appears in at least one IN-SCOPE Crito frame. Pattern A (Pencil-native `library: lucide`) shipped per Q4 probe outcome — D-25 atomic-glyph fallback is NOT used. Consumers reference `Primitive / Icon / <N>` reusable nodes and override the `icon` property via descendants (or insert fresh `type: icon` nodes for ad-hoc usage).
+
+| glyph_name (lucide) | source_frame_id | source_node_id | section / context | shipped_in_phase_24 |
+|---|---|---|---|---|
+| `arrow-left` | `ujMLJ` | `OW4HR` (Icon/Outline/arrow-left, rotation -180) | Home Page Hero / Group containing menu nav back button | yes (lucide-native) |
+| `arrow-right` | `ujMLJ` | `EN06o` / `CNji7` / `qEqRc` / `msHgb` (Icon/Outline/arrow-right) | Home Page Hero CTAs ("Discover More", "Explore Service") trailing arrow | yes (lucide-native) |
+| `check` | `ujMLJ` | `oGwoa` / `y5q3y` / `8tFDS` (Icon/Solid/check) | Home Page Hero bullet rows ("No credit card", "Cancel anytime", "Get 15 days free trial") | yes (lucide-native, solid variant via fill) |
+| `menu` | `ujMLJ` | `IMKg0` (feather-icon / menu) | Home Page Menu bar — mobile hamburger toggle | yes (lucide-native) |
+| `search` | `ujMLJ` | `0TVai` (feather-icon / search) | Home Page Menu bar — search affordance | yes (lucide-native) |
+| `chevron-down` | `ujMLJ` | `GRMag` (feather-icon / chevron-down) | Home Page Menu bar — dropdown indicator | yes (lucide-native) |
+| `chevron-right` | `ujMLJ` | `C7PWz` (feather-icon / chevron-right) | Home Page — inline-link forward affordance | yes (lucide-native; also default glyph for size variants) |
+| `moon` | `ujMLJ` | `dWtlM` (feather-icon / moon) | Home Page Menu bar — dark-mode toggle (deferred per D-01 / TOKEN-07; glyph still in shipset for future activation) | yes (lucide-native) |
+| `alert-circle` | `ujMLJ` | `MUUbA` / `bQ0me` / `roQbL` / `F8kjk` / `jXatI` (feather-icon / alert-circle, 5 instances) | Home Page — tooltip / info indicators across multiple sections | yes (lucide-native) |
+| `link` | `ujMLJ` | `JloSU` (feather-icon / link) | Home Page Hero — external link affordance | yes (lucide-native) |
+
+**Ship-list size: 10 glyphs.** All available via `library: "lucide"` per Pencil guidelines § 3.
+
+**NOT shipped (D-28 deferral):**
+- `linkedin` (source: Home Page `eky09` "akar-icons:linkedin-fill") — brand glyph, Phase 25 Section/Footer
+- `twitter` (source: Home Page `2P1I5` "akar-icons:twitter-fill") — brand glyph, Phase 25 Section/Footer
+- Joel-specific: `instagram`, `substack` — no Crito source; Phase 25 Section/Footer owns
+- Tracked as OPEN-24-13 (source-coverage flag)
+
+**Consumer usage pattern (Pencil guidelines § 3 + Q4 probe):**
+
+```text
+# Reference a size variant and override the glyph:
+Insert(parent, {type: "ref", ref: "<EQaMf|yRvGb|u7NmaS|dpO5Y>", descendants: { /* fill override if needed */ }})
+# OR for ad-hoc usage:
+Insert(parent, {type: "icon", library: "lucide", icon: "<name-from-ship-list>", width: <N>, height: <N>, fill: "<literal>"})
+```
 
 ---
 
