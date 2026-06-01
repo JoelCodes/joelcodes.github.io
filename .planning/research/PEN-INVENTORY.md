@@ -266,6 +266,9 @@ Populated by plans 24-02, 24-03, 24-04 per D-22 (compositional minimum forward v
 
 | primitive | variant_cell | property | literal_value | bound_to_token | source_evidence (frame_id + node_id + section) | rationale |
 |-----------|--------------|----------|---------------|----------------|------------------------------------------------|-----------|
+| `_Components / Primitives` (parent frame) | title text | fontFamily | `Plus Jakarta Sans` | `type-primitive-family-display` | `avgor` / `xPEpx` (plan 24-01 Task 2) | Display family for top-of-canvas library label per Phase 23 token foundation |
+| `_Components / Primitives` (parent frame) | title text | fontSize | `48` | `type-primitive-size-48` / `type-semantic-heading-1-size` | `avgor` / `xPEpx` (plan 24-01 Task 2) | Heading-1 scale for library title; matches `_Tokens & Foundations` headings precedent |
+| `_Components / Primitives` (parent frame) | title text | fill | `#141f39ff` | `color-semantic-text-primary` (→ `color-primitive-navy-900`) | `avgor` / `xPEpx` (plan 24-01 Task 2) | Primary text color for library title; OPEN-23-13 literal carry since batch_design rejects `$<token>` refs |
 
 Populated by plans 24-02, 24-03, 24-04. Each row binds a literal value used in a `batch_design` payload to the semantic token name it conceptually references (OPEN-23-13 dual-track workaround). Plan 24-05 sweep cross-refs every literal in `_Components / Primitives` against this table.
 
