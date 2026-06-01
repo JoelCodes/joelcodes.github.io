@@ -163,11 +163,23 @@ Plans:
 
 Plans:
 
+**Wave 1**
+
 - [ ] 24-01: Stub the four library parent frames at top of canvas (`_Components / Primitives`, `_Components / Compounds`, `_Components / Sections`); confirm `_Tokens & Foundations` is the top neighbor; use `find_empty_space_on_canvas` to avoid overlap with the 15 existing page frames
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
 - [ ] 24-02: Build `Primitive / Button` with variants justified by source evidence (purpose / size / state); reference semantic tokens only; `snapshot_layout` problems-only check
 - [ ] 24-03: Build `Primitive / Input` (label + control + helper text + error slot) and `Primitive / Badge` (pill/metric styles as they appear in Crito heroes and project cards); semantic-token-only; `snapshot_layout`
 - [ ] 24-04: Build `Primitive / Icon` (size variants 16/20/24/32) with documented glyph-swap mechanism — Pattern A (Pencil-native `library: "lucide"` per RESEARCH supersession of D-25) or Pattern B (D-25 atomic-glyph fallback) per probe outcome; source-driven glyph enumeration per D-26; semantic-token-only; `snapshot_layout`
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
 - [ ] 24-05: Sweep — `search_all_unique_properties` over primitive frames, confirm zero raw values; `get_screenshot` each primitive for the reference set
+
+**Cross-cutting constraints:**
+
+- Every Pencil-mutating batch is preceded by `get_editor_state` asserting active editor == `design/Crito.pen` (D-35)
 
 ---
 
