@@ -165,7 +165,7 @@ Plans:
 
 **Wave 1**
 
-- [ ] 24-01: Stub the four library parent frames at top of canvas (`_Components / Primitives`, `_Components / Compounds`, `_Components / Sections`); confirm `_Tokens & Foundations` is the top neighbor; use `find_empty_space_on_canvas` to avoid overlap with the 15 existing page frames
+- [x] 24-01: Stub the four library parent frames at top of canvas (`_Components / Primitives`, `_Components / Compounds`, `_Components / Sections`); confirm `_Tokens & Foundations` is the top neighbor; use `find_empty_space_on_canvas` to avoid overlap with the 15 existing page frames
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
@@ -386,7 +386,7 @@ Phases execute in numeric order: 1 → 2 → ... → 22 → 23 → 24 → 25 →
 | 21. Navigation Cleanup | v1.3 | 1/1 | Complete | 2026-02-10 |
 | 22. Footer Enhancement | v1.3 | 1/1 | Complete | 2026-02-11 |
 | 23. Audit + Token Foundation | v2.0 | 5/5 | Complete    | 2026-05-31 |
-| 24. Layout Primitives + Primitive Components | v2.0 | 0/5 | Not started | - |
+| 24. Layout Primitives + Primitive Components | v2.0 | 1/5 | In Progress|  |
 | 25. Section + Compound Components | v2.0 | 0/TBD | Not started | - |
 | 26. FAQ + 404 Reconstruction | v2.0 | 0/TBD | Not started | - |
 | 27. Thank-you + Contact Reconstruction | v2.0 | 0/TBD | Not started | - |

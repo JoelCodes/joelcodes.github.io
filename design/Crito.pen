@@ -17409,6 +17409,108 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "avgor",
+      "x": -15642.732433950103,
+      "y": -11711.553859422791,
+      "name": "_Components / Primitives",
+      "width": 1440,
+      "height": 600,
+      "fill": "#ffffffff",
+      "layout": "vertical",
+      "gap": 40,
+      "padding": 40,
+      "children": [
+        {
+          "type": "text",
+          "id": "xPEpx",
+          "name": "Title — _Components / Primitives",
+          "fill": "#141f39ff",
+          "content": "_Components / Primitives",
+          "lineHeight": 1.4,
+          "fontFamily": "Plus Jakarta Sans",
+          "fontSize": 48,
+          "fontWeight": "700"
+        },
+        {
+          "type": "note",
+          "id": "JuJeb",
+          "name": "Phase 24 deliverable note",
+          "width": 1200,
+          "height": 240,
+          "content": "Phase 24 deliverable: Primitive / Button, Primitive / Input, Primitive / Badge, Primitive / Icon. Built via plans 24-02 / 24-03 / 24-04. See .planning/research/PEN-INVENTORY.md § Variant Evidence (Phase 24)."
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "t67DU6",
+      "x": -15642.732433950103,
+      "y": -12331.553859422791,
+      "name": "_Components / Compounds",
+      "width": 1440,
+      "height": 420,
+      "fill": "#ffffffff",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 40,
+      "children": [
+        {
+          "type": "text",
+          "id": "p2udm",
+          "name": "Title — _Components / Compounds",
+          "fill": "#141f39ff",
+          "content": "_Components / Compounds",
+          "lineHeight": 1.4,
+          "fontFamily": "Plus Jakarta Sans",
+          "fontSize": 48,
+          "fontWeight": "700"
+        },
+        {
+          "type": "note",
+          "id": "XxZps",
+          "name": "Phase 25 deferral note (Compounds)",
+          "width": 1200,
+          "height": 240,
+          "content": "Populated in Phase 25 (plan 25-03 Compound / Card). See .planning/ROADMAP.md § Phase 25. Intentionally empty in Phase 24 per D-37."
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "g9oRa5",
+      "x": -15642.732433950103,
+      "y": -12951.553859422791,
+      "name": "_Components / Sections",
+      "width": 1440,
+      "height": 420,
+      "fill": "#ffffffff",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 40,
+      "children": [
+        {
+          "type": "text",
+          "id": "pn8P3",
+          "name": "Title — _Components / Sections",
+          "fill": "#141f39ff",
+          "content": "_Components / Sections",
+          "lineHeight": 1.4,
+          "fontFamily": "Plus Jakarta Sans",
+          "fontSize": 48,
+          "fontWeight": "700"
+        },
+        {
+          "type": "note",
+          "id": "YilSu",
+          "name": "Phase 25 deferral note (Sections)",
+          "width": 1200,
+          "height": 240,
+          "content": "Populated in Phase 25 (plans 25-01 Section / Header + 25-02 Section / Footer). See .planning/ROADMAP.md § Phase 25. Intentionally empty in Phase 24 per D-37."
+        }
+      ]
     }
   ],
   "variables": {
