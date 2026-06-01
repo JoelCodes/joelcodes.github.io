@@ -175,7 +175,7 @@ Plans:
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
-- [ ] 24-05: Sweep — `search_all_unique_properties` over primitive frames, confirm zero raw values; `get_screenshot` each primitive for the reference set
+- [x] 24-05: Sweep — `search_all_unique_properties` over primitive frames, confirm zero raw values; `get_screenshot` each primitive for the reference set
 
 **Cross-cutting constraints:**
 
@@ -386,7 +386,7 @@ Phases execute in numeric order: 1 → 2 → ... → 22 → 23 → 24 → 25 →
 | 21. Navigation Cleanup | v1.3 | 1/1 | Complete | 2026-02-10 |
 | 22. Footer Enhancement | v1.3 | 1/1 | Complete | 2026-02-11 |
 | 23. Audit + Token Foundation | v2.0 | 5/5 | Complete    | 2026-05-31 |
-| 24. Layout Primitives + Primitive Components | v2.0 | 4/5 | In Progress|  |
+| 24. Layout Primitives + Primitive Components | v2.0 | 5/5 | Complete   | 2026-06-01 |
 | 25. Section + Compound Components | v2.0 | 0/TBD | Not started | - |
 | 26. FAQ + 404 Reconstruction | v2.0 | 0/TBD | Not started | - |
 | 27. Thank-you + Contact Reconstruction | v2.0 | 0/TBD | Not started | - |

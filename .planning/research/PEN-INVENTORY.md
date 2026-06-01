@@ -368,6 +368,80 @@ Insert(parent, {type: "icon", library: "lucide", icon: "<name-from-ship-list>", 
 
 ---
 
+## End-of-Phase-24 Verification (plan 24-05)
+
+Mirrors Phase 23's End-of-Phase Verification structure. Captured 2026-06-01 at Phase 24 close.
+
+### Sweep Result (VAL-24-04 — zero raw values per COMP-09 + OPEN-23-13 dual-track)
+
+**Verdict: PASS — zero leaks.**
+
+- Token-aware Claude-side property walker per RESEARCH Pattern 7 + OPEN-23-02 workaround (no `search_all_unique_properties` MCP tool available).
+- Recursive `batch_get(avgor, readDepth: 4)` returned the full primitives tree.
+- Distinct literal values collected across all variant cells: ~38 unique literals (colors, padding tuples, gaps, cornerRadii, fontFamilies, fontSizes, fontWeights, lineHeights, strokeWidths, dimensions).
+- Accepted-literal reference set = `phase23_literals ∪ phase24_token_extensions ∪ phase24_binding_literals` = ~38 entries.
+- Walker result: every literal collected from the live tree appears in either (a) `## Tokens Written — Primitives` / `## Tokens Written — Semantic Aliases` (Phase 23 surface), or (b) `## Variant Evidence (Phase 24)` (Phase 24 dual-track bindings).
+- Special-case literals pre-approved: `0` (zero-dimension placeholder for empty slot frames), text node implicit defaults.
+
+### `snapshot_layout` Audit Roll-up (VAL-24-05)
+
+**Verdict: PASS at document level. Per-frame quirk documented and visually verified.**
+
+- `snapshot_layout({ maxDepth: 0, problemsOnly: true })` at document root: `"No layout problems."` — confirms no overlap between top-level frames (16 baseline + 3 Phase 24 library frames stack cleanly).
+- Per-frame `snapshot_layout` with `problemsOnly: true` on Button / Input / Badge frames reports `"partially clipped"` / `"fully clipped"` for text children. **Confirmed Pencil snapshot_layout y-coordinate reporting quirk, NOT a real rendering bug.** Evidence:
+  - User visually verified Plan 24-02 buttons (Default + Hover + Focus) — all 3 render correctly.
+  - User visually verified Plan 24-03 inputs (Default + Focus + Error) + Badge — all render correctly.
+  - User visually verified Plan 24-04 icons (4 sizes) — all render correctly.
+- **Recommendation for Phase 25+:** prefer `get_screenshot` + human visual verification over `snapshot_layout` problem flags for text-inside-button/input/badge structures. Document-level `snapshot_layout` (maxDepth: 0) remains reliable.
+
+### Reference Screenshot Review (VAL-24-05 + VAL-24-08)
+
+Inline `get_screenshot` captured at each plan's build-visual checkpoint:
+- Plan 24-01: `avgor` + `t67DU6` + `g9oRa5` — user APPROVED 2026-06-01
+- Plan 24-02: `avgor` with 3 buttons — user APPROVED 2026-06-01
+- Plan 24-03: `avgor` with buttons + 3 inputs + badge — user APPROVED 2026-06-01
+- Plan 24-04: `avgor` with buttons + inputs + badge + 4 icons + Icon usage note — user APPROVED 2026-06-01
+- Plan 24-05: Final review gate — pending
+
+### Variant Evidence Row Count (D-23 enforcement)
+
+Total rows across Phase 24: **30** in `## Variant Evidence (Phase 24)` table.
+
+| plan | rows added | notes |
+|------|------------|-------|
+| 24-01 | 5 | Primitives parent title × 3 properties; Compounds + Sections stubs × 1 grouped row each |
+| 24-02 | 9 | Button Default × 8 atomic; Hover + Focus × 1 grouped each |
+| 24-03 | 12 | Input Default × 6 grouped; Focus × 1; Error × 2; Badge × 3 |
+| 24-04 | 4 | One row per Icon size variant |
+
+### Token Extensions Row Count (D-33 enforcement)
+
+Total rows in `## Token Extensions (Phase 24)` table: **0**. D-32 Case B reuse + Pitfall 7 prevented any extensions. Phase 23's 95-variable surface intact end-to-end.
+
+### OPEN Flag Count (Phase 24)
+
+**13 OPEN-24-NN rows** added: minor=5, notable=8, blocking=0, resolved-this-phase=0.
+
+OPEN-24-11 is a **retroactive refinement of OPEN-24-05**: Crito source DOES depict a Secondary outline-button via `mkw8g` "Discover More". Future Phase 25/26 consumers needing Secondary CTA should consult that source.
+
+### Active-Editor Pre-flight Compliance (D-35)
+
+~14 `mcp__pencil__get_editor_state` calls across all 5 plans. Zero active-editor-mismatch incidents. OPEN-23-14 mitigation pattern held perfectly.
+
+### Files Modified Summary
+
+- `design/Crito.pen` — 19 top-level frames (16 baseline unmutated + 3 new library frames). Inside `avgor`: 11 child nodes representing all 4 primitives × their variants.
+- `.planning/research/PEN-INVENTORY.md` — multiple new sections + extended Frames table
+- `.planning/phases/24-.../24-NN-SUMMARY.md` × 5 — one per plan
+- `.planning/research/exports/v2.0/end-of-phase-24/id-inventory.json` + `README.md` — NEW per OPEN-23-01 substitution
+- `.planning/STATE.md` + `.planning/ROADMAP.md` — auto-managed via gsd-sdk
+
+### Cross-cutting `must_haves.truths` Satisfaction — ALL YES
+
+Every cross-cutting truth from 24-CONTEXT satisfied — see id-inventory.json `validation_outcomes` block for line-by-line attestation.
+
+---
+
 ## End-of-Phase Verification (plan 23-05)
 
 **Reference frame:** `_Tokens & Foundations` (Pencil id `RpGbe`) at top of canvas in `design/Crito.pen`. 6 child sections: Header, 1. Colors (12 primitive + 14 semantic swatches), 2. Typography (7 specimens — display, heading-1, body, body-sm, caption, button, prose-paragraph), 3. Spacing Scale (8 primitive stripes + 10-row semantic mapping), 4. Radius (3 primitive boxes + 4-row semantic mapping), 5. Dark Mode — Deferred (D-01 omission note per D-02).

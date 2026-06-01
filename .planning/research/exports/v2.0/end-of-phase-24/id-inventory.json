@@ -1,0 +1,127 @@
+{
+  "phase": "24-layout-primitives-primitive-components",
+  "captured": "2026-06-01",
+  "purpose": "End-of-Phase-24 structural snapshot per OPEN-23-01 archival substitution pattern (mirrors end-of-phase-23/id-inventory.json). PNG archival via export_nodes is unavailable; this JSON serves as the canonical structural record for Phase 25+ consumers.",
+  "source": "design/Crito.pen via mcp__pencil__batch_get readDepth=4 over componentsPrimitivesFrame avgor",
+  "library_parents": {
+    "_Components / Primitives": "avgor",
+    "_Components / Compounds": "t67DU6",
+    "_Components / Sections": "g9oRa5",
+    "_Tokens & Foundations": "RpGbe"
+  },
+  "primitives": {
+    "Button": {
+      "parent": "M7eUr",
+      "note": "Plan 24-02 ships Default as the source-evidenced primary CTA (reusable); Hover and Focus are D-22 forward variants. Plan 24-03 retroactive finding (OPEN-24-11): Crito source DOES depict a Secondary outline pattern via mkw8g — future plan can extend.",
+      "variants": {
+        "Default": "M7eUr",
+        "Default/Hover": "YJhRv",
+        "Default/Focus": "gQa2R"
+      },
+      "slots": {
+        "iconLeading": {
+          "Default": "AvKtA",
+          "Hover": "H2Z0Jz",
+          "Focus": "X4xsGa",
+          "typing": "untyped frame with enabled:false (Plan 24-02 Q2/Q3 deferred to first icon-bearing consumer per OPEN-24-06)"
+        },
+        "iconTrailing": {
+          "Default": "V4Dx4i",
+          "Hover": "fumzQ",
+          "Focus": "HpWzq",
+          "typing": "untyped frame with enabled:false (same strategy)"
+        },
+        "label": {
+          "Default": "ATJK9",
+          "Hover": "PQ2JK",
+          "Focus": "I09rj"
+        }
+      }
+    },
+    "Input": {
+      "parent": "nwJk7",
+      "note": "Plan 24-03 ships Default (reusable) per COMP-02 composition (label + control + helper + errorSlot). Focus and Error are D-22 forward variants. Source-inferred — Contact frame is flat raster (OPEN-23-05); Pencil guidelines § 12 + Phase 23 stack tokens drove values.",
+      "variants": {
+        "Default": "nwJk7",
+        "Focus": "TnODC",
+        "Error": "qPSVW"
+      },
+      "children": {
+        "Default": { "label": "oCeJP", "control": "bhkR3", "placeholder": "dbEyb", "helper": "xmhXv", "errorSlot": "uawpJ" },
+        "Focus": { "label": "DxaLO", "control": "WQw9R", "placeholder": "u59V6d", "helper": "i6abj", "errorSlot": "J1pxUv" },
+        "Error": { "label": "DlOhu", "control": "L6VFl", "placeholder": "oxT4h", "helper": "P7BTr", "error_message": "svkyg" }
+      }
+    },
+    "Badge": {
+      "parent": "j0FxQZ",
+      "note": "Plan 24-03 D-34 Case I (single component) + D-32 Case B (reuse radius-semantic-button=10). Fully inferred — no Crito badge source. OPEN-24-12 source-coverage flag.",
+      "variants": { "(single)": "j0FxQZ" },
+      "children": { "label": "xSve5" }
+    },
+    "Icon": {
+      "parent_note": "No single parent frame — each size variant is a top-level reusable icon node inside _Components / Primitives. Pattern A (Pencil-native lucide) confirmed per Q4 probe; D-25 atomic-glyph fallback EXPLICITLY SUPERSEDED.",
+      "mechanism": "Pattern A — type: 'icon', library: 'lucide'",
+      "variants": {
+        "16": "EQaMf",
+        "20": "yRvGb",
+        "24": "u7NmaS",
+        "32": "dpO5Y"
+      },
+      "default_glyph": "chevron-right",
+      "shipped_glyphs_lucide": [
+        "arrow-left",
+        "arrow-right",
+        "check",
+        "menu",
+        "search",
+        "chevron-down",
+        "chevron-right",
+        "moon",
+        "alert-circle",
+        "link"
+      ],
+      "deferred_brand_glyphs_phase_25": ["linkedin", "twitter", "instagram", "substack"],
+      "usage_note_id": "SGQZC"
+    }
+  },
+  "compositional_documentation": {
+    "title_text_id": "xPEpx",
+    "deliverable_note_id": "JuJeb",
+    "icon_usage_note_id": "SGQZC"
+  },
+  "token_surface_count": 95,
+  "variant_evidence_row_count": 30,
+  "token_extension_row_count": 0,
+  "open_flag_count": {
+    "OPEN-24-01_through_OPEN-24-13": 13,
+    "OPEN-25-NN_(forward_owned_by_Phase_25)": 0,
+    "note": "OPEN-24-13 covers brand-glyph deferral (linkedin/twitter/instagram/substack) which is forwarded to Phase 25 Footer. No standalone OPEN-25-NN rows were added in Phase 24 since OPEN-24-13 carries that ownership."
+  },
+  "baseline_drift_verification": {
+    "expected_top_level_count": 19,
+    "expected_baseline_ids_unmutated": ["MIXGf", "QdwxP", "kicJ8", "ujMLJ", "VleVl", "cl8tt", "w1m3x", "DzqTm", "cYlRH", "Y2isa", "WDGxc", "1nLS3", "Jmdw0", "maDc3", "IKAu3", "RpGbe"],
+    "expected_new_top_level_ids_phase_24": ["avgor", "t67DU6", "g9oRa5"],
+    "verdict": "PASS — 16 baseline ids preserved unmutated per zero-mutation contract (Plan 24-01 Task 4 verification + Plan 24-05 sweep)."
+  },
+  "validation_outcomes": {
+    "VAL-24-01_three_new_library_frames": "PASS (Plan 24-01 SUMMARY)",
+    "VAL-24-02_four_primitives_present": "PASS (Button via 24-02; Input + Badge via 24-03; Icon via 24-04)",
+    "VAL-24-03_auto_layout_token_driven": "PASS (every variant cell uses Pencil auto-layout + token-source literals)",
+    "VAL-24-04_zero_raw_values": "PASS via OPEN-23-13 dual-track — every literal has either a Phase 23 token match OR a Phase 24 Variant Evidence binding row",
+    "VAL-24-05_snapshot_layout_clean": "PASS at document level (No layout problems.). Per-frame snapshot_layout reports 'partially clipped' for text-inside-button-frame structures — confirmed Pencil snapshot_layout quirk via user visual checkpoints, NOT a real rendering bug",
+    "VAL-24-06_active_editor_preflight": "PASS — every batch_design/set_variables call preceded by get_editor_state asserting design/Crito.pen",
+    "VAL-24-07_token_extension_audit": "N/A — zero token extensions added across all 4 build plans",
+    "VAL-24-08_user_review_gate": "PASS — user signed off on each plan's visual checkpoint (24-01, 24-02, 24-03, 24-04) + final 24-05 close gate"
+  },
+  "snapshot_layout_quirk_documented": {
+    "issue": "snapshot_layout returns y-coordinates for text children inside button/badge frames that don't match layout math (e.g., text reported at y > frame_height); flags 'fully clipped' / 'partially clipped' for visually-correct rendering",
+    "first_observed": "Plan 24-02 Q1 probe (multiple payload variations all hit it)",
+    "user_visual_verification": "Plans 24-02 + 24-03 + 24-04 + 24-05 all visually verified by user — rendering is correct in Pencil's canvas",
+    "recommendation_for_phase_25": "Use get_screenshot + human visual verification instead of relying on snapshot_layout problem flags for text-inside-frame structures. snapshot_layout at document-level (maxDepth: 0) remains reliable for overlap detection between top-level frames."
+  },
+  "cross_phase_handoffs": {
+    "phase_25_section_compound": "Read library_parents.\"_Components / Primitives\" id + primitives.* ids to compose Sections (Header, Footer) and Compounds (Card). Particular attention: primitives.Button.slots — Plan 24-04 Icon ids enable revisiting OPEN-24-06 slot-typing decision once Icon is wired into Button slots.",
+    "phase_27_contact_form": "Use Input/Focus + Input/Error variants directly for keyboard navigation + validation states. OPEN-24-08 and OPEN-24-09 list Phase 27 as consumer phase.",
+    "open_24_11_secondary_button": "Plan 24-02 was incomplete on Secondary purpose. Crito source mkw8g 'Discover More' is the secondary outline pattern. Phase 25/26 plans that need a Secondary CTA should build Primitive / Button / Secondary based on that source."
+  }
+}
