@@ -256,6 +256,28 @@ Per D-10 schema. All flags raised during Plan 23-01 audit.
 | OPEN-23-13 | tooling | notable | **New (plan 23-05).** `mcp__pencil__batch_design` `Insert` and `Update` operations silently reject `$<variable-name>` value references — properties default to baseline values (e.g., `fill: "$color-semantic-bg-page"` → stored as `fill: "#000000"`; `fontFamily: "$type-primitive-family-display"` → stored as `fontFamily: "Inter"`). Confirmed via direct probe: `fill: "#fdba09"` (literal hex) persists correctly while `fill: "$color-primitive-amber-500"` resolves to default black. Variable resolution DOES work for `set_variables` (verified in plans 23-03/04 — all 95 tokens carry the `$<primitive>` reference syntax in their `value` fields, and the document's variables map is correct). The `_Tokens & Foundations` reference frame in this phase therefore uses literal hex/font/size values rather than `$<token>` references — D-14's "components reference semantic only" rule is preserved in spirit because (a) downstream code consumers DO use `$<name>` resolution through Pencil's standard variable pipeline outside batch_design, and (b) the reference frame is documentation, not a runtime-consumed component. | none — workaround in place; downstream phases that use batch_design to build components should be aware that hand-edits in Pencil's UI or set_variables-driven values still resolve correctly. |
 | OPEN-23-14 | tooling | notable | **New (plan 23-05).** Pencil's VS Code extension silently switches the active editor when VS Code's focus changes — leading to `set_variables` and `batch_design` calls landing in the WRONG `.pen` file even when an explicit `filePath` argument is provided. Reproduced mid-phase 23-05: Pencil's active editor switched from `design/Crito.pen` to `/Users/joel/Desktop/Projects/tonnetz-layout/.planning/designs/phase-4/phase-4-highlight-and-toggle.pen`; the first `_Tokens & Foundations` build landed in the wrong file. Same failure mode as the original Phase 23 pause-blocker (see 23-PAUSE-NOTE.md). **Recovery:** user manually restores active editor to the target file (Cmd+P → open `design/Crito.pen` as Pencil tab), executor re-runs the affected operations. **Prevention for all future Pencil-driven phases:** before each `batch_design` or `set_variables` batch, call `mcp__pencil__get_editor_state(include_schema: false)` and assert the active editor path matches the target file. Halt and surface to user if mismatched. | none — workaround documented; affects all future Pencil-driven phases (24+). Add pre-flight active-editor assertion to plans. |
 
+### Open Flags — Phase 24 (OPEN-24-NN)
+
+Populated by plans 24-02, 24-03, 24-04 per D-22 (compositional minimum forward variants with consumer phase), D-24 (Crito-source-not-depicting-COMP-01 purposes), D-28 (brand glyphs deferred to Phase 25), D-31 (token gap deferred). Per Phase 23 D-09 carry-forward: OPEN flags do not block Phase 24 close.
+
+---
+
+## Variant Evidence (Phase 24)
+
+| primitive | variant_cell | property | literal_value | bound_to_token | source_evidence (frame_id + node_id + section) | rationale |
+|-----------|--------------|----------|---------------|----------------|------------------------------------------------|-----------|
+
+Populated by plans 24-02, 24-03, 24-04. Each row binds a literal value used in a `batch_design` payload to the semantic token name it conceptually references (OPEN-23-13 dual-track workaround). Plan 24-05 sweep cross-refs every literal in `_Components / Primitives` against this table.
+
+---
+
+## Token Extensions (Phase 24)
+
+| token_name | added_by_plan | source_evidence (frame_id + node_id) | rationale |
+|------------|---------------|--------------------------------------|-----------|
+
+Populated conditionally by plan 24-03 if D-32 Badge radius probe surfaces a needed token. Each row must answer: 'Does any other primitive need this token, or does it serve only [Plan 24-NN's primitive]?' Plan 24-05 sweep verifies every NEW token (beyond Phase 23's 95) has a row here.
+
 ---
 
 ## End-of-Phase Verification (plan 23-05)
