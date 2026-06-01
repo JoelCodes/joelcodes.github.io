@@ -55,7 +55,7 @@ Helpful patterns for composing screens and dashboards using design system compon
 
 ## Frames
 
-15 top-level Crito frames + 2 joel-only-no-crito-ref placeholder rows (per CONTEXT D-08) = 17 entries.
+15 top-level Crito frames + 3 Phase-24 library frames (Primitives + Compounds-stub + Sections-stub) + 2 joel-only-no-crito-ref placeholder rows (per CONTEXT D-08) = 20 entries. Note: `_Tokens & Foundations` (RpGbe, added by plan 23-05) is not enumerated here — it's documented in `## End-of-Phase Verification (plan 23-05)`.
 
 | frame_name | frame_id | scope | joel_page_map | child_section_count | status_counts | reconstruction_priority | open_flag_ids |
 |---|---|---|---|---|---|---|---|
@@ -76,6 +76,9 @@ Helpful patterns for composing screens and dashboards using design system compon
 | FULL DESIGN PREVIEW | IKAu3 | OUT-OF-SCOPE | none — Crito section banner | 1 | flat:0, partial:0, factored:1 | n/a (out of scope) | — |
 | (joel-only: Design System) | n/a (no Crito source) | joel-only-no-crito-ref | /design-system page (per D-08) | 0 | flat:0, partial:0, factored:0 | medium (Phase 30) | — |
 | (joel-only: 404) | n/a (no Crito source) | joel-only-no-crito-ref | /404 page (per D-08) | 0 | flat:0, partial:0, factored:0 | low (Phase 26) | — |
+| _Components / Primitives | avgor | library (Phase 24 deliverable) | n/a (library frame, not a page) | 2 (title + manifest note; populated by plans 24-02 / 24-03 / 24-04) | flat:0, partial:0, factored:0 (parent — primitives added by plans 24-02..04) | n/a (Phase 24) | OPEN-23-12 (pill radius candidate per 24-03 Badge probe) |
+| _Components / Compounds | t67DU6 | library (Phase 25 deferral stub per D-37) | n/a (library frame, not a page) | 2 (title + Phase 25 deferral note citing plan 25-03) | flat:0, partial:0, factored:0 | n/a (Phase 25 deliverable) | — |
+| _Components / Sections | g9oRa5 | library (Phase 25 deferral stub per D-37) | n/a (library frame, not a page) | 2 (title + Phase 25 deferral note citing plans 25-01, 25-02) | flat:0, partial:0, factored:0 | n/a (Phase 25 deliverable) | — |
 
 **Other Joel-only pages with no Crito reference (not broken out as rows per D-08 scope limitation):** Projects, FAQ, Thank-you. These appear in the ROADMAP page set but lack a 1:1 Crito source frame. FAQ is partially derivable from Blog frame typography per D-15; see OPEN-23-06.
 
