@@ -199,9 +199,22 @@ Plans:
 
 Plans:
 
+**Wave 1**
+
 - [ ] 25-01-PLAN.md — `Section / Header` build: Crito Menu-bar source audit (D-38/D-39/D-41), Secondary Button variant via D-43 path probe (resolves OPEN-24-11), dual CTA with arrow-right iconTrailing wire (D-44 — resolves OPEN-24-06)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
 - [ ] 25-02-PLAN.md — `Section / Footer` build: Crito Footer source audit (D-48), Instagram lucide Pattern A probe (D-45), Substack Pattern B atomic-glyph from simpleicons canonical (D-46 — resolves OPEN-24-13), Chivo typography earns its keep (D-47)
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
 - [ ] 25-03-PLAN.md — `Compound / Card` build: raster-probe inference from image-import-{12,14,8,22}.jpg (D-49), Pencil typed-slot mechanics probe (D-52), 4 slots image+title+body+footer-actions per D-51 with placeholders enabled (D-53), Phase 25 close sweep + id-inventory archival
+
+**Cross-cutting constraints:**
+
+- Every Pencil-mutating batch is preceded by `mcp__pencil__get_editor_state({ include_schema: false })` asserting active editor == `design/Crito.pen` (D-54)
+- `snapshot_layout(maxDepth: 0, problemsOnly: true)` at document root returns `\"No layout problems.\"`; per-frame text-clipping false-positives documented per Phase 24 quirk (24-05-SUMMARY)
 
 ---
 
