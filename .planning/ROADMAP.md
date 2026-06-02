@@ -195,13 +195,13 @@ Plans:
   3. Each section/compound component has a sibling Pencil note declaring its slot signature: which children are consumer-provided, which are fixed, which are optional
   4. Sections and the compound reference primitive components (Button, Input, Badge, Icon) and semantic tokens only — no raw hex, no raw px, no inline duplications of Button/Input markup
 
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
 
-- [ ] 25-01: Build `Section / Header` (logo + nav links + CTA button instance) using `Primitive / Button` and semantic tokens; document slot signature in sibling note
-- [ ] 25-02: Build `Section / Footer` (link columns + social icons via `Primitive / Icon` + copyright row) using semantic tokens; document slot signature
-- [ ] 25-03: Build `Compound / Card` with slots for content variation (image slot, title slot, body slot, footer-actions slot); verify the same component serves project / blog / service card use cases by populating each slot configuration; document slot signature
+- [ ] 25-01-PLAN.md — `Section / Header` build: Crito Menu-bar source audit (D-38/D-39/D-41), Secondary Button variant via D-43 path probe (resolves OPEN-24-11), dual CTA with arrow-right iconTrailing wire (D-44 — resolves OPEN-24-06)
+- [ ] 25-02-PLAN.md — `Section / Footer` build: Crito Footer source audit (D-48), Instagram lucide Pattern A probe (D-45), Substack Pattern B atomic-glyph from simpleicons canonical (D-46 — resolves OPEN-24-13), Chivo typography earns its keep (D-47)
+- [ ] 25-03-PLAN.md — `Compound / Card` build: raster-probe inference from image-import-{12,14,8,22}.jpg (D-49), Pencil typed-slot mechanics probe (D-52), 4 slots image+title+body+footer-actions per D-51 with placeholders enabled (D-53), Phase 25 close sweep + id-inventory archival
 
 ---
 
