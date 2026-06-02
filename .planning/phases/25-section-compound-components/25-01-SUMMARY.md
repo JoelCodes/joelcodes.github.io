@@ -9,7 +9,7 @@ started: 2026-06-02
 
 # Plan 25-01 Summary — Section / Header
 
-**STATUS: Task 0 COMPLETE — DRAFT. Tasks 1–4 pending; Task 1 checkpoint to surface source-vs-CONTEXT conflicts before any Button mutations.**
+**STATUS: Task 0 COMPLETE. Source-vs-CONTEXT conflicts resolved at pre-Task-1 user gate (2026-06-02): strict source-wins on both — A1 (0 affordances) + B1 (1 CTA in Header). Tasks 1–4 pending.**
 
 This plan ships `Section / Header` (COMP-05) inside `_Components / Sections` (g9oRa5), adds a Secondary Button variant per D-42/D-43 (resolves OPEN-24-11), and wires both Header CTAs' iconTrailing slots with `arrow-right` per D-44 (resolves OPEN-24-06).
 
@@ -98,7 +98,18 @@ Called `get_guidelines("Design System")` + `get_guidelines("Landing Page")` (Tit
 **Status:** UNRESOLVED — will execute in Task 1.
 **Approach:** Try D-43 PREFERRED (add `purpose` axis cell to M7eUr) → if Hover/Focus YJhRv/gQa2R clobbered, fall back to sibling `Primitive / Button / Secondary` in avgor.
 
-### NEW SOURCE-VS-CONTEXT CONFLICTS (surfaced for user gate at Task 1 checkpoint)
+### SOURCE-VS-CONTEXT CONFLICTS — RESOLVED at pre-Task-1 user gate (2026-06-02)
+
+**User gate decisions:**
+- **Conflict A → A1 (strict source-wins, 0 affordances):** D-39 effectively superseded by source audit. Section/Header ships logo + nav + 1 CTA only. PEN-INVENTORY Phase 24 § "Icon Glyphs" "Menu bar" attributions for search/chevron-down/menu are factually incorrect; will be corrected in Task 4 audit-trail with cross-reference to ULZiU live audit. The 3 glyphs themselves stay shipped (no removal — they're available for Phase 26+ consumers if those frames depict them).
+- **Conflict B → B1 (strict source-wins, 1 CTA in Header):** D-42 effectively superseded. Section/Header instances Default green CTA only ("Get Started Free" per Crito Menu bar literal). Secondary Button variant STILL gets added to Primitive/Button library in Task 1 (resolves OPEN-24-11 — downstream consumers Phase 27 contact form / Phase 31 Hero get the Secondary outline). D-44 (iconTrailing arrow-right wire-up) applies to the single primary CTA — still resolves OPEN-24-06 via actual use.
+- **Updated CTA label (D-38 strict source-wins for content):** Primary CTA descendant text override → `"Get Started Free"` from Crito source `ujHMI`.
+- **OPEN-25 flags this plan will seed at Task 4:**
+  - OPEN-25-01 (Q3 Secondary stroke navy-vs-source-literal-white) — already planned
+  - OPEN-25-02 (D-39 source-attribution-correction) — NEW: PEN-INVENTORY Icon-Glyphs "Menu bar" rows for search/chevron-down/menu need corrected attribution
+  - OPEN-25-03 (D-42 superseded by source audit) — NEW: Section/Header ships 1 CTA per source; CONTEXT D-42's "two CTAs" intent reassigned to Phase 31 Homepage Hero (where Crito source DOES show 2 CTAs via mkw8g)
+
+### Original conflicts as surfaced (for audit-trail completeness)
 
 #### Conflict A — D-39 (3 Crito Menu bar affordances) vs source
 
@@ -142,11 +153,59 @@ If B2 chosen, primary CTA descendant text override → `"Get Started Free"` (Cri
 - No PEN-INVENTORY edits (Task 4)
 - No `design/Crito.pen` mutations (Task 0 is read-only)
 
-## Next: Task 1 Checkpoint
+## Variant-Axis Probe Result (Open Question 1)
 
-Task 1 will:
-1. Probe Pencil 2.13 variant-axis-extension on M7eUr (Open Q1 resolution).
-2. Add Secondary Button variant (D-42 / D-43) regardless of Conflict-B resolution — primitive library always benefits from Secondary even if Header instances only 1 CTA.
-3. **CHECKPOINT** — surface to user: (a) variant-axis probe outcome; (b) Secondary cell `get_screenshot`; (c) **Conflict A** decision (affordances 0 or 3); (d) **Conflict B** decision (CTAs 1 or 2).
+**Outcome:** Pencil 2.13's `Frame` schema has NO `variants` property or variant-axis mechanism. Phase 24's "variants" (`Primitive / Button / Default / Hover` YJhRv, `Primitive / Button / Default / Focus` gQa2R) are SIBLING non-reusable frames using naming convention — NOT a Pencil-native variant axis on M7eUr.
 
-User responses at the checkpoint determine Task 2's Section/Header build scope.
+**Consequence for D-43:** PREFERRED path (add `purpose` cell to M7eUr) is N/A — there's no axis to extend. PREFERRED and FALLBACK paths converge to the same approach: ship `Primitive / Button / Secondary` as a new sibling reusable component inside avgor.
+
+**Probe method:** Direct `batch_get(M7eUr, readDepth: 3)` read of existing structure showed no variants property in M7eUr or its siblings (YJhRv, gQa2R). Schema dump from Plan-start `get_editor_state` confirmed Frame interface has no `variants` field. No exploratory mutation needed — schema-truth probe sufficient.
+
+## Secondary Button Build (Task 1)
+
+**Inserted as sibling reusable component inside avgor:**
+
+| property | value | source citation |
+|---|---|---|
+| id | `hIWuC` | newly created |
+| name | `Primitive / Button / Secondary` | naming convention matches Default/Hover/Focus siblings |
+| reusable | true | first-class library component, instanceable via `ref` |
+| width / height | 200 / 60 | matches M7eUr Default |
+| fill | (absent — transparent) | source mkw8g (outline pattern) |
+| stroke | `#141f39ff` (navy) | Open Q3 resolution: navy default for light-bg Header context; source-literal `#ffffffff` (Hero dark-bg) DEVIATES → seed OPEN-25-01 at Task 4 |
+| strokeWidth | 0.5 | source mkw8g |
+| strokeAlignment | `inner` | source mkw8g |
+| cornerRadius | 10 | source mkw8g + matches `radius-semantic-button` |
+| padding | `[16, 20]` | source mkw8g + matches `space-semantic-button-py/-px` |
+| gap | 10 | source mkw8g (OPEN-24-01 carry — 10 vs nearest semantic 9) |
+| alignItems / justifyContent | center / center | source mkw8g |
+
+**Children (3, mirroring Default's API):**
+
+| child_id | role | properties |
+|---|---|---|
+| `KQuMh` | iconLeading slot frame | enabled: false (collapsed by default), width: 24, height: 24 |
+| `UbwMv` | Label text | content "Button Label", Inter / 16 / **600** (heavier than Default's 500 — source mkw8g fontWeight 600), fill `#141f39ff` (navy text for navy outline / transparent fill / light-bg context), lineHeight 1.5 |
+| `q7FOY` | iconTrailing slot frame | enabled: false (collapsed by default), width: 24, height: 24 |
+
+**Phase 24 baseline-drift verification (Pitfall 6 enforcement):** `batch_get` of M7eUr / YJhRv / gQa2R after Secondary insertion shows ZERO mutations to existing Phase 24 baseline:
+- M7eUr: fill `#38da71ff`, weight 500, label fill white, slots/ids preserved ✓
+- YJhRv (Hover): fill `#2db461ff`, structure intact ✓
+- gQa2R (Focus): stroke `#15bee3ff` outer 2, structure intact ✓
+- AvKtA, V4Dx4i, ATJK9 + Hover/Focus child IDs (H2Z0Jz, PQ2JK, fumzQ, X4xsGa, I09rj, HpWzq) all preserved ✓
+
+**snapshot_layout result (per-frame on hIWuC):** Reports text-clipping for children KQuMh / UbwMv / q7FOY — documented Phase 24 text-inside-button-frame quirk per 24-05-SUMMARY. `get_screenshot` shows correct visual rendering; snapshot quirk does NOT correspond to a real layout bug.
+
+**`get_screenshot` result:** Secondary renders as a thin-outlined rectangular pill with navy stroke 0.5px on transparent fill. Label "Button Label" navy. Matches source mkw8g visual at light-bg context.
+
+## Next: Task 1 user gate (visual approval) → Task 2 (Section/Header build with A1+B1 scope)
+
+Awaiting user visual approval of Secondary Button (`hIWuC`) before proceeding to Task 2.
+
+Task 2 scope (per A1+B1 user gate decisions):
+- Section/Header parent: width 1414, fixed-width per D-41 (audit-derived)
+- logo-slot with Crito wordmark text placeholder ("Crito" DM Sans 36/700, navy `#141f39ff` for white-bg context)
+- nav-links row with 6 literal Crito labels: Home, Pages, Pricing, Portfolio, Blog, Contact (Inter 16/500 navy)
+- **NO affordances row** (A1 strict source-wins — Crito Menu bar source has 0 affordances)
+- cta-row with **1 CTA** (B1 strict source-wins — Default green "Get Started Free", iconTrailing arrow-right wire-up for D-44 OPEN-24-06 actual-use resolution)
+- Sibling Pencil note documenting slot signature (Task 4)
