@@ -205,7 +205,7 @@ Plans:
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 25-02-PLAN.md — `Section / Footer` build: Crito Footer source audit (D-48), Instagram lucide Pattern A probe (D-45), Substack Pattern B atomic-glyph from simpleicons canonical (D-46 — resolves OPEN-24-13), Chivo typography earns its keep (D-47)
+- [x] 25-02-PLAN.md — `Section / Footer` built (Xs0Hs inside g9oRa5): Crito Footer audit (Y1ldm) found 3 link columns (not 4 as RESEARCH assumed) + Instagram already in source (correction to OPEN-24-13); lucide Instagram Pattern A probe PASS (D-45); Substack Pattern B atomic-glyph component `AzmgQ` from simpleicons canonical SVG (D-46 — resolves OPEN-24-13); Chivo typography earns its keep (D-47); social-row ships Joel-brand Instagram + Substack at component level (Twitter+LinkedIn skipped per Pitfall 7); seeds OPEN-25-04/05/06
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
