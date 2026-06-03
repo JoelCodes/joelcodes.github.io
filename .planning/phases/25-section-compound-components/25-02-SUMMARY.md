@@ -109,13 +109,37 @@ Probe artifact deleted at task close (`Delete("H3nL3")`) per Phase 24 plan 24-04
 
 **Reusable count:** 10 (Phase 24's 7 + Plan 25-01's Secondary + Section/Header + Substack glyph).
 
-## Next: Task 3 — build Section/Footer parent + children
+## Section/Footer Build (Task 3)
 
-Task 3 will:
-1. Pre-flight.
-2. Build Footer parent inside g9oRa5 (width 1200 matching Header, vertical layout, padded, bg `#fafafaff`/`color-semantic-bg-surface` per audit).
-3. Build main-row (horizontal: brand-column + 3 link columns).
-4. Build brand-column: logo-slot (Crito wordmark placeholder), tagline (Chivo 16/normal, source literal), social-row with Instagram (Pattern A lucide) + Substack (Pattern B ref to AzmgQ).
-5. Build 3 link columns from Crito audit (Resources, Help & Support, Useful Links).
-6. Build copyright-row with source literal "© 2024 Crito. All Right Reserved" (Chivo 14).
-7. Capture screenshot.
+**Inserted as new reusable child of g9oRa5 (sibling of G0wNOc Section/Header):**
+
+| id | role | properties |
+|---|---|---|
+| `Xs0Hs` | Section / Footer parent | reusable:true, width:1200 (matching Header), layout:vertical, gap:32, padding:[48, 0], fill:`#fafafaff` (`color-semantic-bg-surface`) |
+| `BWuAY` | main-row | horizontal, gap:60, justifyContent:space_between, alignItems:start, width:fill_container |
+| `EbI44` | brand-column | vertical, gap:16, width:341 (matching Crito tagline width per audit) |
+| `kkO4M` | logo-slot | slot:[], enabled:true, contains `NOFXt` "Crito" wordmark placeholder (DM Sans 36/700, navy, letterSpacing -0.72, lineHeight 1.2) |
+| `uubl4` | tagline | "Phasellus pulvinar porta turpis sit amet facilis sapien bibendum eu praesent massa." (Chivo 16/normal, `#52525bff`, lineHeight 1.625, fixed-width 341 — source `dPtB2` literal per D-48) |
+| `B9gNb` | social-row | horizontal, gap:16, alignItems:center; contains 2 icons (Joel-brand) |
+| `p3BnkK` | Instagram icon | type:icon, library:lucide (Pattern A per D-45), icon:"instagram", 24×24, navy fill |
+| `ISnSD` | Substack icon | type:ref, ref:`AzmgQ` (Pattern B atomic-glyph from Task 2 per D-46) |
+| `NO9J5` | link-columns container | horizontal, gap:60, alignItems:start |
+| `g6CF2` Useful Links column | vertical, gap:8 | heading "Useful Links" (Chivo 16/700, `#141f38ff`) + 4 links: Features, About, Service, Team (Chivo 16/normal, `#52525bff`, lineHeight 1.625) — Crito source `TqQco` |
+| `TNZRz` Help & Support column | vertical, gap:8 | heading "Help & Support" + links: FAQ, Blog, Contact Us, Support — Crito source `toAtb` |
+| `w5CqFq` Resources column | vertical, gap:8 | heading "Resources" + links: Tools, Guides and resources, Team, Support — Crito source `0Ty39` |
+| `l4jp3` | copyright-row | horizontal, justifyContent:end, fill_container; contains `Vdkgq` "© 2024 Crito. All Right Reserved" (Chivo 14/normal, `#52525bff`, opacity 0.8, lineHeight 1.4286 — Crito source `8Kx6s` literal) |
+
+**Source-wins discipline notes:**
+- Brand-column complex children (Mobile/Email contact rows + 2 raster-baked buttons) NOT shipped — raster-baked Button 01/02 are not reconstructable (Pitfall 7 enforcement: don't ship inferred); Mobile/Email contact rows could be shipped if Joel needs them, but per Phase 25 scope-discipline (don't go beyond what current consumers need) these are deferred to a future Joel-Footer-content phase if needed.
+- Social-row: ships Joel-brand glyphs (Instagram + Substack) at component level per D-45/D-46 + user gate decision. Crito's Twitter + LinkedIn NOT shipped per Pitfall 7 (Joel's component, Joel's brand glyphs).
+- Link columns: 3 columns (corrected from RESEARCH's 4-column assumption per audit). Column order: Useful Links → Help & Support → Resources matches Crito's `iHrsm > TqQco/toAtb/0Ty39` left-to-right visual order.
+- Copyright: Crito source literal per D-48; Phase 31 instance overrides with Joel-brand text (e.g., "© 2026 Joel Shinness").
+- Mobile/Email contact rows from Crito source: deferred. Joel's site has contact info elsewhere (Contact page), so Footer doesn't need them; matches D-48 source-wins-with-Joel-scope-filter.
+
+**Phase 24 baseline-drift verification:** g9oRa5 grew by 2 children since Plan 25-01 (Section/Header `G0wNOc` + Section/Footer `Xs0Hs` + sibling note `hkh26` from Plan 25-01 Task 4); g9oRa5's structural properties (layout, padding, gap, fill, width) unchanged. avgor grew by 2 (Secondary Button + Substack glyph) — its properties unchanged. All other Phase 23/24 baseline IDs untouched.
+
+**Document-level snapshot_layout:** `"No layout problems."` ✓ VAL-25-15 PASS.
+
+## Next: Task 4 — user visual gate + sibling note + PEN-INVENTORY + ROADMAP + plan close
+
+Awaiting user visual approval of Section/Footer (`Xs0Hs`) before Task 4 close.
