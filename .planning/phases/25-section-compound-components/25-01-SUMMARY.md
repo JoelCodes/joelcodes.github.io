@@ -198,14 +198,47 @@ If B2 chosen, primary CTA descendant text override → `"Get Started Free"` (Cri
 
 **`get_screenshot` result:** Secondary renders as a thin-outlined rectangular pill with navy stroke 0.5px on transparent fill. Label "Button Label" navy. Matches source mkw8g visual at light-bg context.
 
-## Next: Task 1 user gate (visual approval) → Task 2 (Section/Header build with A1+B1 scope)
+## Section/Header Build (Task 2)
 
-Awaiting user visual approval of Secondary Button (`hIWuC`) before proceeding to Task 2.
+**Inserted as new reusable child of g9oRa5:**
 
-Task 2 scope (per A1+B1 user gate decisions):
-- Section/Header parent: width 1414, fixed-width per D-41 (audit-derived)
-- logo-slot with Crito wordmark text placeholder ("Crito" DM Sans 36/700, navy `#141f39ff` for white-bg context)
-- nav-links row with 6 literal Crito labels: Home, Pages, Pricing, Portfolio, Blog, Contact (Inter 16/500 navy)
-- **NO affordances row** (A1 strict source-wins — Crito Menu bar source has 0 affordances)
-- cta-row with **1 CTA** (B1 strict source-wins — Default green "Get Started Free", iconTrailing arrow-right wire-up for D-44 OPEN-24-06 actual-use resolution)
-- Sibling Pencil note documenting slot signature (Task 4)
+| property | value | notes |
+|---|---|---|
+| id | `G0wNOc` | new reusable in g9oRa5 |
+| name | `Section / Header` | naming convention COMP-05 satisfied |
+| reusable | true | first-class library component |
+| width | 1200 | fixed-width per D-41 (Crito Menu bar effective visual width ≈1180-1200 per Task 0 audit) |
+| layout | horizontal (default) | nav row pattern per Pencil guidelines § 10 Pattern B |
+| justifyContent | space_between | logo left, nav center-ish, cta right |
+| alignItems | center | vertical centering of children |
+| gap | 32 | per Pencil § 12 nav-row spacing reference |
+| padding | 0 | no internal padding (parent handles outer spacing via space_between) |
+
+**Children (3 layout containers):**
+
+| child_id | role | properties |
+|---|---|---|
+| `adoph` | `logo-slot` | type frame, `slot: []` (untyped — typed-slot probe deferred to Plan 25-03 per D-52), `enabled: true`, alignItems center, contains placeholder text `wtJpF` "Crito" (DM Sans 36/700, navy `#141f39ff`, letterSpacing -0.72, lineHeight 1.2 — source-derived from Crito wordmark `TXMZr`) |
+| `wvv1T` | `nav-links` row | type frame, horizontal layout (default), gap 32, alignItems center. Contains 6 text children — source labels lifted from Crito source single text node `wM9Ac` (whitespace-separated) to discrete text nodes for instance-time per-label overrides. IDs: `mUBnQ` Home, `Q85gzd` Pages, `R6QDSe` Pricing, `K7auH8` Portfolio, `uueLx` Blog, `C0p596` Contact. All Inter 16/500, navy `#141f39ff`, lineHeight 1.5. |
+| `yVNDw` | `cta-row` | type frame, horizontal layout (default), gap 12 (per § 12 Button groups), alignItems center. **Empty until Task 3** — will receive 1 Button ref (per B1 user gate). Currently reports `fit_content(0)` collapse warning — expected/benign, Task 3 resolves. |
+
+**Source-wins discipline notes (D-38 + audit-derived deviations):**
+- Nav labels lifted from Crito's single text node `wM9Ac` (`"Home            Pages            Pricing            Portfolio            Blog            Contact"`) to 6 discrete text nodes. Visual layout preserved (gap 32 ≈ Crito's whitespace separator visual). Lift rationale: discrete nodes enable per-instance label overrides at Phase 31 Homepage (Joel's actual nav: Blog, Projects, FAQ, Contact) without rewriting the whole text node.
+- Logo: Crito's source uses multicolor vector icon + DM Sans "Crito" wordmark. Component-level placeholder simplifies to wordmark-only text — Phase 31 instance can replace via slot mechanism with Joel-brand wordmark when designed.
+- Default Header bg: white (g9oRa5's bg cascades). Crito's Hero is navy (Hero context). Component-level navy text on white = visible; Phase 31 Hero instance can override fills to white-on-navy at instance time via descendants.
+
+**No affordances row built** per A1 user gate (Conflict A strict source-wins resolution).
+
+**Phase 24 baseline-drift verification:** g9oRa5 properties unchanged (still vertical layout, gap 24, padding 40, fill white, width 1440); only `children` array grew by 1 (the new Section/Header). All other Phase 24 baseline IDs untouched.
+
+**snapshot_layout warnings (expected/benign):**
+- `cta-row yVNDw` reports `fit_content(0)` collapse — empty container; Task 3 populates with Button ref → resolves.
+
+## Next: Task 3 — wire single CTA (B1 scope) + arrow-right iconTrailing
+
+Task 3 will:
+1. Insert primary CTA ref to M7eUr inside `cta-row` (yVNDw) with descendant override on label `ATJK9` → "Get Started Free" (Crito source literal `ujHMI`).
+2. Enable iconTrailing slot `V4Dx4i` via descendant override.
+3. Insert `type: icon, library: lucide, icon: "arrow-right"` node into the iconTrailing slot.
+4. Capture `get_screenshot` of populated Section/Header for user visual gate.
+5. Resolve OPEN-24-06 (empty-slot collapse) by ACTUAL use observation per D-44.
