@@ -201,7 +201,7 @@ Plans:
 
 **Wave 1**
 
-- [ ] 25-01-PLAN.md — `Section / Header` build: Crito Menu-bar source audit (D-38/D-39/D-41), Secondary Button variant via D-43 path probe (resolves OPEN-24-11), dual CTA with arrow-right iconTrailing wire (D-44 — resolves OPEN-24-06)
+- [x] 25-01-PLAN.md — `Section / Header` built (G0wNOc inside g9oRa5): Crito Menu-bar audit found 0 affordances + 1 CTA (source-wins resolutions A1 + B1 at Task 1 user gate); Secondary Button variant added as sibling component `hIWuC` in avgor (Pencil 2.13 has no variant-axis property — D-43 PREFERRED/FALLBACK converge); logo-slot + 6 Crito-source nav labels + single primary CTA wired with lucide arrow-right via descendants override; resolves OPEN-24-06 (empty-slot collapse via actual use) + OPEN-24-11 (Secondary from `mkw8g`); seeds OPEN-25-01/02/03
 
 **Wave 2** *(blocked on Wave 1 completion)*
 

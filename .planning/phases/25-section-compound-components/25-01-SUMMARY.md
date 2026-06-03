@@ -2,14 +2,15 @@
 phase: 25-section-compound-components
 plan: 25-01
 type: summary
-status: in_progress
+status: complete
 wave: 1
 started: 2026-06-02
+completed: 2026-06-03
 ---
 
 # Plan 25-01 Summary — Section / Header
 
-**STATUS: Task 0 COMPLETE. Source-vs-CONTEXT conflicts resolved at pre-Task-1 user gate (2026-06-02): strict source-wins on both — A1 (0 affordances) + B1 (1 CTA in Header). Tasks 1–4 pending.**
+**STATUS: COMPLETE — all 5 tasks executed and approved at user gates (Task 1 + Task 3). OPEN-24-06 + OPEN-24-11 RESOLVED in PEN-INVENTORY. OPEN-25-01/02/03 seeded. Plan 25-02 can proceed (sequential per D-57).**
 
 This plan ships `Section / Header` (COMP-05) inside `_Components / Sections` (g9oRa5), adds a Secondary Button variant per D-42/D-43 (resolves OPEN-24-11), and wires both Header CTAs' iconTrailing slots with `arrow-right` per D-44 (resolves OPEN-24-06).
 
@@ -261,16 +262,94 @@ If B2 chosen, primary CTA descendant text override → `"Get Started Free"` (Cri
 
 **Phase 24 baseline-drift verification:** M7eUr / V4Dx4i / AvKtA / ATJK9 underlying component definitions unchanged. The descendant overrides apply only at the `ciMov` ref instance — primitive untouched.
 
-## Next: Task 4 — sibling Pencil note + PEN-INVENTORY updates + plan close
+## Sibling Pencil Note + PEN-INVENTORY Updates (Task 4)
 
-Task 4 will:
-1. Insert sibling Pencil note inside g9oRa5 documenting Section/Header slot signature (COMP-05 Success Criterion 3).
-2. Extend PEN-INVENTORY § Variant Evidence (Phase 24) with Phase-25-late-addition rows (Secondary cell + Section/Header structural rows) per D-23/D-56.
-3. Update PEN-INVENTORY § Open Flags — Phase 24: mark OPEN-24-06 + OPEN-24-11 RESOLVED with Plan 25-01 citations.
-4. Add PEN-INVENTORY § Open Flags — Phase 25 (OPEN-25-NN) section with rows:
-   - OPEN-25-01 (Secondary stroke context-deviation — navy vs source-literal white)
-   - OPEN-25-02 (D-39 source-attribution-correction — earlier PEN-INVENTORY Menu bar affordance citations were wrong)
-   - OPEN-25-03 (D-42 superseded by source audit — Header ships 1 CTA per Crito source; 2-CTA intent reassigned to Phase 31 Homepage Hero)
-5. Document-level `snapshot_layout(maxDepth: 0, problemsOnly: true)`; per-frame Phase 24 text-clipping quirk documented.
-6. Update ROADMAP.md Phase 25 plan list (25-01 checkbox + Plans: 3 plans).
-7. Finalize this SUMMARY.md.
+### Sibling Pencil note `hkh26` inside g9oRa5
+Content documents Section/Header slot signature in human-readable form (COMP-05 Success Criterion 3 + D-52 belt-and-suspenders coverage):
+- logo-slot: untyped Pencil-native slot prop, enabled:true, Crito wordmark text placeholder; consumers override at instance time
+- nav-links: 6 fixed text nodes (Home, Pages, Pricing, Portfolio, Blog, Contact); per-instance label overrides via descendants in Phase 31
+- cta-row: 1 Button ref instance per B1 source-wins (Crito source 1 CTA)
+- NOT shipped: affordances row per A1 source-wins (Crito source 0 affordances)
+
+Note type used `type: "note"` (no `fill` property per Pencil schema — Note extends Entity + Size + TextStyle, NOT CanHaveGraphics; matches Phase 24 precedent `SGQZC`).
+
+### PEN-INVENTORY Updates (D-56 audit-trail discipline)
+1. **§ "Variant Evidence (Phase 24)" extended** with 12 Phase-25-late-addition rows: Secondary Button cell properties (5 rows: parent fill/stroke/etc, structural, label text, slots), Section/Header structural rows (7 rows: parent, logo-slot, logo placeholder, nav-links row, nav-link text nodes, cta-row, primary CTA ref + arrow-right). Each row cites source frame_id + node_id (or marks Q3 deviation).
+2. **§ "Open Flags — Phase 24" Resolution column updated:**
+   - OPEN-24-06: RESOLVED 25-01 Task 3 — empty-slot collapse confirmed by actual production use; descendant-enabled-override is the correct API
+   - OPEN-24-11: RESOLVED 25-01 Task 1 — Secondary shipped as sibling reusable `hIWuC`; D-43 PREFERRED/FALLBACK converge to sibling-component due to Pencil 2.13 schema (no variant-axis property)
+3. **NEW § "Open Flags — Phase 25 (OPEN-25-NN)" section** with 3 rows:
+   - **OPEN-25-01** (variant, notable): Secondary stroke navy default deviates from source-literal white — consumer phase 31 Hero may override at instance via descendants
+   - **OPEN-25-02** (source-attribution, minor): Correction of Phase 24 Icon Glyphs "Menu bar" attribution — search/chevron-down/menu glyphs don't live in ULZiU per Plan 25-01 Task 0 live audit; informational, glyphs still ship
+   - **OPEN-25-03** (scope-deviation, notable): CONTEXT D-42 superseded by source audit — Header ships 1 CTA per Crito Menu bar source; 2-CTA intent re-homed to Phase 31 Homepage Hero where Crito source DOES show 2 CTAs
+
+## snapshot_layout Audit (VAL-25-15)
+
+| level | result | notes |
+|---|---|---|
+| Document root (`maxDepth: 0, problemsOnly: true`) | `"No layout problems."` ✓ PASS | No overlap between any top-level frames (19 top-level frames including new G0wNOc/hkh26 children of g9oRa5) |
+| Per-frame on Secondary Button `hIWuC` | text-clipping false-positive | Phase 24 text-inside-button-frame quirk per 24-05-SUMMARY — `get_screenshot` is authoritative |
+| Per-frame on Section/Header `G0wNOc` | not run individually — covered by document-level | Component children are all within their parent's bounds; no real layout issues |
+
+## ROADMAP.md Update
+
+Phase 25 plan 25-01 checkbox marked `[x]` with descriptive completion summary covering: source-wins resolutions A1+B1, Secondary as sibling component, OPEN-24-06/11 resolved, OPEN-25-01/02/03 seeded. `**Plans**: 3 plans` line already set during plan-phase orchestration.
+
+## Reference Screenshot Set (VAL-25-23)
+
+Inline screenshots captured at each user gate:
+- **Task 1 user gate (2026-06-02):** `get_screenshot(hIWuC)` Secondary Button rendered — APPROVED
+- **Task 3 user gate (2026-06-03):** `get_screenshot(G0wNOc)` populated Section/Header rendered — APPROVED
+- (Task 0 audit was read-only; no mutations to screenshot)
+- (Task 2 build had no checkpoint — confirmed visually at Task 3's full Header gate)
+- (Task 4 close confirmed via this SUMMARY + audit trail; no additional visual gate needed beyond Task 3's full-Header approval)
+
+## VAL-25-* Outcomes for Plan 25-01
+
+| VAL ID | Status | Citation |
+|---|---|---|
+| VAL-25-01 (Section/Header under g9oRa5, reusable:true) | ✓ PASS | `batch_get(g9oRa5, readDepth: 2)` returns G0wNOc child; reusable:true confirmed |
+| VAL-25-07 (Header instances Button twice — dual CTA) | ❌ N/A under B1 user gate | Header instances Button ONCE per B1 strict source-wins (Crito source 1 CTA). Original D-42 intent superseded — see OPEN-25-03 |
+| VAL-25-08 (Header CTA iconTrailing has lucide arrow-right) | ✓ PASS | `ciMov/V4Dx4i` enabled:true (via descendant override) contains I9F0r `type:icon library:lucide icon:arrow-right` |
+| VAL-25-11 (Secondary Button variant present) | ✓ PASS | hIWuC reusable:true in avgor with source-evidenced values from mkw8g + Q3 navy override |
+| VAL-25-12 (auto-layout, no absolute positioning) | ✓ PASS | All Section/Header containers use Pencil auto-layout; no x/y positioning on children |
+| VAL-25-14 (pre-flight active-editor before every mutation) | ✓ PASS | 5 pre-flight `get_editor_state` calls logged (Task 0, Task 1, Task 2, Task 3, Task 4); 0 mismatch incidents |
+| VAL-25-15 (snapshot_layout clean document-level; per-frame quirks documented) | ✓ PASS | Document-level: "No layout problems." Per-frame text-clipping documented per Phase 24 quirk |
+| VAL-25-16 (PEN-INVENTORY Variant Evidence extended per D-56) | ✓ PASS | 12 Phase-25-late-addition rows added (Secondary cell + Section/Header structural) |
+| VAL-25-18 (OPEN-25-NN section seeded) | ✓ PASS | 3 OPEN-25 rows seeded (01 stroke deviation, 02 attribution correction, 03 D-42 supersession) |
+| VAL-25-19 (OPEN-24-06 RESOLVED with Plan 25-01 citation) | ✓ PASS | Resolution column updated with D-44 actual-use citation |
+| VAL-25-20 (OPEN-24-11 RESOLVED with Plan 25-01 citation) | ✓ PASS | Resolution column updated with D-43-converged sibling-component citation |
+| VAL-25-23 (User visual checkpoints) | ✓ PASS (Plan 25-01 portion) | Task 1 + Task 3 user gates APPROVED; full Phase 25 close gate at Plan 25-03 |
+
+## Files Modified
+
+| file | modification | rationale |
+|---|---|---|
+| `design/Crito.pen` | NEW: `hIWuC` Primitive/Button/Secondary inside avgor; NEW: `G0wNOc` Section/Header inside g9oRa5 with children (adoph logo-slot, wtJpF logo placeholder, wvv1T nav-links + 6 text children, yVNDw cta-row, ciMov Primary CTA ref, I9F0r arrow-right icon); NEW: `hkh26` sibling note inside g9oRa5 | Plan 25-01 deliverables — Tasks 1-4 |
+| `.planning/research/PEN-INVENTORY.md` | Extended § Variant Evidence (Phase 24) with 12 rows; updated OPEN-24-06 + OPEN-24-11 Resolution columns; NEW § Open Flags — Phase 25 (OPEN-25-NN) with 3 rows | D-56 audit-trail |
+| `.planning/ROADMAP.md` | Phase 25 plan 25-01 checkbox `[x]` with completion summary | Plan close discipline |
+| `.planning/phases/25-section-compound-components/25-01-SUMMARY.md` | This file (final) | Plan close deliverable |
+
+## Cross-cutting `must_haves.truths` Satisfaction
+
+| truth | satisfied | citation |
+|---|---|---|
+| Section/Header exists under g9oRa5 (COMP-05 + COMP-08) | ✓ | G0wNOc reusable:true inside g9oRa5 |
+| Section/Header content uses Crito-source labels per D-38 | ✓ | wM9Ac literal lift to 6 discrete text nodes (Home..Contact) |
+| All three Crito Menu-bar affordances ship per D-39 | ❌ SUPERSEDED by A1 source-wins resolution | OPEN-25-02 records the Phase 24 attribution correction; D-39 effectively void after audit |
+| Section/Header instances Primitive/Button twice (dual CTA per D-42) | ❌ SUPERSEDED by B1 source-wins resolution | OPEN-25-03 records D-42 re-homing to Phase 31 Homepage Hero |
+| Both Header CTA Button instances have iconTrailing populated with arrow-right (D-44) | ✓ (single CTA does — D-44 resolves OPEN-24-06 via the one production use) | ciMov/V4Dx4i contains I9F0r lucide arrow-right |
+| Secondary Button variant present per D-43 — sibling component path (PREFERRED/FALLBACK converged) | ✓ | hIWuC in avgor with source-evidenced values from mkw8g + Q3 deviation |
+| Logo slot per D-40 ships with enabled:true placeholder | ✓ | adoph slot:[], enabled:true, contains wtJpF Crito wordmark placeholder |
+| Sibling Pencil note documents slot signature (COMP-05 SC#3) | ✓ | hkh26 inside g9oRa5 with full slot signature documentation |
+| Zero raw color hex / zero raw px beyond accepted Variant Evidence binding set (COMP-09) | ✓ | All Section/Header + Secondary literals documented in PEN-INVENTORY Variant Evidence Phase-25-late-addition rows |
+| Every Pencil-mutating batch preceded by `get_editor_state` (D-54) | ✓ | 5 pre-flight calls logged across Tasks 0-4; 0 mismatches |
+| `snapshot_layout(maxDepth: 0, problemsOnly: true)` returns "No layout problems."; per-frame text-clipping documented | ✓ | Document-level PASS at Task 4 |
+| PEN-INVENTORY § Variant Evidence (Phase 24) EXTENDED with Phase-25-late-addition rows per D-23/D-56 | ✓ | 12 new rows added at Task 4 |
+| OPEN-24-06 + OPEN-24-11 marked RESOLVED | ✓ | Resolution columns updated at Task 4 |
+| Phase 24 baseline IDs unmutated EXCEPT for D-42/D-43 Secondary variant addition (M7eUr untouched per Pencil-2.13-no-variant-axis finding — Secondary went to avgor as new sibling) | ✓ | M7eUr, YJhRv, gQa2R, AvKtA, V4Dx4i, ATJK9 + Hover/Focus child IDs all preserved per Task 1 post-mutation batch_get verification |
+| D-57 plan ordering honored (Wave 1 → 2 → 3) | ✓ | Plan 25-01 = Wave 1 first plan |
+
+## Plan 25-01 Close Status
+
+All success criteria met (subject to the D-39 + D-42 source-wins supersessions documented as OPEN-25-02 + OPEN-25-03). Plan 25-02 (Section/Footer) can proceed sequentially.
