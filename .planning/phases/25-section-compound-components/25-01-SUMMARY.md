@@ -234,11 +234,43 @@ If B2 chosen, primary CTA descendant text override → `"Get Started Free"` (Cri
 **snapshot_layout warnings (expected/benign):**
 - `cta-row yVNDw` reports `fit_content(0)` collapse — empty container; Task 3 populates with Button ref → resolves.
 
-## Next: Task 3 — wire single CTA (B1 scope) + arrow-right iconTrailing
+## CTA Wire-up (Task 3 — B1 scope)
 
-Task 3 will:
-1. Insert primary CTA ref to M7eUr inside `cta-row` (yVNDw) with descendant override on label `ATJK9` → "Get Started Free" (Crito source literal `ujHMI`).
-2. Enable iconTrailing slot `V4Dx4i` via descendant override.
-3. Insert `type: icon, library: lucide, icon: "arrow-right"` node into the iconTrailing slot.
-4. Capture `get_screenshot` of populated Section/Header for user visual gate.
-5. Resolve OPEN-24-06 (empty-slot collapse) by ACTUAL use observation per D-44.
+**Inserted single primary CTA inside `yVNDw` cta-row per user gate B1 (strict source-wins, 1 CTA):**
+
+| id | role | properties |
+|---|---|---|
+| `ciMov` | Primary CTA | `type: "ref"`, `ref: "M7eUr"`, descendants: `{"ATJK9": {content: "Get Started Free"}, "V4Dx4i": {enabled: true}}` — instances Default green Button with label override and iconTrailing slot enabled |
+| `I9F0r` | arrow-right icon | `type: "icon"`, `library: "lucide"`, `icon: "arrow-right"`, width: 24, height: 24, fill: `#ffffffff` (white-on-green for visibility against CTA's `#38da71ff` fill); inserted at path `ciMov/V4Dx4i` (inside the iconTrailing slot) |
+
+**CTA label source:** "Get Started Free" — verbatim from Crito Menu bar source `ujHMI` text node per D-38 strict source-wins for content.
+
+## OPEN-24-06 Actual-Use Resolution (D-44)
+
+**Observation through production use of Default Button's iconTrailing slot:**
+
+| Observable | Expected (Phase 24 D-30) | Observed | Verdict |
+|---|---|---|---|
+| iconLeading `ciMov/AvKtA` (consumer left enabled:false) | Slot collapses; no gap; label aligns left within button's center justification | Slot reports `enabled: false`, no visible icon, label "Get Started Free" renders centered with no leading gap | ✓ collapses correctly |
+| iconTrailing `ciMov/V4Dx4i` (consumer set enabled:true via descendant override + inserted lucide arrow-right child) | Slot activates; auto-layout `gap: 10` absorbs between label and icon; icon renders to right of label | Slot enabled, contains I9F0r arrow-right icon, button auto-layout maintains 10px gap between label and trailing icon | ✓ activates + renders correctly |
+| Descendant override mechanism `{"V4Dx4i": {enabled: true}}` | Pencil applies property override on slot child via ref descendants map | Override applied — `batch_get` confirms V4Dx4i has icon child + no longer reports `enabled: false` (default enabled:true now governs) | ✓ Pencil descendant-enabled-override is the correct API |
+| Sibling unwired CTA (hypothetical label-only consumer) | Would render compact (label only, no slots visible) | Sibling Default instance elsewhere in document (e.g., Phase 24 reference set) confirms label-only Buttons render at expected width | ✓ inferred — formal label-only Default exists in primitive library reference |
+
+**Resolution citation (for PEN-INVENTORY OPEN-24-06 row at Task 4):**
+"Resolved 25-01 Task 3 (D-44): Header CTA wires Primitive/Icon arrow-right via iconTrailing slot V4Dx4i; descendant `enabled:true` override correctly activates slot rendering; iconLeading unwired slot remains collapsed (Phase 24 D-30 empty-slot auto-collapse confirmed by ACTUAL production use, not synthetic probe)."
+
+**Phase 24 baseline-drift verification:** M7eUr / V4Dx4i / AvKtA / ATJK9 underlying component definitions unchanged. The descendant overrides apply only at the `ciMov` ref instance — primitive untouched.
+
+## Next: Task 4 — sibling Pencil note + PEN-INVENTORY updates + plan close
+
+Task 4 will:
+1. Insert sibling Pencil note inside g9oRa5 documenting Section/Header slot signature (COMP-05 Success Criterion 3).
+2. Extend PEN-INVENTORY § Variant Evidence (Phase 24) with Phase-25-late-addition rows (Secondary cell + Section/Header structural rows) per D-23/D-56.
+3. Update PEN-INVENTORY § Open Flags — Phase 24: mark OPEN-24-06 + OPEN-24-11 RESOLVED with Plan 25-01 citations.
+4. Add PEN-INVENTORY § Open Flags — Phase 25 (OPEN-25-NN) section with rows:
+   - OPEN-25-01 (Secondary stroke context-deviation — navy vs source-literal white)
+   - OPEN-25-02 (D-39 source-attribution-correction — earlier PEN-INVENTORY Menu bar affordance citations were wrong)
+   - OPEN-25-03 (D-42 superseded by source audit — Header ships 1 CTA per Crito source; 2-CTA intent reassigned to Phase 31 Homepage Hero)
+5. Document-level `snapshot_layout(maxDepth: 0, problemsOnly: true)`; per-frame Phase 24 text-clipping quirk documented.
+6. Update ROADMAP.md Phase 25 plan list (25-01 checkbox + Plans: 3 plans).
+7. Finalize this SUMMARY.md.
