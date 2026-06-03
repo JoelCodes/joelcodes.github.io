@@ -80,14 +80,42 @@ Content: `"© 2024 Crito. All Right Reserved"` (Chivo 14/normal, `#52525bff`, op
 - **Substack:** Ship via Pattern B atomic-glyph using simpleicons canonical SVG (Task 2).
 - **Twitter + LinkedIn:** NOT shipped at Joel's component level per Pitfall 7 — Joel uses Instagram + Substack. Phase 31 Hero/Homepage instance does NOT need to re-override the social row.
 
-## Next: Task 1 — lucide Instagram probe (D-45 Pattern A verification)
+## Lucide Instagram Probe (Task 1 — D-45 verification)
 
-Task 1 will:
-1. Pre-flight `get_editor_state`.
-2. Probe-insert a test Instagram icon via `batch_design` Insert with `type: icon, library: "lucide", icon: "instagram"`.
-3. Verify via `batch_get` whether the icon renders correctly.
-4. Capture probe outcome + delete the test artifact.
-5. CHECKPOINT — surface probe outcome to user before Task 2 Substack build.
+**Outcome: Pattern A WORKS for Instagram.**
 
-If lucide Instagram works → Pattern A for Instagram in Section/Footer.
-If lucide Instagram rejects/breaks → Pattern B fallback for Instagram alongside Substack.
+Inserted probe artifact `H3nL3` inside avgor: `{type: "icon", library: "lucide", icon: "instagram", width: 24, height: 24, fill: "#141f39ff"}`. Returned successfully with no errors and no rejection warnings. `batch_get` confirmed the icon node retained all expected properties. `get_screenshot` rendered (24×24 thumbnail).
+
+RESEARCH § lucide#2792 deprecation note applies as documentation-only: glyph still ships from the lucide library in Pencil's current build. No fallback to Pattern B needed for Instagram.
+
+Probe artifact deleted at task close (`Delete("H3nL3")`) per Phase 24 plan 24-04 probe-cleanup precedent.
+
+**Resolution for Plan 25-02 Task 3:** Section/Footer social-row will insert Instagram via Pattern A `type:icon library:lucide icon:instagram`. Substack via Pattern B atomic-glyph (Task 2 deliverable).
+
+## Substack Atomic-Glyph Build (Task 2 — D-46 Pattern B)
+
+**Inserted as reusable component inside avgor:**
+
+| id | role | properties |
+|---|---|---|
+| `AzmgQ` | parent frame | name `Primitive / Icon / glyphs / substack`, reusable:true, width:24, height:24, fill transparent (`enabled:false`) — wraps the path so consumers can `ref` it like Pattern A icons |
+| `MSKR6` | path child | name "substack", viewBox `[0, 0, 24, 24]`, fill `#141f39ff` (navy default for light-bg Footer context — consumers can override via descendants) |
+
+**SVG path provenance (D-46 source-citation discipline):**
+- Source: simpleicons.org "Substack" canonical, verified 2026-06-01
+- Original (absolute commands): `M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z`
+- Pencil-stored (Pencil normalized absolute H/V/L → relative h/v/l forms): `M22.539 8.242h-21.079v-2.836h21.08v2.836z m-21.079 2.57v13.188l10.54-5.89 10.54 5.89v-13.188h-21.08z m21.08-10.812h-21.08v2.836h21.08v-2.836z`
+- Equivalence: both forms render the identical Substack mark (3 horizontal newspaper-style bars with the middle bar's bottom forming a V at column-x ~12). Pencil's normalization is a syntactic transform, not a geometric change.
+
+**Reusable count:** 10 (Phase 24's 7 + Plan 25-01's Secondary + Section/Header + Substack glyph).
+
+## Next: Task 3 — build Section/Footer parent + children
+
+Task 3 will:
+1. Pre-flight.
+2. Build Footer parent inside g9oRa5 (width 1200 matching Header, vertical layout, padded, bg `#fafafaff`/`color-semantic-bg-surface` per audit).
+3. Build main-row (horizontal: brand-column + 3 link columns).
+4. Build brand-column: logo-slot (Crito wordmark placeholder), tagline (Chivo 16/normal, source literal), social-row with Instagram (Pattern A lucide) + Substack (Pattern B ref to AzmgQ).
+5. Build 3 link columns from Crito audit (Resources, Help & Support, Useful Links).
+6. Build copyright-row with source literal "© 2024 Crito. All Right Reserved" (Chivo 14).
+7. Capture screenshot.
