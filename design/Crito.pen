@@ -17417,7 +17417,7 @@
       "y": -11711.553859422791,
       "name": "_Components / Primitives",
       "width": 1440,
-      "height": 600,
+      "height": 2200,
       "fill": "#ffffffff",
       "layout": "vertical",
       "gap": 40,
@@ -17441,17 +17441,534 @@
           "width": 1200,
           "height": 240,
           "content": "Phase 24 deliverable: Primitive / Button, Primitive / Input, Primitive / Badge, Primitive / Icon. Built via plans 24-02 / 24-03 / 24-04. See .planning/research/PEN-INVENTORY.md § Variant Evidence (Phase 24)."
+        },
+        {
+          "type": "frame",
+          "id": "M7eUr",
+          "name": "Primitive / Button / Default",
+          "reusable": true,
+          "width": 200,
+          "height": 60,
+          "fill": "#38da71ff",
+          "cornerRadius": 10,
+          "gap": 10,
+          "padding": [
+            16,
+            20
+          ],
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "AvKtA",
+              "x": 0,
+              "y": 0,
+              "name": "iconLeading",
+              "enabled": false,
+              "width": 24,
+              "height": 24
+            },
+            {
+              "type": "text",
+              "id": "ATJK9",
+              "name": "Label",
+              "fill": "#ffffffff",
+              "content": "Button Label",
+              "lineHeight": 1.5,
+              "fontFamily": "Inter",
+              "fontSize": 16,
+              "fontWeight": "500"
+            },
+            {
+              "type": "frame",
+              "id": "V4Dx4i",
+              "x": 0,
+              "y": 0,
+              "name": "iconTrailing",
+              "enabled": false,
+              "width": 24,
+              "height": 24
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "YJhRv",
+          "name": "Primitive / Button / Default / Hover",
+          "width": 200,
+          "height": 60,
+          "fill": "#2db461ff",
+          "cornerRadius": 10,
+          "gap": 10,
+          "padding": [
+            16,
+            20
+          ],
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "H2Z0Jz",
+              "x": 0,
+              "y": 0,
+              "name": "iconLeading",
+              "enabled": false,
+              "width": 24,
+              "height": 24
+            },
+            {
+              "type": "text",
+              "id": "PQ2JK",
+              "name": "Label",
+              "fill": "#ffffffff",
+              "content": "Button Label",
+              "lineHeight": 1.5,
+              "fontFamily": "Inter",
+              "fontSize": 16,
+              "fontWeight": "500"
+            },
+            {
+              "type": "frame",
+              "id": "fumzQ",
+              "x": 0,
+              "y": 0,
+              "name": "iconTrailing",
+              "enabled": false,
+              "width": 24,
+              "height": 24
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "gQa2R",
+          "name": "Primitive / Button / Default / Focus",
+          "width": 200,
+          "height": 60,
+          "fill": "#38da71ff",
+          "cornerRadius": 10,
+          "stroke": "#15bee3ff",
+          "strokeWidth": 2,
+          "strokeAlignment": "outer",
+          "gap": 10,
+          "padding": [
+            16,
+            20
+          ],
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "X4xsGa",
+              "x": 0,
+              "y": 0,
+              "name": "iconLeading",
+              "enabled": false,
+              "width": 24,
+              "height": 24
+            },
+            {
+              "type": "text",
+              "id": "I09rj",
+              "name": "Label",
+              "fill": "#ffffffff",
+              "content": "Button Label",
+              "lineHeight": 1.5,
+              "fontFamily": "Inter",
+              "fontSize": 16,
+              "fontWeight": "500"
+            },
+            {
+              "type": "frame",
+              "id": "HpWzq",
+              "x": 0,
+              "y": 0,
+              "name": "iconTrailing",
+              "enabled": false,
+              "width": 24,
+              "height": 24
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "nwJk7",
+          "name": "Primitive / Input / Default",
+          "reusable": true,
+          "width": 400,
+          "layout": "vertical",
+          "gap": 16,
+          "children": [
+            {
+              "type": "text",
+              "id": "oCeJP",
+              "name": "Label",
+              "fill": "#141f39ff",
+              "content": "Label",
+              "lineHeight": 1.5,
+              "fontFamily": "Inter",
+              "fontSize": 14
+            },
+            {
+              "type": "frame",
+              "id": "bhkR3",
+              "name": "control",
+              "width": 400,
+              "height": 48,
+              "fill": "#ffffffff",
+              "cornerRadius": 10,
+              "stroke": "#d4d4d8ff",
+              "strokeWidth": 1,
+              "padding": [
+                8,
+                16
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "dbEyb",
+                  "name": "Placeholder",
+                  "fill": "#52525bff",
+                  "content": "Placeholder",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 16
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "xmhXv",
+              "name": "Helper",
+              "fill": "#52525bff",
+              "content": "Helper text",
+              "lineHeight": 1.5,
+              "fontFamily": "Inter",
+              "fontSize": 14
+            },
+            {
+              "type": "frame",
+              "id": "uawpJ",
+              "x": 0,
+              "y": 0,
+              "name": "errorSlot",
+              "enabled": false,
+              "width": 400,
+              "height": 0
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "TnODC",
+          "name": "Primitive / Input / Focus",
+          "width": 400,
+          "layout": "vertical",
+          "gap": 16,
+          "children": [
+            {
+              "type": "text",
+              "id": "DxaLO",
+              "name": "Label",
+              "fill": "#141f39ff",
+              "content": "Label",
+              "lineHeight": 1.5,
+              "fontFamily": "Inter",
+              "fontSize": 14
+            },
+            {
+              "type": "frame",
+              "id": "WQw9R",
+              "name": "control",
+              "width": 400,
+              "height": 48,
+              "fill": "#ffffffff",
+              "cornerRadius": 10,
+              "stroke": "#15bee3ff",
+              "strokeWidth": 2,
+              "padding": [
+                8,
+                16
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "u59V6d",
+                  "name": "Placeholder",
+                  "fill": "#52525bff",
+                  "content": "Placeholder",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 16
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "i6abj",
+              "name": "Helper",
+              "fill": "#52525bff",
+              "content": "Helper text",
+              "lineHeight": 1.5,
+              "fontFamily": "Inter",
+              "fontSize": 14
+            },
+            {
+              "type": "frame",
+              "id": "J1pxUv",
+              "x": 0,
+              "y": 0,
+              "name": "errorSlot",
+              "enabled": false,
+              "width": 400,
+              "height": 0
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "qPSVW",
+          "name": "Primitive / Input / Error",
+          "width": 400,
+          "layout": "vertical",
+          "gap": 16,
+          "children": [
+            {
+              "type": "text",
+              "id": "DlOhu",
+              "name": "Label",
+              "fill": "#141f39ff",
+              "content": "Label",
+              "lineHeight": 1.5,
+              "fontFamily": "Inter",
+              "fontSize": 14
+            },
+            {
+              "type": "frame",
+              "id": "L6VFl",
+              "name": "control",
+              "width": 400,
+              "height": 48,
+              "fill": "#ffffffff",
+              "cornerRadius": 10,
+              "stroke": "#eb5757ff",
+              "strokeWidth": 2,
+              "padding": [
+                8,
+                16
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "oxT4h",
+                  "name": "Placeholder",
+                  "fill": "#52525bff",
+                  "content": "Placeholder",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 16
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "P7BTr",
+              "name": "Helper",
+              "fill": "#52525bff",
+              "content": "Helper text",
+              "lineHeight": 1.5,
+              "fontFamily": "Inter",
+              "fontSize": 14
+            },
+            {
+              "type": "text",
+              "id": "svkyg",
+              "name": "Error message",
+              "fill": "#eb5757ff",
+              "content": "Error message goes here",
+              "lineHeight": 1.5,
+              "fontFamily": "Inter",
+              "fontSize": 14
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "j0FxQZ",
+          "name": "Primitive / Badge",
+          "reusable": true,
+          "fill": "#15bee3ff",
+          "cornerRadius": 10,
+          "gap": 8,
+          "padding": [
+            4,
+            12
+          ],
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "xSve5",
+              "name": "Label",
+              "fill": "#ffffffff",
+              "content": "Badge",
+              "lineHeight": 1.5,
+              "fontFamily": "Inter",
+              "fontSize": 14,
+              "fontWeight": "500"
+            }
+          ]
+        },
+        {
+          "type": "icon",
+          "id": "EQaMf",
+          "name": "Primitive / Icon / 16",
+          "reusable": true,
+          "width": 16,
+          "height": 16,
+          "icon": "chevron-right",
+          "library": "lucide",
+          "fill": "#141f39ff"
+        },
+        {
+          "type": "icon",
+          "id": "yRvGb",
+          "name": "Primitive / Icon / 20",
+          "reusable": true,
+          "width": 20,
+          "height": 20,
+          "icon": "chevron-right",
+          "library": "lucide",
+          "fill": "#141f39ff"
+        },
+        {
+          "type": "icon",
+          "id": "u7NmaS",
+          "name": "Primitive / Icon / 24",
+          "reusable": true,
+          "width": 24,
+          "height": 24,
+          "icon": "chevron-right",
+          "library": "lucide",
+          "fill": "#141f39ff"
+        },
+        {
+          "type": "icon",
+          "id": "dpO5Y",
+          "name": "Primitive / Icon / 32",
+          "reusable": true,
+          "width": 32,
+          "height": 32,
+          "icon": "chevron-right",
+          "library": "lucide",
+          "fill": "#141f39ff"
+        },
+        {
+          "type": "note",
+          "id": "SGQZC",
+          "name": "Icon usage note",
+          "width": 1200,
+          "height": 200,
+          "content": "Primitive / Icon — Pattern A (Pencil-native lucide) per Q4 probe (supersedes D-25 fallback). Four size variants: 16, 20, 24, 32. Default glyph: chevron-right. CONSUMERS OVERRIDE THE GLYPH via descendants override on a `ref` of the size variant, OR by inserting a fresh `type: icon, library: lucide, icon: \"<name>\"` node. Approved glyphs (source-driven per D-26): arrow-left, arrow-right, check, menu, search, chevron-down, chevron-right, moon, alert-circle, link. Brand glyphs (linkedin, twitter, instagram, substack) DEFERRED to Phase 25 per D-28."
+        },
+        {
+          "type": "frame",
+          "id": "hIWuC",
+          "name": "Primitive / Button / Secondary",
+          "reusable": true,
+          "width": 200,
+          "height": 60,
+          "cornerRadius": 10,
+          "stroke": "#141f39ff",
+          "strokeWidth": 0.5,
+          "strokeAlignment": "inner",
+          "gap": 10,
+          "padding": [
+            16,
+            20
+          ],
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "KQuMh",
+              "x": 0,
+              "y": 0,
+              "name": "iconLeading",
+              "enabled": false,
+              "width": 24,
+              "height": 24
+            },
+            {
+              "type": "text",
+              "id": "UbwMv",
+              "name": "Label",
+              "fill": "#141f39ff",
+              "content": "Button Label",
+              "lineHeight": 1.5,
+              "fontFamily": "Inter",
+              "fontSize": 16,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "q7FOY",
+              "x": 0,
+              "y": 0,
+              "name": "iconTrailing",
+              "enabled": false,
+              "width": 24,
+              "height": 24
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "AzmgQ",
+          "name": "Primitive / Icon / glyphs / substack",
+          "reusable": true,
+          "width": 24,
+          "height": 24,
+          "fill": {
+            "type": "color",
+            "color": "#ffffffff",
+            "enabled": false
+          },
+          "children": [
+            {
+              "type": "path",
+              "id": "MSKR6",
+              "name": "substack",
+              "geometry": "M22.539 8.242h-21.079v-2.836h21.08v2.836z m-21.079 2.57v13.188l10.54-5.89 10.54 5.89v-13.188h-21.08z m21.08-10.812h-21.08v2.836h21.08v-2.836z",
+              "viewBox": [
+                0,
+                0,
+                24,
+                24
+              ],
+              "fill": "#141f39ff",
+              "width": 24,
+              "height": 24
+            }
+          ]
         }
       ]
     },
     {
       "type": "frame",
       "id": "t67DU6",
-      "x": -15642.732433950103,
-      "y": -12331.553859422791,
+      "x": -12602.732433950103,
+      "y": -11711.553859422791,
       "name": "_Components / Compounds",
       "width": 1440,
-      "height": 420,
       "fill": "#ffffffff",
       "layout": "vertical",
       "gap": 24,
@@ -17469,23 +17986,147 @@
           "fontWeight": "700"
         },
         {
+          "type": "frame",
+          "id": "t40xct",
+          "name": "Compound / Card",
+          "reusable": true,
+          "width": 320,
+          "fill": "#ffffffff",
+          "cornerRadius": 10,
+          "stroke": "#d4d4d8ff",
+          "strokeWidth": 1,
+          "strokeAlignment": "inner",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": 24,
+          "children": [
+            {
+              "type": "frame",
+              "id": "FGdti",
+              "name": "image-slot",
+              "slot": [],
+              "width": "fill_container",
+              "height": 180,
+              "fill": "#f2f2f7ff",
+              "cornerRadius": 10,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "DHc77",
+                  "name": "placeholder label",
+                  "fill": "#52525bff",
+                  "content": "Image",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "vGH3A",
+              "name": "title-slot",
+              "slot": [],
+              "width": "fill_container",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "kI3bc",
+                  "name": "title placeholder",
+                  "fill": "#141f39ff",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Card title",
+                  "lineHeight": 1.4,
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "oTSwn",
+              "name": "body-slot",
+              "slot": [],
+              "width": "fill_container",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "ASA0X",
+                  "name": "body placeholder",
+                  "fill": "#52525bff",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Card body text. Replace at instance time with description, excerpt, or metadata depending on Card use case (Project, Blog, Service).",
+                  "lineHeight": 1.625,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "eNqxd",
+              "name": "footer-actions-slot",
+              "slot": [
+                "M7eUr",
+                "hIWuC"
+              ],
+              "width": "fill_container",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "id": "k20bt",
+                  "type": "ref",
+                  "ref": "M7eUr",
+                  "name": "Read More CTA",
+                  "descendants": {
+                    "ATJK9": {
+                      "content": "Read More"
+                    },
+                    "V4Dx4i": {
+                      "enabled": true,
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "iVYxT",
+                          "name": "arrow-right",
+                          "width": 24,
+                          "height": 24,
+                          "icon": "arrow-right",
+                          "library": "lucide",
+                          "fill": "#ffffffff"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
           "type": "note",
-          "id": "XxZps",
-          "name": "Phase 25 deferral note (Compounds)",
+          "id": "iypPb",
+          "name": "Compound / Card — slot signature",
           "width": 1200,
-          "height": 240,
-          "content": "Populated in Phase 25 (plan 25-03 Compound / Card). See .planning/ROADMAP.md § Phase 25. Intentionally empty in Phase 24 per D-37."
+          "height": 680,
+          "content": "Compound / Card (reusable, id t40xct) — slot signature:\n\n• image-slot (id FGdti) — slot:[] (untyped), enabled:true. Default: light-gray placeholder rectangle (180h fill_container, fill #f2f2f7ff color-semantic-bg-surface-elevated) with 'Image' text label. Consumers populate with type:image fill on the slot or replace with custom image-bearing node at instance time. Set enabled:false for Service-style cards with no image.\n\n• title-slot (id vGH3A) — slot:[] (untyped), enabled:true. Default: 'Card title' text (Plus Jakarta Sans 18/700 navy color-semantic-text-primary). Consumers override the text content via descendants. Suitable for any single-line or wrapping title.\n\n• body-slot (id oTSwn) — slot:[] (untyped), enabled:true. Default: body filler text (Inter 14/normal #52525bff color-semantic-text-secondary, lineHeight 1.625, fill_container width). Consumers replace with description (Service card), excerpt + category meta (Blog card), or date + result metric (Project card).\n\n• footer-actions-slot (id eNqxd) — slot:['M7eUr','hIWuC'] (TYPED suggestion per D-52 PREFERRED — Pencil's slot array IS suggestion-only per Pencil schema 2.13 + guidelines § 2; non-matching insertion is not enforced, but typed slots provide picker discoverability). Default: Primitive/Button/Default ref with 'Read More' label + iconTrailing arrow-right wired. Consumers override label/icon or replace with a different Button variant (e.g., Secondary outline for de-emphasized cards). Set enabled:false for Blog-style cards with no explicit CTA.\n\nCard width 320 (typical library preview; consumers resize via fill_container at instance time in card grids). Padding 24 per Pencil guidelines § 12 'Inside cards'. Border 1px #d4d4d8ff color-semantic-border-default + cornerRadius 10 radius-semantic-card.\n\nProvenance: RASTER-DERIVED per D-49 (Plan 25-03 Task 1 raster-probe inference from design/images/image-import-12.jpg + image-import-14.jpg — Service / Project / Blog card patterns). v1.3 src/components/ui/Card.astro consulted as SECONDARY structural reference only; visual values are token-driven, NOT v1.3 neobrutalist visuals (Pitfall 2 prevention).\n\nSource-coverage gap: tracked as OPEN-25-07 (severity notable; consumer phase 28 Blog or 29 Projects). First concrete Card consumer locks the real values via instance overrides or component edits and resolves the flag. Follows Phase 24 OPEN-24-12 (Badge) consumer-resolution precedent.\n\nNO Card hover/focus states ship in Phase 25 — Crito raster doesn't depict; primitive-layer Button hover/focus inside footer-actions-slot covers interactivity.\n\nSee 25-03-SUMMARY.md and PEN-INVENTORY § Variant Evidence (Phase 24) Phase-25-plan-03 rows + § Compound Source Inference (Phase 25) section for full audit trail."
         }
       ]
     },
     {
       "type": "frame",
       "id": "g9oRa5",
-      "x": -15642.732433950103,
-      "y": -12951.553859422791,
+      "x": -14122.732433950103,
+      "y": -11711.553859422791,
       "name": "_Components / Sections",
       "width": 1440,
-      "height": 420,
       "fill": "#ffffffff",
       "layout": "vertical",
       "gap": 24,
@@ -17503,12 +18144,479 @@
           "fontWeight": "700"
         },
         {
-          "type": "note",
-          "id": "YilSu",
-          "name": "Phase 25 deferral note (Sections)",
+          "type": "frame",
+          "id": "G0wNOc",
+          "name": "Section / Header",
+          "reusable": true,
           "width": 1200,
-          "height": 240,
-          "content": "Populated in Phase 25 (plans 25-01 Section / Header + 25-02 Section / Footer). See .planning/ROADMAP.md § Phase 25. Intentionally empty in Phase 24 per D-37."
+          "gap": 32,
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "adoph",
+              "name": "logo-slot",
+              "slot": [],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "wtJpF",
+                  "name": "Logo placeholder (Crito wordmark)",
+                  "fill": "#141f39ff",
+                  "content": "Crito",
+                  "lineHeight": 1.2,
+                  "fontFamily": "DM Sans",
+                  "fontSize": 36,
+                  "fontWeight": "700",
+                  "letterSpacing": -0.72
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "wvv1T",
+              "name": "nav-links",
+              "gap": 32,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "mUBnQ",
+                  "name": "Home",
+                  "fill": "#141f39ff",
+                  "content": "Home",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "Q85gzd",
+                  "name": "Pages",
+                  "fill": "#141f39ff",
+                  "content": "Pages",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "R6QDSe",
+                  "name": "Pricing",
+                  "fill": "#141f39ff",
+                  "content": "Pricing",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "K7auH8",
+                  "name": "Portfolio",
+                  "fill": "#141f39ff",
+                  "content": "Portfolio",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "uueLx",
+                  "name": "Blog",
+                  "fill": "#141f39ff",
+                  "content": "Blog",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "C0p596",
+                  "name": "Contact",
+                  "fill": "#141f39ff",
+                  "content": "Contact",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "yVNDw",
+              "name": "cta-row",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "id": "ciMov",
+                  "type": "ref",
+                  "ref": "M7eUr",
+                  "name": "Primary CTA",
+                  "descendants": {
+                    "ATJK9": {
+                      "content": "Get Started Free"
+                    },
+                    "V4Dx4i": {
+                      "enabled": true,
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "I9F0r",
+                          "name": "arrow-right",
+                          "width": 24,
+                          "height": 24,
+                          "icon": "arrow-right",
+                          "library": "lucide",
+                          "fill": "#ffffffff"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "id": "hkh26",
+          "name": "Section / Header — slot signature",
+          "width": 1200,
+          "height": 380,
+          "content": "Section / Header (reusable, id G0wNOc) — slot signature:\n\n• logo-slot (id adoph) — slot:[] (untyped, Plan 25-03 may retroactively type), enabled:true. Default content: 'Crito' wordmark text placeholder (DM Sans 36/700, navy). Consumers override at instance time with Joel-brand wordmark or custom logo node.\n\n• nav-links (id wvv1T) — fixed text nodes (6) lifted from Crito source per D-38. Literal labels: Home, Pages, Pricing, Portfolio, Blog, Contact (Inter 16/500, navy). Per-instance label overrides happen via descendants in Phase 31 Homepage instance time (Joel's actual nav: Blog, Projects, FAQ, Contact).\n\n• cta-row (id yVNDw) — horizontal frame containing 1 Button ref instance (B1 user gate strict source-wins: Crito Menu bar source shows 1 CTA, not 2). Primary instance (ciMov) ref M7eUr with label 'Get Started Free' override and iconTrailing slot wired with lucide arrow-right per D-44 — resolves OPEN-24-06 via actual production use.\n\nNot shipped (A1 user gate strict source-wins resolution): Crito Menu bar affordances row (search / chevron-down / hamburger icons). The earlier PEN-INVENTORY Phase 24 Icon-Glyphs 'Menu bar' attribution was factually incorrect — those glyphs live elsewhere in ujMLJ. The 3 glyphs themselves stay in Phase 24 ship-set for Phase 26+ consumers.\n\nAll children use Pencil auto-layout (LAYOUT-01). Component width 1200 fixed per D-41 matching Crito Menu bar effective visual.\n\nSee 25-01-SUMMARY.md and PEN-INVENTORY § Variant Evidence (Phase 24) Phase-25-late-additions for full audit trail."
+        },
+        {
+          "type": "frame",
+          "id": "Xs0Hs",
+          "name": "Section / Footer",
+          "reusable": true,
+          "width": 1200,
+          "fill": "#fafafaff",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            48,
+            0
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "BWuAY",
+              "name": "main-row",
+              "width": "fill_container",
+              "gap": 60,
+              "justifyContent": "space_between",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "EbI44",
+                  "name": "brand-column",
+                  "width": 341,
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "kkO4M",
+                      "name": "logo-slot",
+                      "slot": [],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "NOFXt",
+                          "name": "Logo placeholder (Crito wordmark)",
+                          "fill": "#141f39ff",
+                          "content": "Crito",
+                          "lineHeight": 1.2,
+                          "fontFamily": "DM Sans",
+                          "fontSize": 36,
+                          "fontWeight": "700",
+                          "letterSpacing": -0.72
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "uubl4",
+                      "name": "tagline",
+                      "fill": "#52525bff",
+                      "textGrowth": "fixed-width",
+                      "width": 341,
+                      "content": "Phasellus pulvinar porta turpis sit amet facilis sapien bibendum eu praesent massa.",
+                      "lineHeight": 1.625,
+                      "fontFamily": "Chivo",
+                      "fontSize": 16,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "B9gNb",
+                      "name": "social-row",
+                      "gap": 16,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "p3BnkK",
+                          "name": "Instagram",
+                          "width": 24,
+                          "height": 24,
+                          "icon": "instagram",
+                          "library": "lucide",
+                          "fill": "#141f39ff"
+                        },
+                        {
+                          "id": "ISnSD",
+                          "type": "ref",
+                          "ref": "AzmgQ",
+                          "name": "Substack"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "NO9J5",
+                  "name": "link-columns",
+                  "gap": 60,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "g6CF2",
+                      "name": "Useful Links",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Z7rdR7",
+                          "name": "heading",
+                          "fill": "#141f38ff",
+                          "content": "Useful Links",
+                          "lineHeight": 1.25,
+                          "fontFamily": "Chivo",
+                          "fontSize": 16,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "e110d",
+                          "name": "Features",
+                          "fill": "#52525bff",
+                          "content": "Features",
+                          "lineHeight": 1.625,
+                          "fontFamily": "Chivo",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "hZzoT",
+                          "name": "About",
+                          "fill": "#52525bff",
+                          "content": "About",
+                          "lineHeight": 1.625,
+                          "fontFamily": "Chivo",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "VUToa",
+                          "name": "Service",
+                          "fill": "#52525bff",
+                          "content": "Service",
+                          "lineHeight": 1.625,
+                          "fontFamily": "Chivo",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "OjueQ",
+                          "name": "Team",
+                          "fill": "#52525bff",
+                          "content": "Team",
+                          "lineHeight": 1.625,
+                          "fontFamily": "Chivo",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "TNZRz",
+                      "name": "Help & Support",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "FM9Hw",
+                          "name": "heading",
+                          "fill": "#141f38ff",
+                          "content": "Help & Support",
+                          "lineHeight": 1.25,
+                          "fontFamily": "Chivo",
+                          "fontSize": 16,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "L7Wft",
+                          "name": "FAQ",
+                          "fill": "#52525bff",
+                          "content": "FAQ",
+                          "lineHeight": 1.625,
+                          "fontFamily": "Chivo",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "ZPxMG",
+                          "name": "Blog",
+                          "fill": "#52525bff",
+                          "content": "Blog",
+                          "lineHeight": 1.625,
+                          "fontFamily": "Chivo",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "tX85O",
+                          "name": "Contact Us",
+                          "fill": "#52525bff",
+                          "content": "Contact Us",
+                          "lineHeight": 1.625,
+                          "fontFamily": "Chivo",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "yDJeG",
+                          "name": "Support",
+                          "fill": "#52525bff",
+                          "content": "Support",
+                          "lineHeight": 1.625,
+                          "fontFamily": "Chivo",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "w5CqFq",
+                      "name": "Resources",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "RIB78",
+                          "name": "heading",
+                          "fill": "#141f38ff",
+                          "content": "Resources",
+                          "lineHeight": 1.25,
+                          "fontFamily": "Chivo",
+                          "fontSize": 16,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "vcnVU",
+                          "name": "Tools",
+                          "fill": "#52525bff",
+                          "content": "Tools",
+                          "lineHeight": 1.625,
+                          "fontFamily": "Chivo",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "WazdH",
+                          "name": "Guides and resources",
+                          "fill": "#52525bff",
+                          "content": "Guides and resources",
+                          "lineHeight": 1.625,
+                          "fontFamily": "Chivo",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "nRBtx",
+                          "name": "Team",
+                          "fill": "#52525bff",
+                          "content": "Team",
+                          "lineHeight": 1.625,
+                          "fontFamily": "Chivo",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Q4RgS",
+                          "name": "Support",
+                          "fill": "#52525bff",
+                          "content": "Support",
+                          "lineHeight": 1.625,
+                          "fontFamily": "Chivo",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "l4jp3",
+              "name": "copyright-row",
+              "width": "fill_container",
+              "justifyContent": "end",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "Vdkgq",
+                  "name": "copyright",
+                  "opacity": 0.8,
+                  "fill": "#52525bff",
+                  "content": "© 2024 Crito. All Right Reserved",
+                  "lineHeight": 1.4285714285714286,
+                  "fontFamily": "Chivo",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "id": "x48zh",
+          "name": "Section / Footer — slot signature",
+          "width": 1200,
+          "height": 480,
+          "content": "Section / Footer (reusable, id Xs0Hs) — slot signature:\n\n• logo-slot (id kkO4M, inside brand-column) — slot:[] (untyped), enabled:true. Default: 'Crito' wordmark text placeholder (DM Sans 36/700, navy). Consumers override at instance time with Joel-brand wordmark.\n\n• brand-column tagline (id uubl4) — fixed text, Crito source literal per D-48 ('Phasellus pulvinar...'). Phase 31 instance overrides with Joel's actual tagline.\n\n• brand-column social-row (id B9gNb) — ships JOEL-BRAND defaults at component level per Pitfall 7: Instagram (lucide Pattern A) + Substack (Pattern B atomic-glyph AzmgQ from simpleicons canonical SVG). Crito's Twitter + LinkedIn NOT shipped — Joel uses Instagram + Substack.\n\n• link-columns (id NO9J5) — 3 columns matching Crito source `iHrsm` audit: Useful Links / Help & Support / Resources. Each: Chivo 16/700 navy heading + 4 Chivo 16/normal links (Crito source literals per D-48). Phase 31 instance overrides labels with Joel's actual nav set.\n\n• copyright-row (id l4jp3) — right-aligned copyright text, Chivo 14/normal opacity 0.8. Crito source literal '© 2024 Crito. All Right Reserved'.\n\nNot shipped from Crito source: Mobile + Email contact rows (Joel has contact info elsewhere); 2 raster-baked image buttons (Pitfall 7 — not reconstructable). These deferred to a future Joel-Footer-content phase if needed.\n\nAll typography uses Chivo per D-47 (Phase 23's conditional Chivo primitive type-primitive-family-chivo earns its keep). Footer bg #fafafaff binds to color-semantic-bg-surface per Crito source audit.\n\nSee 25-02-SUMMARY.md and PEN-INVENTORY § Variant Evidence + § Glyphs Shipped (Phase 25) for full audit trail."
         }
       ]
     }
