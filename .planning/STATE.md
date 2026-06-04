@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Prep Crito Design File
 status: executing
-stopped_at: Plan 25-02 complete (Section/Footer + Substack atomic-glyph)
-last_updated: "2026-06-03T21:42:36.853Z"
+stopped_at: Phase 25 COMPLETE — all 3 plans shipped
+last_updated: "2026-06-04T02:50:05.923Z"
 last_activity: 2026-06-02 -- Phase 25 execution started
 progress:
   total_phases: 10
@@ -102,7 +102,7 @@ None currently. Phase 23 first plan (the live Pencil MCP audit) is the gating de
 
 ## Session Continuity
 
-Last session: 2026-06-03T21:42:36.842Z
-Stopped at: Plan 25-02 complete (Section/Footer + Substack atomic-glyph)
-Resume file: .planning/phases/25-section-compound-components/25-03-PLAN.md
+Last session: 2026-06-04T02:50:05.917Z
+Stopped at: Phase 25 COMPLETE — all 3 plans shipped
+Resume file: .planning/ROADMAP.md
 Next action: `/gsd:plan-phase 23` to plan Phase 23 (Audit + Token Foundation)

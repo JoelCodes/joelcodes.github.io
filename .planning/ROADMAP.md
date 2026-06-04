@@ -209,7 +209,7 @@ Plans:
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
-- [ ] 25-03-PLAN.md — `Compound / Card` build: raster-probe inference from image-import-{12,14,8,22}.jpg (D-49), Pencil typed-slot mechanics probe (D-52), 4 slots image+title+body+footer-actions per D-51 with placeholders enabled (D-53), Phase 25 close sweep + id-inventory archival
+- [x] 25-03-PLAN.md — `Compound / Card` built (t40xct inside t67DU6): raster-probe inference from image-import-12.jpg (Service+Project) + image-import-14.jpg (Blog) per D-49 confirmed single 4-slot signature serves all 3 use cases; Pencil 2.13 typed-slot is suggestion-only per schema/§2 (D-52 PREFERRED applied to footer-actions-slot with `slot:['M7eUr','hIWuC']` + sibling note ships regardless per belt-and-suspenders); 4 slots image/title/body/footer-actions all enabled:true with placeholders per D-53; Phase 25 close sweep — library frames repositioned horizontally (avgor + g9oRa5 + t67DU6 side-by-side), heights fit_content, Phase 24 D-37 deferral notes deleted; id-inventory.json archived; seeds OPEN-25-07 (Card source-coverage gap per D-50)
 
 **Cross-cutting constraints:**
 
