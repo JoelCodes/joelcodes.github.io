@@ -220,24 +220,31 @@ Plans:
 
 #### Phase 26: FAQ + 404 Reconstruction (Calibration Workflow Established)
 
-**Goal**: The two simplest IN-SCOPE pages — FAQ (accordion list + CTA) and 404 (helpful navigation back to home + key pages) — are reconstructed as editable compositions of Phase 24/25 components on top of semantic tokens, *and* the per-section calibration workflow (side-by-side screenshot, fidelity label, OPEN-gap declaration, raster archival rule) is formally adopted here and applied to every later per-page phase.
+**Goal**: The two simplest IN-SCOPE pages — FAQ (stacked Q+A list + CTA) and 404 (helpful navigation back to home + key pages) — are reconstructed as editable compositions of Phase 24/25 components on top of semantic tokens (with two new Section components and a `type-semantic-heading-2-*` token added as foundation), *and* the per-section calibration workflow (joel-only-branch token-usage check + crito-source-branch side-by-side script, fidelity label, OPEN-gap declaration, raster-removal rule) is formally adopted here and applied to every later per-page phase. FAQ and 404 are both `joel-only-no-crito-ref` per PEN-INVENTORY (no Crito source exists for either) — Phase 26 ships them as fresh designs in Crito vocab per CONTEXT D-58, not as v1.3 visual mirrors.
 **Depends on**: Phase 25
 **Requirements**: PAGE-04, PAGE-08, PAGE-09, PAGE-11, VALID-01, VALID-02, VALID-03
 **Success Criteria** (what must be TRUE):
 
-  1. The Crito FAQ frame and 404 frame in `design/Crito.pen` no longer contain any `[FLAT]` raster sections — every section is a composition of layout frames, primitive instances, and (where applicable) compound instances referencing semantic tokens
-  2. Each reconstructed section in both pages carries an explicit fidelity label in a sibling Pencil note: `EXACT` / `APPROXIMATE` / `STUB` (VALID-01); gaps the source doesn't reveal appear as flagged OPEN notes, never silently filled (VALID-03)
-  3. `.planning/ui-reviews/v2.0/` contains a side-by-side calibration artifact for every reconstructed section — `get_screenshot` of the reconstructed frame paired with the matching raster from `design/images/` (VALID-02) — and the user has spot-checked at least one section per page before phase close
-  4. Original raster nodes inside each reconstructed section are removed (or hidden/locked as archival reference) only after the replacement composition has been visually verified to match (PAGE-11); the FAQ and 404 page frames render the reconstructed compositions, not the original rasters
-  5. Both reconstructions happen at the desktop breakpoint only — mobile-breakpoint frames are not introduced (PAGE-09); the policy is recorded as a one-line note in `_Tokens & Foundations` or `PEN-INVENTORY.md` so later per-page phases inherit it
+  1. Two new top-level page frames (`FAQ` and `404`) exist in `design/Crito.pen` as fresh-design compositions of Phase 23/24/25 tokens + primitives + sections — every section is a composition of layout frames, primitive instances, and section/compound instances referencing semantic tokens (no `[FLAT]` rasters because no Crito source rasters exist to begin with per PEN-INVENTORY `joel-only-no-crito-ref` scope rows)
+  2. Each reconstructed section in both pages carries an explicit per-section fidelity label per CONTEXT D-83 (`EXACT` / `APPROXIMATE` / `STUB`) — recorded in plan SUMMARYs; gaps the source doesn't reveal appear as flagged OPEN-26-NN notes in PEN-INVENTORY, never silently filled (VALID-03)
+  3. Per-section calibration was conducted via Plan-close AskUserQuestion gates per CONTEXT D-65 — inline `get_screenshot` rendering paired with semantic-token-usage description vs `_Tokens & Foundations` (D-62 joel-only branch). D-64 filenames are description identifiers, NOT disk-write paths (`get_screenshot` cannot write to disk per OPEN-23-01 — RESEARCH § Focus 4 substitution); the user spot-checked at least one section per page before phase close (VALID-02)
+  4. PAGE-11 status documented as INERT for both FAQ and 404 (joel-only-no-crito-ref scope — no raster exists to remove per RESEARCH § Focus 5); PAGE-11 ACTIVE branch is defined in CALIBRATION-PROTOCOL.md for inheriting phases (27/28/29/31) that have crito-source rasters
+  5. Both reconstructions happen at the desktop breakpoint only — mobile-breakpoint frames are not introduced (PAGE-09); the policy is repeated in `CALIBRATION-PROTOCOL.md` so later per-page phases inherit it
 
-**Plans**: TBD
+**Plans**: 4 plans
 
 Plans:
 
-- [ ] 26-01: Reconstruct FAQ page sections (accordion list section, CTA section) — replace `[FLAT]` rasters with token-driven compositions of `Compound / Card` (or layout frames) + `Primitive / Button`; per-section side-by-side calibration into `.planning/ui-reviews/v2.0/`; fidelity labels; user spot-check
-- [ ] 26-02: Reconstruct 404 page sections (message + nav-back compositions) — token-driven, primitive instances; per-section calibration; fidelity labels; user spot-check
-- [ ] 26-03: Codify the calibration workflow as `.planning/research/CALIBRATION-PROTOCOL.md` (referenced by every later per-page phase) — side-by-side script, fidelity label definitions, OPEN-flag template, raster-removal rule, desktop-only constraint
+- [ ] 26-00-PLAN.md — Phase 26 foundation: `type-semantic-heading-2-*` 4-part composite + `type-primitive-size-32` primitive (per CONTEXT D-72 + RESEARCH § Focus 3 user gate at Task 1 for heading-2 values) + new Section/CTA (3-slot: headline/body/actions per D-78) + Section/NavBack (2-slot: heading/links per D-79) reusable components inside `_Components / Sections` (g9oRa5). Also updates this ROADMAP entry from 3 plans → 4 plans (D-84).
+- [ ] 26-01-PLAN.md — FAQ page frame reconstruction: top-level `FAQ` frame at 1440 width via `find_empty_space_on_canvas` (D-74); instances Section/Header (G0wNOc) + page-intro section + Q+A list (5 verbatim pairs from `src/pages/faq.astro` lines 11-32 per D-82) + Section/CTA (STUB microcopy per D-82) + Section/Footer (Xs0Hs); plan-close calibration spot-check user gate per D-65 (joel-only branch, D-62 token-usage check).
+- [ ] 26-02-PLAN.md — 404 page frame reconstruction: top-level `404` frame at 1440 width; instances Section/Header + message section (BIG headline + body, both STUB text per D-81 — layout EXACT) + Section/NavBack instance (4 structural labels Home/Blog/Projects/Contact per CONTEXT Claude's Discretion) + Section/Footer; plan-close calibration spot-check user gate per D-65; PAGE-11 INERT note recorded in PEN-INVENTORY per RESEARCH § Focus 5.
+- [ ] 26-03-PLAN.md — Codify `.planning/research/CALIBRATION-PROTOCOL.md` (codify-what-worked per D-67): branch matrix (crito-source-present vs joel-only-no-crito-ref) + per-step script per branch (Pencil MCP calls, pairing target, naming convention, user-gate format) + EXACT/APPROXIMATE/STUB definitions per branch per D-63 + OPEN-flag template + PAGE-11 carve-out (crito-source only) + PAGE-09 desktop-only constraint + inline-screenshot substitution per OPEN-23-01 + per-page phase consumer map for Phases 27-31. Cross-referenced from PEN-INVENTORY via short `## Calibration Protocol` anchor per D-69.
+
+**Cross-cutting constraints:**
+
+- Every Pencil-mutating call is preceded by `mcp__pencil__get_editor_state({ include_schema: false })` asserting active editor == `design/Crito.pen` (D-87 carry-forward from Phase 25 D-54 / Phase 24 D-35)
+- `snapshot_layout({ maxDepth: 0, problemsOnly: true })` at document root returns `"No layout problems."` at every plan close; text-clipping false-positives per-frame documented per Phase 24/25 precedent
+- PEN-INVENTORY extension pattern per D-88 — each mutating plan adds Frames Inventory / Variant Evidence (Phase 26) / Token Extensions (Phase 26) rows and any OPEN-26-NN flags
 
 ---
 
@@ -400,8 +407,8 @@ Phases execute in numeric order: 1 → 2 → ... → 22 → 23 → 24 → 25 →
 | 22. Footer Enhancement | v1.3 | 1/1 | Complete | 2026-02-11 |
 | 23. Audit + Token Foundation | v2.0 | 5/5 | Complete    | 2026-05-31 |
 | 24. Layout Primitives + Primitive Components | v2.0 | 5/5 | Complete   | 2026-06-01 |
-| 25. Section + Compound Components | v2.0 | 0/TBD | Not started | - |
-| 26. FAQ + 404 Reconstruction | v2.0 | 0/TBD | Not started | - |
+| 25. Section + Compound Components | v2.0 | 3/3 | Complete | 2026-06-06 |
+| 26. FAQ + 404 Reconstruction | v2.0 | 0/4 | Not started | - |
 | 27. Thank-you + Contact Reconstruction | v2.0 | 0/TBD | Not started | - |
 | 28. Blog Reconstruction | v2.0 | 0/TBD | Not started | - |
 | 29. Projects Reconstruction | v2.0 | 0/TBD | Not started | - |
@@ -411,4 +418,4 @@ Phases execute in numeric order: 1 → 2 → ... → 22 → 23 → 24 → 25 →
 
 ---
 *Roadmap initialized: 2026-01-26 for v1.0*
-*Last updated: 2026-05-31 — v1.4 abandoned, v2.0 Prep Crito Design File phases 23-32 added*
+*Last updated: 2026-06-06 — Phase 26 planned (4 plans: 26-00 foundation + 26-01 FAQ + 26-02 404 + 26-03 CALIBRATION-PROTOCOL.md per CONTEXT D-84)*
