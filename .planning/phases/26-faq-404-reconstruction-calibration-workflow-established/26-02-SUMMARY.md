@@ -46,4 +46,15 @@ No mutations issued in Task 0 — pure verification.
 
 **Page-frame-row anchor pattern confirmed:** Plan 26-01 noted the row-mismatch when `FindEmptySpace` was called without an anchor and chose the library row. Plan 26-02 used `nodeId: <previous-reconstructed-page-id>` and the function correctly placed the new page in the page-frame row. **This is the pattern Plan 26-03 CALIBRATION-PROTOCOL.md should codify as the default placement protocol** for subsequent per-page phases (27 Thank-you+Contact, 28 Blog, 29 Projects, 30 Design-system, 31 Homepage).
 
+## Task 2: Section/Header ref + message section (D-60 + D-77 + D-81)
+
+Inserted as the first 2 children of 404 frame `csXky`.
+
+| Element | ID | Notes |
+|---|---|---|
+| Section/Header ref → `G0wNOc` | `pZReo` | NO descendants override (D-77 — Crito-source nav labels stay through Phase 30) |
+| message-section frame | `SruDH` | width 1200, vertical, gap 24 (`space-semantic-stack-md`), padding `[96, 0]` (= `space-semantic-section-y` × ~1.5; generous 404 visual breathing per D-60), alignItems center |
+| message-section / headline text | `t9wUlR` | content "Headline placeholder" — Plus Jakarta Sans 48 / 700 / lh 1.4 / `#141f39ff` (heading-1 typography). **STUB content per D-81** — fidelity TEXT=STUB / LAYOUT=EXACT per D-83. |
+| message-section / body text | `WWABs` | content "Body placeholder — this page does not exist. Try the navigation below." — Inter 16 / 400 / lh 1.625 / `#52525bff` (prose-paragraph typography). `textAlign: center`, `textGrowth: fixed-width`, `width: 720`. **STUB content per D-81** — explicitly labeled STUB even though the placeholder line gives a structural hint; user may revise brand-voice copy at calibration gate or in a future content phase. |
+
 
