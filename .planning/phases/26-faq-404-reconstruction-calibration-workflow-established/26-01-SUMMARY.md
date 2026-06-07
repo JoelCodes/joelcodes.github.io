@@ -103,6 +103,57 @@ Inserted as the 4th and 5th children of FAQ frame `b7Hgy`.
 | Section/CTA (FAQ instance) | `NQNB3` | `Hs5rc` | Descendants override map: `U1DQb` → "Still have questions?" + `mlSq0` → "Get in touch and we'll help you figure out next steps." + `ATJK9` → "Get in touch". Override values are **identical to Section/CTA component defaults** so the visible result is unchanged — overrides included to make the FAQ instance's binding to those STUB strings explicit per D-82. **STUB fidelity** per D-82 (microcopy is placeholder; layout EXACT). |
 | Section/Footer (FAQ instance) | `MmDy2` | `Xs0Hs` | NO descendants override per D-77 (Crito-source labels stay; Joel-brand override deferred to Phase 31). |
 
-`batch_get(["b7Hgy"])` confirms 5 direct children in order: `MpVz3` (Header), `I4QJas` (page-intro), `FswuE` (qa-list), `NQNB3` (CTA), `MmDy2` (Footer). The CTA `descendants` map as returned by Pencil shows only `U1DQb` + `mlSq0` (no `ATJK9` entry) — Pencil likely omits no-op overrides from output (`ATJK9` value matches the Hs5rc component's nested `bhkiN/ATJK9` default). Rendered Button label still resolves to "Get in touch" — verified visually at Task 5 screenshot.
+`batch_get(["b7Hgy"])` confirms 5 direct children in order: `MpVz3` (Header), `I4QJas` (page-intro), `FswuE` (qa-list), `NQNB3` (CTA), `MmDy2` (Footer). The CTA `descendants` map as returned by Pencil shows only `U1DQb` + `mlSq0` (no `ATJK9` entry) — Pencil likely omits no-op overrides from output (`ATJK9` value matches the Hs5rc component's nested `bhkiN/ATJK9` default). Rendered Button label still resolves to "Get in touch" — to be verified at Task 6 (subject to OPEN-26-02 screenshot caveat below).
+
+## Task 5: snapshot_layout sweep + page-frame fit_content + position correction
+
+### Pre-flight (D-87)
+
+`mcp__pencil__get_editor_state` PASS — active editor `design/Crito.pen` ✓; top-level node count 20 (was 19; FAQ added) ✓.
+
+### snapshot_layout outcomes
+
+| Call | Result |
+|---|---|
+| `snapshot_layout({maxDepth:0, problemsOnly:true})` (document level) | `"No layout problems."` ✓ |
+| `snapshot_layout({parentId:"b7Hgy", problemsOnly:true})` (FAQ frame) | `"No layout problems."` ✓ |
+| `snapshot_layout({parentId:"b7Hgy", maxDepth:3})` (full structural trace) | All children positioned correctly; total computed content height **1733** (Header 60 + page-intro 237 + qa-list 775 + CTA 307 + Footer 304 + small inter-section spacing); some qa-item A texts flagged `partially clipped` / `fully clipped` — **known Phase 24/25 text-clipping false-positive** (RESEARCH § Pitfall 6). Documented inline below. |
+
+### Text-clipping false-positive (Phase 24/25 carry-forward, RESEARCH Pitfall 6)
+
+`snapshot_layout` flagged 5 of the 5 A text nodes inside qa-items 1-5 with `"problems": "partially clipped"` or `"fully clipped"`. Verification:
+- Each qa-item's computed `height` exactly equals `Q.height + gap + A.height` (e.g., qa-item-1: 45 + 12 + 52 = 109; reported `eDbs7` height = 109 ✓).
+- The visible coordinate-system y values returned by snapshot_layout (Q at y=50, A at y=107) appear to be **baseline-aware** rather than top-of-bbox. The clipping flag is a layout-engine false positive triggered by multi-line wrapped Inter 16/lh 1.625 text at width 800 — same condition documented in Phase 24's `24-05-SUMMARY` and re-confirmed in Phase 25.
+- A-text wrapping behaviors correctly produce ~26 (1 line) or ~52 (2 lines) heights matching `fontSize * lineHeight` math.
+
+**Not a real clipping** — text would render correctly inside `fit_content` qa-items; flag carry-forward expected and documented. NO mitigation applied (rebuild would not change the layout-engine false-positive).
+
+### Page-frame fit_content + position correction
+
+FAQ frame was Updated twice during Task 5:
+
+1. `Update("b7Hgy", { height: "fit_content" })` — Per plan Task 5 instruction. Total content height 1733 fit inside the original 1800 height (no overflow), so this Update is structurally redundant — but `fit_content` is the more flexible default and avoids future Tasks 2-7-style edits having to track explicit page height as content grows. Logged for audit completeness.
+
+2. `Update("b7Hgy", { x: 16327.267566049897, y: -4111.553859422791 })` — Position correction. Task 1's `FindEmptySpace(direction:"right")` had returned the library-row Y (y = −11711.55) rather than the page-frame-row Y (y = −4111.55). Per D-74 "to the right of the existing Crito page-frame cluster", the page-frame row is the correct anchor. New x = 16327.27 sits 200px to the right of `cl8tt`'s right edge (16127). **Recorded as a Plan 26-03 CALIBRATION-PROTOCOL.md feedback item:** future per-page phases should pass `nodeId: cl8tt` (or the previously-placed reconstructed page's id) to `FindEmptySpace` for explicit row anchoring, or call `FindEmptySpace` with `direction:"right"` from a same-row anchor.
+
+### OPEN-26-02 — get_screenshot rendering quirk (raised in Task 5)
+
+`mcp__pencil__get_screenshot` returns a blank white image when called against any frame **created during this Pencil MCP session** — including:
+- the FAQ frame `b7Hgy` (full page),
+- any sub-frame (`I4QJas`, `FswuE`),
+- the qa-item `eDbs7`,
+- the FAQ's Section/Header instance `MpVz3` (even though the source `G0wNOc` renders correctly),
+- a controlled-experiment ephemeral test frame (created + screenshotted + deleted in Task 5 diagnostic).
+
+`get_screenshot` works correctly for:
+- the source `G0wNOc` (Section/Header) — renders all text + button,
+- the `g9oRa5` library cluster — renders all 4 sections + sibling notes,
+- the Crito-source page `cl8tt` (raster fill image) — renders full page.
+
+The screenshot blank-out affects the **rendering pipeline only**, not the underlying file: `batch_get` shows all content properties intact, `snapshot_layout` confirms positions and sizes are computed correctly. This is a **tooling-only** issue that does not block the calibration-spot-check intent of D-65 — the user can open `design/Crito.pen` in Pencil's actual editor and verify the FAQ rendering directly. The OPEN flag is raised so Plans 26-02 / 27+ can either:
+- (a) Investigate whether a fresh Pencil MCP session lifts the quirk (likely — would explain why Phase 25 SUMMARY screenshots aren't blocked),
+- (b) Codify a workaround in CALIBRATION-PROTOCOL.md (Plan 26-03) — e.g., direct-editor verification as the primary calibration channel when `get_screenshot` returns blank.
+
+OPEN-26-02 row will be added to `PEN-INVENTORY.md § Open Flags — Phase 26` at Task 7.
 
 
