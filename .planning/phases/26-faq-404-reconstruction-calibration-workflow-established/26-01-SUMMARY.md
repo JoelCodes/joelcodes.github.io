@@ -1,8 +1,8 @@
 ---
 phase: 26-faq-404-reconstruction-calibration-workflow-established
 plan: 01
-status: in-progress
-date: 2026-06-06
+status: complete
+date: 2026-06-07
 ---
 
 # Plan 26-01 Summary: FAQ Page Frame (Joel-Only Branch)
@@ -155,5 +155,84 @@ The screenshot blank-out affects the **rendering pipeline only**, not the underl
 - (b) Codify a workaround in CALIBRATION-PROTOCOL.md (Plan 26-03) — e.g., direct-editor verification as the primary calibration channel when `get_screenshot` returns blank.
 
 OPEN-26-02 row will be added to `PEN-INVENTORY.md § Open Flags — Phase 26` at Task 7.
+
+## Task 6: Calibration Spot-Check User Gate (D-65 + D-83 + D-86)
+
+OPEN-26-02 effectively cleared between Task 5 and Task 6 — `get_screenshot` started returning correct visual renders again after the `Update("b7Hgy", {x, y})` position correction in Task 5. Two calibration screenshots produced inline successfully:
+
+- `mcp__pencil__get_screenshot({ nodeId: "FswuE" })` — Q+A list section: 5 stacked Q+A pairs visible; Q headlines in heading-2 typography (PJS 32/700/lh 1.4 navy), A bodies in prose-paragraph (Inter 16/400/lh 1.625 gray). All 5 verbatim Q strings legible.
+- `mcp__pencil__get_screenshot({ nodeId: "NQNB3" })` — Section/CTA instance: "Still have questions?" headline + STUB body "Get in touch and we'll help you figure out next steps." + green "Get in touch" Button visible.
+
+Bonus renders captured to support user decision: `I4QJas` (page-intro section), `b7Hgy` (full FAQ page).
+
+### AskUserQuestion presented (per D-65 + RESEARCH § Example 4 format)
+
+Question + structured token-usage description per the plan's Task 6 action — surfaced inline screenshots + per-section fidelity proposals + semantic-token bindings (heading-1, heading-2, prose-paragraph, bg-page, bg-surface-elevated, text-primary, text-secondary, section-y, stack-lg, stack-xs) + calibration target (`RpGbe` _Tokens & Foundations reference). Also surfaced a candidate gap (no `space-semantic-stack-xs` for the 12px Q→A intra-item gap).
+
+### User response: **APPROVE**
+
+- Per-section fidelity labels per D-83 confirmed:
+  - Section/Header instance — **EXACT** (Phase 25 shipped; D-77 Crito-source nav labels stay)
+  - page-intro — **APPROXIMATE** (NEW brand-neutral subhead copy; user may revise in future content phase)
+  - qa-list — **EXACT** (real verbatim Q+A content + correct token usage per D-83)
+  - Section/CTA instance — **STUB** (microcopy placeholder per D-82; layout EXACT)
+  - Section/Footer instance — **EXACT** (Phase 25 shipped; D-77 Crito-source labels stay)
+- `type-semantic-prose-paragraph-*` provisional flag — **DROPPED** per D-71 (FAQ first-page-consumer APPROVE confirms the family/size/weight/lh values read correctly for plain prose).
+- No OPEN-26-NN raised at the gate. User picked the plain "APPROVE" option (not the variant offering to raise OPEN-26-03 for the space-stack-xs token; treated as a low-priority deferral — literal 12 stands until a real consumer surfaces the need per Pitfall 1).
+
+### VALID-01 / VALID-02 / VALID-03 satisfied at Task 6
+
+- VALID-01 (per-section fidelity labels) — labels recorded above per D-83 ✓
+- VALID-02 (joel-only-branch calibration via D-62 token-usage check) — inline screenshots + structured token-usage description served as the calibration artifact ✓
+- VALID-03 (any gap declared as OPEN) — OPEN-26-02 raised at Task 5 (now self-resolved with workaround codified for Plan 26-03) ✓; no further OPENs raised at the gate
+
+## Task 7: PEN-INVENTORY Extensions + 26-01-SUMMARY Close (D-88)
+
+### PEN-INVENTORY edits applied
+
+1. **Frames Inventory table** — Added a new row for `FAQ`:
+   - `name: FAQ` / `frame_id: b7Hgy` / `scope: joel-only-no-crito-ref` / `joel_page_map: /faq (per Plan 26-01)` / `child_section_count: 5` / `status_counts: flat:0, partial:0, factored:5` / `reconstruction_priority: n/a (Phase 26 plan 26-01 — reconstructed)` / `open_flag_ids: OPEN-26-02 (now resolved)`
+   - Inserted right after the existing `(joel-only: 404)` placeholder row (which Plan 26-02 will update analogously).
+
+2. **Open Flags — Phase 26** — Added new row for OPEN-26-02:
+   - id `OPEN-26-02` / category `tooling` / severity `minor` / description covers the get_screenshot blank-render stale-cache quirk + its in-plan self-resolution + workaround codification target (Plan 26-03 CALIBRATION-PROTOCOL.md). consumer_phase: 26-02 (404 reconstruction) + 27+ (per-page phases).
+   - Also extended OPEN-26-01 description with a Phase 26-01 verification note: heading-2 interpolation default reads visually coherent at FAQ calibration; user APPROVED.
+
+3. **Variant Evidence (Phase 26)** — Appended 12 new rows for the FAQ page-frame structural bindings:
+   - FAQ page-frame structural row (fill, width, height, layout, etc.)
+   - Section/Header instance (D-77 carry-forward)
+   - page-intro section + title + body (3 rows — heading-1 + prose-paragraph)
+   - qa-list section + qa-item-1..5 + Q text × 5 + A text × 5 (4 rows: container + items + Q row + A row)
+   - Section/CTA instance with descendants override
+   - Section/Footer instance (D-77 carry-forward)
+   - Updated `Phase 26 Variant Evidence outcome` summary to **29 rows total** (17 from 26-00 + 12 from 26-01).
+   - Added `Page-frame count after Phase 26 plan 26-01` line — 1 reconstructed top-level page frame (FAQ b7Hgy).
+
+4. **`type-semantic-prose-paragraph-*` rows** — Dropped the "provisional" annotation from all 4 rows (family/size/weight/lh) per D-71 + user APPROVE at Task 6. Each row now carries an explicit "Provisional flag DROPPED at plan 26-01 Task 6" notation pointing to the FAQ first-consumer verification.
+
+5. **`_Tokens & Foundations` summary checklist** — Updated the "Prose paragraph (provisional)" item to reflect the dropped provisional flag and the carry-forward of OPEN-23-11 (prose-link / prose-list / prose-inline-code re-pointed to Phase 28).
+
+## Files Modified
+
+- `design/Crito.pen` — Pencil-MCP-side, no git diff
+  - Inserted: `b7Hgy` (FAQ page frame) + 5 direct children (`MpVz3`, `I4QJas`, `FswuE`, `NQNB3`, `MmDy2`) + page-intro sub-children + qa-list / 5 qa-items / 10 Q+A text nodes.
+  - Total new IDs: 1 page frame + 4 sub-frames + 5 qa-items + 12 text-node children (2 page-intro + 10 Q+A) + 2 component refs (Header, Footer) + 1 CTA ref with descendants override = 25 new IDs.
+- `.planning/research/PEN-INVENTORY.md` — 5 logical edits (Frames Inventory FAQ row + OPEN-26-02 + OPEN-26-01 update + Phase 26 Variant Evidence 12-row append + prose-paragraph provisional-flag drop ×4 + summary checklist refresh).
+- `.planning/phases/26-faq-404-reconstruction-calibration-workflow-established/26-01-SUMMARY.md` (this file)
+
+## Success Criteria Status
+
+- [x] A top-level frame named `FAQ` exists with 5 vertical children in order: Section/Header ref (MpVz3), page-intro frame (I4QJas), qa-list frame (FswuE), Section/CTA ref (NQNB3 with STUB descendants override), Section/Footer ref (MmDy2)
+- [x] `batch_get(["FswuE"])` shows exactly 5 qa-items; each contains a Q text node (heading-2 typography) + an A text node (prose-paragraph typography)
+- [x] Q+A text contents match the verbatim source from `src/pages/faq.astro` lines 11-32 (apostrophes preserved verbatim)
+- [x] Plan-close calibration AskUserQuestion was presented with inline `get_screenshot` renders + token-usage description; user APPROVED with all D-83 fidelity labels accepted
+- [x] PEN-INVENTORY.md Frames Inventory row for FAQ exists; Variant Evidence Phase 26 sub-section contains FAQ-related rows; OPEN-26-02 logged
+- [x] VALID-01 satisfied: per-section fidelity labels recorded
+- [x] VALID-02 satisfied: joel-only-branch calibration artifact (inline screenshots + description per D-65) was presented at the AskUserQuestion gate
+- [x] VALID-03 satisfied: OPEN-26-02 raised then self-resolved with workaround codified for Plan 26-03
+- [x] PAGE-04 satisfied: FAQ frame reconstructed as token-driven composition (heading-1 + heading-2 + prose-paragraph + bg-page + bg-surface-elevated + text-primary + text-secondary + section-y + stack-lg + stack-sm)
+- [x] PAGE-09 satisfied: desktop-only (1440 width; no mobile breakpoint)
+
+Plan 26-01 complete. FAQ page frame shipped; calibration gated; audit trail extended. Plan 26-02 (404 reconstruction) may proceed.
 
 
