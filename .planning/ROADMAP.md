@@ -408,7 +408,7 @@ Phases execute in numeric order: 1 → 2 → ... → 22 → 23 → 24 → 25 →
 | 23. Audit + Token Foundation | v2.0 | 5/5 | Complete    | 2026-05-31 |
 | 24. Layout Primitives + Primitive Components | v2.0 | 5/5 | Complete   | 2026-06-01 |
 | 25. Section + Compound Components | v2.0 | 3/3 | Complete | 2026-06-06 |
-| 26. FAQ + 404 Reconstruction | v2.0 | 4/4 | Complete | 2026-06-07 |
+| 26. FAQ + 404 Reconstruction | v2.0 | 4/4 | Complete   | 2026-06-07 |
 | 27. Thank-you + Contact Reconstruction | v2.0 | 0/TBD | Not started | - |
 | 28. Blog Reconstruction | v2.0 | 0/TBD | Not started | - |
 | 29. Projects Reconstruction | v2.0 | 0/TBD | Not started | - |
