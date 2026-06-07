@@ -33,3 +33,23 @@ Note: per CTA defaults already set in Plan 26-00, the FAQ STUB strings proposed 
 
 No mutations issued in Task 0 — pure verification.
 
+## Task 1: FAQ Top-Level Page Frame (D-74 + D-75 + D-76 + Pitfall 3 + Pitfall 5)
+
+`FindEmptySpace({width:1440, height:1800, direction:"right", padding:80})` returned `{x: 16207.27, y: -11711.55}`. `batch_design` Insert placed `FAQ` (id **`b7Hgy`**) as a direct child of the document root (NOT inside `g9oRa5` / `avgor` / `t67DU6` / `RpGbe` — Pitfall 3 compliance).
+
+| Property | Value |
+|---|---|
+| id | `b7Hgy` |
+| name | "FAQ" (plain per D-76) |
+| type | frame |
+| width × height | 1440 × 1800 |
+| layout / gap / padding / alignItems | vertical / 0 / 0 / center (Pitfall 5: outer 1440 + inner 1200 centered) |
+| fill | `#ffffffff` (color-semantic-bg-page literal per OPEN-23-13) |
+| placeholder | `true` (carry through Tasks 2-5; cleared in Task 5 fit_content / final structural validation) |
+| coords | x = 16207.27, y = −11711.55 |
+
+**Directional / row-placement observation for CALIBRATION-PROTOCOL.md (Plan 26-03):**
+
+The page-frame cluster row sits at y ≈ −4111.55; the library row sits at y ≈ −11711.55. `FindEmptySpace(direction:"right")` chose the library-row Y but a column to the right of all existing nodes (x = 16207, the rightmost Crito page edge at x ≈ 16127, so directional preference holds). The page-frame row and library row are visually distinct "tracks" on the canvas; reconstructed pages may want to anchor to the page-frame row instead. Not blocking — recording the observation per Task 1 action so Plan 26-03 can codify the preferred anchor (e.g., pass `nodeId: <cl8tt>` to chain new screens off the rightmost existing page).
+
+
