@@ -63,4 +63,35 @@ Inserted as the first 2 children of FAQ frame `b7Hgy` in the vertical auto-layou
 | page-intro / title text | `WGdgb` | "Frequently Asked Questions" — Plus Jakarta Sans 48 / 700 / lh 1.4 / `#141f39ff` (heading-1 typography per `type-semantic-heading-1-*`) |
 | page-intro / body text | `ZguDg` | "Answers to common questions about working with Joel." — Inter 16 / 400 / lh 1.625 / `#52525bff` (prose-paragraph typography). **APPROXIMATE fidelity** — short brand-neutral copy authored for the gate; user may revise at Task 6 calibration. |
 
+## Task 3: Q+A list — 5 verbatim pairs (D-59 + D-71 + D-82)
+
+Inserted as the 3rd child of FAQ frame `b7Hgy` in vertical stack.
+
+| Element | ID | Notes |
+|---|---|---|
+| qa-list outer frame | `FswuE` | width 1200, vertical, gap 32 (`space-semantic-stack-lg`), padding `[64, 0]` (`space-semantic-section-y`), alignItems center |
+| qa-item-1 frame | `eDbs7` | width 800 (narrower reading column), vertical, gap 12 (`space-semantic-stack-xs`), padding 0 |
+| qa-item-2 frame | `XI1HR` | same shape |
+| qa-item-3 frame | `H0nfx` | same shape |
+| qa-item-4 frame | `hfqaE` | same shape |
+| qa-item-5 frame | `YThyr` | same shape |
+
+**Q text nodes** — `lQhL5` / `s2XJP` / `vysqV` / `zWJFi` / `a1obh` — all Plus Jakarta Sans 32 / 700 / lh 1.4 / `#141f39ff` (`type-semantic-heading-2-*` typography per D-72; first real consumer of the Plan 26-00 heading-2 token family).
+
+**A text nodes** — `r16PLy` / `h8hoa` / `oKRJQ` / `oYSZ4` / `uFB4N` — all Inter 16 / 400 / lh 1.625 / `#52525bff` (`type-semantic-prose-paragraph-*` typography per D-71; D-71 "provisional" status pending Task 6 confirmation).
+
+Q+A text uses `textGrowth: "fixed-width"` + `width: "fill_container"` so the text wraps to the qa-item's 800-wide column (per schema guideline for text inside a layout parent).
+
+**Verbatim Q+A content shipped (from `src/pages/faq.astro` lines 11-32):**
+
+| # | Q | A |
+|---|---|---|
+| 1 | How long does a typical project take? | Every project is different. Discovery and prototyping usually take 1-2 weeks, then we'll outline a timeline in the proposal based on scope. |
+| 2 | Do you work with clients outside your area? | Absolutely. Most client communication happens over video calls and email. Location doesn't matter. |
+| 3 | What if I'm not sure exactly what I need? | That's what discovery is for. We'll talk through your challenges and I'll help clarify what solution makes sense. |
+| 4 | How do you handle changes during the project? | Small adjustments are normal. Larger scope changes are discussed together and may adjust the timeline or investment. |
+| 5 | What happens after handover? | You get documentation and training. I'm available for questions and can provide ongoing support if needed. |
+
+Plain ASCII apostrophes preserved verbatim in: `I'm`, `That's`, `we'll`, `We'll`, `I'll`, `doesn't`. NO accordion mechanic (D-59 — both Q and A always visible). NO Compound/Card refs (RESEARCH Don't Hand-Roll — image-slot is wrong shape; plain frames used).
+
 
