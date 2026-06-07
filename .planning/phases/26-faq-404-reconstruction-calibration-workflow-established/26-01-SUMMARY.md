@@ -52,4 +52,15 @@ No mutations issued in Task 0 — pure verification.
 
 The page-frame cluster row sits at y ≈ −4111.55; the library row sits at y ≈ −11711.55. `FindEmptySpace(direction:"right")` chose the library-row Y but a column to the right of all existing nodes (x = 16207, the rightmost Crito page edge at x ≈ 16127, so directional preference holds). The page-frame row and library row are visually distinct "tracks" on the canvas; reconstructed pages may want to anchor to the page-frame row instead. Not blocking — recording the observation per Task 1 action so Plan 26-03 can codify the preferred anchor (e.g., pass `nodeId: <cl8tt>` to chain new screens off the rightmost existing page).
 
+## Task 2: Section/Header ref + page-intro section (D-77 + heading-1 typography)
+
+Inserted as the first 2 children of FAQ frame `b7Hgy` in the vertical auto-layout.
+
+| Element | ID | Notes |
+|---|---|---|
+| Section/Header ref → `G0wNOc` | `MpVz3` | NO descendants override (D-77: Crito-source nav labels stay; Joel v1.3 4-link override deferred to Phase 31) |
+| page-intro frame | `I4QJas` | width 1200, vertical, gap 16, padding [64,0], alignItems center |
+| page-intro / title text | `WGdgb` | "Frequently Asked Questions" — Plus Jakarta Sans 48 / 700 / lh 1.4 / `#141f39ff` (heading-1 typography per `type-semantic-heading-1-*`) |
+| page-intro / body text | `ZguDg` | "Answers to common questions about working with Joel." — Inter 16 / 400 / lh 1.625 / `#52525bff` (prose-paragraph typography). **APPROXIMATE fidelity** — short brand-neutral copy authored for the gate; user may revise at Task 6 calibration. |
+
 
