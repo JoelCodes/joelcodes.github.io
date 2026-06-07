@@ -27,3 +27,23 @@ This plan was executed INLINE by the main orchestrator, same as Plans 26-00 + 26
 
 No mutations issued in Task 0 — pure verification.
 
+## Task 1: 404 Top-Level Page Frame (D-74 + D-75 + D-76 + Pitfall 3 + Pitfall 5)
+
+`FindEmptySpace({width:1440, height:1000, direction:"right", padding:80, nodeId:"b7Hgy"})` returned `{x: 17847.27, y: −4111.55}`. **The `nodeId: "b7Hgy"` anchor parameter applied the Plan 26-01 Task 1 CALIBRATION-PROTOCOL.md feedback — by passing the FAQ frame's id as the anchor, `FindEmptySpace` placed the 404 frame in the same row** (y = −4111.55, the page-frame row), to the right of FAQ. The 200px lateral padding (1440 FAQ width + 80 padding ≈ 17847) and the row alignment make the FAQ + 404 reconstruction cluster a tight visual neighbor of the Crito-source page frames.
+
+`batch_design` Insert placed `404` (id **`csXky`**) as a direct child of the document root (NOT inside library parents — Pitfall 3 compliance).
+
+| Property | Value |
+|---|---|
+| id | `csXky` |
+| name | "404" (plain per D-76) |
+| type | frame |
+| width × height | 1440 × 1000 (Pitfall 5: outer 1440 + inner 1200 centered) |
+| layout / gap / padding / alignItems | vertical / 0 / 0 / center |
+| fill | `#ffffffff` (color-semantic-bg-page) |
+| placeholder | `true` (will be cleared in Task 4 after structural validation) |
+| coords | x = 17847.27, y = −4111.55 (page-frame row, ~80px right of FAQ's right edge) |
+
+**Page-frame-row anchor pattern confirmed:** Plan 26-01 noted the row-mismatch when `FindEmptySpace` was called without an anchor and chose the library row. Plan 26-02 used `nodeId: <previous-reconstructed-page-id>` and the function correctly placed the new page in the page-frame row. **This is the pattern Plan 26-03 CALIBRATION-PROTOCOL.md should codify as the default placement protocol** for subsequent per-page phases (27 Thank-you+Contact, 28 Blog, 29 Projects, 30 Design-system, 31 Homepage).
+
+
