@@ -1,7 +1,7 @@
 ---
 phase: 26-faq-404-reconstruction-calibration-workflow-established
 plan: 02
-status: in-progress
+status: complete
 date: 2026-06-07
 ---
 
@@ -98,5 +98,86 @@ Inserted as the 3rd and 4th children of 404 frame `csXky`.
 **FAQ frame `b7Hgy` continues to render correctly** in this same session (re-confirmed during the workaround attempts), so the stale-cache quirk is per-subtree, not per-session. **Working theory revised:** the cache clears when the right kind of Update touches the subtree; for FAQ that was a Y-position change between two distinct rows (library row → page-frame row); for 404 the position changes were within the same row, which did not invalidate the cache. Plan 26-03 CALIBRATION-PROTOCOL.md will codify the more reliable workaround: **fall back to user-side verification in Pencil's actual editor at the calibration gate when `get_screenshot` returns blank for a newly-created frame after a same-row Update.** The structural verification via `batch_get` + `snapshot_layout` remains authoritative — only the visual-aid layer of the calibration is affected.
 
 Task 4 done — snapshot_layout clean, fit_content active, `get_screenshot` blank-but-known-quirk; proceed to Task 5 calibration gate with structural-description-only presentation.
+
+## Task 5: Calibration Spot-Check User Gate (D-65 + D-83 + D-86)
+
+`get_screenshot(csXky)` stayed blank through all OPEN-26-02 workaround attempts. Calibration gate surfaced WITHOUT inline screenshots — structural-only presentation with explicit pointer to canvas coordinates (17847.27, −4111.55) for the user to inspect frame `csXky` in Pencil's actual editor.
+
+### AskUserQuestion presented
+
+Structural description of all 4 sections + per-section fidelity proposals per D-83 + semantic-token bindings (heading-1, heading-2, prose-paragraph, bg-page, text-primary, text-secondary, section-y, stack-md) + PAGE-11 INERT note + calibration target (`RpGbe`) + pointer to Pencil editor for visual verification.
+
+### User response: **APPROVE** (visual check confirmed in Pencil's editor)
+
+Per-section fidelity labels per D-83 recorded:
+- Section/Header instance — **EXACT** (Phase 25 shipped; D-77 Crito-source nav labels stay)
+- message-section — **LAYOUT = EXACT / TEXT = STUB** per D-83
+- Section/NavBack instance — **EXACT** (Plan 26-00 defaults match; structural labels Home / Blog / Projects / Contact per D-79 + Claude's Discretion)
+- Section/Footer instance — **EXACT** (Phase 25 shipped; D-77)
+
+No new OPEN-26-NN raised at the gate beyond the refined OPEN-26-02 already documented at Task 4.
+
+### VALID-01 / VALID-02 / VALID-03 satisfied at Task 5
+
+- VALID-01 (per-section fidelity labels) — recorded above per D-83 ✓
+- VALID-02 (joel-only-branch calibration via D-62 token-usage check) — structural description + token-usage description + user editor-side verification ✓ (visual-aid screenshot unavailable per OPEN-26-02 Tier-2 fallback; structural verification remains authoritative)
+- VALID-03 (gap declaration) — OPEN-26-02 refined with per-subtree behavior documented; no further gaps surfaced ✓
+
+## Task 6: PEN-INVENTORY Extensions + 26-02-SUMMARY Close + PAGE-11 INERT (D-88 + RESEARCH § Focus 5)
+
+### PEN-INVENTORY edits applied
+
+1. **Frames Inventory** — Replaced the `(joel-only: 404)` placeholder row with a proper `404` row:
+   - `name: 404` / `frame_id: csXky` / `scope: joel-only-no-crito-ref` / `joel_page_map: /404 (per Plan 26-02)` / `child_section_count: 4` / `status_counts: flat:0, partial:0, factored:4` / `reconstruction_priority: n/a (Phase 26 plan 26-02 — reconstructed)` / `open_flag_ids: OPEN-26-02 (Plan 26-02 instance — stuck; user verified in Pencil editor)`
+   - Inserted **above** the FAQ row in placement order (matching the 404-first → FAQ-second ordering in the original v2.0 page-frame placeholder list).
+   - FAQ row note refined to clarify that the 26-01 OPEN-26-02 instance cleared after the cross-row position move.
+
+2. **PAGE-11 status note** — Added a block right below the Frames Inventory table:
+   - "INERT for both reconstructed rows above (FAQ + 404). Joel-only-no-crito-ref scope — no Crito FAQ or 404 raster exists to remove. PAGE-11 applies only to the crito-source branch (Phases 27 Thank-you+Contact / 28 Blog / 29 Projects / 30 Design-system / 31 Homepage). Plan 26-03 CALIBRATION-PROTOCOL.md documents this carve-out in the branch matrix."
+
+3. **Open Flags — Phase 26** — Refined OPEN-26-02 description with Plan 26-02 finding:
+   - Per-subtree (not per-session) stale-cache.
+   - Plan 26-01 cross-row Update cleared FAQ subtree; Plan 26-02 same-row Updates did NOT clear 404 subtree.
+   - Workaround codification updated to Tier-1 (cross-row Update) + Tier-2 (user-side editor verification).
+
+4. **Variant Evidence (Phase 26)** — Appended 8 new rows for Plan 26-02 bindings:
+   - 404 page frame structural (fill, layout, width, position via FindEmptySpace nodeId-anchor pattern)
+   - Section/Header instance (D-77 carry-forward)
+   - message-section + headline + body (3 rows)
+   - Section/NavBack instance (no-override note — defaults match)
+   - Section/Footer instance (D-77 carry-forward)
+   - Updated `Phase 26 Variant Evidence outcome` summary line to **37 rows total** (17 from 26-00 + 12 from 26-01 + 8 from 26-02).
+   - Updated `Page-frame count` line to **2 reconstructed top-level page frames** (FAQ b7Hgy + 404 csXky).
+
+## Files Modified
+
+- `design/Crito.pen` — Pencil-MCP-side, no git diff
+  - Inserted: `csXky` (404 page frame) + 4 direct children (`pZReo`, `SruDH`, `XJtoN`, `UPHLK`) + message-section sub-children (`t9wUlR` headline, `WWABs` body).
+  - Total new IDs: 1 page frame + 1 message-section + 3 component refs (Header, NavBack, Footer) + 2 message-section text-node children = **7 new IDs**.
+- `.planning/research/PEN-INVENTORY.md` — 4 logical edits (Frames Inventory 404 row + PAGE-11 INERT block + OPEN-26-02 refinement + Phase 26 Variant Evidence 8-row append).
+- `.planning/phases/26-faq-404-reconstruction-calibration-workflow-established/26-02-SUMMARY.md` (this file).
+
+## Success Criteria Status
+
+- [x] A top-level frame named `404` exists with 4 vertical children: Section/Header ref (pZReo), message-section frame (SruDH), Section/NavBack ref (XJtoN), Section/Footer ref (UPHLK)
+- [x] Message section contains headline + body text nodes with STUB content (per D-81) and EXACT typography bindings (heading-1 + prose-paragraph)
+- [x] Section/NavBack instance renders with 4 structural labels (Home / Blog / Projects / Contact) and "Find what you need" heading — pure ref instance with no descendants override (Plan 26-00 defaults match)
+- [x] Plan-close calibration AskUserQuestion was presented with structural-description + token-usage description + PAGE-11 INERT note (visual screenshot unavailable per OPEN-26-02 Tier-2 fallback; user verified directly in Pencil's editor); user APPROVED
+- [x] PEN-INVENTORY.md Frames Inventory row for 404 + Variant Evidence Phase 26 rows + PAGE-11 INERT note exist
+- [x] VALID-01 satisfied (per-section labels per D-83); VALID-02 satisfied (joel-only-branch calibration via D-62 — user editor-verified); VALID-03 satisfied (OPEN-26-02 refined)
+- [x] PAGE-08 satisfied (404 frame reconstructed)
+- [x] PAGE-09 satisfied (desktop-only, 1440 width; no mobile breakpoint)
+- [x] PAGE-11 documented as INERT (joel-only branch — no Crito raster to remove)
+
+## Explicit PAGE-11 INERT note for Plan 26-03 CALIBRATION-PROTOCOL.md branch matrix
+
+Plan 26-03 is responsible for codifying the **joel-only-no-crito-ref vs crito-source-present** branch matrix. From Plan 26-02:
+
+- **joel-only-no-crito-ref branch:** PAGE-11 is INERT. No source raster exists; the per-page calibration spot-check is solely a token-usage check against `_Tokens & Foundations` (`RpGbe`). This is the branch that Plans 26-01 (FAQ) and 26-02 (404) operated on. The structural calibration is sufficient; visual calibration uses either `get_screenshot` (FAQ) or user-side Pencil editor verification (404, Tier-2 OPEN-26-02 fallback).
+- **crito-source-present branch:** PAGE-11 is ACTIVE. Phases 27-31 will reconstruct pages that DO have a Crito source raster (Contact `cl8tt`, Blog `DzqTm` / `w1m3x`, Homepage `ujMLJ`, etc.). PAGE-11 requires removing the source raster ONLY AFTER the per-page calibration spot-check PASSES — the visual diff between Crito-source raster and the reconstructed composition becomes part of the calibration evidence.
+
+Plan 26-03 should formalize this in the CALIBRATION-PROTOCOL.md branch matrix with explicit Tier-1 / Tier-2 workarounds for OPEN-26-02 (get_screenshot stale-cache) carried forward.
+
+Plan 26-02 complete. Plan 26-03 (CALIBRATION-PROTOCOL.md) may proceed with the codify-what-worked step.
 
 
