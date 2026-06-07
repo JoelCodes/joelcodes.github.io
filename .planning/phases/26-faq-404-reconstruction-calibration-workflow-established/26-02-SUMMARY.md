@@ -57,4 +57,15 @@ Inserted as the first 2 children of 404 frame `csXky`.
 | message-section / headline text | `t9wUlR` | content "Headline placeholder" — Plus Jakarta Sans 48 / 700 / lh 1.4 / `#141f39ff` (heading-1 typography). **STUB content per D-81** — fidelity TEXT=STUB / LAYOUT=EXACT per D-83. |
 | message-section / body text | `WWABs` | content "Body placeholder — this page does not exist. Try the navigation below." — Inter 16 / 400 / lh 1.625 / `#52525bff` (prose-paragraph typography). `textAlign: center`, `textGrowth: fixed-width`, `width: 720`. **STUB content per D-81** — explicitly labeled STUB even though the placeholder line gives a structural hint; user may revise brand-voice copy at calibration gate or in a future content phase. |
 
+## Task 3: Section/NavBack ref + Section/Footer ref (D-79 + D-77)
+
+Inserted as the 3rd and 4th children of 404 frame `csXky`.
+
+| Element | ID | ref | Descendants override |
+|---|---|---|---|
+| Section/NavBack (404 instance) | `XJtoN` | `N1jo3i` | **NONE** — Plan 26-00 default placeholder ("Find what you need" heading + 4 plain text links Home / Blog / Projects / Contact) already matches the 404's desired EXACT structural labels per CONTEXT.md Claude's Discretion + D-79. Per the plan's Task 3 documented branch: "If 26-00 placeholders are already the desired labels, this ref needs no descendants override at all." |
+| Section/Footer (404 instance) | `UPHLK` | `Xs0Hs` | **NONE** per D-77 (Crito-source labels stay; Joel-brand override deferred to Phase 31). |
+
+`batch_get(["csXky"])` confirms 4 direct children in order: `pZReo` (Header) → `SruDH` (message-section) → `XJtoN` (NavBack) → `UPHLK` (Footer). 404 page frame structurally complete.
+
 
