@@ -94,4 +94,15 @@ Q+A text uses `textGrowth: "fixed-width"` + `width: "fill_container"` so the tex
 
 Plain ASCII apostrophes preserved verbatim in: `I'm`, `That's`, `we'll`, `We'll`, `I'll`, `doesn't`. NO accordion mechanic (D-59 — both Q and A always visible). NO Compound/Card refs (RESEARCH Don't Hand-Roll — image-slot is wrong shape; plain frames used).
 
+## Task 4: Section/CTA ref + Section/Footer ref (D-61 + D-77 + D-82)
+
+Inserted as the 4th and 5th children of FAQ frame `b7Hgy`.
+
+| Element | ID | ref | Notes |
+|---|---|---|---|
+| Section/CTA (FAQ instance) | `NQNB3` | `Hs5rc` | Descendants override map: `U1DQb` → "Still have questions?" + `mlSq0` → "Get in touch and we'll help you figure out next steps." + `ATJK9` → "Get in touch". Override values are **identical to Section/CTA component defaults** so the visible result is unchanged — overrides included to make the FAQ instance's binding to those STUB strings explicit per D-82. **STUB fidelity** per D-82 (microcopy is placeholder; layout EXACT). |
+| Section/Footer (FAQ instance) | `MmDy2` | `Xs0Hs` | NO descendants override per D-77 (Crito-source labels stay; Joel-brand override deferred to Phase 31). |
+
+`batch_get(["b7Hgy"])` confirms 5 direct children in order: `MpVz3` (Header), `I4QJas` (page-intro), `FswuE` (qa-list), `NQNB3` (CTA), `MmDy2` (Footer). The CTA `descendants` map as returned by Pencil shows only `U1DQb` + `mlSq0` (no `ATJK9` entry) — Pencil likely omits no-op overrides from output (`ATJK9` value matches the Hs5rc component's nested `bhkiN/ATJK9` default). Rendered Button label still resolves to "Get in touch" — verified visually at Task 5 screenshot.
+
 
