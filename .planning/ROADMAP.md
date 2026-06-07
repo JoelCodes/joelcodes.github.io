@@ -256,16 +256,24 @@ Plans:
 **Success Criteria** (what must be TRUE):
 
   1. The Crito Thank-you frame in `design/Crito.pen` is fully reconstructed — zero `[FLAT]` markers — and the Calendly placeholder section is present as a distinct slot/note (so the future code milestone can wire a real Calendly link without re-deriving the section)
-  2. The Crito Contact frame is fully reconstructed; the 8-field lead-qualification form is composed entirely of `Primitive / Input` instances (no inlined input markup); any field type the primitive doesn't yet cover is added as a justified variant rather than reinvented inline
-  3. Each reconstructed section on both pages carries an EXACT / APPROXIMATE / STUB fidelity label and has a side-by-side artifact in `.planning/ui-reviews/v2.0/`; OPEN gaps (e.g. error states not depicted in Crito source) are flagged, not invented
-  4. The user has spot-checked at least one section per page against the side-by-side artifacts before phase close
+  2. The Crito Contact frame is fully reconstructed; the 8-field lead-qualification form is composed entirely of `Primitive / Input` instances (no inlined input markup); any field type the primitive doesn't yet cover is added as a justified variant rather than reinvented inline (D-89 Hybrid library strategy: Textarea variant + Select/Checkbox sibling primitives + CheckboxGroup compound — Plan 27-00 foundation)
+  3. Each reconstructed section on both pages carries an EXACT / APPROXIMATE / STUB fidelity label per D-83 and is calibrated via CALIBRATION-PROTOCOL.md inline-screenshot gates (Thank-you joel-only branch per § 4.5; Contact crito-source-flat-raster branch per § 3.4 — paired against `design/images/image-import-NN.jpg` probed at Plan 27-02 Task 0); OPEN-27-NN gaps flagged, not invented
+  4. The user has spot-checked at least one section per page via the plan-close calibration gates (Plan 27-01 + Plan 27-02 single AskUserQuestion gates per CALIBRATION-PROTOCOL § 4.5 / § 3.4) before phase close; PAGE-11 INERT for Thank-you + PAGE-11 ACTIVE for Contact (cl8tt raster hidden via `enabled: false` AFTER user APPROVE only — first production use of PAGE-11 ACTIVE in v2.0)
 
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
 
-- [ ] 27-01: Reconstruct Thank-you page sections (post-submission message section, Calendly placeholder section) per calibration protocol from Phase 26
-- [ ] 27-02: Reconstruct Contact page sections including 8-field form using `Primitive / Input` instances; surface any input variants needed (justified by Joel's actual field shape, not invented) back to Phase 24's primitive; per-section calibration; user spot-check
+- [ ] 27-00-PLAN.md — Phase 27 foundation (D-89 Hybrid library strategy + D-101 foundation-first): Primitive/Input label-slot UPDATE per D-91 (oCeJP → horizontal frame with label-text + required-mark enabled:false + optional-text enabled:false; in-place type-conversion probe + Delete+recreate fallback per RESEARCH Open Question 2) + Primitive/Input/Textarea variant + Primitive/Select Default/Focus/Error sibling primitive (chevron-down via lucide native Pattern A per D-92) + Primitive/Checkbox Default/Focus/Error sibling primitive + Compound/CheckboxGroup compound inside avgor + t67DU6. Seeds PEN-INVENTORY § Calendly Wiring Map (Phase 27) with both URLs per D-93. NO user-calibration gate at close per D-86 + D-102 (agent-deterministic foundation work).
+- [ ] 27-01-PLAN.md — Thank-you joel-only reconstruction (D-99 + D-100; CALIBRATION-PROTOCOL § 4 joel-only branch; PAGE-11 INERT per § 4.3 carry-forward): top-level `Thank-you` frame at 1440 width via `find_empty_space_on_canvas` with `nodeId: csXky` anchor (Phase 26 404 frame, CALIBRATION-PROTOCOL § 10.4); instances Section/Header (G0wNOc, no override per D-77) + success-message section (Primitive/Icon/32 with lucide circle-check Pattern A per D-100 + heading "Thanks for reaching out!" + body "I'll email you within 48 hours..." both v1.3 verbatim per D-98) + Section/CTA (Hs5rc, first cross-phase consumer per Phase 26 D-78; Calendly placeholder with v1.3 button label "Skip the wait - book a call" + sibling Calendly URL note `calendly.com/joelshinness` per D-93) + secondary "Return to homepage" plain text-link per D-99 Claude's Discretion + Section/Footer (Xs0Hs, no override per D-77); plan-close single calibration AskUserQuestion gate per CALIBRATION-PROTOCOL § 4.5 (joel-only token-usage format).
+- [ ] 27-02-PLAN.md — Contact crito-source-flat-raster reconstruction (D-95 + D-96 + D-97 + D-98; CALIBRATION-PROTOCOL § 3 crito-source-flat-raster sub-case; PAGE-11 ACTIVE per § 3.3 — FIRST production use of PAGE-11 ACTIVE in v2.0): Task 0 probes cl8tt raster image-import-NN.jpg index (HIGHEST-PRIORITY DELIVERABLE per RESEARCH § Pitfall 3); top-level `Contact` frame at 1440 width via `find_empty_space_on_canvas` with `nodeId: <thankYouPageId>` anchor; instances Section/Header + page-intro ("Let's Talk" + 48-hours body v1.3 verbatim per D-98) + 2-col asymmetric grid per D-95 (form-column 760 + sidebar-column 376; horizontal-layout alignItems flex_start) containing the 8-field form composed entirely of Plan 27-00 library instances per D-97 (Name + Email + Company + Challenges Textarea + Solutions CheckboxGroup × 5 + Budget Select + Timeline Select + Message Textarea + Submit + privacy; required-mark + optional-text per field per D-97 Message inconsistency raises OPEN-27-NN) + sidebar Compound/Card (t40xct, second cross-phase consumer per Phase 25 D-49; image disabled + v1.3 verbatim title/body/Button "Book a Call" + sibling Calendly URL note `calendly.com/me--juoi/discovery-call` per D-93) + Section/Footer; plan-close single calibration AskUserQuestion gate per CALIBRATION-PROTOCOL § 3.4 step 5 (crito-source-flat-raster side-by-side with cl8tt image-import-NN.jpg); on APPROVE → batch_design Update(cl8tt, { enabled: false }) per PAGE-11 ACTIVE (NEVER before APPROVE per Pitfall 4) → PEN-INVENTORY status_counts flat:1 → hidden:1 + OPEN-23-05 RESOLVED.
+
+**Cross-cutting constraints:**
+
+- Every Pencil-mutating call is preceded by `mcp__pencil__get_editor_state({ include_schema: false })` asserting active editor == `design/Crito.pen` (D-103 carry-forward from Phase 26 D-87 / Phase 25 D-54 / Phase 24 D-35)
+- Phase 27 ships ZERO new tokens — `get_variables({})` returns 100 at every plan open + close (D-91 reuses `color-semantic-text-error` for required-mark; per Open Question reuse)
+- `snapshot_layout({ maxDepth: 0, problemsOnly: true })` at document root returns `"No layout problems."` at every plan close; per-frame text-clipping false-positives anticipated to exceed Phase 26 due to multi-line content (textareas + CheckboxGroup) per Pitfall 5 (NOT mitigated — known benign)
+- PEN-INVENTORY extension pattern per D-104 — Frames Inventory rows for Thank-you + Contact; Variant Evidence (Phase 27) sub-section; NEW § Calendly Wiring Map (Phase 27); Open Flags — Phase 27 (OPEN-27-NN); cl8tt status_counts update post-APPROVE; OPEN-23-05 RESOLVED + OPEN-24-04/-07/-08/-09 partial-resolution update notes
 
 ---
 
@@ -409,7 +417,7 @@ Phases execute in numeric order: 1 → 2 → ... → 22 → 23 → 24 → 25 →
 | 24. Layout Primitives + Primitive Components | v2.0 | 5/5 | Complete   | 2026-06-01 |
 | 25. Section + Compound Components | v2.0 | 3/3 | Complete | 2026-06-06 |
 | 26. FAQ + 404 Reconstruction | v2.0 | 4/4 | Complete   | 2026-06-07 |
-| 27. Thank-you + Contact Reconstruction | v2.0 | 0/TBD | Not started | - |
+| 27. Thank-you + Contact Reconstruction | v2.0 | 0/3 | Planned | - |
 | 28. Blog Reconstruction | v2.0 | 0/TBD | Not started | - |
 | 29. Projects Reconstruction | v2.0 | 0/TBD | Not started | - |
 | 30. Design System Reference Reconstruction | v2.0 | 0/TBD | Not started | - |
@@ -418,4 +426,4 @@ Phases execute in numeric order: 1 → 2 → ... → 22 → 23 → 24 → 25 →
 
 ---
 *Roadmap initialized: 2026-01-26 for v1.0*
-*Last updated: 2026-06-07 — Phase 26 complete (4/4 plans shipped: 26-00 foundation + 26-01 FAQ + 26-02 404 + 26-03 CALIBRATION-PROTOCOL.md; calibration protocol established for Phases 27-31 to inherit)*
+*Last updated: 2026-06-07 — Phase 27 planned (3/3 plans: 27-00 foundation + 27-01 Thank-you joel-only + 27-02 Contact crito-source-flat-raster; CALIBRATION-PROTOCOL first dual-branch consumer; PAGE-11 ACTIVE first production use deferred to Plan 27-02 post-APPROVE)*
