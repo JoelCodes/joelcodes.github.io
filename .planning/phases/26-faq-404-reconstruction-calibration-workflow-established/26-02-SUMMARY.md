@@ -68,4 +68,35 @@ Inserted as the 3rd and 4th children of 404 frame `csXky`.
 
 `batch_get(["csXky"])` confirms 4 direct children in order: `pZReo` (Header) → `SruDH` (message-section) → `XJtoN` (NavBack) → `UPHLK` (Footer). 404 page frame structurally complete.
 
+## Task 4: snapshot_layout + fit_content + screenshot
+
+### Pre-flight + placeholder clear + height switch
+
+`Update("csXky", {placeholder: false, height: "fit_content"})` applied. Top-level node count grew 20 → 21 (404 frame confirmed visible at document root).
+
+### snapshot_layout outcomes
+
+| Call | Result |
+|---|---|
+| `snapshot_layout({maxDepth:0, problemsOnly:true})` (document level) | `"No layout problems."` ✓ |
+| `snapshot_layout({parentId:"csXky", maxDepth:3})` (full 404 structural trace) | All 4 children positioned correctly; fit_content height = **824** (Header 60 + message-section 309 + NavBack 151 + Footer 304 + small inter-section spacing). Footer instance `UPHLK` flagged `"partially clipped"` — see false-positive note below. |
+
+### Text-clipping false-positive carry-forward (Phase 24/25, Pitfall 6)
+
+`UPHLK` (Section/Footer instance) reports `"problems": "partially clipped"` at the instance level. This is the Phase 24/25 layout-engine false-positive: the same `Xs0Hs` Footer renders correctly in `g9oRa5` (library cluster source) and in FAQ frame `b7Hgy` (Plan 26-01 calibration screenshot showed Footer pixels). The flag is NOT a real clipping in this instance — `UPHLK`'s computed height (304) matches the source `Xs0Hs` Footer computed height in other contexts. Per Plan 26-00 + 26-01 pattern: NO mitigation applied; quirk documented.
+
+### OPEN-26-02 (refined — Pencil MCP screenshot stale-cache for newly-created subtree)
+
+`get_screenshot({nodeId: "csXky"})` returned blank-white for the 404 page frame and ALL its sub-frames (`SruDH` message-section, `XJtoN` NavBack instance, `pZReo` Header instance, `UPHLK` Footer instance) and even leaf text nodes (`t9wUlR` headline). Plan 26-01 had the same blank-render quirk for FAQ frame `b7Hgy`, which cleared after a single `Update(b7Hgy, {x, y})` no-op position assignment. Plan 26-02's `csXky` did NOT clear with the same workaround — tried:
+
+1. `Update(csXky, {x:<current>, y:<current>})` — no effect
+2. `Update(SruDH, {gap:24})` — no effect (touching a child)
+3. `Update(t9wUlR, {content:<same>})` — no effect (touching a leaf text)
+4. `Update(csXky, {x:0, y:0})` then `Update(csXky, {x:17847, y:-4111})` — round-trip move, no effect
+5. `get_editor_state` after each — no effect on render cache
+
+**FAQ frame `b7Hgy` continues to render correctly** in this same session (re-confirmed during the workaround attempts), so the stale-cache quirk is per-subtree, not per-session. **Working theory revised:** the cache clears when the right kind of Update touches the subtree; for FAQ that was a Y-position change between two distinct rows (library row → page-frame row); for 404 the position changes were within the same row, which did not invalidate the cache. Plan 26-03 CALIBRATION-PROTOCOL.md will codify the more reliable workaround: **fall back to user-side verification in Pencil's actual editor at the calibration gate when `get_screenshot` returns blank for a newly-created frame after a same-row Update.** The structural verification via `batch_get` + `snapshot_layout` remains authoritative — only the visual-aid layer of the calibration is affected.
+
+Task 4 done — snapshot_layout clean, fit_content active, `get_screenshot` blank-but-known-quirk; proceed to Task 5 calibration gate with structural-description-only presentation.
+
 
