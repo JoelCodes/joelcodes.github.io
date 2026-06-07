@@ -235,10 +235,10 @@ Plans:
 
 Plans:
 
-- [ ] 26-00-PLAN.md — Phase 26 foundation: `type-semantic-heading-2-*` 4-part composite + `type-primitive-size-32` primitive (per CONTEXT D-72 + RESEARCH § Focus 3 user gate at Task 1 for heading-2 values) + new Section/CTA (3-slot: headline/body/actions per D-78) + Section/NavBack (2-slot: heading/links per D-79) reusable components inside `_Components / Sections` (g9oRa5). Also updates this ROADMAP entry from 3 plans → 4 plans (D-84).
-- [ ] 26-01-PLAN.md — FAQ page frame reconstruction: top-level `FAQ` frame at 1440 width via `find_empty_space_on_canvas` (D-74); instances Section/Header (G0wNOc) + page-intro section + Q+A list (5 verbatim pairs from `src/pages/faq.astro` lines 11-32 per D-82) + Section/CTA (STUB microcopy per D-82) + Section/Footer (Xs0Hs); plan-close calibration spot-check user gate per D-65 (joel-only branch, D-62 token-usage check).
-- [ ] 26-02-PLAN.md — 404 page frame reconstruction: top-level `404` frame at 1440 width; instances Section/Header + message section (BIG headline + body, both STUB text per D-81 — layout EXACT) + Section/NavBack instance (4 structural labels Home/Blog/Projects/Contact per CONTEXT Claude's Discretion) + Section/Footer; plan-close calibration spot-check user gate per D-65; PAGE-11 INERT note recorded in PEN-INVENTORY per RESEARCH § Focus 5.
-- [ ] 26-03-PLAN.md — Codify `.planning/research/CALIBRATION-PROTOCOL.md` (codify-what-worked per D-67): branch matrix (crito-source-present vs joel-only-no-crito-ref) + per-step script per branch (Pencil MCP calls, pairing target, naming convention, user-gate format) + EXACT/APPROXIMATE/STUB definitions per branch per D-63 + OPEN-flag template + PAGE-11 carve-out (crito-source only) + PAGE-09 desktop-only constraint + inline-screenshot substitution per OPEN-23-01 + per-page phase consumer map for Phases 27-31. Cross-referenced from PEN-INVENTORY via short `## Calibration Protocol` anchor per D-69.
+- [x] 26-00-PLAN.md — Phase 26 foundation: `type-semantic-heading-2-*` 4-part composite + `type-primitive-size-32` primitive (per CONTEXT D-72 + RESEARCH § Focus 3 user gate at Task 1 for heading-2 values) + new Section/CTA (3-slot: headline/body/actions per D-78) + Section/NavBack (2-slot: heading/links per D-79) reusable components inside `_Components / Sections` (g9oRa5). Also updates this ROADMAP entry from 3 plans → 4 plans (D-84).
+- [x] 26-01-PLAN.md — FAQ page frame reconstruction: top-level `FAQ` frame at 1440 width via `find_empty_space_on_canvas` (D-74); instances Section/Header (G0wNOc) + page-intro section + Q+A list (5 verbatim pairs from `src/pages/faq.astro` lines 11-32 per D-82) + Section/CTA (STUB microcopy per D-82) + Section/Footer (Xs0Hs); plan-close calibration spot-check user gate per D-65 (joel-only branch, D-62 token-usage check).
+- [x] 26-02-PLAN.md — 404 page frame reconstruction: top-level `404` frame at 1440 width; instances Section/Header + message section (BIG headline + body, both STUB text per D-81 — layout EXACT) + Section/NavBack instance (4 structural labels Home/Blog/Projects/Contact per CONTEXT Claude's Discretion) + Section/Footer; plan-close calibration spot-check user gate per D-65; PAGE-11 INERT note recorded in PEN-INVENTORY per RESEARCH § Focus 5.
+- [x] 26-03-PLAN.md — Codify `.planning/research/CALIBRATION-PROTOCOL.md` (codify-what-worked per D-67): branch matrix (crito-source-present vs joel-only-no-crito-ref) + per-step script per branch (Pencil MCP calls, pairing target, naming convention, user-gate format) + EXACT/APPROXIMATE/STUB definitions per branch per D-63 + OPEN-flag template + PAGE-11 carve-out (crito-source only) + PAGE-09 desktop-only constraint + inline-screenshot substitution per OPEN-23-01 + per-page phase consumer map for Phases 27-31. Cross-referenced from PEN-INVENTORY via short `## Calibration Protocol` anchor per D-69.
 
 **Cross-cutting constraints:**
 
@@ -408,7 +408,7 @@ Phases execute in numeric order: 1 → 2 → ... → 22 → 23 → 24 → 25 →
 | 23. Audit + Token Foundation | v2.0 | 5/5 | Complete    | 2026-05-31 |
 | 24. Layout Primitives + Primitive Components | v2.0 | 5/5 | Complete   | 2026-06-01 |
 | 25. Section + Compound Components | v2.0 | 3/3 | Complete | 2026-06-06 |
-| 26. FAQ + 404 Reconstruction | v2.0 | 0/4 | Not started | - |
+| 26. FAQ + 404 Reconstruction | v2.0 | 4/4 | Complete | 2026-06-07 |
 | 27. Thank-you + Contact Reconstruction | v2.0 | 0/TBD | Not started | - |
 | 28. Blog Reconstruction | v2.0 | 0/TBD | Not started | - |
 | 29. Projects Reconstruction | v2.0 | 0/TBD | Not started | - |
@@ -418,4 +418,4 @@ Phases execute in numeric order: 1 → 2 → ... → 22 → 23 → 24 → 25 →
 
 ---
 *Roadmap initialized: 2026-01-26 for v1.0*
-*Last updated: 2026-06-06 — Phase 26 planned (4 plans: 26-00 foundation + 26-01 FAQ + 26-02 404 + 26-03 CALIBRATION-PROTOCOL.md per CONTEXT D-84)*
+*Last updated: 2026-06-07 — Phase 26 complete (4/4 plans shipped: 26-00 foundation + 26-01 FAQ + 26-02 404 + 26-03 CALIBRATION-PROTOCOL.md; calibration protocol established for Phases 27-31 to inherit)*
