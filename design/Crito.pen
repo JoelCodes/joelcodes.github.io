@@ -15314,7 +15314,8 @@
               "content": "Single source of truth for design/Crito.pen variable surface (95 tokens: 39 primitive + 56 semantic). Reference frame only — components in Phases 24+ consume semantic aliases via $<name> reference syntax (D-14). Do not edit this frame directly; regenerate via plan 23-05 if tokens change.\n\nNOTE: literal hex/font/size values used in this frame because Pencil batch_design rejects $<var> references at Insert/Update time (OPEN-23-13). The 95 tokens themselves DO use the $<name> alias chain in their values and resolve correctly at render time outside batch_design (verified by get_variables).",
               "lineHeight": 1.6,
               "fontFamily": "Inter",
-              "fontSize": 16
+              "fontSize": 16,
+              "fontWeight": "normal"
             }
           ]
         },
@@ -15347,7 +15348,8 @@
               "content": "Primitives = raw values from audit. Semantic aliases reference primitives via $<primitive-name> (NATIVE Pencil aliasing — verified in plan 23-04 set_variables surface).",
               "lineHeight": 1.6,
               "fontFamily": "Inter",
-              "fontSize": 16
+              "fontSize": 16,
+              "fontWeight": "normal"
             },
             {
               "type": "text",
@@ -15397,7 +15399,8 @@
                       "content": "color-primitive-amber-500",
                       "lineHeight": 1.6,
                       "fontFamily": "Inter",
-                      "fontSize": 16
+                      "fontSize": 16,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -15407,7 +15410,8 @@
                       "content": "#fdba09",
                       "lineHeight": 1.5,
                       "fontFamily": "Chivo",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -15440,7 +15444,8 @@
                       "content": "color-primitive-cyan-500",
                       "lineHeight": 1.6,
                       "fontFamily": "Inter",
-                      "fontSize": 16
+                      "fontSize": 16,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -15450,7 +15455,8 @@
                       "content": "#15bee3",
                       "lineHeight": 1.5,
                       "fontFamily": "Chivo",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -15483,7 +15489,8 @@
                       "content": "color-primitive-green-500",
                       "lineHeight": 1.6,
                       "fontFamily": "Inter",
-                      "fontSize": 16
+                      "fontSize": 16,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -15493,7 +15500,8 @@
                       "content": "#38da71",
                       "lineHeight": 1.5,
                       "fontFamily": "Chivo",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -15526,7 +15534,8 @@
                       "content": "color-primitive-coral-400",
                       "lineHeight": 1.6,
                       "fontFamily": "Inter",
-                      "fontSize": 16
+                      "fontSize": 16,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -15536,7 +15545,8 @@
                       "content": "#ff928a",
                       "lineHeight": 1.5,
                       "fontFamily": "Chivo",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -15569,7 +15579,8 @@
                       "content": "color-primitive-red-400",
                       "lineHeight": 1.6,
                       "fontFamily": "Inter",
-                      "fontSize": 16
+                      "fontSize": 16,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -15579,7 +15590,8 @@
                       "content": "#eb5757",
                       "lineHeight": 1.5,
                       "fontFamily": "Chivo",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -15612,7 +15624,8 @@
                       "content": "color-primitive-navy-900",
                       "lineHeight": 1.6,
                       "fontFamily": "Inter",
-                      "fontSize": 16
+                      "fontSize": 16,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -15622,7 +15635,8 @@
                       "content": "#141f39",
                       "lineHeight": 1.5,
                       "fontFamily": "Chivo",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -15655,7 +15669,8 @@
                       "content": "color-primitive-neutral-700",
                       "lineHeight": 1.6,
                       "fontFamily": "Inter",
-                      "fontSize": 16
+                      "fontSize": 16,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -15665,7 +15680,8 @@
                       "content": "#52525b",
                       "lineHeight": 1.5,
                       "fontFamily": "Chivo",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -15698,7 +15714,8 @@
                       "content": "color-primitive-neutral-200",
                       "lineHeight": 1.6,
                       "fontFamily": "Inter",
-                      "fontSize": 16
+                      "fontSize": 16,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -15708,7 +15725,8 @@
                       "content": "#d4d4d8",
                       "lineHeight": 1.5,
                       "fontFamily": "Chivo",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -15741,7 +15759,8 @@
                       "content": "color-primitive-neutral-100",
                       "lineHeight": 1.6,
                       "fontFamily": "Inter",
-                      "fontSize": 16
+                      "fontSize": 16,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -15751,7 +15770,8 @@
                       "content": "#f2f2f7",
                       "lineHeight": 1.5,
                       "fontFamily": "Chivo",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -15784,7 +15804,8 @@
                       "content": "color-primitive-neutral-50",
                       "lineHeight": 1.6,
                       "fontFamily": "Inter",
-                      "fontSize": 16
+                      "fontSize": 16,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -15794,7 +15815,8 @@
                       "content": "#fafafa",
                       "lineHeight": 1.5,
                       "fontFamily": "Chivo",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -15827,7 +15849,8 @@
                       "content": "color-primitive-white",
                       "lineHeight": 1.6,
                       "fontFamily": "Inter",
-                      "fontSize": 16
+                      "fontSize": 16,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -15837,7 +15860,8 @@
                       "content": "#ffffff",
                       "lineHeight": 1.5,
                       "fontFamily": "Chivo",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -15870,7 +15894,8 @@
                       "content": "color-primitive-black",
                       "lineHeight": 1.6,
                       "fontFamily": "Inter",
-                      "fontSize": 16
+                      "fontSize": 16,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -15880,7 +15905,8 @@
                       "content": "#000000",
                       "lineHeight": 1.5,
                       "fontFamily": "Chivo",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 }
@@ -15934,7 +15960,8 @@
                       "content": "color-semantic-bg-page",
                       "lineHeight": 1.6,
                       "fontFamily": "Inter",
-                      "fontSize": 16
+                      "fontSize": 16,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -15944,7 +15971,8 @@
                       "content": "→ color-primitive-white",
                       "lineHeight": 1.5,
                       "fontFamily": "Chivo",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -15977,7 +16005,8 @@
                       "content": "color-semantic-bg-surface",
                       "lineHeight": 1.6,
                       "fontFamily": "Inter",
-                      "fontSize": 16
+                      "fontSize": 16,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -15987,7 +16016,8 @@
                       "content": "→ color-primitive-neutral-50",
                       "lineHeight": 1.5,
                       "fontFamily": "Chivo",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -16020,7 +16050,8 @@
                       "content": "color-semantic-bg-surface-elevated",
                       "lineHeight": 1.6,
                       "fontFamily": "Inter",
-                      "fontSize": 16
+                      "fontSize": 16,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -16030,7 +16061,8 @@
                       "content": "→ color-primitive-neutral-100",
                       "lineHeight": 1.5,
                       "fontFamily": "Chivo",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -16063,7 +16095,8 @@
                       "content": "color-semantic-bg-inverse",
                       "lineHeight": 1.6,
                       "fontFamily": "Inter",
-                      "fontSize": 16
+                      "fontSize": 16,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -16073,7 +16106,8 @@
                       "content": "→ color-primitive-navy-900",
                       "lineHeight": 1.5,
                       "fontFamily": "Chivo",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -16106,7 +16140,8 @@
                       "content": "color-semantic-bg-accent",
                       "lineHeight": 1.6,
                       "fontFamily": "Inter",
-                      "fontSize": 16
+                      "fontSize": 16,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -16116,7 +16151,8 @@
                       "content": "→ color-primitive-amber-500",
                       "lineHeight": 1.5,
                       "fontFamily": "Chivo",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -16149,7 +16185,8 @@
                       "content": "color-semantic-bg-brand",
                       "lineHeight": 1.6,
                       "fontFamily": "Inter",
-                      "fontSize": 16
+                      "fontSize": 16,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -16159,7 +16196,8 @@
                       "content": "→ color-primitive-cyan-500",
                       "lineHeight": 1.5,
                       "fontFamily": "Chivo",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -16192,7 +16230,8 @@
                       "content": "color-semantic-bg-cta-primary",
                       "lineHeight": 1.6,
                       "fontFamily": "Inter",
-                      "fontSize": 16
+                      "fontSize": 16,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -16202,7 +16241,8 @@
                       "content": "→ color-primitive-green-500",
                       "lineHeight": 1.5,
                       "fontFamily": "Chivo",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -16235,7 +16275,8 @@
                       "content": "color-semantic-text-primary",
                       "lineHeight": 1.6,
                       "fontFamily": "Inter",
-                      "fontSize": 16
+                      "fontSize": 16,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -16245,7 +16286,8 @@
                       "content": "→ color-primitive-navy-900",
                       "lineHeight": 1.5,
                       "fontFamily": "Chivo",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -16278,7 +16320,8 @@
                       "content": "color-semantic-text-secondary",
                       "lineHeight": 1.6,
                       "fontFamily": "Inter",
-                      "fontSize": 16
+                      "fontSize": 16,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -16288,7 +16331,8 @@
                       "content": "→ color-primitive-neutral-700",
                       "lineHeight": 1.5,
                       "fontFamily": "Chivo",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -16321,7 +16365,8 @@
                       "content": "color-semantic-text-inverse",
                       "lineHeight": 1.6,
                       "fontFamily": "Inter",
-                      "fontSize": 16
+                      "fontSize": 16,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -16331,7 +16376,8 @@
                       "content": "→ color-primitive-white",
                       "lineHeight": 1.5,
                       "fontFamily": "Chivo",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -16364,7 +16410,8 @@
                       "content": "color-semantic-text-accent",
                       "lineHeight": 1.6,
                       "fontFamily": "Inter",
-                      "fontSize": 16
+                      "fontSize": 16,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -16374,7 +16421,8 @@
                       "content": "→ color-primitive-amber-500",
                       "lineHeight": 1.5,
                       "fontFamily": "Chivo",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -16407,7 +16455,8 @@
                       "content": "color-semantic-text-error",
                       "lineHeight": 1.6,
                       "fontFamily": "Inter",
-                      "fontSize": 16
+                      "fontSize": 16,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -16417,7 +16466,8 @@
                       "content": "→ color-primitive-red-400",
                       "lineHeight": 1.5,
                       "fontFamily": "Chivo",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -16450,7 +16500,8 @@
                       "content": "color-semantic-border-default",
                       "lineHeight": 1.6,
                       "fontFamily": "Inter",
-                      "fontSize": 16
+                      "fontSize": 16,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -16460,7 +16511,8 @@
                       "content": "→ color-primitive-neutral-200",
                       "lineHeight": 1.5,
                       "fontFamily": "Chivo",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -16493,7 +16545,8 @@
                       "content": "color-semantic-decorative-coral",
                       "lineHeight": 1.6,
                       "fontFamily": "Inter",
-                      "fontSize": 16
+                      "fontSize": 16,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -16503,7 +16556,8 @@
                       "content": "→ color-primitive-coral-400",
                       "lineHeight": 1.5,
                       "fontFamily": "Chivo",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 }
@@ -16540,7 +16594,8 @@
               "content": "Each semantic role composes 4 sub-tokens: family + size + weight + line-height. heading-2..6 NOT shipped (OPEN-23-10). prose-link, prose-list, prose-inline-code NOT shipped (OPEN-23-11).",
               "lineHeight": 1.6,
               "fontFamily": "Inter",
-              "fontSize": 16
+              "fontSize": 16,
+              "fontWeight": "normal"
             },
             {
               "type": "frame",
@@ -16577,7 +16632,8 @@
                   "content": "type-semantic-display    ·    Plus Jakarta Sans · 70 · 700 · lh 1.2",
                   "lineHeight": 1.5,
                   "fontFamily": "Chivo",
-                  "fontSize": 14
+                  "fontSize": 14,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -16616,7 +16672,8 @@
                   "content": "type-semantic-heading-1    ·    Plus Jakarta Sans · 48 · 700 · lh 1.4",
                   "lineHeight": 1.5,
                   "fontFamily": "Chivo",
-                  "fontSize": 14
+                  "fontSize": 14,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -16642,7 +16699,8 @@
                   "content": "The quick brown fox jumps over the lazy dog",
                   "lineHeight": 1.6,
                   "fontFamily": "Inter",
-                  "fontSize": 16
+                  "fontSize": 16,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -16654,7 +16712,8 @@
                   "content": "type-semantic-body    ·    Inter · 16 · 400 · lh 1.6",
                   "lineHeight": 1.5,
                   "fontFamily": "Chivo",
-                  "fontSize": 14
+                  "fontSize": 14,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -16680,7 +16739,8 @@
                   "content": "The quick brown fox jumps over the lazy dog",
                   "lineHeight": 1.5,
                   "fontFamily": "Inter",
-                  "fontSize": 14
+                  "fontSize": 14,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -16692,7 +16752,8 @@
                   "content": "type-semantic-body-sm    ·    Inter · 14 · 400 · lh 1.5",
                   "lineHeight": 1.5,
                   "fontFamily": "Chivo",
-                  "fontSize": 14
+                  "fontSize": 14,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -16718,7 +16779,8 @@
                   "content": "The quick brown fox jumps over the lazy dog",
                   "lineHeight": 1.5,
                   "fontFamily": "Chivo",
-                  "fontSize": 14
+                  "fontSize": 14,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -16730,7 +16792,8 @@
                   "content": "type-semantic-caption    ·    Chivo · 14 · 400 · lh 1.5",
                   "lineHeight": 1.5,
                   "fontFamily": "Chivo",
-                  "fontSize": 14
+                  "fontSize": 14,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -16769,7 +16832,8 @@
                   "content": "type-semantic-button    ·    Inter · 16 · 500 · lh 1.5",
                   "lineHeight": 1.5,
                   "fontFamily": "Chivo",
-                  "fontSize": 14
+                  "fontSize": 14,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -16795,7 +16859,8 @@
                   "content": "The quick brown fox jumps over the lazy dog",
                   "lineHeight": 1.6,
                   "fontFamily": "Inter",
-                  "fontSize": 16
+                  "fontSize": 16,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -16807,7 +16872,8 @@
                   "content": "type-semantic-prose-paragraph    ·    Inter · 16 · 400 · lh 1.6 (provisional — see OPEN-23-11)",
                   "lineHeight": 1.5,
                   "fontFamily": "Chivo",
-                  "fontSize": 14
+                  "fontSize": 14,
+                  "fontWeight": "normal"
                 }
               ]
             }
@@ -16842,7 +16908,8 @@
               "content": "Primitives shown as filled stripes (width = value px). Semantic aliases reference primitives by role.",
               "lineHeight": 1.6,
               "fontFamily": "Inter",
-              "fontSize": 16
+              "fontSize": 16,
+              "fontWeight": "normal"
             },
             {
               "type": "frame",
@@ -16868,7 +16935,8 @@
                   "content": "space-primitive-9 = 9px",
                   "lineHeight": 1.6,
                   "fontFamily": "Inter",
-                  "fontSize": 16
+                  "fontSize": 16,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -16896,7 +16964,8 @@
                   "content": "space-primitive-10 = 10px",
                   "lineHeight": 1.6,
                   "fontFamily": "Inter",
-                  "fontSize": 16
+                  "fontSize": 16,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -16924,7 +16993,8 @@
                   "content": "space-primitive-16 = 16px",
                   "lineHeight": 1.6,
                   "fontFamily": "Inter",
-                  "fontSize": 16
+                  "fontSize": 16,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -16952,7 +17022,8 @@
                   "content": "space-primitive-20 = 20px",
                   "lineHeight": 1.6,
                   "fontFamily": "Inter",
-                  "fontSize": 16
+                  "fontSize": 16,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -16980,7 +17051,8 @@
                   "content": "space-primitive-24 = 24px",
                   "lineHeight": 1.6,
                   "fontFamily": "Inter",
-                  "fontSize": 16
+                  "fontSize": 16,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -17008,7 +17080,8 @@
                   "content": "space-primitive-32 = 32px",
                   "lineHeight": 1.6,
                   "fontFamily": "Inter",
-                  "fontSize": 16
+                  "fontSize": 16,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -17036,7 +17109,8 @@
                   "content": "space-primitive-40 = 40px",
                   "lineHeight": 1.6,
                   "fontFamily": "Inter",
-                  "fontSize": 16
+                  "fontSize": 16,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -17064,7 +17138,8 @@
                   "content": "space-primitive-60 = 60px",
                   "lineHeight": 1.6,
                   "fontFamily": "Inter",
-                  "fontSize": 16
+                  "fontSize": 16,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -17101,7 +17176,8 @@
                   "content": "space-semantic-section-y → space-primitive-60",
                   "lineHeight": 1.5,
                   "fontFamily": "Chivo",
-                  "fontSize": 14
+                  "fontSize": 14,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -17111,7 +17187,8 @@
                   "content": "space-semantic-container-x → space-primitive-24",
                   "lineHeight": 1.5,
                   "fontFamily": "Chivo",
-                  "fontSize": 14
+                  "fontSize": 14,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -17121,7 +17198,8 @@
                   "content": "space-semantic-stack-sm → space-primitive-16",
                   "lineHeight": 1.5,
                   "fontFamily": "Chivo",
-                  "fontSize": 14
+                  "fontSize": 14,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -17131,7 +17209,8 @@
                   "content": "space-semantic-stack-md → space-primitive-24",
                   "lineHeight": 1.5,
                   "fontFamily": "Chivo",
-                  "fontSize": 14
+                  "fontSize": 14,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -17141,7 +17220,8 @@
                   "content": "space-semantic-stack-lg → space-primitive-40",
                   "lineHeight": 1.5,
                   "fontFamily": "Chivo",
-                  "fontSize": 14
+                  "fontSize": 14,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -17151,7 +17231,8 @@
                   "content": "space-semantic-inline-sm → space-primitive-9",
                   "lineHeight": 1.5,
                   "fontFamily": "Chivo",
-                  "fontSize": 14
+                  "fontSize": 14,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -17161,7 +17242,8 @@
                   "content": "space-semantic-inline-md → space-primitive-16",
                   "lineHeight": 1.5,
                   "fontFamily": "Chivo",
-                  "fontSize": 14
+                  "fontSize": 14,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -17171,7 +17253,8 @@
                   "content": "space-semantic-inline-lg → space-primitive-20",
                   "lineHeight": 1.5,
                   "fontFamily": "Chivo",
-                  "fontSize": 14
+                  "fontSize": 14,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -17181,7 +17264,8 @@
                   "content": "space-semantic-button-px → space-primitive-20",
                   "lineHeight": 1.5,
                   "fontFamily": "Chivo",
-                  "fontSize": 14
+                  "fontSize": 14,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -17191,7 +17275,8 @@
                   "content": "space-semantic-button-py → space-primitive-16",
                   "lineHeight": 1.5,
                   "fontFamily": "Chivo",
-                  "fontSize": 14
+                  "fontSize": 14,
+                  "fontWeight": "normal"
                 }
               ]
             }
@@ -17247,7 +17332,8 @@
                       "content": "radius-primitive-10 = 10px",
                       "lineHeight": 1.5,
                       "fontFamily": "Chivo",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -17275,7 +17361,8 @@
                       "content": "radius-primitive-16 = 16px",
                       "lineHeight": 1.5,
                       "fontFamily": "Chivo",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -17303,7 +17390,8 @@
                       "content": "radius-primitive-24 = 24px",
                       "lineHeight": 1.5,
                       "fontFamily": "Chivo",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 }
@@ -17336,7 +17424,8 @@
                   "content": "radius-semantic-button → radius-primitive-10",
                   "lineHeight": 1.5,
                   "fontFamily": "Chivo",
-                  "fontSize": 14
+                  "fontSize": 14,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -17346,7 +17435,8 @@
                   "content": "radius-semantic-card → radius-primitive-10",
                   "lineHeight": 1.5,
                   "fontFamily": "Chivo",
-                  "fontSize": 14
+                  "fontSize": 14,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -17356,7 +17446,8 @@
                   "content": "radius-semantic-input → radius-primitive-10",
                   "lineHeight": 1.5,
                   "fontFamily": "Chivo",
-                  "fontSize": 14
+                  "fontSize": 14,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -17366,7 +17457,8 @@
                   "content": "radius-semantic-surface → radius-primitive-24",
                   "lineHeight": 1.5,
                   "fontFamily": "Chivo",
-                  "fontSize": 14
+                  "fontSize": 14,
+                  "fontWeight": "normal"
                 }
               ]
             }
@@ -17404,7 +17496,8 @@
               "content": "Dark-mode token slots are intentionally omitted in v2.0. No @light,@dark variable syntax exists in this file. Tokens are single-theme for v2.0 (CONTEXT D-01, TOKEN-07). A future milestone will design dark values from scratch — no pre-named slots. Do not retro-add dark slots in any v2.0 phase. See PEN-INVENTORY.md ## Dark-Mode Omission Rationale for full details.",
               "lineHeight": 1.6,
               "fontFamily": "Inter",
-              "fontSize": 16
+              "fontSize": 16,
+              "fontWeight": "normal"
             }
           ]
         }
@@ -17610,7 +17703,8 @@
               "content": "Label",
               "lineHeight": 1.5,
               "fontFamily": "Inter",
-              "fontSize": 14
+              "fontSize": 14,
+              "fontWeight": "normal"
             },
             {
               "type": "frame",
@@ -17636,7 +17730,8 @@
                   "content": "Placeholder",
                   "lineHeight": 1.5,
                   "fontFamily": "Inter",
-                  "fontSize": 16
+                  "fontSize": 16,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -17648,7 +17743,8 @@
               "content": "Helper text",
               "lineHeight": 1.5,
               "fontFamily": "Inter",
-              "fontSize": 14
+              "fontSize": 14,
+              "fontWeight": "normal"
             },
             {
               "type": "frame",
@@ -17678,7 +17774,8 @@
               "content": "Label",
               "lineHeight": 1.5,
               "fontFamily": "Inter",
-              "fontSize": 14
+              "fontSize": 14,
+              "fontWeight": "normal"
             },
             {
               "type": "frame",
@@ -17704,7 +17801,8 @@
                   "content": "Placeholder",
                   "lineHeight": 1.5,
                   "fontFamily": "Inter",
-                  "fontSize": 16
+                  "fontSize": 16,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -17716,7 +17814,8 @@
               "content": "Helper text",
               "lineHeight": 1.5,
               "fontFamily": "Inter",
-              "fontSize": 14
+              "fontSize": 14,
+              "fontWeight": "normal"
             },
             {
               "type": "frame",
@@ -17746,7 +17845,8 @@
               "content": "Label",
               "lineHeight": 1.5,
               "fontFamily": "Inter",
-              "fontSize": 14
+              "fontSize": 14,
+              "fontWeight": "normal"
             },
             {
               "type": "frame",
@@ -17772,7 +17872,8 @@
                   "content": "Placeholder",
                   "lineHeight": 1.5,
                   "fontFamily": "Inter",
-                  "fontSize": 16
+                  "fontSize": 16,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -17784,7 +17885,8 @@
               "content": "Helper text",
               "lineHeight": 1.5,
               "fontFamily": "Inter",
-              "fontSize": 14
+              "fontSize": 14,
+              "fontWeight": "normal"
             },
             {
               "type": "text",
@@ -17794,7 +17896,8 @@
               "content": "Error message goes here",
               "lineHeight": 1.5,
               "fontFamily": "Inter",
-              "fontSize": 14
+              "fontSize": 14,
+              "fontWeight": "normal"
             }
           ]
         },
@@ -18617,6 +18720,522 @@
           "width": 1200,
           "height": 480,
           "content": "Section / Footer (reusable, id Xs0Hs) — slot signature:\n\n• logo-slot (id kkO4M, inside brand-column) — slot:[] (untyped), enabled:true. Default: 'Crito' wordmark text placeholder (DM Sans 36/700, navy). Consumers override at instance time with Joel-brand wordmark.\n\n• brand-column tagline (id uubl4) — fixed text, Crito source literal per D-48 ('Phasellus pulvinar...'). Phase 31 instance overrides with Joel's actual tagline.\n\n• brand-column social-row (id B9gNb) — ships JOEL-BRAND defaults at component level per Pitfall 7: Instagram (lucide Pattern A) + Substack (Pattern B atomic-glyph AzmgQ from simpleicons canonical SVG). Crito's Twitter + LinkedIn NOT shipped — Joel uses Instagram + Substack.\n\n• link-columns (id NO9J5) — 3 columns matching Crito source `iHrsm` audit: Useful Links / Help & Support / Resources. Each: Chivo 16/700 navy heading + 4 Chivo 16/normal links (Crito source literals per D-48). Phase 31 instance overrides labels with Joel's actual nav set.\n\n• copyright-row (id l4jp3) — right-aligned copyright text, Chivo 14/normal opacity 0.8. Crito source literal '© 2024 Crito. All Right Reserved'.\n\nNot shipped from Crito source: Mobile + Email contact rows (Joel has contact info elsewhere); 2 raster-baked image buttons (Pitfall 7 — not reconstructable). These deferred to a future Joel-Footer-content phase if needed.\n\nAll typography uses Chivo per D-47 (Phase 23's conditional Chivo primitive type-primitive-family-chivo earns its keep). Footer bg #fafafaff binds to color-semantic-bg-surface per Crito source audit.\n\nSee 25-02-SUMMARY.md and PEN-INVENTORY § Variant Evidence + § Glyphs Shipped (Phase 25) for full audit trail."
+        },
+        {
+          "type": "frame",
+          "id": "Hs5rc",
+          "name": "Section / CTA",
+          "reusable": true,
+          "width": 1200,
+          "fill": "#f2f2f7ff",
+          "layout": "vertical",
+          "gap": 24,
+          "padding": [
+            64,
+            0
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "QT4yJ",
+              "name": "headline-slot",
+              "slot": [],
+              "layout": "vertical",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "U1DQb",
+                  "fill": "#141f39ff",
+                  "content": "Still have questions?",
+                  "lineHeight": 1.4,
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 32,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Ay7WY",
+              "name": "body-slot",
+              "slot": [],
+              "width": 720,
+              "layout": "vertical",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "mlSq0",
+                  "fill": "#52525bff",
+                  "content": "Get in touch and we'll help you figure out next steps.",
+                  "lineHeight": 1.625,
+                  "fontFamily": "Inter",
+                  "fontSize": 16
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "munqN",
+              "name": "actions-slot",
+              "slot": [
+                "M7eUr",
+                "hIWuC"
+              ],
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "id": "bhkiN",
+                  "type": "ref",
+                  "ref": "M7eUr",
+                  "descendants": {
+                    "ATJK9": {
+                      "content": "Get in touch"
+                    },
+                    "V4Dx4i": {
+                      "enabled": true
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "id": "D8owaR",
+          "name": "Section / CTA — slot signature",
+          "width": 1200,
+          "height": 0,
+          "content": "Section / CTA (reusable) — slot signature:\n\n• headline-slot — slot:[] (untyped), enabled:true. Default: 'Still have questions?' text (Plus Jakarta Sans 32/700/lh 1.4 navy — heading-2 typography). Consumers override via descendants for headline microcopy.\n\n• body-slot — slot:[] (untyped), enabled:true. Default: prose body placeholder (Inter 16/400 #52525bff). Optional — consumers may set enabled:false for headline-only CTAs.\n\n• actions-slot — slot:['M7eUr','hIWuC'] (TYPED suggestion per D-52 PREFERRED Pattern). Default: 1 Primitive/Button/Default ref with 'Get in touch' label + iconTrailing slot enabled (consumer wires arrow-right at instance time per D-44 carry-forward). Consumers may add 2nd Button/Secondary ref for dual-CTA.\n\nWidth 1200 fixed (matches Header/Footer Phase 25 ship width). Padding [64,0] (section-y rhythm — binds to space-semantic-section-y). Fill #f2f2f7ff binds to color-semantic-bg-surface-elevated. Gap 24 binds to space-semantic-stack-md.\n\nFAQ instances as 'Still have questions?' CTA with STUB microcopy per D-82 (real wording deferred to future content phase). Phase 31 Homepage may instance for hero / footer / mid-page CTAs.\n\nSee 26-00-SUMMARY.md and PEN-INVENTORY § Variant Evidence (Phase 26) for full audit trail."
+        },
+        {
+          "type": "frame",
+          "id": "N1jo3i",
+          "name": "Section / NavBack",
+          "reusable": true,
+          "width": 1200,
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            32,
+            0
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "gIXNO",
+              "name": "heading-slot",
+              "slot": [],
+              "layout": "vertical",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "GTpO3",
+                  "fill": "#141f39ff",
+                  "content": "Find what you need",
+                  "lineHeight": 1.4,
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 32,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "xCp6W",
+              "name": "links-slot",
+              "slot": [],
+              "gap": 24,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "ISpPb",
+                  "fill": "#141f39ff",
+                  "content": "Home",
+                  "lineHeight": 1.625,
+                  "fontFamily": "Inter",
+                  "fontSize": 16
+                },
+                {
+                  "type": "text",
+                  "id": "cz8Dm",
+                  "fill": "#141f39ff",
+                  "content": "Blog",
+                  "lineHeight": 1.625,
+                  "fontFamily": "Inter",
+                  "fontSize": 16
+                },
+                {
+                  "type": "text",
+                  "id": "L8pGWB",
+                  "fill": "#141f39ff",
+                  "content": "Projects",
+                  "lineHeight": 1.625,
+                  "fontFamily": "Inter",
+                  "fontSize": 16
+                },
+                {
+                  "type": "text",
+                  "id": "XH2fs",
+                  "fill": "#141f39ff",
+                  "content": "Contact",
+                  "lineHeight": 1.625,
+                  "fontFamily": "Inter",
+                  "fontSize": 16
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "id": "dUURV",
+          "name": "Section / NavBack — slot signature",
+          "width": 1200,
+          "height": 0,
+          "content": "Section / NavBack (reusable) — slot signature:\n\n• heading-slot — slot:[] (untyped), enabled:true. Default: 'Find what you need' text (Plus Jakarta Sans 32/700/lh 1.4 navy — heading-2 typography). Consumers override via descendants.\n\n• links-slot — slot:[] (untyped), enabled:true. Default: 4 text-node children with body typography (Inter 16/400 navy lh 1.625), contents: Home, Blog, Projects, Contact (Joel's v1.3 nav set per CONTEXT Claude's Discretion). PLAIN TEXT NODES — NOT Button refs per Pitfall O5/O6 narrow-scope design.\n\nWidth 1200 fixed. Padding [32,0]. Gap 16 (heading→links) + gap 24 (between links). Layout vertical at root; links-slot is horizontal.\n\nBuilt narrowly for 404 only (D-79). NOT generalized to Blog 'related posts' / Projects 'related projects' — those need card-grid shapes, different signature, deferred to Phase 28/29.\n\n404 instances with default labels (Joel-v1.3-nav-set, structural not microcopy). Real nav link targets wired by code milestone.\n\nSee 26-00-SUMMARY.md and PEN-INVENTORY § Variant Evidence (Phase 26) for full audit trail."
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "b7Hgy",
+      "x": 16327.267566049897,
+      "y": -4111.553859422791,
+      "name": "FAQ",
+      "width": 1440,
+      "fill": "#ffffffff",
+      "layout": "vertical",
+      "alignItems": "center",
+      "children": [
+        {
+          "id": "MpVz3",
+          "type": "ref",
+          "ref": "G0wNOc",
+          "name": "Section / Header (FAQ instance)"
+        },
+        {
+          "type": "frame",
+          "id": "I4QJas",
+          "name": "page-intro",
+          "width": 1200,
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            64,
+            0
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "WGdgb",
+              "name": "page-intro / title",
+              "fill": "#141f39ff",
+              "content": "Frequently Asked Questions",
+              "lineHeight": 1.4,
+              "fontFamily": "Plus Jakarta Sans",
+              "fontSize": 48,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "ZguDg",
+              "name": "page-intro / body",
+              "fill": "#52525bff",
+              "content": "Answers to common questions about working with Joel.",
+              "lineHeight": 1.625,
+              "fontFamily": "Inter",
+              "fontSize": 16
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "FswuE",
+          "name": "qa-list",
+          "width": 1200,
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            64,
+            0
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "eDbs7",
+              "name": "qa-item-1",
+              "width": 800,
+              "layout": "vertical",
+              "gap": 12,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "lQhL5",
+                  "name": "qa-item-1 / Q",
+                  "fill": "#141f39ff",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "How long does a typical project take?",
+                  "lineHeight": 1.4,
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 32,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "r16PLy",
+                  "name": "qa-item-1 / A",
+                  "fill": "#52525bff",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Every project is different. Discovery and prototyping usually take 1-2 weeks, then we'll outline a timeline in the proposal based on scope.",
+                  "lineHeight": 1.625,
+                  "fontFamily": "Inter",
+                  "fontSize": 16
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "XI1HR",
+              "name": "qa-item-2",
+              "width": 800,
+              "layout": "vertical",
+              "gap": 12,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "s2XJP",
+                  "name": "qa-item-2 / Q",
+                  "fill": "#141f39ff",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Do you work with clients outside your area?",
+                  "lineHeight": 1.4,
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 32,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "h8hoa",
+                  "name": "qa-item-2 / A",
+                  "fill": "#52525bff",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Absolutely. Most client communication happens over video calls and email. Location doesn't matter.",
+                  "lineHeight": 1.625,
+                  "fontFamily": "Inter",
+                  "fontSize": 16
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "H0nfx",
+              "name": "qa-item-3",
+              "width": 800,
+              "layout": "vertical",
+              "gap": 12,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "vysqV",
+                  "name": "qa-item-3 / Q",
+                  "fill": "#141f39ff",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "What if I'm not sure exactly what I need?",
+                  "lineHeight": 1.4,
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 32,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "oKRJQ",
+                  "name": "qa-item-3 / A",
+                  "fill": "#52525bff",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "That's what discovery is for. We'll talk through your challenges and I'll help clarify what solution makes sense.",
+                  "lineHeight": 1.625,
+                  "fontFamily": "Inter",
+                  "fontSize": 16
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "hfqaE",
+              "name": "qa-item-4",
+              "width": 800,
+              "layout": "vertical",
+              "gap": 12,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "zWJFi",
+                  "name": "qa-item-4 / Q",
+                  "fill": "#141f39ff",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "How do you handle changes during the project?",
+                  "lineHeight": 1.4,
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 32,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "oYSZ4",
+                  "name": "qa-item-4 / A",
+                  "fill": "#52525bff",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Small adjustments are normal. Larger scope changes are discussed together and may adjust the timeline or investment.",
+                  "lineHeight": 1.625,
+                  "fontFamily": "Inter",
+                  "fontSize": 16
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "YThyr",
+              "name": "qa-item-5",
+              "width": 800,
+              "layout": "vertical",
+              "gap": 12,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "a1obh",
+                  "name": "qa-item-5 / Q",
+                  "fill": "#141f39ff",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "What happens after handover?",
+                  "lineHeight": 1.4,
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 32,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "uFB4N",
+                  "name": "qa-item-5 / A",
+                  "fill": "#52525bff",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "You get documentation and training. I'm available for questions and can provide ongoing support if needed.",
+                  "lineHeight": 1.625,
+                  "fontFamily": "Inter",
+                  "fontSize": 16
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NQNB3",
+          "type": "ref",
+          "ref": "Hs5rc",
+          "name": "Section / CTA (FAQ instance)",
+          "descendants": {
+            "U1DQb": {
+              "content": "Still have questions?"
+            },
+            "mlSq0": {
+              "content": "Get in touch and we'll help you figure out next steps."
+            }
+          }
+        },
+        {
+          "id": "MmDy2",
+          "type": "ref",
+          "ref": "Xs0Hs",
+          "name": "Section / Footer (FAQ instance)"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "csXky",
+      "x": 17847.267566049897,
+      "y": -4111.553859422791,
+      "name": "404",
+      "width": 1440,
+      "fill": "#ffffffff",
+      "layout": "vertical",
+      "alignItems": "center",
+      "children": [
+        {
+          "id": "pZReo",
+          "type": "ref",
+          "ref": "G0wNOc",
+          "name": "Section / Header (404 instance)"
+        },
+        {
+          "type": "frame",
+          "id": "SruDH",
+          "name": "message-section",
+          "width": 1200,
+          "layout": "vertical",
+          "gap": 24,
+          "padding": [
+            96,
+            0
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "t9wUlR",
+              "name": "message-section / headline",
+              "fill": "#141f39ff",
+              "content": "Headline placeholder",
+              "lineHeight": 1.4,
+              "fontFamily": "Plus Jakarta Sans",
+              "fontSize": 48,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "WWABs",
+              "name": "message-section / body",
+              "fill": "#52525bff",
+              "textGrowth": "fixed-width",
+              "width": 720,
+              "content": "Body placeholder — this page does not exist. Try the navigation below.",
+              "lineHeight": 1.625,
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 16
+            }
+          ]
+        },
+        {
+          "id": "XJtoN",
+          "type": "ref",
+          "ref": "N1jo3i",
+          "name": "Section / NavBack (404 instance)"
+        },
+        {
+          "id": "UPHLK",
+          "type": "ref",
+          "ref": "Xs0Hs",
+          "name": "Section / Footer (404 instance)"
         }
       ]
     }
@@ -19001,6 +19620,26 @@
     "type-semantic-prose-paragraph-weight": {
       "type": "string",
       "value": "$type-primitive-weight-400"
+    },
+    "type-primitive-size-32": {
+      "type": "number",
+      "value": 32
+    },
+    "type-semantic-heading-2-family": {
+      "type": "string",
+      "value": "$type-primitive-family-display"
+    },
+    "type-semantic-heading-2-lh": {
+      "type": "number",
+      "value": "$type-primitive-lh-heading"
+    },
+    "type-semantic-heading-2-size": {
+      "type": "number",
+      "value": "$type-primitive-size-32"
+    },
+    "type-semantic-heading-2-weight": {
+      "type": "string",
+      "value": "$type-primitive-weight-700"
     }
   }
 }
