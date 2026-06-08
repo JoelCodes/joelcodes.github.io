@@ -18678,6 +18678,37 @@
               "fontWeight": "normal"
             }
           ]
+        },
+        {
+          "type": "frame",
+          "id": "kJQmJ",
+          "name": "Primitive / Badge / Outline",
+          "reusable": true,
+          "fill": "$color-semantic-bg-page",
+          "cornerRadius": "$radius-semantic-button",
+          "stroke": "$color-semantic-border-default",
+          "strokeWidth": 1,
+          "strokeAlignment": "inner",
+          "gap": 8,
+          "padding": [
+            4,
+            12
+          ],
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "pENro",
+              "name": "Label",
+              "fill": "$color-semantic-text-primary",
+              "content": "Badge",
+              "lineHeight": "$type-semantic-body-sm-lh",
+              "fontFamily": "$type-semantic-body-sm-family",
+              "fontSize": "$type-semantic-body-sm-size",
+              "fontWeight": "$type-primitive-weight-500"
+            }
+          ]
         }
       ]
     },
@@ -18749,6 +18780,8 @@
               "name": "title-slot",
               "slot": [],
               "width": "fill_container",
+              "layout": "vertical",
+              "gap": 4,
               "children": [
                 {
                   "type": "text",
@@ -18762,6 +18795,19 @@
                   "fontFamily": "Plus Jakarta Sans",
                   "fontSize": 18,
                   "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "SoXch",
+                  "name": "metadata-caption",
+                  "fill": "$color-semantic-text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "DATE • READ TIME",
+                  "lineHeight": "$type-semantic-body-sm-lh",
+                  "fontFamily": "$type-semantic-body-sm-family",
+                  "fontSize": "$type-semantic-body-sm-size",
+                  "fontWeight": "$type-semantic-body-sm-weight"
                 }
               ]
             },
@@ -19611,6 +19657,271 @@
           "width": 1200,
           "height": 0,
           "content": "Section / NavBack (reusable) — slot signature:\n\n• heading-slot — slot:[] (untyped), enabled:true. Default: 'Find what you need' text (Plus Jakarta Sans 32/700/lh 1.4 navy — heading-2 typography). Consumers override via descendants.\n\n• links-slot — slot:[] (untyped), enabled:true. Default: 4 text-node children with body typography (Inter 16/400 navy lh 1.625), contents: Home, Blog, Projects, Contact (Joel's v1.3 nav set per CONTEXT Claude's Discretion). PLAIN TEXT NODES — NOT Button refs per Pitfall O5/O6 narrow-scope design.\n\nWidth 1200 fixed. Padding [32,0]. Gap 16 (heading→links) + gap 24 (between links). Layout vertical at root; links-slot is horizontal.\n\nBuilt narrowly for 404 only (D-79). NOT generalized to Blog 'related posts' / Projects 'related projects' — those need card-grid shapes, different signature, deferred to Phase 28/29.\n\n404 instances with default labels (Joel-v1.3-nav-set, structural not microcopy). Real nav link targets wired by code milestone.\n\nSee 26-00-SUMMARY.md and PEN-INVENTORY § Variant Evidence (Phase 26) for full audit trail."
+        },
+        {
+          "type": "frame",
+          "id": "O1IwyS",
+          "name": "Section / TagFilter",
+          "reusable": true,
+          "width": 1200,
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            32,
+            0
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "iHWbI",
+              "x": 0,
+              "y": 0,
+              "name": "heading-slot",
+              "enabled": false,
+              "slot": [],
+              "width": "fill_container(0)",
+              "layout": "vertical",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "ggbXn",
+                  "name": "heading placeholder",
+                  "fill": "$color-semantic-text-primary",
+                  "content": "Browse by topic",
+                  "lineHeight": "$type-semantic-heading-2-lh",
+                  "fontFamily": "$type-semantic-heading-2-family",
+                  "fontSize": "$type-semantic-heading-2-size",
+                  "fontWeight": "$type-semantic-heading-2-weight"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "CNqq9",
+              "name": "pills-row",
+              "gap": 12,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "id": "RxShj",
+                  "type": "ref",
+                  "ref": "M7eUr",
+                  "name": "pill-1-active",
+                  "cornerRadius": 9999,
+                  "enabled": true,
+                  "descendants": {
+                    "ATJK9": {
+                      "content": "All Posts"
+                    }
+                  }
+                },
+                {
+                  "id": "z1aro",
+                  "type": "ref",
+                  "ref": "hIWuC",
+                  "name": "pill-1-inactive",
+                  "cornerRadius": 9999,
+                  "enabled": false,
+                  "descendants": {
+                    "UbwMv": {
+                      "content": "All Posts"
+                    }
+                  }
+                },
+                {
+                  "id": "al86r",
+                  "type": "ref",
+                  "ref": "M7eUr",
+                  "name": "pill-2-active",
+                  "cornerRadius": 9999,
+                  "enabled": false,
+                  "descendants": {
+                    "ATJK9": {
+                      "content": "automation"
+                    }
+                  }
+                },
+                {
+                  "id": "u3X64E",
+                  "type": "ref",
+                  "ref": "hIWuC",
+                  "name": "pill-2-inactive",
+                  "cornerRadius": 9999,
+                  "enabled": true,
+                  "descendants": {
+                    "UbwMv": {
+                      "content": "automation"
+                    }
+                  }
+                },
+                {
+                  "id": "C93nA",
+                  "type": "ref",
+                  "ref": "M7eUr",
+                  "name": "pill-3-active",
+                  "cornerRadius": 9999,
+                  "enabled": false,
+                  "descendants": {
+                    "ATJK9": {
+                      "content": "small-business"
+                    }
+                  }
+                },
+                {
+                  "id": "j4KiI",
+                  "type": "ref",
+                  "ref": "hIWuC",
+                  "name": "pill-3-inactive",
+                  "cornerRadius": 9999,
+                  "enabled": true,
+                  "descendants": {
+                    "UbwMv": {
+                      "content": "small-business"
+                    }
+                  }
+                },
+                {
+                  "id": "m35My",
+                  "type": "ref",
+                  "ref": "M7eUr",
+                  "name": "pill-4-active",
+                  "cornerRadius": 9999,
+                  "enabled": false,
+                  "descendants": {
+                    "ATJK9": {
+                      "content": "productivity"
+                    }
+                  }
+                },
+                {
+                  "id": "EXgTG",
+                  "type": "ref",
+                  "ref": "hIWuC",
+                  "name": "pill-4-inactive",
+                  "cornerRadius": 9999,
+                  "enabled": true,
+                  "descendants": {
+                    "UbwMv": {
+                      "content": "productivity"
+                    }
+                  }
+                },
+                {
+                  "id": "CCXCE",
+                  "type": "ref",
+                  "ref": "M7eUr",
+                  "name": "pill-5-active",
+                  "cornerRadius": 9999,
+                  "enabled": false,
+                  "descendants": {
+                    "ATJK9": {
+                      "content": "ai"
+                    }
+                  }
+                },
+                {
+                  "id": "hMIRk",
+                  "type": "ref",
+                  "ref": "hIWuC",
+                  "name": "pill-5-inactive",
+                  "cornerRadius": 9999,
+                  "enabled": true,
+                  "descendants": {
+                    "UbwMv": {
+                      "content": "ai"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "id": "MGfOS",
+          "name": "Section / TagFilter — slot signature",
+          "width": 1200,
+          "height": 280,
+          "content": "Section / TagFilter (reusable) — slot signature:\n\n• heading-slot — slot:[] (untyped), enabled:false default. Consumers may override enabled:true and insert a heading text node when context demands (e.g. 'Browse by topic'). Default off matches Crito DzqTm raster — no heading visible above filter pills.\n\n• pills-row — horizontal frame, gap 12, alignItems center, justifyContent center. Contains 10 paired-ref children (D-117 + RESEARCH Focus 6 Sub-option A1): 5 positions × 2 refs each.\n  - Position 1 (default ACTIVE): M7eUr ref enabled (label 'All Posts', cornerRadius 9999) + hIWuC ref disabled (shadow inactive variant).\n  - Positions 2-5 (default INACTIVE): hIWuC ref enabled (labels 'automation', 'small-business', 'productivity', 'ai', cornerRadius 9999) + M7eUr ref disabled (shadow active variant).\n  - Consumers toggle `enabled` between paired refs at instance time to switch active pill.\n\nPill rounded-full shape achieved via instance-time cornerRadius descendants override (value 9999 per D-120). No new Button variant added (forward-state-only per Phase 24 D-22 + Hybrid library minimalism). OPEN-28-NN proposal: radius-semantic-pill token (OPEN-23-12 candidate) if 9999-as-literal proves brittle in downstream consumers.\n\nSee 28-00-SUMMARY.md and PEN-INVENTORY § Variant Evidence (Phase 28)."
+        },
+        {
+          "type": "frame",
+          "id": "etY5x",
+          "name": "Section / RelatedPosts",
+          "reusable": true,
+          "width": 1200,
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            32,
+            0
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "W1edi",
+              "name": "heading-slot",
+              "slot": [],
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "uQJdO",
+                  "name": "heading text",
+                  "fill": "$color-semantic-text-primary",
+                  "content": "Related posts",
+                  "lineHeight": "$type-semantic-heading-2-lh",
+                  "fontFamily": "$type-semantic-heading-2-family",
+                  "fontSize": "$type-semantic-heading-2-size",
+                  "fontWeight": "$type-semantic-heading-2-weight"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "j9KOm",
+              "name": "cards-row",
+              "slot": [
+                "t40xct"
+              ],
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "id": "HmMOm",
+                  "type": "ref",
+                  "ref": "t40xct",
+                  "name": "card-1",
+                  "width": "fill_container"
+                },
+                {
+                  "id": "mHWPU",
+                  "type": "ref",
+                  "ref": "t40xct",
+                  "name": "card-2",
+                  "width": "fill_container"
+                },
+                {
+                  "id": "olBLe",
+                  "type": "ref",
+                  "ref": "t40xct",
+                  "name": "card-3",
+                  "width": "fill_container"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "id": "sUijx",
+          "name": "Section / RelatedPosts — slot signature",
+          "width": 1200,
+          "height": 280,
+          "content": "Section / RelatedPosts (reusable) — slot signature:\n\n• heading-slot — slot:[] (untyped), enabled:true default. Default content: 'Related posts' text using heading-2 semantic typography (Plus Jakarta Sans 32/700/lh 1.4 navy). Consumers override at instance time for context variants ('More from this author', 'You might also like').\n\n• cards-row — slot:['t40xct'] (TYPED suggestion per D-52 PREFERRED Pattern). horizontal frame, gap 24, alignItems start, width fill_container. Contains 3 Compound/Card refs (t40xct) per D-114 + D-118 (3-card density default). Each card uses fill_container width so the row distributes evenly. Consumers override card descendants (vGH3A title + SoXch metadata-caption + FGdti image-slot + oTSwn body-slot + eNqxd footer-actions-slot) at instance time.\n\nWidth 1200 fixed (matches Header/Footer/CTA/NavBack Phase 25-26 ship width). Padding [32,0] (section-y rhythm — semi-tight per Crito source density). Gap 32 (heading→cards-row). alignItems start at root so heading aligns left.\n\nNarrow-scoping per D-116: Blog Index + Blog Post Pages consume this component exclusively. Projects 'related projects' (Phase 29) gets its own component or generalizes this later — not pre-generalized here.\n\nSee 28-00-SUMMARY.md and PEN-INVENTORY § Variant Evidence (Phase 28)."
         }
       ]
     },
@@ -20884,6 +21195,70 @@
     "type-semantic-heading-4-weight": {
       "type": "string",
       "value": "$type-primitive-weight-700"
+    },
+    "type-semantic-prose-code-block-family": {
+      "type": "string",
+      "value": "$type-primitive-family-mono"
+    },
+    "type-semantic-prose-code-block-lh": {
+      "type": "number",
+      "value": "$type-primitive-lh-loose"
+    },
+    "type-semantic-prose-code-block-size": {
+      "type": "number",
+      "value": "$type-primitive-size-14"
+    },
+    "type-semantic-prose-code-block-weight": {
+      "type": "string",
+      "value": "$type-primitive-weight-400"
+    },
+    "type-semantic-prose-inline-code-family": {
+      "type": "string",
+      "value": "$type-primitive-family-mono"
+    },
+    "type-semantic-prose-inline-code-lh": {
+      "type": "number",
+      "value": "$type-primitive-lh-normal"
+    },
+    "type-semantic-prose-inline-code-size": {
+      "type": "number",
+      "value": "$type-primitive-size-14"
+    },
+    "type-semantic-prose-inline-code-weight": {
+      "type": "string",
+      "value": "$type-primitive-weight-400"
+    },
+    "type-semantic-prose-link-color": {
+      "type": "color",
+      "value": "$color-semantic-text-accent"
+    },
+    "type-semantic-prose-link-family": {
+      "type": "string",
+      "value": "$type-primitive-family-body"
+    },
+    "type-semantic-prose-link-size": {
+      "type": "number",
+      "value": "$type-primitive-size-16"
+    },
+    "type-semantic-prose-link-weight": {
+      "type": "string",
+      "value": "$type-primitive-weight-500"
+    },
+    "type-semantic-prose-list-family": {
+      "type": "string",
+      "value": "$type-primitive-family-body"
+    },
+    "type-semantic-prose-list-lh": {
+      "type": "number",
+      "value": "$type-primitive-lh-loose"
+    },
+    "type-semantic-prose-list-size": {
+      "type": "number",
+      "value": "$type-primitive-size-16"
+    },
+    "type-semantic-prose-list-weight": {
+      "type": "string",
+      "value": "$type-primitive-weight-400"
     }
   }
 }
