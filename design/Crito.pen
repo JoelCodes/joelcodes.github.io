@@ -18835,6 +18835,95 @@
           "width": 1200,
           "height": 680,
           "content": "Compound / Card (reusable, id t40xct) — slot signature:\n\n• image-slot (id FGdti) — slot:[] (untyped), enabled:true. Default: light-gray placeholder rectangle (180h fill_container, fill #f2f2f7ff color-semantic-bg-surface-elevated) with 'Image' text label. Consumers populate with type:image fill on the slot or replace with custom image-bearing node at instance time. Set enabled:false for Service-style cards with no image.\n\n• title-slot (id vGH3A) — slot:[] (untyped), enabled:true. Default: 'Card title' text (Plus Jakarta Sans 18/700 navy color-semantic-text-primary). Consumers override the text content via descendants. Suitable for any single-line or wrapping title.\n\n• body-slot (id oTSwn) — slot:[] (untyped), enabled:true. Default: body filler text (Inter 14/normal #52525bff color-semantic-text-secondary, lineHeight 1.625, fill_container width). Consumers replace with description (Service card), excerpt + category meta (Blog card), or date + result metric (Project card).\n\n• footer-actions-slot (id eNqxd) — slot:['M7eUr','hIWuC'] (TYPED suggestion per D-52 PREFERRED — Pencil's slot array IS suggestion-only per Pencil schema 2.13 + guidelines § 2; non-matching insertion is not enforced, but typed slots provide picker discoverability). Default: Primitive/Button/Default ref with 'Read More' label + iconTrailing arrow-right wired. Consumers override label/icon or replace with a different Button variant (e.g., Secondary outline for de-emphasized cards). Set enabled:false for Blog-style cards with no explicit CTA.\n\nCard width 320 (typical library preview; consumers resize via fill_container at instance time in card grids). Padding 24 per Pencil guidelines § 12 'Inside cards'. Border 1px #d4d4d8ff color-semantic-border-default + cornerRadius 10 radius-semantic-card.\n\nProvenance: RASTER-DERIVED per D-49 (Plan 25-03 Task 1 raster-probe inference from design/images/image-import-12.jpg + image-import-14.jpg — Service / Project / Blog card patterns). v1.3 src/components/ui/Card.astro consulted as SECONDARY structural reference only; visual values are token-driven, NOT v1.3 neobrutalist visuals (Pitfall 2 prevention).\n\nSource-coverage gap: tracked as OPEN-25-07 (severity notable; consumer phase 28 Blog or 29 Projects). First concrete Card consumer locks the real values via instance overrides or component edits and resolves the flag. Follows Phase 24 OPEN-24-12 (Badge) consumer-resolution precedent.\n\nNO Card hover/focus states ship in Phase 25 — Crito raster doesn't depict; primitive-layer Button hover/focus inside footer-actions-slot covers interactivity.\n\nSee 25-03-SUMMARY.md and PEN-INVENTORY § Variant Evidence (Phase 24) Phase-25-plan-03 rows + § Compound Source Inference (Phase 25) section for full audit trail."
+        },
+        {
+          "type": "frame",
+          "id": "SW4cz",
+          "name": "Compound / CheckboxGroup",
+          "reusable": true,
+          "width": 320,
+          "layout": "vertical",
+          "gap": 12,
+          "children": [
+            {
+              "type": "text",
+              "id": "H2gB5P",
+              "name": "legend-slot",
+              "fill": "#141f39ff",
+              "content": "Choose options",
+              "lineHeight": 1.5,
+              "fontFamily": "Inter",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "MZPrM",
+              "name": "options-slot",
+              "slot": [
+                "gimNt"
+              ],
+              "layout": "vertical",
+              "gap": 12,
+              "children": [
+                {
+                  "id": "OAOSX",
+                  "type": "ref",
+                  "ref": "gimNt",
+                  "name": "Option 1",
+                  "descendants": {
+                    "pBv3p": {
+                      "content": "Option 1"
+                    }
+                  }
+                },
+                {
+                  "id": "elfPM",
+                  "type": "ref",
+                  "ref": "gimNt",
+                  "name": "Option 2",
+                  "descendants": {
+                    "pBv3p": {
+                      "content": "Option 2"
+                    }
+                  }
+                },
+                {
+                  "id": "PojXW",
+                  "type": "ref",
+                  "ref": "gimNt",
+                  "name": "Option 3",
+                  "descendants": {
+                    "pBv3p": {
+                      "content": "Option 3"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "akAeF",
+              "x": 0,
+              "y": 0,
+              "name": "helper-slot",
+              "enabled": false,
+              "fill": "#52525bff",
+              "content": "Optional helper text",
+              "lineHeight": 1.5,
+              "fontFamily": "Inter",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "id": "TXLkH",
+          "name": "Compound / CheckboxGroup — slot signature",
+          "width": 1200,
+          "height": 0,
+          "content": "Compound / CheckboxGroup (reusable) — slot signature:\n\n• legend-slot (text, body-sm typography, REQUIRED — group-level prompt like HTML <legend>; Inter 14/normal #141f39ff). Plan 27-02 Solutions field instance overrides to 'How can Joel help?' per D-97.\n\n• options-slot (frame, vertical-stack gap 12, typed suggestion: Primitive/Checkbox/Default refs gimNt per D-52 PREFERRED + sibling-note belt-and-suspenders; enabled:true with 3 placeholder Checkbox refs per Phase 25 D-53 enabled-with-placeholder). Plan 27-02 Contact Solutions field instance overrides options-slot contents to 5 Checkbox refs with v1.3 labels: AI / Automations / Web Apps / Consultation / Not Sure per D-97. Horizontal layout possible if cl8tt raster probe reveals different shape — but default vertical per Claude's Discretion (v1.3 space-y-3 observation).\n\n• helper-slot (text, body-sm secondary, OPTIONAL — enabled:false default per Phase 25 D-53 enabled-with-placeholder pattern).\n\nNo per-option legend (legend-slot is group-level). D-89 Hybrid library strategy — CheckboxGroup composes Checkbox refs (distinct from Compound/Card which composes images + text via slots).\n\nSee 27-00-SUMMARY.md and PEN-INVENTORY § Variant Evidence (Phase 27) for full audit trail."
         }
       ]
     },
