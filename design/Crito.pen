@@ -19954,6 +19954,139 @@
           "name": "Section / Footer (404 instance)"
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "XsDab",
+      "x": 19367.267566049897,
+      "y": -4111.553859422791,
+      "name": "Thank-you",
+      "width": 1440,
+      "fill": "#ffffffff",
+      "layout": "vertical",
+      "alignItems": "center",
+      "children": [
+        {
+          "id": "y2PN4A",
+          "type": "ref",
+          "ref": "G0wNOc",
+          "name": "Section / Header (Thank-you instance)"
+        },
+        {
+          "type": "frame",
+          "id": "H5LJu",
+          "name": "success-message",
+          "width": 1200,
+          "layout": "vertical",
+          "gap": 24,
+          "padding": [
+            96,
+            0
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "id": "ozqJk",
+              "type": "ref",
+              "ref": "dpO5Y",
+              "name": "circle-check (success)",
+              "library": "lucide",
+              "icon": "circle-check",
+              "fill": "#38da71ff"
+            },
+            {
+              "type": "text",
+              "id": "sftHp",
+              "name": "heading",
+              "fill": "#141f39ff",
+              "content": "Thanks for reaching out!",
+              "lineHeight": 1.4,
+              "textAlign": "center",
+              "fontFamily": "Plus Jakarta Sans",
+              "fontSize": 48,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "zmISZ",
+              "name": "body",
+              "fill": "#52525bff",
+              "textGrowth": "fixed-width",
+              "width": 720,
+              "content": "I'll email you within 48 hours with next steps. Looking forward to learning more about your project!",
+              "lineHeight": 1.625,
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 16,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "id": "wZbat",
+          "type": "ref",
+          "ref": "Hs5rc",
+          "name": "Section / CTA-Calendly (Thank-you instance)",
+          "descendants": {
+            "U1DQb": {
+              "content": "Skip the wait — book a call"
+            },
+            "Ay7WY": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "type": "note",
+          "id": "ZPinn",
+          "name": "Calendly wiring (Thank-you)",
+          "width": 1200,
+          "height": 0,
+          "content": "Calendly placeholder (Phase 27 D-93/D-94) — code milestone wires Section/CTA-Calendly (ref Hs5rc) actions-slot Button[0] `href` to https://calendly.com/joelshinness (v1.3 thank-you.astro line 35). May replace body-slot with embedded Calendly iframe at wire-time. Cross-reference: PEN-INVENTORY § Calendly Wiring Map (Phase 27) row 1 (Thank-you consumer)."
+        },
+        {
+          "type": "frame",
+          "id": "oSBZY",
+          "name": "secondary-link",
+          "width": 1200,
+          "layout": "vertical",
+          "gap": 4,
+          "padding": [
+            16,
+            0,
+            32,
+            0
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "asdXt",
+              "name": "return-link",
+              "fill": "#52525bff",
+              "content": "Return to homepage",
+              "lineHeight": 1.4,
+              "fontFamily": "Inter",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "note",
+              "id": "HTg0k",
+              "name": "Return to homepage — wire-target",
+              "width": 0,
+              "height": 0,
+              "content": "Code milestone wires this text node as <a href='/'>Return to homepage</a>. Plain text link per D-99 default (not Primitive/Button/Secondary — that's the Claude's Discretion upgrade reserved for stronger affordance contexts)."
+            }
+          ]
+        },
+        {
+          "id": "PRLPt",
+          "type": "ref",
+          "ref": "Xs0Hs",
+          "name": "Section / Footer (Thank-you instance)"
+        }
+      ]
     }
   ],
   "variables": {
