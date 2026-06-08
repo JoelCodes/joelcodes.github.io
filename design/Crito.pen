@@ -20840,6 +20840,50 @@
     "type-semantic-heading-2-weight": {
       "type": "string",
       "value": "$type-primitive-weight-700"
+    },
+    "type-primitive-family-mono": {
+      "type": "string",
+      "value": "'SF Mono', Menlo, Monaco, Consolas, monospace"
+    },
+    "type-primitive-size-20": {
+      "type": "number",
+      "value": 20
+    },
+    "type-primitive-size-24": {
+      "type": "number",
+      "value": 24
+    },
+    "type-semantic-heading-3-family": {
+      "type": "string",
+      "value": "$type-primitive-family-display"
+    },
+    "type-semantic-heading-3-lh": {
+      "type": "number",
+      "value": "$type-primitive-lh-heading"
+    },
+    "type-semantic-heading-3-size": {
+      "type": "number",
+      "value": "$type-primitive-size-24"
+    },
+    "type-semantic-heading-3-weight": {
+      "type": "string",
+      "value": "$type-primitive-weight-700"
+    },
+    "type-semantic-heading-4-family": {
+      "type": "string",
+      "value": "$type-primitive-family-display"
+    },
+    "type-semantic-heading-4-lh": {
+      "type": "number",
+      "value": "$type-primitive-lh-heading"
+    },
+    "type-semantic-heading-4-size": {
+      "type": "number",
+      "value": "$type-primitive-size-20"
+    },
+    "type-semantic-heading-4-weight": {
+      "type": "string",
+      "value": "$type-primitive-weight-700"
     }
   }
 }
