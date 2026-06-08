@@ -20087,6 +20087,356 @@
           "name": "Section / Footer (Thank-you instance)"
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "n0QqTd",
+      "x": 20887.267566049897,
+      "y": -4111.553859422791,
+      "name": "Contact",
+      "width": 1440,
+      "fill": "#ffffffff",
+      "layout": "vertical",
+      "alignItems": "center",
+      "children": [
+        {
+          "id": "KpXG8",
+          "type": "ref",
+          "ref": "G0wNOc",
+          "name": "Section / Header (Contact instance)"
+        },
+        {
+          "type": "frame",
+          "id": "IN8mK",
+          "name": "page-intro",
+          "width": 1200,
+          "layout": "vertical",
+          "gap": 12,
+          "padding": [
+            64,
+            0
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "K19CQ",
+              "name": "heading",
+              "fill": "#141f39ff",
+              "content": "Let's Talk",
+              "lineHeight": 1.4,
+              "fontFamily": "Plus Jakarta Sans",
+              "fontSize": 48,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "NkMyS",
+              "name": "body",
+              "fill": "#52525bff",
+              "content": "Tell me about your project and I'll get back to you within 48 hours.",
+              "lineHeight": 1.625,
+              "fontFamily": "Inter",
+              "fontSize": 16,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "TtFyF",
+          "name": "form-and-sidebar-grid",
+          "width": 1200,
+          "gap": 32,
+          "padding": [
+            0,
+            0,
+            64,
+            0
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "WML8j",
+              "name": "form-column",
+              "width": 760,
+              "layout": "vertical",
+              "gap": 24,
+              "children": [
+                {
+                  "id": "pCNor",
+                  "type": "ref",
+                  "ref": "nwJk7",
+                  "name": "Field 1 — Name",
+                  "descendants": {
+                    "A4z2RM": {
+                      "content": "Name"
+                    },
+                    "oOKQF": {
+                      "enabled": true
+                    },
+                    "dbEyb": {
+                      "content": "Your name"
+                    }
+                  }
+                },
+                {
+                  "id": "IN0LO",
+                  "type": "ref",
+                  "ref": "nwJk7",
+                  "name": "Field 2 — Email",
+                  "descendants": {
+                    "A4z2RM": {
+                      "content": "Email"
+                    },
+                    "oOKQF": {
+                      "enabled": true
+                    },
+                    "dbEyb": {
+                      "content": "you@example.com"
+                    }
+                  }
+                },
+                {
+                  "id": "n0kqG",
+                  "type": "ref",
+                  "ref": "nwJk7",
+                  "name": "Field 3 — Company",
+                  "descendants": {
+                    "A4z2RM": {
+                      "content": "Company"
+                    },
+                    "iBbbW": {
+                      "enabled": true
+                    },
+                    "dbEyb": {
+                      "content": "Company name (if applicable)"
+                    }
+                  }
+                },
+                {
+                  "id": "HhM94",
+                  "type": "ref",
+                  "ref": "vegJw",
+                  "name": "Field 4 — Challenges",
+                  "descendants": {
+                    "hWwXP": {
+                      "content": "What challenges are you facing?"
+                    },
+                    "qzrSZ": {
+                      "enabled": true
+                    },
+                    "RMLUN": {
+                      "content": "What problems are slowing you down, causing headaches, or just keeping you from doing the work you love?"
+                    }
+                  }
+                },
+                {
+                  "id": "Run8P",
+                  "type": "ref",
+                  "ref": "SW4cz",
+                  "name": "Field 5 — Solutions",
+                  "descendants": {
+                    "H2gB5P": {
+                      "content": "What kinds of solutions do you think you'll need?"
+                    },
+                    "MZPrM": {
+                      "type": "frame",
+                      "id": "OfxWH",
+                      "name": "options-slot",
+                      "slot": [
+                        "gimNt"
+                      ],
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "id": "A7a0cz",
+                          "type": "ref",
+                          "ref": "gimNt",
+                          "name": "Option AI",
+                          "descendants": {
+                            "pBv3p": {
+                              "content": "AI"
+                            }
+                          }
+                        },
+                        {
+                          "id": "vRCpK",
+                          "type": "ref",
+                          "ref": "gimNt",
+                          "name": "Option Automations",
+                          "descendants": {
+                            "pBv3p": {
+                              "content": "Automations"
+                            }
+                          }
+                        },
+                        {
+                          "id": "Q6rWeR",
+                          "type": "ref",
+                          "ref": "gimNt",
+                          "name": "Option Web Apps",
+                          "descendants": {
+                            "pBv3p": {
+                              "content": "Web Apps"
+                            }
+                          }
+                        },
+                        {
+                          "id": "o0Hj0J",
+                          "type": "ref",
+                          "ref": "gimNt",
+                          "name": "Option Consultation",
+                          "descendants": {
+                            "pBv3p": {
+                              "content": "Consultation"
+                            }
+                          }
+                        },
+                        {
+                          "id": "p0DLT7",
+                          "type": "ref",
+                          "ref": "gimNt",
+                          "name": "Option Not Sure",
+                          "descendants": {
+                            "pBv3p": {
+                              "content": "Not Sure"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": "kCb5L",
+                  "type": "ref",
+                  "ref": "Rinmg",
+                  "name": "Field 6 — Budget",
+                  "descendants": {
+                    "dLxN0": {
+                      "content": "Do you have a budget in mind?"
+                    },
+                    "K85Cv": {
+                      "enabled": true
+                    },
+                    "f8Y80": {
+                      "content": "Select budget range (optional)"
+                    }
+                  }
+                },
+                {
+                  "id": "NtDhx",
+                  "type": "ref",
+                  "ref": "Rinmg",
+                  "name": "Field 7 — Timeline",
+                  "descendants": {
+                    "dLxN0": {
+                      "content": "Do you have a timeline in mind?"
+                    },
+                    "K85Cv": {
+                      "enabled": true
+                    },
+                    "f8Y80": {
+                      "content": "Select timeline (optional)"
+                    }
+                  }
+                },
+                {
+                  "id": "Y4rG8",
+                  "type": "ref",
+                  "ref": "vegJw",
+                  "name": "Field 8 — Message",
+                  "descendants": {
+                    "hWwXP": {
+                      "content": "Message"
+                    },
+                    "FmHxX": {
+                      "enabled": true
+                    },
+                    "qzrSZ": {
+                      "enabled": true
+                    },
+                    "RMLUN": {
+                      "content": "Anything else you'd like to share about your project, goals, or how I can help?"
+                    }
+                  }
+                },
+                {
+                  "id": "XmJ1K",
+                  "type": "ref",
+                  "ref": "M7eUr",
+                  "name": "Submit Button",
+                  "descendants": {
+                    "ATJK9": {
+                      "content": "Send Message"
+                    },
+                    "V4Dx4i": {
+                      "enabled": true
+                    }
+                  }
+                },
+                {
+                  "type": "text",
+                  "id": "mCCWk",
+                  "name": "privacy-line",
+                  "fill": "#52525bff",
+                  "content": "Your info stays between us. No spam, ever.",
+                  "lineHeight": 1.4,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "hkKT1",
+              "name": "sidebar-column",
+              "width": 376,
+              "layout": "vertical",
+              "gap": 16,
+              "alignItems": "center",
+              "children": [
+                {
+                  "id": "o4Dy1",
+                  "type": "ref",
+                  "ref": "t40xct",
+                  "name": "Sidebar Card — Ready to chat?",
+                  "descendants": {
+                    "FGdti": {
+                      "enabled": false
+                    },
+                    "kI3bc": {
+                      "content": "Ready to chat?"
+                    },
+                    "ASA0X": {
+                      "content": "Schedule a discovery call with me directly!"
+                    },
+                    "k20bt/ATJK9": {
+                      "content": "Book a Call"
+                    }
+                  }
+                },
+                {
+                  "type": "note",
+                  "id": "DrjHO",
+                  "name": "Calendly wiring (Contact sidebar)",
+                  "width": 376,
+                  "height": 0,
+                  "content": "Calendly placeholder (Phase 27 D-93/D-94) — code milestone wires Compound/Card sidebar footer-actions Button[0] `href` to https://calendly.com/me--juoi/discovery-call (v1.3 ContactSection.astro line 191). Cross-reference: PEN-INVENTORY § Calendly Wiring Map (Phase 27) row 2 (Contact sidebar consumer). Sidebar uses Compound/Card (Phase 25 t40xct) NOT Section/CTA — different visual shape (sidebar card vs full-width section) per D-96; same wiring mechanism per D-93."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "cP6fH",
+          "type": "ref",
+          "ref": "Xs0Hs",
+          "name": "Section / Footer (Contact instance)"
+        }
+      ]
     }
   ],
   "variables": {
