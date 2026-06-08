@@ -49,8 +49,8 @@ This document scopes what v2.0 will deliver. Each requirement is testable, atomi
 - [ ] **PAGE-02**: Projects index + project detail frames reconstructed (Crito's "Projects" / "Project" frames mapped to Joel's `/projects` route family)
 - [ ] **PAGE-03**: Blog index + blog post + tag-page frames reconstructed (mapped to Joel's `/blog` route family) — section components for post header, prose body, related-posts strip, tag-filter strip
 - [ ] **PAGE-04**: FAQ frame reconstructed (FAQ accordion section, CTA section)
-- [ ] **PAGE-05**: Contact frame reconstructed including the 8-field lead-qualification form using `Primitive / Input` instances
-- [ ] **PAGE-06**: Thank-you frame reconstructed (post-submission message + Calendly placeholder section)
+- [x] **PAGE-05**: Contact frame reconstructed including the 8-field lead-qualification form using `Primitive / Input` instances
+- [x] **PAGE-06**: Thank-you frame reconstructed (post-submission message + Calendly placeholder section)
 - [ ] **PAGE-07**: Design-system reference frame reconstructed (token gallery, component gallery for the `/design-system` route)
 - [ ] **PAGE-08**: 404 frame reconstructed (helpful navigation back to home + key pages)
 - [ ] **PAGE-09**: All reconstruction is **desktop-only** for v2.0 — mobile breakpoint reconstruction deferred to a later milestone
@@ -129,8 +129,8 @@ Mapped by the roadmapper after phase structure approval. Every v2.0 requirement 
 | PAGE-02 | Phase 29 | Pending |
 | PAGE-03 | Phase 28 | Pending |
 | PAGE-04 | Phase 26 | Pending |
-| PAGE-05 | Phase 27 | Pending |
-| PAGE-06 | Phase 27 | Pending |
+| PAGE-05 | Phase 27 | Complete |
+| PAGE-06 | Phase 27 | Complete |
 | PAGE-07 | Phase 30 | Pending |
 | PAGE-08 | Phase 26 | Pending |
 | PAGE-09 | Phase 26 | Pending |

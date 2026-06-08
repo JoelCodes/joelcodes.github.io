@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Prep Crito Design File
-status: executing
-stopped_at: Phase 27 context gathered
-last_updated: "2026-06-07T23:50:47.111Z"
-last_activity: 2026-06-07 -- Phase 27 planning complete
+status: ready_to_plan
+stopped_at: Phase 27 complete (3/3) — ready to discuss Phase 28
+last_updated: 2026-06-08T16:44:35.699Z
+last_activity: 2026-06-08 -- Phase 27 execution started
 progress:
   total_phases: 10
   completed_phases: 4
   total_plans: 20
-  completed_plans: 17
+  completed_plans: 20
   percent: 40
 ---
 
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-31)
 
 **Core value:** Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
-**Current focus:** Phase 26 — faq-404-reconstruction-calibration-workflow-established
+**Current focus:** Phase 28 — blog reconstruction (index + post + tag page)
 
 ## Current Position
 
-Phase: 26 — COMPLETE (4/4 plans shipped)
-Plan: 4 of 4 (Plan 26-03 CALIBRATION-PROTOCOL.md closed)
-Status: Ready to execute
-Last activity: 2026-06-07 -- Phase 27 planning complete
+Phase: 28
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-06-08
 
 Progress: [████░░░░░░] 40% (v2.0 — 4/10 phases complete)
 
@@ -49,7 +49,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 **Velocity:**
 
-- Total plans completed: 76 (v1.0: 23, v1.1: 14, v1.2: 10, v1.3: 20)
+- Total plans completed: 79 (v1.0: 23, v1.1: 14, v1.2: 10, v1.3: 20)
 - Average duration: ~1-5 min/plan (recent trend)
 - Total execution time: ~5 days across 4 milestones
 
