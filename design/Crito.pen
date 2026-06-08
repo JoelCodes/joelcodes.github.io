@@ -17696,15 +17696,52 @@
           "gap": 16,
           "children": [
             {
-              "type": "text",
-              "id": "oCeJP",
-              "name": "Label",
-              "fill": "#141f39ff",
-              "content": "Label",
-              "lineHeight": 1.5,
-              "fontFamily": "Inter",
-              "fontSize": 14,
-              "fontWeight": "normal"
+              "type": "frame",
+              "id": "rpdc0",
+              "name": "label-slot",
+              "gap": 4,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "A4z2RM",
+                  "name": "label-text",
+                  "fill": "#141f39ff",
+                  "content": "Label",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "oOKQF",
+                  "x": 0,
+                  "y": 0,
+                  "name": "required-mark",
+                  "enabled": false,
+                  "fill": "#eb5757ff",
+                  "content": "*",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "iBbbW",
+                  "x": 0,
+                  "y": 0,
+                  "name": "optional-text",
+                  "enabled": false,
+                  "fill": "#52525bff",
+                  "content": "(optional)",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
             },
             {
               "type": "frame",
@@ -18772,7 +18809,8 @@
                   "content": "Get in touch and we'll help you figure out next steps.",
                   "lineHeight": 1.625,
                   "fontFamily": "Inter",
-                  "fontSize": 16
+                  "fontSize": 16,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -18861,7 +18899,8 @@
                   "content": "Home",
                   "lineHeight": 1.625,
                   "fontFamily": "Inter",
-                  "fontSize": 16
+                  "fontSize": 16,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -18870,7 +18909,8 @@
                   "content": "Blog",
                   "lineHeight": 1.625,
                   "fontFamily": "Inter",
-                  "fontSize": 16
+                  "fontSize": 16,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -18879,7 +18919,8 @@
                   "content": "Projects",
                   "lineHeight": 1.625,
                   "fontFamily": "Inter",
-                  "fontSize": 16
+                  "fontSize": 16,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -18888,7 +18929,8 @@
                   "content": "Contact",
                   "lineHeight": 1.625,
                   "fontFamily": "Inter",
-                  "fontSize": 16
+                  "fontSize": 16,
+                  "fontWeight": "normal"
                 }
               ]
             }
@@ -18953,7 +18995,8 @@
               "content": "Answers to common questions about working with Joel.",
               "lineHeight": 1.625,
               "fontFamily": "Inter",
-              "fontSize": 16
+              "fontSize": 16,
+              "fontWeight": "normal"
             }
           ]
         },
@@ -19001,7 +19044,8 @@
                   "content": "Every project is different. Discovery and prototyping usually take 1-2 weeks, then we'll outline a timeline in the proposal based on scope.",
                   "lineHeight": 1.625,
                   "fontFamily": "Inter",
-                  "fontSize": 16
+                  "fontSize": 16,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -19036,7 +19080,8 @@
                   "content": "Absolutely. Most client communication happens over video calls and email. Location doesn't matter.",
                   "lineHeight": 1.625,
                   "fontFamily": "Inter",
-                  "fontSize": 16
+                  "fontSize": 16,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -19071,7 +19116,8 @@
                   "content": "That's what discovery is for. We'll talk through your challenges and I'll help clarify what solution makes sense.",
                   "lineHeight": 1.625,
                   "fontFamily": "Inter",
-                  "fontSize": 16
+                  "fontSize": 16,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -19106,7 +19152,8 @@
                   "content": "Small adjustments are normal. Larger scope changes are discussed together and may adjust the timeline or investment.",
                   "lineHeight": 1.625,
                   "fontFamily": "Inter",
-                  "fontSize": 16
+                  "fontSize": 16,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -19141,7 +19188,8 @@
                   "content": "You get documentation and training. I'm available for questions and can provide ongoing support if needed.",
                   "lineHeight": 1.625,
                   "fontFamily": "Inter",
-                  "fontSize": 16
+                  "fontSize": 16,
+                  "fontWeight": "normal"
                 }
               ]
             }
@@ -19221,7 +19269,8 @@
               "lineHeight": 1.625,
               "textAlign": "center",
               "fontFamily": "Inter",
-              "fontSize": 16
+              "fontSize": 16,
+              "fontWeight": "normal"
             }
           ]
         },
