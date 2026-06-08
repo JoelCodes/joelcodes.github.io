@@ -18212,6 +18212,375 @@
               "fontWeight": "normal"
             }
           ]
+        },
+        {
+          "type": "frame",
+          "id": "Rinmg",
+          "name": "Primitive / Select / Default",
+          "reusable": true,
+          "width": 320,
+          "layout": "vertical",
+          "gap": 16,
+          "children": [
+            {
+              "type": "frame",
+              "id": "fqDQW",
+              "name": "label-slot",
+              "gap": 4,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "dLxN0",
+                  "name": "label-text",
+                  "fill": "#141f39ff",
+                  "content": "Label",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "VYFue",
+                  "x": 0,
+                  "y": 0,
+                  "name": "required-mark",
+                  "enabled": false,
+                  "fill": "#eb5757ff",
+                  "content": "*",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "K85Cv",
+                  "x": 0,
+                  "y": 0,
+                  "name": "optional-text",
+                  "enabled": false,
+                  "fill": "#52525bff",
+                  "content": "(optional)",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "vwza5",
+              "name": "control",
+              "width": "fill_container",
+              "fill": "#ffffffff",
+              "cornerRadius": 10,
+              "stroke": "#d4d4d8ff",
+              "strokeWidth": 1,
+              "gap": 8,
+              "padding": [
+                8,
+                16
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "f8Y80",
+                  "name": "placeholder",
+                  "fill": "#52525bff",
+                  "content": "Select option",
+                  "lineHeight": 1.625,
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "icon",
+                  "id": "KjpDh",
+                  "name": "chevron-icon",
+                  "width": 16,
+                  "height": 16,
+                  "icon": "chevron-down",
+                  "library": "lucide",
+                  "fill": "#52525bff"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "KqWKB",
+              "name": "helper-slot",
+              "fill": "#52525bff",
+              "content": "Optional helper text",
+              "lineHeight": 1.5,
+              "fontFamily": "Inter",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "KL1Py",
+              "x": 0,
+              "y": 0,
+              "name": "errorSlot",
+              "enabled": false,
+              "fill": "#eb5757ff",
+              "content": "Error message placeholder",
+              "lineHeight": 1.5,
+              "fontFamily": "Inter",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "kkH3X",
+          "name": "Primitive / Select / Focus",
+          "reusable": true,
+          "width": 320,
+          "layout": "vertical",
+          "gap": 16,
+          "children": [
+            {
+              "type": "frame",
+              "id": "vikbh",
+              "name": "label-slot",
+              "gap": 4,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "GM4Ae",
+                  "name": "label-text",
+                  "fill": "#141f39ff",
+                  "content": "Label",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "d8C8u0",
+                  "x": 0,
+                  "y": 0,
+                  "name": "required-mark",
+                  "enabled": false,
+                  "fill": "#eb5757ff",
+                  "content": "*",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "SHE3S",
+                  "x": 0,
+                  "y": 0,
+                  "name": "optional-text",
+                  "enabled": false,
+                  "fill": "#52525bff",
+                  "content": "(optional)",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "n15hIX",
+              "name": "control",
+              "width": "fill_container",
+              "fill": "#ffffffff",
+              "cornerRadius": 10,
+              "stroke": "#15bee3ff",
+              "strokeWidth": 2,
+              "gap": 8,
+              "padding": [
+                8,
+                16
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "bWlcT",
+                  "name": "placeholder",
+                  "fill": "#52525bff",
+                  "content": "Select option",
+                  "lineHeight": 1.625,
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "icon",
+                  "id": "cpjQs",
+                  "name": "chevron-icon",
+                  "width": 16,
+                  "height": 16,
+                  "icon": "chevron-down",
+                  "library": "lucide",
+                  "fill": "#52525bff"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "X3dsi",
+              "name": "helper-slot",
+              "fill": "#52525bff",
+              "content": "Optional helper text",
+              "lineHeight": 1.5,
+              "fontFamily": "Inter",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "YzYsE",
+              "x": 0,
+              "y": 0,
+              "name": "errorSlot",
+              "enabled": false,
+              "fill": "#eb5757ff",
+              "content": "Error message placeholder",
+              "lineHeight": 1.5,
+              "fontFamily": "Inter",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "F2JXQl",
+          "name": "Primitive / Select / Error",
+          "reusable": true,
+          "width": 320,
+          "layout": "vertical",
+          "gap": 16,
+          "children": [
+            {
+              "type": "frame",
+              "id": "poEB1",
+              "name": "label-slot",
+              "gap": 4,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "zcSVc",
+                  "name": "label-text",
+                  "fill": "#141f39ff",
+                  "content": "Label",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "FoCTt",
+                  "x": 0,
+                  "y": 0,
+                  "name": "required-mark",
+                  "enabled": false,
+                  "fill": "#eb5757ff",
+                  "content": "*",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "jaHe6",
+                  "x": 0,
+                  "y": 0,
+                  "name": "optional-text",
+                  "enabled": false,
+                  "fill": "#52525bff",
+                  "content": "(optional)",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "D3aeC",
+              "name": "control",
+              "width": "fill_container",
+              "fill": "#ffffffff",
+              "cornerRadius": 10,
+              "stroke": "#eb5757ff",
+              "strokeWidth": 2,
+              "gap": 8,
+              "padding": [
+                8,
+                16
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "C5ETjl",
+                  "name": "placeholder",
+                  "fill": "#52525bff",
+                  "content": "Select option",
+                  "lineHeight": 1.625,
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "icon",
+                  "id": "cR9xD",
+                  "name": "chevron-icon",
+                  "width": 16,
+                  "height": 16,
+                  "icon": "chevron-down",
+                  "library": "lucide",
+                  "fill": "#52525bff"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "W9g5sh",
+              "name": "helper-slot",
+              "fill": "#52525bff",
+              "content": "Optional helper text",
+              "lineHeight": 1.5,
+              "fontFamily": "Inter",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "u7S9BR",
+              "name": "errorSlot",
+              "fill": "#eb5757ff",
+              "content": "This field is required",
+              "lineHeight": 1.5,
+              "fontFamily": "Inter",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            }
+          ]
         }
       ]
     },
