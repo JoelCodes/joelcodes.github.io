@@ -18581,6 +18581,102 @@
               "fontWeight": "normal"
             }
           ]
+        },
+        {
+          "type": "frame",
+          "id": "gimNt",
+          "name": "Primitive / Checkbox / Default",
+          "reusable": true,
+          "gap": 12,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "kSdMS",
+              "name": "box-slot",
+              "width": 16,
+              "height": 16,
+              "fill": "#ffffffff",
+              "cornerRadius": 4,
+              "stroke": "#d4d4d8ff",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "pBv3p",
+              "name": "label-slot",
+              "fill": "#141f39ff",
+              "content": "Option label",
+              "lineHeight": 1.625,
+              "fontFamily": "Inter",
+              "fontSize": 16,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Q70a7",
+          "name": "Primitive / Checkbox / Focus",
+          "reusable": true,
+          "gap": 12,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "ADCuK",
+              "name": "box-slot",
+              "width": 16,
+              "height": 16,
+              "fill": "#ffffffff",
+              "cornerRadius": 4,
+              "stroke": "#15bee3ff",
+              "strokeWidth": 2
+            },
+            {
+              "type": "text",
+              "id": "h9c26",
+              "name": "label-slot",
+              "fill": "#141f39ff",
+              "content": "Option label",
+              "lineHeight": 1.625,
+              "fontFamily": "Inter",
+              "fontSize": 16,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "YTbYo",
+          "name": "Primitive / Checkbox / Error",
+          "reusable": true,
+          "gap": 12,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "NATiQ",
+              "name": "box-slot",
+              "width": 16,
+              "height": 16,
+              "fill": "#ffffffff",
+              "cornerRadius": 4,
+              "stroke": "#eb5757ff",
+              "strokeWidth": 2
+            },
+            {
+              "type": "text",
+              "id": "V2fXBD",
+              "name": "label-slot",
+              "fill": "#141f39ff",
+              "content": "Option label",
+              "lineHeight": 1.625,
+              "fontFamily": "Inter",
+              "fontSize": 16,
+              "fontWeight": "normal"
+            }
+          ]
         }
       ]
     },
