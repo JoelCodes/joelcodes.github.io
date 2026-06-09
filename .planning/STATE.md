@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Prep Crito Design File
 status: completed
-stopped_at: Phase 28 context gathered
-last_updated: "2026-06-09T06:12:53.732Z"
+stopped_at: Phase 29 context gathered
+last_updated: "2026-06-09T06:59:00.770Z"
 last_activity: 2026-06-09 -- Phase 28 marked complete
 progress:
   total_phases: 10
@@ -102,7 +102,7 @@ None currently. Phase 23 first plan (the live Pencil MCP audit) is the gating de
 
 ## Session Continuity
 
-Last session: 2026-06-08T17:22:19.305Z
-Stopped at: Phase 28 context gathered
-Resume file: .planning/phases/28-blog-reconstruction-index-post-tag-page/28-CONTEXT.md
+Last session: 2026-06-09T06:59:00.760Z
+Stopped at: Phase 29 context gathered
+Resume file: .planning/phases/29-projects-reconstruction-index-project-detail/29-CONTEXT.md
 Next action: `/gsd:plan-phase 27` to plan Phase 27 (Thank-you + Contact Reconstruction)
