@@ -23139,6 +23139,18 @@
       "width": 1200,
       "height": 320,
       "content": "Projects index page frame (Plan 29-01 per D-127 crito-source-flat-raster branch).\n\nComposition: Section/Header ref (G0wNOc, no override per D-77) + page-intro (v1.3 verbatim from src/pages/projects/index.astro lines 19-23) + Section/TagFilter ref (O1IwyS) with descendants override per D-137 (Position 5 disabled both shadows since v1.3 has only 4 categories) + 6-Compound/ProjectCard grid (3-col x 2-row; 2 real projects.json entries + 4 representative agency-template per Plan 28-01 BlogCard precedent) + Section/Footer ref (Xs0Hs, no override per D-77).\n\nTagFilter validates D-115 broad-scoping with THIRD consumer (Blog + Tag + Projects). Plan 28-01 Blog index TagFilter instance (M1Wu9) verified UNCHANGED post-mutation — per-instance descendants behavior validated.\n\nPAGE-11 ACTIVE on Y2isa fires AT TASK 5 post-APPROVE per CALIBRATION-PROTOCOL § 3.3 + Pitfall 4. Image references (project thumbnails) ship as placeholder content; code milestone wires real images.\n\nCalibration gate at Task 4 uses DUAL pairing per D-130: Y2isa raster overall page-layout + image-import-12.jpg ProjectCard fidelity visual proxy per OPEN-25-07 line 303. (Per Task 0 probe: Y2isa.fill.image == images/image-import-12.jpg — pairing collapses to single image.)"
+    },
+    {
+      "type": "frame",
+      "id": "s5k41l",
+      "x": 29767.267566049897,
+      "y": -4111.553859422791,
+      "name": "Project",
+      "width": 1440,
+      "height": 2400,
+      "fill": "#ffffffff",
+      "layout": "vertical",
+      "alignItems": "center"
     }
   ],
   "variables": {
