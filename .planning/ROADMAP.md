@@ -323,12 +323,13 @@ Plans:
   3. The project detail page's recurring section structures (hero, results strip, related projects strip) are factored as section components where they appear more than once, not duplicated inline
   4. Per-section fidelity labels and side-by-side calibration artifacts in `.planning/ui-reviews/v2.0/`; user spot-check before phase close
 
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
 
-- [ ] 29-01: Reconstruct Projects index frame (card grid using `Compound / Card`); per-section calibration
-- [ ] 29-02: Reconstruct Project detail frame (hero, problem/solution/results, related projects); factor recurring section structures into section components; per-section calibration; user spot-check
+- [ ] 29-00-PLAN.md — Foundation: ship Compound/ProjectCard (new sibling of t40xct + ZSxZU in t67DU6) + Section/ResultsMetrics + Section/RelatedProjects (new siblings in g9oRa5); possible Badge variant + possible new type-semantic-metric-large token per D-132/D-135 plan-execution; agent-deterministic close-without-gate per D-139
+- [ ] 29-01-PLAN.md — Projects index page frame (crito-source-flat-raster branch; Y2isa visual proxy): Section/Header + page-intro (v1.3 verbatim) + Section/TagFilter instance with descendants override per D-137 (third broad-scoping consumer) + 6-Compound/ProjectCard grid (3-col × 2-row) + Section/Footer; calibration gate with DUAL pairing per D-130 (Y2isa + image-import-12.jpg); PAGE-11 ACTIVE on Y2isa post-APPROVE (FOURTH production use)
+- [ ] 29-02-PLAN.md — Project detail page frame (crito-source-flat-raster branch; cYlRH visual proxy): Section/Header + back-nav inline composition per D-133 (Icon/16 + arrow-left Pattern A) + title-header + body-prose (Challenge + Solution verbatim from bakery-order-system) + Section/ResultsMetrics instance + Section/RelatedProjects instance + Section/Footer; OPEN-29-NN deferrals per D-136 (Screenshots + Testimonial + Built With); calibration gate single pairing; PAGE-11 ACTIVE on cYlRH post-APPROVE (FIFTH production use); CLOSES PHASE 29
 
 ---
 
