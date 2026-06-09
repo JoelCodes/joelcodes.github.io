@@ -23150,7 +23150,232 @@
       "height": 2400,
       "fill": "#ffffffff",
       "layout": "vertical",
-      "alignItems": "center"
+      "alignItems": "center",
+      "children": [
+        {
+          "id": "CQRPf",
+          "type": "ref",
+          "ref": "G0wNOc",
+          "name": "Section / Header (Project instance)"
+        },
+        {
+          "type": "frame",
+          "id": "AV5Cz",
+          "name": "back-nav",
+          "width": 1200,
+          "gap": 8,
+          "padding": [
+            32,
+            0,
+            16,
+            0
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "id": "D6J5Y6",
+              "type": "ref",
+              "ref": "EQaMf",
+              "name": "back-nav-icon (arrow-left)",
+              "icon": "arrow-left"
+            },
+            {
+              "type": "text",
+              "id": "Zo2al",
+              "name": "back-nav-label",
+              "fill": "#15bee3ff",
+              "content": "Back to Projects",
+              "lineHeight": 1.5,
+              "fontFamily": "Inter",
+              "fontSize": 16,
+              "fontWeight": "500"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "IU5hv",
+          "name": "title-header",
+          "width": 1200,
+          "layout": "vertical",
+          "gap": 24,
+          "padding": [
+            16,
+            0,
+            48,
+            0
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "eSVC5",
+              "name": "project-title",
+              "fill": "#141f39ff",
+              "content": "Bakery Order Automation",
+              "lineHeight": 1.4,
+              "fontFamily": "Plus Jakarta Sans",
+              "fontSize": 48,
+              "fontWeight": "700"
+            },
+            {
+              "id": "HCOgC",
+              "type": "ref",
+              "ref": "j0FxQZ",
+              "name": "category-badge (Web Apps)",
+              "descendants": {
+                "xSve5": {
+                  "content": "Web Apps"
+                }
+              }
+            },
+            {
+              "type": "text",
+              "id": "lMRF6",
+              "name": "problem-hero",
+              "fill": "#52525bff",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Sarah's bakery was receiving orders through 5 different channels: phone, SMS, Facebook, Instagram, and email. She spent 4-5 hours daily just transcribing orders into her notebook, leading to errors and missed opportunities. Peak seasons meant working until midnight to organize the next day's baking schedule.",
+              "lineHeight": 1.625,
+              "fontFamily": "Inter",
+              "fontSize": 16
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "LM9rH",
+          "name": "body-prose",
+          "width": 1200,
+          "layout": "vertical",
+          "gap": 24,
+          "padding": [
+            0,
+            0,
+            48,
+            0
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "vFvKi",
+              "name": "challenge-heading",
+              "fill": "#141f39ff",
+              "content": "The Challenge",
+              "lineHeight": 1.4,
+              "fontFamily": "Plus Jakarta Sans",
+              "fontSize": 32,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "qjPQ7",
+              "name": "challenge-body",
+              "fill": "#52525bff",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Sarah's bakery was receiving orders through 5 different channels: phone, SMS, Facebook, Instagram, and email. She spent 4-5 hours daily just transcribing orders into her notebook, leading to errors and missed opportunities. Peak seasons meant working until midnight to organize the next day's baking schedule.",
+              "lineHeight": 1.625,
+              "fontFamily": "Inter",
+              "fontSize": 16
+            },
+            {
+              "type": "text",
+              "id": "H4ybq",
+              "name": "solution-heading",
+              "fill": "#141f39ff",
+              "content": "The Solution",
+              "lineHeight": 1.4,
+              "fontFamily": "Plus Jakarta Sans",
+              "fontSize": 32,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "N4H6K",
+              "name": "solution-body",
+              "fill": "#52525bff",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "We built a custom order management system that consolidated all order channels into a single dashboard. Customers can now place orders through a simple web form, and the system automatically organizes them by pickup date and baking schedule. The dashboard shows real-time inventory needs, prevents overbooking, and generates daily baking schedules automatically.",
+              "lineHeight": 1.625,
+              "fontFamily": "Inter",
+              "fontSize": 16
+            }
+          ]
+        },
+        {
+          "id": "xTY9e",
+          "type": "ref",
+          "ref": "y4RORu",
+          "name": "Section / ResultsMetrics (Project instance — bakery)",
+          "descendants": {
+            "fQ3lT": {
+              "content": "85%"
+            },
+            "le3Sb": {
+              "content": "Time reduction in order processing"
+            },
+            "m9gef7": {
+              "content": "20hrs"
+            },
+            "oFgt8": {
+              "content": "Saved per week"
+            },
+            "MJNW6": {
+              "content": "Zero"
+            },
+            "zd4Bh": {
+              "content": "Missed orders since launch"
+            }
+          }
+        },
+        {
+          "id": "GJ6Jc",
+          "type": "ref",
+          "ref": "OLSa0",
+          "name": "Section / RelatedProjects (Project instance — 2-card density)",
+          "descendants": {
+            "zzp9o/QdrAM/xSve5": {
+              "content": "Automation"
+            },
+            "zzp9o/mY1QY": {
+              "content": "Multi-Channel Inventory Sync"
+            },
+            "zzp9o/VRqcN": {
+              "content": "A growing e-commerce retailer was selling on Amazon, Shopify, and eBay simultaneously. Inventory counts were updated manually across platforms, ..."
+            },
+            "DcjgP/QdrAM/xSve5": {
+              "content": "Web Apps"
+            },
+            "DcjgP/mY1QY": {
+              "content": "Custom CRM for Local Real Estate"
+            },
+            "DcjgP/VRqcN": {
+              "content": "Independent realtors needed a CRM that didn't require a $5k/month subscription. Built a streamlined client tracking system with lead pipeline auto..."
+            },
+            "Vyl5Z": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "id": "JtKjM",
+          "type": "ref",
+          "ref": "Xs0Hs",
+          "name": "Section / Footer (Project instance)"
+        }
+      ]
+    },
+    {
+      "type": "note",
+      "id": "JNsbD",
+      "x": 29767,
+      "y": -1700,
+      "name": "Project detail composition note",
+      "width": 1200,
+      "height": 400,
+      "content": "Project detail page frame (Plan 29-02 per D-127 crito-source-flat-raster branch + D-129 Crito-shape Joel-content hybrid).\n\nComposition: Section/Header ref (G0wNOc, no override per D-77) + back-nav inline composition per D-133 (Primitive/Icon/16 EQaMf with lucide arrow-left glyph swap Pattern A — root-level icon override per Pencil schema, NOT descendants since EQaMf is a single icon node — + text 'Back to Projects' verbatim from v1.3 [slug].astro line 31) + title-header (project title heading-1 + category-badge instance (j0FxQZ + 'Web Apps' label override) + problem hero prose-paragraph) + body-prose ('The Challenge' + 'The Solution' as continuous prose using type-semantic-heading-2 + type-semantic-prose-paragraph — SECONDARY validation of prose tokens after Plan 28-02 PRIMARY per D-110 carry-forward) + Section/ResultsMetrics instance with 6-key descendants override re-asserting bakery-order-system project.results (idempotent per Plan 29-00 default content) + Section/RelatedProjects instance with 2 ProjectCard descendants overrides (inventory-sync + Custom CRM) + 3rd ref (Vyl5Z) enabled:false per CONTEXT 2-card density default + Section/Footer ref (Xs0Hs, no override per D-77).\n\nSelected project for body-prose: bakery-order-system (default per CONTEXT line 120; testimonial-bearing case).\n\ncYlRH.fill.image identified at Task 0 probe: images/image-import-15.jpg — FIRST identification (closes OPEN-28-03 from Phase 28). Calibration gate at Task 4 uses SINGLE pairing per § 3.4 (cYlRH only).\n\nOPEN-29-NN deferrals per D-136 (NOT shipped in frame, recorded as PEN-INVENTORY rows at Task 6):\n- Screenshots gallery (v1.3 [slug].astro lines 73-95)\n- Testimonial conditional blockquote (v1.3 lines 118-128)\n- Built With technology badges (v1.3 lines 131-145)\n\nPAGE-11 ACTIVE on cYlRH fires AT TASK 5 post-APPROVE per § 3.3 + Pitfall 4 — FIFTH production use in v2.0 (closes the crito-source-flat-raster chain).\n\nResolves OPEN-25-07 (Phase 29 ships sibling Compound/ProjectCard per Plan 28-01 BlogCard precedent; 6 Plan 29-01 instances + 2 Plan 29-02 RelatedProjects instances = 8 total ProjectCard consumers)."
     }
   ],
   "variables": {
