@@ -15129,6 +15129,7 @@
       "x": 9767.267566049897,
       "y": -4111.553859422791,
       "name": "07_Blog",
+      "enabled": false,
       "clip": true,
       "width": 1920,
       "height": 3871,
@@ -18971,6 +18972,138 @@
           "width": 1200,
           "height": 0,
           "content": "Compound / CheckboxGroup (reusable) — slot signature:\n\n• legend-slot (text, body-sm typography, REQUIRED — group-level prompt like HTML <legend>; Inter 14/normal #141f39ff). Plan 27-02 Solutions field instance overrides to 'How can Joel help?' per D-97.\n\n• options-slot (frame, vertical-stack gap 12, typed suggestion: Primitive/Checkbox/Default refs gimNt per D-52 PREFERRED + sibling-note belt-and-suspenders; enabled:true with 3 placeholder Checkbox refs per Phase 25 D-53 enabled-with-placeholder). Plan 27-02 Contact Solutions field instance overrides options-slot contents to 5 Checkbox refs with v1.3 labels: AI / Automations / Web Apps / Consultation / Not Sure per D-97. Horizontal layout possible if cl8tt raster probe reveals different shape — but default vertical per Claude's Discretion (v1.3 space-y-3 observation).\n\n• helper-slot (text, body-sm secondary, OPTIONAL — enabled:false default per Phase 25 D-53 enabled-with-placeholder pattern).\n\nNo per-option legend (legend-slot is group-level). D-89 Hybrid library strategy — CheckboxGroup composes Checkbox refs (distinct from Compound/Card which composes images + text via slots).\n\nSee 27-00-SUMMARY.md and PEN-INVENTORY § Variant Evidence (Phase 27) for full audit trail."
+        },
+        {
+          "type": "frame",
+          "id": "ZSxZU",
+          "name": "Compound / BlogCard",
+          "reusable": true,
+          "clip": true,
+          "width": 380,
+          "fill": "#ffffffff",
+          "cornerRadius": 10,
+          "stroke": "#d4d4d8ff",
+          "strokeAlignment": "inner",
+          "layout": "vertical",
+          "children": [
+            {
+              "type": "frame",
+              "id": "l58P3",
+              "name": "image-slot",
+              "slot": [],
+              "width": "fill_container",
+              "height": 240,
+              "fill": "#f2f2f7ff",
+              "layout": "vertical",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "o419y",
+                  "name": "placeholder label",
+                  "fill": "#52525bff",
+                  "content": "Featured image",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "uSmRf",
+              "name": "content-area",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "padding": 24,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "wtjQE",
+                  "name": "date-row",
+                  "fill": "#52525bff",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "JAN 27, 2026 • 5 MIN READ",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "Q0iK5",
+                  "name": "title",
+                  "fill": "#141f39ff",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Post title placeholder",
+                  "lineHeight": 1.4,
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 24,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "ZAlf3",
+                  "name": "excerpt",
+                  "fill": "#52525bff",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Excerpt placeholder describing the post content briefly. Replace at instance time with description from MDX frontmatter.",
+                  "lineHeight": 1.625,
+                  "fontFamily": "Inter",
+                  "fontSize": 16
+                },
+                {
+                  "type": "frame",
+                  "id": "n4lcP3",
+                  "name": "tags-row",
+                  "slot": [
+                    "kJQmJ"
+                  ],
+                  "width": "fill_container",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "id": "N67inL",
+                      "type": "ref",
+                      "ref": "kJQmJ",
+                      "name": "tag-default-1",
+                      "descendants": {
+                        "pENro": {
+                          "content": "tag-1"
+                        }
+                      }
+                    },
+                    {
+                      "id": "M58ov",
+                      "type": "ref",
+                      "ref": "kJQmJ",
+                      "name": "tag-default-2",
+                      "descendants": {
+                        "pENro": {
+                          "content": "tag-2"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "id": "HCDiX",
+          "name": "Compound / BlogCard — slot signature",
+          "width": 1200,
+          "height": 280,
+          "content": "Compound / BlogCard (reusable) — Crito-raster-aligned blog card per Plan 28-01 calibration REVISE.\n\nSlot signature:\n• image-slot (untyped slot:[]) — 240h fill_container, default placeholder fill #f2f2f7ff with 'Featured image' label. Consumers populate via fill:image at instance time OR replace whole slot. Code milestone wires `post.data.featuredImage` to image-slot.fill.\n• content-area (frame, padding 24, vertical gap 12) — wraps the text stack:\n  - date-row (body-sm secondary): override content per post (e.g., 'JAN 27, 2026 • 5 MIN READ')\n  - title (heading-3: Plus Jakarta Sans 24/700/lh 1.4 — uses Plan 28-00 type-semantic-heading-3 surface)\n  - excerpt (prose-paragraph, secondary, lh-loose) — override with post.data.description\n  - tags-row (typed slot ['kJQmJ'] for Badge/Outline picker discoverability): default 2 Badge/Outline refs; consumers replace children with post.data.tags loop\n\nDistinct from Compound/Card (t40xct) — BlogCard is image-first, heading-3 title, excerpt + tags-only (no CTA Button); t40xct is image+title+body+CTA Button row (general-purpose). Both shipped per D-116 narrow-scoping (BlogCard for Blog Index + Blog Post related-posts consumers; t40xct for Phase 27 Contact sidebar + future Projects consumers).\n\nWidth 380 sized for 3-col blog-grid (1200 - 2*24 gap = 1152 / 3 = 384, rounded to 380). cornerRadius 10 + 1px neutral-200 border + clip:true so image clips at top corners.\n\nProvenance: Plan 28-01 calibration REVISE — Crito raster (image-import-14.jpg) shows prominent featured image + bigger title than t40xct's 18px. heading-3 (24px) first real consumer.\n\nSee 28-01-SUMMARY.md and PEN-INVENTORY § Variant Evidence (Phase 28) for full audit trail."
         }
       ]
     },
@@ -20747,6 +20880,479 @@
           "type": "ref",
           "ref": "Xs0Hs",
           "name": "Section / Footer (Contact instance)"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "EDAf1",
+      "x": 22407.267566049897,
+      "y": -4111.553859422791,
+      "name": "Blog",
+      "width": 1440,
+      "fill": "#ffffffff",
+      "layout": "vertical",
+      "alignItems": "center",
+      "children": [
+        {
+          "id": "HnExq",
+          "type": "ref",
+          "ref": "G0wNOc",
+          "name": "Section / Header (Blog instance)"
+        },
+        {
+          "type": "frame",
+          "id": "WuC14",
+          "name": "page-intro-banner",
+          "width": "fill_container",
+          "fill": "#ff928aff",
+          "layout": "vertical",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "uSpsf",
+              "name": "page-intro",
+              "width": 1200,
+              "layout": "vertical",
+              "gap": 16,
+              "padding": [
+                80,
+                0,
+                48,
+                0
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "uqJfj",
+                  "name": "heading",
+                  "fill": "#141f39ff",
+                  "content": "Blog",
+                  "lineHeight": 1.4,
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 48,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "K3m3y",
+                  "name": "body",
+                  "fill": "#52525bff",
+                  "textGrowth": "fixed-width",
+                  "width": 600,
+                  "content": "Practical insights on automation, AI, and custom software for small businesses. Learn how to work smarter, not harder.",
+                  "lineHeight": 1.625,
+                  "textAlign": "center",
+                  "fontFamily": "Inter",
+                  "fontSize": 16
+                }
+              ]
+            },
+            {
+              "type": "path",
+              "id": "oR8Ep",
+              "name": "wave",
+              "geometry": "M0 20q360-20 720 0t720 0l0 40-1440 0z",
+              "viewBox": [
+                0,
+                0,
+                1440,
+                60
+              ],
+              "fill": "#ffffffff",
+              "width": "fill_container",
+              "height": 60
+            }
+          ]
+        },
+        {
+          "id": "M1Wu9",
+          "type": "ref",
+          "ref": "O1IwyS",
+          "name": "Section / TagFilter (Blog instance)"
+        },
+        {
+          "type": "frame",
+          "id": "u3bT1S",
+          "name": "blog-grid",
+          "width": 1200,
+          "layout": "vertical",
+          "gap": 24,
+          "padding": [
+            40,
+            0,
+            80,
+            0
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "pe31G",
+              "name": "row-1",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "id": "pXhdd",
+                  "type": "ref",
+                  "ref": "ZSxZU",
+                  "name": "BlogCard-1",
+                  "width": "fill_container",
+                  "descendants": {
+                    "wtjQE": {
+                      "content": "JAN 27, 2026 • 5 MIN READ"
+                    },
+                    "Q0iK5": {
+                      "content": "Getting Started with Business Automation"
+                    },
+                    "ZAlf3": {
+                      "content": "Learn how automation can save your small business hours each week without complex tools or big budgets."
+                    },
+                    "n4lcP3": {
+                      "type": "frame",
+                      "id": "Ixgg7",
+                      "name": "tags-row",
+                      "slot": [
+                        "kJQmJ"
+                      ],
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "id": "BBUZw",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "tag-automation",
+                          "descendants": {
+                            "pENro": {
+                              "content": "automation"
+                            }
+                          }
+                        },
+                        {
+                          "id": "aEMJR",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "tag-small-business",
+                          "descendants": {
+                            "pENro": {
+                              "content": "small-business"
+                            }
+                          }
+                        },
+                        {
+                          "id": "QJpte",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "tag-productivity",
+                          "descendants": {
+                            "pENro": {
+                              "content": "productivity"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": "eu1zW",
+                  "type": "ref",
+                  "ref": "ZSxZU",
+                  "name": "BlogCard-2",
+                  "width": "fill_container",
+                  "descendants": {
+                    "wtjQE": {
+                      "content": "FEB 09, 2026 • 3 MIN READ"
+                    },
+                    "Q0iK5": {
+                      "content": "I'm Pivoting"
+                    },
+                    "ZAlf3": {
+                      "content": "The Start Of My Adventure."
+                    },
+                    "n4lcP3": {
+                      "type": "frame",
+                      "id": "Zepko",
+                      "name": "tags-row",
+                      "slot": [
+                        "kJQmJ"
+                      ],
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "id": "e6M9yn",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "tag-ai",
+                          "descendants": {
+                            "pENro": {
+                              "content": "ai"
+                            }
+                          }
+                        },
+                        {
+                          "id": "lK54y",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "tag-automation",
+                          "descendants": {
+                            "pENro": {
+                              "content": "automation"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": "lf31r",
+                  "type": "ref",
+                  "ref": "ZSxZU",
+                  "name": "BlogCard-3",
+                  "width": "fill_container",
+                  "descendants": {
+                    "wtjQE": {
+                      "content": "JAN 15, 2026 • 7 MIN READ"
+                    },
+                    "Q0iK5": {
+                      "content": "The Future of Small Business Tech"
+                    },
+                    "ZAlf3": {
+                      "content": "How AI and automation are reshaping what's possible for owner-operated businesses without enterprise budgets."
+                    },
+                    "n4lcP3": {
+                      "type": "frame",
+                      "id": "udFfL",
+                      "name": "tags-row",
+                      "slot": [
+                        "kJQmJ"
+                      ],
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "id": "sB9gJ",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "tag-ai",
+                          "descendants": {
+                            "pENro": {
+                              "content": "ai"
+                            }
+                          }
+                        },
+                        {
+                          "id": "Yf8Lv",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "tag-tutorial",
+                          "descendants": {
+                            "pENro": {
+                              "content": "tutorial"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "niQRj",
+              "name": "row-2",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "id": "J0OJyq",
+                  "type": "ref",
+                  "ref": "ZSxZU",
+                  "name": "BlogCard-4",
+                  "width": "fill_container",
+                  "descendants": {
+                    "wtjQE": {
+                      "content": "JAN 08, 2026 • 4 MIN READ"
+                    },
+                    "Q0iK5": {
+                      "content": "Why I Use Astro for Client Sites"
+                    },
+                    "ZAlf3": {
+                      "content": "Static-first, content-collection-driven, and zero JS by default — why Astro fits small-business sites best."
+                    },
+                    "n4lcP3": {
+                      "type": "frame",
+                      "id": "oA1FK",
+                      "name": "tags-row",
+                      "slot": [
+                        "kJQmJ"
+                      ],
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "id": "eM8j7",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "tag-design",
+                          "descendants": {
+                            "pENro": {
+                              "content": "design"
+                            }
+                          }
+                        },
+                        {
+                          "id": "U4oC0j",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "tag-tutorial",
+                          "descendants": {
+                            "pENro": {
+                              "content": "tutorial"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": "QPqZl",
+                  "type": "ref",
+                  "ref": "ZSxZU",
+                  "name": "BlogCard-5",
+                  "width": "fill_container",
+                  "descendants": {
+                    "wtjQE": {
+                      "content": "DEC 22, 2025 • 6 MIN READ"
+                    },
+                    "Q0iK5": {
+                      "content": "Building Trust with Small Business Clients"
+                    },
+                    "ZAlf3": {
+                      "content": "Onboarding playbooks, scope contracts, and the day-1 conversations that turn one project into a long relationship."
+                    },
+                    "n4lcP3": {
+                      "type": "frame",
+                      "id": "K1EKJi",
+                      "name": "tags-row",
+                      "slot": [
+                        "kJQmJ"
+                      ],
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "id": "E3iiO",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "tag-small-business",
+                          "descendants": {
+                            "pENro": {
+                              "content": "small-business"
+                            }
+                          }
+                        },
+                        {
+                          "id": "N9U69B",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "tag-productivity",
+                          "descendants": {
+                            "pENro": {
+                              "content": "productivity"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": "Tw07G",
+                  "type": "ref",
+                  "ref": "ZSxZU",
+                  "name": "BlogCard-6",
+                  "width": "fill_container",
+                  "descendants": {
+                    "wtjQE": {
+                      "content": "DEC 10, 2025 • 5 MIN READ"
+                    },
+                    "Q0iK5": {
+                      "content": "AI Tools That Actually Save Time"
+                    },
+                    "ZAlf3": {
+                      "content": "Cutting through the AI-tooling noise: the 4 categories that genuinely move the needle for a 1-3 person business."
+                    },
+                    "n4lcP3": {
+                      "type": "frame",
+                      "id": "rwk3p",
+                      "name": "tags-row",
+                      "slot": [
+                        "kJQmJ"
+                      ],
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "id": "xFpu8",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "tag-ai",
+                          "descendants": {
+                            "pENro": {
+                              "content": "ai"
+                            }
+                          }
+                        },
+                        {
+                          "id": "e6ZOZ",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "tag-productivity",
+                          "descendants": {
+                            "pENro": {
+                              "content": "productivity"
+                            }
+                          }
+                        },
+                        {
+                          "id": "AZJdt",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "tag-automation",
+                          "descendants": {
+                            "pENro": {
+                              "content": "automation"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "TqkTQ",
+          "type": "ref",
+          "ref": "Xs0Hs",
+          "name": "Section / Footer (Blog instance)"
         }
       ]
     }
