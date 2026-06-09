@@ -20150,6 +20150,168 @@
           "width": 1200,
           "height": 280,
           "content": "Section / RelatedPosts (reusable) — slot signature:\n\n• heading-slot — slot:[] (untyped), enabled:true default. Default content: 'Related posts' text using heading-2 semantic typography (Plus Jakarta Sans 32/700/lh 1.4 navy). Consumers override at instance time for context variants ('More from this author', 'You might also like').\n\n• cards-row — slot:['t40xct'] (TYPED suggestion per D-52 PREFERRED Pattern). horizontal frame, gap 24, alignItems start, width fill_container. Contains 3 Compound/Card refs (t40xct) per D-114 + D-118 (3-card density default). Each card uses fill_container width so the row distributes evenly. Consumers override card descendants (vGH3A title + SoXch metadata-caption + FGdti image-slot + oTSwn body-slot + eNqxd footer-actions-slot) at instance time.\n\nWidth 1200 fixed (matches Header/Footer/CTA/NavBack Phase 25-26 ship width). Padding [32,0] (section-y rhythm — semi-tight per Crito source density). Gap 32 (heading→cards-row). alignItems start at root so heading aligns left.\n\nNarrow-scoping per D-116: Blog Index + Blog Post Pages consume this component exclusively. Projects 'related projects' (Phase 29) gets its own component or generalizes this later — not pre-generalized here.\n\nSee 28-00-SUMMARY.md and PEN-INVENTORY § Variant Evidence (Phase 28)."
+        },
+        {
+          "type": "frame",
+          "id": "y4RORu",
+          "name": "Section / ResultsMetrics",
+          "reusable": true,
+          "width": 1200,
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            32,
+            0
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "T4gdxa",
+              "name": "heading-slot",
+              "slot": [],
+              "width": "fill_container",
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "pu7kn",
+                  "name": "heading",
+                  "fill": "#141f39ff",
+                  "content": "Results",
+                  "lineHeight": 1.4,
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 32,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "o8ykx",
+              "name": "metrics-row",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Cj3hI",
+                  "name": "metric-tile-1",
+                  "width": "fill_container",
+                  "fill": "#ffffffff",
+                  "cornerRadius": 10,
+                  "stroke": "#d4d4d8ff",
+                  "strokeWidth": 1,
+                  "strokeAlignment": "inner",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "fQ3lT",
+                      "name": "metric-value",
+                      "fill": "#141f39ff",
+                      "content": "85%",
+                      "lineHeight": 1.4,
+                      "fontFamily": "Plus Jakarta Sans",
+                      "fontSize": 48,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "le3Sb",
+                      "name": "metric-label",
+                      "fill": "#52525bff",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Time reduction in order processing",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "LBXI9",
+                  "name": "metric-tile-2",
+                  "width": "fill_container",
+                  "fill": "#ffffffff",
+                  "cornerRadius": 10,
+                  "stroke": "#d4d4d8ff",
+                  "strokeWidth": 1,
+                  "strokeAlignment": "inner",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "m9gef7",
+                      "name": "metric-value",
+                      "fill": "#141f39ff",
+                      "content": "20hrs",
+                      "lineHeight": 1.4,
+                      "fontFamily": "Plus Jakarta Sans",
+                      "fontSize": 48,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "oFgt8",
+                      "name": "metric-label",
+                      "fill": "#52525bff",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Saved per week",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "xHArl",
+                  "name": "metric-tile-3",
+                  "width": "fill_container",
+                  "fill": "#ffffffff",
+                  "cornerRadius": 10,
+                  "stroke": "#d4d4d8ff",
+                  "strokeWidth": 1,
+                  "strokeAlignment": "inner",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "MJNW6",
+                      "name": "metric-value",
+                      "fill": "#141f39ff",
+                      "content": "Zero",
+                      "lineHeight": 1.4,
+                      "fontFamily": "Plus Jakarta Sans",
+                      "fontSize": 48,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "zd4Bh",
+                      "name": "metric-label",
+                      "fill": "#52525bff",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Missed orders since launch",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -22630,6 +22792,16 @@
       "width": 1200,
       "height": 360,
       "content": "Compound / ProjectCard (reusable, id DnsRs) — slot signature per Plan 29-00 (D-131 + D-132):\n\n• image-slot (untyped slot:[], enabled:true) — 240h fill_container, default placeholder fill #f2f2f7ff (color-semantic-bg-surface-elevated) with 'Project image' text label. Consumers populate via fill: {type:'image', url:'<project.thumbnail>'} at instance time, OR replace whole slot at code milestone.\n\n• content-area (frame, padding 24, vertical gap 12) — wraps category-badge-slot + title + body.\n  - category-badge-slot (TYPED slot:['j0FxQZ'] per D-132 + D-52 PREFERRED — Badge/Default solid default lean per CONTEXT Claude's Discretion; plan-execution at Plan 29-01 calibration may swap to ['kJQmJ'] Badge/Outline if image-import-12.jpg shows outline treatment). Default Badge ref child; consumer overrides label at instance time.\n  - title (heading-3: Plus Jakarta Sans 24/700/lh 1.4 navy — heading-3 SECOND-CONSUMER after BlogCard; plan-execution may downsize to heading-4 20px at Plan 29-01 calibration if visual reads heavy).\n  - body (prose-paragraph: Inter 16/400/lh 1.625 secondary). Consumers override with first 160 chars of project.problem from projects.json.\n\nNarrow-scope rationale per D-131: sibling of t40xct + ZSxZU inside t67DU6. t40xct continues serving Phase 27 Contact sidebar + Phase 28 RelatedPosts + future Phase 31 Homepage. NOT generalized for any other consumer — Phase 31 may build its own card if needed.\n\nProvenance: image-import-12.jpg lower 2x2 Project grid (Phase 25 D-49 raster-probe identification) + v1.3 src/components/ProjectCard.astro (lines 19-52 slot derivation, lines 14-16 160-char truncate convention).\n\nCrito-visual register per D-58 + D-132: borderless white card per Plan 28-01 BlogCard precedent (stroke reserved at strokeWidth 0 for forward-state variants). NO v1.3 yellow neobrutalist chrome (4px border + 6px hard shadow + uppercase Bricolage Grotesque).\n\nHover/focus states deferred to code milestone per Pitfall 7 (clickable-card pattern is interactive state; static design tool ships READING state per D-92/D-59 carry-forward).\n\nWidth 380 sized for 3-col project-grid (1200 - 2*24 gap = 1152 / 3 = 384, rounded to 380; matches Plan 28-01 BlogCard width)."
+    },
+    {
+      "type": "note",
+      "id": "chbda",
+      "x": -15642.732433950103,
+      "y": 6738.446140577209,
+      "name": "Section / ResultsMetrics — slot signature",
+      "width": 1200,
+      "height": 320,
+      "content": "Section / ResultsMetrics (reusable, id y4RORu) — slot signature per Plan 29-00 (D-135):\n\n• heading-slot (untyped slot:[], enabled:true) — default 'Results' text in heading-2 typography (Plus Jakarta Sans 32/700/lh 1.4 navy). REUSE heading-2 per D-135 default + Phase 26 Plan 26-00 + OPEN-26-01 carry-forward. Consumers override heading content via descendants for context variants (e.g. 'Project results', 'Outcomes').\n\n• metrics-row — 3 FIXED metric-tile children (NOT a slot — narrow-scoping per D-135 + D-129 Joel-content essential carve-out). horizontal layout, gap 24, alignItems start, fill_container width.\n\nEach metric-tile (3 fixed): vertical layout, gap 8 (metric-value → metric-label), padding 24 (Pencil § 12 'Inside cards'), fill_container width, white fill, 1px #d4d4d8ff border (color-semantic-border-default), 10 cornerRadius (radius-semantic-card), alignItems start.\n  - metric-value (text): default heading-1 reuse (Plus Jakarta Sans 48/700/lh 1.4 navy) per D-135 Option A (zero new tokens). Option B path (type-semantic-metric-large 60px composite) reserved if Plan 29-02 calibration needs distinction.\n  - metric-label (text): body-sm reuse (Inter 14/400/lh 1.5 #52525bff secondary).\n\nDefault content from bakery-order-system project.results verbatim (CONTEXT Claude's Discretion):\n  - Tile 1: '85%' / 'Time reduction in order processing'\n  - Tile 2: '20hrs' / 'Saved per week'\n  - Tile 3: 'Zero' / 'Missed orders since launch'\n\nConsumers (Plan 29-02 Project detail) override 3 metric-tile descendants per project.results array at instance time.\n\nChrome treatment: plain white + border + 10 radius (CONTEXT Claude's Discretion default). Coral pivot path documented: if Plan 29-02 calibration shows visual needs distinction, fill: '#ff928aff' decorative-coral (matches Plan 28-01 BlogCard banner precedent) or stroke-only neutral chrome alternatives.\n\nWidth 1200 fixed (matches Phase 25-28 ship width). Padding [32,0] vertical-only rhythm.\n\nNarrow-scoping per D-135 + D-129: Joel-content essential — ships regardless of cYlRH evidence. NOT generalized into Section/Metrics for any metric domain (KPI / dashboard / etc.); Phase 29-02 Project detail is the ONLY consumer in v2.0.\n\nToken outcome: Option A (heading-1 reuse) — zero new tokens. OPEN-23-10 partial-resolution unchanged."
     }
   ],
   "variables": {
