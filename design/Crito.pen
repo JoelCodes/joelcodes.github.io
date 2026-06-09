@@ -22055,6 +22055,477 @@
           "name": "Section / Footer (Blog Post instance)"
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "FUctJ",
+      "x": 26727.267566049897,
+      "y": -4111.553859422791,
+      "name": "Tag",
+      "width": 1440,
+      "height": 1900,
+      "fill": "#ffffffff",
+      "layout": "vertical",
+      "alignItems": "center",
+      "children": [
+        {
+          "id": "sF4uF",
+          "type": "ref",
+          "ref": "G0wNOc",
+          "name": "Section / Header (Tag instance)"
+        },
+        {
+          "type": "frame",
+          "id": "pFNbo",
+          "name": "page-intro",
+          "width": 1200,
+          "layout": "vertical",
+          "gap": 12,
+          "padding": [
+            80,
+            0,
+            48,
+            0
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "rdjAb",
+              "name": "heading",
+              "fill": "#141f39ff",
+              "content": "Posts tagged \"automation\"",
+              "lineHeight": 1.4,
+              "textAlign": "center",
+              "fontFamily": "Plus Jakarta Sans",
+              "fontSize": 48,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "w53TbD",
+              "name": "subhead",
+              "fill": "#52525bff",
+              "content": "3 posts about automation",
+              "lineHeight": 1.625,
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 16
+            }
+          ]
+        },
+        {
+          "id": "uSqet",
+          "type": "ref",
+          "ref": "O1IwyS",
+          "name": "Section / TagFilter (Tag instance)",
+          "descendants": {
+            "RxShj": {
+              "enabled": false
+            },
+            "z1aro": {
+              "enabled": true
+            },
+            "al86r": {
+              "enabled": true
+            },
+            "u3X64E": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "type": "frame",
+          "id": "acS4p",
+          "name": "tag-grid",
+          "width": 1200,
+          "layout": "vertical",
+          "gap": 24,
+          "padding": [
+            40,
+            0,
+            80,
+            0
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "Q3N6t",
+              "name": "row-1",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "id": "G2d7y",
+                  "type": "ref",
+                  "ref": "ZSxZU",
+                  "name": "BlogCard-1",
+                  "width": "fill_container",
+                  "descendants": {
+                    "wtjQE": {
+                      "content": "JAN 27, 2026 • 5 MIN READ"
+                    },
+                    "Q0iK5": {
+                      "content": "Getting Started with Business Automation"
+                    },
+                    "ZAlf3": {
+                      "content": "Learn how automation can save your small business hours each week without complex tools or big budgets."
+                    },
+                    "n4lcP3": {
+                      "type": "frame",
+                      "id": "Q1RxOz",
+                      "name": "tags-row",
+                      "slot": [
+                        "kJQmJ"
+                      ],
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "id": "FjUvE",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "tag-automation",
+                          "descendants": {
+                            "pENro": {
+                              "content": "automation"
+                            }
+                          }
+                        },
+                        {
+                          "id": "gSoNu",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "tag-small-business",
+                          "descendants": {
+                            "pENro": {
+                              "content": "small-business"
+                            }
+                          }
+                        },
+                        {
+                          "id": "l4VOT",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "tag-productivity",
+                          "descendants": {
+                            "pENro": {
+                              "content": "productivity"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": "XnKxn",
+                  "type": "ref",
+                  "ref": "ZSxZU",
+                  "name": "BlogCard-2",
+                  "width": "fill_container",
+                  "descendants": {
+                    "wtjQE": {
+                      "content": "FEB 09, 2026 • 3 MIN READ"
+                    },
+                    "Q0iK5": {
+                      "content": "I'm Pivoting"
+                    },
+                    "ZAlf3": {
+                      "content": "The Start Of My Adventure."
+                    },
+                    "n4lcP3": {
+                      "type": "frame",
+                      "id": "sY7m7",
+                      "name": "tags-row",
+                      "slot": [
+                        "kJQmJ"
+                      ],
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "id": "Q9OOt6",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "tag-ai",
+                          "descendants": {
+                            "pENro": {
+                              "content": "ai"
+                            }
+                          }
+                        },
+                        {
+                          "id": "HG89O",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "tag-automation",
+                          "descendants": {
+                            "pENro": {
+                              "content": "automation"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": "YOTPL",
+                  "type": "ref",
+                  "ref": "ZSxZU",
+                  "name": "BlogCard-3",
+                  "width": "fill_container",
+                  "descendants": {
+                    "wtjQE": {
+                      "content": "JAN 15, 2026 • 6 MIN READ"
+                    },
+                    "Q0iK5": {
+                      "content": "Automating Customer Onboarding"
+                    },
+                    "ZAlf3": {
+                      "content": "From welcome email to first usage tracking — turn manual handoffs into a repeatable workflow."
+                    },
+                    "n4lcP3": {
+                      "type": "frame",
+                      "id": "GWodo",
+                      "name": "tags-row",
+                      "slot": [
+                        "kJQmJ"
+                      ],
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "id": "kSXqO",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "tag-automation",
+                          "descendants": {
+                            "pENro": {
+                              "content": "automation"
+                            }
+                          }
+                        },
+                        {
+                          "id": "RM3aL",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "tag-tutorial",
+                          "descendants": {
+                            "pENro": {
+                              "content": "tutorial"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "edkwh",
+              "name": "row-2",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "id": "u9pSxc",
+                  "type": "ref",
+                  "ref": "ZSxZU",
+                  "name": "BlogCard-4",
+                  "width": "fill_container",
+                  "descendants": {
+                    "wtjQE": {
+                      "content": "DEC 20, 2025 • 5 MIN READ"
+                    },
+                    "Q0iK5": {
+                      "content": "From Spreadsheets to Automated Workflows"
+                    },
+                    "ZAlf3": {
+                      "content": "Spreadsheets are great until they aren't. The 3 signals it's time to graduate and what to graduate to."
+                    },
+                    "n4lcP3": {
+                      "type": "frame",
+                      "id": "xvpdk",
+                      "name": "tags-row",
+                      "slot": [
+                        "kJQmJ"
+                      ],
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "id": "D8A2Mk",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "tag-automation",
+                          "descendants": {
+                            "pENro": {
+                              "content": "automation"
+                            }
+                          }
+                        },
+                        {
+                          "id": "H33ka",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "tag-productivity",
+                          "descendants": {
+                            "pENro": {
+                              "content": "productivity"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": "zPOty",
+                  "type": "ref",
+                  "ref": "ZSxZU",
+                  "name": "BlogCard-5",
+                  "width": "fill_container",
+                  "descendants": {
+                    "wtjQE": {
+                      "content": "DEC 05, 2025 • 7 MIN READ"
+                    },
+                    "Q0iK5": {
+                      "content": "AI + Automation: A Practical Guide"
+                    },
+                    "ZAlf3": {
+                      "content": "How to combine LLM-based AI with traditional automation flows for compounding leverage in a small team."
+                    },
+                    "n4lcP3": {
+                      "type": "frame",
+                      "id": "ncNO8",
+                      "name": "tags-row",
+                      "slot": [
+                        "kJQmJ"
+                      ],
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "id": "F8l73",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "tag-ai",
+                          "descendants": {
+                            "pENro": {
+                              "content": "ai"
+                            }
+                          }
+                        },
+                        {
+                          "id": "WXfxF",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "tag-automation",
+                          "descendants": {
+                            "pENro": {
+                              "content": "automation"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": "W3eFC",
+                  "type": "ref",
+                  "ref": "ZSxZU",
+                  "name": "BlogCard-6",
+                  "width": "fill_container",
+                  "descendants": {
+                    "wtjQE": {
+                      "content": "NOV 28, 2025 • 8 MIN READ"
+                    },
+                    "Q0iK5": {
+                      "content": "Small Business Automation Stack 2026"
+                    },
+                    "ZAlf3": {
+                      "content": "The 8 tools I install on every small business engagement — from CRM to billing to ops glue."
+                    },
+                    "n4lcP3": {
+                      "type": "frame",
+                      "id": "uMy3F",
+                      "name": "tags-row",
+                      "slot": [
+                        "kJQmJ"
+                      ],
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "id": "X3Z52",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "tag-automation",
+                          "descendants": {
+                            "pENro": {
+                              "content": "automation"
+                            }
+                          }
+                        },
+                        {
+                          "id": "B10cgH",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "tag-small-business",
+                          "descendants": {
+                            "pENro": {
+                              "content": "small-business"
+                            }
+                          }
+                        },
+                        {
+                          "id": "cG5lA",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "tag-tutorial",
+                          "descendants": {
+                            "pENro": {
+                              "content": "tutorial"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "b6Qh4A",
+          "type": "ref",
+          "ref": "Xs0Hs",
+          "name": "Section / Footer (Tag instance)"
+        }
+      ]
+    },
+    {
+      "type": "note",
+      "id": "RT1Zz",
+      "x": 26967.267566049897,
+      "y": -4111.553859422791,
+      "name": "Tag page wiring (dynamic generation)",
+      "width": 1200,
+      "height": 400,
+      "content": "Tag page (FUctJ) — joel-only-no-crito-ref reconstruction per CALIBRATION-PROTOCOL § 4 (no source raster to compare against; token-usage check vs RpGbe _Tokens & Foundations reference frame).\n\n1. **page-intro (pFNbo) STUB content per D-83:** Code milestone generates page-intro from `/blog/tags/[tag].astro` template: heading content via `Posts tagged \"${tag}\"` template literal; subhead via `${posts.length} posts about ${tag}` (pluralized). v2.0 ships representative 'automation' tag with 3-posts count as STUB; runtime renders per-tag dynamic values. v1.3 src/pages/blog/tags/[tag].astro lines 47-62 reference structure.\n\n2. **TagFilter active-state flip (uSqet — D-117 paired-ref validation):** Descendants override flips Plan 28-00 default-active 'All Posts' (pill-1) to 'automation' (pill-2). Mechanic: pill-1-active (RxShj) enabled:false + pill-1-inactive (z1aro) enabled:true + pill-2-active (al86r) enabled:true + pill-2-inactive (u3X64E) enabled:false. Plan 28-01 Blog index TagFilter (M1Wu9) instance is UNCHANGED — per-instance descendants override mechanism validated.\n\n3. **'Back to all posts' link affordance:** Deferred to runtime per CONTEXT.md Deferred Ideas (similar to D-99 'Return to homepage' Phase 27 pattern).\n\n4. **6-BlogCard filtered grid:** Code milestone filters /blog post collection by current tag URL param — `posts.filter(p => p.data.tags.includes(tag))`. v2.0 ships 6 representative BlogCard refs (2 real MDX + 4 representative agency-template), all including 'automation' tag in footer-actions-slot Badge/Outline overrides. Runtime renders actual filtered subset (length may differ from 6).\n\n5. **PAGE-11 INERT** per § 4.3: NO Crito source raster to hide for Tag page (Crito's blog architecture has Blog index + Blog detail only — no Tag page). Plan 28-03 close performs no PAGE-11 mutation. v2.0's 4th INERT-branch consumer (Phase 26 FAQ + 404 + Phase 27 Thank-you + Phase 28 Tag)."
     }
   ],
   "variables": {
