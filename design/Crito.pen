@@ -22891,7 +22891,254 @@
       "height": 2200,
       "fill": "#ffffffff",
       "layout": "vertical",
-      "alignItems": "center"
+      "alignItems": "center",
+      "children": [
+        {
+          "id": "cF7Lg",
+          "type": "ref",
+          "ref": "G0wNOc",
+          "name": "Section / Header (Projects instance)"
+        },
+        {
+          "type": "frame",
+          "id": "TjK3X",
+          "name": "page-intro",
+          "width": 1200,
+          "layout": "vertical",
+          "gap": 12,
+          "padding": [
+            80,
+            0,
+            48,
+            0
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "c2G4Fg",
+              "name": "heading",
+              "fill": "#141f39ff",
+              "content": "Projects",
+              "lineHeight": 1.4,
+              "textAlign": "center",
+              "fontFamily": "Plus Jakarta Sans",
+              "fontSize": 48,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "h6iw9",
+              "name": "body",
+              "fill": "#52525bff",
+              "textGrowth": "fixed-width",
+              "width": 600,
+              "content": "Real projects, real results. See how I've helped small businesses automate workflows, build custom tools, and leverage AI to work smarter.",
+              "lineHeight": 1.625,
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 16
+            }
+          ]
+        },
+        {
+          "id": "vWXhb",
+          "type": "ref",
+          "ref": "O1IwyS",
+          "name": "Section / TagFilter (Projects instance)",
+          "descendants": {
+            "RxShj/ATJK9": {
+              "content": "All Projects"
+            },
+            "z1aro/UbwMv": {
+              "content": "All Projects"
+            },
+            "al86r/ATJK9": {
+              "content": "Web Apps"
+            },
+            "u3X64E/UbwMv": {
+              "content": "Web Apps"
+            },
+            "C93nA/ATJK9": {
+              "content": "Automation"
+            },
+            "j4KiI/UbwMv": {
+              "content": "Automation"
+            },
+            "m35My/ATJK9": {
+              "content": "AI Development"
+            },
+            "EXgTG/UbwMv": {
+              "content": "AI Development"
+            },
+            "CCXCE": {
+              "enabled": false
+            },
+            "hMIRk": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "type": "frame",
+          "id": "VlRQ0",
+          "name": "projects-grid",
+          "width": 1200,
+          "layout": "vertical",
+          "gap": 24,
+          "padding": [
+            40,
+            0,
+            80,
+            0
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "upm97",
+              "name": "row-1",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "id": "n5ejTn",
+                  "type": "ref",
+                  "ref": "DnsRs",
+                  "name": "ProjectCard-1 (bakery)",
+                  "width": "fill_container",
+                  "descendants": {
+                    "QdrAM/xSve5": {
+                      "content": "Web Apps"
+                    },
+                    "mY1QY": {
+                      "content": "Bakery Order Automation"
+                    },
+                    "VRqcN": {
+                      "content": "Sarah's bakery was receiving orders through 5 different channels: phone, SMS, Facebook, Instagram, and email. She spent 4-5 hours daily just trans..."
+                    }
+                  }
+                },
+                {
+                  "id": "DRvTq",
+                  "type": "ref",
+                  "ref": "DnsRs",
+                  "name": "ProjectCard-2 (inventory-sync)",
+                  "width": "fill_container",
+                  "descendants": {
+                    "QdrAM/xSve5": {
+                      "content": "Automation"
+                    },
+                    "mY1QY": {
+                      "content": "Multi-Channel Inventory Sync"
+                    },
+                    "VRqcN": {
+                      "content": "A growing e-commerce retailer was selling on Amazon, Shopify, and eBay simultaneously. Inventory counts were updated manually across platforms, ..."
+                    }
+                  }
+                },
+                {
+                  "id": "WAkzM",
+                  "type": "ref",
+                  "ref": "DnsRs",
+                  "name": "ProjectCard-3 (CRM)",
+                  "width": "fill_container",
+                  "descendants": {
+                    "QdrAM/xSve5": {
+                      "content": "Web Apps"
+                    },
+                    "mY1QY": {
+                      "content": "Custom CRM for Local Real Estate"
+                    },
+                    "VRqcN": {
+                      "content": "Independent realtors needed a CRM that didn't require a $5k/month subscription. Built a streamlined client tracking system with lead pipeline auto..."
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "aEjJD",
+              "name": "row-2",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "id": "GbdZa",
+                  "type": "ref",
+                  "ref": "DnsRs",
+                  "name": "ProjectCard-4 (Recipe AI)",
+                  "width": "fill_container",
+                  "descendants": {
+                    "QdrAM/xSve5": {
+                      "content": "AI Development"
+                    },
+                    "mY1QY": {
+                      "content": "AI-Powered Recipe Generator"
+                    },
+                    "VRqcN": {
+                      "content": "A meal-kit startup wanted custom recipes generated from customer pantry contents. Built an LLM-driven recipe engine that adapts to dietary restric..."
+                    }
+                  }
+                },
+                {
+                  "id": "z5x28",
+                  "type": "ref",
+                  "ref": "DnsRs",
+                  "name": "ProjectCard-5 (Restaurant Inventory)",
+                  "width": "fill_container",
+                  "descendants": {
+                    "QdrAM/xSve5": {
+                      "content": "Web Apps"
+                    },
+                    "mY1QY": {
+                      "content": "Restaurant Inventory Dashboard"
+                    },
+                    "VRqcN": {
+                      "content": "A local restaurant chain was tracking inventory across 3 locations via spreadsheets. Built a real-time dashboard with par-level alerts and supplie..."
+                    }
+                  }
+                },
+                {
+                  "id": "Cc0mF",
+                  "type": "ref",
+                  "ref": "DnsRs",
+                  "name": "ProjectCard-6 (Slack Bot)",
+                  "width": "fill_container",
+                  "descendants": {
+                    "QdrAM/xSve5": {
+                      "content": "Automation"
+                    },
+                    "mY1QY": {
+                      "content": "Slack Bot for Customer Support"
+                    },
+                    "VRqcN": {
+                      "content": "A B2B SaaS team was buried in repetitive customer questions. Built a Slack bot that triages tickets, escalates to humans, and surfaces FAQ answer..."
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "L5EmG",
+          "type": "ref",
+          "ref": "Xs0Hs",
+          "name": "Section / Footer (Projects instance)"
+        }
+      ]
+    },
+    {
+      "type": "note",
+      "id": "bRkNL",
+      "x": 28247,
+      "y": -1900,
+      "name": "Projects index composition note",
+      "width": 1200,
+      "height": 320,
+      "content": "Projects index page frame (Plan 29-01 per D-127 crito-source-flat-raster branch).\n\nComposition: Section/Header ref (G0wNOc, no override per D-77) + page-intro (v1.3 verbatim from src/pages/projects/index.astro lines 19-23) + Section/TagFilter ref (O1IwyS) with descendants override per D-137 (Position 5 disabled both shadows since v1.3 has only 4 categories) + 6-Compound/ProjectCard grid (3-col x 2-row; 2 real projects.json entries + 4 representative agency-template per Plan 28-01 BlogCard precedent) + Section/Footer ref (Xs0Hs, no override per D-77).\n\nTagFilter validates D-115 broad-scoping with THIRD consumer (Blog + Tag + Projects). Plan 28-01 Blog index TagFilter instance (M1Wu9) verified UNCHANGED post-mutation — per-instance descendants behavior validated.\n\nPAGE-11 ACTIVE on Y2isa fires AT TASK 5 post-APPROVE per CALIBRATION-PROTOCOL § 3.3 + Pitfall 4. Image references (project thumbnails) ship as placeholder content; code milestone wires real images.\n\nCalibration gate at Task 4 uses DUAL pairing per D-130: Y2isa raster overall page-layout + image-import-12.jpg ProjectCard fidelity visual proxy per OPEN-25-07 line 303. (Per Task 0 probe: Y2isa.fill.image == images/image-import-12.jpg — pairing collapses to single image.)"
     }
   ],
   "variables": {
