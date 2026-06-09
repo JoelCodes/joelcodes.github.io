@@ -46,7 +46,7 @@ This document scopes what v2.0 will deliver. Each requirement is testable, atomi
 ### Page Reconstruction
 
 - [ ] **PAGE-01**: Homepage frame in `.pen` reconstructed — every flat raster section replaced with a layout-driven composition of section components instancing primitives and compounds
-- [ ] **PAGE-02**: Projects index + project detail frames reconstructed (Crito's "Projects" / "Project" frames mapped to Joel's `/projects` route family)
+- [x] **PAGE-02**: Projects index + project detail frames reconstructed (Crito's "Projects" / "Project" frames mapped to Joel's `/projects` route family)
 - [ ] **PAGE-03**: Blog index + blog post + tag-page frames reconstructed (mapped to Joel's `/blog` route family) — section components for post header, prose body, related-posts strip, tag-filter strip
 - [ ] **PAGE-04**: FAQ frame reconstructed (FAQ accordion section, CTA section)
 - [x] **PAGE-05**: Contact frame reconstructed including the 8-field lead-qualification form using `Primitive / Input` instances
@@ -126,7 +126,7 @@ Mapped by the roadmapper after phase structure approval. Every v2.0 requirement 
 | COMP-08 | Phase 24 | Pending |
 | COMP-09 | Phase 24 | Pending |
 | PAGE-01 | Phase 31 | Pending |
-| PAGE-02 | Phase 29 | Pending |
+| PAGE-02 | Phase 29 | Complete |
 | PAGE-03 | Phase 28 | Pending |
 | PAGE-04 | Phase 26 | Pending |
 | PAGE-05 | Phase 27 | Complete |

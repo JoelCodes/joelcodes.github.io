@@ -328,7 +328,7 @@ Plans:
 Plans:
 
 - [x] 29-00-PLAN.md — Foundation: ship Compound/ProjectCard (new sibling of t40xct + ZSxZU in t67DU6) + Section/ResultsMetrics + Section/RelatedProjects (new siblings in g9oRa5); possible Badge variant + possible new type-semantic-metric-large token per D-132/D-135 plan-execution; agent-deterministic close-without-gate per D-139
-- [ ] 29-01-PLAN.md — Projects index page frame (crito-source-flat-raster branch; Y2isa visual proxy): Section/Header + page-intro (v1.3 verbatim) + Section/TagFilter instance with descendants override per D-137 (third broad-scoping consumer) + 6-Compound/ProjectCard grid (3-col × 2-row) + Section/Footer; calibration gate with DUAL pairing per D-130 (Y2isa + image-import-12.jpg); PAGE-11 ACTIVE on Y2isa post-APPROVE (FOURTH production use)
+- [x] 29-01-PLAN.md — Projects index page frame (crito-source-flat-raster branch; Y2isa visual proxy): Section/Header + page-intro (v1.3 verbatim) + Section/TagFilter instance with descendants override per D-137 (third broad-scoping consumer) + 6-Compound/ProjectCard grid (3-col × 2-row) + Section/Footer; calibration gate with DUAL pairing per D-130 (Y2isa + image-import-12.jpg); PAGE-11 ACTIVE on Y2isa post-APPROVE (FOURTH production use)
 - [ ] 29-02-PLAN.md — Project detail page frame (crito-source-flat-raster branch; cYlRH visual proxy): Section/Header + back-nav inline composition per D-133 (Icon/16 + arrow-left Pattern A) + title-header + body-prose (Challenge + Solution verbatim from bakery-order-system) + Section/ResultsMetrics instance + Section/RelatedProjects instance + Section/Footer; OPEN-29-NN deferrals per D-136 (Screenshots + Testimonial + Built With); calibration gate single pairing; PAGE-11 ACTIVE on cYlRH post-APPROVE (FIFTH production use); CLOSES PHASE 29
 
 ---
@@ -432,7 +432,7 @@ Phases execute in numeric order: 1 → 2 → ... → 22 → 23 → 24 → 25 →
 | 26. FAQ + 404 Reconstruction | v2.0 | 4/4 | Complete   | 2026-06-07 |
 | 27. Thank-you + Contact Reconstruction | v2.0 | 3/3 | Complete    | 2026-06-08 |
 | 28. Blog Reconstruction | v2.0 | 0/TBD | Not started | - |
-| 29. Projects Reconstruction | v2.0 | 1/3 | In Progress|  |
+| 29. Projects Reconstruction | v2.0 | 2/3 | In Progress|  |
 | 30. Design System Reference Reconstruction | v2.0 | 0/TBD | Not started | - |
 | 31. Homepage Reconstruction | v2.0 | 0/TBD | Not started | - |
 | 32. Fidelity Sweep + Handoff | v2.0 | 0/TBD | Not started | - |

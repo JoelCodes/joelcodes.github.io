@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Prep Crito Design File
 status: executing
-stopped_at: Phase 29 context gathered
-last_updated: "2026-06-09T18:56:32.449Z"
-last_activity: 2026-06-09 -- Phase 29 execution started
+stopped_at: Completed 29-01-PLAN.md (Projects index reconstruction)
+last_updated: "2026-06-09T20:11:03.829Z"
+last_activity: 2026-06-09
 progress:
   total_phases: 10
   completed_phases: 6
   total_plans: 27
-  completed_plans: 24
+  completed_plans: 26
   percent: 60
 ---
 
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-05-31)
 ## Current Position
 
 Phase: 29 (projects-reconstruction-index-project-detail) — EXECUTING
-Plan: 1 of 3
-Status: Executing Phase 29
-Last activity: 2026-06-09 -- Phase 29 execution started
+Plan: 2 of 3
+Status: Ready to execute
+Last activity: 2026-06-09
 
-Progress: [████░░░░░░] 40% (v2.0 — 4/10 phases complete)
+Progress: [██████████] 96%
 
 ## Milestone History
 
@@ -63,6 +63,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 | v1.3 Design System & Nav | 17-22 | 20 | 2 days |
 
 *Updated after each plan completion*
+| Phase 29 P01 | 55min | 7 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -102,7 +103,7 @@ None currently. Phase 23 first plan (the live Pencil MCP audit) is the gating de
 
 ## Session Continuity
 
-Last session: 2026-06-09T06:59:00.760Z
-Stopped at: Phase 29 context gathered
-Resume file: .planning/phases/29-projects-reconstruction-index-project-detail/29-CONTEXT.md
+Last session: 2026-06-09T20:10:57.292Z
+Stopped at: Completed 29-01-PLAN.md (Projects index reconstruction)
+Resume file: None
 Next action: `/gsd:plan-phase 27` to plan Phase 27 (Thank-you + Contact Reconstruction)
