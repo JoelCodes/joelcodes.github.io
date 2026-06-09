@@ -15112,6 +15112,7 @@
       "x": 11987.267566049897,
       "y": -4111.553859422791,
       "name": "08_Blog Details",
+      "enabled": false,
       "clip": true,
       "width": 1920,
       "height": 4486,
@@ -21353,6 +21354,705 @@
           "type": "ref",
           "ref": "Xs0Hs",
           "name": "Section / Footer (Blog instance)"
+        }
+      ]
+    },
+    {
+      "type": "note",
+      "id": "fl8b4",
+      "x": 25447.267566049897,
+      "y": -4111.553859422791,
+      "name": "Blog Post prose-token wiring",
+      "width": 1200,
+      "height": 380,
+      "content": "Blog Post page (ysKxH) — prose-token + structural wiring documentation:\n\n1. **Italic+link paragraph (line 59 MDX):** Static design ships as single italic text node (Option B per RESEARCH Focus 5 fallback). 'Get in touch' link span (target /contact) styling deferred to code milestone — MDX renderer wires `<a href='/contact' class='prose-link'>Get in touch</a>` with `type-semantic-prose-link-*` token (text-accent color + hover-underline descriptor). Static design honors D-92 reading-state pragma; link styling honored in runtime CSS export.\n\n2. **Inline-code synthetic consumer:** Plan 28-02 adds a synthetic inline-code paragraph at end of post body ('Most automation tools accept code patterns like `npm run build` to trigger workflows.') for `type-semantic-prose-inline-code-*` token validation since the D-123 sample MDX (getting-started-with-automation.mdx) is silent on inline-code spans. Flagged as OPEN-28-NN. Future MDX with actual inline-code lifts this synthesis. Inline-code chrome: small frame with `bg-surface-elevated` fill + 1px `border-default` stroke + cornerRadius 4 + padding [2,6] wrapping mono text.\n\n3. **Mono font Pencil rendering:** type-primitive-family-mono token is the CSS stack `'SF Mono', Menlo, Monaco, Consolas, monospace` per D-108 (for CSS export). Pencil rendering uses 'JetBrains Mono' single Google Font as the design-time visual proxy since Pencil 2.13 fontFamily expects a single font name not a comma-separated stack. Code milestone uses the primitive's CSS stack value at runtime. Recorded as OPEN-28-NN (Pencil-vs-CSS mono-stack divergence).\n\n4. **Featured-image placeholder:** Code milestone wires `featured-image` fill (PI1bl) to `post.data.featuredImage` (MDX frontmatter image path); v2.0 ships default placeholder per D-113.\n\n5. **Post-detail tag row:** Code milestone loops `post.data.tags` array to render Badge/Outline (kJQmJ) refs in tag-row (m4N8T); v2.0 ships 3 representative tags from getting-started-with-automation.mdx ('automation', 'small-business', 'productivity').\n\n6. **TOC (3-column layout per v1.3 [slug].astro):** Deferred to code milestone per CONTEXT.md Deferred Ideas. v2.0 ships single-column composition.\n\n7. **Metadata row format:** Code milestone formats `post.data.pubDate` to 'MMM DD, YYYY' display; read-time calculated from MDX body word count via reading-time-estimator package (v1.3 carryforward)."
+    },
+    {
+      "type": "frame",
+      "id": "aQ8FL",
+      "x": 23927.267566049897,
+      "y": -4111.553859422791,
+      "name": "Blog Post",
+      "width": 1440,
+      "height": 3400,
+      "fill": "#ffffffff",
+      "layout": "vertical",
+      "alignItems": "center",
+      "children": [
+        {
+          "id": "bjRu4",
+          "type": "ref",
+          "ref": "G0wNOc",
+          "name": "Section / Header (Blog Post instance)"
+        },
+        {
+          "type": "frame",
+          "id": "TTWAs",
+          "name": "two-column-wrapper",
+          "width": 1200,
+          "gap": 64,
+          "padding": [
+            80,
+            0,
+            64,
+            0
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "r8zNr",
+              "name": "main-column",
+              "width": 760,
+              "layout": "vertical",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "m33lb",
+                  "name": "title",
+                  "fill": "#141f39ff",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Getting Started with Business Automation",
+                  "lineHeight": 1.4,
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 48,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "gvFiw",
+                  "name": "featured-image",
+                  "width": "fill_container",
+                  "height": 340,
+                  "fill": "#f2f2f7ff",
+                  "cornerRadius": 10,
+                  "layout": "vertical",
+                  "justifyContent": "center",
+                  "alignItems": "center"
+                },
+                {
+                  "type": "text",
+                  "id": "J0wLG",
+                  "name": "intro-paragraph",
+                  "fill": "#141f39ff",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Most small business owners think automation requires expensive software or technical expertise. The truth? You can start automating today with tools you already have.",
+                  "lineHeight": 1.625,
+                  "fontFamily": "Inter",
+                  "fontSize": 16
+                },
+                {
+                  "type": "text",
+                  "id": "acNKn",
+                  "name": "h2-why-automate",
+                  "fill": "#141f39ff",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Why Automate?",
+                  "lineHeight": 1.4,
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 32,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "I6Q2JA",
+                  "name": "para-1",
+                  "fill": "#141f39ff",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Every minute spent on repetitive tasks is a minute you could spend growing your business. Here's what automation can handle:",
+                  "lineHeight": 1.625,
+                  "fontFamily": "Inter",
+                  "fontSize": 16
+                },
+                {
+                  "type": "frame",
+                  "id": "EC437",
+                  "name": "ul-automation-handles",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    24
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Ii3kM",
+                      "name": "li-1",
+                      "fill": "#141f39ff",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "• **Email responses** — Auto-replies, templates, and scheduling",
+                      "lineHeight": 1.625,
+                      "fontFamily": "Inter",
+                      "fontSize": 16
+                    },
+                    {
+                      "type": "text",
+                      "id": "u66Bv",
+                      "name": "li-2",
+                      "fill": "#141f39ff",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "• **Invoice reminders** — Automatic follow-ups on unpaid invoices",
+                      "lineHeight": 1.625,
+                      "fontFamily": "Inter",
+                      "fontSize": 16
+                    },
+                    {
+                      "type": "text",
+                      "id": "zaQ55",
+                      "name": "li-3",
+                      "fill": "#141f39ff",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "• **Data entry** — Moving information between apps automatically",
+                      "lineHeight": 1.625,
+                      "fontFamily": "Inter",
+                      "fontSize": 16
+                    },
+                    {
+                      "type": "text",
+                      "id": "gUTSC",
+                      "name": "li-4",
+                      "fill": "#141f39ff",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "• **Social media** — Scheduled posts and basic engagement",
+                      "lineHeight": 1.625,
+                      "fontFamily": "Inter",
+                      "fontSize": 16
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "cqlSs",
+                  "name": "h2-start-simple",
+                  "fill": "#141f39ff",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Start Simple",
+                  "lineHeight": 1.4,
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 32,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "XEY3n",
+                  "name": "para-2",
+                  "fill": "#141f39ff",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "The best automation is invisible. Start with one process that:",
+                  "lineHeight": 1.625,
+                  "fontFamily": "Inter",
+                  "fontSize": 16
+                },
+                {
+                  "type": "frame",
+                  "id": "EMV8n",
+                  "name": "ol-automation-criteria",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    24
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "dIOTe",
+                      "name": "oli-1",
+                      "fill": "#141f39ff",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "1. Happens frequently (daily or weekly)",
+                      "lineHeight": 1.625,
+                      "fontFamily": "Inter",
+                      "fontSize": 16
+                    },
+                    {
+                      "type": "text",
+                      "id": "LRomI",
+                      "name": "oli-2",
+                      "fill": "#141f39ff",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "2. Follows the same steps every time",
+                      "lineHeight": 1.625,
+                      "fontFamily": "Inter",
+                      "fontSize": 16
+                    },
+                    {
+                      "type": "text",
+                      "id": "XV3kw",
+                      "name": "oli-3",
+                      "fill": "#141f39ff",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "3. Doesn't require human judgment",
+                      "lineHeight": 1.625,
+                      "fontFamily": "Inter",
+                      "fontSize": 16
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "R8iJ9",
+                  "name": "h3-example-invoice",
+                  "fill": "#141f39ff",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Example: Invoice Follow-ups",
+                  "lineHeight": 1.4,
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 24,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "UBJLz",
+                  "name": "para-before-code",
+                  "fill": "#141f39ff",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Instead of manually checking who hasn't paid:",
+                  "lineHeight": 1.625,
+                  "fontFamily": "Inter",
+                  "fontSize": 16
+                },
+                {
+                  "type": "frame",
+                  "id": "Fzv16",
+                  "name": "code-block",
+                  "width": "fill_container",
+                  "fill": "#f2f2f7ff",
+                  "cornerRadius": 10,
+                  "layout": "vertical",
+                  "padding": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Amt8F",
+                      "name": "code-text",
+                      "fill": "#141f39ff",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "// Pseudo-code for invoice automation\nconst overdueInvoices = invoices.filter(\n  inv => inv.dueDate < today && !inv.paid\n);\n\noverdueInvoices.forEach(invoice => {\n  sendReminderEmail(invoice.customer);\n  logActivity(`Reminder sent to ${invoice.customer.name}`);\n});",
+                      "lineHeight": 1.6,
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "Fke1x",
+                  "name": "para-after-code",
+                  "fill": "#141f39ff",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "This simple pattern can save hours each week.",
+                  "lineHeight": 1.625,
+                  "fontFamily": "Inter",
+                  "fontSize": 16
+                },
+                {
+                  "type": "text",
+                  "id": "JFgoP",
+                  "name": "h2-whats-next",
+                  "fill": "#141f39ff",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "What's Next?",
+                  "lineHeight": 1.4,
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 32,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "JN0Av",
+                  "name": "para-3",
+                  "fill": "#141f39ff",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "In future posts, we'll cover:",
+                  "lineHeight": 1.625,
+                  "fontFamily": "Inter",
+                  "fontSize": 16
+                },
+                {
+                  "type": "frame",
+                  "id": "d514P",
+                  "name": "ul-future-posts",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    24
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "h0VT2r",
+                      "name": "li2-1",
+                      "fill": "#141f39ff",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "• Setting up your first Zapier automation",
+                      "lineHeight": 1.625,
+                      "fontFamily": "Inter",
+                      "fontSize": 16
+                    },
+                    {
+                      "type": "text",
+                      "id": "RLE0Q",
+                      "name": "li2-2",
+                      "fill": "#141f39ff",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "• When to build custom tools vs use existing solutions",
+                      "lineHeight": 1.625,
+                      "fontFamily": "Inter",
+                      "fontSize": 16
+                    },
+                    {
+                      "type": "text",
+                      "id": "ZtDR2",
+                      "name": "li2-3",
+                      "fill": "#141f39ff",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "• How AI is changing what's possible for small businesses",
+                      "lineHeight": 1.625,
+                      "fontFamily": "Inter",
+                      "fontSize": 16
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "B4S5fW",
+                  "name": "hr-wrapper",
+                  "width": "fill_container",
+                  "height": 1,
+                  "fill": "#d4d4d8ff"
+                },
+                {
+                  "type": "text",
+                  "id": "k6AAA",
+                  "name": "italic-link-para",
+                  "fill": "#141f39ff",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Have a process you'd like to automate? Get in touch and let's chat about what's possible.",
+                  "lineHeight": 1.625,
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontStyle": "italic"
+                },
+                {
+                  "type": "frame",
+                  "id": "gwHew",
+                  "name": "inline-code-para",
+                  "width": "fill_container",
+                  "gap": 4,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "La3G2",
+                      "name": "text-before",
+                      "fill": "#141f39ff",
+                      "content": "Most automation tools accept code patterns like",
+                      "lineHeight": 1.625,
+                      "fontFamily": "Inter",
+                      "fontSize": 16
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Jcw33",
+                      "name": "inline-code-chrome",
+                      "fill": "#f2f2f7ff",
+                      "cornerRadius": 4,
+                      "stroke": "#d4d4d8ff",
+                      "strokeWidth": 1,
+                      "padding": [
+                        2,
+                        6
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "XnS53",
+                          "name": "inline-code-text",
+                          "fill": "#141f39ff",
+                          "content": "npm run build",
+                          "lineHeight": 1.6,
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "vb764",
+                      "name": "text-after",
+                      "fill": "#141f39ff",
+                      "content": "to trigger workflows.",
+                      "lineHeight": 1.625,
+                      "fontFamily": "Inter",
+                      "fontSize": 16
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "i4AOv",
+              "name": "info-sidebar",
+              "width": 280,
+              "layout": "vertical",
+              "gap": 32,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "ghazR",
+                  "name": "author-block",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "DNfnD",
+                      "name": "avatar-placeholder",
+                      "fill": "#d4d4d8ff",
+                      "width": 60,
+                      "height": 60
+                    },
+                    {
+                      "type": "text",
+                      "id": "wCa8p",
+                      "name": "author-name",
+                      "fill": "#141f39ff",
+                      "content": "Joel Shinness",
+                      "lineHeight": 1.4,
+                      "fontFamily": "Plus Jakarta Sans",
+                      "fontSize": 18,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "P9Sr3",
+                      "name": "author-role",
+                      "fill": "#52525bff",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Web developer for small business",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "vTl3S",
+                  "name": "published-block",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "U9jWF",
+                      "name": "published-label",
+                      "fill": "#52525bff",
+                      "content": "PUBLISHED",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "500",
+                      "letterSpacing": 1.2
+                    },
+                    {
+                      "type": "text",
+                      "id": "LunZz",
+                      "name": "published-value",
+                      "fill": "#141f39ff",
+                      "content": "January 27, 2026",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 16
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "HyJTM",
+                  "name": "read-time-block",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "JQnJm",
+                      "name": "read-label",
+                      "fill": "#52525bff",
+                      "content": "READING TIME",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "500",
+                      "letterSpacing": 1.2
+                    },
+                    {
+                      "type": "text",
+                      "id": "LrRHy",
+                      "name": "read-value",
+                      "fill": "#141f39ff",
+                      "content": "5 min read",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 16
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "USzz1",
+                  "name": "tags-block",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "r2KBM",
+                      "name": "tags-label",
+                      "fill": "#52525bff",
+                      "content": "TAGS",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "500",
+                      "letterSpacing": 1.2
+                    },
+                    {
+                      "type": "frame",
+                      "id": "E5h8I",
+                      "name": "tags-list",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "id": "LMQcz",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "sidebar-tag-automation",
+                          "descendants": {
+                            "pENro": {
+                              "content": "automation"
+                            }
+                          }
+                        },
+                        {
+                          "id": "Nr0JO",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "sidebar-tag-small-business",
+                          "descendants": {
+                            "pENro": {
+                              "content": "small-business"
+                            }
+                          }
+                        },
+                        {
+                          "id": "owUWN",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "sidebar-tag-productivity",
+                          "descendants": {
+                            "pENro": {
+                              "content": "productivity"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "h2Jp34",
+                  "name": "share-block",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "JRagJ",
+                      "name": "share-label",
+                      "fill": "#52525bff",
+                      "content": "SHARE",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "500",
+                      "letterSpacing": 1.2
+                    },
+                    {
+                      "type": "text",
+                      "id": "PEbS1",
+                      "name": "share-value",
+                      "fill": "#52525bff",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Share buttons wire at code milestone (Twitter / LinkedIn / Copy Link).",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "yniMD",
+          "type": "ref",
+          "ref": "etY5x",
+          "name": "Section / RelatedPosts (Blog Post instance)"
+        },
+        {
+          "id": "tg3vl",
+          "type": "ref",
+          "ref": "Xs0Hs",
+          "name": "Section / Footer (Blog Post instance)"
         }
       ]
     }
