@@ -4,12 +4,12 @@ milestone: v2.0
 milestone_name: Prep Crito Design File
 status: executing
 stopped_at: Phase 30 context gathered
-last_updated: "2026-06-09T22:21:49.775Z"
-last_activity: 2026-06-09
+last_updated: "2026-06-09T22:56:30.859Z"
+last_activity: 2026-06-09 -- Phase 30 planning complete
 progress:
   total_phases: 10
   completed_phases: 7
-  total_plans: 27
+  total_plans: 29
   completed_plans: 27
   percent: 70
 ---
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-05-31)
 Phase: 29 (projects-reconstruction-index-project-detail) — EXECUTING
 Plan: 3 of 3
 Status: Ready to execute
-Last activity: 2026-06-09
+Last activity: 2026-06-09 -- Phase 30 planning complete
 
 Progress: [██████████] 100%
 
