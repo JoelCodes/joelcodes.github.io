@@ -22880,6 +22880,18 @@
       "width": 1200,
       "height": 280,
       "content": "Section / RelatedProjects (reusable, id OLSa0) — slot signature per Plan 29-00 (D-134).\n\nMIRRORS etY5x Section/RelatedPosts structure EXACTLY with cards-row swap (TYPED slot:['t40xct'] → TYPED slot:['DnsRs']).\n\nStructure:\n• heading-slot (skkDc, untyped slot:[], enabled:true) — default 'Related projects' (NOT 'Related posts') heading-2 (Plus Jakarta Sans 32/700/lh 1.4 navy). Consumers override for context variants ('More work', 'Related case studies').\n• cards-row (AyKCK, TYPED slot:['DnsRs'] per D-52 PREFERRED + D-134 NEW ProjectCard swap, horizontal, gap 24, alignItems start, fill_container) with 3 ProjectCard refs default (zzp9o + DcjgP + Vyl5Z), each at fill_container width.\n\nAll dimensions and rhythm match etY5x: vertical gap 32, padding [32,0], width 1200 (Phase 25-28 ship width), alignItems start.\n\nNarrow-scope rationale per D-134: project domain ONLY. NOT generalized into a Section/RelatedContent that handles both Posts + Projects — different content domain, different vocabulary, honest discoverability for downstream agents. Phase 31 Homepage may instance for 'recent work' if needed.\n\nPlan 29-02 (Project detail) first consumer instance: descendants override on 2-3 ProjectCard refs per v1.3 sample project count. Default 3-card density may downsize to 2 at Plan 29-02 calibration if pad-feels-forced per CONTEXT Claude's Discretion.\n\nProvenance: mirror of etY5x (Plan 28-00 + D-118 3-card density carry-forward)."
+    },
+    {
+      "type": "frame",
+      "id": "SCcln",
+      "x": 28247.267566049897,
+      "y": -4111.553859422791,
+      "name": "Projects",
+      "width": 1440,
+      "height": 2200,
+      "fill": "#ffffffff",
+      "layout": "vertical",
+      "alignItems": "center"
     }
   ],
   "variables": {
