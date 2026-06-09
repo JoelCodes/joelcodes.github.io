@@ -20312,6 +20312,74 @@
               ]
             }
           ]
+        },
+        {
+          "type": "frame",
+          "id": "OLSa0",
+          "name": "Section / RelatedProjects",
+          "reusable": true,
+          "width": 1200,
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            32,
+            0
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "skkDc",
+              "name": "heading-slot",
+              "slot": [],
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "s1MoMg",
+                  "name": "heading",
+                  "fill": "#141f39ff",
+                  "content": "Related projects",
+                  "lineHeight": 1.4,
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 32,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "AyKCK",
+              "name": "cards-row",
+              "slot": [
+                "DnsRs"
+              ],
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "id": "zzp9o",
+                  "type": "ref",
+                  "ref": "DnsRs",
+                  "name": "ProjectCard-1",
+                  "width": "fill_container"
+                },
+                {
+                  "id": "DcjgP",
+                  "type": "ref",
+                  "ref": "DnsRs",
+                  "name": "ProjectCard-2",
+                  "width": "fill_container"
+                },
+                {
+                  "id": "Vyl5Z",
+                  "type": "ref",
+                  "ref": "DnsRs",
+                  "name": "ProjectCard-3",
+                  "width": "fill_container"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -22802,6 +22870,16 @@
       "width": 1200,
       "height": 320,
       "content": "Section / ResultsMetrics (reusable, id y4RORu) — slot signature per Plan 29-00 (D-135):\n\n• heading-slot (untyped slot:[], enabled:true) — default 'Results' text in heading-2 typography (Plus Jakarta Sans 32/700/lh 1.4 navy). REUSE heading-2 per D-135 default + Phase 26 Plan 26-00 + OPEN-26-01 carry-forward. Consumers override heading content via descendants for context variants (e.g. 'Project results', 'Outcomes').\n\n• metrics-row — 3 FIXED metric-tile children (NOT a slot — narrow-scoping per D-135 + D-129 Joel-content essential carve-out). horizontal layout, gap 24, alignItems start, fill_container width.\n\nEach metric-tile (3 fixed): vertical layout, gap 8 (metric-value → metric-label), padding 24 (Pencil § 12 'Inside cards'), fill_container width, white fill, 1px #d4d4d8ff border (color-semantic-border-default), 10 cornerRadius (radius-semantic-card), alignItems start.\n  - metric-value (text): default heading-1 reuse (Plus Jakarta Sans 48/700/lh 1.4 navy) per D-135 Option A (zero new tokens). Option B path (type-semantic-metric-large 60px composite) reserved if Plan 29-02 calibration needs distinction.\n  - metric-label (text): body-sm reuse (Inter 14/400/lh 1.5 #52525bff secondary).\n\nDefault content from bakery-order-system project.results verbatim (CONTEXT Claude's Discretion):\n  - Tile 1: '85%' / 'Time reduction in order processing'\n  - Tile 2: '20hrs' / 'Saved per week'\n  - Tile 3: 'Zero' / 'Missed orders since launch'\n\nConsumers (Plan 29-02 Project detail) override 3 metric-tile descendants per project.results array at instance time.\n\nChrome treatment: plain white + border + 10 radius (CONTEXT Claude's Discretion default). Coral pivot path documented: if Plan 29-02 calibration shows visual needs distinction, fill: '#ff928aff' decorative-coral (matches Plan 28-01 BlogCard banner precedent) or stroke-only neutral chrome alternatives.\n\nWidth 1200 fixed (matches Phase 25-28 ship width). Padding [32,0] vertical-only rhythm.\n\nNarrow-scoping per D-135 + D-129: Joel-content essential — ships regardless of cYlRH evidence. NOT generalized into Section/Metrics for any metric domain (KPI / dashboard / etc.); Phase 29-02 Project detail is the ONLY consumer in v2.0.\n\nToken outcome: Option A (heading-1 reuse) — zero new tokens. OPEN-23-10 partial-resolution unchanged."
+    },
+    {
+      "type": "note",
+      "id": "DZrSf",
+      "x": -15642.732433950103,
+      "y": 7559.446140577209,
+      "name": "Section / RelatedProjects — slot signature",
+      "width": 1200,
+      "height": 280,
+      "content": "Section / RelatedProjects (reusable, id OLSa0) — slot signature per Plan 29-00 (D-134).\n\nMIRRORS etY5x Section/RelatedPosts structure EXACTLY with cards-row swap (TYPED slot:['t40xct'] → TYPED slot:['DnsRs']).\n\nStructure:\n• heading-slot (skkDc, untyped slot:[], enabled:true) — default 'Related projects' (NOT 'Related posts') heading-2 (Plus Jakarta Sans 32/700/lh 1.4 navy). Consumers override for context variants ('More work', 'Related case studies').\n• cards-row (AyKCK, TYPED slot:['DnsRs'] per D-52 PREFERRED + D-134 NEW ProjectCard swap, horizontal, gap 24, alignItems start, fill_container) with 3 ProjectCard refs default (zzp9o + DcjgP + Vyl5Z), each at fill_container width.\n\nAll dimensions and rhythm match etY5x: vertical gap 32, padding [32,0], width 1200 (Phase 25-28 ship width), alignItems start.\n\nNarrow-scope rationale per D-134: project domain ONLY. NOT generalized into a Section/RelatedContent that handles both Posts + Projects — different content domain, different vocabulary, honest discoverability for downstream agents. Phase 31 Homepage may instance for 'recent work' if needed.\n\nPlan 29-02 (Project detail) first consumer instance: descendants override on 2-3 ProjectCard refs per v1.3 sample project count. Default 3-card density may downsize to 2 at Plan 29-02 calibration if pad-feels-forced per CONTEXT Claude's Discretion.\n\nProvenance: mirror of etY5x (Plan 28-00 + D-118 3-card density carry-forward)."
     }
   ],
   "variables": {
