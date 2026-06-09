@@ -19105,6 +19105,100 @@
           "width": 1200,
           "height": 280,
           "content": "Compound / BlogCard (reusable) — Crito-raster-aligned blog card per Plan 28-01 calibration REVISE.\n\nSlot signature:\n• image-slot (untyped slot:[]) — 240h fill_container, default placeholder fill #f2f2f7ff with 'Featured image' label. Consumers populate via fill:image at instance time OR replace whole slot. Code milestone wires `post.data.featuredImage` to image-slot.fill.\n• content-area (frame, padding 24, vertical gap 12) — wraps the text stack:\n  - date-row (body-sm secondary): override content per post (e.g., 'JAN 27, 2026 • 5 MIN READ')\n  - title (heading-3: Plus Jakarta Sans 24/700/lh 1.4 — uses Plan 28-00 type-semantic-heading-3 surface)\n  - excerpt (prose-paragraph, secondary, lh-loose) — override with post.data.description\n  - tags-row (typed slot ['kJQmJ'] for Badge/Outline picker discoverability): default 2 Badge/Outline refs; consumers replace children with post.data.tags loop\n\nDistinct from Compound/Card (t40xct) — BlogCard is image-first, heading-3 title, excerpt + tags-only (no CTA Button); t40xct is image+title+body+CTA Button row (general-purpose). Both shipped per D-116 narrow-scoping (BlogCard for Blog Index + Blog Post related-posts consumers; t40xct for Phase 27 Contact sidebar + future Projects consumers).\n\nWidth 380 sized for 3-col blog-grid (1200 - 2*24 gap = 1152 / 3 = 384, rounded to 380). cornerRadius 10 + 1px neutral-200 border + clip:true so image clips at top corners.\n\nProvenance: Plan 28-01 calibration REVISE — Crito raster (image-import-14.jpg) shows prominent featured image + bigger title than t40xct's 18px. heading-3 (24px) first real consumer.\n\nSee 28-01-SUMMARY.md and PEN-INVENTORY § Variant Evidence (Phase 28) for full audit trail."
+        },
+        {
+          "type": "frame",
+          "id": "DnsRs",
+          "name": "Compound / ProjectCard",
+          "reusable": true,
+          "clip": true,
+          "width": 380,
+          "fill": "#ffffffff",
+          "cornerRadius": 10,
+          "stroke": "#d4d4d8ff",
+          "strokeAlignment": "inner",
+          "layout": "vertical",
+          "children": [
+            {
+              "type": "frame",
+              "id": "v81bAX",
+              "name": "image-slot",
+              "slot": [],
+              "width": "fill_container",
+              "height": 240,
+              "fill": "#f2f2f7ff",
+              "layout": "vertical",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "nBqwn",
+                  "name": "placeholder label",
+                  "fill": "#52525bff",
+                  "content": "Project image",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "o3N8Pl",
+              "name": "content-area",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "padding": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "t4Rnn",
+                  "name": "category-badge-slot",
+                  "slot": [
+                    "j0FxQZ"
+                  ],
+                  "width": "fill_container",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "id": "QdrAM",
+                      "type": "ref",
+                      "ref": "j0FxQZ",
+                      "name": "Badge default"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "mY1QY",
+                  "name": "title",
+                  "fill": "#141f39ff",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Project title placeholder",
+                  "lineHeight": 1.4,
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 24,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "VRqcN",
+                  "name": "body",
+                  "fill": "#52525bff",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Project problem excerpt placeholder describing the challenge briefly. Replace at instance time with first 160 chars of project.problem from projects.json.",
+                  "lineHeight": 1.625,
+                  "fontFamily": "Inter",
+                  "fontSize": 16
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -22526,6 +22620,16 @@
       "width": 1200,
       "height": 400,
       "content": "Tag page (FUctJ) — joel-only-no-crito-ref reconstruction per CALIBRATION-PROTOCOL § 4 (no source raster to compare against; token-usage check vs RpGbe _Tokens & Foundations reference frame).\n\n1. **page-intro (pFNbo) STUB content per D-83:** Code milestone generates page-intro from `/blog/tags/[tag].astro` template: heading content via `Posts tagged \"${tag}\"` template literal; subhead via `${posts.length} posts about ${tag}` (pluralized). v2.0 ships representative 'automation' tag with 3-posts count as STUB; runtime renders per-tag dynamic values. v1.3 src/pages/blog/tags/[tag].astro lines 47-62 reference structure.\n\n2. **TagFilter active-state flip (uSqet — D-117 paired-ref validation):** Descendants override flips Plan 28-00 default-active 'All Posts' (pill-1) to 'automation' (pill-2). Mechanic: pill-1-active (RxShj) enabled:false + pill-1-inactive (z1aro) enabled:true + pill-2-active (al86r) enabled:true + pill-2-inactive (u3X64E) enabled:false. Plan 28-01 Blog index TagFilter (M1Wu9) instance is UNCHANGED — per-instance descendants override mechanism validated.\n\n3. **'Back to all posts' link affordance:** Deferred to runtime per CONTEXT.md Deferred Ideas (similar to D-99 'Return to homepage' Phase 27 pattern).\n\n4. **6-BlogCard filtered grid:** Code milestone filters /blog post collection by current tag URL param — `posts.filter(p => p.data.tags.includes(tag))`. v2.0 ships 6 representative BlogCard refs (2 real MDX + 4 representative agency-template), all including 'automation' tag in footer-actions-slot Badge/Outline overrides. Runtime renders actual filtered subset (length may differ from 6).\n\n5. **PAGE-11 INERT** per § 4.3: NO Crito source raster to hide for Tag page (Crito's blog architecture has Blog index + Blog detail only — no Tag page). Plan 28-03 close performs no PAGE-11 mutation. v2.0's 4th INERT-branch consumer (Phase 26 FAQ + 404 + Phase 27 Thank-you + Phase 28 Tag)."
+    },
+    {
+      "type": "note",
+      "id": "cqN7R",
+      "x": -15642.732433950103,
+      "y": 6022.446140577209,
+      "name": "Compound / ProjectCard — slot signature",
+      "width": 1200,
+      "height": 360,
+      "content": "Compound / ProjectCard (reusable, id DnsRs) — slot signature per Plan 29-00 (D-131 + D-132):\n\n• image-slot (untyped slot:[], enabled:true) — 240h fill_container, default placeholder fill #f2f2f7ff (color-semantic-bg-surface-elevated) with 'Project image' text label. Consumers populate via fill: {type:'image', url:'<project.thumbnail>'} at instance time, OR replace whole slot at code milestone.\n\n• content-area (frame, padding 24, vertical gap 12) — wraps category-badge-slot + title + body.\n  - category-badge-slot (TYPED slot:['j0FxQZ'] per D-132 + D-52 PREFERRED — Badge/Default solid default lean per CONTEXT Claude's Discretion; plan-execution at Plan 29-01 calibration may swap to ['kJQmJ'] Badge/Outline if image-import-12.jpg shows outline treatment). Default Badge ref child; consumer overrides label at instance time.\n  - title (heading-3: Plus Jakarta Sans 24/700/lh 1.4 navy — heading-3 SECOND-CONSUMER after BlogCard; plan-execution may downsize to heading-4 20px at Plan 29-01 calibration if visual reads heavy).\n  - body (prose-paragraph: Inter 16/400/lh 1.625 secondary). Consumers override with first 160 chars of project.problem from projects.json.\n\nNarrow-scope rationale per D-131: sibling of t40xct + ZSxZU inside t67DU6. t40xct continues serving Phase 27 Contact sidebar + Phase 28 RelatedPosts + future Phase 31 Homepage. NOT generalized for any other consumer — Phase 31 may build its own card if needed.\n\nProvenance: image-import-12.jpg lower 2x2 Project grid (Phase 25 D-49 raster-probe identification) + v1.3 src/components/ProjectCard.astro (lines 19-52 slot derivation, lines 14-16 160-char truncate convention).\n\nCrito-visual register per D-58 + D-132: borderless white card per Plan 28-01 BlogCard precedent (stroke reserved at strokeWidth 0 for forward-state variants). NO v1.3 yellow neobrutalist chrome (4px border + 6px hard shadow + uppercase Bricolage Grotesque).\n\nHover/focus states deferred to code milestone per Pitfall 7 (clickable-card pattern is interactive state; static design tool ships READING state per D-92/D-59 carry-forward).\n\nWidth 380 sized for 3-col project-grid (1200 - 2*24 gap = 1152 / 3 = 384, rounded to 380; matches Plan 28-01 BlogCard width)."
     }
   ],
   "variables": {
