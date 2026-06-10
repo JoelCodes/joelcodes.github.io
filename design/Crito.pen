@@ -20382,6 +20382,273 @@
               ]
             }
           ]
+        },
+        {
+          "type": "frame",
+          "id": "C8D21",
+          "name": "Section / TokenSwatchGrid",
+          "reusable": true,
+          "width": 1200,
+          "layout": "vertical",
+          "gap": 24,
+          "padding": [
+            32,
+            0
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "T2oEN",
+              "name": "heading-slot",
+              "fill": "#141f39ff",
+              "content": "Color tokens",
+              "lineHeight": 1.4,
+              "fontFamily": "Plus Jakarta Sans",
+              "fontSize": 24,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "CqHvm",
+              "name": "grid-container",
+              "width": 1200,
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "RkLvg",
+                  "name": "swatch-row-default",
+                  "width": 1200,
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "KnhrD",
+                      "name": "swatch-tile-default",
+                      "width": 200,
+                      "fill": "#ffffffff",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 12,
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": 4,
+                          "id": "cBz5K",
+                          "name": "swatch",
+                          "fill": "#fdba09ff",
+                          "width": 176,
+                          "height": 80
+                        },
+                        {
+                          "type": "text",
+                          "id": "VmlTx",
+                          "name": "token-name",
+                          "fill": "#141f39ff",
+                          "content": "color-semantic-bg-accent",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "GbY3q",
+                          "name": "resolved-value",
+                          "fill": "#52525bff",
+                          "content": "#fdba09",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 12
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "qo5Vi",
+          "name": "Section / TypeSpecimen",
+          "reusable": true,
+          "width": 1200,
+          "layout": "vertical",
+          "gap": 24,
+          "padding": [
+            32,
+            0
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "fJynU",
+              "name": "heading-slot",
+              "fill": "#141f39ff",
+              "content": "Type Scale",
+              "lineHeight": 1.4,
+              "fontFamily": "Plus Jakarta Sans",
+              "fontSize": 24,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "QA3ye",
+              "name": "grid-container",
+              "width": 1200,
+              "layout": "vertical",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "nJOdc",
+                  "name": "specimen-tile-default",
+                  "width": 360,
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "XaVoE",
+                      "name": "sample-text",
+                      "fill": "#141f39ff",
+                      "content": "The quick brown fox jumps over the lazy dog",
+                      "lineHeight": 1.2,
+                      "fontFamily": "Plus Jakarta Sans",
+                      "fontSize": 32,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "C1oYN",
+                      "name": "token-name",
+                      "fill": "#52525bff",
+                      "content": "type-semantic-display",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "C45bR",
+                      "name": "metadata",
+                      "fill": "#52525bff",
+                      "content": "32px / 700 / 1.2 lh",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 11
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "I45jZx",
+          "name": "Section / ComponentShowcase",
+          "reusable": true,
+          "width": 1200,
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            24,
+            0
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "h6JsA",
+              "name": "label-slot",
+              "fill": "#141f39ff",
+              "content": "Primitive / Button / Default",
+              "lineHeight": 1.5,
+              "fontFamily": "Inter",
+              "fontSize": 14,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "kxLcQ",
+              "name": "live-instance-slot",
+              "width": 1200,
+              "fill": "#fafafaff",
+              "cornerRadius": 10,
+              "layout": "vertical",
+              "padding": 24,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "f11Sj",
+                  "name": "instance-placeholder",
+                  "fill": "#52525bff",
+                  "content": "[component instance lives here]",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "rujh9",
+              "name": "code-snippet-slot",
+              "width": 1200,
+              "fill": "#f2f2f7ff",
+              "cornerRadius": 4,
+              "stroke": "#d4d4d8ff",
+              "strokeWidth": 1,
+              "strokeAlignment": "inner",
+              "layout": "vertical",
+              "padding": [
+                12,
+                16
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "MJ9mv",
+                  "name": "snippet-text",
+                  "fill": "#141f39ff",
+                  "content": "<Button variant=\"yellow\">Click</Button>",
+                  "lineHeight": 1.625,
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 14
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "id": "cob7a",
+          "name": "Section / TokenSwatchGrid — slot signature",
+          "width": 1200,
+          "height": 320,
+          "content": "Section / TokenSwatchGrid (reusable, id C8D21) — slot signature:\n\n• heading-slot (text, default 'Color tokens', Plus Jakarta Sans 24/700 navy heading-3 typography). Consumers override the content per token group (Primary Accent / Text Variants / Neutral / Usage Guidelines for the Colors section; or any group label).\n\n• grid-container (frame, layout vertical, default 1200 width). Contains repeating swatch-row-default frames (horizontal, gap 16). Wrapping not supported by Pencil 2.13 schema (layoutWrap unrecognized) — consumers wrap manually by adding multiple horizontal swatch-row frames inside grid-container.\n\n• swatch-tile-default (frame, layout vertical, gap 8, padding 12, width 200, fill #ffffffff). Each tile contains: swatch rectangle (176×80, cornerRadius 4 = radius-semantic-card-equivalent literal; default fill #fdba09ff placeholder) + token-name text (Inter 14/500 navy — body-sm caption tier) + resolved-value text (Inter 12/400 #52525bff — caption secondary). Consumers override the swatch fill + token-name content + resolved-value content via descendants at instance time.\n\nWidth 1200 fixed (matches Section/Header / Section/Footer ship width). Padding [32,0]. Gap 24 between heading and grid. NEW Phase 30 Plan 30-00 deliverable per D-149 — INTENTIONAL DEPARTURE from Phase 26/28/29 single-consumer narrow-scoping (bounded at SECTION layer; justified by ~30 in-phase swatch-tile instances inside Colors section of /design-system page frame).\n\nSee 30-00-SUMMARY.md and PEN-INVENTORY § Variant Evidence (Phase 30) for full audit trail."
+        },
+        {
+          "type": "note",
+          "id": "A9LxS",
+          "name": "Section / TypeSpecimen — slot signature",
+          "width": 1200,
+          "height": 320,
+          "content": "Section / TypeSpecimen (reusable, id qo5Vi) — slot signature:\n\n• heading-slot (text, default 'Type Scale', Plus Jakarta Sans 24/700 navy heading-3 typography). Consumers override per group (Font Families / Type Scale / Font Weights / Line Heights for the Typography section).\n\n• grid-container (frame, layout vertical default — vertical reads cleanest for type specimens stacked top to bottom). Consumers may override to horizontal if specimen tiles are visually compact (e.g., font-weight chips).\n\n• specimen-tile-default (frame, layout vertical, gap 4, padding 16, width 360). Each tile contains: sample-text rendered IN the token being specimen'd (default 'The quick brown fox jumps over the lazy dog' rendered Plus Jakarta Sans 32/700 navy lh 1.2 — display-heading specimen) + token-name caption (Inter 12/500 #52525bff secondary) + metadata caption (Inter 11/400 #52525bff, content '<size>px / <weight> / <lh> lh').\n\nConsumers override the sample-text typography per token (e.g., heading-1 = Plus Jakarta Sans 48/700 lh 1.4; body = Inter 16/400 lh 1.6; prose-paragraph = Inter 16/400 lh 1.6). token-name and metadata content updated to match. Width 1200 fixed parent; tiles 360 wide allowing 3 per row if consumer wraps via multiple horizontal grid-container rows.\n\nNEW Phase 30 Plan 30-00 deliverable per D-149 — paired with TokenSwatchGrid in INTENTIONAL DEPARTURE bundle (~12 in-phase specimen-tile instances inside Typography section).\n\nSee 30-00-SUMMARY.md and PEN-INVENTORY § Variant Evidence (Phase 30) for full audit trail."
+        },
+        {
+          "type": "note",
+          "id": "vR31j",
+          "name": "Section / ComponentShowcase — slot signature",
+          "width": 1200,
+          "height": 480,
+          "content": "Section / ComponentShowcase (reusable, id I45jZx) — slot signature per D-149 + D-150:\n\n• label-slot (text, default 'Primitive / Button / Default', Inter 14/600 navy — caption tier for component identifier). Consumers override with the canonical component name + variant (e.g., 'Compound / BlogCard', 'Section / TagFilter — active state').\n\n• live-instance-slot (frame, layout vertical, alignItems center, padding 24, fill #fafafaff = color-semantic-bg-surface literal, cornerRadius 10 = radius-semantic-card literal, width 1200). Default contains placeholder text '[component instance lives here]'. Consumers Replace this placeholder with a ref to the actual component (e.g., Insert(componentShowcaseInstance+'/kxLcQ', {type: 'ref', ref: 'M7eUr'}) for a Button/Default showcase). The fafafa surround provides visual contrast against the page background so the component reads as 'shown in isolation'.\n\n• code-snippet-slot (frame containing text, enabled:true default per D-150 + D-53 placeholder-slot pattern). Background fill #f2f2f7ff = color-semantic-bg-surface-elevated literal. Border 1px #d4d4d8ff = color-semantic-border-default literal. Padding [12,16]. cornerRadius 4 (smaller than card radius — distinguishes inline code from card chrome). Inner snippet-text rendered JetBrains Mono 14/400 navy lh 1.625 (= type-semantic-prose-code-block size + weight + lh per Phase 28 D-105/D-108). Consumers override snippet-text content with the canonical default-variant snippet (e.g., '<Button variant=\"yellow\">Click</Button>', '<Card variant=\"default\">...</Card>').\n\nNOTE — Pencil font-family rendering quirk (OPEN-30-NN seed): type-semantic-prose-code-block-family resolves to 'SF Mono, Menlo, Monaco, Consolas, monospace' (CSS fallback chain for runtime). Pencil 2.13's text-rendering layer ONLY accepts single Google-Fonts family names; the fallback chain returns 'invalid' error. Plan 30-00 uses JetBrains Mono as the Pencil-renderable mono family proxy. The runtime CSS export will still resolve to the SF Mono fallback chain via type-semantic-prose-code-block-family token; the visual divergence is design-tool-only. Variant Evidence Phase 30 row documents this dual-track.\n\nNEW Phase 30 Plan 30-00 deliverable per D-149 + D-150 — INTENTIONAL DEPARTURE bundle (~16 in-phase ComponentShowcase instances inside Components section of /design-system page frame: 4 primitives × 1-2 variants + 4 compounds + 8 sections). Phase 30 ComponentShowcase is the SECONDARY validation surface for type-semantic-prose-code-block per Phase 28 D-110 'provisional' flag verification chain.\n\nSee 30-00-SUMMARY.md and PEN-INVENTORY § Variant Evidence (Phase 30) for full audit trail."
         }
       ]
     },
