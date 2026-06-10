@@ -51,7 +51,7 @@ This document scopes what v2.0 will deliver. Each requirement is testable, atomi
 - [ ] **PAGE-04**: FAQ frame reconstructed (FAQ accordion section, CTA section)
 - [x] **PAGE-05**: Contact frame reconstructed including the 8-field lead-qualification form using `Primitive / Input` instances
 - [x] **PAGE-06**: Thank-you frame reconstructed (post-submission message + Calendly placeholder section)
-- [ ] **PAGE-07**: Design-system reference frame reconstructed (token gallery, component gallery for the `/design-system` route)
+- [x] **PAGE-07**: Design-system reference frame reconstructed (token gallery, component gallery for the `/design-system` route)
 - [ ] **PAGE-08**: 404 frame reconstructed (helpful navigation back to home + key pages)
 - [ ] **PAGE-09**: All reconstruction is **desktop-only** for v2.0 — mobile breakpoint reconstruction deferred to a later milestone
 - [ ] **PAGE-10**: Every IN-SCOPE page frame ends in zero `[FLAT]` status markers in the `_Inventory` frame
@@ -131,7 +131,7 @@ Mapped by the roadmapper after phase structure approval. Every v2.0 requirement 
 | PAGE-04 | Phase 26 | Pending |
 | PAGE-05 | Phase 27 | Complete |
 | PAGE-06 | Phase 27 | Complete |
-| PAGE-07 | Phase 30 | Pending |
+| PAGE-07 | Phase 30 | Complete |
 | PAGE-08 | Phase 26 | Pending |
 | PAGE-09 | Phase 26 | Pending |
 | PAGE-10 | Phase 32 | Pending |

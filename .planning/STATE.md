@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Prep Crito Design File
-status: executing
-stopped_at: Phase 30 context gathered
-last_updated: "2026-06-10T02:50:25.507Z"
+status: ready_to_plan
+stopped_at: Phase 30 complete (2/2) — ready to discuss Phase 31
+last_updated: 2026-06-10T03:25:47.922Z
 last_activity: 2026-06-10 -- Phase 30 execution started
 progress:
   total_phases: 10
   completed_phases: 7
   total_plans: 29
-  completed_plans: 28
+  completed_plans: 29
   percent: 70
 ---
 
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-31)
 
 **Core value:** Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
-**Current focus:** Phase 30 — design-system-reference-reconstruction
+**Current focus:** Phase 31 — homepage reconstruction
 
 ## Current Position
 
-Phase: 30 (design-system-reference-reconstruction) — EXECUTING
-Plan: 1 of 2
-Status: Executing Phase 30
-Last activity: 2026-06-10 -- Phase 30 execution started
+Phase: 31
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-06-10
 
 Progress: [██████████] 100%
 
@@ -49,7 +49,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 **Velocity:**
 
-- Total plans completed: 79 (v1.0: 23, v1.1: 14, v1.2: 10, v1.3: 20)
+- Total plans completed: 81 (v1.0: 23, v1.1: 14, v1.2: 10, v1.3: 20)
 - Average duration: ~1-5 min/plan (recent trend)
 - Total execution time: ~5 days across 4 milestones
 
