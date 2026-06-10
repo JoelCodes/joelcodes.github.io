@@ -349,7 +349,7 @@ Plans:
 
 Plans:
 
-- [ ] 30-00-PLAN.md — Phase 30 foundation (D-149 intentional departure from narrow-scoping precedent): ships 3 new Section components inside `_Components / Sections` (g9oRa5) — `Section / TokenSwatchGrid` + `Section / TypeSpecimen` + `Section / ComponentShowcase` (code-snippet-slot per D-150 binds Phase 28 mono-primitive + prose-code-block tokens via literal values per OPEN-23-13). Each ships with sibling Pencil note declaring slot signature per D-149 + D-93 belt-and-suspenders. Library count moves 16 → 19. Default 0 net-new tokens per D-151 (mid-plan gate only if showcase-internal padding/gap surfaces escalation per D-72/D-106/D-135 precedent). NO user-calibration gate at close per D-152 + D-86/D-102/D-124/D-139 chain (agent-deterministic foundation work).
+- [x] 30-00-PLAN.md — Phase 30 foundation (D-149 intentional departure from narrow-scoping precedent): ships 3 new Section components inside `_Components / Sections` (g9oRa5) — `Section / TokenSwatchGrid` + `Section / TypeSpecimen` + `Section / ComponentShowcase` (code-snippet-slot per D-150 binds Phase 28 mono-primitive + prose-code-block tokens via literal values per OPEN-23-13). Each ships with sibling Pencil note declaring slot signature per D-149 + D-93 belt-and-suspenders. Library count moves 16 → 19. Default 0 net-new tokens per D-151 (mid-plan gate only if showcase-internal padding/gap surfaces escalation per D-72/D-106/D-135 precedent). NO user-calibration gate at close per D-152 + D-86/D-102/D-124/D-139 chain (agent-deterministic foundation work).
 - [ ] 30-01-PLAN.md — `Design system` page-frame composition + calibration (joel-only-no-crito-ref branch per § 4; FIFTH production use of CALIBRATION-PROTOCOL § 4 after Plans 26-01 + 26-02 + 27-01 + 28-03; closes PEN-INVENTORY line 77 placeholder via D-128 + D-154 in-place reclassification pattern). Top-level `Design system` frame at 1440 width via `find_empty_space_on_canvas` nodeId:s5k41l anchor (Phase 29 Project frame per § 10.4). 7 child sections vertical-stack: Section/Header (G0wNOc, no override per D-77) + page-intro (v1.3 verbatim H1 + body + JSON-link per D-143 + 3 sibling notes for noindex/JSON/sidebar-dropped) + Colors (TokenSwatchGrid × 3-4 per v1.3 sub-grouping) + Typography (TypeSpecimen × 2-4) + Components (~16 ComponentShowcase instances per D-148 full v2.0 library coverage — Primitives 10 + Compounds 4 + Sections 8) + Utilities (iso-shadow APPROXIMATE + iso-glow STUB + iso-rotate STUB per Open Q3 + 3 sibling CSS notes from src/styles/global.css) + Section/Footer (Xs0Hs, no override per D-77). Token surface drift = 0 net-new (composition plan ships zero new tokens per D-151). Single calibration AskUserQuestion at close per § 4.5 (joel-only token-usage format vs RpGbe per D-62). On APPROVE → PEN-INVENTORY line 77 in-place reclassification. PAGE-11 INERT per § 4.3.
 
 ---
@@ -434,7 +434,7 @@ Phases execute in numeric order: 1 → 2 → ... → 22 → 23 → 24 → 25 →
 | 27. Thank-you + Contact Reconstruction | v2.0 | 3/3 | Complete    | 2026-06-08 |
 | 28. Blog Reconstruction | v2.0 | 0/TBD | Not started | - |
 | 29. Projects Reconstruction | v2.0 | 3/3 | Complete   | 2026-06-09 |
-| 30. Design System Reference Reconstruction | v2.0 | 0/TBD | Not started | - |
+| 30. Design System Reference Reconstruction | v2.0 | 1/2 | In Progress|  |
 | 31. Homepage Reconstruction | v2.0 | 0/TBD | Not started | - |
 | 32. Fidelity Sweep + Handoff | v2.0 | 0/TBD | Not started | - |
 
