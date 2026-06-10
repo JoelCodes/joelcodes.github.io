@@ -209,4 +209,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-05-31 — v1.4 abandoned (phases 23 + 24 reverted), v2.0 "Prep Crito Design File" started*
+*Last updated: 2026-06-10 — Phase 30 (Design system reference reconstruction) complete; v2.0 milestone at 8/10 phases (80%). Next: Phase 31 Homepage reconstruction*
