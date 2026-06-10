@@ -23651,7 +23651,6 @@
       "y": -4111.553859422791,
       "name": "Design system",
       "width": 1440,
-      "height": 2400,
       "fill": "#ffffffff",
       "layout": "vertical",
       "alignItems": "center",
@@ -24428,8 +24427,1835 @@
               "width": 0,
               "height": 0,
               "content": "v1.3 src/pages/design-system.astro Colors section has a 'Usage Guidelines' sub-grouping with prose copy on when to use each color (Primary actions / Brand identity / Accent text / Backgrounds / Borders / Decorative). Phase 30 ships this as a sibling note rather than a TokenSwatchGrid instance — the guidance is prose, not visual swatches. Code milestone preserves the prose copy at /design-system page."
+            },
+            {
+              "id": "CTtZv",
+              "type": "ref",
+              "ref": "C8D21",
+              "name": "Colors — Brand Primitives TokenSwatchGrid",
+              "descendants": {
+                "T2oEN": {
+                  "content": "Brand Primitives"
+                },
+                "CqHvm": {
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "iD10x",
+                      "name": "swatch-row Primitives",
+                      "width": 1200,
+                      "fill": {
+                        "type": "color",
+                        "color": "#ffffff00",
+                        "enabled": false
+                      },
+                      "gap": 16,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "AMHMK",
+                          "name": "swatch-tile amber-500",
+                          "width": 200,
+                          "fill": "#ffffffff",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "padding": 12,
+                          "children": [
+                            {
+                              "type": "rectangle",
+                              "cornerRadius": 4,
+                              "id": "FMFJe",
+                              "name": "swatch",
+                              "fill": "#fdba09ff",
+                              "width": 176,
+                              "height": 80
+                            },
+                            {
+                              "type": "text",
+                              "id": "eWtlz",
+                              "name": "token-name",
+                              "fill": "#141f39ff",
+                              "content": "color-primitive-amber-500",
+                              "lineHeight": 1.4,
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "o9GNK",
+                              "name": "resolved-value",
+                              "fill": "#52525bff",
+                              "content": "#fdba09",
+                              "lineHeight": 1.4,
+                              "fontFamily": "Inter",
+                              "fontSize": 12
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "w4VRE",
+                          "name": "swatch-tile cyan-500",
+                          "width": 200,
+                          "fill": "#ffffffff",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "padding": 12,
+                          "children": [
+                            {
+                              "type": "rectangle",
+                              "cornerRadius": 4,
+                              "id": "BgWUD",
+                              "name": "swatch",
+                              "fill": "#15bee3ff",
+                              "width": 176,
+                              "height": 80
+                            },
+                            {
+                              "type": "text",
+                              "id": "kIo4z",
+                              "name": "token-name",
+                              "fill": "#141f39ff",
+                              "content": "color-primitive-cyan-500",
+                              "lineHeight": 1.4,
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "zohYO",
+                              "name": "resolved-value",
+                              "fill": "#52525bff",
+                              "content": "#15bee3",
+                              "lineHeight": 1.4,
+                              "fontFamily": "Inter",
+                              "fontSize": 12
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "j0jE2",
+                          "name": "swatch-tile green-500",
+                          "width": 200,
+                          "fill": "#ffffffff",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "padding": 12,
+                          "children": [
+                            {
+                              "type": "rectangle",
+                              "cornerRadius": 4,
+                              "id": "zjT3D",
+                              "name": "swatch",
+                              "fill": "#38da71ff",
+                              "width": 176,
+                              "height": 80
+                            },
+                            {
+                              "type": "text",
+                              "id": "z6lXI",
+                              "name": "token-name",
+                              "fill": "#141f39ff",
+                              "content": "color-primitive-green-500",
+                              "lineHeight": 1.4,
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "Bp2fd",
+                              "name": "resolved-value",
+                              "fill": "#52525bff",
+                              "content": "#38da71",
+                              "lineHeight": 1.4,
+                              "fontFamily": "Inter",
+                              "fontSize": 12
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "fgHIs",
+                          "name": "swatch-tile navy-900",
+                          "width": 200,
+                          "fill": "#ffffffff",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "padding": 12,
+                          "children": [
+                            {
+                              "type": "rectangle",
+                              "cornerRadius": 4,
+                              "id": "gwE2B",
+                              "name": "swatch",
+                              "fill": "#141f39ff",
+                              "width": 176,
+                              "height": 80
+                            },
+                            {
+                              "type": "text",
+                              "id": "V7Fdw1",
+                              "name": "token-name",
+                              "fill": "#141f39ff",
+                              "content": "color-primitive-navy-900",
+                              "lineHeight": 1.4,
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "Q3mI4n",
+                              "name": "resolved-value",
+                              "fill": "#52525bff",
+                              "content": "#141f39",
+                              "lineHeight": 1.4,
+                              "fontFamily": "Inter",
+                              "fontSize": 12
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "k7Ara7",
+                          "name": "swatch-tile coral-400",
+                          "width": 200,
+                          "fill": "#ffffffff",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "padding": 12,
+                          "children": [
+                            {
+                              "type": "rectangle",
+                              "cornerRadius": 4,
+                              "id": "jspLD",
+                              "name": "swatch",
+                              "fill": "#ff928aff",
+                              "width": 176,
+                              "height": 80
+                            },
+                            {
+                              "type": "text",
+                              "id": "JgTpl",
+                              "name": "token-name",
+                              "fill": "#141f39ff",
+                              "content": "color-primitive-coral-400",
+                              "lineHeight": 1.4,
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "nXUiR",
+                              "name": "resolved-value",
+                              "fill": "#52525bff",
+                              "content": "#ff928a",
+                              "lineHeight": 1.4,
+                              "fontFamily": "Inter",
+                              "fontSize": 12
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "F9NzK",
+                          "name": "swatch-tile red-400",
+                          "width": 200,
+                          "fill": "#ffffffff",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "padding": 12,
+                          "children": [
+                            {
+                              "type": "rectangle",
+                              "cornerRadius": 4,
+                              "id": "CxPgj",
+                              "name": "swatch",
+                              "fill": "#eb5757ff",
+                              "width": 176,
+                              "height": 80
+                            },
+                            {
+                              "type": "text",
+                              "id": "Efl62",
+                              "name": "token-name",
+                              "fill": "#141f39ff",
+                              "content": "color-primitive-red-400",
+                              "lineHeight": 1.4,
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "gMxFb",
+                              "name": "resolved-value",
+                              "fill": "#52525bff",
+                              "content": "#eb5757",
+                              "lineHeight": 1.4,
+                              "fontFamily": "Inter",
+                              "fontSize": 12
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
             }
           ]
+        },
+        {
+          "type": "frame",
+          "id": "Q6bJzy",
+          "name": "Typography",
+          "width": 1200,
+          "fill": {
+            "type": "color",
+            "color": "#ffffff00",
+            "enabled": false
+          },
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            80,
+            0
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "uNPUE",
+              "name": "H2",
+              "fill": "#141f39ff",
+              "content": "Typography",
+              "lineHeight": 1.4,
+              "fontFamily": "Plus Jakarta Sans",
+              "fontSize": 32,
+              "fontWeight": "700"
+            },
+            {
+              "id": "BOp3l",
+              "type": "ref",
+              "ref": "qo5Vi",
+              "name": "Typography — Font Families TypeSpecimen",
+              "descendants": {
+                "fJynU": {
+                  "content": "Font Families"
+                },
+                "QA3ye": {
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "gpMXR",
+                      "name": "specimen-tile display",
+                      "width": 1200,
+                      "fill": {
+                        "type": "color",
+                        "color": "#ffffff00",
+                        "enabled": false
+                      },
+                      "layout": "vertical",
+                      "gap": 4,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "NeNYz",
+                          "name": "sample-text",
+                          "fill": "#141f39ff",
+                          "content": "The quick brown fox jumps over the lazy dog",
+                          "lineHeight": 1.2,
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 32,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "NPdKf",
+                          "name": "token-name",
+                          "fill": "#52525bff",
+                          "content": "type-primitive-family-display",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "zgA4u",
+                          "name": "metadata",
+                          "fill": "#52525bff",
+                          "content": "Plus Jakarta Sans  (display family — heading + display roles)",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 11
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "bA92K",
+                      "name": "specimen-tile body",
+                      "width": 1200,
+                      "fill": {
+                        "type": "color",
+                        "color": "#ffffff00",
+                        "enabled": false
+                      },
+                      "layout": "vertical",
+                      "gap": 4,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "v79d7z",
+                          "name": "sample-text",
+                          "fill": "#141f39ff",
+                          "content": "The quick brown fox jumps over the lazy dog",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 18
+                        },
+                        {
+                          "type": "text",
+                          "id": "mTGXH",
+                          "name": "token-name",
+                          "fill": "#52525bff",
+                          "content": "type-primitive-family-body",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "xMiPG",
+                          "name": "metadata",
+                          "fill": "#52525bff",
+                          "content": "Inter  (body family — paragraphs + UI text)",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 11
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "bS4lX",
+                      "name": "specimen-tile footer",
+                      "width": 1200,
+                      "fill": {
+                        "type": "color",
+                        "color": "#ffffff00",
+                        "enabled": false
+                      },
+                      "layout": "vertical",
+                      "gap": 4,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "g7YId",
+                          "name": "sample-text",
+                          "fill": "#141f39ff",
+                          "content": "The quick brown fox jumps over the lazy dog",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Chivo",
+                          "fontSize": 18
+                        },
+                        {
+                          "type": "text",
+                          "id": "r6KTv",
+                          "name": "token-name",
+                          "fill": "#52525bff",
+                          "content": "type-primitive-family-footer",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "qvQAY",
+                          "name": "metadata",
+                          "fill": "#52525bff",
+                          "content": "Chivo  (footer family — captions + Section/Footer)",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 11
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "SPhV0",
+                      "name": "specimen-tile mono",
+                      "width": 1200,
+                      "fill": {
+                        "type": "color",
+                        "color": "#ffffff00",
+                        "enabled": false
+                      },
+                      "layout": "vertical",
+                      "gap": 4,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "s4txZy",
+                          "name": "sample-text",
+                          "fill": "#141f39ff",
+                          "content": "const x = 'The quick brown fox';",
+                          "lineHeight": 1.625,
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 14
+                        },
+                        {
+                          "type": "text",
+                          "id": "LzlB3",
+                          "name": "token-name",
+                          "fill": "#52525bff",
+                          "content": "type-primitive-family-mono  (Pencil-render proxy: JetBrains Mono; runtime: SF Mono fallback chain — OPEN-30-04)",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "B621mX",
+                          "name": "metadata",
+                          "fill": "#52525bff",
+                          "content": "'SF Mono', Menlo, Monaco, Consolas, monospace  (code blocks + inline code)",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 11
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "qCLSI",
+              "type": "ref",
+              "ref": "qo5Vi",
+              "name": "Typography — Type Scale TypeSpecimen",
+              "descendants": {
+                "fJynU": {
+                  "content": "Type Scale"
+                },
+                "QA3ye": {
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "d9OUOk",
+                      "name": "specimen-tile display",
+                      "width": 1200,
+                      "fill": {
+                        "type": "color",
+                        "color": "#ffffff00",
+                        "enabled": false
+                      },
+                      "layout": "vertical",
+                      "gap": 4,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "U40F5",
+                          "name": "sample-text",
+                          "fill": "#141f39ff",
+                          "content": "Display",
+                          "lineHeight": 1.2,
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 70,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "t9P09",
+                          "name": "token-name",
+                          "fill": "#52525bff",
+                          "content": "type-semantic-display",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "nNwj2",
+                          "name": "metadata",
+                          "fill": "#52525bff",
+                          "content": "70px / 700 / 1.2 lh  /  Plus Jakarta Sans",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 11
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Z1XAdb",
+                      "name": "specimen-tile heading-1",
+                      "width": 1200,
+                      "fill": {
+                        "type": "color",
+                        "color": "#ffffff00",
+                        "enabled": false
+                      },
+                      "layout": "vertical",
+                      "gap": 4,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "v21Xi0",
+                          "name": "sample-text",
+                          "fill": "#141f39ff",
+                          "content": "Heading 1",
+                          "lineHeight": 1.4,
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 48,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "b7Rgd",
+                          "name": "token-name",
+                          "fill": "#52525bff",
+                          "content": "type-semantic-heading-1",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "OOowq",
+                          "name": "metadata",
+                          "fill": "#52525bff",
+                          "content": "48px / 700 / 1.4 lh  /  Plus Jakarta Sans",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 11
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Y0zOA",
+                      "name": "specimen-tile heading-2",
+                      "width": 1200,
+                      "fill": {
+                        "type": "color",
+                        "color": "#ffffff00",
+                        "enabled": false
+                      },
+                      "layout": "vertical",
+                      "gap": 4,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "iHFQ5",
+                          "name": "sample-text",
+                          "fill": "#141f39ff",
+                          "content": "Heading 2",
+                          "lineHeight": 1.4,
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 32,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "e9ZMj9",
+                          "name": "token-name",
+                          "fill": "#52525bff",
+                          "content": "type-semantic-heading-2",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "B9mQh",
+                          "name": "metadata",
+                          "fill": "#52525bff",
+                          "content": "32px / 700 / 1.4 lh  /  Plus Jakarta Sans",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 11
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ga2br",
+                      "name": "specimen-tile heading-3",
+                      "width": 1200,
+                      "fill": {
+                        "type": "color",
+                        "color": "#ffffff00",
+                        "enabled": false
+                      },
+                      "layout": "vertical",
+                      "gap": 4,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "u80ZV",
+                          "name": "sample-text",
+                          "fill": "#141f39ff",
+                          "content": "Heading 3",
+                          "lineHeight": 1.4,
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 24,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "x72Rif",
+                          "name": "token-name",
+                          "fill": "#52525bff",
+                          "content": "type-semantic-heading-3",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "gybXo",
+                          "name": "metadata",
+                          "fill": "#52525bff",
+                          "content": "24px / 700 / 1.4 lh  /  Plus Jakarta Sans",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 11
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "CPC5s",
+                      "name": "specimen-tile heading-4",
+                      "width": 1200,
+                      "fill": {
+                        "type": "color",
+                        "color": "#ffffff00",
+                        "enabled": false
+                      },
+                      "layout": "vertical",
+                      "gap": 4,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "MjIUx",
+                          "name": "sample-text",
+                          "fill": "#141f39ff",
+                          "content": "Heading 4",
+                          "lineHeight": 1.4,
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 20,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "c4kXB",
+                          "name": "token-name",
+                          "fill": "#52525bff",
+                          "content": "type-semantic-heading-4",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "zrjfH",
+                          "name": "metadata",
+                          "fill": "#52525bff",
+                          "content": "20px / 700 / 1.4 lh  /  Plus Jakarta Sans",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 11
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "c8AY5",
+                      "name": "specimen-tile body",
+                      "width": 1200,
+                      "fill": {
+                        "type": "color",
+                        "color": "#ffffff00",
+                        "enabled": false
+                      },
+                      "layout": "vertical",
+                      "gap": 4,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "a4CqTn",
+                          "name": "sample-text",
+                          "fill": "#141f39ff",
+                          "content": "Body text — the quick brown fox jumps over the lazy dog",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 16
+                        },
+                        {
+                          "type": "text",
+                          "id": "t8bB7",
+                          "name": "token-name",
+                          "fill": "#52525bff",
+                          "content": "type-semantic-body  /  type-semantic-prose-paragraph",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "y5jOW",
+                          "name": "metadata",
+                          "fill": "#52525bff",
+                          "content": "16px / 400 / 1.6 lh  /  Inter",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 11
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "VNAve",
+                      "name": "specimen-tile body-sm",
+                      "width": 1200,
+                      "fill": {
+                        "type": "color",
+                        "color": "#ffffff00",
+                        "enabled": false
+                      },
+                      "layout": "vertical",
+                      "gap": 4,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "exIJc",
+                          "name": "sample-text",
+                          "fill": "#141f39ff",
+                          "content": "Body-sm — used for secondary copy and form helpers",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 14
+                        },
+                        {
+                          "type": "text",
+                          "id": "dJZJX",
+                          "name": "token-name",
+                          "fill": "#52525bff",
+                          "content": "type-semantic-body-sm  /  type-semantic-caption (Chivo variant)",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "z2xRK",
+                          "name": "metadata",
+                          "fill": "#52525bff",
+                          "content": "14px / 400 / 1.5 lh  /  Inter",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 11
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "E3Izx",
+                      "name": "specimen-tile prose-code-block",
+                      "width": 1200,
+                      "fill": {
+                        "type": "color",
+                        "color": "#ffffff00",
+                        "enabled": false
+                      },
+                      "layout": "vertical",
+                      "gap": 4,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "n59rG",
+                          "name": "sample-text",
+                          "fill": "#141f39ff",
+                          "content": "const greeting = 'hello world';",
+                          "lineHeight": 1.625,
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 14
+                        },
+                        {
+                          "type": "text",
+                          "id": "Q5JSp3",
+                          "name": "token-name",
+                          "fill": "#52525bff",
+                          "content": "type-semantic-prose-code-block  (SECONDARY validation per D-150 / Phase 28 D-110)",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "kyvwa",
+                          "name": "metadata",
+                          "fill": "#52525bff",
+                          "content": "14px / 400 / 1.625 lh  /  SF Mono fallback (Pencil-render proxy: JetBrains Mono — OPEN-30-04)",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 11
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "type": "frame",
+              "id": "Y3PkRv",
+              "name": "Typography — Weights + Line Heights inline reference",
+              "width": 1200,
+              "fill": {
+                "type": "color",
+                "color": "#ffffff00",
+                "enabled": false
+              },
+              "layout": "vertical",
+              "gap": 8,
+              "padding": [
+                16,
+                0
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "q50Ya",
+                  "name": "weights-heading",
+                  "fill": "#141f39ff",
+                  "content": "Weights",
+                  "lineHeight": 1.4,
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "HGCHq",
+                  "name": "weights-row",
+                  "fill": "#52525bff",
+                  "content": "400 normal  /  500 medium  /  700 bold  —  type-primitive-weight-{400,500,700}",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14
+                },
+                {
+                  "type": "text",
+                  "id": "s7WNQ",
+                  "name": "lh-heading",
+                  "fill": "#141f39ff",
+                  "content": "Line Heights",
+                  "lineHeight": 1.4,
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "hNzgK",
+                  "name": "lh-tight",
+                  "fill": "#52525bff",
+                  "content": "1.2 lh-tight — display roles  (type-primitive-lh-tight)",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14
+                },
+                {
+                  "type": "text",
+                  "id": "W3h6Rv",
+                  "name": "lh-heading-val",
+                  "fill": "#52525bff",
+                  "content": "1.4 lh-heading — heading-1..4  (type-primitive-lh-heading)",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14
+                },
+                {
+                  "type": "text",
+                  "id": "NXaX0",
+                  "name": "lh-snug",
+                  "fill": "#52525bff",
+                  "content": "1.5 lh-snug — body-sm, captions, buttons  (type-primitive-lh-snug)",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14
+                },
+                {
+                  "type": "text",
+                  "id": "B1jkQv",
+                  "name": "lh-normal",
+                  "fill": "#52525bff",
+                  "content": "1.6 lh-normal — body, prose-paragraph  (type-primitive-lh-normal)",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14
+                },
+                {
+                  "type": "text",
+                  "id": "y1BGNZ",
+                  "name": "lh-loose",
+                  "fill": "#52525bff",
+                  "content": "1.625 lh-loose — prose-list, prose-code-block  (type-primitive-lh-loose)",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "E1wZm0",
+          "name": "Components",
+          "width": 1200,
+          "fill": {
+            "type": "color",
+            "color": "#ffffff00",
+            "enabled": false
+          },
+          "layout": "vertical",
+          "gap": 48,
+          "padding": [
+            80,
+            0
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "KWSNN",
+              "name": "H2",
+              "fill": "#141f39ff",
+              "content": "Components",
+              "lineHeight": 1.4,
+              "fontFamily": "Plus Jakarta Sans",
+              "fontSize": 32,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "XAzHt",
+              "name": "Primitives",
+              "width": 1200,
+              "fill": {
+                "type": "color",
+                "color": "#ffffff00",
+                "enabled": false
+              },
+              "layout": "vertical",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "ScDIe",
+                  "name": "H3",
+                  "fill": "#141f39ff",
+                  "content": "Primitives",
+                  "lineHeight": 1.4,
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 24,
+                  "fontWeight": "700"
+                },
+                {
+                  "id": "zdXff",
+                  "type": "ref",
+                  "ref": "I45jZx",
+                  "name": "Button/Default ComponentShowcase",
+                  "descendants": {
+                    "h6JsA": {
+                      "content": "Primitive / Button / Default"
+                    },
+                    "kxLcQ": {
+                      "children": [
+                        {
+                          "id": "PbpGZ",
+                          "type": "ref",
+                          "ref": "M7eUr",
+                          "name": "Button/Default live instance"
+                        }
+                      ]
+                    },
+                    "MJ9mv": {
+                      "content": "<Button variant=\"yellow\">Click</Button>"
+                    }
+                  }
+                },
+                {
+                  "id": "LqNpR",
+                  "type": "ref",
+                  "ref": "I45jZx",
+                  "name": "Button/Secondary ComponentShowcase",
+                  "descendants": {
+                    "h6JsA": {
+                      "content": "Primitive / Button / Secondary"
+                    },
+                    "kxLcQ": {
+                      "children": [
+                        {
+                          "id": "fIb3l",
+                          "type": "ref",
+                          "ref": "hIWuC",
+                          "name": "Button/Secondary live instance"
+                        }
+                      ]
+                    },
+                    "MJ9mv": {
+                      "content": "<Button variant=\"secondary\">Click</Button>"
+                    }
+                  }
+                },
+                {
+                  "id": "W3DP9V",
+                  "type": "ref",
+                  "ref": "I45jZx",
+                  "name": "Input/Default ComponentShowcase",
+                  "descendants": {
+                    "h6JsA": {
+                      "content": "Primitive / Input / Default"
+                    },
+                    "kxLcQ": {
+                      "children": [
+                        {
+                          "id": "s1WcU",
+                          "type": "ref",
+                          "ref": "nwJk7",
+                          "name": "Input/Default live instance"
+                        }
+                      ]
+                    },
+                    "MJ9mv": {
+                      "content": "<Input label=\"Name\" placeholder=\"Your name\" />"
+                    }
+                  }
+                },
+                {
+                  "id": "YE3KO",
+                  "type": "ref",
+                  "ref": "I45jZx",
+                  "name": "Badge/Default ComponentShowcase",
+                  "descendants": {
+                    "h6JsA": {
+                      "content": "Primitive / Badge / Default"
+                    },
+                    "kxLcQ": {
+                      "children": [
+                        {
+                          "id": "igPna",
+                          "type": "ref",
+                          "ref": "j0FxQZ",
+                          "name": "Badge/Default live instance"
+                        }
+                      ]
+                    },
+                    "MJ9mv": {
+                      "content": "<Badge>Tag</Badge>"
+                    }
+                  }
+                },
+                {
+                  "id": "eEhWh",
+                  "type": "ref",
+                  "ref": "I45jZx",
+                  "name": "Badge/Outline ComponentShowcase",
+                  "descendants": {
+                    "h6JsA": {
+                      "content": "Primitive / Badge / Outline"
+                    },
+                    "kxLcQ": {
+                      "children": [
+                        {
+                          "id": "JpBUz",
+                          "type": "ref",
+                          "ref": "kJQmJ",
+                          "name": "Badge/Outline live instance"
+                        }
+                      ]
+                    },
+                    "MJ9mv": {
+                      "content": "<Badge variant=\"outline\">Tag</Badge>"
+                    }
+                  }
+                },
+                {
+                  "id": "riq4V",
+                  "type": "ref",
+                  "ref": "I45jZx",
+                  "name": "Icon ComponentShowcase (16/20/24/32 sizes per D-148)",
+                  "descendants": {
+                    "h6JsA": {
+                      "content": "Primitive / Icon  —  16 / 20 / 24 / 32"
+                    },
+                    "kxLcQ": {
+                      "layout": "horizontal",
+                      "gap": 24,
+                      "alignItems": "center",
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "id": "fx3y5",
+                          "type": "ref",
+                          "ref": "EQaMf",
+                          "name": "Icon/16 live instance"
+                        },
+                        {
+                          "id": "vJxyE",
+                          "type": "ref",
+                          "ref": "yRvGb",
+                          "name": "Icon/20 live instance"
+                        },
+                        {
+                          "id": "lflzO",
+                          "type": "ref",
+                          "ref": "u7NmaS",
+                          "name": "Icon/24 live instance"
+                        },
+                        {
+                          "id": "nrLAd",
+                          "type": "ref",
+                          "ref": "dpO5Y",
+                          "name": "Icon/32 live instance"
+                        }
+                      ]
+                    },
+                    "MJ9mv": {
+                      "content": "<Icon name=\"chevron-right\" size={24} />"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "R7DBJ",
+              "name": "Compounds",
+              "width": 1200,
+              "fill": {
+                "type": "color",
+                "color": "#ffffff00",
+                "enabled": false
+              },
+              "layout": "vertical",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "g9spUI",
+                  "name": "H3",
+                  "fill": "#141f39ff",
+                  "content": "Compounds",
+                  "lineHeight": 1.4,
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 24,
+                  "fontWeight": "700"
+                },
+                {
+                  "id": "b8Gqp",
+                  "type": "ref",
+                  "ref": "I45jZx",
+                  "name": "Card ComponentShowcase",
+                  "descendants": {
+                    "h6JsA": {
+                      "content": "Compound / Card"
+                    },
+                    "kxLcQ": {
+                      "children": [
+                        {
+                          "id": "BuHPG",
+                          "type": "ref",
+                          "ref": "t40xct",
+                          "name": "Card live instance"
+                        }
+                      ]
+                    },
+                    "MJ9mv": {
+                      "content": "<Card><CardImage /><CardTitle>Card title</CardTitle><CardBody>...</CardBody><CardActions><Button>Read More</Button></CardActions></Card>"
+                    }
+                  }
+                },
+                {
+                  "id": "tV8y0",
+                  "type": "ref",
+                  "ref": "I45jZx",
+                  "name": "BlogCard ComponentShowcase",
+                  "descendants": {
+                    "h6JsA": {
+                      "content": "Compound / BlogCard"
+                    },
+                    "kxLcQ": {
+                      "children": [
+                        {
+                          "id": "xMjEB",
+                          "type": "ref",
+                          "ref": "ZSxZU",
+                          "name": "BlogCard live instance"
+                        }
+                      ]
+                    },
+                    "MJ9mv": {
+                      "content": "<BlogCard post={post} />"
+                    }
+                  }
+                },
+                {
+                  "id": "kF0Cf",
+                  "type": "ref",
+                  "ref": "I45jZx",
+                  "name": "ProjectCard ComponentShowcase",
+                  "descendants": {
+                    "h6JsA": {
+                      "content": "Compound / ProjectCard"
+                    },
+                    "kxLcQ": {
+                      "children": [
+                        {
+                          "id": "e61eFE",
+                          "type": "ref",
+                          "ref": "DnsRs",
+                          "name": "ProjectCard live instance"
+                        }
+                      ]
+                    },
+                    "MJ9mv": {
+                      "content": "<ProjectCard project={project} />"
+                    }
+                  }
+                },
+                {
+                  "id": "Ec193",
+                  "type": "ref",
+                  "ref": "I45jZx",
+                  "name": "CheckboxGroup ComponentShowcase",
+                  "descendants": {
+                    "h6JsA": {
+                      "content": "Compound / CheckboxGroup"
+                    },
+                    "kxLcQ": {
+                      "children": [
+                        {
+                          "id": "e1LXr",
+                          "type": "ref",
+                          "ref": "SW4cz",
+                          "name": "CheckboxGroup live instance"
+                        }
+                      ]
+                    },
+                    "MJ9mv": {
+                      "content": "<CheckboxGroup legend=\"Choose options\" options={[\"A\",\"B\",\"C\"]} />"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "fLjBn",
+              "name": "Sections",
+              "width": 1200,
+              "fill": {
+                "type": "color",
+                "color": "#ffffff00",
+                "enabled": false
+              },
+              "layout": "vertical",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "aCMzu",
+                  "name": "H3",
+                  "fill": "#141f39ff",
+                  "content": "Sections",
+                  "lineHeight": 1.4,
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 24,
+                  "fontWeight": "700"
+                },
+                {
+                  "id": "ib1Vt",
+                  "type": "ref",
+                  "ref": "I45jZx",
+                  "name": "Header ComponentShowcase",
+                  "descendants": {
+                    "h6JsA": {
+                      "content": "Section / Header  (cross-page consistency proof)"
+                    },
+                    "kxLcQ": {
+                      "children": [
+                        {
+                          "id": "fXiWe",
+                          "type": "ref",
+                          "ref": "G0wNOc",
+                          "name": "Header live instance"
+                        }
+                      ]
+                    },
+                    "MJ9mv": {
+                      "content": "<Header />"
+                    }
+                  }
+                },
+                {
+                  "id": "X0C4v",
+                  "type": "ref",
+                  "ref": "I45jZx",
+                  "name": "Footer ComponentShowcase",
+                  "descendants": {
+                    "h6JsA": {
+                      "content": "Section / Footer  (cross-page consistency proof)"
+                    },
+                    "kxLcQ": {
+                      "children": [
+                        {
+                          "id": "XTfBq",
+                          "type": "ref",
+                          "ref": "Xs0Hs",
+                          "name": "Footer live instance"
+                        }
+                      ]
+                    },
+                    "MJ9mv": {
+                      "content": "<Footer />"
+                    }
+                  }
+                },
+                {
+                  "id": "kRy9p",
+                  "type": "ref",
+                  "ref": "I45jZx",
+                  "name": "CTA ComponentShowcase",
+                  "descendants": {
+                    "h6JsA": {
+                      "content": "Section / CTA"
+                    },
+                    "kxLcQ": {
+                      "children": [
+                        {
+                          "id": "vcvsq",
+                          "type": "ref",
+                          "ref": "Hs5rc",
+                          "name": "CTA live instance"
+                        }
+                      ]
+                    },
+                    "MJ9mv": {
+                      "content": "<CTA heading=\"Still have questions?\" actions={[<Button>Get in touch</Button>]} />"
+                    }
+                  }
+                },
+                {
+                  "id": "ydmkt",
+                  "type": "ref",
+                  "ref": "I45jZx",
+                  "name": "NavBack ComponentShowcase",
+                  "descendants": {
+                    "h6JsA": {
+                      "content": "Section / NavBack"
+                    },
+                    "kxLcQ": {
+                      "children": [
+                        {
+                          "id": "rh6Xw",
+                          "type": "ref",
+                          "ref": "N1jo3i",
+                          "name": "NavBack live instance"
+                        }
+                      ]
+                    },
+                    "MJ9mv": {
+                      "content": "<NavBack heading=\"Find what you need\" links={[{href:'/',label:'Home'},...]} />"
+                    }
+                  }
+                },
+                {
+                  "id": "hpwNq",
+                  "type": "ref",
+                  "ref": "I45jZx",
+                  "name": "TagFilter ComponentShowcase",
+                  "descendants": {
+                    "h6JsA": {
+                      "content": "Section / TagFilter"
+                    },
+                    "kxLcQ": {
+                      "children": [
+                        {
+                          "id": "Yn5Y1",
+                          "type": "ref",
+                          "ref": "O1IwyS",
+                          "name": "TagFilter live instance"
+                        }
+                      ]
+                    },
+                    "MJ9mv": {
+                      "content": "<TagFilter tags={[...]} active=\"all\" />"
+                    }
+                  }
+                },
+                {
+                  "id": "yL1K6",
+                  "type": "ref",
+                  "ref": "I45jZx",
+                  "name": "RelatedPosts ComponentShowcase",
+                  "descendants": {
+                    "h6JsA": {
+                      "content": "Section / RelatedPosts"
+                    },
+                    "kxLcQ": {
+                      "children": [
+                        {
+                          "id": "rebLb",
+                          "type": "ref",
+                          "ref": "etY5x",
+                          "name": "RelatedPosts live instance"
+                        }
+                      ]
+                    },
+                    "MJ9mv": {
+                      "content": "<RelatedPosts posts={posts} heading=\"Related posts\" />"
+                    }
+                  }
+                },
+                {
+                  "id": "E7fwX",
+                  "type": "ref",
+                  "ref": "I45jZx",
+                  "name": "ResultsMetrics ComponentShowcase",
+                  "descendants": {
+                    "h6JsA": {
+                      "content": "Section / ResultsMetrics"
+                    },
+                    "kxLcQ": {
+                      "children": [
+                        {
+                          "id": "i91TmD",
+                          "type": "ref",
+                          "ref": "y4RORu",
+                          "name": "ResultsMetrics live instance"
+                        }
+                      ]
+                    },
+                    "MJ9mv": {
+                      "content": "<ResultsMetrics metrics={[{value:'85%',label:'Reduction'},...]} />"
+                    }
+                  }
+                },
+                {
+                  "id": "uSKHI",
+                  "type": "ref",
+                  "ref": "I45jZx",
+                  "name": "RelatedProjects ComponentShowcase",
+                  "descendants": {
+                    "h6JsA": {
+                      "content": "Section / RelatedProjects"
+                    },
+                    "kxLcQ": {
+                      "children": [
+                        {
+                          "id": "l78iZ",
+                          "type": "ref",
+                          "ref": "OLSa0",
+                          "name": "RelatedProjects live instance"
+                        }
+                      ]
+                    },
+                    "MJ9mv": {
+                      "content": "<RelatedProjects projects={projects} />"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Jp7XU",
+          "name": "Utilities",
+          "width": 1200,
+          "fill": {
+            "type": "color",
+            "color": "#ffffff00",
+            "enabled": false
+          },
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            80,
+            0
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "BT4Al",
+              "name": "H2",
+              "fill": "#141f39ff",
+              "content": "Utilities",
+              "lineHeight": 1.4,
+              "fontFamily": "Plus Jakarta Sans",
+              "fontSize": 32,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "BOkXm",
+              "name": "iso-shadow",
+              "width": 1200,
+              "fill": {
+                "type": "color",
+                "color": "#ffffff00",
+                "enabled": false
+              },
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "oi6cQ",
+                  "name": "H3",
+                  "fill": "#141f39ff",
+                  "content": "iso-shadow  (APPROXIMATE — calibration target per Open Q3)",
+                  "lineHeight": 1.4,
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 24,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "Tnb6E",
+                  "name": "iso-shadow-stage",
+                  "width": 320,
+                  "height": 220,
+                  "fill": {
+                    "type": "color",
+                    "color": "#ffffff00",
+                    "enabled": false
+                  },
+                  "layout": "vertical",
+                  "padding": [
+                    16,
+                    16,
+                    24,
+                    16
+                  ],
+                  "children": [
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 10,
+                      "id": "C7tXBp",
+                      "name": "shadow-offset (#141f39 navy, 5px 5px)",
+                      "fill": "#141f39ff",
+                      "width": 240,
+                      "height": 160
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 10,
+                      "id": "p41yzh",
+                      "name": "card-foreground",
+                      "fill": "#ffffffff",
+                      "width": 240,
+                      "height": 160,
+                      "stroke": "#d4d4d8ff",
+                      "strokeWidth": 1
+                    }
+                  ]
+                },
+                {
+                  "type": "note",
+                  "id": "IoWfx",
+                  "name": "iso-shadow CSS mechanic",
+                  "width": 0,
+                  "height": 0,
+                  "content": "src/styles/global.css lines 193-218.\n\n.iso-shadow      { box-shadow: 5px 5px 0 currentColor; }\n.iso-shadow-sm   { box-shadow: 3px 3px 0 currentColor; }\n.iso-shadow-lg   { box-shadow: 8px 8px 0 currentColor; }\n\nDark mode: each variant becomes a soft glow via color-mix(in oklch, currentColor 20-60%, transparent).\n\nPhase 30 ships APPROXIMATE visualization (offset filled rectangle behind a Card placeholder). Code milestone re-implements via box-shadow utility class. Calibration gate at Task 8 confirms APPROXIMATE reads cleanly OR re-labels to STUB."
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "I8Ach",
+              "name": "iso-glow",
+              "width": 1200,
+              "fill": {
+                "type": "color",
+                "color": "#ffffff00",
+                "enabled": false
+              },
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "zlCme",
+                  "name": "H3",
+                  "fill": "#141f39ff",
+                  "content": "iso-glow  (STUB — color-mix() not faithfully renderable in Pencil)",
+                  "lineHeight": 1.4,
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 24,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "seQVv",
+                  "name": "iso-glow-stage",
+                  "width": 320,
+                  "fill": {
+                    "type": "color",
+                    "color": "#ffffff00",
+                    "enabled": false
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 16,
+                  "children": [
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 10,
+                      "id": "igKTn",
+                      "name": "card-placeholder",
+                      "fill": "#ffffffff",
+                      "width": 240,
+                      "height": 160,
+                      "stroke": "#d4d4d8ff",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "text",
+                      "id": "r214J",
+                      "name": "stub-label",
+                      "fill": "#52525bff",
+                      "content": "STUB — iso-glow renders as a soft CSS box-shadow with color-mix; not faithfully representable in Pencil. See sibling note for CSS mechanic.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 12
+                    }
+                  ]
+                },
+                {
+                  "type": "note",
+                  "id": "bWHHl",
+                  "name": "iso-glow CSS mechanic",
+                  "width": 0,
+                  "height": 0,
+                  "content": "src/styles/global.css lines 220-231.\n\n.iso-glow         { box-shadow: 0 0 20px color-mix(in oklch, currentColor 40%, transparent); }\n.iso-glow-subtle  { box-shadow: 0 0 15px color-mix(in oklch, currentColor 20%, transparent); }\n.iso-glow-strong  { box-shadow: 0 0 30px color-mix(in oklch, currentColor 60%, transparent); }\n\nUsed in dark mode iso-shadow variants and as explicit glow utility. Phase 30 STUB — color-mix() in oklch + soft blur cannot be faithfully rendered in Pencil design tool. Code milestone implements via Tailwind utility classes."
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "cWeq5",
+              "name": "iso-rotate",
+              "width": 1200,
+              "fill": {
+                "type": "color",
+                "color": "#ffffff00",
+                "enabled": false
+              },
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "P9FVz",
+                  "name": "H3",
+                  "fill": "#141f39ff",
+                  "content": "iso-rotate  (STUB — 3D CSS transforms not renderable in Pencil)",
+                  "lineHeight": 1.4,
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 24,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "uCYga",
+                  "name": "iso-rotate-stage",
+                  "width": 320,
+                  "fill": {
+                    "type": "color",
+                    "color": "#ffffff00",
+                    "enabled": false
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 16,
+                  "children": [
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 10,
+                      "id": "iAWur",
+                      "name": "card-placeholder",
+                      "fill": "#ffffffff",
+                      "width": 240,
+                      "height": 160,
+                      "stroke": "#d4d4d8ff",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "text",
+                      "id": "cYz8L",
+                      "name": "stub-label",
+                      "fill": "#52525bff",
+                      "content": "STUB — iso-rotate uses rotateX + rotateZ 3D transforms; not renderable in Pencil's 2D canvas. See sibling note for CSS mechanic.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 12
+                    }
+                  ]
+                },
+                {
+                  "type": "note",
+                  "id": "riQTk",
+                  "name": "iso-rotate CSS mechanic",
+                  "width": 0,
+                  "height": 0,
+                  "content": "src/styles/global.css lines 145-158.\n\n.iso-rotate         { transform: rotateX(45deg) rotateZ(45deg); }\n.iso-rotate-subtle  { transform: rotateX(30deg) rotateZ(30deg); }\n.iso-rotate-steep   { transform: rotateX(60deg) rotateZ(45deg); }\n\nUsed within .iso-container { transform-style: preserve-3d } parents for compound 3D effects. Additional .iso-face-* utilities (front, top, side) for multi-face elements. Phase 30 STUB — 3D CSS transforms cannot be rendered in Pencil's 2D canvas; code milestone implements via Tailwind transform utilities."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "GChGo",
+          "type": "ref",
+          "ref": "Xs0Hs",
+          "name": "Section/Footer instance"
         }
       ]
     },
@@ -24472,6 +26298,36 @@
       "width": 0,
       "height": 0,
       "content": "v1.3 section anchor ID: #colors"
+    },
+    {
+      "type": "note",
+      "id": "dEgwQ",
+      "x": 0,
+      "y": 0,
+      "name": "Typography H2 anchor ID",
+      "width": 0,
+      "height": 0,
+      "content": "v1.3 section anchor ID: #typography"
+    },
+    {
+      "type": "note",
+      "id": "j1erBj",
+      "x": 0,
+      "y": 0,
+      "name": "Components H2 anchor ID",
+      "width": 0,
+      "height": 0,
+      "content": "v1.3 section anchor ID: #components"
+    },
+    {
+      "type": "note",
+      "id": "J4bSH",
+      "x": 0,
+      "y": 0,
+      "name": "Utilities H2 anchor ID",
+      "width": 0,
+      "height": 0,
+      "content": "v1.3 section anchor ID: #utilities"
     }
   ],
   "variables": {
