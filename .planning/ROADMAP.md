@@ -114,7 +114,7 @@ See `.planning/MILESTONES.md` "v1.4 Design Overhaul (Abandoned)" entry for the f
 
 **Cross-cutting policies (apply to every phase from Phase 24 onward):**
 
-- **Zero raw hex/px values** inside any component or section — every fill, stroke, padding, gap, type style references a token (COMP-09 enforced; VALID-04 sweep-verifies at milestone close).
+- **Zero raw hex/px values** inside any component or section — every fill, stroke, padding, gap references a token (COMP-09 enforced; VALID-04 sweep-verifies at milestone close).
 - **Single-file strategy** — everything lives in `design/Crito.pen`; library frames at top of canvas with `_` prefix (COMP-08).
 - **Gap declaration, not gap filling** — when the source is silent, add a flagged OPEN note in Pencil; never silently fill with personal style choices (VALID-03 enforced from Phase 26 onward, but the discipline starts the moment Phase 23's audit surfaces the first ambiguity).
 - **Desktop only for v2.0** — mobile breakpoint reconstruction deferred to a later milestone (PAGE-09).
@@ -356,7 +356,7 @@ Plans:
 
 #### Phase 31: Homepage Reconstruction
 
-**Goal**: The Homepage frame — the highest section count and highest reuse payoff — is reconstructed last, with every flat raster section (hero, services, process, why-choose-us / about, contact-section preview, etc.) replaced by a layout-driven composition of section components instancing primitives and compounds; running the full library through the homepage is the strongest stress test of the foundation work.
+**Goal**: The Homepage frame — the highest section count and highest reuse payoff — is reconstructed last as a Joel-shape 5-section narrative backbone (Hero → Services → Process → About → closing-CTA) with Crito-vocab tokens + library components per D-156, the only v2.0 IN-SCOPE page where the Crito source (ujMLJ) is structurally editable; D-155 introduces a NEW HYBRID joel-only-with-Hero-pairing-exception calibration sub-branch (§ 4 default + § 3.4 step 4 Hero side-by-side exception) honoring the topology-source decoupling; closes every remaining cross-phase deferral (Phase 25 D-38 Header nav override per D-162 SCOPED + Phase 25 D-40 Joel logo per D-163 + Phase 25 OPEN-25-01 Hero Secondary white-stroke per D-157 + Phase 23 OPEN-23-04 ujMLJ token-mining last consumer + Phase 23 OPEN-23-09 Poppins decision).
 **Depends on**: Phase 30
 **Requirements**: PAGE-01
 **Success Criteria** (what must be TRUE):
@@ -366,13 +366,25 @@ Plans:
   3. The reconstructed homepage uses `Section / Header` and `Section / Footer` instances at top and bottom (proving cross-page consistency with Phase 30's design-system page)
   4. Per-section fidelity labels and side-by-side calibration artifacts in `.planning/ui-reviews/v2.0/` for every reconstructed homepage section; user spot-check before phase close (highest scrutiny because this is the most-trafficked surface)
 
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
 
-- [ ] 31-01: Reconstruct Homepage hero + services sections (highest visual stakes); per-section calibration
-- [ ] 31-02: Reconstruct Homepage process + about sections; per-section calibration
-- [ ] 31-03: Reconstruct any remaining Homepage sections (why-choose-us, contact preview, etc.); per-section calibration; user spot-check across all homepage sections
+**Wave 1**
+
+- [ ] 31-00-PLAN.md — Phase 31 foundation (D-164 foundation-first chain; probe-only, NO library mutations, NO calibration gate at close per D-86/D-102/D-124/D-139/D-152/D-165 chain): Task 0 content extraction from v1.3 src/components/{Hero,Services,Process,About,homepage/ContactSection,layout/Header}.astro per D-98 chain → content lookup table for Plan 31-01 consumption; Task 1 Section/Header (G0wNOc) descendants-override probe for D-162 4-link nav (Path B HIDE+REPLACE vs Path C children-whole-replacement per OPEN-30-07 ref-composition constraint); Task 2 Primitive/Button/Secondary (hIWuC) descendants-override probe for OPEN-25-01 white-stroke + white-label carve-out per D-157; Task 3 ujMLJ Hero subtree role assignment probe per PEN-INVENTORY line 121 (0veF5/Wx9kx/7QsZc/HuBKK/LqPtn/ggx3v) + Hero illustration leaf node ID for D-155 LOCK note target; Task 4 baseline regression (21 components + 9 page frames + 107 tokens unchanged). Library 19 → 19; tokens 107 → 107. Default mid-plan gate triggers only IF (a) Hero subtree probe surfaces new token need (default NO), (b) Section/SecondaryLink third consumer surfaces (default DEFER), or (c) Hero illustration content authority needs clarification (default STUB rect with sibling note).
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [ ] 31-01-PLAN.md — Homepage page-frame composition + single calibration gate at close per D-155 HYBRID joel-only-with-Hero-pairing-exception sub-branch (SIXTH joel-only production use + FIRST D-155 HYBRID consumer in v2.0; LAST per-page reconstruction): top-level `Homepage` frame at 1440 width via find_empty_space_on_canvas with `nodeId: a0gRv` anchor (Phase 30 Design system frame per § 10.4); 7-child vertical-stack composition — Section/Header (G0wNOc) with D-162 SCOPED descendants override (HIDE Home/About/Services + REPLACE one slot text with "Projects") + D-163 logo sibling Pencil note + Hero inline per D-157 (Crito Hero layout: PJS 70 display H1 + Inter 18 subtitle + dual CTAs Primary M7eUr + Secondary hIWuC with OPEN-25-01 white-stroke + white-label descendants override + decorative coral ellipse 286×225 per PEN-INVENTORY line 129 token-mining + Hero illustration STUB image-fill rect) + Services inline per D-158 (H2 + 3-up Compound/Card t40xct grid with per-card descendants overrides + image-slot STUB) + Process inline per D-159 (H2 + 5-step vertical timeline + step-illustration STUB) + About inline per D-160 (2-col headshot STUB LEFT + bio + credibility stats inline + Primary CTA to /contact n0QqTd RIGHT) + Section/CTA (Hs5rc) instance per D-161 (SECOND cross-phase consumer after Phase 27 Plan 27-01 Thank-you; v1.3 ContactSection on-homepage sibling note for code milestone) + Section/Footer (Xs0Hs, no override per D-77 carry-forward); snapshot_layout regression at document root; single AskUserQuestion calibration gate carrying BOTH § 4.5 joel-only token-usage description AND § 3.4 step 4 Hero side-by-side image pair per D-155 HYBRID; on APPROVE → PAGE-11 LOCK action per § 3.3 sub-section-raster sub-rule (sibling Pencil note on ujMLJ Hero illustration parent; raster STAYS enabled:true — NEVER hidden per Pitfall 4); PEN-INVENTORY extensions per D-167 (new Homepage row + ujMLJ line 65 status_counts locked:1 + Variant Evidence Phase 31 + new Open Flags — Phase 31 OPEN-31-NN section + OPEN-25-01/-23-09 RESOLVED + OPEN-23-04 LAST-VISIT); v2.0 per-page reconstruction chain closes at 10/10 IN-SCOPE Joel pages.
+
+**Cross-cutting constraints:**
+
+- Every Pencil-mutating call is preceded by `mcp__pencil__get_editor_state({ include_schema: false })` asserting active editor == `design/Crito.pen` (D-166 carry-forward from Phase 30 D-153 / Phase 29 D-140 / Phase 28 D-125 / Phase 27 D-103 / Phase 26 D-87 / Phase 25 D-54 / Phase 24 D-35)
+- `snapshot_layout({ maxDepth: 0, problemsOnly: true })` at document root returns `"No layout problems."` at every plan close; text-clipping false-positives anticipated on Hero PJS 70 H1 + heading-1 H2s + prose-paragraph bodies per Pitfall 6 (documented BENIGN per Phase 24-30 precedent)
+- PEN-INVENTORY extension pattern per D-167 — Frames Inventory NEW Homepage row + UPDATE ujMLJ line 65 LOCK + Variant Evidence (Phase 31) sub-section + Open Flags — Phase 31 (OPEN-31-NN) + cross-phase OPEN-flag status updates (OPEN-25-01 RESOLVED, OPEN-23-09 RESOLVED, OPEN-23-04 LAST-VISIT)
+- Phase 31 ships ZERO new tokens default — `get_variables({})` returns 107 at every plan open + close per D-164 plan-execution evaluation (mid-plan gate only if Hero subtree probe surfaces token escalation)
+- Phase 31 ships ZERO new library components — pure composition + descendants overrides per Pitfall O5/O6 narrow-scoping chain + D-158/-159/-160/-161 inline composition (Phase 30 D-149 showcase departure NOT inherited)
 
 ---
 
@@ -435,9 +447,9 @@ Phases execute in numeric order: 1 → 2 → ... → 22 → 23 → 24 → 25 →
 | 28. Blog Reconstruction | v2.0 | 0/TBD | Not started | - |
 | 29. Projects Reconstruction | v2.0 | 3/3 | Complete   | 2026-06-09 |
 | 30. Design System Reference Reconstruction | v2.0 | 2/2 | Complete    | 2026-06-10 |
-| 31. Homepage Reconstruction | v2.0 | 0/TBD | Not started | - |
+| 31. Homepage Reconstruction | v2.0 | 0/2 | Not started | - |
 | 32. Fidelity Sweep + Handoff | v2.0 | 0/TBD | Not started | - |
 
 ---
 *Roadmap initialized: 2026-01-26 for v1.0*
-*Last updated: 2026-06-08 — Phase 28 planned (4/4 plans: 28-00 foundation + 28-01 Blog index crito-source-flat-raster + 28-02 Blog post detail crito-source-flat-raster + 28-03 Tag joel-only-no-crito-ref; ships 7 prose tokens + 2 Section components + Card title-slot extension + Badge/Outline variant; PAGE-11 ACTIVE applied twice (DzqTm + w1m3x); CALIBRATION-PROTOCOL second dual-branch consumer; OPEN-25-07 resolved at Phase 28 close via 15 Card instances)*
+*Last updated: 2026-06-11 — Phase 31 planned (2/2 plans: 31-00 foundation probe-only + 31-01 Homepage page-frame composition + D-155 HYBRID joel-only-with-Hero-pairing-exception calibration sub-branch; ships 0 new tokens + 0 new library components; 1 new top-level Homepage frame + 1 sibling Pencil LOCK note on ujMLJ Hero illustration parent per § 3.3 sub-section-raster sub-rule; closes Phase 25 D-38 Header nav override + Phase 25 D-40 Joel logo + Phase 25 OPEN-25-01 Hero Secondary white-stroke + Phase 23 OPEN-23-04 + OPEN-23-09 deferral chains; SECOND cross-phase Section/CTA consumer; v2.0 per-page reconstruction chain closes at 10/10 IN-SCOPE Joel pages after Plan 31-01 APPROVE)*
