@@ -91,6 +91,7 @@ See `.planning/MILESTONES.md` "v2.0 Prep Crito Design File (Abandoned)" for deta
 **Requirements:** FOUND-01, FOUND-02, FOUND-03, FOUND-04, FOUND-05
 
 **Success Criteria:**
+
 1. `src/styles/global.css` contains a `@theme` block with all eight `--wl-*` palette tokens (Ink / Sub / Accent / Accent-soft / Sea-glass / Sea-glass-deep / Paper / Line) in both light and dark variants, every value traceable to a Figma variable — no invented values.
 2. Fraunces (upright + italic, `opsz`/`wght` variable axes) and Hanken Grotesk (weight variable) load from self-hosted `@fontsource-variable` packages; Lighthouse CLS = 0 on the homepage after the font phase.
 3. A WCAG AA contrast check passes for every text-use token pair in both themes before any component is authored.
@@ -100,11 +101,25 @@ See `.planning/MILESTONES.md` "v2.0 Prep Crito Design File (Abandoned)" for deta
 **Plans:** 6 plans (5 waves)
 
 Plans:
+**Wave 1**
+
 - [ ] 33-01-PLAN.md — Figma extraction artifact (palette, type ramp, waveform SVG, OG tagline) [manual/Figma]
 - [ ] 33-02-PLAN.md — Lighthouse CI expansion (landing + blog, mobile + desktop, re-enable LCP audits)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
 - [ ] 33-03-PLAN.md — WCAG AA contrast gate script + accent-soft-text companion (TDD)
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
 - [ ] 33-04-PLAN.md — --wl-* @theme tokens (light + dark) + body base default
+
+**Wave 4** *(blocked on Wave 3 completion)*
+
 - [ ] 33-05-PLAN.md — Self-hosted fonts (fontsource + Fontaine CLS=0) + 13-style type ramp
+
+**Wave 5** *(blocked on Wave 4 completion)*
+
 - [ ] 33-06-PLAN.md — Brand assets: WaveMark, favicon, OG image (approval-gated) [manual/approval]
 
 ---
@@ -118,6 +133,7 @@ Plans:
 **Requirements:** CHROME-01, CHROME-02, CHROME-03, CHROME-04
 
 **Success Criteria:**
+
 1. Opening any page in a dark-OS browser produces no flash of light-theme content; the FOUC-prevention `<script is:inline>` remains in `<head>` before `<body>`.
 2. The site header displays the waveform mark, wordmark, and nav links (Services / Showcase / About / Book a call) on desktop; the theme toggle is functional in both header states.
 3. The mobile navigation opens/closes correctly, all links are reachable by keyboard, and screen-reader announcement is correct — zero axe-core violations.
@@ -135,6 +151,7 @@ Plans:
 **Requirements:** COMP-01, COMP-02
 
 **Success Criteria:**
+
 1. `CTAButton.astro` renders all four Figma variants (Solid / Ghost / Ghost-on-dark / Small) including calendar and mail icon slots; all variants pass axe-core with zero violations and meet WCAG AA contrast in both themes.
 2. Each supporting primitive (Eyebrow, Tag, Callout, LinkCard, Breadcrumb, Step) exists as an individual Astro component using only `--wl-*` tokens; zero references to old neobrutalist token names appear in new component files.
 3. All primitives are exercised on a temporary dev isolation page that is deleted before the phase branch is merged; the dev page is not reachable in production.
@@ -151,6 +168,7 @@ Plans:
 **Requirements:** COMP-03, COMP-04, COMP-05, CONT-01
 
 **Success Criteria:**
+
 1. `ProjectCard.astro` renders closed and expanded states using native `<details>`/`<summary>`; the expanded story content (problem / built / result) is in the DOM when collapsed (for SEO indexing) and animated open/close via CSS `::details-content`; zero axe-core violations.
 2. `FAQItem.astro` uses native `<details>` with exclusive-open behavior; keyboard navigation cycles through all FAQ items without a mouse; zero axe-core violations.
 3. The five-line frequency-field wave SVG renders correctly in both light and dark themes using `var(--wl-*)` stroke tokens; the SVG is inline (not `<img src>`), so CSS variables resolve at render time.
@@ -168,6 +186,7 @@ Plans:
 **Requirements:** PAGE-01, CONT-02, IA-03, IA-04
 
 **Success Criteria:**
+
 1. `/` renders all nine Figma sections (Hero, Who, Three-ways `#services`, How-it-works, Automations, Proof, About `#about`, Agencies, Final CTA) with copy sourced verbatim from Figma frames `12:2` (light) and `117:103` (dark); any Figma copy gap is flagged to Joel, not filled with invented text.
 2. All Book-a-call CTAs resolve to a single `BOOKING_URL` constant (Calendly placeholder); email CTAs use `mailto:me@joelshinness.com`.
 3. Anchor nav active states update correctly as the user scrolls through `#services` and `#about`; the cross-page link `/showcase` → `/#services` lands on the correct section with header offset applied.
@@ -187,6 +206,7 @@ Plans:
 **Requirements:** PAGE-02, PAGE-06
 
 **Success Criteria:**
+
 1. `/showcase` displays Client Work and Craft & Experiments sections; each project renders via `ProjectCard.astro` in closed state and expands to show the full problem/built/result story; all card states match Figma frame `12:3`.
 2. Blog index (`/blog`), post (`/blog/[slug]`), and tag (`/blog/tags/[tag]`) pages render in the Wavelength brand at all breakpoints; the blog is removed from the main nav but a `/blog` link is present in the footer.
 3. The `loading="lazy"` bug on blog post featured images is fixed (changed to `loading="eager"` at the LCP position); Lighthouse LCP audit passes on blog post URLs.
@@ -204,6 +224,7 @@ Plans:
 **Requirements:** PAGE-03, PAGE-04, PAGE-05, IA-02
 
 **Success Criteria:**
+
 1. `/404` renders a branded not-found page using Wavelength tokens and chrome (this page currently does not exist in the repo).
 2. `/services/web` is reachable by direct URL but carries a `noindex` meta tag and is excluded from the `@astrojs/sitemap` output via `filter()` in `astro.config.mjs`; visiting the URL in a browser renders the full page, but the URL does not appear in `dist/sitemap-*.xml` after `npm run build`.
 3. `/areas/abbotsford` is likewise dev-hidden (noindex + sitemap filter) and includes `ProfessionalService` JSON-LD with `areaServed: "Abbotsford, BC"` in the page `<head>`; the JSON-LD is present and valid in the build output even while the page is dev-hidden.
@@ -220,6 +241,7 @@ Plans:
 **Requirements:** IA-01, IA-05
 
 **Success Criteria:**
+
 1. `astro.config.mjs` contains redirect entries for `/projects` → `/showcase`, `/projects/[slug]` → `/showcase`, `/faq` → `/`, and `/thank-you` is removed; all redirects produce the correct destination in a `npm run build` output check before any source file is deleted.
 2. `src/pages/faq.astro`, `src/pages/projects/index.astro`, `src/pages/projects/[slug].astro`, and `src/pages/thank-you.astro` are deleted only after the redirect entries are confirmed present in the build output.
 3. The n8n webhook contact form is removed: no `<form>` elements pointing to the webhook remain in any page template, no dead JavaScript event listeners reference the form DOM IDs, and `PUBLIC_N8N_WEBHOOK_URL` is removed from documentation (it may remain as a deployment secret but is no longer referenced in source code).
@@ -238,6 +260,7 @@ Plans:
 **Design-fidelity note:** QUAL-03 (visual fidelity gate) has been enforced as in-phase screenshot comparison checkpoints at Phases 34, 35, 36, 37, 38. Phase 41 is the formal milestone-close approval: Joel reviews Landing (light + dark) and Showcase side-by-side with Figma frames and signs off before the milestone is marked shipped.
 
 **Success Criteria:**
+
 1. All retired surfaces are deleted: `src/components/ui/` (Badge, Button, Card, Input, CheckboxGroup), `src/pages/design-system/`, `src/pages/component-demo.astro`, `src/pages/test-isometric.astro`, and `src/components/illustrations/`; `npm run build` succeeds with zero import errors after deletion.
 2. All old neobrutalist token references are purged: `grep -r "var(--color-yellow\|var(--font-heading\|var(--border-neo\|bg-yellow\|bg-turquoise\|shadow-neo\|iso-shadow" src/` returns zero results; only `--wl-*` tokens remain in `global.css`.
 3. `CLAUDE.md` is rewritten to reflect v3.0: correct font names (Fraunces + Hanken Grotesk), correct token prefix (`--wl-*`), correct component names and folder structure, correct IA (no /faq, no /projects, blog out of nav); the `design/image-import-*` root-level duplicates are deleted.
