@@ -97,6 +97,16 @@ See `.planning/MILESTONES.md` "v2.0 Prep Crito Design File (Abandoned)" for deta
 4. `lighthouserc.json` tests landing, showcase, and one blog post URL (mobile + desktop); `lcp-lazy-loaded` and `prioritize-lcp-image` audits are re-enabled.
 5. Waveform mark, favicon, and OG-image assets are exported from Figma and wired into `BaseLayout.astro` / `SEO.astro`; existing v1/v2 tokens remain in `@theme` untouched (namespace isolation via `--wl-` prefix).
 
+**Plans:** 6 plans (5 waves)
+
+Plans:
+- [ ] 33-01-PLAN.md — Figma extraction artifact (palette, type ramp, waveform SVG, OG tagline) [manual/Figma]
+- [ ] 33-02-PLAN.md — Lighthouse CI expansion (landing + blog, mobile + desktop, re-enable LCP audits)
+- [ ] 33-03-PLAN.md — WCAG AA contrast gate script + accent-soft-text companion (TDD)
+- [ ] 33-04-PLAN.md — --wl-* @theme tokens (light + dark) + body base default
+- [ ] 33-05-PLAN.md — Self-hosted fonts (fontsource + Fontaine CLS=0) + 13-style type ramp
+- [ ] 33-06-PLAN.md — Brand assets: WaveMark, favicon, OG image (approval-gated) [manual/approval]
+
 ---
 
 #### Phase 34: BaseLayout + Chrome
