@@ -83,17 +83,49 @@
 
 ## Traceability
 
-Populated during roadmap creation.
-
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| — | — | — |
+| FOUND-01 | Phase 33 | Pending |
+| FOUND-02 | Phase 33 | Pending |
+| FOUND-03 | Phase 33 | Pending |
+| FOUND-04 | Phase 33 | Pending |
+| FOUND-05 | Phase 33 | Pending |
+| CHROME-01 | Phase 34 | Pending |
+| CHROME-02 | Phase 34 | Pending |
+| CHROME-03 | Phase 34 | Pending |
+| CHROME-04 | Phase 34 | Pending |
+| COMP-01 | Phase 35 | Pending |
+| COMP-02 | Phase 35 | Pending |
+| COMP-03 | Phase 36 | Pending |
+| COMP-04 | Phase 36 | Pending |
+| COMP-05 | Phase 36 | Pending |
+| CONT-01 | Phase 36 | Pending |
+| PAGE-01 | Phase 37 | Pending |
+| CONT-02 | Phase 37 | Pending |
+| IA-03 | Phase 37 | Pending |
+| IA-04 | Phase 37 | Pending |
+| PAGE-02 | Phase 38 | Pending |
+| PAGE-06 | Phase 38 | Pending |
+| PAGE-03 | Phase 39 | Pending |
+| PAGE-04 | Phase 39 | Pending |
+| PAGE-05 | Phase 39 | Pending |
+| IA-02 | Phase 39 | Pending |
+| IA-01 | Phase 40 | Pending |
+| IA-05 | Phase 40 | Pending |
+| CLEAN-01 | Phase 41 | Pending |
+| CLEAN-02 | Phase 41 | Pending |
+| CLEAN-03 | Phase 41 | Pending |
+| QUAL-01 | Phase 41 | Pending |
+| QUAL-02 | Phase 41 | Pending |
+| QUAL-03 | Phase 41 | Pending |
 
 **Coverage:**
-- v3.0 requirements: 29 total
-- Mapped to phases: 0
-- Unmapped: 29 ⚠️ (roadmap pending)
+- v3.0 requirements: 33 total
+- Mapped to phases: 33
+- Unmapped: 0 ✓
+
+*Note: The requirements file initially stated 29 total. A recount of the defined requirement IDs yields 33 (FOUND ×5, CHROME ×4, COMP ×5, PAGE ×6, IA ×5, CONT ×2, CLEAN ×3, QUAL ×3). All 33 are mapped.*
 
 ---
 *Requirements defined: 2026-07-14*
-*Last updated: 2026-07-14 after initial definition*
+*Last updated: 2026-07-14 — traceability table populated after roadmap creation*
