@@ -136,3 +136,23 @@
 ---
 
 
+
+## v2.0 Prep Crito Design File (Abandoned: 2026-07-14)
+
+**Status:** Abandoned — all 10 phases (23-32) were completed and verified, but the design direction itself was dropped before any code milestone consumed the output.
+
+**What was delivered (design-only, no code changes):**
+- `design/Crito.pen` fully reconstructed: 107-token two-tier variable system, 32 reusable components (primitives / compounds / sections), all 10 IN-SCOPE Joel page frames rebuilt as editable compositions with zero raw hex/px values
+- Milestone audit: 39/39 requirement deliverables present and cross-verified (`.planning/milestones/v2.0-MILESTONE-AUDIT.md`)
+- Archival PNG exports + `v2.0-HANDOFF.md` code-milestone organization map
+
+**Where the work lives:** The complete v2.0 record (phases 26-32 execution, exports, handoff doc) is on the **unmerged branch `feature/phase-32-fidelity-sweep-handoff`**. Main carries the record through Phase 31 planning. Deliberately left unmerged.
+
+**Why abandoned:** Joel chose an entirely new brand direction — "Joel Shinness Solutions" (Figma brand exploration: sea-cool palette, Fraunces + Hanken Grotesk, waveform mark, new Landing/Showcase IA). The Crito template look, and all work fitting the site to it, is superseded. Unlike v1.4 (which failed on execution), v2.0 succeeded at its goal; the goal itself became obsolete.
+
+**Resolution:** Replaced by **v3.0 Wavelength Rebrand** — rebuild the site in place to the new Figma design. Phase numbers 23-32 were genuinely executed, so v3.0 phases start at **33**.
+
+**Planning artifacts archived to:** `.planning/milestones/v2.0-{REQUIREMENTS,ROADMAP,MILESTONE-AUDIT}.md`, `.planning/milestones/v2.0-research/`
+
+---
+

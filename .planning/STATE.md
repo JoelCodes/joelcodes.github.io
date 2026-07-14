@@ -1,36 +1,34 @@
 ---
 gsd_state_version: 1.0
-milestone: v2.0
-milestone_name: Prep Crito Design File
-status: executing
-stopped_at: Phase 31 context gathered
-last_updated: "2026-06-11T17:48:45.219Z"
-last_activity: 2026-06-11 -- Phase 31 planning complete
+milestone: v3.0
+milestone_name: Wavelength Rebrand
+status: defining_requirements
+stopped_at: Milestone started — research in progress
+last_updated: "2026-07-14"
+last_activity: 2026-07-14 — v2.0 abandoned, v3.0 started
 progress:
-  total_phases: 10
-  completed_phases: 8
-  total_plans: 31
-  completed_plans: 29
-  percent: 80
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-05-31)
+See: .planning/PROJECT.md (updated 2026-07-14)
 
 **Core value:** Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
-**Current focus:** Phase 31 — homepage reconstruction
+**Current focus:** v3.0 milestone definition (research → requirements → roadmap)
 
 ## Current Position
 
-Phase: 31
-Plan: Not started
-Status: Ready to execute
-Last activity: 2026-06-11 -- Phase 31 planning complete
-
-Progress: [██████████] 100%
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-07-14 — Milestone v3.0 started
 
 ## Milestone History
 
@@ -41,7 +39,8 @@ Progress: [██████████] 100%
 | v1.2 | Homepage Refinement | 12-16 | 2026-02-10 |
 | v1.3 | Design System & Nav Cleanup | 17-22 | 2026-02-11 |
 | v1.4 | Design Overhaul | (23-30 attempted) | Abandoned 2026-05-31 |
-| v2.0 | Prep Crito Design File | 23-32 | — |
+| v2.0 | Prep Crito Design File | 23-32 (all executed) | Abandoned 2026-07-14 |
+| v3.0 | Wavelength Rebrand | 33+ | — |
 
 See `.planning/MILESTONES.md` for full milestone details.
 
@@ -49,9 +48,8 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 **Velocity:**
 
-- Total plans completed: 81 (v1.0: 23, v1.1: 14, v1.2: 10, v1.3: 20)
+- Total plans completed: 101 (v1.0: 23, v1.1: 14, v1.2: 10, v1.3: 20, v2.0: 34)
 - Average duration: ~1-5 min/plan (recent trend)
-- Total execution time: ~5 days across 4 milestones
 
 **By Milestone:**
 
@@ -61,50 +59,43 @@ See `.planning/MILESTONES.md` for full milestone details.
 | v1.1 Design Updates | 7-11 | 14 | 2 days |
 | v1.2 Homepage Refinement | 12-16 | 10 | 1 day |
 | v1.3 Design System & Nav | 17-22 | 20 | 2 days |
-
-*Updated after each plan completion*
-| Phase 29 P01 | 55min | 7 tasks | 2 files |
-| Phase 29 P02 | 45min | 7 tasks | 2 files |
+| v2.0 Prep Crito (abandoned) | 23-32 | 34 | ~2 weeks elapsed |
 
 ## Accumulated Context
 
-### Key Decisions (v2.0)
+### Key Decisions (v3.0)
 
-- **Roadmap 2026-05-31**: v2.0 spans Phases 23-32 (10 phases). Phase 23 = Audit + Token Foundation; 24 = Layout Primitives + Primitive Components; 25 = Section + Compound Components; 26-31 = per-page reconstruction (FAQ + 404 first, Homepage last) with per-section calibration as definition-of-done; 32 = Fidelity Sweep + Handoff
-- **Roadmap 2026-05-31**: Per-section calibration (VALID-01 + VALID-02) is mandatory definition-of-done inside every per-page phase — NOT deferred to a final QA pass (reversing this discipline is exactly how v1.4 failed)
-- **Roadmap 2026-05-31**: Variables-first non-negotiable — Phase 23 audit + token foundation MUST land before any component or page work; Phase 23 first concrete task is a live Pencil MCP audit (`get_editor_state(include_schema: true)` → `get_guidelines` → `batch_get` → `search_all_unique_properties` → `get_variables`); audit output may invalidate inference-only recommendations from the research summary
-- **Roadmap 2026-05-31**: Single-file strategy — everything lives in `design/Crito.pen` (reverses v1.4 Decision 4 to split into `design/design-system.pen`); library frames at top of canvas with `_` prefix
-- **Roadmap 2026-05-31**: Desktop only for v2.0 — mobile-breakpoint reconstruction explicitly deferred to a later milestone (PAGE-09)
-- **Milestone start 2026-05-31**: v2.0 is Pencil-MCP-centric — focus is reconstructing the Crito `.pen` file (recreating flat raster sections as editable components with proper tokens) before any code work resumes
-- **Milestone start 2026-05-31**: Phase numbering continues from 23 — v1.4 phase numbers freed up since nothing v1.4 actually shipped
-- **Lesson from v1.4 abandonment**: Building code from a flat-image .pen produces generic-looking results because typography, spacing, and component structure get guessed; v2.0 fixes the .pen first so downstream code has high-fidelity ground truth
+- **Milestone start 2026-07-14**: v2.0 abandoned unconsumed — Joel chose the new "Joel Shinness Solutions" Figma brand (sea-cool palette, Fraunces + Hanken Grotesk, waveform mark). The complete v2.0 record lives on unmerged branch `feature/phase-32-fidelity-sweep-handoff`.
+- **Milestone start 2026-07-14**: Rebuild in place — keep Astro 5 + Tailwind 4 infra, CI, SEO, blog content; replace tokens, components, layouts, pages wholesale.
+- **Milestone start 2026-07-14**: Figma file `1tg8wIPcvOVC5tPZ8pkGO2` is the design source of truth (Components page `36:5`; Landing `12:2` incl. dark `117:103`; Showcase `12:3`; Service Web `85:103`; Area Abbotsford `85:104`). Copy in the mockups is real — use verbatim.
+- **Milestone start 2026-07-14**: IA — nav is Services (landing anchor) / Showcase / About (landing anchor) / Book a call (Calendly placeholder). Blog stays reachable by URL but leaves the nav. Service Web + Area Abbotsford built but dev-hidden.
+- **Milestone start 2026-07-14**: Phase numbering starts at 33 (v2.0 phases 23-32 were genuinely executed, unlike v1.4).
 
-### Key Decisions (carried from v1.4 lessons)
+### Lessons carried forward
 
-- **Roadmap 2026-05-14**: Exact Crito font/palette values are MEDIUM confidence — Pencil MCP inspection of the original Crito source is the source of truth; do not name packages or token values before inspection confirms them
-- **Roadmap 2026-05-14**: Crito reference `.pen` contains 15 page frames but originally zero reusable components (Figma → Pen conversion flattened them) — recreating them is the entire v2.0 deliverable
+- **v1.4 lesson**: Never fill design gaps with invented style — flag gaps and ask. Applies to Figma gaps (e.g. missing About/Services index pages) the same as it did to flat rasters.
+- **v2.0 lesson**: Validate the design *direction* with the user before investing a milestone in design-fidelity tooling.
 
 ### Pending Todos
-
-**Open questions surfaced by the roadmap (resolve during Phase 23):**
-
-1. Dark-mode token slots — encode `@light,@dark` now (with dark mirroring light) or defer entirely? Decision made in Phase 23 plan 23-02 with the user, recorded in PEN-INVENTORY.md
-2. Crito `.fig` accessibility — confirm whether the original `.fig` opens cleanly and exposes variables as ground truth for token values (filename ambiguity: design folder contains both an Alliatus-named and a Crito-named `.fig` per PITFALLS research)
-3. OPEN-flag policy — does each OPEN block phase close, or does milestone close gate only on critical-category OPENs? Recommendation: OPENs do not block phase close; resolve during Phase 23 with user
 
 **Before deployment (carried from v1.3):**
 
 1. Configure n8n webhook — set PUBLIC_N8N_WEBHOOK_URL environment variable
-2. Update Calendly booking link on /thank-you page with real URL
+2. Replace `BOOKING_URL` Calendly placeholder with real URL (now also gates v3.0 Book-a-call CTAs)
 3. Add real social links (Instagram, Substack URLs)
+
+**v3.0 cleanup candidates:**
+
+1. Delete untracked `design/image-import-*.{png,jpg}` duplicates at `design/` root (Pencil artifacts; originals tracked in `design/images/`)
+2. Decide fate of `design/Crito.pen`, `design/*.fig` in the repo (archives — keep or move)
 
 ### Blockers/Concerns
 
-None currently. Phase 23 first plan (the live Pencil MCP audit) is the gating dependency for everything that follows; if Pencil MCP tools turn out to be unavailable to the executing agent, the milestone cannot proceed (flagged as Hard Block #1 in research SUMMARY).
+None currently.
 
 ## Session Continuity
 
-Last session: 2026-06-11T17:12:26.494Z
-Stopped at: Phase 31 context gathered
-Resume file: .planning/phases/31-homepage-reconstruction/31-CONTEXT.md
-Next action: `/gsd:plan-phase 27` to plan Phase 27 (Thank-you + Contact Reconstruction)
+Last session: 2026-07-14
+Stopped at: v3.0 milestone started — research phase
+Resume file: None
+Next action: Complete research → define REQUIREMENTS.md → create ROADMAP.md
