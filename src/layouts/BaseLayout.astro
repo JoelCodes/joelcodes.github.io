@@ -4,6 +4,12 @@ import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import SEO from '../components/SEO.astro';
 
+// Self-hosted variable font preloads — ?url lets Vite resolve to hashed /_astro/ asset (FOUND-02 / 33-05)
+// Filenames verified from node_modules/@fontsource-variable/*/files/ at install time
+import frauncesWoff2 from '@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2?url';
+import frauncesItalicWoff2 from '@fontsource-variable/fraunces/files/fraunces-latin-wght-italic.woff2?url';
+import hankenWoff2 from '@fontsource-variable/hanken-grotesk/files/hanken-grotesk-latin-wght-normal.woff2?url';
+
 interface Props {
   title: string;
   description?: string;
@@ -26,6 +32,11 @@ const { title, description = 'Web apps, automation, and AI development for small
 
     <!-- Additional head content via slot -->
     <slot name="head" />
+
+    <!-- Self-hosted variable font preloads — served from hashed /_astro/ assets (FOUND-02 / 33-05) -->
+    <link rel="preload" as="font" type="font/woff2" href={frauncesWoff2} crossorigin="anonymous" />
+    <link rel="preload" as="font" type="font/woff2" href={frauncesItalicWoff2} crossorigin="anonymous" />
+    <link rel="preload" as="font" type="font/woff2" href={hankenWoff2} crossorigin="anonymous" />
 
     <!-- Google Fonts - preconnect for initial connection, dns-prefetch as fallback -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
