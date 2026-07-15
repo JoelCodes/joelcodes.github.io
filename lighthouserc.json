@@ -1,4 +1,5 @@
 {
+  "_comment": "URL list: landing + one real blog post. /showcase/ activates in Phase 38 when that route is built.",
   "ci": {
     "collect": {
       "numberOfRuns": 3,
@@ -6,7 +7,10 @@
         "preset": "desktop"
       },
       "staticDistDir": "./dist",
-      "url": ["http://localhost/"]
+      "url": [
+        "http://localhost/",
+        "http://localhost/blog/im-pivoting/"
+      ]
     },
     "assert": {
       "preset": "lighthouse:no-pwa",
@@ -23,9 +27,9 @@
         "modern-image-formats": "off",
         "render-blocking-insight": "off",
         "render-blocking-resources": "off",
-        "lcp-lazy-loaded": "off",
+        "lcp-lazy-loaded": "warn",
         "non-composited-animations": "off",
-        "prioritize-lcp-image": "off",
+        "prioritize-lcp-image": "warn",
         "uses-responsive-images": "off"
       }
     },
