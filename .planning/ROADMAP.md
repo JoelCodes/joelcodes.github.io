@@ -132,13 +132,25 @@ Plans:
 
 **Requirements:** CHROME-01, CHROME-02, CHROME-03, CHROME-04
 
-**Success Criteria:**
+**Plans:** 6 plans
 
-1. Opening any page in a dark-OS browser produces no flash of light-theme content; the FOUC-prevention `<script is:inline>` remains in `<head>` before `<body>`.
-2. The site header displays the waveform mark, wordmark, and nav links (Services / Showcase / About / Book a call) on desktop; the theme toggle is functional in both header states.
-3. The mobile navigation opens/closes correctly, all links are reachable by keyboard, and screen-reader announcement is correct — zero axe-core violations.
-4. The site footer displays tagline, nav links, contact email, and copyright at all breakpoints; the `/blog` link is present but marked dev-only (present in DOM, not in the mobile nav overlay).
+Plans:
+- [ ] 34-01-PLAN.md — Rewrite dark-mode a11y spec to colorScheme contexts (Wave 0 prerequisite)
+- [ ] 34-02-PLAN.md — global.css chrome tokens (--wl-on-ink, footer locals) + six .wl-* utilities + 64px scroll offset
+- [ ] 34-03-PLAN.md — Blog prod-exclusion (D-13) + /faq → / redirect (D-03 subset) + delete faq.astro
+- [ ] 34-04-PLAN.md — SiteHeader.astro + SiteFooter.astro (Figma chrome, zero JS)
+- [ ] 34-05-PLAN.md — BaseLayout wiring + system-only FOUC script + full a11y suite
+- [ ] 34-06-PLAN.md — Figma-vs-rendered fidelity gate (non-autonomous, Joel approval)
+
+**Success Criteria** (amended per 34-CONTEXT.md — amendments supersede original wording):
+
+1. Opening any page in a dark-OS browser produces no flash of light-theme content; the FOUC-prevention `<script is:inline>` remains in `<head>` before `<body>`. (System-only via `prefers-color-scheme` — D-05/D-06.)
+2. The site header displays the waveform mark, wordmark, and nav links (Services / Showcase / About / Book a call) on desktop. ~~theme toggle functional in both header states~~ — AMENDED: no visible theme toggle ships this phase (D-05; CHROME-01 toggle deferred).
+3. ~~Mobile navigation opens/closes correctly~~ — AMENDED: no mobile menu; the Figma mobile bar is literal (mark + Showcase + CTA, D-01). All chrome links keyboard-reachable and screen-reader correct — zero axe-core violations at 390px (CHROME-04).
+4. The site footer displays tagline, nav links, contact email, and copyright at all breakpoints. ~~/blog link present in DOM, not in mobile overlay~~ — AMENDED: Blog link gated to dev builds only (D-11); blog pages excluded from prod builds entirely (D-13); there is no mobile overlay.
 5. Figma-frame vs. rendered screenshot comparison for SiteHeader (desktop + mobile) and SiteFooter approved before phase is marked done.
+
+**Adjacent changes absorbed this phase:** `/faq` → `/` redirect ships now; `/projects` → `/showcase` deferred to Phase 38 and `/projects/[slug]` to Phase 40 (D-03 sequencing, files still exist). Blog gated out of prod builds + sitemap (D-13).
 
 ---
 
