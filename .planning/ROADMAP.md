@@ -135,11 +135,22 @@ Plans:
 **Plans:** 6 plans
 
 Plans:
+**Wave 1**
+
 - [ ] 34-01-PLAN.md — Rewrite dark-mode a11y spec to colorScheme contexts (Wave 0 prerequisite)
 - [ ] 34-02-PLAN.md — global.css chrome tokens (--wl-on-ink, footer locals) + six .wl-* utilities + 64px scroll offset
 - [ ] 34-03-PLAN.md — Blog prod-exclusion (D-13) + /faq → / redirect (D-03 subset) + delete faq.astro
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
 - [ ] 34-04-PLAN.md — SiteHeader.astro + SiteFooter.astro (Figma chrome, zero JS)
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
 - [ ] 34-05-PLAN.md — BaseLayout wiring + system-only FOUC script + full a11y suite
+
+**Wave 4** *(blocked on Wave 3 completion)*
+
 - [ ] 34-06-PLAN.md — Figma-vs-rendered fidelity gate (non-autonomous, Joel approval)
 
 **Success Criteria** (amended per 34-CONTEXT.md — amendments supersede original wording):
