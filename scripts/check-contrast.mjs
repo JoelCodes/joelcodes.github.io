@@ -13,8 +13,10 @@
  * Re-run manually whenever token values in src/styles/global.css change.
  *
  * Formula source: https://www.w3.org/TR/WCAG21/#relative-luminance
- * Zero runtime dependencies — inline W3C formula only.
+ * Zero runtime dependencies — inline W3C formula only (node:url is stdlib).
  */
+
+import { pathToFileURL } from 'node:url';
 
 // ── Pure formula functions (exported for tests) ──────────────────────────────
 
@@ -163,7 +165,10 @@ export const PAIRS = [
 
 // ── Main loop (runs only when executed directly, not when imported) ──────────
 
-const isMain = import.meta.url === `file://${process.argv[1]}`;
+// pathToFileURL handles percent-encoding, Windows drive letters, etc. — a raw
+// `file://${process.argv[1]}` comparison silently fails open on paths with
+// spaces/non-ASCII (WR-01).
+const isMain = Boolean(process.argv[1]) && import.meta.url === pathToFileURL(process.argv[1]).href;
 
 if (isMain) {
   let textFailed = 0;
