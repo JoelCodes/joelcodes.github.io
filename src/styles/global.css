@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* Self-hosted variable fonts (FOUND-02 / 33-05) */
+@import '@fontsource-variable/fraunces/wght.css';
+@import '@fontsource-variable/fraunces/wght-italic.css';
+@import '@fontsource-variable/hanken-grotesk/wght.css';
+
 /* ============================================================
    WL TOKENS (v3.0 Wavelength — namespace isolated via --wl- prefix)
    DO NOT edit old token block below until Phase 41 cleanup
