@@ -300,7 +300,7 @@ Plans:
 | 1-22 | v1.0-v1.3 | 66/66 | Complete (see milestone archives) | 2026-01-26 → 2026-02-11 |
 | 23-32 | v2.0 (abandoned) | 34/34 | Executed, unconsumed (see archive branch) | 2026-05-31 → 2026-06-13 |
 | 33 | v3.0 | 6/6 | Complete    | 2026-07-15 |
-| 34 | v3.0 | 6/6 | Complete   | 2026-07-15 |
+| 34 | v3.0 | 6/6 | Complete    | 2026-07-15 |
 | 35 | v3.0 | — | Pending | — |
 | 36 | v3.0 | — | Pending | — |
 | 37 | v3.0 | — | Pending | — |

@@ -16,10 +16,10 @@
 
 ### Site Chrome
 
-- [ ] **CHROME-01**: BaseLayout carries the new fonts, FOUC-safe dark-mode script in `<head>`, and a theme toggle usable in both header states
-- [ ] **CHROME-02**: Site Header per Figma (desktop + mobile): waveform mark + wordmark, nav Services (`/#services`) / Showcase / About (`/#about`) / Book-a-call CTA; Blog link included dev-only
-- [ ] **CHROME-03**: Site Footer per Figma (desktop + mobile): tagline, nav links, contact email, copyright; Blog link included dev-only
-- [ ] **CHROME-04**: Mobile navigation matches the Figma mobile header breakpoint and is keyboard/screen-reader accessible
+- [x] **CHROME-01**: BaseLayout carries the new fonts, FOUC-safe dark-mode script in `<head>`, and a theme toggle usable in both header states
+- [x] **CHROME-02**: Site Header per Figma (desktop + mobile): waveform mark + wordmark, nav Services (`/#services`) / Showcase / About (`/#about`) / Book-a-call CTA; Blog link included dev-only
+- [x] **CHROME-03**: Site Footer per Figma (desktop + mobile): tagline, nav links, contact email, copyright; Blog link included dev-only
+- [x] **CHROME-04**: Mobile navigation matches the Figma mobile header breakpoint and is keyboard/screen-reader accessible
 
 ### Component Library
 
@@ -90,10 +90,10 @@
 | FOUND-03 | Phase 33 | Complete |
 | FOUND-04 | Phase 33 | Complete |
 | FOUND-05 | Phase 33 | Complete |
-| CHROME-01 | Phase 34 | Pending |
-| CHROME-02 | Phase 34 | Pending |
-| CHROME-03 | Phase 34 | Pending |
-| CHROME-04 | Phase 34 | Pending |
+| CHROME-01 | Phase 34 | Complete |
+| CHROME-02 | Phase 34 | Complete |
+| CHROME-03 | Phase 34 | Complete |
+| CHROME-04 | Phase 34 | Complete |
 | COMP-01 | Phase 35 | Pending |
 | COMP-02 | Phase 35 | Pending |
 | COMP-03 | Phase 36 | Pending |
