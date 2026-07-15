@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v3.0
 milestone_name: Wavelength Rebrand
 status: executing
-stopped_at: Phase 34 context gathered
-last_updated: "2026-07-15T19:01:18.120Z"
-last_activity: 2026-07-15 -- Phase 34 execution started
+stopped_at: Phase 34 complete — fidelity gate approved
+last_updated: "2026-07-15T19:55:00.000Z"
+last_activity: 2026-07-15 -- Phase 34 complete (34-06-SUMMARY.md)
 progress:
   total_phases: 9
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 12
-  completed_plans: 6
-  percent: 11
+  completed_plans: 12
+  percent: 22
 ---
 
 # Project State
@@ -25,21 +25,22 @@ See: .planning/PROJECT.md (updated 2026-07-14)
 
 ## Current Position
 
-Phase: 34 (BaseLayout + Chrome) — EXECUTING
-Plan: 1 of 6
-Status: Executing Phase 34
-Last activity: 2026-07-15 -- Phase 34 execution started
+Phase: 34 (BaseLayout + Chrome) — COMPLETE
+Plan: 6 of 6 (all plans done)
+Status: Phase 34 complete — fidelity gate approved by Joel (2026-07-15)
+Last activity: 2026-07-15 -- Completed 34-06-PLAN.md (fidelity gate approved, phase closed)
 
 ```
-v3.0 Progress: [                                        ] 0/9 phases
+v3.0 Progress: [█████████                               ] 2/9 phases (22%)
+               33 ██ 34 ██ 35░░ 36░░ 37░░ 38░░ 39░░ 40░░ 41░░
 ```
 
 ## Phase Index
 
 | Phase | Name | Requirements | Status |
 |-------|------|--------------|--------|
-| 33 | Token Foundation + Fonts | FOUND-01–05 | Pending |
-| 34 | BaseLayout + Chrome | CHROME-01–04 | Pending |
+| 33 | Token Foundation + Fonts | FOUND-01–05 | Complete |
+| 34 | BaseLayout + Chrome | CHROME-01–04 | Complete |
 | 35 | UI Primitives | COMP-01–02 | Pending |
 | 36 | Content Components + Expandable Cards | COMP-03–05, CONT-01 | Pending |
 | 37 | Landing Page | PAGE-01, CONT-02, IA-03–04 | Pending |
@@ -83,6 +84,9 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 ### Key Decisions (v3.0)
 
+- **Phase 34 fidelity gate 2026-07-15**: WaveMark `badge` prop pattern established — render both mark variants (bare strokes + circle-badge) in HTML, toggle via CSS `dark:hidden`/`hidden dark:block`. Zero client JS.
+- **Phase 34 fidelity gate 2026-07-15**: Footer height delta (~249px vs 261px Figma) accepted as-is — browser/Figma font-engine variance, no padding adjustment.
+- **Phase 34 fidelity gate 2026-07-15**: Circle-badge mark (#EAF6F3 disc, #12333B ink strokes) applies to all dark surfaces: dark-mode header AND always-dark footer. Bare strokes only on light backgrounds.
 - **Milestone start 2026-07-14**: v2.0 abandoned unconsumed — Joel chose the new "Joel Shinness Solutions" Figma brand (sea-cool palette, Fraunces + Hanken Grotesk, waveform mark). The complete v2.0 record lives on unmerged branch `feature/phase-32-fidelity-sweep-handoff`.
 - **Milestone start 2026-07-14**: Rebuild in place — keep Astro 5 + Tailwind 4 infra, CI, SEO, blog content; replace tokens, components, layouts, pages wholesale.
 - **Milestone start 2026-07-14**: Figma file `1tg8wIPcvOVC5tPZ8pkGO2` is the design source of truth (Components page `36:5`; Landing `12:2` incl. dark `117:103`; Showcase `12:3`; Service Web `85:103`; Area Abbotsford `85:104`). Copy in the mockups is real — use verbatim.
@@ -119,7 +123,7 @@ None currently.
 
 ## Session Continuity
 
-Last session: 2026-07-15T18:17:10.632Z
-Stopped at: Phase 34 context gathered
-Resume file: .planning/phases/34-baselayout-chrome/34-CONTEXT.md
-Next action: `/gsd:plan-phase 33` — Token Foundation + Fonts
+Last session: 2026-07-15T19:55:00.000Z
+Stopped at: Phase 34 complete — all 6 plans executed, fidelity gate approved
+Resume file: None (phase complete)
+Next action: `/gsd:plan-phase 35` — UI Primitives

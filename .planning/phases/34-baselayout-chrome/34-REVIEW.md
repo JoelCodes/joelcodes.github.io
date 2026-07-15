@@ -2,14 +2,16 @@
 phase: 34-baselayout-chrome
 plan: 06
 type: fidelity-review
-status: awaiting-approval
+status: APPROVED
 captured: 2026-07-15
+approved: 2026-07-15
+gate-verdict: APPROVED by Joel (2026-07-15)
 ---
 
 # Phase 34 Fidelity Gate Review
 
 > Figma-frame vs. rendered-screenshot comparison for SiteHeader + SiteFooter.
-> This document must receive Joel's sign-off before Phase 34 is marked done.
+> **GATE STATUS: APPROVED by Joel (2026-07-15).** Phase 34 may close.
 > (v1.4 milestone discipline — every UI phase ends with an approved fidelity comparison.)
 
 **Figma file:** `1tg8wIPcvOVC5tPZ8pkGO2`
@@ -32,7 +34,7 @@ captured: 2026-07-15
 **Observations:**
 - Background `--wl-sea-glass` (`#E6F1F1`) renders correctly as pale teal.
 - Bottom border: 1px solid `--wl-accent` (`#0E7078`) visible as a teal rule.
-- Brand lockup (left): WaveMark 30×30 + "Joel Shinness Solutions" in Fraunces Regular at the extracted size; `gap-[10px]` visually confirmed.
+- Brand lockup (left): bare-stroke WaveMark 30×30 (accent color) + "Joel Shinness Solutions" in Fraunces Regular at the extracted size; `gap-[10px]` visually confirmed.
 - Nav links (right): "Services", "Showcase", "About" in Hanken Grotesk Medium 15px; gap `26px` between items.
 - CTA "Book a call": ink-dark background (`#12333B`), light text (`#EAF6F3`), `border-radius: 10px`, Hanken Grotesk SemiBold 14px.
 - Desktop `px-[160px]` gutter applied; content stays within frame.
@@ -66,18 +68,13 @@ captured: 2026-07-15
 | Color scheme | Dark (`prefers-color-scheme: dark` via Playwright `colorScheme`) |
 | Rendered screenshot | `screenshots/header-desktop-1440-dark.png` |
 
-**Observations:**
+**Observations (post-fix):**
 - Background flips to dark `--wl-sea-glass` (`#123640`) — deep teal; renders correctly.
 - Wordmark and nav links render in `--wl-ink` (dark mode value `#EAF6F3`) — light text on dark bg.
-- CTA button: background = `--wl-ink` dark value (`#EAF6F3`), text = `--wl-on-ink` light value (`#12333B`) — token inversion produces a light button with dark text in dark mode. This is consistent with the Figma extraction note: "CTA inverts via tokens."
-- WaveMark renders as bare wave strokes against the dark bg (accent color flips to `#4FB3B8`).
+- CTA button: background = `--wl-ink` dark value (`#EAF6F3`), text = `--wl-on-ink` light value (`#12333B`) — token inversion produces a light button with dark text in dark mode. Confirmed matching Figma extraction note.
+- **WaveMark: circle-badge presentation active** — light `#EAF6F3` disc with `#12333B` ink wave strokes. Matches Figma 117:104 treatment. Implemented via `badge` prop toggle via CSS `dark:hidden` / `hidden dark:block` — zero client JS.
 
-**Gate checklist item — DARK HEADER WAVEMARK (requires Joel's decision):**
-The Figma dark header instance `117:104` (dark Landing `117:103`) renders the WaveMark inside a **light circular badge**. The current implementation renders bare wave strokes only (no circular badge).
-
-Questions for Joel:
-1. Does the WaveMark need a light circular badge container on the dark header to match Figma's `117:104`? If yes, a new `WaveMarkCircle` variant would be needed (architectural — Rule 4).
-2. Is the bare-stroke WaveMark on the dark header acceptable as a simplification?
+**GC-01 RESOLVED:** Circle-badge fix applied (commit 71b9929). Gate item closed.
 
 ---
 
@@ -90,19 +87,19 @@ Questions for Joel:
 | Color scheme | Light (footer renders identically — always dark, no theme flip) |
 | Rendered screenshot | `screenshots/footer-desktop-1440-light.png` |
 
-**Observations:**
+**Observations (post-fix):**
 - Background `#0D2A31` via `--wl-footer-bg` — deep ink green, correct.
-- Brand lockup (left): WaveMark bare strokes + "Joel Shinness Solutions" in Fraunces `18.4px`, `#EAF6F3` (`--wl-on-ink`). Lockup gap `10px`.
+- Brand lockup (left): **circle-badge WaveMark** (light `#EAF6F3` disc, `#12333B` ink strokes) + "Joel Shinness Solutions" in Fraunces `18.4px`, `#EAF6F3` (`--wl-on-ink`). Matches Figma `42:77` treatment. Lockup gap `10px`.
 - Tagline "On your wavelength." in Fraunces Italic `17px`, `#5AA9A5` — renders in accent-soft italic. ✓
 - Supporting line: "Solutions for small businesses — web, automations, and AI that save you time and money." Hanken Grotesk Regular 14px, `#7FA4A2`. ✓
 - Foot-links (right): "Services", "Showcase", "About", "Book a call", "Email" — Hanken Grotesk 14px, `#CDE6E5`, `gap-[22px]`. ✓
 - Divider: full-width `rgba(255,255,255,0.09)` `1px` rule visible as very subtle separator.
-- Bottom row: "contact@joelshinness.com · GitHub" (left) + "© 2026 Joel Shinness" (right). Both `#CDE6E5` / `#8FB4B2` respectively.
+- **Bottom row (post-fix):** `© 2026 Joel Shinness` on LEFT, `contact@joelshinness.com · GitHub` on RIGHT — matches Figma node `42:74`. ✓
 - Padding: `45px` top, `29px` bottom, `160px` horizontal at desktop.
-- Rendered height: ~249px. Figma specifies 261px. Delta: ~12px. This is within normal rendering variance (line-height and wrapping differences). Flagged for Joel's review.
+- Rendered height: ~249px. Figma specifies 261px. Delta: ~12px. **ACCEPTED deviation — see GC-03 below.**
 
-**Gate checklist item — FOOTER WAVEMARK CIRCLE-BADGE:**
-Figma node `42:77` footer brand lockup shows the WaveMark inside a **light circular badge** (matching the dark header treatment). The current implementation renders bare wave strokes. This is the same question as the dark header — does the footer mark need the circle-badge variant?
+**GC-02 RESOLVED:** Circle-badge fix applied (commit 71b9929). Gate item closed.
+**Footer bottom-row RESOLVED:** Order swapped to match Figma 42:74 (commit 71b9929).
 
 ---
 
@@ -123,61 +120,61 @@ Figma node `42:77` footer brand lockup shows the WaveMark inside a **light circu
 
 ## Approved Deviations
 
-These deviations from the Figma design are **pre-approved** per `34-CONTEXT.md` decisions and do not require Joel's re-approval here — they are listed for the record only.
+These deviations from the Figma design are approved. Pre-approved deviations (D-02, D-05) were confirmed by Joel at the fidelity gate checkpoint.
 
 ### D-02 — Mobile wordmark hidden (mark-only at < 640px)
 
 - **What Figma specifies:** Wordmark "Joel Shinness Solutions" shrinks to `15px` at 390px mobile.
 - **What is implemented:** Wordmark is hidden entirely below 640px; WaveMark mark only is shown.
-- **Why approved:** At 390px the 18.4px wordmark + 30px mark + 20px padding creates visible overflow. User-approved deviation in 34-CONTEXT.md.
+- **Why approved:** At 390px the 18.4px wordmark + 30px mark + 20px padding creates visible overflow. User-approved deviation in 34-CONTEXT.md. Reconfirmed by Joel at gate checkpoint.
 - **D-reference:** D-02
 
 ### D-05 — No theme toggle anywhere
 
 - **What Figma specifies:** Figma never included a theme toggle in the chrome.
 - **What is implemented:** No theme toggle. Dark mode via `prefers-color-scheme` only.
-- **Why this MATCHES Figma:** D-05 clarifies that no toggle was ever in the design. This is not a deviation from Figma — it confirms the implementation matches Figma exactly.
+- **Why this MATCHES Figma:** D-05 clarifies that no toggle was ever in the design. This is not a deviation from Figma — it confirms the implementation matches Figma exactly. Reconfirmed by Joel at gate checkpoint.
 - **D-reference:** D-05
+
+### GC-03 — Footer rendered height delta (~249px vs. 261px Figma spec)
+
+- **What Figma specifies:** Footer height 261px (node `42:77`: 1440×261).
+- **What is rendered:** ~249px (~12px shorter).
+- **Why accepted:** Delta attributable to line-height and text wrapping differences between Hanken Grotesk variable font rendering in browser vs. Figma's internal font engine. No padding/spacing adjustment required. **Accepted as-is per Joel's gate approval (2026-07-15).**
+- **D-reference:** GC-03 (accepted gate deviation)
 
 ---
 
-## Gate Checklist (requires Joel's input)
+## Gate Checklist — Resolved
 
-### Item GC-01 — Dark header WaveMark circle-badge
+### Item GC-01 — Dark header WaveMark circle-badge — RESOLVED
 
-**Question:** Figma dark header instance `117:104` renders the WaveMark inside a light circular badge container (different from the bare-stroke mark used in the light header). The rendered dark header uses bare strokes (same asset as light mode, just color-flipped via tokens).
+**Resolution:** Implemented circle-badge variant via `badge` prop on `WaveMark.astro`. In `SiteHeader.astro`, bare-stroke mark is hidden in dark mode (`dark:hidden`) and badge mark is shown (`hidden dark:block`). Zero client JS — CSS-only via Tailwind dark: variant. Commit 71b9929.
 
-- [ ] **Option A (strict fidelity):** Implement a circle-badge variant of WaveMark for dark header and dark footer. Requires a new component / asset variant (architectural deviation — Rule 4).
-- [ ] **Option B (simplification accepted):** Bare-stroke WaveMark on dark surfaces is acceptable. The circle-badge is a Figma detail we are consciously omitting.
+### Item GC-02 — Footer WaveMark circle-badge — RESOLVED
 
-**Confirm also:** Does the rendered dark `--wl-on-ink` value (`#12333B` — dark text on light CTA) match Joel's expectation? The token inversion (light button, dark text in dark mode) is the intended behavior per Figma extraction.
+**Resolution:** Same `badge` prop used in `SiteFooter.astro` always (footer is always-dark). Circle-badge with `#EAF6F3` fill and `#12333B` wave strokes matches Figma 42:77. Commit 71b9929.
 
-### Item GC-02 — Footer WaveMark circle-badge
+### Item GC-03 — Footer rendered height delta — ACCEPTED
 
-**Question:** Figma footer brand lockup (node `42:77`) also uses the circle-badge mark treatment. Same resolution as GC-01 applies — circle-badge or bare strokes accepted?
-
-**Note:** The footer circle-badge would be on the always-dark `#0D2A31` background (same aesthetic context as the dark header). The decision can be the same for both GC-01 and GC-02.
-
-### Item GC-03 — Footer rendered height delta
-
-**Question:** Footer renders at ~249px vs. Figma spec of 261px (node `42:77`: 1440×261). Delta: ~12px. Likely attributable to line-height / wrapping differences in Hanken Grotesk at 14px vs. the variable font Figma uses. Is this acceptable, or should padding/spacing be adjusted to match exactly?
+**Resolution:** Accepted as-is per Joel's approval. Documented as GC-03 approved deviation above.
 
 ---
 
 ## Sign-Off
 
 **Joel's decision on GC-01 (dark header WaveMark):**
-> _[Pending]_
+> APPROVED FIX — circle-badge mark on dark surfaces (2026-07-15). Implemented and verified.
 
 **Joel's decision on GC-02 (footer WaveMark):**
-> _[Pending]_
+> APPROVED FIX — circle-badge mark on dark surfaces, including footer (2026-07-15). Implemented and verified.
 
 **Joel's decision on GC-03 (footer height delta):**
-> _[Pending]_
+> ACCEPTED as-is — record as approved deviation, no code change (2026-07-15).
 
 **Joel's fidelity approval:**
-> _[Pending — type "approved" to close the gate, or describe deltas to fix]_
+> **Approve with selected fixes** — GC-01/GC-02 circle-badge and footer bottom-row swap applied and re-verified. Gate APPROVED. Phase 34 may close.
 
 ---
 
-_Captured 2026-07-15 by plan executor (34-06 Task 1). Screenshots in `.planning/phases/34-baselayout-chrome/screenshots/`._
+_Captured 2026-07-15 by plan executor (34-06 Task 1). Updated 2026-07-15 after fidelity gate fixes (34-06 continuation). Screenshots in `.planning/phases/34-baselayout-chrome/screenshots/`._
