@@ -1,0 +1,37 @@
+{
+  "_comment": "URL list: landing + one real blog post. /showcase/ activates in Phase 38 when that route is built.",
+  "ci": {
+    "collect": {
+      "numberOfRuns": 3,
+      "staticDistDir": "./dist",
+      "url": [
+        "http://localhost/",
+        "http://localhost/blog/im-pivoting/"
+      ]
+    },
+    "assert": {
+      "preset": "lighthouse:no-pwa",
+      "assertions": {
+        "categories:performance": ["error", { "minScore": 0.9 }],
+        "categories:accessibility": ["warn", { "minScore": 0.9 }],
+        "categories:best-practices": ["warn", { "minScore": 0.9 }],
+        "categories:seo": ["warn", { "minScore": 0.9 }],
+        "largest-contentful-paint": ["warn", { "maxNumericValue": 2500 }],
+        "cumulative-layout-shift": ["warn", { "maxNumericValue": 0.1 }],
+        "interactive": ["warn", { "maxNumericValue": 3800 }],
+        "image-delivery-insight": "off",
+        "network-dependency-tree-insight": "off",
+        "modern-image-formats": "off",
+        "render-blocking-insight": "off",
+        "render-blocking-resources": "off",
+        "lcp-lazy-loaded": "warn",
+        "non-composited-animations": "off",
+        "prioritize-lcp-image": "warn",
+        "uses-responsive-images": "off"
+      }
+    },
+    "upload": {
+      "target": "temporary-public-storage"
+    }
+  }
+}
