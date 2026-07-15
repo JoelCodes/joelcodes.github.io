@@ -42,13 +42,13 @@ Small business owners can understand what Joel does, trust his process, and easi
 - ✓ Playwright + axe-core accessibility testing in CI — v1.1
 - ✓ Lighthouse CI thresholds (90+ all categories) — v1.0-v1.3
 - ✓ n8n webhook contact form flow — v1.3 (webhook URL still unconfigured)
+- ✓ Sea-cool token foundation (light + dark) in Tailwind 4 `@theme` — v3.0 Phase 33 (dark values from Figma variable mode; one FIDELITY-GAP: sea-glass-deep keeps light value in dark)
+- ✓ Fraunces + Hanken Grotesk self-hosted fonts — v3.0 Phase 33 (fontsource-variable + Fontaine fallback metrics, 13-style `.wl-*` type ramp, WCAG AA contrast gate script, waveform mark/favicon/OG assets)
 
 ### Active
 
 *v3.0 scope — detailed in `.planning/REQUIREMENTS.md` once defined:*
 
-- [ ] Sea-cool token foundation (light + dark) in Tailwind 4 `@theme`
-- [ ] Fraunces + Hanken Grotesk self-hosted fonts
 - [ ] Component library per Figma Components page
 - [ ] Landing page (responsive, all 4 Figma breakpoints, dark mode)
 - [ ] Showcase page (responsive, expandable project cards)
@@ -104,4 +104,4 @@ Small business owners can understand what Joel does, trust his process, and easi
 This document evolves at phase transitions and milestone boundaries.
 
 ---
-*Last updated: 2026-07-14 — v2.0 abandoned (direction pivot), v3.0 Wavelength Rebrand started*
+*Last updated: 2026-07-15 — Phase 33 (Token Foundation + Fonts) complete*
