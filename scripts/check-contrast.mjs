@@ -95,15 +95,15 @@ const D_PAPER            = '#0C2228';  // --color-wl-paper (dark)
 // --wl-accent-soft-text (light): minimally darkened accent-soft (#5AA9A5) at
 // the same OKLCH hue until contrastRatio(companion, L_PAPER) >= 4.5:1.
 //
-// Derivation steps (same OKLCH hue h≈186°, reducing L until pass):
+// Derivation: sequential same-hue darkening (OKLCH h≈186°, C held, L reduced):
 //   #5AA9A5 on #F6FBFA → 2.63:1  FAIL (even fails 3:1 large-text threshold)
-//   #4A9490 on #F6FBFA → 3.24:1  FAIL
-//   #3A8480 on #F6FBFA → 4.07:1  FAIL
-//   #2D7A76 on #F6FBFA → 4.83:1  PASS  ← chosen (minimum darkening to clear 4.5:1)
+//   #36807D on #F6FBFA → 4.43:1  FAIL
+//   #357F7C on #F6FBFA → 4.49:1  FAIL
+//   #347E7B on #F6FBFA → 4.55:1  PASS  ← chosen (minimum darkening to clear 4.5:1)
 //
 // Before: #5AA9A5 → 2.63:1  (FAIL — original accent-soft, decorative use only)
-// After:  #2D7A76 → 4.83:1  (PASS — companion for text use)
-const L_ACCENT_SOFT_TEXT = '#2D7A76';  // --color-wl-accent-soft-text (light)
+// After:  #347E7B → 4.55:1  (PASS — companion for text use; minimum darkening)
+const L_ACCENT_SOFT_TEXT = '#347E7B';  // --color-wl-accent-soft-text (light)
 
 // --wl-accent-soft-text (dark): dark accent-soft #7FC4C0 on dark paper #0C2228
 // #7FC4C0 on #0C2228 → 8.28:1  PASS  (dark theme naturally high contrast)
