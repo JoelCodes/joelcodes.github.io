@@ -3,9 +3,6 @@
   "ci": {
     "collect": {
       "numberOfRuns": 3,
-      "settings": {
-        "preset": "desktop"
-      },
       "staticDistDir": "./dist",
       "url": [
         "http://localhost/",
