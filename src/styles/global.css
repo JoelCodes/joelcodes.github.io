@@ -26,8 +26,11 @@
   --color-wl-accent-soft-text: #347E7B;
 
   /* Wavelength font families */
-  --font-wl-heading: 'Fraunces Variable', Georgia, serif;
-  --font-wl-body:    'Hanken Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
+  /* "... Variable fallback" families are the metric-adjusted @font-face blocks injected by
+     fontaineFallbackPlugin (astro.config.mjs) — they MUST appear in these stacks or the
+     CLS mitigation is a no-op (CR-01). */
+  --font-wl-heading: 'Fraunces Variable', 'Fraunces Variable fallback', Georgia, serif;
+  --font-wl-body:    'Hanken Grotesk Variable', 'Hanken Grotesk Variable fallback', ui-sans-serif, system-ui, sans-serif;
 }
 
 /* Dark mode semantic flip — plain .dark block (NOT @theme) so runtime class toggle works (D-01) */
