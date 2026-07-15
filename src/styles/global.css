@@ -28,6 +28,11 @@
      on those surfaces. See scripts/check-contrast.mjs PAIRS matrix (WR-02). */
   --color-wl-accent-soft-text: #347E7B;
 
+  /* On-ink text — participates in Figma variable system (node 42:27 --on-ink) */
+  /* Used for: CTA button label on ink bg, footer wordmark. */
+  /* Light value #EAF6F3 (a light-surface color for use on ink/dark backgrounds). */
+  --color-wl-on-ink: #EAF6F3;
+
   /* Wavelength font families */
   /* "... Variable fallback" families are the metric-adjusted @font-face blocks injected by
      fontaineFallbackPlugin (astro.config.mjs) — they MUST appear in these stacks or the
@@ -47,6 +52,23 @@
   --color-wl-paper:            #0C2228;
   --color-wl-line:             #5AA9A538;
   --color-wl-accent-soft-text: #7FC4C0;
+  /* on-ink: #EAF6F3 is already a light color designed for dark surfaces; assumed same in dark mode. */
+  /* NOTE: dark --wl-on-ink assumed #EAF6F3; confirm at fidelity gate via Figma dark variable mode. */
+  --color-wl-on-ink:           #12333B;
+}
+
+/* Footer-local color tokens — always dark-background, do NOT flip with .dark.
+   Not part of the 8-token --wl-* palette (designer intent: local values per 34-UI-SPEC.md).
+   Source: 34-FIGMA-EXTRACTION.md "Footer color inventory" — node 42:77 extractions.
+   Centralized as CSS custom properties for maintainability; Figma description explicitly
+   blesses them as local values outside the variable system. */
+:root {
+  --wl-footer-bg:             #0D2A31;
+  --wl-footer-tagline-color:  #5AA9A5;
+  --wl-footer-text-secondary: #7FA4A2;
+  --wl-footer-text-link:      #CDE6E5;
+  --wl-footer-text-muted:     #8FB4B2;
+  --wl-footer-divider:        rgba(255, 255, 255, 0.09);
 }
 
 /* ============================================================
@@ -144,7 +166,7 @@ html {
 }
 
 section[id] {
-  scroll-margin-top: 60px;
+  scroll-margin-top: 64px; /* updated from 60px to match new 64px header height (Phase 34) */
 }
 
 /* Shadow utilities for neobrutalist design */
@@ -707,6 +729,86 @@ section[id] {
     letter-spacing: 0;
     font-style: italic;
     font-variation-settings: "SOFT" 0, "WONK" 1;
+  }
+
+  /* ============================================================
+     WL CHROME UTILITIES (Phase 34 — header + footer type)
+     All sizes extracted from Figma nodes; fidelity gate verifies.
+     These are NOT mismatched Phase 33 ramp classes (.wl-label-button = 16px/600,
+     .wl-accent-kicker = 20px, .wl-text-body = 16px) — new chrome-scoped utilities.
+     ============================================================ */
+
+  /* ---- Chrome / Wordmark (header + footer) ---- */
+  /* extracted: 18.4px / Fraunces 400 Regular / node 42:29 */
+  /* No existing Phase 33 class matches 18.4px — authoring new chrome-scoped utility */
+  .wl-wordmark {
+    font-family: var(--font-wl-heading);
+    font-size: 18.4px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0;
+    font-style: normal;
+    font-variation-settings: "SOFT" 0, "WONK" 1;
+  }
+
+  /* ---- Chrome / Nav Link (header nav) ---- */
+  /* extracted: 15px / Hanken Grotesk 500 Medium / node 42:29 */
+  /* Phase 33 .wl-label-button is 16px/600 — wrong size AND weight; not reused */
+  .wl-nav-link {
+    font-family: var(--font-wl-body);
+    font-size: 15px;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0;
+    font-style: normal;
+  }
+
+  /* ---- Chrome / CTA Label (Book a call button) ---- */
+  /* extracted: 14px / Hanken Grotesk 600 SemiBold / node 39:30 */
+  /* Phase 33 .wl-label-button is 16px/600 — wrong size; not reused */
+  .wl-cta-label {
+    font-family: var(--font-wl-body);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 0;
+    font-style: normal;
+  }
+
+  /* ---- Chrome / Footer Tagline ("On your wavelength.") ---- */
+  /* extracted: 17px / Fraunces 400 italic / node 42:77 */
+  /* No match in Phase 33 ramp — .wl-accent-kicker is 20px; authoring new utility */
+  .wl-footer-tagline {
+    font-family: var(--font-wl-heading);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0;
+    font-style: italic;
+    font-variation-settings: "SOFT" 0, "WONK" 1;
+  }
+
+  /* ---- Chrome / Footer Body (supporting line) ---- */
+  /* extracted: 14px / Hanken Grotesk 400 Regular / node 42:77 */
+  /* Phase 33 .wl-text-body is 16px — wrong size; authoring new utility */
+  .wl-footer-body {
+    font-family: var(--font-wl-body);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0;
+    font-style: normal;
+  }
+
+  /* ---- Chrome / Footer Link (nav + bottom row) ---- */
+  /* extracted: 14px / Hanken Grotesk 400 Regular / node 42:77 */
+  .wl-footer-link {
+    font-family: var(--font-wl-body);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0;
+    font-style: normal;
   }
 
 }
