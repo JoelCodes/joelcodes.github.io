@@ -685,7 +685,8 @@ section[id] {
 
   /* ---- Accent / Outcome ---- */
   /* specced: 390=16, 768=16, 1440=16, 1920=16 (constant); italic Fraunces */
-  /* Note: no opsz in extraction table (—); no font-variation-settings for Fraunces accent styles */
+  /* Note: opsz not specced in extraction table (—); SOFT 0 / WONK 1 retained per
+     extraction's ramp-wide mockup-render note (applies to all Fraunces styles incl. accents) */
   .wl-accent-outcome {
     font-family: var(--font-wl-heading);
     font-size: 16px;
