@@ -5,6 +5,10 @@ import Button from '../../components/ui/Button.astro';
 import { getCollection } from 'astro:content';
 import { readingTime } from 'reading-time-estimator';
 
+if (import.meta.env.PROD) {
+  return Astro.redirect('/');  // No blog index in production (D-13)
+}
+
 // Get published posts, sorted newest first
 const allPosts = await getCollection('blog', ({ data }) => {
   return import.meta.env.PROD ? !data.draft : true;
