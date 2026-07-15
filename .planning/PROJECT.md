@@ -27,7 +27,7 @@ Small business owners can understand what Joel does, trust his process, and easi
 - Landing page at all four breakpoints with `#services` / `#about` anchor sections
 - Showcase page with client work + craft/experiments project cards (expandable)
 - Service Web and Area Abbotsford pages built but dev-hidden (not linked/indexed in production yet)
-- Blog restyled to the new brand, reachable by URL but removed from the nav
+- Blog restyled to the new brand, dev-only until it returns (excluded from prod builds and sitemap — Phase 34 decision)
 - Crito/neobrutalist artifact cleanup (components, design-system pages, illustrations, CLAUDE.md)
 
 ## Requirements
@@ -44,6 +44,7 @@ Small business owners can understand what Joel does, trust his process, and easi
 - ✓ n8n webhook contact form flow — v1.3 (webhook URL still unconfigured)
 - ✓ Sea-cool token foundation (light + dark) in Tailwind 4 `@theme` — v3.0 Phase 33 (dark values from Figma variable mode; one FIDELITY-GAP: sea-glass-deep keeps light value in dark)
 - ✓ Fraunces + Hanken Grotesk self-hosted fonts — v3.0 Phase 33 (fontsource-variable + Fontaine fallback metrics, 13-style `.wl-*` type ramp, WCAG AA contrast gate script, waveform mark/favicon/OG assets)
+- ✓ Wavelength chrome site-wide — v3.0 Phase 34 (SiteHeader/SiteFooter per Figma with circle-badge mark on dark, zero client JS, system-only FOUC-safe dark mode, blog gated out of prod, /faq → / redirect, fidelity gate approved 2026-07-15; validates CHROME-01..04)
 
 ### Active
 
@@ -54,7 +55,7 @@ Small business owners can understand what Joel does, trust his process, and easi
 - [ ] Showcase page (responsive, expandable project cards)
 - [ ] Service Web + Area Abbotsford pages (dev-hidden)
 - [ ] Nav/IA: Services (anchor) / Showcase / About (anchor) / Book a call (Calendly placeholder)
-- [ ] Blog restyled, out of nav, URLs stable
+- [ ] Blog restyled (dev-only in prod as of Phase 34; Phase 38 restyles against dev builds)
 - [ ] Legacy design cleanup + CLAUDE.md update
 
 ### Out of Scope
@@ -82,7 +83,7 @@ Small business owners can understand what Joel does, trust his process, and easi
 - **Fonts:** Fraunces + Hanken Grotesk must be self-hosted (performance + GDPR)
 - **Accessibility:** WCAG 2.2 AA (Playwright/axe-core validated)
 - **Performance:** Lighthouse 90+ all categories maintained through the rebuild
-- **Blog URLs:** Existing post URLs must not break (posts stay reachable, sitemap intact)
+- **Blog URLs:** REVERSED in Phase 34 (Joel's explicit call) — blog pages are excluded from prod builds while dev-only; `/blog/*` 404s in prod and posts left the sitemap. SEO value knowingly sacrificed until the blog returns.
 
 ## Key Decisions
 
@@ -94,14 +95,16 @@ Small business owners can understand what Joel does, trust his process, and easi
 | Abandon Crito direction (v2.0) | New Figma brand supersedes it; work archived on branch | — 2026-07-14 |
 | Rebuild in place (not fresh scaffold) | Infra (CI, SEO, blog wiring) isn't design-flavored; keep it | — Pending |
 | v3.0 from Figma via MCP | Live design source with real tokens/copy beats raster interpretation (v1.4/v2.0 lesson) | — Pending |
-| Blog out of nav, URLs stable | New IA has no blog nav item; content keeps SEO value | — Pending |
+| Blog fully dev-only (link + pages out of prod) | Joel reversed "URLs stable" in Phase 34 discussion; one coherent dev-only gate | ✓ Shipped in 34 |
+| contact@joelshinness.com site-wide | Figma copy shipped verbatim; Joel sets up the alias before launch (amends Phase 37's me@ criterion) | — 2026-07-15 |
+| No theme toggle in v3.0 chrome | Figma specs none; site follows prefers-color-scheme; toggle deferred (design in Figma first) | ✓ Shipped in 34 |
 | Service/Area pages dev-hidden | Fully designed, but Joel wants them unpublished for now | — Pending |
 | Calendly placeholder constant | Real URL not yet chosen; single `BOOKING_URL` to swap later | — Pending |
-| Dark mode from Figma dark mockup | Landing dark variant exists (`117:103`); keep the toggle | — Pending |
+| Dark mode from Figma dark mockup | Landing dark variant exists (`117:103`); system-only (toggle deferred per Phase 34) | — Pending |
 
 ## Evolution
 
 This document evolves at phase transitions and milestone boundaries.
 
 ---
-*Last updated: 2026-07-15 — Phase 33 (Token Foundation + Fonts) complete*
+*Last updated: 2026-07-15 — Phase 34 (BaseLayout + Chrome) complete*
