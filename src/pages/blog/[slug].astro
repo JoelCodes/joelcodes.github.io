@@ -5,6 +5,7 @@ import TableOfContents from '../../components/TableOfContents.astro';
 import { readingTime } from 'reading-time-estimator';
 
 export async function getStaticPaths() {
+  if (import.meta.env.PROD) return [];  // No blog pages in production (D-13)
   const posts = await getCollection('blog', ({ data }) => {
     return import.meta.env.PROD ? !data.draft : true;
   });
