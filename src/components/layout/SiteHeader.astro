@@ -1,0 +1,69 @@
+---
+import WaveMark from '../WaveMark.astro';
+const BOOKING_URL = '#book'; // TODO: replace with real Calendly URL when Phase 37 wires IA-03
+const isDev = import.meta.env.DEV;
+---
+
+<!-- Wavelength site header — sticky, zero client JS, wl-* tokens only (Plan 34-04 / CHROME-02) -->
+<header
+  class="sticky top-0 z-30 h-16 bg-wl-sea-glass"
+  style="border-bottom: 1px solid var(--color-wl-accent);"
+>
+  <div class="max-w-[1440px] mx-auto px-5 sm:px-[160px] h-full flex items-center justify-between">
+
+    <!-- Brand lockup (left): mark + wordmark -->
+    <a
+      href="/"
+      aria-label="Joel Shinness Solutions — home"
+      class="flex items-center gap-[10px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+    >
+      <WaveMark size={30} class="text-wl-accent" />
+      <!-- Wordmark hidden below sm (640px) — mark-only per D-02 (user-approved deviation from Figma 15px shrink) -->
+      <span class="hidden sm:inline wl-wordmark text-wl-ink">Joel Shinness Solutions</span>
+    </a>
+
+    <!-- Desktop nav (≥ 640px) — all links + CTA -->
+    <nav aria-label="Primary navigation" class="hidden sm:flex items-center gap-[26px]">
+      <a
+        href="/#services"
+        class="wl-nav-link text-wl-ink hover:text-wl-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+      >Services</a>
+      <a
+        href="/showcase"
+        class="wl-nav-link text-wl-ink hover:text-wl-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+      >Showcase</a>
+      <a
+        href="/#about"
+        class="wl-nav-link text-wl-ink hover:text-wl-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+      >About</a>
+      {isDev && (
+        <a
+          href="/blog"
+          class="wl-nav-link text-wl-sub hover:text-wl-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+        >Blog</a>
+      )}
+      <!-- CTA: pre-COMP-01 inline-styled <a>; replace with <CTAButton> in Phase 35 -->
+      <!-- min-h-[44px] + inline-flex ensure WCAG 2.5.5 44px touch target (9+9+14=32px text alone falls short) -->
+      <a
+        href={BOOKING_URL}
+        class="wl-cta-label inline-flex items-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+        style="background: var(--color-wl-ink); color: var(--color-wl-on-ink); padding: 9px 17px; border-radius: 10px; text-decoration: none; min-height: 44px;"
+      >Book a call</a>
+    </nav>
+
+    <!-- Mobile nav (&lt; 640px) — Showcase + CTA only (Services/About reachable via footer — D-01) -->
+    <nav aria-label="Primary navigation" class="flex sm:hidden items-center gap-[18px]">
+      <a
+        href="/showcase"
+        class="wl-nav-link text-wl-ink hover:text-wl-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+      >Showcase</a>
+      <!-- CTA: pre-COMP-01 inline-styled <a>; replace with <CTAButton> in Phase 35 -->
+      <a
+        href={BOOKING_URL}
+        class="wl-cta-label inline-flex items-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+        style="background: var(--color-wl-ink); color: var(--color-wl-on-ink); padding: 9px 17px; border-radius: 10px; text-decoration: none; min-height: 44px;"
+      >Book a call</a>
+    </nav>
+
+  </div>
+</header>
