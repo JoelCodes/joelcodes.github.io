@@ -8,11 +8,11 @@
 
 ### Foundation
 
-- [ ] **FOUND-01**: Tailwind 4 `@theme` token set covering the full sea-cool palette (Ink/Sub/Accent/Accent-soft/Sea-glass/Sea-glass-deep/Paper/Line) in light **and** dark themes, namespaced `--wl-*` during migration so old tokens keep rendering existing pages until cleanup
-- [ ] **FOUND-02**: Fraunces + Hanken Grotesk self-hosted via `@fontsource-variable` (Fraunces upright + italic with correct `opsz` axis at display sizes); 13-style type ramp from the Figma Components page available as utilities
-- [ ] **FOUND-03**: WCAG AA contrast verified for the token pairs of both themes before any component is built
-- [ ] **FOUND-04**: Lighthouse CI expanded before page migration: landing + showcase + one blog post URLs, mobile + desktop, `lcp-lazy-loaded`/`prioritize-lcp-image` audits re-enabled
-- [ ] **FOUND-05**: Waveform logo mark, favicon, and OG-image assets exported from Figma and wired into the layout/SEO plumbing
+- [x] **FOUND-01**: Tailwind 4 `@theme` token set covering the full sea-cool palette (Ink/Sub/Accent/Accent-soft/Sea-glass/Sea-glass-deep/Paper/Line) in light **and** dark themes, namespaced `--wl-*` during migration so old tokens keep rendering existing pages until cleanup
+- [x] **FOUND-02**: Fraunces + Hanken Grotesk self-hosted via `@fontsource-variable` (Fraunces upright + italic with correct `opsz` axis at display sizes); 13-style type ramp from the Figma Components page available as utilities
+- [x] **FOUND-03**: WCAG AA contrast verified for the token pairs of both themes before any component is built
+- [x] **FOUND-04**: Lighthouse CI expanded before page migration: landing + showcase + one blog post URLs, mobile + desktop, `lcp-lazy-loaded`/`prioritize-lcp-image` audits re-enabled
+- [x] **FOUND-05**: Waveform logo mark, favicon, and OG-image assets exported from Figma and wired into the layout/SEO plumbing
 
 ### Site Chrome
 
@@ -85,11 +85,11 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FOUND-01 | Phase 33 | Pending |
-| FOUND-02 | Phase 33 | Pending |
-| FOUND-03 | Phase 33 | Pending |
-| FOUND-04 | Phase 33 | Pending |
-| FOUND-05 | Phase 33 | Pending |
+| FOUND-01 | Phase 33 | Complete |
+| FOUND-02 | Phase 33 | Complete |
+| FOUND-03 | Phase 33 | Complete |
+| FOUND-04 | Phase 33 | Complete |
+| FOUND-05 | Phase 33 | Complete |
 | CHROME-01 | Phase 34 | Pending |
 | CHROME-02 | Phase 34 | Pending |
 | CHROME-03 | Phase 34 | Pending |
@@ -120,6 +120,7 @@
 | QUAL-03 | Phase 41 | Pending |
 
 **Coverage:**
+
 - v3.0 requirements: 33 total
 - Mapped to phases: 33
 - Unmapped: 0 ✓
