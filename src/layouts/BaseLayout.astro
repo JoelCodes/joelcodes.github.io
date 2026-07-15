@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
-import Header from '../components/layout/Header.astro';
-import Footer from '../components/layout/Footer.astro';
+import SiteHeader from '../components/layout/SiteHeader.astro';
+import SiteFooter from '../components/layout/SiteFooter.astro';
 import SEO from '../components/SEO.astro';
 
 // Self-hosted variable font preloads — ?url lets Vite resolve to hashed /_astro/ asset (FOUND-02 / 33-05)
@@ -58,21 +58,22 @@ const { title, description = 'Web apps, automation, and AI development for small
       <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:opsz,wght@9..40,100..900&display=swap" rel="stylesheet" />
     </noscript>
 
-    <!-- Dark mode script - runs before body renders to prevent FOUC -->
+    <!-- CRITICAL: must remain in <head>, before <body> — prevents dark-mode FOUC.
+         System-only per D-05/D-06. Clears stale localStorage.theme from v1.x/v2.x toggle. -->
     <script is:inline>
-      document.documentElement.classList.toggle(
-        "dark",
-        localStorage.theme === "dark" ||
-          (!("theme" in localStorage) &&
-           window.matchMedia("(prefers-color-scheme: dark)").matches)
-      );
+      if ('theme' in localStorage) {
+        delete localStorage.theme;
+      }
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('dark');
+      }
     </script>
   </head>
   <body class="font-body bg-bg-light dark:bg-bg-dark text-text-light dark:text-text-dark min-h-screen flex flex-col">
-    <Header />
+    <SiteHeader />
     <main class="flex-grow">
       <slot />
     </main>
-    <Footer />
+    <SiteFooter />
   </body>
 </html>

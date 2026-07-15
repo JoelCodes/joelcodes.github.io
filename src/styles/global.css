@@ -69,6 +69,11 @@
   --wl-footer-text-link:      #CDE6E5;
   --wl-footer-text-muted:     #8FB4B2;
   --wl-footer-divider:        rgba(255, 255, 255, 0.09);
+  /* Footer wordmark: always light on the always-dark footer background.
+     Uses --color-wl-on-ink light value (#EAF6F3) explicitly — NOT referencing
+     the flippable --color-wl-on-ink token which becomes #12333B in dark mode
+     (contrast 1.12:1 against footer bg — WCAG AA violation). Rule 1 fix. */
+  --wl-footer-wordmark-color: #EAF6F3;
 }
 
 /* ============================================================
