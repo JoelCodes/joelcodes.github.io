@@ -74,6 +74,7 @@ export default defineConfig({
     '/portfolio': '/projects',
     '/portfolio/[slug]': '/projects/[slug]',
     '/contact': '/#contact',
+    '/faq': '/',
   },
 
   // base: '/joel-shinness-website', // Uncomment if not using custom domain
@@ -95,6 +96,7 @@ export default defineConfig({
     expressiveCode(),
     mdx(),
     sitemap({
+      filter: (page) => !page.includes('/blog'),
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
