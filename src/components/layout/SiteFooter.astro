@@ -1,0 +1,103 @@
+---
+import WaveMark from '../WaveMark.astro';
+const currentYear = new Date().getFullYear();
+const isDev = import.meta.env.DEV;
+const BOOKING_URL = '#book'; // TODO: replace with real Calendly URL when Phase 37 wires IA-03
+---
+
+<!-- Wavelength site footer — always-dark #0D2A31, zero client JS, wl-footer-* locals (Plan 34-04 / CHROME-03) -->
+<footer style="background-color: var(--wl-footer-bg);">
+  <div
+    class="max-w-[1440px] mx-auto px-6 sm:px-[160px]"
+    style="padding-top: 45px; padding-bottom: 29px;"
+  >
+
+    <!-- Top row: brand-left / foot-links-right; stacks on mobile -->
+    <div class="flex flex-col sm:flex-row sm:justify-between gap-8 sm:gap-0">
+
+      <!-- Left column: brand lockup + tagline + supporting line -->
+      <div class="flex flex-col gap-2">
+        <!-- Brand lockup: mark (on-ink light) + wordmark (on-ink light) -->
+        <a
+          href="/"
+          aria-label="Joel Shinness Solutions — home"
+          class="flex items-center gap-[10px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+        >
+          <WaveMark size={32} class="text-wl-on-ink" />
+          <span class="wl-wordmark" style="color: var(--color-wl-on-ink);">Joel Shinness Solutions</span>
+        </a>
+
+        <!-- Tagline — Fraunces italic (verbatim Figma copy, period included) -->
+        <p class="wl-footer-tagline" style="color: var(--wl-footer-tagline-color);">On your wavelength.</p>
+
+        <!-- Supporting line (verbatim Figma copy, em dash) -->
+        <p class="wl-footer-body" style="color: var(--wl-footer-text-secondary);">Solutions for small businesses — web, automations, and AI that save you time and money.</p>
+      </div>
+
+      <!-- Right column: foot-links nav (five links per 34-FIGMA-EXTRACTION.md node 42:65) -->
+      <nav aria-label="Footer navigation" class="flex flex-row flex-wrap gap-[22px] items-start">
+        <a
+          href="/#services"
+          class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+          style="color: var(--wl-footer-text-link);"
+        >Services</a>
+        <a
+          href="/showcase"
+          class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+          style="color: var(--wl-footer-text-link);"
+        >Showcase</a>
+        <a
+          href="/#about"
+          class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+          style="color: var(--wl-footer-text-link);"
+        >About</a>
+        <a
+          href={BOOKING_URL}
+          class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+          style="color: var(--wl-footer-text-link);"
+        >Book a call</a>
+        <a
+          href="mailto:contact@joelshinness.com"
+          class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+          style="color: var(--wl-footer-text-link);"
+        >Email</a>
+        {isDev && (
+          <a
+            href="/blog"
+            class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+            style="color: var(--wl-footer-text-muted);"
+          >Blog</a>
+        )}
+      </nav>
+
+    </div>
+
+    <!-- Divider: 27px spacer above, 1px rule rgba(255,255,255,0.09), 24px spacer below (node 42:65) -->
+    <hr style="border: none; border-top: 1px solid var(--wl-footer-divider); margin: 27px 0 24px;" />
+
+    <!-- Bottom row: email · GitHub (left) + copyright (right) -->
+    <div class="flex flex-col sm:flex-row sm:justify-between gap-[22px]">
+      <p>
+        <a
+          href="mailto:contact@joelshinness.com"
+          class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+          style="color: var(--wl-footer-text-link);"
+        >contact@joelshinness.com</a><!--
+        --><span aria-hidden="true" style="color: var(--wl-footer-text-link);"> · </span><!--
+        --><a
+          href="https://github.com/JoelCodes"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+          style="color: var(--wl-footer-text-link);"
+        >GitHub</a>
+      </p>
+
+      <!-- Copyright: dynamic year only, no boilerplate attributions (D-10) -->
+      <p class="wl-footer-link" style="color: var(--wl-footer-text-muted);">
+        &copy; {currentYear} Joel Shinness
+      </p>
+    </div>
+
+  </div>
+</footer>
