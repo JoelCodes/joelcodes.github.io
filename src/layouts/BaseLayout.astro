@@ -61,8 +61,12 @@ const { title, description = 'Web apps, automation, and AI development for small
     <!-- CRITICAL: must remain in <head>, before <body> — prevents dark-mode FOUC.
          System-only per D-05/D-06. Clears stale localStorage.theme from v1.x/v2.x toggle. -->
     <script is:inline>
-      if ('theme' in localStorage) {
-        delete localStorage.theme;
+      try {
+        if ('theme' in localStorage) {
+          delete localStorage.theme;
+        }
+      } catch (e) {
+        /* storage blocked (private mode / cookie settings) — dark mode must still work */
       }
       if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         document.documentElement.classList.add('dark');

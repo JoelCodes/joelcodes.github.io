@@ -2,7 +2,7 @@
 import WaveMark from '../WaveMark.astro';
 const currentYear = new Date().getFullYear();
 const isDev = import.meta.env.DEV;
-const BOOKING_URL = '#book'; // TODO: replace with real Calendly URL when Phase 37 wires IA-03
+const BOOKING_URL = '/#book'; // TODO: replace with real Calendly URL when Phase 37 wires IA-03
 ---
 
 <!-- Wavelength site footer — always-dark #0D2A31, zero client JS, wl-footer-* locals (Plan 34-04 / CHROME-03) -->
@@ -21,7 +21,7 @@ const BOOKING_URL = '#book'; // TODO: replace with real Calendly URL when Phase 
         <a
           href="/"
           aria-label="Joel Shinness Solutions — home"
-          class="flex items-center gap-[10px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+          class="flex items-center gap-[10px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--wl-footer-wordmark-color)]"
         >
           <!-- Circle-badge mark: always-dark footer surface (Figma node 42:77) -->
           <WaveMark size={32} badge />
@@ -39,33 +39,33 @@ const BOOKING_URL = '#book'; // TODO: replace with real Calendly URL when Phase 
       <nav aria-label="Footer navigation" class="flex flex-row flex-wrap gap-[22px] items-start">
         <a
           href="/#services"
-          class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+          class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--wl-footer-wordmark-color)]"
           style="color: var(--wl-footer-text-link);"
         >Services</a>
         <a
           href="/showcase"
-          class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+          class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--wl-footer-wordmark-color)]"
           style="color: var(--wl-footer-text-link);"
         >Showcase</a>
         <a
           href="/#about"
-          class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+          class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--wl-footer-wordmark-color)]"
           style="color: var(--wl-footer-text-link);"
         >About</a>
         <a
           href={BOOKING_URL}
-          class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+          class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--wl-footer-wordmark-color)]"
           style="color: var(--wl-footer-text-link);"
         >Book a call</a>
         <a
           href="mailto:contact@joelshinness.com"
-          class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+          class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--wl-footer-wordmark-color)]"
           style="color: var(--wl-footer-text-link);"
         >Email</a>
         {isDev && (
           <a
             href="/blog"
-            class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+            class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--wl-footer-wordmark-color)]"
             style="color: var(--wl-footer-text-muted);"
           >Blog</a>
         )}
@@ -86,7 +86,7 @@ const BOOKING_URL = '#book'; // TODO: replace with real Calendly URL when Phase 
       <p>
         <a
           href="mailto:contact@joelshinness.com"
-          class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+          class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--wl-footer-wordmark-color)]"
           style="color: var(--wl-footer-text-link);"
         >contact@joelshinness.com</a><!--
         --><span aria-hidden="true" style="color: var(--wl-footer-text-link);"> · </span><!--
@@ -94,7 +94,7 @@ const BOOKING_URL = '#book'; // TODO: replace with real Calendly URL when Phase 
           href="https://github.com/JoelCodes"
           target="_blank"
           rel="noopener noreferrer"
-          class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+          class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--wl-footer-wordmark-color)]"
           style="color: var(--wl-footer-text-link);"
         >GitHub</a>
       </p>

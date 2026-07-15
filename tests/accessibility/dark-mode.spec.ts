@@ -49,8 +49,9 @@ test.describe('Dark Mode Accessibility', () => {
     await context.close();
   });
 
-  // Blog test removed: /blog returns 404 in prod; test suite runs against prod build
-  // If dev-only test coverage is desired for blog, add a separate dev test block
+  // Blog dark-mode test removed: /blog is dev-only as of Phase 34 (prod builds emit a
+  // redirect stub). The suite's webServer runs `npm run dev`, where /blog still renders —
+  // light-mode blog coverage lives in axe-tests.spec.ts until the Phase 38 restyle.
 
   test('Homepage in light mode should not have accessibility violations', async ({ browser }) => {
     const context = await browser.newContext({ colorScheme: 'light' });
