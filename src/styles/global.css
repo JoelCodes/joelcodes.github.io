@@ -1,5 +1,47 @@
 @import "tailwindcss";
 
+/* ============================================================
+   WL TOKENS (v3.0 Wavelength — namespace isolated via --wl- prefix)
+   DO NOT edit old token block below until Phase 41 cleanup
+   ============================================================ */
+
+@theme {
+  /* Wavelength Palette — light values (Figma-traced from file 1tg8wIPcvOVC5tPZ8pkGO2) */
+  --color-wl-ink:             #12333B;
+  --color-wl-sub:             #35525A;
+  --color-wl-accent:          #0E7078;
+  --color-wl-accent-soft:     #5AA9A5;
+  --color-wl-sea-glass:       #E6F1F1;
+  --color-wl-sea-glass-deep:  #D2E7E7;
+  --color-wl-paper:           #F6FBFA;
+  --color-wl-line:            color-mix(in oklch, #0E7078 16%, transparent);
+
+  /* Companion token — text use of accent-soft (AA-compliant, FOUND-03 / D-09) */
+  /* --wl-accent-soft (#5AA9A5) fails WCAG AA on paper at 2.63:1; companion darkened to 4.55:1 */
+  --color-wl-accent-soft-text: #347E7B;
+
+  /* Wavelength font families */
+  --font-wl-heading: 'Fraunces Variable', Georgia, serif;
+  --font-wl-body:    'Hanken Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Dark mode semantic flip — plain .dark block (NOT @theme) so runtime class toggle works (D-01) */
+/* sea-glass-deep omitted: no dark evidence in Figma; keeps light value #D2E7E7 (D-04 / FIDELITY-GAP) */
+.dark {
+  --color-wl-ink:              #EAF6F3;
+  --color-wl-sub:              #A9C9C7;
+  --color-wl-accent:           #4FB3B8;
+  --color-wl-accent-soft:      #7FC4C0;
+  --color-wl-sea-glass:        #123640;
+  --color-wl-paper:            #0C2228;
+  --color-wl-line:             #5AA9A538;
+  --color-wl-accent-soft-text: #7FC4C0;
+}
+
+/* ============================================================
+   OLD NEOBRUTALIST TOKENS (v2.x — unchanged until Phase 41)
+   ============================================================ */
+
 @theme {
   /* Primary accent colors */
   --color-yellow: oklch(0.85 0.18 95);
@@ -69,6 +111,15 @@
 
 /* Dark mode variant for class-based toggle */
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* Body default — Hanken Grotesk + Figma body-style line-height (D-08) */
+/* Utility classes (e.g. font-body on existing <body>) win over @layer base — old pages unaffected */
+@layer base {
+  body {
+    font-family: var(--font-wl-body);
+    line-height: 1.6;
+  }
+}
 
 /* Smooth scroll behavior with accessibility consideration */
 html {
