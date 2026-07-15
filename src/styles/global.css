@@ -21,8 +21,11 @@
   --color-wl-paper:           #F6FBFA;
   --color-wl-line:            color-mix(in oklch, #0E7078 16%, transparent);
 
-  /* Companion token — text use of accent-soft (AA-compliant, FOUND-03 / D-09) */
+  /* Companion token — text use of accent-soft (FOUND-03 / D-09) */
   /* --wl-accent-soft (#5AA9A5) fails WCAG AA on paper at 2.63:1; companion darkened to 4.55:1 */
+  /* ⚠ PAPER-ONLY: --wl-accent-soft-text is AA-validated on --wl-paper ONLY (4.55:1).
+     It FAILS AA on sea-glass (4.12:1) and sea-glass-deep (3.7:1) — do NOT use it
+     on those surfaces. See scripts/check-contrast.mjs PAIRS matrix (WR-02). */
   --color-wl-accent-soft-text: #347E7B;
 
   /* Wavelength font families */

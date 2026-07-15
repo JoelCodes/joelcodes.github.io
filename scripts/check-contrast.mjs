@@ -105,7 +105,14 @@ const D_PAPER            = '#0C2228';  // --color-wl-paper (dark)
 //
 // Before: #5AA9A5 → 2.63:1  (FAIL — original accent-soft, decorative use only)
 // After:  #347E7B → 4.55:1  (PASS — companion for text use; minimum darkening)
-const L_ACCENT_SOFT_TEXT = '#347E7B';  // --color-wl-accent-soft-text (light)
+//
+// ⚠ PAPER-ONLY RESTRICTION (WR-02): --wl-accent-soft-text is validated for
+// --wl-paper backgrounds ONLY. It FAILS WCAG AA on sea-glass (4.12:1) and
+// sea-glass-deep (3.7:1). The mockups use accent-soft text exclusively on
+// paper (D-09/D-12: minimal same-hue darkening for the pairs actually used).
+// Do NOT place companion-token text on sea-glass surfaces without further
+// darkening + re-running this gate. Informational rows below document this.
+const L_ACCENT_SOFT_TEXT = '#347E7B';  // --color-wl-accent-soft-text (light) — PAPER ONLY
 
 // --wl-accent-soft-text (dark): dark accent-soft #7FC4C0 on dark paper #0C2228
 // #7FC4C0 on #0C2228 → 8.28:1  PASS  (dark theme naturally high contrast)
@@ -136,6 +143,14 @@ export const PAIRS = [
   // This row is INFORMATIONAL (textUse: false); accent-soft is for decorative/illustration
   // use only. Any text use MUST use --wl-accent-soft-text companion above.
   [L_ACCENT_SOFT, L_PAPER, 'light: accent-soft on paper [DECORATIVE ONLY — not for text]', 3, false],
+
+  // Companion token on sea-glass surfaces — DOCUMENTED RESTRICTIONS (WR-02).
+  // These combinations are NOT approved for use: the companion is derived for
+  // paper only (see PAPER-ONLY RESTRICTION note above). Informational rows
+  // (textUse: false) so the documented failure is visible on every run without
+  // failing the gate — the mockups never place companion text on sea-glass.
+  [L_ACCENT_SOFT_TEXT, L_SEA_GLASS,      'light: accent-soft-text on sea-glass [NOT APPROVED — paper-only token]',      4.5, false],
+  [L_ACCENT_SOFT_TEXT, L_SEA_GLASS_DEEP, 'light: accent-soft-text on sea-glass-deep [NOT APPROVED — paper-only token]', 4.5, false],
 
   // Text on sea-glass section backgrounds
   [L_INK,    L_SEA_GLASS, 'light: ink on sea-glass (section bg)',                   4.5, true],
