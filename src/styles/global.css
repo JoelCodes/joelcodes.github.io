@@ -28,6 +28,11 @@
      on those surfaces. See scripts/check-contrast.mjs PAIRS matrix (WR-02). */
   --color-wl-accent-soft-text: #347E7B;
 
+  /* On-ink text — participates in Figma variable system (node 42:27 --on-ink) */
+  /* Used for: CTA button label on ink bg, footer wordmark. */
+  /* Light value #EAF6F3 (a light-surface color for use on ink/dark backgrounds). */
+  --color-wl-on-ink: #EAF6F3;
+
   /* Wavelength font families */
   /* "... Variable fallback" families are the metric-adjusted @font-face blocks injected by
      fontaineFallbackPlugin (astro.config.mjs) — they MUST appear in these stacks or the
@@ -47,6 +52,23 @@
   --color-wl-paper:            #0C2228;
   --color-wl-line:             #5AA9A538;
   --color-wl-accent-soft-text: #7FC4C0;
+  /* on-ink: #EAF6F3 is already a light color designed for dark surfaces; assumed same in dark mode. */
+  /* NOTE: dark --wl-on-ink assumed #EAF6F3; confirm at fidelity gate via Figma dark variable mode. */
+  --color-wl-on-ink:           #12333B;
+}
+
+/* Footer-local color tokens — always dark-background, do NOT flip with .dark.
+   Not part of the 8-token --wl-* palette (designer intent: local values per 34-UI-SPEC.md).
+   Source: 34-FIGMA-EXTRACTION.md "Footer color inventory" — node 42:77 extractions.
+   Centralized as CSS custom properties for maintainability; Figma description explicitly
+   blesses them as local values outside the variable system. */
+:root {
+  --wl-footer-bg:             #0D2A31;
+  --wl-footer-tagline-color:  #5AA9A5;
+  --wl-footer-text-secondary: #7FA4A2;
+  --wl-footer-text-link:      #CDE6E5;
+  --wl-footer-text-muted:     #8FB4B2;
+  --wl-footer-divider:        rgba(255, 255, 255, 0.09);
 }
 
 /* ============================================================
