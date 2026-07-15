@@ -17,7 +17,10 @@ const isDev = import.meta.env.DEV;
       aria-label="Joel Shinness Solutions — home"
       class="flex items-center gap-[10px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
     >
-      <WaveMark size={30} class="text-wl-accent" />
+      <!-- Bare strokes: light mode (accent color via currentColor). Hidden in dark mode. -->
+      <WaveMark size={30} class="text-wl-accent dark:hidden" />
+      <!-- Circle badge: dark mode (light disc, ink strokes — Figma 117:104). Hidden in light mode. -->
+      <WaveMark size={30} badge class="hidden dark:block" />
       <!-- Wordmark hidden below sm (640px) — mark-only per D-02 (user-approved deviation from Figma 15px shrink) -->
       <span class="hidden sm:inline wl-wordmark text-wl-ink">Joel Shinness Solutions</span>
     </a>

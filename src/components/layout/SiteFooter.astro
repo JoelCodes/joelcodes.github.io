@@ -23,7 +23,8 @@ const BOOKING_URL = '#book'; // TODO: replace with real Calendly URL when Phase 
           aria-label="Joel Shinness Solutions — home"
           class="flex items-center gap-[10px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
         >
-          <WaveMark size={32} style="color: var(--wl-footer-wordmark-color);" />
+          <!-- Circle-badge mark: always-dark footer surface (Figma node 42:77) -->
+          <WaveMark size={32} badge />
           <span class="wl-wordmark" style="color: var(--wl-footer-wordmark-color);">Joel Shinness Solutions</span>
         </a>
 
@@ -75,8 +76,13 @@ const BOOKING_URL = '#book'; // TODO: replace with real Calendly URL when Phase 
     <!-- Divider: 27px spacer above, 1px rule rgba(255,255,255,0.09), 24px spacer below (node 42:65) -->
     <hr style="border: none; border-top: 1px solid var(--wl-footer-divider); margin: 27px 0 24px;" />
 
-    <!-- Bottom row: email · GitHub (left) + copyright (right) -->
+    <!-- Bottom row: copyright (left) + email · GitHub (right) — Figma node 42:74 -->
     <div class="flex flex-col sm:flex-row sm:justify-between gap-[22px]">
+      <!-- Copyright: dynamic year only, no boilerplate attributions (D-10) -->
+      <p class="wl-footer-link" style="color: var(--wl-footer-text-muted);">
+        &copy; {currentYear} Joel Shinness
+      </p>
+
       <p>
         <a
           href="mailto:contact@joelshinness.com"
@@ -91,11 +97,6 @@ const BOOKING_URL = '#book'; // TODO: replace with real Calendly URL when Phase 
           class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
           style="color: var(--wl-footer-text-link);"
         >GitHub</a>
-      </p>
-
-      <!-- Copyright: dynamic year only, no boilerplate attributions (D-10) -->
-      <p class="wl-footer-link" style="color: var(--wl-footer-text-muted);">
-        &copy; {currentYear} Joel Shinness
       </p>
     </div>
 
