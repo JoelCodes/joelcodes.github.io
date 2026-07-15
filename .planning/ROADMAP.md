@@ -98,7 +98,7 @@ See `.planning/MILESTONES.md` "v2.0 Prep Crito Design File (Abandoned)" for deta
 4. `lighthouserc.json` tests landing, showcase, and one blog post URL (mobile + desktop); `lcp-lazy-loaded` and `prioritize-lcp-image` audits are re-enabled.
 5. Waveform mark, favicon, and OG-image assets are exported from Figma and wired into `BaseLayout.astro` / `SEO.astro`; existing v1/v2 tokens remain in `@theme` untouched (namespace isolation via `--wl-` prefix).
 
-**Plans:** 4/6 plans executed
+**Plans:** 5/6 plans executed
 
 Plans:
 **Wave 1**
@@ -116,7 +116,7 @@ Plans:
 
 **Wave 4** *(blocked on Wave 3 completion)*
 
-- [ ] 33-05-PLAN.md — Self-hosted fonts (fontsource + Fontaine CLS=0) + 13-style type ramp
+- [x] 33-05-PLAN.md — Self-hosted fonts (fontsource + Fontaine CLS=0) + 13-style type ramp
 
 **Wave 5** *(blocked on Wave 4 completion)*
 
@@ -276,7 +276,7 @@ Plans:
 |-------|-----------|----------------|--------|-----------|
 | 1-22 | v1.0-v1.3 | 66/66 | Complete (see milestone archives) | 2026-01-26 → 2026-02-11 |
 | 23-32 | v2.0 (abandoned) | 34/34 | Executed, unconsumed (see archive branch) | 2026-05-31 → 2026-06-13 |
-| 33 | v3.0 | 4/6 | In Progress|  |
+| 33 | v3.0 | 5/6 | In Progress|  |
 | 34 | v3.0 | — | Pending | — |
 | 35 | v3.0 | — | Pending | — |
 | 36 | v3.0 | — | Pending | — |
