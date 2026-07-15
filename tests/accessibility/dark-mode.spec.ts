@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { settleAnimations } from './helpers';
 
 /**
  * Dark mode accessibility test suite.
@@ -21,6 +22,9 @@ test.describe('Dark Mode Accessibility', () => {
     const html = page.locator('html');
     await expect(html).toHaveClass(/dark/);
 
+    await settleAnimations(page);
+
+
     const results = await new AxeBuilder({ page })
       .withTags(wcagTags)
       .analyze();
@@ -33,6 +37,9 @@ test.describe('Dark Mode Accessibility', () => {
     const context = await browser.newContext({ colorScheme: 'dark' });
     const page = await context.newPage();
     await page.goto('/projects');
+
+    await settleAnimations(page);
+
 
     const results = await new AxeBuilder({ page })
       .withTags(wcagTags)
@@ -49,6 +56,9 @@ test.describe('Dark Mode Accessibility', () => {
     const context = await browser.newContext({ colorScheme: 'light' });
     const page = await context.newPage();
     await page.goto('/');
+
+    await settleAnimations(page);
+
 
     const results = await new AxeBuilder({ page })
       .withTags(wcagTags)

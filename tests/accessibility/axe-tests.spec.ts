@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { settleAnimations } from './helpers';
 
 /**
  * Accessibility test suite using axe-core to detect WCAG 2.2 AA violations.
@@ -12,6 +13,9 @@ test.describe('Page Accessibility Tests', () => {
   test('Homepage should not have accessibility violations', async ({ page }) => {
     await page.goto('/');
 
+    await settleAnimations(page);
+
+
     const results = await new AxeBuilder({ page })
       .withTags(wcagTags)
       .analyze();
@@ -21,6 +25,9 @@ test.describe('Page Accessibility Tests', () => {
 
   test('Projects page should not have accessibility violations', async ({ page }) => {
     await page.goto('/projects');
+
+    await settleAnimations(page);
+
 
     const results = await new AxeBuilder({ page })
       .withTags(wcagTags)
@@ -32,6 +39,9 @@ test.describe('Page Accessibility Tests', () => {
   test('Blog page should not have accessibility violations', async ({ page }) => {
     await page.goto('/blog');
 
+    await settleAnimations(page);
+
+
     const results = await new AxeBuilder({ page })
       .withTags(wcagTags)
       .analyze();
@@ -41,6 +51,9 @@ test.describe('Page Accessibility Tests', () => {
 
   test('About page should not have accessibility violations', async ({ page }) => {
     await page.goto('/about');
+
+    await settleAnimations(page);
+
 
     const results = await new AxeBuilder({ page })
       .withTags(wcagTags)
