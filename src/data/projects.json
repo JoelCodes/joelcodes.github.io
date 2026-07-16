@@ -1,52 +1,30 @@
 [
   {
+    "id": "bakery-order-system",
     "slug": "bakery-order-system",
-    "title": "Bakery Order Automation",
-    "category": "web-apps",
-    "categoryLabel": "Web Apps",
-    "thumbnail": "/images/portfolio/bakery-thumb.jpg",
-    "problem": "Sarah's bakery was receiving orders through 5 different channels: phone, SMS, Facebook, Instagram, and email. She spent 4-5 hours daily just transcribing orders into her notebook, leading to errors and missed opportunities. Peak seasons meant working until midnight to organize the next day's baking schedule.",
-    "solution": "We built a custom order management system that consolidated all order channels into a single dashboard. Customers can now place orders through a simple web form, and the system automatically organizes them by pickup date and baking schedule. The dashboard shows real-time inventory needs, prevents overbooking, and generates daily baking schedules automatically.",
-    "results": [
-      { "metric": "85%", "label": "Time reduction in order processing" },
-      { "metric": "20hrs", "label": "Saved per week" },
-      { "metric": "Zero", "label": "Missed orders since launch" }
-    ],
-    "technologies": ["React", "Node.js", "PostgreSQL", "Twilio API"],
-    "screenshots": [
-      { "src": "/images/portfolio/bakery-dashboard.jpg", "alt": "Order management dashboard" },
-      { "src": "/images/portfolio/bakery-calendar.jpg", "alt": "Automated baking schedule" }
-    ],
-    "testimonial": {
-      "quote": "This system gave me my evenings back. I used to stay up until midnight organizing orders. Now everything's done automatically, and I can focus on baking.",
-      "author": "Sarah Johnson",
-      "role": "Owner, Sweet Delights Bakery"
-    },
-    "draft": true
+    "section": "client-work",
+    "eyebrow": "MMORPG · PLAYER SAFETY",
+    "title": "Chat Safety Pipeline",
+    "outcome": "Kept players safe from chat abuse — at scale.",
+    "summary": "A real-time pipeline that flagged and filtered harmful chat across a live game, protecting a large player community without slowing conversation down.",
+    "tags": ["Real-time", "Moderation", "Scale", "Pipelines"],
+    "problem": "A live game's chat exposed players — many of them young — to abuse faster than human moderators could keep up with.",
+    "built": "A real-time pipeline that scored every message, filtered the worst instantly, and routed the tricky calls to moderators with the context they needed to decide.",
+    "result": "Harmful messages caught before they landed, a safer community, and a moderation team freed up for judgment calls instead of endless triage.",
+    "thumbLabel": "chat-safety pipeline"
   },
   {
+    "id": "inventory-sync-automation",
     "slug": "inventory-sync-automation",
-    "title": "Multi-Channel Inventory Sync",
-    "category": "automation",
-    "categoryLabel": "Automation",
-    "thumbnail": "/images/portfolio/inventory-thumb.jpg",
-    "problem": "A growing e-commerce retailer was selling on Amazon, Shopify, and eBay simultaneously. Inventory counts were updated manually across platforms, leading to overselling, angry customers, and hours of daily reconciliation work.",
-    "solution": "We built an automation that syncs inventory levels in real-time across all sales channels. When a sale happens on any platform, stock counts update everywhere within seconds. The system also alerts the team when items run low and generates reorder reports automatically.",
-    "results": [
-      { "metric": "100%", "label": "Reduction in overselling incidents" },
-      { "metric": "15hrs", "label": "Saved weekly on manual updates" },
-      { "metric": "3x", "label": "Increase in sales capacity" }
-    ],
-    "technologies": ["n8n", "REST APIs", "PostgreSQL", "Slack Integration"],
-    "screenshots": [
-      { "src": "/images/portfolio/inventory-dashboard.jpg", "alt": "Real-time inventory dashboard" },
-      { "src": "/images/portfolio/inventory-alerts.jpg", "alt": "Low stock alert system" }
-    ],
-    "testimonial": {
-      "quote": "We went from constant fires and customer complaints to smooth operations overnight. This automation paid for itself in the first week.",
-      "author": "Marcus Chen",
-      "role": "Operations Manager, TrendGoods Co."
-    },
-    "draft": true
+    "section": "craft-experiments",
+    "eyebrow": "MMORPG · PLAYER SAFETY",
+    "title": "Chat Safety Pipeline",
+    "outcome": "Kept players safe from chat abuse — at scale.",
+    "summary": "A real-time pipeline that flagged and filtered harmful chat across a live game, protecting a large player community without slowing conversation down.",
+    "tags": ["Real-time", "Moderation", "Scale", "Pipelines"],
+    "problem": "A live game's chat exposed players — many of them young — to abuse faster than human moderators could keep up with.",
+    "built": "A real-time pipeline that scored every message, filtered the worst instantly, and routed the tricky calls to moderators with the context they needed to decide.",
+    "result": "Harmful messages caught before they landed, a safer community, and a moderation team freed up for judgment calls instead of endless triage.",
+    "thumbLabel": "chat-safety pipeline"
   }
 ]
