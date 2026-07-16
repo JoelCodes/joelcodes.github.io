@@ -318,7 +318,7 @@ Plans:
 | 33 | v3.0 | 6/6 | Complete    | 2026-07-15 |
 | 34 | v3.0 | 6/6 | Complete    | 2026-07-15 |
 | 35 | v3.0 | 4/4 | Complete    | 2026-07-16 |
-| 36 | v3.0 | 2/6 | In Progress|  |
+| 36 | v3.0 | 5/6 | In Progress|  |
 | 37 | v3.0 | — | Pending | — |
 | 38 | v3.0 | — | Pending | — |
 | 39 | v3.0 | — | Pending | — |
