@@ -433,6 +433,41 @@ export const PAIRS = [
 
 ---
 
+## Validation Architecture
+
+### Test Infrastructure
+
+| Property | Value |
+|----------|-------|
+| **Framework** | Playwright 1.58.2 + `@axe-core/playwright` 4.11.1 + plain-node `check-contrast.mjs` |
+| **Config file** | `playwright.config.ts` — `testDir: './tests'`, `testIgnore: 'tests/build/**'`, webServer runs `npm run dev` on `http://localhost:4321` |
+| **Quick run command** | `npm run test:a11y` (`playwright test tests/accessibility`) |
+| **Full suite command** | `npx playwright test && npm run build && npm run test:build` |
+| **Estimated runtime** | ~60 seconds (Playwright ~10s + build ~30s + build assertions <1s) — same as Phase 34 |
+
+### What Gets Validated per Requirement
+
+| Requirement | Gate | Command / Method |
+|-------------|------|-----------------|
+| COMP-01 — CTAButton variants axe-clean, AA contrast both themes | Temporary `tests/accessibility/primitives.spec.ts` (light + dark axe), `node scripts/check-contrast.mjs` extended with new pairs | `npm run test:a11y` + `node scripts/check-contrast.mjs` |
+| COMP-02 — each primitive exists, only `--wl-*` tokens, zero old-token refs | `grep -r "bg-yellow\|text-turquoise\|shadow-neo\|border-neo\|--color-yellow" src/components/wl/` returns zero | Manual grep in task verify step |
+| Isolation page axe coverage | `tests/accessibility/primitives.spec.ts` — 2 specs (light/dark) against `/dev/primitives` via dev server | `npm run test:a11y` |
+| Contrast script extension (new pairs) | `node scripts/check-contrast.mjs` exits 0 after adding Phase 35 pairs to PAIRS matrix | `node scripts/check-contrast.mjs` |
+| Prod-build isolation page absent | `npm run build && grep -r "primitives" dist/` returns zero after final deletion commit | `npm run build` + grep |
+| SiteHeader pixel-neutral retrofit | Screenshot diff before/after `<CTAButton>` swap — zero visual delta | Manual Playwright screenshot or Figma compare |
+
+### Sampling Rate
+
+- **After every task commit:** `npm run build` (Astro/TS errors surface immediately; keeps build green throughout)
+- **After every wave:** Full suite — `npx playwright test && npm run build && npm run test:build`
+- **Before `/gsd:verify-work`:** Full suite must be green; isolation page and its spec must be deleted; prod-build grep must return zero
+
+### Wave 0 Needs
+
+No Wave 0 setup required. All tooling (`@playwright/test`, `@axe-core/playwright`, `playwright.config.ts`, `tests/accessibility/helpers.ts`) is already installed and passing from Phase 34. The only additions this phase writes are the temporary `tests/accessibility/primitives.spec.ts` (created during Wave 1, deleted in the final wave) and new PAIRS rows in `check-contrast.mjs`.
+
+---
+
 ## Figma Extraction Requirements
 
 The following values MUST be extracted from Figma before implementation begins. These cannot be determined from the codebase alone.
