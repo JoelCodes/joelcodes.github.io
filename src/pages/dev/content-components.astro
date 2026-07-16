@@ -58,9 +58,9 @@ const entry1 = projects[1] ?? projects[0];
 
         <div>
           <p style="font-family: var(--font-wl-body); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-wl-sub); margin: 0 0 16px 0;">
-            ProjectCard - expanded state (second entry, open forced via CSS wrapper)
+            ProjectCard - expanded state (second entry, open forced for fidelity gate)
           </p>
-          <div class="dev-force-open">
+          <div id="dev-card-expanded">
             <ProjectCard
               eyebrow={entry1.data.eyebrow}
               title={entry1.data.title}
@@ -125,30 +125,21 @@ const entry1 = projects[1] ?? projects[0];
   </main>
 </BaseLayout>
 
+{/* DEV-ONLY: Inline script to force the second ProjectCard open for the fidelity screenshot.
+    ProjectCard does not expose an open prop passthrough (not present in component API).
+    This script is acceptable on a dev-only isolation page (this file is deleted in Task 4).
+    It sets the open attribute on the details element inside #dev-card-expanded after render. */}
+<script>
+  (function() {
+    var wrapper = document.getElementById('dev-card-expanded');
+    if (!wrapper) return;
+    var details = wrapper.querySelector('details');
+    if (details) details.open = true;
+  })();
+</script>
+
 <style>
-  .dev-force-open details::details-content {
-    display: block;
-    height: auto;
-    overflow: visible;
-    content-visibility: visible;
-  }
-
-  .dev-force-open .wl-project-card-details {
-    border: 1px solid var(--color-wl-accent);
-  }
-
-  .dev-force-open .wl-project-card-details .wl-toggle-label {
-    display: none;
-  }
-
-  .dev-force-open .wl-project-card-details .wl-toggle-label-open {
-    display: inline;
-  }
-
-  .dev-force-open .wl-project-card-details .wl-toggle-indicator {
-    transform: rotate(180deg);
-  }
-
+  /* FrequencyWave: absolute full-bleed behind section content */
   .dev-wave-bg {
     position: absolute;
     inset: 0;
