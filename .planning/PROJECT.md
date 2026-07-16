@@ -45,12 +45,13 @@ Small business owners can understand what Joel does, trust his process, and easi
 - ✓ Sea-cool token foundation (light + dark) in Tailwind 4 `@theme` — v3.0 Phase 33 (dark values from Figma variable mode; one FIDELITY-GAP: sea-glass-deep keeps light value in dark)
 - ✓ Fraunces + Hanken Grotesk self-hosted fonts — v3.0 Phase 33 (fontsource-variable + Fontaine fallback metrics, 13-style `.wl-*` type ramp, WCAG AA contrast gate script, waveform mark/favicon/OG assets)
 - ✓ Wavelength chrome site-wide — v3.0 Phase 34 (SiteHeader/SiteFooter per Figma with circle-badge mark on dark, zero client JS, system-only FOUC-safe dark mode, blog gated out of prod, /faq → / redirect, fidelity gate approved 2026-07-15; validates CHROME-01..04)
+- ✓ UI primitive library — v3.0 Phase 35 (8 components in `src/components/wl/`: CTAButton ×4 variants + calendar/mail icons, Eyebrow, Tag, Callout, LinkCard, Breadcrumb, Step, ServiceCard; Figma-extracted values, D-10 non-flippable on-dark literals, `--wl-card-*` dark panel tokens, SiteHeader CTA retrofit; fidelity gate approved 2026-07-15, code review fixed 11 findings, verification 12/12; validates COMP-01..02)
 
 ### Active
 
 *v3.0 scope — detailed in `.planning/REQUIREMENTS.md` once defined:*
 
-- [ ] Component library per Figma Components page
+- [x] Component library per Figma Components page — primitives done (Phase 35); interactive pieces (Project Card, FAQ, wave bg) in Phase 36
 - [ ] Landing page (responsive, all 4 Figma breakpoints, dark mode)
 - [ ] Showcase page (responsive, expandable project cards)
 - [ ] Service Web + Area Abbotsford pages (dev-hidden)
@@ -107,4 +108,4 @@ Small business owners can understand what Joel does, trust his process, and easi
 This document evolves at phase transitions and milestone boundaries.
 
 ---
-*Last updated: 2026-07-15 — Phase 34 (BaseLayout + Chrome) complete*
+*Last updated: 2026-07-16 — Phase 35 (UI Primitives) complete*
