@@ -74,6 +74,25 @@
      the flippable --color-wl-on-ink token which becomes #12333B in dark mode
      (contrast 1.12:1 against footer bg — WCAG AA violation). Rule 1 fix. */
   --wl-footer-wordmark-color: #EAF6F3;
+
+  /* ── Phase 35 card-panel local tokens (footer-precedent pattern) ──────────
+     White-card components (Callout 99:26, LinkCard 99:29, ServiceCard 40:32)
+     flip in dark mode via local custom properties — see dark-mode card panel
+     subsection in 35-FIGMA-EXTRACTION.md §Fresh MCP Extraction (2026-07-15).
+     Source nodes: 117:159 "Card / Web" dark mockup.
+     These are local values outside the --wl-* palette (same precedent as
+     --wl-footer-* above). */
+  --wl-card-bg:            #FFFFFF;                                  /* card fill light — Figma: white literal */
+  --wl-card-shadow:        0 20px 40px -30px rgba(18, 51, 59, 0.5); /* Shadow/Card light */
+  --wl-card-icon-tile-bg:  var(--color-wl-accent);                   /* ServiceCard icon tile light */
+}
+
+/* Dark-mode card panel flip — matches .dark flip mechanism (D-01 / Phase 33 precedent).
+   Source: 35-FIGMA-EXTRACTION.md §Fresh MCP Extraction, 117:159 "Card / Web" dark mockup. */
+.dark {
+  --wl-card-bg:            #12333B;                                  /* card fill dark — dark mockup 117:159 */
+  --wl-card-shadow:        0 20px 40px -30px rgba(0, 0, 0, 0.8);    /* Shadow/Card dark */
+  --wl-card-icon-tile-bg:  rgba(90, 169, 165, 0.14);                 /* icon tile dark — accent-soft @14% */
 }
 
 /* ============================================================

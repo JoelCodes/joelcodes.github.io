@@ -1,0 +1,60 @@
+---
+/**
+ * Tag — COMP-02 Tag primitive
+ *
+ * Single-slot label pill. Presentational only — no ARIA role (per UI-SPEC
+ * accessibility contract: use the surrounding context for semantic meaning).
+ *
+ * All geometry sourced from 35-FIGMA-EXTRACTION.md §Fresh MCP Extraction (2026-07-15),
+ * node 39:44.
+ *
+ * Extraction values:
+ *   Fill:          rgba(14,112,120,0.08)  — accent @8% (Figma description: "accent @8%")
+ *   Border:        1px solid var(--color-wl-line)
+ *   Padding:       4px 10px
+ *   Border-radius: 999px (radius/pill)
+ *   Text:          HG Regular 12px, var(--color-wl-sub)
+ *                  (12px is Figma-extracted local size — not part of the 13-style ramp)
+ *
+ * No on-dark case: Tag is used on light/paper surfaces only per extraction.
+ * Dark mode: --color-wl-sub and --color-wl-line flip automatically via .dark block
+ * in global.css; the rgba(14,112,120,0.08) fill is an opacity tint and naturally
+ * lighter in dark mode (accent flips to #4FB3B8 — fill remains subtle tint).
+ * No dark: override needed.
+ *
+ * Zero old-token references (D-03). No <script> tag.
+ */
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<span
+  class:list={[className]}
+  style={[
+    /* Fill: accent @8% — rgba(14,112,120,0.08) — source node 39:44 */
+    'background: rgba(14, 112, 120, 0.08);',
+    /* Border: 1px solid var(--color-wl-line) — source node 39:44 */
+    'border: 1px solid var(--color-wl-line);',
+    /* Padding: 4px 10px — source node 39:44 */
+    'padding: 4px 10px;',
+    /* Border-radius: 999px (radius/pill) — source node 39:44 */
+    'border-radius: 999px;',
+    /* Text: HG Regular 12px (local size, Figma-extracted), var(--color-wl-sub) */
+    /* 12px is below the Phase 33 ramp (smallest = 13px .wl-text-note);         */
+    /* Figma extraction confirms 12px — local size like footer values.            */
+    'font-family: var(--font-wl-body);',
+    'font-size: 12px;',
+    'font-weight: 400;',
+    'line-height: 1.5;',
+    'color: var(--color-wl-sub);',
+    /* Inline-flex for pill alignment */
+    'display: inline-flex;',
+    'align-items: center;',
+  ].join(' ')}
+>
+  <slot />
+</span>

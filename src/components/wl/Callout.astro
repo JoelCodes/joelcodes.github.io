@@ -1,0 +1,59 @@
+---
+/**
+ * Callout — COMP-02 Callout primitive
+ *
+ * Aside/callout card with a full-height accent left border. Slot-driven notice block.
+ * Renders as <aside> (UI-SPEC accessibility contract: important-notice treatment).
+ *
+ * All geometry sourced from 35-FIGMA-EXTRACTION.md §Fresh MCP Extraction (2026-07-15),
+ * node 99:26.
+ *
+ * Extraction values:
+ *   Background:    #FFFFFF literal (card fill — white, not paper)
+ *                  Dark mode: flips to #12333B via --wl-card-bg (Phase 35 card token)
+ *   Border:        1px solid var(--color-wl-line)
+ *   Border-radius: 14px (local, not a token — source: 35-FIGMA-EXTRACTION.md local values registry)
+ *   Padding:       21px 26px
+ *   Accent bar:    3px wide, full height, left edge, var(--color-wl-accent)
+ *                  Implemented as border-left: 3px solid per Figma designer description.
+ *                  padding-left adjusted to 23px to maintain visual inner padding
+ *                  (26px nominal - 3px bar = 23px inside the bar).
+ *   Text:          .wl-text-body (HG Regular 16px / 1.6), var(--color-wl-sub)
+ *
+ * Dark-mode card flip: uses --wl-card-bg (defined in global.css :root / .dark blocks).
+ * No dark: color overrides needed — flippable tokens (--color-wl-line, --color-wl-sub,
+ * --color-wl-accent) handle dark mode automatically.
+ *
+ * Zero old-token references (D-03). No <script> tag.
+ */
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<aside
+  class:list={[
+    'wl-text-body',
+    className
+  ]}
+  style={[
+    /* Background: white card fill — uses Phase 35 card token (flips in dark mode) */
+    /* --wl-card-bg: #FFFFFF light / #12333B dark (global.css Phase 35 card locals) */
+    'background: var(--wl-card-bg);',
+    /* Border: 1px solid line token; accent bar is border-left 3px solid accent */
+    'border: 1px solid var(--color-wl-line);',
+    /* Accent left bar: 3px solid accent (full height via border-left on element) */
+    'border-left: 3px solid var(--color-wl-accent);',
+    /* Border-radius: 14px (local, Figma-extracted — 35-FIGMA-EXTRACTION.md local values) */
+    'border-radius: 14px;',
+    /* Padding: 21px 26px (extracted). Left side: 23px to account for 3px accent bar. */
+    'padding: 21px 23px 21px 26px;',
+    /* Text color: var(--color-wl-sub) (secondary text, flippable) */
+    'color: var(--color-wl-sub);',
+  ].join(' ')}
+>
+  <slot />
+</aside>
