@@ -128,6 +128,9 @@ const {
 
   {/* Go-link: HG SemiBold 15px accent, arrow "→" as TEXT (no icon by design) */}
   {/* 15px is a local Figma-extracted size (35-FIGMA-EXTRACTION.md local values) */}
+  {/* Only the decorative arrow is aria-hidden (WR-05): the visible label must stay
+      in the accessible name (WCAG 2.5.3 Label in Name — voice-control users say
+      "click Learn more") and be announced by screen readers. */}
   <span
     style={[
       'font-family: var(--font-wl-body);',
@@ -138,8 +141,7 @@ const {
       'align-items: center;',
       'gap: 4px;',
     ].join(' ')}
-    aria-hidden="true"
   >
-    {goLabel} →
+    {goLabel} <span aria-hidden="true">→</span>
   </span>
 </a>
