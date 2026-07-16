@@ -46,12 +46,13 @@ Small business owners can understand what Joel does, trust his process, and easi
 - ✓ Fraunces + Hanken Grotesk self-hosted fonts — v3.0 Phase 33 (fontsource-variable + Fontaine fallback metrics, 13-style `.wl-*` type ramp, WCAG AA contrast gate script, waveform mark/favicon/OG assets)
 - ✓ Wavelength chrome site-wide — v3.0 Phase 34 (SiteHeader/SiteFooter per Figma with circle-badge mark on dark, zero client JS, system-only FOUC-safe dark mode, blog gated out of prod, /faq → / redirect, fidelity gate approved 2026-07-15; validates CHROME-01..04)
 - ✓ UI primitive library — v3.0 Phase 35 (8 components in `src/components/wl/`: CTAButton ×4 variants + calendar/mail icons, Eyebrow, Tag, Callout, LinkCard, Breadcrumb, Step, ServiceCard; Figma-extracted values, D-10 non-flippable on-dark literals, `--wl-card-*` dark panel tokens, SiteHeader CTA retrofit; fidelity gate approved 2026-07-15, code review fixed 11 findings, verification 12/12; validates COMP-01..02)
+- ✓ Content components + expandable cards — v3.0 Phase 36 (ProjectCard with native `<details>` whole-card summary, gradient thumb block, story-in-DOM SEO; FAQItem exclusive-open via `name` attr with rotating `+` toggle; FrequencyWave 5-path inline SVG; projects.json v2 as Zod-validated `file()` content collection with D-09 placeholder copy; v1 `/projects` pages deleted early; `::details-content` progressive enhancement; fidelity gate approved 2026-07-16, code review fixed 7 of 8 findings, verification 14/14; validates COMP-03..05, CONT-01)
 
 ### Active
 
 *v3.0 scope — detailed in `.planning/REQUIREMENTS.md` once defined:*
 
-- [x] Component library per Figma Components page — primitives done (Phase 35); interactive pieces (Project Card, FAQ, wave bg) in Phase 36
+- [x] Component library per Figma Components page — primitives done (Phase 35); interactive pieces done (Phase 36: Project Card, FAQ, wave bg)
 - [ ] Landing page (responsive, all 4 Figma breakpoints, dark mode)
 - [ ] Showcase page (responsive, expandable project cards)
 - [ ] Service Web + Area Abbotsford pages (dev-hidden)
@@ -108,4 +109,4 @@ Small business owners can understand what Joel does, trust his process, and easi
 This document evolves at phase transitions and milestone boundaries.
 
 ---
-*Last updated: 2026-07-16 — Phase 35 (UI Primitives) complete*
+*Last updated: 2026-07-16 — Phase 36 (Content Components + Expandable Cards) complete*
