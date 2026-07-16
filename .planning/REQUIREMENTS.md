@@ -23,8 +23,8 @@
 
 ### Component Library
 
-- [ ] **COMP-01**: CTA Button component with Figma variants (Solid / Ghost / Ghost-on-dark / Small) incl. calendar + mail icon slots
-- [ ] **COMP-02**: Supporting primitives per Figma Components page: Eyebrow (on-light/on-dark), Tag, Callout, Link Card, Breadcrumb, Step, Service Card (default/highlight)
+- [x] **COMP-01**: CTA Button component with Figma variants (Solid / Ghost / Ghost-on-dark / Small) incl. calendar + mail icon slots
+- [x] **COMP-02**: Supporting primitives per Figma Components page: Eyebrow (on-light/on-dark), Tag, Callout, Link Card, Breadcrumb, Step, Service Card (default/highlight)
 - [ ] **COMP-03**: Project Card with closed/expanded states via native `<details>` (aria-correct, animated per Figma, expanded story content indexed)
 - [ ] **COMP-04**: FAQ Item (closed/open) via native `<details>` accordion, exclusive-open behavior
 - [ ] **COMP-05**: Five-line "frequency field" wave background as inline SVG that adapts to both themes
@@ -94,8 +94,8 @@
 | CHROME-02 | Phase 34 | Complete |
 | CHROME-03 | Phase 34 | Complete |
 | CHROME-04 | Phase 34 | Complete |
-| COMP-01 | Phase 35 | Pending |
-| COMP-02 | Phase 35 | Pending |
+| COMP-01 | Phase 35 | Complete |
+| COMP-02 | Phase 35 | Complete |
 | COMP-03 | Phase 36 | Pending |
 | COMP-04 | Phase 36 | Pending |
 | COMP-05 | Phase 36 | Pending |

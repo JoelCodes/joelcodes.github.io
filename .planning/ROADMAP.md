@@ -317,7 +317,7 @@ Plans:
 | 23-32 | v2.0 (abandoned) | 34/34 | Executed, unconsumed (see archive branch) | 2026-05-31 → 2026-06-13 |
 | 33 | v3.0 | 6/6 | Complete    | 2026-07-15 |
 | 34 | v3.0 | 6/6 | Complete    | 2026-07-15 |
-| 35 | v3.0 | 4/4 | Complete   | 2026-07-16 |
+| 35 | v3.0 | 4/4 | Complete    | 2026-07-16 |
 | 36 | v3.0 | — | Pending | — |
 | 37 | v3.0 | — | Pending | — |
 | 38 | v3.0 | — | Pending | — |
