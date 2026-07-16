@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v3.0
 milestone_name: Wavelength Rebrand
 status: executing
-stopped_at: Completed 36-04-PLAN.md
-last_updated: "2026-07-16T22:12:00Z"
-last_activity: 2026-07-16 -- Completed 36-04 (ProjectCard COMP-03, FrequencyWave COMP-05, ::details-content CSS)
+stopped_at: Completed 36-05-PLAN.md
+last_updated: "2026-07-16T22:19:00Z"
+last_activity: 2026-07-16 -- Completed 36-05 (FAQItem COMP-04 — native exclusive-open accordion, typographic + toggle, Fraunces 18px question)
 progress:
   total_phases: 9
   completed_phases: 3
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-07-14)
 ## Current Position
 
 Phase: 36 (content-components-expandable-cards) — EXECUTING
-Plan: 4 of 6 complete
+Plan: 5 of 6 complete
 Status: Executing Phase 36
-Last activity: 2026-07-16 -- Completed 36-04 (ProjectCard COMP-03, FrequencyWave COMP-05, ::details-content CSS)
+Last activity: 2026-07-16 -- Completed 36-05 (FAQItem COMP-04 — native exclusive-open accordion, typographic + toggle, Fraunces 18px question)
 
 ```
 v3.0 Progress: [█████████░                              ] 2/9 phases (22%)
@@ -104,6 +104,8 @@ See `.planning/MILESTONES.md` for full milestone details.
 - **Phase 36-04 2026-07-16**: ::details-content animation placed in global.css (not per-component) so ProjectCard (COMP-03) and FAQItem (36-05) share one definition. interpolate-size: allow-keywords on :root for Chromium progressive enhancement; FF/Safari snap per D-07.
 - **Phase 36-04 2026-07-16**: ProjectCard title: local Fraunces 22px (not .wl-heading-h3 21px). Hook: Fraunces Italic 17px ink (not accent). Both per 36-EXTRACTION.md — extraction supersedes UI-SPEC.
 - **Phase 36-04 2026-07-16**: FrequencyWave stroke-linecap: butt (Figma export default, per extraction). WaveMark "round" convention overridden by extraction authority.
+- **Phase 36-05 2026-07-16**: FAQItem toggle is a typographic `+` glyph (HG Regular 21px accent) rotating 45° — NOT a chevron SVG. Extraction node 99:17/99:22 is authoritative; plan text mentioning SVG was superseded.
+- **Phase 36-05 2026-07-16**: FAQItem question: local Fraunces Regular 18px ink (no .wl-* class match). ::details-content animation reused from global.css (36-04) — not duplicated in component. Scoped CSS overrides global 180° rotation to 45° for the + glyph.
 
 ### Lessons carried forward
 
@@ -130,7 +132,7 @@ None currently.
 
 ## Session Continuity
 
-Last session: 2026-07-16T22:12:00Z
-Stopped at: Completed 36-04-PLAN.md
-Resume file: .planning/phases/36-content-components-expandable-cards/36-04-SUMMARY.md
-Next action: Execute 36-05 (FAQItem component)
+Last session: 2026-07-16T22:19:00Z
+Stopped at: Completed 36-05-PLAN.md
+Resume file: .planning/phases/36-content-components-expandable-cards/36-05-SUMMARY.md
+Next action: Execute 36-06 (isolation page — exercise FAQItem + ProjectCard + FrequencyWave)
