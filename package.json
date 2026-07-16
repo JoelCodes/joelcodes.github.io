@@ -8,7 +8,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "test:a11y": "playwright test tests/accessibility",
-    "test:a11y:ui": "playwright test tests/accessibility --ui"
+    "test:a11y:ui": "playwright test tests/accessibility --ui",
+    "test:build": "node tests/build/ia-01-build-output.test.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",

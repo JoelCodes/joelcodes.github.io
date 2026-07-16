@@ -53,13 +53,11 @@ test.describe('Icon visual regression', () => {
   });
 
   test('Project detail page footer icons', async ({ page }) => {
-    // Visit first project (any project works for footer verification)
-    await page.goto('/projects');
-    await page.waitForLoadState('networkidle');
-
-    // Click first project card to navigate to detail page
-    const firstProject = page.locator('.project-card.show').first();
-    await firstProject.click();
+    // Navigate directly to a known project slug (getStaticPaths generates all slugs,
+    // including draft projects — draft only adds noindex meta, page still renders in dev).
+    // All projects in projects.json are currently draft=true, so .project-card.show
+    // never renders on the index page; direct slug navigation is more reliable.
+    await page.goto('/projects/bakery-order-system');
     await page.waitForLoadState('networkidle');
 
     // Use role='contentinfo' to target main footer (not blockquote footer)
