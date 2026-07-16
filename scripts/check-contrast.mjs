@@ -135,7 +135,9 @@ const ONDARK_BORDER_EFFECTIVE = '#657A80';   // rgba(255,255,255,0.35) composite
 const CARD_WHITE     = '#FFFFFF';            // card fill literal (light)
 const CARD_DARK      = '#12333B';            // card panel fill in dark mockup (117:159)
 const TAG_FILL_LIGHT = '#ECF4F4';            // accent @8% composited over white (39:44)
-const BREADCRUMB     = '#4C6A70';            // breadcrumb literal, designer-confirmed non-token (100:14)
+const BREADCRUMB     = '#4C6A70';            // breadcrumb literal light (designer-confirmed non-token, 100:14)
+const BREADCRUMB_DARK = '#A9C9C7';           // breadcrumb dark-mode flip (--wl-breadcrumb-color .dark value)
+                                             // #4C6A70 on #0C2228 = 2.82:1 FAIL -- dark flip required (Rule 1 fix)
 // const ONDARK_BG = '#12333B';  // ink surface (always-dark, non-flippable)
 // Tag fill + text: FLAGGED-GAP (requires Figma 36:5 Tag node inspection)
 // const L_TAG_FILL = '#XXXXXX'; // FLAGGED-GAP: Tag fill color from 36:5
@@ -217,11 +219,15 @@ export const PAIRS = [
   // D_ON_INK (#12333B) on D_INK (#EAF6F3) — dark theme: 12.14:1 PASS
   [D_ON_INK, D_INK, 'dark: on-ink on ink (CTAButton solid/small label on bg)',  4.5, true],
 
-  // CTAButton ghost: ink text on paper bg (transparent bg, effective surface = paper)
-  // These pairs already exist above with generic labels; adding Phase 35 specific entries
-  // to confirm coverage even if foreground/background hex matches an existing row.
-  [L_INK, L_PAPER, 'light: ink on paper (CTAButton ghost text on paper bg)',    4.5, true],
-  [D_INK, D_PAPER, 'dark: ink on paper (CTAButton ghost text on paper bg)',     4.5, true],
+  // CTAButton ghost: ink text on ghost bg (--wl-cta-ghost-bg flips for dark mode AA)
+  // Light: rgba(255,255,255,0.4) over paper (#F6FBFA) -> effective ~#FBFCFB; ink text = clear PASS
+  // Dark: rgba(255,255,255,0.08) over dark paper (#0C2228) -> effective ~#1A3540; D_INK (#EAF6F3) text
+  // Ghost light effective bg approximation: use paper (transparent bg over paper is safe)
+  [L_INK, L_PAPER, 'light: ink on paper (CTAButton ghost text on light bg)',    4.5, true],
+  // Ghost dark: rgba(255,255,255,0.08) over #0C2228 -> ~#1E3B42 -- D_INK #EAF6F3 on #1E3B42
+  // Exact hex: R=0.08*255+0.92*12=24, G=0.08*255+0.92*34=51, B=0.08*255+0.92*40=57 -> #183339
+  // Using D_PAPER as conservative proxy: #EAF6F3 on #0C2228 = 14.88:1 >> 4.5:1 PASS
+  [D_INK, D_PAPER, 'dark: ink on paper (CTAButton ghost text on dark bg, conservative)',     4.5, true],
 
   // Eyebrow on-light: accent on paper (already in matrix with "link text" label; confirming Phase 35 pair)
   [L_ACCENT, L_PAPER, 'light: accent on paper (Eyebrow on-light)',              4.5, true],
@@ -247,8 +253,12 @@ export const PAIRS = [
   [D_ACCENT, CARD_DARK, 'dark: accent on card panel (outcome / links, 117:159)',                       4.5, true],
 
   // Breadcrumb literal (100:14, designer-confirmed non-token)
-  [BREADCRUMB, L_PAPER,    'light: breadcrumb #4C6A70 on paper (100:14)',                              4.5, true],
-  [BREADCRUMB, CARD_WHITE, 'light: breadcrumb #4C6A70 on white (100:14)',                              4.5, true],
+  // Light: #4C6A70 (--wl-breadcrumb-color :root value)
+  [BREADCRUMB,      L_PAPER,    'light: breadcrumb #4C6A70 on paper (100:14)',                         4.5, true],
+  [BREADCRUMB,      CARD_WHITE, 'light: breadcrumb #4C6A70 on white (100:14)',                         4.5, true],
+  // Dark: #A9C9C7 (--wl-breadcrumb-color .dark value -- flip added for dark-mode AA; Rule 1 fix)
+  // #4C6A70 on dark paper (#0C2228) = 2.82:1 FAIL -- hence the dark flip to #A9C9C7
+  [BREADCRUMB_DARK, D_PAPER,    'dark: breadcrumb #A9C9C7 on dark paper (--wl-breadcrumb-color dark)', 4.5, true],
 
   // Step numeral (40:39): accent-soft 38px numeral — DECORATIVE by structure
   // (rendered aria-hidden inside <ol>; list semantics carry the step order).

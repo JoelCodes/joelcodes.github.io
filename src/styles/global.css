@@ -75,6 +75,19 @@
      (contrast 1.12:1 against footer bg — WCAG AA violation). Rule 1 fix. */
   --wl-footer-wordmark-color: #EAF6F3;
 
+  /* ── Phase 35 CTAButton ghost + Breadcrumb local tokens ───────────────────
+     CTAButton ghost (39:22): rgba(255,255,255,0.4) on light paper -- passes AA.
+     In dark mode, light paper flips to #0C2228 and rgba(255,255,255,0.4) resolves
+     to ~#6d7a7e. The ghost ink text (#EAF6F3 in dark) on that = 4.0:1 (AA fail).
+     Fix: in dark mode, drop opacity to 0.08 so the base dark surface stays dark
+     enough for #EAF6F3 text to pass AA (estimated > 8:1). */
+  --wl-cta-ghost-bg: rgba(255, 255, 255, 0.4);
+  /* Breadcrumb (100:14): #4C6A70 designer-confirmed non-token, AA on light paper.
+     In dark mode paper (#0C2228), #4C6A70 = 2.82:1 (AA fail).
+     Dark mode uses --color-wl-sub dark value (#A9C9C7) as breadcrumb color --
+     consistent trust-tint intent, AA on #0C2228 background. */
+  --wl-breadcrumb-color: #4C6A70;
+
   /* ── Phase 35 card-panel local tokens (footer-precedent pattern) ──────────
      White-card components (Callout 99:26, LinkCard 99:29, ServiceCard 40:32)
      flip in dark mode via local custom properties — see dark-mode card panel
@@ -93,6 +106,13 @@
   --wl-card-bg:            #12333B;                                  /* card fill dark — dark mockup 117:159 */
   --wl-card-shadow:        0 20px 40px -30px rgba(0, 0, 0, 0.8);    /* Shadow/Card dark */
   --wl-card-icon-tile-bg:  rgba(90, 169, 165, 0.14);                 /* icon tile dark — accent-soft @14% */
+  /* CTAButton ghost dark flip: in dark mode paper (#0C2228), opacity-0.4 white resolves
+     to ~#6d7a7e which fails AA with #EAF6F3 ink text. Use 0.08 opacity so the effective
+     bg stays near-dark and #EAF6F3 text achieves 8:1+ contrast. */
+  --wl-cta-ghost-bg: rgba(255, 255, 255, 0.08);
+  /* Breadcrumb dark flip: #4C6A70 fails AA on dark paper (#0C2228 = 2.82:1).
+     In dark mode, use --color-wl-sub dark value (#A9C9C7) for AA compliance. */
+  --wl-breadcrumb-color: #A9C9C7;
 }
 
 /* ============================================================
