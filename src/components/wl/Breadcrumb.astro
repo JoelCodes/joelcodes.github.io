@@ -52,13 +52,18 @@ const { items, class: className = '' } = Astro.props;
 // Dark mode: #4C6A70 on dark paper (#0C2228) = 2.82:1 FAIL -- use --wl-breadcrumb-color
 // which flips to #A9C9C7 in .dark (global.css Phase 35 breadcrumb local token).
 // #A9C9C7 on #0C2228 = 6.7:1 AA PASS dark mode (estimated, similar to sub dark token).
+// Color is applied via CLASS (itemColorClass), NOT inline style — an inline
+// `color:` declaration would beat `hover:text-wl-accent` in the cascade and
+// kill the link hover state (WR-01 fix).
 const itemStyle = [
   'font-family: var(--font-wl-body);',
   'font-size: 14px;',
   'font-weight: 400;',
   'line-height: 1.5;',
-  'color: var(--wl-breadcrumb-color);',  /* flips #4C6A70 light / #A9C9C7 dark (global.css Phase 35) */
 ].join(' ');
+
+// Flips #4C6A70 light / #A9C9C7 dark (global.css Phase 35 breadcrumb local token).
+const itemColorClass = 'text-[color:var(--wl-breadcrumb-color)]';
 ---
 
 <nav aria-label="Breadcrumb" class:list={[className]}>
@@ -75,15 +80,17 @@ const itemStyle = [
             /* Current page: span with aria-current="page", not a link */
             <span
               aria-current="page"
+              class={itemColorClass}
               style={itemStyle}
             >
               {item.label}
             </span>
           ) : (
-            /* Non-current: anchor with hover + focus ring */
+            /* Non-current: anchor with hover + focus ring. Color class first so the
+               hover variant (higher specificity via :hover) can override it (WR-01). */
             <a
               href={item.href}
-              class="hover:text-wl-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent transition-colors"
+              class:list={[itemColorClass, 'hover:text-wl-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent transition-colors']}
               style={[itemStyle, 'text-decoration: none;'].join(' ')}
             >
               {item.label}
@@ -94,6 +101,7 @@ const itemStyle = [
           {!isLast && (
             <span
               aria-hidden="true"
+              class={itemColorClass}
               style={[itemStyle, 'padding: 0 4px; user-select: none;'].join(' ')}
             >
               /
