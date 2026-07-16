@@ -1,5 +1,6 @@
 ---
 import WaveMark from '../WaveMark.astro';
+import CTAButton from '../wl/CTAButton.astro';
 const BOOKING_URL = '/#book'; // TODO: replace with real Calendly URL when Phase 37 wires IA-03
 const isDev = import.meta.env.DEV;
 ---
@@ -45,13 +46,8 @@ const isDev = import.meta.env.DEV;
           class="wl-nav-link text-wl-sub hover:text-wl-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
         >Blog</a>
       )}
-      <!-- CTA: pre-COMP-01 inline-styled <a>; replace with <CTAButton> in Phase 35 -->
-      <!-- min-h-[44px] + inline-flex ensure WCAG 2.5.5 44px touch target (9+9+14=32px text alone falls short) -->
-      <a
-        href={BOOKING_URL}
-        class="wl-cta-label inline-flex items-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
-        style="background: var(--color-wl-ink); color: var(--color-wl-on-ink); padding: 9px 17px; border-radius: 10px; text-decoration: none; min-height: 44px;"
-      >Book a call</a>
+      <!-- CTA: CTAButton small variant (COMP-01 — Phase 35 35-02) — pixel-neutral to pre-retrofit spec (D-02) -->
+      <CTAButton href={BOOKING_URL} variant="small">Book a call</CTAButton>
     </nav>
 
     <!-- Mobile nav (&lt; 640px) — Showcase + CTA only (Services/About reachable via footer — D-01) -->
@@ -60,12 +56,8 @@ const isDev = import.meta.env.DEV;
         href="/showcase"
         class="wl-nav-link text-wl-ink hover:text-wl-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
       >Showcase</a>
-      <!-- CTA: pre-COMP-01 inline-styled <a>; replace with <CTAButton> in Phase 35 -->
-      <a
-        href={BOOKING_URL}
-        class="wl-cta-label inline-flex items-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
-        style="background: var(--color-wl-ink); color: var(--color-wl-on-ink); padding: 9px 17px; border-radius: 10px; text-decoration: none; min-height: 44px;"
-      >Book a call</a>
+      <!-- CTA: CTAButton small variant (COMP-01 — Phase 35 35-02) — pixel-neutral to pre-retrofit spec (D-02) -->
+      <CTAButton href={BOOKING_URL} variant="small">Book a call</CTAButton>
     </nav>
 
   </div>
