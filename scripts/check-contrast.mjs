@@ -60,17 +60,19 @@ export function relativeLuminance(hex) {
  * Compute the WCAG contrast ratio between two hex colours.
  * ratio = (L_lighter + 0.05) / (L_darker + 0.05)
  * Order-independent; returns a value in [1, 21].
+ * UNROUNDED (WR-07): rounding here let borderline failures pass the gate
+ * (e.g. a true 4.4951 rounds to 4.50 >= 4.5). Threshold comparisons use the
+ * exact value; callers round for DISPLAY only.
  * @param {string} hex1
  * @param {string} hex2
- * @returns {number}  Rounded to 2 decimal places
+ * @returns {number}  Exact ratio (not rounded)
  */
 export function contrastRatio(hex1, hex2) {
   const l1 = relativeLuminance(hex1);
   const l2 = relativeLuminance(hex2);
   const lighter = Math.max(l1, l2);
   const darker = Math.min(l1, l2);
-  const ratio = (lighter + 0.05) / (darker + 0.05);
-  return Math.round(ratio * 100) / 100;
+  return (lighter + 0.05) / (darker + 0.05);
 }
 
 // ── Palette constants (from 33-FIGMA-EXTRACTION.md) ─────────────────────────
@@ -295,6 +297,7 @@ if (isMain) {
   console.log('  ' + '─'.repeat(68));
 
   for (const [fg, bg, label, threshold, textUse] of PAIRS) {
+    // Compare the UNROUNDED ratio to the threshold (WR-07); round for display only.
     const ratio = contrastRatio(fg, bg);
     const pass = ratio >= threshold;
     if (!pass) {
@@ -302,7 +305,7 @@ if (isMain) {
       else decorativeFailed++;
     }
     const status = pass ? '\x1b[32mPASS\x1b[0m' : (textUse ? '\x1b[31mFAIL\x1b[0m' : '\x1b[33mINFO\x1b[0m');
-    console.log(`  ${status}  ${label}: ${ratio}:1 (threshold ${threshold}:1)`);
+    console.log(`  ${status}  ${label}: ${Math.round(ratio * 100) / 100}:1 (threshold ${threshold}:1)`);
   }
 
   console.log('  ' + '─'.repeat(68));
