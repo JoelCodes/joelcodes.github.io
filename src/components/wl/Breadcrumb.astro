@@ -22,7 +22,9 @@
  * Separator: " / " as aria-hidden text span (no SVG by design — designer confirmed).
  *
  * WAI-ARIA pattern:
- *   - Last item (or item without href): <span aria-current="page"> — NOT a link
+ *   - Last item: <span aria-current="page"> — NOT a link (exactly ONE aria-current
+ *     per trail, per the WAI-ARIA breadcrumb pattern — WR-06)
+ *   - Middle items without href: plain <span> (non-navigable, NO aria-current)
  *   - Other items: <a href> with hover:text-wl-accent and focus ring
  *   - Between items: <span aria-hidden="true"> / </span>
  *
@@ -72,14 +74,15 @@ const itemColorClass = 'text-[color:var(--wl-breadcrumb-color)]';
   >
     {items.map((item, index) => {
       const isLast = index === items.length - 1;
-      const isCurrent = isLast || !item.href;
+      const isLink = !isLast && Boolean(item.href);
 
       return (
         <li style="display: flex; align-items: center;">
-          {isCurrent ? (
-            /* Current page: span with aria-current="page", not a link */
+          {!isLink ? (
+            /* Non-link item: aria-current="page" ONLY on the last item (WR-06) —
+               href-less middle items are plain spans per the WAI-ARIA pattern. */
             <span
-              aria-current="page"
+              aria-current={isLast ? 'page' : undefined}
               class={itemColorClass}
               style={itemStyle}
             >
