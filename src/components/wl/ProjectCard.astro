@@ -270,6 +270,9 @@ const Heading = `h${headingLevel}` as 'h2' | 'h3' | 'h4';
               'color: var(--color-wl-accent);',
             ].join(' ')}
           >Read the story</span>
+          {/* Hidden by default via stylesheet rule (.wl-toggle-label-open) — NOT inline
+              style: an inline `display: none` beats every stylesheet selector, so the
+              details[open] reveal rule below could never apply (CR-01). */}
           <span
             class="wl-toggle-label-open"
             style={[
@@ -278,8 +281,6 @@ const Heading = `h${headingLevel}` as 'h2' | 'h3' | 'h4';
               'font-weight: 600;',
               'line-height: normal;',
               'color: var(--color-wl-accent);',
-              /* Hidden by default; shown when details[open] via global CSS */
-              'display: none;',
             ].join(' ')}
           >Hide</span>
 
@@ -387,7 +388,12 @@ const Heading = `h${headingLevel}` as 'h2' | 'h3' | 'h4';
   }
 
   /* Toggle label text swap — zero JS.
-     "Read the story" shown closed, "Hide" shown open (source nodes 41:27 / 41:77). */
+     "Read the story" shown closed, "Hide" shown open (source nodes 41:27 / 41:77).
+     Default hiding of the open-state label lives HERE (not inline) so the
+     [open] reveal rule below can win — inline styles are unoverridable (CR-01). */
+  .wl-toggle-label-open {
+    display: none;
+  }
   .wl-project-card-details[open] .wl-toggle-label {
     display: none;
   }
