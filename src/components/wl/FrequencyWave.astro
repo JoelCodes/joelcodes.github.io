@@ -1,0 +1,88 @@
+---
+/**
+ * FrequencyWave — COMP-05. Five-line frequency-field inline SVG.
+ * stroke=var(--color-wl-accent) flips light/dark via global.css .dark.
+ * Paths from 36-EXTRACTION.md (Figma node 13:21 — "field" frame, Landing 12:2 hero).
+ * Inline SVG (not an img tag) so the CSS var resolves at render. Zero old-token refs. No script tag.
+ *
+ * viewBox:            0 0 1670 1044 — node 13:21
+ * Group opacity:      0.7 on the 5-line group — node 13:21
+ * preserveAspectRatio: none (stretches with container in Figma render)
+ * Stroke color:       var(--color-wl-accent) — token flips #0E7078 / #4FB3B8 in dark mode
+ * Fill:               none
+ * stroke-linecap:     NOT set (butt default per Figma export — extraction.md is authoritative;
+ *                     WaveMark "round" convention overridden by Figma geometry)
+ *
+ * Per-path values (top→bottom, 36-EXTRACTION.md):
+ *   Path 1: opacity 0.14, stroke-width 1.73958
+ *   Path 2: opacity 0.18, stroke-width 1.73958
+ *   Path 3: opacity 0.22, stroke-width 2.31944
+ *   Path 4: opacity 0.20, stroke-width 2.31944
+ *   Path 5: opacity 0.15, stroke-width 1.73958
+ *
+ * Props:
+ *   class?: string — passthrough for sizing/positioning by consumer
+ *
+ * No size prop, no badge variant (divergence from WaveMark — per 36-PATTERNS.md).
+ * Zero old-token references. No script tag.
+ */
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<svg
+  aria-hidden="true"
+  class:list={[className]}
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1670 1044"
+  fill="none"
+  preserveAspectRatio="none"
+>
+  {/* Group opacity 0.7 — source node 13:21 */}
+  <g opacity="0.7">
+    {/* Path 1: opacity 0.14, stroke-width 1.73958 — source 36-EXTRACTION.md row 1 */}
+    <path
+      d="M-115.972 278.458C347.917 174.083 719.028 382.833 1090.14 266.861C1368.47 179.882 1577.22 348.042 1809.17 255.264"
+      stroke="var(--color-wl-accent)"
+      stroke-width="1.73958"
+      opacity="0.14"
+      fill="none"
+    />
+    {/* Path 2: opacity 0.18, stroke-width 1.73958 — source 36-EXTRACTION.md row 2 */}
+    <path
+      d="M-115.972 382.833C347.917 278.458 719.028 487.208 1090.14 371.236C1368.47 284.257 1577.22 452.417 1809.17 359.639"
+      stroke="var(--color-wl-accent)"
+      stroke-width="1.73958"
+      opacity="0.18"
+      fill="none"
+    />
+    {/* Path 3: opacity 0.22, stroke-width 2.31944 — source 36-EXTRACTION.md row 3 */}
+    <path
+      d="M-115.972 498.806C347.917 394.431 719.028 603.181 1090.14 487.208C1368.47 400.229 1577.22 568.389 1809.17 475.611"
+      stroke="var(--color-wl-accent)"
+      stroke-width="2.31944"
+      opacity="0.22"
+      fill="none"
+    />
+    {/* Path 4: opacity 0.20, stroke-width 2.31944 — source 36-EXTRACTION.md row 4 */}
+    <path
+      d="M-115.972 626.375C347.917 522 719.028 730.75 1090.14 614.778C1368.47 527.799 1577.22 695.958 1809.17 603.181"
+      stroke="var(--color-wl-accent)"
+      stroke-width="2.31944"
+      opacity="0.20"
+      fill="none"
+    />
+    {/* Path 5: opacity 0.15, stroke-width 1.73958 — source 36-EXTRACTION.md row 5 */}
+    <path
+      d="M-115.972 765.542C347.917 661.167 719.028 869.917 1090.14 753.944C1368.47 666.965 1577.22 835.125 1809.17 742.347"
+      stroke="var(--color-wl-accent)"
+      stroke-width="1.73958"
+      opacity="0.15"
+      fill="none"
+    />
+  </g>
+</svg>
