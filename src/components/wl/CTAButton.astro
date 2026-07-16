@@ -189,8 +189,10 @@ const hasIcon = icon !== undefined;
       'rounded-[13px] min-h-[44px] py-[15px] px-[27px]',
       {
         /* solid (39:15): ink bg, on-ink text (flippable tokens — correct for page-level surfaces).
-           Shadow/CTA from 33-FIGMA-EXTRACTION.md: 0 12px 28px -14px rgba(18,51,59,0.75) */
-        'bg-wl-ink text-wl-on-ink [filter:drop-shadow(0_12px_28px_-14px_rgba(18,51,59,0.75))] hover:opacity-90 transition-opacity':
+           Shadow/CTA: 0 12px 28px -14px rgba(18,51,59,0.75) as box-shadow — drop-shadow()
+           takes max 3 lengths (no spread), so a 4-length filter is invalid and never
+           renders (WR-04). Extraction: "box-shadow with spread is authoritative". */
+        'bg-wl-ink text-wl-on-ink shadow-[0_12px_28px_-14px_rgba(18,51,59,0.75)] hover:opacity-90 transition-opacity':
           variant === 'solid',
         /* ghost (39:22): frosted bg rgba(255,255,255,0.4) via --wl-cta-ghost-bg (flips to
            0.08 in dark mode for AA), wl-accent border 1.5px, ink text. bg applied via
