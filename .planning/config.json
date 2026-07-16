@@ -1,6 +1,5 @@
 {
   "mode": "yolo",
-  "depth": "standard",
   "parallelization": false,
   "commit_docs": true,
   "model_profile": "balanced",
@@ -8,7 +7,7 @@
     "research": true,
     "plan_check": true,
     "verifier": true,
-    "_auto_chain_active": false,
+    "_auto_chain_active": true,
     "tdd_mode": true,
     "code_review_depth": "deep",
     "auto_advance": true,
@@ -32,5 +31,6 @@
   "git": {
     "branching_strategy": "milestone",
     "create_tag": true
-  }
+  },
+  "granularity": "standard"
 }
