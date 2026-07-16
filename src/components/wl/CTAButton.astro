@@ -17,7 +17,9 @@
  *
  * Hover states: no hover specs exist in Figma — minimal derived hover per UI-SPEC convention:
  *   solid/small: opacity-90 on hover (slight darken effect)
- *   ghost: bg rgba(255,255,255,0.6) on hover (lighten the frosted bg)
+ *   ghost: bg var(--wl-cta-ghost-bg-hover) on hover — rgba(255,255,255,0.6) light /
+ *          rgba(255,255,255,0.16) dark (flips like --wl-cta-ghost-bg so the surface
+ *          stays dark for #EAF6F3 ink text in dark mode — CR-02 / Rule 1)
  *   ghost-on-dark: rgba(255,255,255,0.08) bg on hover (subtle lightening — always-dark surface)
  *   These are APPROVED-DEVIATION candidates for fidelity gate per extraction_note.
  *
@@ -68,8 +70,10 @@ const hasIcon = icon !== undefined;
       'no-underline',
       /* base geometry */
       'rounded-[13px] min-h-[44px] py-[15px] px-[27px]',
-      /* hover: subtle bg lightening on always-dark surface (derived — no Figma hover spec) */
-      'hover:bg-[rgba(255,255,255,0.08)]',
+      /* bg via class (NOT inline style) so the hover utility can win the cascade (CR-02).
+         hover: subtle bg lightening on always-dark surface (derived — no Figma hover spec).
+         0.08 white over #12333B -> effective #25434B; #EAF6F3 label = 9.57:1 AA PASS. */
+      'bg-transparent hover:bg-[rgba(255,255,255,0.08)]',
       'transition-colors',
       className
     ]}
@@ -80,7 +84,6 @@ const hasIcon = icon !== undefined;
       /* non-flippable literal border — source Figma 117:103 ghost-on-dark (D-10) */
       'border: 1.5px solid rgba(255,255,255,0.35);',
       'text-decoration: none;',
-      'background: transparent;',
     ].join(' ')}
   >
     {icon === 'calendar' && (
@@ -189,15 +192,18 @@ const hasIcon = icon !== undefined;
            Shadow/CTA from 33-FIGMA-EXTRACTION.md: 0 12px 28px -14px rgba(18,51,59,0.75) */
         'bg-wl-ink text-wl-on-ink [filter:drop-shadow(0_12px_28px_-14px_rgba(18,51,59,0.75))] hover:opacity-90 transition-opacity':
           variant === 'solid',
-        /* ghost (39:22): frosted bg rgba(255,255,255,0.4), wl-accent border 1.5px, ink text.
-           bg set via inline style to preserve exact rgba literal; border via class. */
-        'text-wl-ink hover:bg-[rgba(255,255,255,0.6)] transition-colors':
+        /* ghost (39:22): frosted bg rgba(255,255,255,0.4) via --wl-cta-ghost-bg (flips to
+           0.08 in dark mode for AA), wl-accent border 1.5px, ink text. bg applied via
+           class (NOT inline style) so the hover utility can win the cascade (CR-02).
+           Hover uses --wl-cta-ghost-bg-hover (0.6 light / 0.16 dark) — a hard-coded 0.6
+           literal would fail AA in dark mode (2.22:1); flipping token keeps surface dark. */
+        'text-wl-ink bg-[var(--wl-cta-ghost-bg)] hover:bg-[var(--wl-cta-ghost-bg-hover)] transition-colors':
           variant === 'ghost',
       },
       className
     ]}
     style={variant === 'ghost'
-      ? 'background: var(--wl-cta-ghost-bg); border: 1.5px solid var(--color-wl-accent); text-decoration: none;'
+      ? 'border: 1.5px solid var(--color-wl-accent); text-decoration: none;'
       : 'text-decoration: none;'}
   >
     {icon === 'calendar' && (

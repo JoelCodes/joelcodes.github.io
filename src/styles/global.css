@@ -82,6 +82,11 @@
      Fix: in dark mode, drop opacity to 0.08 so the base dark surface stays dark
      enough for #EAF6F3 text to pass AA (estimated > 8:1). */
   --wl-cta-ghost-bg: rgba(255, 255, 255, 0.4);
+  /* Ghost hover (derived — no Figma hover spec): lighten the frosted bg on light
+     paper. Must flip like --wl-cta-ghost-bg: a hard-coded 0.6 white in dark mode
+     composites to ~#9EA7A9 on dark paper — #EAF6F3 ink text = 2.22:1 (AA FAIL).
+     Dark flip below keeps the surface dark (CR-02 / Rule 1). */
+  --wl-cta-ghost-bg-hover: rgba(255, 255, 255, 0.6);
   /* Breadcrumb (100:14): #4C6A70 designer-confirmed non-token, AA on light paper.
      In dark mode paper (#0C2228), #4C6A70 = 2.82:1 (AA fail).
      Dark mode uses --color-wl-sub dark value (#A9C9C7) as breadcrumb color --
@@ -110,6 +115,9 @@
      to ~#6d7a7e which fails AA with #EAF6F3 ink text. Use 0.08 opacity so the effective
      bg stays near-dark and #EAF6F3 text achieves 8:1+ contrast. */
   --wl-cta-ghost-bg: rgba(255, 255, 255, 0.08);
+  /* Ghost hover dark flip: 0.16 white over dark paper (#0C2228) -> effective #33454A;
+     #EAF6F3 ink text on #33454A = 9.08:1 AA PASS (verified in check-contrast.mjs). */
+  --wl-cta-ghost-bg-hover: rgba(255, 255, 255, 0.16);
   /* Breadcrumb dark flip: #4C6A70 fails AA on dark paper (#0C2228 = 2.82:1).
      In dark mode, use --color-wl-sub dark value (#A9C9C7) for AA compliance. */
   --wl-breadcrumb-color: #A9C9C7;

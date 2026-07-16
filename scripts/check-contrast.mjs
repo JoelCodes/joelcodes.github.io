@@ -139,6 +139,10 @@ const TAG_FILL_LIGHT = '#ECF4F4';            // accent @8% composited over white
 const BREADCRUMB     = '#4C6A70';            // breadcrumb literal light (designer-confirmed non-token, 100:14)
 const BREADCRUMB_DARK = '#A9C9C7';           // breadcrumb dark-mode flip (--wl-breadcrumb-color .dark value)
                                              // #4C6A70 on #0C2228 = 2.82:1 FAIL -- dark flip required (Rule 1 fix)
+// CTAButton ghost hover (--wl-cta-ghost-bg-hover, CR-02 fix) — effective composited surfaces:
+const GHOST_HOVER_LIGHT_EFF  = '#FBFDFD';    // rgba(255,255,255,0.6) over light paper #F6FBFA
+const GHOST_HOVER_DARK_EFF   = '#33454A';    // rgba(255,255,255,0.16) over dark paper #0C2228
+const ONDARK_HOVER_EFF       = '#25434B';    // rgba(255,255,255,0.08) over ink strip #12333B (ghost-on-dark hover)
 // const ONDARK_BG = '#12333B';  // ink surface (always-dark, non-flippable)
 // Tag fill + text: FLAGGED-GAP (requires Figma 36:5 Tag node inspection)
 // const L_TAG_FILL = '#XXXXXX'; // FLAGGED-GAP: Tag fill color from 36:5
@@ -229,6 +233,12 @@ export const PAIRS = [
   // Exact hex: R=0.08*255+0.92*12=24, G=0.08*255+0.92*34=51, B=0.08*255+0.92*40=57 -> #183339
   // Using D_PAPER as conservative proxy: #EAF6F3 on #0C2228 = 14.88:1 >> 4.5:1 PASS
   [D_INK, D_PAPER, 'dark: ink on paper (CTAButton ghost text on dark bg, conservative)',     4.5, true],
+
+  // CTAButton ghost hover (--wl-cta-ghost-bg-hover flips 0.6 light / 0.16 dark — CR-02 fix)
+  [L_INK, GHOST_HOVER_LIGHT_EFF, 'light: ink on ghost hover bg (0.6 white over paper)',      4.5, true],
+  [D_INK, GHOST_HOVER_DARK_EFF,  'dark: ink on ghost hover bg (0.16 white over dark paper)', 4.5, true],
+  // CTAButton ghost-on-dark hover (0.08 white over always-dark ink strip)
+  [ONDARK_LABEL, ONDARK_HOVER_EFF, 'non-flippable: ghost-on-dark label on hover bg (0.08 white over ink)', 4.5, true],
 
   // Eyebrow on-light: accent on paper (already in matrix with "link text" label; confirming Phase 35 pair)
   [L_ACCENT, L_PAPER, 'light: accent on paper (Eyebrow on-light)',              4.5, true],
