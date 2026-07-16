@@ -63,6 +63,10 @@
    Centralized as CSS custom properties for maintainability; Figma description explicitly
    blesses them as local values outside the variable system. */
 :root {
+  /* interpolate-size: progressive enhancement — Chromium gets smooth height-to-auto on
+     ::details-content; FF/Safari ignore this and snap (D-07: no max-height fallback). */
+  interpolate-size: allow-keywords;
+
   --wl-footer-bg:             #0D2A31;
   --wl-footer-tagline-color:  #5AA9A5;
   --wl-footer-text-secondary: #7FA4A2;
@@ -211,9 +215,42 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Phase 36 (COMP-03/COMP-04): native <details> expand/collapse animation.
+   ::details-content is Baseline 2025 (Chrome 131+/FF 143+/Safari 18.4+). height 0→auto needs
+   interpolate-size (Chromium only, 2026); FF/Safari snap — intentional per D-07, no max-height fallback.
+   Placed in global.css (not per-component <style>) so ProjectCard (COMP-03) AND FAQItem (36-05)
+   share one definition — DRY, consistent timing, single prefers-reduced-motion override. */
+details::details-content {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s ease, content-visibility 0.3s ease allow-discrete;
+}
+
+details[open]::details-content {
+  height: auto;
+}
+
+/* Chevron rotation (D-08) — ships independently of ::details-content support;
+   works in all browsers that support the details[open] attribute selector. */
+details .wl-toggle-indicator {
+  transition: transform 0.3s ease;
+}
+
+details[open] .wl-toggle-indicator {
+  transform: rotate(180deg);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  /* Disable details expand/collapse height animation for users who prefer reduced motion */
+  details::details-content {
+    transition: none;
+  }
+  /* Disable chevron rotation animation for users who prefer reduced motion */
+  details .wl-toggle-indicator {
+    transition: none;
   }
 }
 
