@@ -130,6 +130,7 @@ const D_ON_INK = '#12333B';  // --color-wl-on-ink dark value (text on ink bg, da
 const ONDARK_LABEL   = '#EAF6F3';            // ghost-on-dark label literal (39:27)
 const ONDARK_EYEBROW = '#5AA9A5';            // eyebrow on-dark text/dash literal (39:40)
 const ONDARK_SURFACE = '#12333B';            // always-dark ink strip surface
+const ONDARK_FOCUS   = '#4FB3B8';            // ghost-on-dark focus ring literal (non-flippable, D-10 — CR-01 fix)
 const ONDARK_BORDER_EFFECTIVE = '#657A80';   // rgba(255,255,255,0.35) composited over #12333B
 // White-card components (Callout 99:26, LinkCard 99:29, ServiceCard 40:32) — light mode
 const CARD_WHITE     = '#FFFFFF';            // card fill literal (light)
@@ -238,6 +239,9 @@ export const PAIRS = [
   [ONDARK_LABEL,   ONDARK_SURFACE, 'non-flippable: ghost-on-dark label on ink surface (39:27)',        4.5, true],
   [ONDARK_BORDER_EFFECTIVE, ONDARK_SURFACE, 'non-flippable: ghost-on-dark border on ink [DECORATIVE — 1.4.11 boundary]', 3, false],
   [ONDARK_EYEBROW, ONDARK_SURFACE, 'non-flippable: eyebrow on-dark text on ink surface (39:40)',       4.5, true],
+  // Focus indicator (non-text): WCAG 1.4.11 requires 3:1. Non-flippable literal —
+  // the flippable accent token would resolve to #0E7078 = 2.31:1 in light mode (CR-01).
+  [ONDARK_FOCUS,   ONDARK_SURFACE, 'non-flippable: ghost-on-dark focus ring on ink [1.4.11 non-text]', 3,   true],
 
   // Tag (39:44): sub text on accent@8% fill composited over white card
   [L_SUB, TAG_FILL_LIGHT, 'light: tag text (sub) on tag fill (accent 8% over white)',                  4.5, true],

@@ -60,9 +60,11 @@ const hasIcon = icon !== undefined;
       'wl-label-button',
       'inline-flex items-center',
       hasIcon ? 'gap-[9px]' : '',
-      /* a11y focus ring — wl-accent flips in dark mode; on always-dark surface #4FB3B8
-         on #12333B = 5.42:1 (AA pass). Verified AA — flippable token acceptable here. */
-      'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent',
+      /* a11y focus ring — NON-FLIPPABLE literal (D-10): this sits on the always-dark
+         ink strip (#12333B) in BOTH themes. The flippable wl-accent token resolves to
+         #0E7078 in light mode = 2.31:1 on #12333B (FAIL 1.4.11). Literal #4FB3B8 on
+         #12333B = 5.42:1 in both themes (verified in check-contrast.mjs). */
+      'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4FB3B8]',
       'no-underline',
       /* base geometry */
       'rounded-[13px] min-h-[44px] py-[15px] px-[27px]',
