@@ -125,9 +125,17 @@ const D_ACCENT_SOFT_TEXT = '#7FC4C0';  // --color-wl-accent-soft-text (dark) = s
 // D_ON_INK: text on ink bg in dark mode (same hex as L_INK) — tokens flip
 const L_ON_INK = '#EAF6F3';  // --color-wl-on-ink light value (text on ink bg, light theme)
 const D_ON_INK = '#12333B';  // --color-wl-on-ink dark value (text on ink bg, dark theme)
-// Ghost-on-dark, Eyebrow on-dark: FLAGGED-GAP constants (D-10 non-flippable)
-// Replace #XXXXXX with values from Figma dark mockup 117:103 once extracted
-// const ONDARK_FG = '#XXXXXX';  // FLAGGED-GAP: non-flippable foreground from 117:103
+// Ghost-on-dark, Eyebrow on-dark: non-flippable literals (D-10), extracted from
+// Figma component variants 39:27 / 39:40 + dark mockup 117:103 (2026-07-15 fresh MCP session)
+const ONDARK_LABEL   = '#EAF6F3';            // ghost-on-dark label literal (39:27)
+const ONDARK_EYEBROW = '#5AA9A5';            // eyebrow on-dark text/dash literal (39:40)
+const ONDARK_SURFACE = '#12333B';            // always-dark ink strip surface
+const ONDARK_BORDER_EFFECTIVE = '#657A80';   // rgba(255,255,255,0.35) composited over #12333B
+// White-card components (Callout 99:26, LinkCard 99:29, ServiceCard 40:32) — light mode
+const CARD_WHITE     = '#FFFFFF';            // card fill literal (light)
+const CARD_DARK      = '#12333B';            // card panel fill in dark mockup (117:159)
+const TAG_FILL_LIGHT = '#ECF4F4';            // accent @8% composited over white (39:44)
+const BREADCRUMB     = '#4C6A70';            // breadcrumb literal, designer-confirmed non-token (100:14)
 // const ONDARK_BG = '#12333B';  // ink surface (always-dark, non-flippable)
 // Tag fill + text: FLAGGED-GAP (requires Figma 36:5 Tag node inspection)
 // const L_TAG_FILL = '#XXXXXX'; // FLAGGED-GAP: Tag fill color from 36:5
@@ -219,25 +227,33 @@ export const PAIRS = [
   [L_ACCENT, L_PAPER, 'light: accent on paper (Eyebrow on-light)',              4.5, true],
   [D_ACCENT, D_PAPER, 'dark: accent on paper (Eyebrow on-light, dark flip)',    4.5, true],
 
-  // CTAButton ghost-on-dark: FLAGGED-GAP — non-flippable literal from Figma 117:103 (D-10)
-  // Uncomment and replace #XXXXXX once extracted from dark mockup 117:103
-  // [ONDARK_FG, ONDARK_BG, 'non-flippable: ghost-on-dark label on ink surface',  4.5, true],
-  // [ONDARK_FG, ONDARK_BG, 'non-flippable: ghost-on-dark border on ink surface', 4.5, false],
+  // CTAButton ghost-on-dark + Eyebrow on-dark: non-flippable literals on the
+  // always-dark ink strip (D-10; Figma 39:27 / 39:40, verified against 117:103)
+  [ONDARK_LABEL,   ONDARK_SURFACE, 'non-flippable: ghost-on-dark label on ink surface (39:27)',        4.5, true],
+  [ONDARK_BORDER_EFFECTIVE, ONDARK_SURFACE, 'non-flippable: ghost-on-dark border on ink [DECORATIVE — 1.4.11 boundary]', 3, false],
+  [ONDARK_EYEBROW, ONDARK_SURFACE, 'non-flippable: eyebrow on-dark text on ink surface (39:40)',       4.5, true],
 
-  // Eyebrow on-dark: FLAGGED-GAP — non-flippable literal from Figma 117:103 (D-10)
-  // [ONDARK_FG, ONDARK_BG, 'non-flippable: eyebrow on-dark text on ink surface', 4.5, true],
+  // Tag (39:44): sub text on accent@8% fill composited over white card
+  [L_SUB, TAG_FILL_LIGHT, 'light: tag text (sub) on tag fill (accent 8% over white)',                  4.5, true],
 
-  // Tag text on Tag fill: FLAGGED-GAP (requires Figma 36:5 Tag node inspection)
-  // [L_TAG_TEXT, L_TAG_FILL, 'light: tag text on tag fill (Tag component)',       4.5, true],
+  // White-card components (Callout 99:26, LinkCard 99:29, ServiceCard 40:32) — light mode
+  [L_INK,    CARD_WHITE, 'light: ink on white card (titles)',                                          4.5, true],
+  [L_SUB,    CARD_WHITE, 'light: sub on white card (body)',                                            4.5, true],
+  [L_ACCENT, CARD_WHITE, 'light: accent on white card (outcome / go-link / kicker)',                   4.5, true],
 
-  // Callout text on Callout fill: FLAGGED-GAP (requires Figma 36:5 Callout inspection)
-  // [L_CALLOUT_TEXT, L_CALLOUT_FILL, 'light: callout text on callout fill',       4.5, true],
+  // Dark-mode card panel #12333B (dark mockup 117:159) — dark token values on card fill
+  [D_INK,    CARD_DARK, 'dark: ink on card panel (titles, 117:159)',                                   4.5, true],
+  [D_SUB,    CARD_DARK, 'dark: sub on card panel (body, 117:159)',                                     4.5, true],
+  [D_ACCENT, CARD_DARK, 'dark: accent on card panel (outcome / links, 117:159)',                       4.5, true],
 
-  // ServiceCard default text on default fill: FLAGGED-GAP (requires Figma 36:5 inspection)
-  // [L_SC_DEFAULT_TEXT, L_SC_DEFAULT_FILL, 'light: servicecard default text on bg', 4.5, true],
+  // Breadcrumb literal (100:14, designer-confirmed non-token)
+  [BREADCRUMB, L_PAPER,    'light: breadcrumb #4C6A70 on paper (100:14)',                              4.5, true],
+  [BREADCRUMB, CARD_WHITE, 'light: breadcrumb #4C6A70 on white (100:14)',                              4.5, true],
 
-  // ServiceCard highlight text on highlight fill: FLAGGED-GAP (requires Figma 36:5 inspection)
-  // [L_SC_HIGHLIGHT_TEXT, L_SC_HIGHLIGHT_FILL, 'light: servicecard highlight text on bg', 4.5, true],
+  // Step numeral (40:39): accent-soft 38px numeral — DECORATIVE by structure
+  // (rendered aria-hidden inside <ol>; list semantics carry the step order).
+  // 2.63:1 fails even the 3:1 large-text floor — surfaced at the fidelity gate for Joel.
+  [L_ACCENT_SOFT, L_PAPER, 'light: step numeral accent-soft on paper [DECORATIVE — aria-hidden, ol semantics; fidelity-gate item]', 3, false],
 ];
 
 // ── Main loop (runs only when executed directly, not when imported) ──────────
