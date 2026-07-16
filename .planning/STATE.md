@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v3.0
 milestone_name: Wavelength Rebrand
 status: executing
-stopped_at: Completed 36-02-PLAN.md
-last_updated: "2026-07-16T22:00:02Z"
-last_activity: 2026-07-16 -- Completed 36-02 (v1 projects teardown, green build)
+stopped_at: Completed 36-03-PLAN.md
+last_updated: "2026-07-16T22:05:00Z"
+last_activity: 2026-07-16 -- Completed 36-03 (v2 projects.json, file() collection, contrast gate)
 progress:
   total_phases: 9
   completed_phases: 3
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-07-14)
 ## Current Position
 
 Phase: 36 (content-components-expandable-cards) — EXECUTING
-Plan: 2 of 6 complete
+Plan: 3 of 6 complete
 Status: Executing Phase 36
-Last activity: 2026-07-16 -- Completed 36-02 (v1 projects teardown, green build)
+Last activity: 2026-07-16 -- Completed 36-03 (v2 projects.json, file() collection, contrast gate)
 
 ```
 v3.0 Progress: [█████████                               ] 2/9 phases (22%)
@@ -98,6 +98,9 @@ See `.planning/MILESTONES.md` for full milestone details.
 - **Roadmap 2026-07-14**: CONT-02 (verbatim copy) assigned to Phase 37 as primary owner; same discipline applies when Phase 39 builds service/area pages.
 - **Roadmap 2026-07-14**: Requirements recount yielded 33 (not 29 as initially estimated in REQUIREMENTS.md); all 33 mapped.
 - **Phase 36-02 2026-07-16**: Astro 5 static mode cannot redirect a dynamic segment `[param]` to a fixed URL — `'/portfolio/[slug]': '/'` raises GetStaticPathsRequired; entry must be omitted. Dynamic redirects require same-param destinations (e.g. `'/portfolio/[slug]': '/showcase/[slug]'`).
+- **Phase 36-03 2026-07-16**: `thumbLabel` added to v2 projects.json schema — Figma extraction confirmed 308px gradient thumb block with per-project italic label not in UI-SPEC schema; both JSON entries carry `"chat-safety pipeline"` as D-09 placeholder.
+- **Phase 36-03 2026-07-16**: Section assignment — `bakery-order-system` → `client-work`; `inventory-sync-automation` → `craft-experiments` (per Figma Showcase 12:3 section labels).
+- **Phase 36-03 2026-07-16**: FAQItem is a white card (same CARD_WHITE/CARD_DARK tokens as ProjectCard) — Figma 99:14 confirmed #FFFFFF fill, radius 14px; all FAQItem contrast pairs added to gate script.
 
 ### Lessons carried forward
 
@@ -124,7 +127,7 @@ None currently.
 
 ## Session Continuity
 
-Last session: 2026-07-16T22:00:02Z
-Stopped at: Completed 36-02-PLAN.md
-Resume file: .planning/phases/36-content-components-expandable-cards/36-02-SUMMARY.md
-Next action: Execute 36-03 (v2 projects.json rewrite)
+Last session: 2026-07-16T22:05:00Z
+Stopped at: Completed 36-03-PLAN.md
+Resume file: .planning/phases/36-content-components-expandable-cards/36-03-SUMMARY.md
+Next action: Execute 36-04 (ProjectCard component)
