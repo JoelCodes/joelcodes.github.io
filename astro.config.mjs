@@ -71,8 +71,8 @@ export default defineConfig({
   site: 'https://joelshinness.com',
 
   redirects: {
-    '/portfolio': '/projects',
-    '/portfolio/[slug]': '/projects/[slug]',
+    '/portfolio': '/',
+    '/portfolio/[slug]': '/',
     '/contact': '/#contact',
     '/faq': '/',
   },
