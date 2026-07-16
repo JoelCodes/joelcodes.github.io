@@ -1,10 +1,11 @@
 ---
 phase: 36
 slug: content-components-expandable-cards
-status: draft
+status: approved
 shadcn_initialized: false
 preset: none
 created: 2026-07-15
+reviewed_at: 2026-07-16
 ---
 
 # Phase 36 — UI Design Contract
