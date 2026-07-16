@@ -25,9 +25,9 @@
 
 - [x] **COMP-01**: CTA Button component with Figma variants (Solid / Ghost / Ghost-on-dark / Small) incl. calendar + mail icon slots
 - [x] **COMP-02**: Supporting primitives per Figma Components page: Eyebrow (on-light/on-dark), Tag, Callout, Link Card, Breadcrumb, Step, Service Card (default/highlight)
-- [ ] **COMP-03**: Project Card with closed/expanded states via native `<details>` (aria-correct, animated per Figma, expanded story content indexed)
-- [ ] **COMP-04**: FAQ Item (closed/open) via native `<details>` accordion, exclusive-open behavior
-- [ ] **COMP-05**: Five-line "frequency field" wave background as inline SVG that adapts to both themes
+- [x] **COMP-03**: Project Card with closed/expanded states via native `<details>` (aria-correct, animated per Figma, expanded story content indexed)
+- [x] **COMP-04**: FAQ Item (closed/open) via native `<details>` accordion, exclusive-open behavior
+- [x] **COMP-05**: Five-line "frequency field" wave background as inline SVG that adapts to both themes
 
 ### Pages
 
@@ -48,7 +48,7 @@
 
 ### Content
 
-- [ ] **CONT-01**: `projects.json` v2 schema carrying the Showcase card content (eyebrow, title, outcome line, summary, tags, expanded problem/built/result story) — populated verbatim from Figma
+- [x] **CONT-01**: `projects.json` v2 schema carrying the Showcase card content (eyebrow, title, outcome line, summary, tags, expanded problem/built/result story) — populated verbatim from Figma
 - [ ] **CONT-02**: Landing/service/area copy sourced verbatim from the Figma mockups; any missing copy flagged to Joel, not invented
 
 ### Cleanup & Quality
@@ -96,10 +96,10 @@
 | CHROME-04 | Phase 34 | Complete |
 | COMP-01 | Phase 35 | Complete |
 | COMP-02 | Phase 35 | Complete |
-| COMP-03 | Phase 36 | Pending |
-| COMP-04 | Phase 36 | Pending |
-| COMP-05 | Phase 36 | Pending |
-| CONT-01 | Phase 36 | Pending |
+| COMP-03 | Phase 36 | Complete |
+| COMP-04 | Phase 36 | Complete |
+| COMP-05 | Phase 36 | Complete |
+| CONT-01 | Phase 36 | Complete |
 | PAGE-01 | Phase 37 | Pending |
 | CONT-02 | Phase 37 | Pending |
 | IA-03 | Phase 37 | Pending |
