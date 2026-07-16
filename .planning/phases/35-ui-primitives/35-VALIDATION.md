@@ -2,8 +2,8 @@
 phase: 35
 slug: ui-primitives
 status: draft
-nyquist_compliant: false
-wave_0_complete: false
+nyquist_compliant: true
+wave_0_complete: true
 created: 2026-07-15
 ---
 
@@ -38,7 +38,15 @@ created: 2026-07-15
 
 | Task ID | Plan | Wave | Requirement | Threat Ref | Secure Behavior | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|------------|-----------------|-----------|-------------------|-------------|--------|
-| *(filled by planner from PLAN.md tasks)* | | | COMP-01, COMP-02 | | | | | | ⬜ pending |
+| 35-01-T1 Figma extraction artifact | 35-01 | 1 | COMP-01, COMP-02 | T-01 SVG-injection, T-02 supply-chain | Icon geometry only (no script/handler/href); zero new npm deps; values extracted-or-flagged | CLI + source | `git diff --exit-code package.json`; `grep -q "SITEHEADER_CTA_VARIANT\|non-flippable" 35-FIGMA-EXTRACTION.md` | 35-FIGMA-EXTRACTION.md | ⬜ pending |
+| 35-01-T2 contrast-script PAIRS extension | 35-01 | 1 | COMP-01, COMP-02 | — | New text-on-bg pairs verified AA; flagged pairs commented, not invented | CLI | `node scripts/check-contrast.mjs` (exit 0); `grep -q "PHASE 35" scripts/check-contrast.mjs` | scripts/check-contrast.mjs | ⬜ pending |
+| 35-02-T1 CTAButton (4 variants + icons) | 35-02 | 2 | COMP-01 | T-01 SVG-injection, T-02 on-dark-contrast | `<a>`-only; closed icon set; ghost-on-dark non-flippable literal | build + source | `npm run build`; `grep -rE "bg-yellow\|text-turquoise\|shadow-neo\|border-neo\|--color-yellow" src/components/wl/CTAButton.astro` (zero) | src/components/wl/CTAButton.astro | ⬜ pending |
+| 35-02-T2 Eyebrow + SiteHeader retrofit | 35-02 | 2 | COMP-02, COMP-01 | T-02 on-dark-contrast | Pixel-neutral CTA swap; eyebrow on-dark non-flippable | build + source | `npm run build`; `grep -c 'padding: 9px 17px' src/components/layout/SiteHeader.astro` (0); `grep -q "import CTAButton" src/components/layout/SiteHeader.astro` | src/components/wl/Eyebrow.astro | ⬜ pending |
+| 35-03-T1 Tag/Callout/ServiceCard | 35-03 | 2 | COMP-02 | T-02 on-dark-contrast | Token-only; no dark: pairs; ServiceCard default/highlight | build + source | `npm run build`; `grep -rE "bg-yellow\|text-turquoise\|shadow-neo\|border-neo\|--color-yellow" src/components/wl/{Tag,Callout,ServiceCard}.astro` (zero) | src/components/wl/ServiceCard.astro | ⬜ pending |
+| 35-03-T2 LinkCard/Breadcrumb/Step | 35-03 | 2 | COMP-02 | T-01 SVG-injection | Breadcrumb WAI-ARIA; LinkCard focus ring; Step li-compatible | build + source | `npm run build`; `grep -q 'aria-current="page"' src/components/wl/Breadcrumb.astro`; `grep -q "focus-visible:outline-wl-accent" src/components/wl/LinkCard.astro` | src/components/wl/Breadcrumb.astro | ⬜ pending |
+| 35-04-T1 isolation page + axe spec | 35-04 | 3 | COMP-01, COMP-02 | T-01 dev-page-leak | DEV-gate present; on-dark strip literal `#12333B`; light+dark axe clean | test (axe) | `npm run test:a11y`; `node scripts/check-contrast.mjs`; `grep -q "import.meta.env.PROD" src/pages/dev/primitives.astro` | src/pages/dev/primitives.astro (temp) | ⬜ pending |
+| 35-04-T2 fidelity gate (Joel approval) | 35-04 | 3 | COMP-01, COMP-02 | — | Figma 36:5 vs rendered light+dark approved | manual | Joel side-by-side screenshot comparison (see Manual-Only Verifications) | — | ⬜ pending |
+| 35-04-T3 delete page+spec, verify prod-clean | 35-04 | 3 | COMP-01, COMP-02 | T-01 dev-page-leak, T-02 stale-test | Isolation page absent from prod build; suite green without temp spec | CLI + test | `npm run build && grep -r "primitives" dist/` (zero); `npx playwright test` | (deletion — no file) | ⬜ pending |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 
