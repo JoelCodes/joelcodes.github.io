@@ -34,6 +34,11 @@
  *
  * Slot: default — body description (.wl-text-body / wl-sub)
  *
+ * Headings-outline contract (WR-09): the title renders as a <p> — headings inside
+ * links are discouraged, so LinkCard titles deliberately stay OUT of the page
+ * outline (visual weight only via .wl-heading-h3). ServiceCard, by contrast,
+ * renders a real heading (headingLevel prop).
+ *
  * Hover state: no Figma hover spec exists — derived per existing chrome convention
  * (accent text color per SiteHeader.astro nav links). Implemented as `group` on the
  * card anchor + `group-hover:text-wl-accent` on the TITLE (title turns accent on

@@ -34,6 +34,10 @@
  *   - Numeral is aria-hidden="true" — it is decorative order-marking
  *   - The component does NOT emit a list element; parent provides list semantics
  *   - Use as: ordered-list > li > Step (parent wraps steps in an ordered list)
+ *   - Headings-outline contract (WR-09): the title renders as a <p> — step titles
+ *     deliberately stay OUT of the page outline (list semantics carry structure;
+ *     visual weight only via .wl-heading-h3). ServiceCard, by contrast, renders a
+ *     real heading (headingLevel prop).
  *
  * Zero old-token references (D-03). No <script> tag.
  */

@@ -39,11 +39,19 @@
  *   Body: .wl-text-body (HG 16px/1.6 sub)
  *
  * Props:
- *   variant?:   'default' | 'highlight' (default: 'default') — D-01
- *   kicker?:    string — kicker pill text (highlight variant only, e.g. "ALL THE HELP, NONE OF THE HYPE")
- *   benefit?:   string — .wl-accent-outcome outcome text
- *   title?:     string — .wl-heading-h3 card title
- *   class?:     string — passthrough
+ *   variant?:      'default' | 'highlight' (default: 'default') — D-01
+ *   kicker?:       string — kicker pill text (highlight variant only, e.g. "ALL THE HELP, NONE OF THE HYPE")
+ *   benefit?:      string — .wl-accent-outcome outcome text
+ *   title?:        string — .wl-heading-h3 card title
+ *   headingLevel?: 2 | 3 | 4 (default: 3) — heading element for the title (WR-09)
+ *   class?:        string — passthrough
+ *
+ * Headings-outline contract (WR-09):
+ *   The title renders as a REAL heading (h2/h3/h4) and participates in the page
+ *   outline. Default is h3 — correct when the card grid sits under an h2 section
+ *   heading. Set headingLevel to match the surrounding outline, or axe
+ *   heading-order will flag the page. (Sibling primitives LinkCard and Step
+ *   deliberately use <p> for their titles and stay OUT of the outline.)
  *
  * Slots:
  *   icon       — 22×22 icon content inside the 42×42 tile
@@ -62,6 +70,7 @@ interface Props {
   kicker?: string;
   benefit?: string;
   title?: string;
+  headingLevel?: 2 | 3 | 4;
   body?: string;
   class?: string;
 }
@@ -71,11 +80,16 @@ const {
   kicker,
   benefit,
   title,
+  headingLevel = 3,
   body,
   class: className = ''
 } = Astro.props;
 
 const isHighlight = variant === 'highlight';
+
+// Dynamic heading tag (WR-09): consumers align the card title with the page
+// outline via headingLevel; visual style stays .wl-heading-h3 regardless.
+const Heading = `h${headingLevel}` as 'h2' | 'h3' | 'h4';
 ---
 
 <div
@@ -161,11 +175,11 @@ const isHighlight = variant === 'highlight';
   {/* 10px gap between benefit and title */}
   {benefit && <div style="height: 10px;"></div>}
 
-  {/* Title: .wl-heading-h3 (Fraunces 21px ink) */}
+  {/* Title: .wl-heading-h3 (Fraunces 21px ink) — element level via headingLevel prop (WR-09) */}
   {title && (
-    <h3 class="wl-heading-h3" style="color: var(--color-wl-ink); margin: 0;">
+    <Heading class="wl-heading-h3" style="color: var(--color-wl-ink); margin: 0;">
       {title}
-    </h3>
+    </Heading>
   )}
 
   {/* 8px gap between title and body */}
