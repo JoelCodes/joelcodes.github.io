@@ -117,7 +117,13 @@ const Heading = `h${headingLevel}` as 'h2' | 'h3' | 'h4';
       'display: flex;',
       'flex-direction: column;',
     ].join(' ')}
-    class="wl-project-card-details"
+    class:list={[
+      'wl-project-card-details',
+      /* WR-06: marks cards that render the expanded panel — the WR-03 [open]
+         padding-bottom:0 override only applies when the panel exists to supply
+         the card's bottom padding. */
+      (problem || built || result) && 'wl-has-story',
+    ]}
   >
     {/* <summary> = the ENTIRE closed card (D-01).
         list-style: none removes Safari's native disclosure triangle.
@@ -312,7 +318,12 @@ const Heading = `h${headingLevel}` as 'h2' | 'h3' | 'h4';
 
     {/* ── Expanded panel (inside <details>, after </summary>).
         Story content present in DOM when card is closed — CSS ::details-content hides it.
-        NOT conditionally omitted: enables SEO indexing of problem/built/result text. */}
+        NOT conditionally omitted when ANY story prop exists: enables SEO indexing of
+        problem/built/result text.
+        WR-06: the whole panel (spacer + divider chrome included) renders ONLY when at
+        least one of problem/built/result is provided — otherwise opening the card
+        revealed ~40px of blank space with a floating divider. */}
+    {(problem || built || result) && (
     <div
       style={[
         /* Horizontal padding matches body: 27px — source node 41:82 */
@@ -371,6 +382,7 @@ const Heading = `h${headingLevel}` as 'h2' | 'h3' | 'h4';
         </div>
       )}
     </div>
+    )}
   </details>
 </article>
 
@@ -396,8 +408,10 @@ const Heading = `h${headingLevel}` as 'h2' | 'h3' | 'h4';
   }
 
   /* Open state: expanded panel owns the card bottom padding; the toggle→divider gap
-     is the panel's 21px spacer alone (node 41:81), not 29px + 21px = 50px (WR-03). */
-  .wl-project-card-details[open] .wl-project-card-body {
+     is the panel's 21px spacer alone (node 41:81), not 29px + 21px = 50px (WR-03).
+     Scoped to .wl-has-story (WR-06): when no story props exist, no panel renders,
+     so the body must keep its 29px bottom padding even when open. */
+  .wl-project-card-details.wl-has-story[open] .wl-project-card-body {
     padding-bottom: 0;
   }
 
