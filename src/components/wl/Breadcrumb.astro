@@ -12,10 +12,12 @@
  *   A11y:      nav[aria-label="Breadcrumb"] + ol + aria-current="page" on last item
  *
  * Color #4C6A70 note:
- *   Designer description: "Color #4C6A70 (matches the site's crumb/trust tint — not a
+ *   Designer description: "Color #4C6A70 (matches the site's crumb/trust tint -- not a
  *   token in code either)". This is a non-token literal sourced from Figma 100:14.
- *   contrast: #4C6A70 on #F6FBFA (paper) = 4.57:1 (AA PASS — verified check-contrast.mjs)
- *   contrast: #4C6A70 on #FFFFFF (white) = 4.19:1 — borderline; used on paper in mockups.
+ *   contrast: #4C6A70 on #F6FBFA (paper) = 4.57:1 (AA PASS -- verified check-contrast.mjs)
+ *   contrast: #4C6A70 on #FFFFFF (white) = 4.19:1 -- borderline; used on paper in mockups.
+ *   Dark mode: #4C6A70 on #0C2228 (dark paper) = 2.82:1 -- FAIL. Fixed via --wl-breadcrumb-color
+ *   local token (global.css Phase 35): flips #4C6A70 light / #A9C9C7 dark. (Rule 1 bug fix)
  *
  * Separator: " / " as aria-hidden text span (no SVG by design — designer confirmed).
  *
@@ -44,14 +46,18 @@ interface Props {
 
 const { items, class: className = '' } = Astro.props;
 
-// Shared text style for all items: HG Regular 14px, #4C6A70 literal
-// (designer-confirmed non-token, 35-FIGMA-EXTRACTION.md node 100:14)
+// Shared text style for all items: HG Regular 14px, #4C6A70 literal on light, #A9C9C7 on dark.
+// Source: Figma node 100:14. Designer description: "Color #4C6A70 -- not a token in code either."
+// #4C6A70 on paper (#F6FBFA) = 5.58:1 AA PASS light mode (check-contrast.mjs).
+// Dark mode: #4C6A70 on dark paper (#0C2228) = 2.82:1 FAIL -- use --wl-breadcrumb-color
+// which flips to #A9C9C7 in .dark (global.css Phase 35 breadcrumb local token).
+// #A9C9C7 on #0C2228 = 6.7:1 AA PASS dark mode (estimated, similar to sub dark token).
 const itemStyle = [
   'font-family: var(--font-wl-body);',
   'font-size: 14px;',
   'font-weight: 400;',
   'line-height: 1.5;',
-  'color: #4C6A70;',         /* literal, designer-confirmed non-token (100:14) */
+  'color: var(--wl-breadcrumb-color);',  /* flips #4C6A70 light / #A9C9C7 dark (global.css Phase 35) */
 ].join(' ');
 ---
 
