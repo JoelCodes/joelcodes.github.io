@@ -1,0 +1,142 @@
+---
+/**
+ * LinkCard — COMP-02 LinkCard primitive
+ *
+ * Cross-link mini card. Renders as an <a href> with focus ring and hover state.
+ * Designer description (Figma 99:29): "No icon by design."
+ *
+ * All geometry sourced from 35-FIGMA-EXTRACTION.md §Fresh MCP Extraction (2026-07-15),
+ * node 99:29.
+ *
+ * Extraction values:
+ *   Background:    #FFFFFF literal → --wl-card-bg (dark: #12333B via Phase 35 card token)
+ *   Border:        1px solid var(--color-wl-line)
+ *   Border-radius: 16px (local, Figma-extracted — 35-FIGMA-EXTRACTION.md local values)
+ *   Padding:       24px 26px
+ *   Shadow:        Shadow/Card = 0 20px 40px -30px rgba(18,51,59,0.5) → --wl-card-shadow
+ *
+ * Inner stack (per extraction):
+ *   outcome  — .wl-accent-outcome (Fraunces Italic 16px accent)   [optional prop]
+ *   · 8px ·
+ *   title    — .wl-heading-h3 (Fraunces 21px ink)                 [required prop]
+ *   · 8px ·
+ *   description — .wl-text-body (HG 16px/1.6 sub)                 [default slot]
+ *   · 11px ·
+ *   go-link  — HG SemiBold 15px accent, arrow "→" as TEXT (no icon/SVG by design)
+ *              15px is a local Figma-extracted size (35-FIGMA-EXTRACTION.md local values)
+ *
+ * Props:
+ *   href:     string — required (renders as <a>)
+ *   title:    string — required card title (.wl-heading-h3)
+ *   outcome?: string — optional .wl-accent-outcome line above title
+ *   goLabel?: string — optional go-link label (default: "Learn more")
+ *   class?:   string — passthrough
+ *
+ * Slot: default — body description (.wl-text-body / wl-sub)
+ *
+ * Hover state: no Figma hover spec exists — derived per existing chrome convention
+ * (hover:text-wl-accent pattern per SiteHeader.astro nav links).
+ * FIDELITY-GATE: hover state is derived, not extracted — flag for Joel's review.
+ *
+ * Arrow: "→" as TEXT per designer description ("arrow → as TEXT — NO icon/SVG by design").
+ * This is intentional and T-01 clean (no SVG at all).
+ *
+ * Focus ring: project-wide wl-accent outline (2px, offset 2px).
+ *
+ * Dark-mode card flip: --wl-card-bg, --wl-card-shadow in global.css :root + .dark.
+ * Zero old-token references (D-03). No <script> tag.
+ */
+
+interface Props {
+  href: string;
+  title: string;
+  outcome?: string;
+  goLabel?: string;
+  class?: string;
+}
+
+const {
+  href,
+  title,
+  outcome,
+  goLabel = 'Learn more',
+  class: className = ''
+} = Astro.props;
+---
+
+<a
+  href={href}
+  class:list={[
+    /* Project-wide focus ring (COMP-02 requirement) */
+    'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent',
+    /* Hover: derived convention — hover:text-wl-accent on the entire card subtly
+       indicates interactivity (extracted chrome convention from SiteHeader nav links).
+       FIDELITY-GATE: no Figma hover spec — derived, surface at fidelity gate. */
+    'hover:text-wl-accent',
+    /* Block display for card layout */
+    'block',
+    /* Remove default link underline */
+    'no-underline',
+    'transition-colors',
+    className
+  ]}
+  style={[
+    /* Background: Phase 35 card token — #FFFFFF light / #12333B dark */
+    'background: var(--wl-card-bg);',
+    /* Border: 1px solid line token — source node 99:29 */
+    'border: 1px solid var(--color-wl-line);',
+    /* Border-radius: 16px (local, Figma-extracted) */
+    'border-radius: 16px;',
+    /* Padding: 24px 26px — source node 99:29 */
+    'padding: 24px 26px;',
+    /* Shadow: Shadow/Card — --wl-card-shadow flips in dark mode */
+    'box-shadow: var(--wl-card-shadow);',
+    /* Remove text decoration */
+    'text-decoration: none;',
+    /* Ensure card content color doesn't inherit link color on hover globally */
+    'color: inherit;',
+  ].join(' ')}
+>
+  {/* Outcome: .wl-accent-outcome — Fraunces Italic 16px, accent color */}
+  {outcome && (
+    <p
+      class="wl-accent-outcome"
+      style="color: var(--color-wl-accent); margin: 0 0 8px 0;"
+    >
+      {outcome}
+    </p>
+  )}
+
+  {/* Title: .wl-heading-h3 — Fraunces 21px, ink color */}
+  <p
+    class="wl-heading-h3"
+    style="color: var(--color-wl-ink); margin: 0 0 8px 0;"
+  >
+    {title}
+  </p>
+
+  {/* Description: .wl-text-body — HG 16px/1.6, sub color */}
+  <div
+    class="wl-text-body"
+    style="color: var(--color-wl-sub); margin: 0 0 11px 0;"
+  >
+    <slot />
+  </div>
+
+  {/* Go-link: HG SemiBold 15px accent, arrow "→" as TEXT (no icon by design) */}
+  {/* 15px is a local Figma-extracted size (35-FIGMA-EXTRACTION.md local values) */}
+  <span
+    style={[
+      'font-family: var(--font-wl-body);',
+      'font-size: 15px;',
+      'font-weight: 600;',
+      'color: var(--color-wl-accent);',
+      'display: inline-flex;',
+      'align-items: center;',
+      'gap: 4px;',
+    ].join(' ')}
+    aria-hidden="true"
+  >
+    {goLabel} →
+  </span>
+</a>
