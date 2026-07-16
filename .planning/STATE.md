@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v3.0
 milestone_name: Wavelength Rebrand
 status: executing
-stopped_at: Completed 36-05-PLAN.md
-last_updated: "2026-07-16T22:19:00Z"
-last_activity: 2026-07-16 -- Completed 36-05 (FAQItem COMP-04 — native exclusive-open accordion, typographic + toggle, Fraunces 18px question)
+stopped_at: Completed 36-06-PLAN.md
+last_updated: "2026-07-16T23:44:00Z"
+last_activity: 2026-07-16 -- Completed 36-06 (Phase 36 a11y/contrast/fidelity gates all green; isolation page + axe spec deleted; build proven clean)
 progress:
   total_phases: 9
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 22
-  completed_plans: 19
-  percent: 39
+  completed_plans: 20
+  percent: 44
 ---
 
 # Project State
@@ -25,14 +25,14 @@ See: .planning/PROJECT.md (updated 2026-07-14)
 
 ## Current Position
 
-Phase: 36 (content-components-expandable-cards) — EXECUTING
-Plan: 5 of 6 complete
-Status: Executing Phase 36
-Last activity: 2026-07-16 -- Completed 36-05 (FAQItem COMP-04 — native exclusive-open accordion, typographic + toggle, Fraunces 18px question)
+Phase: 36 (content-components-expandable-cards) — COMPLETE
+Plan: 6 of 6 complete
+Status: Phase 36 complete; ready for Phase 37 (Landing Page)
+Last activity: 2026-07-16 -- Completed 36-06 (Phase 36 a11y/contrast/fidelity gates all green; isolation page + axe spec deleted; build proven clean)
 
 ```
-v3.0 Progress: [█████████░                              ] 2/9 phases (22%)
-               33 ██ 34 ██ 35░░ 36░░ 37░░ 38░░ 39░░ 40░░ 41░░
+v3.0 Progress: [████████████░                           ] 4/9 phases (44%)
+               33 ██ 34 ██ 35 ██ 36 ██ 37░░ 38░░ 39░░ 40░░ 41░░
 ```
 
 ## Phase Index
@@ -42,7 +42,7 @@ v3.0 Progress: [█████████░                              ] 2/
 | 33 | Token Foundation + Fonts | FOUND-01–05 | Complete |
 | 34 | BaseLayout + Chrome | CHROME-01–04 | Complete |
 | 35 | UI Primitives | COMP-01–02 | Pending |
-| 36 | Content Components + Expandable Cards | COMP-03–05, CONT-01 | Pending |
+| 36 | Content Components + Expandable Cards | COMP-03–05, CONT-01 | Complete |
 | 37 | Landing Page | PAGE-01, CONT-02, IA-03–04 | Pending |
 | 38 | Showcase + Blog Restyle | PAGE-02, PAGE-06 | Pending |
 | 39 | Utility Pages + Dev-Hidden Pages | PAGE-03–05, IA-02 | Pending |
@@ -106,6 +106,8 @@ See `.planning/MILESTONES.md` for full milestone details.
 - **Phase 36-04 2026-07-16**: FrequencyWave stroke-linecap: butt (Figma export default, per extraction). WaveMark "round" convention overridden by extraction authority.
 - **Phase 36-05 2026-07-16**: FAQItem toggle is a typographic `+` glyph (HG Regular 21px accent) rotating 45° — NOT a chevron SVG. Extraction node 99:17/99:22 is authoritative; plan text mentioning SVG was superseded.
 - **Phase 36-05 2026-07-16**: FAQItem question: local Fraunces Regular 18px ink (no .wl-* class match). ::details-content animation reused from global.css (36-04) — not duplicated in component. Scoped CSS overrides global 180° rotation to 45° for the + glyph.
+- **Phase 36-06 fidelity gate 2026-07-16**: Joel approved rendered ProjectCard (closed + expanded), FAQItem group, FrequencyWave on paper + sea-glass vs Figma 36:5 at 1440px, light + dark. No fidelity gaps to address. Screenshots stored at .planning/phases/36-content-components-expandable-cards/fidelity/.
+- **Phase 36-06 2026-07-16**: Isolation page + axe spec treated as true temporary scaffolding — deleted in final cleanup commit after all gates passed. Fidelity screenshots are permanent gate artifacts (not deleted). Build proven clean: grep -r 'content-components' dist/ returns zero.
 
 ### Lessons carried forward
 
@@ -132,7 +134,7 @@ None currently.
 
 ## Session Continuity
 
-Last session: 2026-07-16T22:19:00Z
-Stopped at: Completed 36-05-PLAN.md
-Resume file: .planning/phases/36-content-components-expandable-cards/36-05-SUMMARY.md
-Next action: Execute 36-06 (isolation page — exercise FAQItem + ProjectCard + FrequencyWave)
+Last session: 2026-07-16T23:44:00Z
+Stopped at: Completed 36-06-PLAN.md (Phase 36 complete)
+Resume file: .planning/phases/36-content-components-expandable-cards/36-06-SUMMARY.md
+Next action: Execute Phase 37 (Landing Page — PAGE-01, CONT-02, IA-03–04)
