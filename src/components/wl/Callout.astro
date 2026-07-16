@@ -49,8 +49,9 @@ const { class: className = '' } = Astro.props;
     'border-left: 3px solid var(--color-wl-accent);',
     /* Border-radius: 14px (local, Figma-extracted — 35-FIGMA-EXTRACTION.md local values) */
     'border-radius: 14px;',
-    /* Padding: 21px 26px (extracted). Left side: 23px to account for 3px accent bar. */
-    'padding: 21px 23px 21px 26px;',
+    /* Padding: 21px 26px (extracted). Shorthand is top/RIGHT/bottom/LEFT:
+       left = 23px + 3px accent bar = 26px visual inset; right = 26px (WR-03 fix). */
+    'padding: 21px 26px 21px 23px;',
     /* Text color: var(--color-wl-sub) (secondary text, flippable) */
     'color: var(--color-wl-sub);',
   ].join(' ')}
