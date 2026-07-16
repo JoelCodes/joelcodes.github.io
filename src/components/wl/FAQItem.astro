@@ -1,0 +1,188 @@
+---
+/**
+ * FAQItem — COMP-04 FAQ accordion item
+ *
+ * Accordion item using native <details name={groupName}>/<summary>. Multiple
+ * FAQItems sharing one groupName are exclusive-open: opening one closes the
+ * others natively — no JS (D — FAQ-only; ProjectCard uses independent-open).
+ * Keyboard operability is native: Tab reaches each summary; Space/Enter toggles.
+ * No manual role, aria-expanded, or aria-labelledby overrides (D-02 — native AT
+ * roles are correct for details/summary).
+ *
+ * All geometry/type/color sourced from 36-EXTRACTION.md (Figma nodes 99:14–99:24):
+ *   Background:   #FFFFFF → var(--wl-card-bg)         (flips dark via Phase 35 token)
+ *   Border closed: 1px solid var(--color-wl-line)      (node 99:14)
+ *   Border open:   1px solid var(--color-wl-accent)    (node 99:19)
+ *   Border-radius: 14px                                (node 99:14)
+ *   Padding:       19px top/bottom, 24px left/right    (node 99:14)
+ *   Row layout:    flex, gap 16px, items-center        (node 99:15)
+ *   Question type: Fraunces Regular 18px var(--color-wl-ink), SOFT 0/WONK 1
+ *                  — NEITHER .wl-text-body-large (17px HG) nor .wl-heading-h3 (21px);
+ *                  local 18px per extraction node 99:16
+ *   Toggle indicator: typographic `+` — Hanken Grotesk Regular 21px
+ *                     var(--color-wl-accent), rotates 45° when open (+ → ×)
+ *                     (node 99:17/99:22) — NOT a chevron SVG
+ *   Open gap (row→answer): 12px (node 99:19, Figma --space-sm)
+ *   Answer: .wl-text-body / var(--color-wl-sub)        (node 99:23)
+ *   Shadow: none (no card shadow on FAQ items)          (node 99:14)
+ *
+ * CSS ownership:
+ *   ::details-content height animation + prefers-reduced-motion guard live in
+ *   global.css (36-04 shipped them) — NOT duplicated here. `:root { interpolate-size:
+ *   allow-keywords }` is global and owned by 36-04/foundation — not defined here;
+ *   absence only degrades to instant snap (D-07). This component's <style> block
+ *   provides only FAQItem-specific CSS: border-state swap, + indicator rotation
+ *   (45° override of the global 180° default), and WebKit marker suppression.
+ *
+ * Zero old-token references (D-03). No script tag.
+ */
+
+interface Props {
+  question: string;  // required — rendered as <summary> text
+  groupName: string; // required — sets name attr for exclusive-open group
+  class?: string;
+}
+
+const { question, groupName, class: className = '' } = Astro.props;
+---
+
+<details
+  name={groupName}
+  class:list={['wl-faq-item', className]}
+  style={[
+    /* Background: #FFFFFF light / #12333B dark — var(--wl-card-bg) from Phase 35 card token */
+    'background: var(--wl-card-bg);',
+    /* Border-radius: 14px — source node 99:14 */
+    'border-radius: 14px;',
+    /* No shadow (FAQ items have no card shadow) — node 99:14 confirmed */
+    'box-shadow: none;',
+  ].join(' ')}
+>
+  {/* <summary> — question row + toggle indicator.
+      list-style:none removes disclosure triangle in Firefox/Chrome.
+      The ::-webkit-details-marker rule in <style> handles WebKit/Safari.
+      cursor:pointer makes clickability obvious on non-interactive defaults. */}
+  <summary
+    style="list-style: none; cursor: pointer;"
+    class="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+  >
+    {/* Row: question text + toggle, flex gap 16px items-center — source node 99:15 */}
+    <div
+      style={[
+        'display: flex;',
+        'align-items: center;',
+        /* gap: 16px between question and toggle — source node 99:15 */
+        'gap: 16px;',
+        /* Padding: 19px top/bottom, 24px left/right — source node 99:14 */
+        'padding: 19px 24px;',
+      ].join(' ')}
+    >
+      {/* Question: Fraunces Regular 18px var(--color-wl-ink), SOFT 0/WONK 1 — node 99:16
+          No existing .wl-* class matches (heading-h3 is 21px, text-body-large is 17px HG).
+          Local inline style per extraction override guidance. */}
+      <span
+        class="hover:text-wl-accent"
+        style={[
+          /* Fraunces Regular 18px — local size, extraction confirmed node 99:16 */
+          'font-family: var(--font-wl-heading);',
+          'font-size: 18px;',
+          'font-weight: 400;',
+          'font-style: normal;',
+          'font-variation-settings: "SOFT" 0, "WONK" 1;',
+          'line-height: 1.2;',
+          /* Color: ink (--color-wl-ink) — source node 99:16 */
+          'color: var(--color-wl-ink);',
+          /* Take up remaining space so toggle stays right-aligned */
+          'flex: 1;',
+        ].join(' ')}
+      >
+        {question}
+      </span>
+
+      {/* Toggle indicator: typographic `+` glyph — Hanken Grotesk Regular 21px accent.
+          Rotates 45° on details[open] (+ → ×) via .wl-toggle-indicator CSS.
+          Source nodes 99:17 (closed) / 99:22 (open).
+          aria-hidden: decorative (the question text already describes the item). */}
+      <span
+        class="wl-toggle-indicator"
+        aria-hidden="true"
+        style={[
+          /* Hanken Grotesk Regular 21px (large text) — source node 99:17 */
+          'font-family: var(--font-wl-body);',
+          'font-size: 21px;',
+          'font-weight: 400;',
+          'font-style: normal;',
+          /* Color: accent — source node 99:17 */
+          'color: var(--color-wl-accent);',
+          /* Prevent shrink so the + stays visible at narrow widths */
+          'flex-shrink: 0;',
+          /* Establish a stable transform origin for the 45° rotation */
+          'display: inline-block;',
+          'line-height: 1;',
+        ].join(' ')}
+      >+</span>
+    </div>
+  </summary>
+
+  {/* Answer slot — open-state content.
+      gap-12px (--space-sm) between summary row and answer: source node 99:19.
+      Answer styled .wl-text-body (HG Regular 16px/1.6/sub) — source node 99:23.
+      Padding matches container sides so answer text aligns with question text. */}
+  <div
+    style={[
+      /* gap between question row and answer: 12px — source node 99:19 */
+      'padding: 0 24px 19px 24px;',
+      /* Open gap (row→answer): 12px. Applied as margin-top on this container because
+         the answer is inside ::details-content which handles height animation. */
+      'margin-top: 12px;',
+    ].join(' ')}
+  >
+    <div class="wl-text-body" style="color: var(--color-wl-sub);">
+      <slot />
+    </div>
+  </div>
+</details>
+
+{/* FAQItem-specific CSS.
+    Global.css (36-04) already owns:
+      details::details-content height 0→auto animation + prefers-reduced-motion guard
+      details .wl-toggle-indicator transition: transform 0.3s ease
+      details[open] .wl-toggle-indicator { transform: rotate(180deg) } — chevron default
+    This block provides only what is unique to FAQItem:
+      1. Border state swap (line → accent on open)
+      2. + indicator rotation: 45° (not 180° — override the global chevron rotation)
+      3. WebKit disclosure triangle suppression (belt-and-suspenders beyond list-style:none)
+      4. Reduced-motion guard for the 45° rotation (supplements global guard) */}
+<style>
+  /* Closed state border: line — source node 99:14 */
+  .wl-faq-item {
+    border: 1px solid var(--color-wl-line);
+  }
+
+  /* Open state border: accent — source node 99:19 */
+  .wl-faq-item[open] {
+    border: 1px solid var(--color-wl-accent);
+  }
+
+  /* Toggle indicator: rotate 45° when open (+ → ×).
+     Overrides the global details[open] .wl-toggle-indicator { rotate(180deg) }
+     which is correct for chevron SVGs (ProjectCard) but wrong for the + glyph. */
+  .wl-faq-item[open] .wl-toggle-indicator {
+    transform: rotate(45deg);
+  }
+
+  /* WebKit disclosure-triangle suppression.
+     list-style:none is insufficient in Safari — belt-and-suspenders rule. */
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    /* The global block already sets details .wl-toggle-indicator { transition: none }.
+       This rule ensures the 45° FAQItem open-state also snaps (no residual transform
+       transition from any specificity difference). */
+    .wl-faq-item .wl-toggle-indicator {
+      transition: none;
+    }
+  }
+</style>
