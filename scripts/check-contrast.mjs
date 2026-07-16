@@ -280,6 +280,66 @@ export const PAIRS = [
   // (rendered aria-hidden inside <ol>; list semantics carry the step order).
   // 2.63:1 fails even the 3:1 large-text floor — surfaced at the fidelity gate for Joel.
   [L_ACCENT_SOFT, L_PAPER, 'light: step numeral accent-soft on paper [DECORATIVE — aria-hidden, ol semantics; fidelity-gate item]', 3, false],
+
+  // ── PHASE 36 ADDITIONS ───────────────────────────────────────────────────
+  // Source: .planning/phases/36-content-components-expandable-cards/36-EXTRACTION.md
+  //         Figma nodes 41:45 (ProjectCard closed), 41:95 (expanded), 99:14/99:24 (FAQItem)
+  //
+  // Card surface: CARD_WHITE (#FFFFFF light) / CARD_DARK (#12333B dark) — confirmed extraction.
+  // FAQItem surface: also white card (same token — Figma 99:14 confirmed #FFFFFF, not a
+  // divider-list; FIDELITY-GAP resolved in 36-EXTRACTION.md).
+
+  // ProjectCard: title (Fraunces Regular 22px) — ink on card-bg
+  [L_INK,    CARD_WHITE, 'light: ProjectCard title ink on card-bg (22px)',                      4.5, true],
+  [D_INK,    CARD_DARK,  'dark: ProjectCard title ink on card-bg (22px)',                       4.5, true],
+
+  // ProjectCard: hook/outcome (Fraunces Italic 17px) — ink on card-bg
+  // Extraction note: outcome is INK color (not accent) at 17px (not 16px as UI-SPEC assumed)
+  [L_INK,    CARD_WHITE, 'light: ProjectCard hook/outcome ink on card-bg (17px italic)',        4.5, true],
+  [D_INK,    CARD_DARK,  'dark: ProjectCard hook/outcome ink on card-bg (17px italic)',         4.5, true],
+
+  // ProjectCard: kicker/eyebrow (Hanken Grotesk Bold 12px) — accent on card-bg
+  [L_ACCENT, CARD_WHITE, 'light: ProjectCard kicker accent on card-bg (12px bold)',             4.5, true],
+  [D_ACCENT, CARD_DARK,  'dark: ProjectCard kicker accent on card-bg (12px bold)',              4.5, true],
+
+  // ProjectCard: toggle label "Read the story"/"Hide" (HG SemiBold 14px) — accent on card-bg
+  [L_ACCENT, CARD_WHITE, 'light: ProjectCard toggle label accent on card-bg (14px semibold)',   4.5, true],
+  [D_ACCENT, CARD_DARK,  'dark: ProjectCard toggle label accent on card-bg (14px semibold)',    4.5, true],
+
+  // ProjectCard: body summary (HG Regular 16px) — sub on card-bg
+  [L_SUB,    CARD_WHITE, 'light: ProjectCard body sub on card-bg (16px)',                       4.5, true],
+  [D_SUB,    CARD_DARK,  'dark: ProjectCard body sub on card-bg (16px)',                        4.5, true],
+
+  // ProjectCard: expanded section labels (Fraunces Italic 16px) — accent on card-bg
+  [L_ACCENT, CARD_WHITE, 'light: ProjectCard expanded section label accent on card-bg (16px italic)', 4.5, true],
+  [D_ACCENT, CARD_DARK,  'dark: ProjectCard expanded section label accent on card-bg (16px italic)',  4.5, true],
+
+  // ProjectCard: expanded body prose (HG Regular 16px) — sub on card-bg (same as summary)
+  [L_SUB,    CARD_WHITE, 'light: ProjectCard expanded prose sub on card-bg (16px)',             4.5, true],
+  [D_SUB,    CARD_DARK,  'dark: ProjectCard expanded prose sub on card-bg (16px)',              4.5, true],
+
+  // FAQItem: question (Fraunces Regular 18px) — ink on card-bg
+  // Extraction: FAQItem is a white card (99:14), not a divider-list row; radius 14px.
+  [L_INK,    CARD_WHITE, 'light: FAQItem question ink on card-bg (18px)',                       4.5, true],
+  [D_INK,    CARD_DARK,  'dark: FAQItem question ink on card-bg (18px)',                        4.5, true],
+
+  // FAQItem: answer prose (HG Regular 16px) — sub on card-bg
+  [L_SUB,    CARD_WHITE, 'light: FAQItem answer sub on card-bg (16px)',                         4.5, true],
+  [D_SUB,    CARD_DARK,  'dark: FAQItem answer sub on card-bg (16px)',                          4.5, true],
+
+  // FAQItem: toggle indicator "+" glyph (HG Regular 21px — LARGE TEXT) — accent on card-bg
+  // 21px qualifies as large text (WCAG: 18pt+ or 14pt bold+); threshold 3:1.
+  [L_ACCENT, CARD_WHITE, 'light: FAQItem toggle "+" accent on card-bg (21px large-text)',       3,   true],
+  [D_ACCENT, CARD_DARK,  'dark: FAQItem toggle "+" accent on card-bg (21px large-text)',        3,   true],
+
+  // Thumb block label (Fraunces Italic 16px, #FFFFFF @ opacity 0.85) on gradient bg.
+  // Gradient stops: #0E7078 (0%) → #14323B (70%). WCAG measures fg against actual bg;
+  // label is centered — worst case is lightest stop (#0E7078). opacity does not reduce
+  // the opaque background hex; text opacity (0.85) reduces perceived contrast but the
+  // WCAG formula uses the full-opacity hex (#FFFFFF). Tested against both stops.
+  // Gradient does not flip in dark mode (thumb design is consistent across themes).
+  ['#FFFFFF', '#0E7078', 'thumb label: white on gradient light stop #0E7078 (worst case)',      4.5, true],
+  ['#FFFFFF', '#14323B', 'thumb label: white on gradient dark stop #14323B',                    4.5, true],
 ];
 
 // ── Main loop (runs only when executed directly, not when imported) ──────────
