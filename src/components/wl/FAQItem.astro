@@ -66,15 +66,17 @@ const { question, groupName, class: className = '' } = Astro.props;
     style="list-style: none; cursor: pointer;"
     class="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
   >
-    {/* Row: question text + toggle, flex gap 16px items-center — source node 99:15 */}
+    {/* Row: question text + toggle, flex gap 16px items-center — source node 99:15.
+        Padding (19px/24px, node 99:14) lives in the scoped <style> block — NOT inline —
+        so the [open] rule can zero the bottom padding and keep the row→answer gap at
+        the specced 12px instead of 19+12=31px (WR-03). */}
     <div
+      class="wl-faq-row"
       style={[
         'display: flex;',
         'align-items: center;',
         /* gap: 16px between question and toggle — source node 99:15 */
         'gap: 16px;',
-        /* Padding: 19px top/bottom, 24px left/right — source node 99:14 */
-        'padding: 19px 24px;',
       ].join(' ')}
     >
       {/* Question: Fraunces Regular 18px var(--color-wl-ink), SOFT 0/WONK 1 — node 99:16
@@ -127,14 +129,14 @@ const { question, groupName, class: className = '' } = Astro.props;
   {/* Answer slot — open-state content.
       gap-12px (--space-sm) between summary row and answer: source node 99:19.
       Answer styled .wl-text-body (HG Regular 16px/1.6/sub) — source node 99:23.
-      Padding matches container sides so answer text aligns with question text. */}
+      Padding matches container sides so answer text aligns with question text.
+      WR-03: this wrapper owns the ENTIRE 12px row→answer gap as padding-top (the
+      [open] rule zeroes the row's bottom padding); the previous margin-top stacked
+      on the row's 19px bottom padding for an effective 31px gap. */}
   <div
     style={[
-      /* gap between question row and answer: 12px — source node 99:19 */
-      'padding: 0 24px 19px 24px;',
-      /* Open gap (row→answer): 12px. Applied as margin-top on this container because
-         the answer is inside ::details-content which handles height animation. */
-      'margin-top: 12px;',
+      /* 12px row→answer gap (99:19) + 24px sides + 19px container bottom (99:14) */
+      'padding: 12px 24px 19px 24px;',
     ].join(' ')}
   >
     <div class="wl-text-body" style="color: var(--color-wl-sub);">
@@ -162,6 +164,18 @@ const { question, groupName, class: className = '' } = Astro.props;
   /* Open state border: accent — source node 99:19 */
   .wl-faq-item[open] {
     border: 1px solid var(--color-wl-accent);
+  }
+
+  /* Row padding: 19px top/bottom, 24px left/right — source node 99:14.
+     Stylesheet-owned (not inline) so the [open] override below can apply (WR-03). */
+  .wl-faq-row {
+    padding: 19px 24px;
+  }
+
+  /* Open state: the answer wrapper owns the full 12px row→answer gap (node 99:19).
+     Without this, 19px row bottom padding + 12px gap stacked to 31px (WR-03). */
+  .wl-faq-item[open] .wl-faq-row {
+    padding-bottom: 0;
   }
 
   /* Toggle indicator: rotate 45° when open (+ → ×).

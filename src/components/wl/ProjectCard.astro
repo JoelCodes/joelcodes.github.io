@@ -162,12 +162,14 @@ const Heading = `h${headingLevel}` as 'h2' | 'h3' | 'h4';
       </div>
 
       {/* ── Body closed-state content ──
-          Padding: 26px top / 29px bottom / 27px left+right — source node 41:7
-          Using flex column with explicit gap values per extraction. */}
+          Padding: 26px top / 29px bottom / 27px left+right — source node 41:7.
+          Padding lives in the scoped <style> block (not inline) so the [open] rule can
+          zero the bottom padding: the 29px is CARD bottom padding for the closed state;
+          when open, the expanded panel owns the card bottom padding and the toggle→divider
+          gap must be exactly the 21px spacer, not 29+21=50px (WR-03, node 41:81). */}
       <div
+        class="wl-project-card-body"
         style={[
-          /* Body padding — source node 41:7 */
-          'padding: 26px 27px 29px 27px;',
           'display: flex;',
           'flex-direction: column;',
         ].join(' ')}
@@ -385,6 +387,18 @@ const Heading = `h${headingLevel}` as 'h2' | 'h3' | 'h4';
   /* Open state border: 1px solid var(--color-wl-accent) — source node 41:95 */
   .wl-project-card-details[open] {
     border: 1px solid var(--color-wl-accent);
+  }
+
+  /* Body padding: 26px top / 29px bottom / 27px sides — source node 41:7.
+     Stylesheet-owned (not inline) so the [open] override below can apply (WR-03). */
+  .wl-project-card-body {
+    padding: 26px 27px 29px 27px;
+  }
+
+  /* Open state: expanded panel owns the card bottom padding; the toggle→divider gap
+     is the panel's 21px spacer alone (node 41:81), not 29px + 21px = 50px (WR-03). */
+  .wl-project-card-details[open] .wl-project-card-body {
+    padding-bottom: 0;
   }
 
   /* Toggle label text swap — zero JS.
