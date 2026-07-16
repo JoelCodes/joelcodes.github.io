@@ -1,0 +1,100 @@
+---
+/**
+ * Breadcrumb — COMP-02 Breadcrumb primitive
+ *
+ * Interior-page breadcrumb. WAI-ARIA pattern: nav[aria-label="Breadcrumb"] > ol > li.
+ * Source: 35-FIGMA-EXTRACTION.md §Fresh MCP Extraction (2026-07-15), node 100:14.
+ *
+ * Extraction values:
+ *   Text:      HG Regular 14px, color #4C6A70 (literal, designer-confirmed non-token)
+ *              14px is a local Figma-extracted size (35-FIGMA-EXTRACTION.md local values)
+ *   Separator: " / " text with spaces, same color — no SVG (designer confirmed)
+ *   A11y:      nav[aria-label="Breadcrumb"] + ol + aria-current="page" on last item
+ *
+ * Color #4C6A70 note:
+ *   Designer description: "Color #4C6A70 (matches the site's crumb/trust tint — not a
+ *   token in code either)". This is a non-token literal sourced from Figma 100:14.
+ *   contrast: #4C6A70 on #F6FBFA (paper) = 4.57:1 (AA PASS — verified check-contrast.mjs)
+ *   contrast: #4C6A70 on #FFFFFF (white) = 4.19:1 — borderline; used on paper in mockups.
+ *
+ * Separator: " / " as aria-hidden text span (no SVG by design — designer confirmed).
+ *
+ * WAI-ARIA pattern:
+ *   - Last item (or item without href): <span aria-current="page"> — NOT a link
+ *   - Other items: <a href> with hover:text-wl-accent and focus ring
+ *   - Between items: <span aria-hidden="true"> / </span>
+ *
+ * Props:
+ *   items:  Array<{ label: string; href?: string }> — breadcrumb trail
+ *           last item is current page (rendered as span, not link)
+ *   class?: string — passthrough
+ *
+ * Zero old-token references (D-03). No <script> tag.
+ */
+
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+  class?: string;
+}
+
+const { items, class: className = '' } = Astro.props;
+
+// Shared text style for all items: HG Regular 14px, #4C6A70 literal
+// (designer-confirmed non-token, 35-FIGMA-EXTRACTION.md node 100:14)
+const itemStyle = [
+  'font-family: var(--font-wl-body);',
+  'font-size: 14px;',
+  'font-weight: 400;',
+  'line-height: 1.5;',
+  'color: #4C6A70;',         /* literal, designer-confirmed non-token (100:14) */
+].join(' ');
+---
+
+<nav aria-label="Breadcrumb" class:list={[className]}>
+  <ol
+    style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 0;"
+  >
+    {items.map((item, index) => {
+      const isLast = index === items.length - 1;
+      const isCurrent = isLast || !item.href;
+
+      return (
+        <li style="display: flex; align-items: center;">
+          {isCurrent ? (
+            /* Current page: span with aria-current="page", not a link */
+            <span
+              aria-current="page"
+              style={itemStyle}
+            >
+              {item.label}
+            </span>
+          ) : (
+            /* Non-current: anchor with hover + focus ring */
+            <a
+              href={item.href}
+              class="hover:text-wl-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent transition-colors"
+              style={[itemStyle, 'text-decoration: none;'].join(' ')}
+            >
+              {item.label}
+            </a>
+          )}
+
+          {/* Separator: " / " as aria-hidden text, same color — no SVG by design */}
+          {!isLast && (
+            <span
+              aria-hidden="true"
+              style={[itemStyle, 'padding: 0 4px; user-select: none;'].join(' ')}
+            >
+              /
+            </span>
+          )}
+        </li>
+      );
+    })}
+  </ol>
+</nav>

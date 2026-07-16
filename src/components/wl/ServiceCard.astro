@@ -1,0 +1,182 @@
+---
+/**
+ * ServiceCard — COMP-02 ServiceCard primitive
+ *
+ * What-I-build card with default and highlight variants (D-01).
+ * Renders a <div> with a class:list variant dispatch.
+ *
+ * All geometry sourced from 35-FIGMA-EXTRACTION.md §Fresh MCP Extraction (2026-07-15),
+ * nodes 40:15 (default) and 40:31 (highlight).
+ *
+ * Extraction values (both variants share base geometry):
+ *   Background:    #FFFFFF literal → --wl-card-bg (dark: #12333B via Phase 35 card token)
+ *   Border-radius: 18px (radius/card)
+ *   Padding:       32px 27px
+ *   Shadow:        Shadow/Card = 0 20px 40px -30px rgba(18,51,59,0.5)
+ *                  → --wl-card-shadow (dark: 0 20px 40px -30px rgba(0,0,0,0.8))
+ *
+ * Default variant (40:15):
+ *   Border:  1px solid var(--color-wl-line)
+ *
+ * Highlight variant (40:31):
+ *   Border:  1px solid var(--color-wl-accent)
+ *   Kicker:  pill positioned absolute top -13px left 26px
+ *            bg: #FFFFFF (card white) / dark: --wl-card-bg
+ *            border: 1px solid var(--color-wl-accent)
+ *            radius: 999px
+ *            padding: 5px 13px
+ *            text: HG Bold 11px, tracking 1.54px (14%), var(--color-wl-accent), uppercase
+ *            content via `kicker` prop
+ *
+ * Inner stack (both variants):
+ *   Icon tile: 42×42px, bg --wl-card-icon-tile-bg (accent light / accent-soft@14% dark)
+ *              radius 12px, inner icon slot 22×22px centered
+ *   · 18px gap ·
+ *   Benefit: .wl-accent-outcome (Fraunces Italic 16px accent)
+ *   · 10px gap ·
+ *   Title: .wl-heading-h3 (Fraunces 21px ink)
+ *   · 8px gap ·
+ *   Body: .wl-text-body (HG 16px/1.6 sub)
+ *
+ * Props:
+ *   variant?:   'default' | 'highlight' (default: 'default') — D-01
+ *   kicker?:    string — kicker pill text (highlight variant only, e.g. "ALL THE HELP, NONE OF THE HYPE")
+ *   benefit?:   string — .wl-accent-outcome outcome text
+ *   title?:     string — .wl-heading-h3 card title
+ *   class?:     string — passthrough
+ *
+ * Slots:
+ *   icon       — 22×22 icon content inside the 42×42 tile
+ *   default    — body prose (replaces the body text if slotted; otherwise use body prop)
+ *
+ * Note: The highlight variant requires `position: relative` on the card for kicker placement.
+ *
+ * Dark-mode card flip: --wl-card-bg, --wl-card-shadow, --wl-card-icon-tile-bg defined
+ * in global.css :root + .dark (Phase 35 card local tokens).
+ *
+ * Zero old-token references (D-03). No <script> tag.
+ */
+
+interface Props {
+  variant?: 'default' | 'highlight';
+  kicker?: string;
+  benefit?: string;
+  title?: string;
+  body?: string;
+  class?: string;
+}
+
+const {
+  variant = 'default',
+  kicker,
+  benefit,
+  title,
+  body,
+  class: className = ''
+} = Astro.props;
+
+const isHighlight = variant === 'highlight';
+---
+
+<div
+  class:list={[
+    className,
+    {
+      /* highlight requires relative positioning for the kicker pill */
+      'relative': isHighlight,
+    }
+  ]}
+  style={[
+    /* Background: Phase 35 card token — #FFFFFF light / #12333B dark */
+    'background: var(--wl-card-bg);',
+    /* Border-radius: 18px — source node 40:32 (radius/card, local) */
+    'border-radius: 18px;',
+    /* Padding: 32px 27px — source node 40:32 */
+    'padding: 32px 27px;',
+    /* Shadow: Shadow/Card — --wl-card-shadow flips in dark mode */
+    'box-shadow: var(--wl-card-shadow);',
+    /* Border: default = line token, highlight = accent */
+    isHighlight
+      ? 'border: 1px solid var(--color-wl-accent);'
+      : 'border: 1px solid var(--color-wl-line);',
+  ].join(' ')}
+>
+  {/* Kicker pill — highlight variant only (absolute, top -13px left 26px) */}
+  {isHighlight && kicker && (
+    <div
+      style={[
+        'position: absolute;',
+        'top: -13px;',
+        'left: 26px;',
+        /* bg: card white (--wl-card-bg so it flips in dark mode) */
+        'background: var(--wl-card-bg);',
+        'border: 1px solid var(--color-wl-accent);',
+        'border-radius: 999px;',
+        'padding: 5px 13px;',
+        /* text: HG Bold 11px, tracking 1.54px (14%), accent, uppercase */
+        /* 11px is a local Figma-extracted size (35-FIGMA-EXTRACTION.md local values) */
+        'font-family: var(--font-wl-body);',
+        'font-size: 11px;',
+        'font-weight: 700;',
+        'letter-spacing: 1.54px;',
+        'color: var(--color-wl-accent);',
+        'text-transform: uppercase;',
+        'white-space: nowrap;',
+      ].join(' ')}
+    >
+      {kicker}
+    </div>
+  )}
+
+  {/* Icon tile: 42×42px, bg --wl-card-icon-tile-bg, radius 12px */}
+  <div
+    style={[
+      'width: 42px;',
+      'height: 42px;',
+      /* bg: --wl-card-icon-tile-bg — accent light / rgba(90,169,165,0.14) dark */
+      'background: var(--wl-card-icon-tile-bg);',
+      'border-radius: 12px;',
+      /* Center the 22×22 inner icon with 10px offset on each side */
+      'display: flex;',
+      'align-items: center;',
+      'justify-content: center;',
+    ].join(' ')}
+  >
+    {/* Inner icon: 22×22 slot — consumer places icon here */}
+    <div style="width: 22px; height: 22px; display: flex; align-items: center; justify-content: center;">
+      <slot name="icon" />
+    </div>
+  </div>
+
+  {/* 18px gap between tile and benefit */}
+  <div style="height: 18px;"></div>
+
+  {/* Benefit: .wl-accent-outcome (Fraunces Italic 16px accent) */}
+  {benefit && (
+    <p class="wl-accent-outcome" style="color: var(--color-wl-accent); margin: 0;">
+      {benefit}
+    </p>
+  )}
+
+  {/* 10px gap between benefit and title */}
+  {benefit && <div style="height: 10px;"></div>}
+
+  {/* Title: .wl-heading-h3 (Fraunces 21px ink) */}
+  {title && (
+    <h3 class="wl-heading-h3" style="color: var(--color-wl-ink); margin: 0;">
+      {title}
+    </h3>
+  )}
+
+  {/* 8px gap between title and body */}
+  {title && <div style="height: 8px;"></div>}
+
+  {/* Body: .wl-text-body (HG 16px/1.6 sub) */}
+  {body ? (
+    <p class="wl-text-body" style="color: var(--color-wl-sub); margin: 0;">{body}</p>
+  ) : (
+    <div class="wl-text-body" style="color: var(--color-wl-sub);">
+      <slot />
+    </div>
+  )}
+</div>
