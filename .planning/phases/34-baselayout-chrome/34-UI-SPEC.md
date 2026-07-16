@@ -336,7 +336,8 @@ All copy is verbatim from Figma. No copy is invented.
 | Footer nav — Primary navigation aria-label | "Footer navigation" | Accessibility requirement |
 | Footer tagline line 1 | "On your wavelength." | 33-FIGMA-EXTRACTION.md OG Tagline section (verbatim, period included) |
 | Footer tagline line 2 | "Solutions for small businesses — web, automations, and AI that save you time and money." | 34-CONTEXT.md specifics |
-| Footer contact link text | "contact@joelshinness.com" | 34-CONTEXT.md D-07/D-08 |
+| Footer foot-links nav "Email" label | "Email" (nav link in foot-links row, per extraction node 42:65) | 34-FIGMA-EXTRACTION.md |
+| Footer bottom-row contact link text | "contact@joelshinness.com" (bottom row only, node 42:74) | 34-CONTEXT.md D-07/D-08 |
 | Footer contact link href | `mailto:contact@joelshinness.com` | 34-CONTEXT.md D-07 |
 | Footer GitHub link text | "GitHub" | 34-CONTEXT.md D-09 |
 | Footer GitHub link href | `https://github.com/JoelCodes` | 34-RESEARCH.md (git remote origin) |
