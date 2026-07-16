@@ -1,0 +1,160 @@
+---
+// DEV-ONLY ISOLATION PAGE -- Phase 36 content component verification.
+// TEMPORARY -- delete this file in the final Phase 36 commit alongside
+// tests/accessibility/content-components.spec.ts.
+// Verify deletion: npm run build && grep -r "content-components" dist/ returns zero.
+//
+// Purpose: Render ProjectCard (COMP-03), FAQItem (COMP-04), FrequencyWave (COMP-05)
+// in Figma 36:5 component order for a11y gate + fidelity gate (SC-1, SC-2, SC-5).
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/wl/ProjectCard.astro';
+import FAQItem from '../../components/wl/FAQItem.astro';
+import FrequencyWave from '../../components/wl/FrequencyWave.astro';
+import { getCollection } from 'astro:content';
+
+// DEV-gate: isolation page never ships to prod (D-14/T-01 threat model)
+if (import.meta.env.PROD) {
+  return Astro.redirect('/');
+}
+
+// Load real collection data -- exercises the SEO-in-DOM contract (not hardcoded copy)
+const projects = await getCollection('projects');
+// Use first entry for closed state, second for "expanded" static render
+const entry0 = projects[0];
+const entry1 = projects[1] ?? projects[0];
+---
+
+<BaseLayout
+  title="Dev: Content Components - Phase 36"
+  description="DEV-only isolation page for Phase 36 content component verification. Not linked in production."
+>
+  <main>
+
+    <section style="background: var(--color-wl-paper); padding: 64px 48px;">
+      <div style="max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; gap: 48px;">
+
+        <h1 style="font-family: var(--font-wl-body); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-wl-sub); margin: 0; padding-bottom: 8px; border-bottom: 1px solid var(--color-wl-line);">
+          Phase 36 Content Components - Figma 36:5 order
+        </h1>
+
+        <div>
+          <p style="font-family: var(--font-wl-body); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-wl-sub); margin: 0 0 16px 0;">
+            ProjectCard - closed state (real collection data)
+          </p>
+          <ProjectCard
+            eyebrow={entry0.data.eyebrow}
+            title={entry0.data.title}
+            outcome={entry0.data.outcome}
+            summary={entry0.data.summary}
+            tags={entry0.data.tags}
+            problem={entry0.data.problem}
+            built={entry0.data.built}
+            result={entry0.data.result}
+            thumbLabel={entry0.data.thumbLabel}
+            headingLevel={2}
+          />
+        </div>
+
+        <div>
+          <p style="font-family: var(--font-wl-body); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-wl-sub); margin: 0 0 16px 0;">
+            ProjectCard - expanded state (second entry, open forced via CSS wrapper)
+          </p>
+          <div class="dev-force-open">
+            <ProjectCard
+              eyebrow={entry1.data.eyebrow}
+              title={entry1.data.title}
+              outcome={entry1.data.outcome}
+              summary={entry1.data.summary}
+              tags={entry1.data.tags}
+              problem={entry1.data.problem}
+              built={entry1.data.built}
+              result={entry1.data.result}
+              thumbLabel={entry1.data.thumbLabel}
+              headingLevel={2}
+            />
+          </div>
+        </div>
+
+        <div>
+          <p style="font-family: var(--font-wl-body); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-wl-sub); margin: 0 0 16px 0;">
+            FAQItem - exclusive-open group (3 items, name="faq-dev-demo")
+          </p>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <FAQItem question="What kinds of businesses do you work with?" groupName="faq-dev-demo">
+              Mostly small businesses and solo operators who need software that actually works for their team, not enterprise tooling retrofitted to a five-person shop.
+            </FAQItem>
+            <FAQItem question="How does a typical engagement start?" groupName="faq-dev-demo">
+              With a conversation. I want to understand what you are trying to do and why the current approach is not cutting it. From there we figure out whether a quick automation or a longer build makes more sense.
+            </FAQItem>
+            <FAQItem question="Do you do ongoing support after the project ships?" groupName="faq-dev-demo">
+              Yes. Most clients stick around for at least a few months after launch. Software always surfaces new questions once real people start using it.
+            </FAQItem>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section style="background: var(--color-wl-paper); padding: 64px 48px; position: relative; overflow: hidden;">
+      <div style="max-width: 640px; margin: 0 auto; position: relative; z-index: 1;">
+        <p style="font-family: var(--font-wl-body); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-wl-sub); margin: 0 0 16px 0;">
+          FrequencyWave - on paper surface
+        </p>
+        <p class="wl-text-body" style="color: var(--color-wl-sub);">
+          FrequencyWave COMP-05 rendered as a full-bleed decorative background. The accent
+          stroke adapts light/dark via var(--color-wl-accent) with no JavaScript.
+        </p>
+      </div>
+      <FrequencyWave class="dev-wave-bg" />
+    </section>
+
+    <section style="background: var(--color-wl-sea-glass); padding: 64px 48px; position: relative; overflow: hidden;">
+      <div style="max-width: 640px; margin: 0 auto; position: relative; z-index: 1;">
+        <p style="font-family: var(--font-wl-body); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-wl-ink); margin: 0 0 16px 0;">
+          FrequencyWave - on sea-glass surface
+        </p>
+        <p class="wl-text-body" style="color: var(--color-wl-ink);">
+          Same component on the sea-glass surface. Stroke reads on this teal background
+          in both light and dark modes.
+        </p>
+      </div>
+      <FrequencyWave class="dev-wave-bg" />
+    </section>
+
+  </main>
+</BaseLayout>
+
+<style>
+  .dev-force-open details::details-content {
+    display: block;
+    height: auto;
+    overflow: visible;
+    content-visibility: visible;
+  }
+
+  .dev-force-open .wl-project-card-details {
+    border: 1px solid var(--color-wl-accent);
+  }
+
+  .dev-force-open .wl-project-card-details .wl-toggle-label {
+    display: none;
+  }
+
+  .dev-force-open .wl-project-card-details .wl-toggle-label-open {
+    display: inline;
+  }
+
+  .dev-force-open .wl-project-card-details .wl-toggle-indicator {
+    transform: rotate(180deg);
+  }
+
+  .dev-wave-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+</style>
