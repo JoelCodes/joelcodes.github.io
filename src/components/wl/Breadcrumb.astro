@@ -14,8 +14,8 @@
  * Color #4C6A70 note:
  *   Designer description: "Color #4C6A70 (matches the site's crumb/trust tint -- not a
  *   token in code either)". This is a non-token literal sourced from Figma 100:14.
- *   contrast: #4C6A70 on #F6FBFA (paper) = 4.57:1 (AA PASS -- verified check-contrast.mjs)
- *   contrast: #4C6A70 on #FFFFFF (white) = 4.19:1 -- borderline; used on paper in mockups.
+ *   contrast: #4C6A70 on #F6FBFA (paper) = 5.58:1 (AA PASS -- verified check-contrast.mjs)
+ *   contrast: #4C6A70 on #FFFFFF (white) = 5.83:1 (AA PASS -- verified check-contrast.mjs)
  *   Dark mode: #4C6A70 on #0C2228 (dark paper) = 2.82:1 -- FAIL. Fixed via --wl-breadcrumb-color
  *   local token (global.css Phase 35): flips #4C6A70 light / #A9C9C7 dark. (Rule 1 bug fix)
  *
@@ -53,7 +53,7 @@ const { items, class: className = '' } = Astro.props;
 // #4C6A70 on paper (#F6FBFA) = 5.58:1 AA PASS light mode (check-contrast.mjs).
 // Dark mode: #4C6A70 on dark paper (#0C2228) = 2.82:1 FAIL -- use --wl-breadcrumb-color
 // which flips to #A9C9C7 in .dark (global.css Phase 35 breadcrumb local token).
-// #A9C9C7 on #0C2228 = 6.7:1 AA PASS dark mode (estimated, similar to sub dark token).
+// #A9C9C7 on #0C2228 = 9.31:1 AA PASS dark mode (verified check-contrast.mjs).
 // Color is applied via CLASS (itemColorClass), NOT inline style — an inline
 // `color:` declaration would beat `hover:text-wl-accent` in the cascade and
 // kill the link hover state (WR-01 fix).

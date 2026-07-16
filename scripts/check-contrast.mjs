@@ -227,12 +227,12 @@ export const PAIRS = [
   [D_ON_INK, D_INK, 'dark: on-ink on ink (CTAButton solid/small label on bg)',  4.5, true],
 
   // CTAButton ghost: ink text on ghost bg (--wl-cta-ghost-bg flips for dark mode AA)
-  // Light: rgba(255,255,255,0.4) over paper (#F6FBFA) -> effective ~#FBFCFB; ink text = clear PASS
-  // Dark: rgba(255,255,255,0.08) over dark paper (#0C2228) -> effective ~#1A3540; D_INK (#EAF6F3) text
+  // Light: rgba(255,255,255,0.4) over paper (#F6FBFA) -> effective ~#FAFDFC; ink text = clear PASS
+  // Dark: rgba(255,255,255,0.08) over dark paper (#0C2228) -> effective #1F3439; D_INK (#EAF6F3) text
   // Ghost light effective bg approximation: use paper (transparent bg over paper is safe)
   [L_INK, L_PAPER, 'light: ink on paper (CTAButton ghost text on light bg)',    4.5, true],
-  // Ghost dark: rgba(255,255,255,0.08) over #0C2228 -> ~#1E3B42 -- D_INK #EAF6F3 on #1E3B42
-  // Exact hex: R=0.08*255+0.92*12=24, G=0.08*255+0.92*34=51, B=0.08*255+0.92*40=57 -> #183339
+  // Ghost dark: rgba(255,255,255,0.08) over #0C2228 -- D_INK #EAF6F3 on the composite
+  // Exact hex: R=0.08*255+0.92*12=31.44, G=0.08*255+0.92*34=51.68, B=0.08*255+0.92*40=57.2 -> #1F3439
   // Using D_PAPER as conservative proxy: #EAF6F3 on #0C2228 = 14.88:1 >> 4.5:1 PASS
   [D_INK, D_PAPER, 'dark: ink on paper (CTAButton ghost text on dark bg, conservative)',     4.5, true],
 
