@@ -79,9 +79,11 @@ const { question, groupName, class: className = '' } = Astro.props;
     >
       {/* Question: Fraunces Regular 18px var(--color-wl-ink), SOFT 0/WONK 1 — node 99:16
           No existing .wl-* class matches (heading-h3 is 21px, text-body-large is 17px HG).
-          Local inline style per extraction override guidance. */}
+          Local inline style per extraction override guidance.
+          Color is CLASS-based (text-wl-ink), not inline — an inline `color` would beat
+          hover:text-wl-accent in every browser, killing the hover affordance (WR-02). */}
       <span
-        class="hover:text-wl-accent"
+        class="text-wl-ink hover:text-wl-accent"
         style={[
           /* Fraunces Regular 18px — local size, extraction confirmed node 99:16 */
           'font-family: var(--font-wl-heading);',
@@ -90,8 +92,6 @@ const { question, groupName, class: className = '' } = Astro.props;
           'font-style: normal;',
           'font-variation-settings: "SOFT" 0, "WONK" 1;',
           'line-height: 1.2;',
-          /* Color: ink (--color-wl-ink) — source node 99:16 */
-          'color: var(--color-wl-ink);',
           /* Take up remaining space so toggle stays right-aligned */
           'flex: 1;',
         ].join(' ')}
