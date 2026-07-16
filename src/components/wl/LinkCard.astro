@@ -35,7 +35,11 @@
  * Slot: default — body description (.wl-text-body / wl-sub)
  *
  * Hover state: no Figma hover spec exists — derived per existing chrome convention
- * (hover:text-wl-accent pattern per SiteHeader.astro nav links).
+ * (accent text color per SiteHeader.astro nav links). Implemented as `group` on the
+ * card anchor + `group-hover:text-wl-accent` on the TITLE (title turns accent on
+ * card hover). Children set their colors via classes/inline as before; only the
+ * title participates in hover (WR-02 fix — previously inline `color:` declarations
+ * made the hover utility dead code).
  * FIDELITY-GATE: hover state is derived, not extracted — flag for Joel's review.
  *
  * Arrow: "→" as TEXT per designer description ("arrow → as TEXT — NO icon/SVG by design").
@@ -69,15 +73,14 @@ const {
   class:list={[
     /* Project-wide focus ring (COMP-02 requirement) */
     'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent',
-    /* Hover: derived convention — hover:text-wl-accent on the entire card subtly
-       indicates interactivity (extracted chrome convention from SiteHeader nav links).
+    /* Hover: derived convention — `group` here + group-hover:text-wl-accent on the
+       title indicates interactivity (chrome convention from SiteHeader nav links).
        FIDELITY-GATE: no Figma hover spec — derived, surface at fidelity gate. */
-    'hover:text-wl-accent',
+    'group',
     /* Block display for card layout */
     'block',
     /* Remove default link underline */
     'no-underline',
-    'transition-colors',
     className
   ]}
   style={[
@@ -93,8 +96,6 @@ const {
     'box-shadow: var(--wl-card-shadow);',
     /* Remove text decoration */
     'text-decoration: none;',
-    /* Ensure card content color doesn't inherit link color on hover globally */
-    'color: inherit;',
   ].join(' ')}
 >
   {/* Outcome: .wl-accent-outcome — Fraunces Italic 16px, accent color */}
@@ -107,10 +108,12 @@ const {
     </p>
   )}
 
-  {/* Title: .wl-heading-h3 — Fraunces 21px, ink color */}
+  {/* Title: .wl-heading-h3 — Fraunces 21px, ink color.
+      Color via class (not inline) so group-hover can win the cascade (WR-02):
+      title turns accent when the card is hovered — derived hover affordance. */}
   <p
-    class="wl-heading-h3"
-    style="color: var(--color-wl-ink); margin: 0 0 8px 0;"
+    class="wl-heading-h3 text-wl-ink group-hover:text-wl-accent transition-colors"
+    style="margin: 0 0 8px 0;"
   >
     {title}
   </p>
