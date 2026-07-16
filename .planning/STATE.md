@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v3.0
 milestone_name: Wavelength Rebrand
 status: executing
-stopped_at: Phase 36 context gathered
-last_updated: "2026-07-16T21:17:52.187Z"
-last_activity: 2026-07-16 -- Phase 36 planning complete
+stopped_at: Completed 36-02-PLAN.md
+last_updated: "2026-07-16T22:00:02Z"
+last_activity: 2026-07-16 -- Completed 36-02 (v1 projects teardown, green build)
 progress:
   total_phases: 9
   completed_phases: 3
   total_plans: 22
-  completed_plans: 16
-  percent: 33
+  completed_plans: 18
+  percent: 36
 ---
 
 # Project State
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-07-14)
 
 **Core value:** Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
-**Current focus:** Phase 35 — UI Primitives
+**Current focus:** Phase 36 — content-components-expandable-cards
 
 ## Current Position
 
-Phase: 36
-Plan: Not started
-Status: Ready to execute
-Last activity: 2026-07-16 -- Phase 36 planning complete
+Phase: 36 (content-components-expandable-cards) — EXECUTING
+Plan: 2 of 6 complete
+Status: Executing Phase 36
+Last activity: 2026-07-16 -- Completed 36-02 (v1 projects teardown, green build)
 
 ```
 v3.0 Progress: [█████████                               ] 2/9 phases (22%)
@@ -97,6 +97,7 @@ See `.planning/MILESTONES.md` for full milestone details.
 - **Roadmap 2026-07-14**: QUAL-01/02/03 owned by Phase 41 as final gate, but enforced throughout — axe-core per component in isolation phases, Lighthouse per page in page phases, screenshot comparison per phase.
 - **Roadmap 2026-07-14**: CONT-02 (verbatim copy) assigned to Phase 37 as primary owner; same discipline applies when Phase 39 builds service/area pages.
 - **Roadmap 2026-07-14**: Requirements recount yielded 33 (not 29 as initially estimated in REQUIREMENTS.md); all 33 mapped.
+- **Phase 36-02 2026-07-16**: Astro 5 static mode cannot redirect a dynamic segment `[param]` to a fixed URL — `'/portfolio/[slug]': '/'` raises GetStaticPathsRequired; entry must be omitted. Dynamic redirects require same-param destinations (e.g. `'/portfolio/[slug]': '/showcase/[slug]'`).
 
 ### Lessons carried forward
 
@@ -123,7 +124,7 @@ None currently.
 
 ## Session Continuity
 
-Last session: 2026-07-16T18:03:06.843Z
-Stopped at: Phase 36 context gathered
-Resume file: .planning/phases/36-content-components-expandable-cards/36-CONTEXT.md
-Next action: `/gsd:plan-phase 35` — UI Primitives
+Last session: 2026-07-16T22:00:02Z
+Stopped at: Completed 36-02-PLAN.md
+Resume file: .planning/phases/36-content-components-expandable-cards/36-02-SUMMARY.md
+Next action: Execute 36-03 (v2 projects.json rewrite)
