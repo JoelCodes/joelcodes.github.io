@@ -118,6 +118,29 @@ const L_ACCENT_SOFT_TEXT = '#347E7B';  // --color-wl-accent-soft-text (light) �
 // #7FC4C0 on #0C2228 → 8.28:1  PASS  (dark theme naturally high contrast)
 const D_ACCENT_SOFT_TEXT = '#7FC4C0';  // --color-wl-accent-soft-text (dark) = same as D_ACCENT_SOFT
 
+// ── Phase 35 additions — on-ink / on-dark surfaces ──────────────────────────
+//
+// CTAButton solid/small: on-ink text pairs (--wl-on-ink is #EAF6F3 light / #12333B dark)
+// L_ON_INK: text on ink bg in light mode (same hex as D_INK)
+// D_ON_INK: text on ink bg in dark mode (same hex as L_INK) — tokens flip
+const L_ON_INK = '#EAF6F3';  // --color-wl-on-ink light value (text on ink bg, light theme)
+const D_ON_INK = '#12333B';  // --color-wl-on-ink dark value (text on ink bg, dark theme)
+// Ghost-on-dark, Eyebrow on-dark: FLAGGED-GAP constants (D-10 non-flippable)
+// Replace #XXXXXX with values from Figma dark mockup 117:103 once extracted
+// const ONDARK_FG = '#XXXXXX';  // FLAGGED-GAP: non-flippable foreground from 117:103
+// const ONDARK_BG = '#12333B';  // ink surface (always-dark, non-flippable)
+// Tag fill + text: FLAGGED-GAP (requires Figma 36:5 Tag node inspection)
+// const L_TAG_FILL = '#XXXXXX'; // FLAGGED-GAP: Tag fill color from 36:5
+// const L_TAG_TEXT = '#XXXXXX'; // FLAGGED-GAP: Tag text color from 36:5
+// Callout fill + text: FLAGGED-GAP (requires Figma 36:5 Callout node inspection)
+// const L_CALLOUT_FILL = '#XXXXXX'; // FLAGGED-GAP: Callout fill from 36:5
+// const L_CALLOUT_TEXT = '#XXXXXX'; // FLAGGED-GAP: Callout text from 36:5
+// ServiceCard default/highlight fill + text: FLAGGED-GAP (requires Figma 36:5 inspection)
+// const L_SC_DEFAULT_FILL = '#XXXXXX'; // FLAGGED-GAP: ServiceCard default fill from 36:5
+// const L_SC_DEFAULT_TEXT = '#XXXXXX'; // FLAGGED-GAP: ServiceCard default text from 36:5
+// const L_SC_HIGHLIGHT_FILL = '#XXXXXX'; // FLAGGED-GAP: ServiceCard highlight fill from 36:5
+// const L_SC_HIGHLIGHT_TEXT = '#XXXXXX'; // FLAGGED-GAP: ServiceCard highlight text from 36:5
+
 // ── Pair matrix ─────────────────────────────────────────────────────────────
 //
 // Format: [foreground, background, label, threshold, textUse]
@@ -176,6 +199,45 @@ export const PAIRS = [
   [D_INK,    D_SEA_GLASS, 'dark: ink on sea-glass (section bg)',                    4.5, true],
   [D_SUB,    D_SEA_GLASS, 'dark: sub on sea-glass (secondary)',                     4.5, true],
   [D_ACCENT, D_SEA_GLASS, 'dark: accent on sea-glass (link)',                       4.5, true],
+
+  // ── PHASE 35 ADDITIONS ───────────────────────────────────────────────────
+  // Source: .planning/phases/35-ui-primitives/35-FIGMA-EXTRACTION.md
+  //
+  // CTAButton solid/small: on-ink text on ink bg (EXTRACTED — D-02/COMP-01)
+  // L_ON_INK (#EAF6F3) on L_INK (#12333B) — light theme: 12.14:1 PASS
+  [L_ON_INK, L_INK, 'light: on-ink on ink (CTAButton solid/small label on bg)', 4.5, true],
+  // D_ON_INK (#12333B) on D_INK (#EAF6F3) — dark theme: 12.14:1 PASS
+  [D_ON_INK, D_INK, 'dark: on-ink on ink (CTAButton solid/small label on bg)',  4.5, true],
+
+  // CTAButton ghost: ink text on paper bg (transparent bg, effective surface = paper)
+  // These pairs already exist above with generic labels; adding Phase 35 specific entries
+  // to confirm coverage even if foreground/background hex matches an existing row.
+  [L_INK, L_PAPER, 'light: ink on paper (CTAButton ghost text on paper bg)',    4.5, true],
+  [D_INK, D_PAPER, 'dark: ink on paper (CTAButton ghost text on paper bg)',     4.5, true],
+
+  // Eyebrow on-light: accent on paper (already in matrix with "link text" label; confirming Phase 35 pair)
+  [L_ACCENT, L_PAPER, 'light: accent on paper (Eyebrow on-light)',              4.5, true],
+  [D_ACCENT, D_PAPER, 'dark: accent on paper (Eyebrow on-light, dark flip)',    4.5, true],
+
+  // CTAButton ghost-on-dark: FLAGGED-GAP — non-flippable literal from Figma 117:103 (D-10)
+  // Uncomment and replace #XXXXXX once extracted from dark mockup 117:103
+  // [ONDARK_FG, ONDARK_BG, 'non-flippable: ghost-on-dark label on ink surface',  4.5, true],
+  // [ONDARK_FG, ONDARK_BG, 'non-flippable: ghost-on-dark border on ink surface', 4.5, false],
+
+  // Eyebrow on-dark: FLAGGED-GAP — non-flippable literal from Figma 117:103 (D-10)
+  // [ONDARK_FG, ONDARK_BG, 'non-flippable: eyebrow on-dark text on ink surface', 4.5, true],
+
+  // Tag text on Tag fill: FLAGGED-GAP (requires Figma 36:5 Tag node inspection)
+  // [L_TAG_TEXT, L_TAG_FILL, 'light: tag text on tag fill (Tag component)',       4.5, true],
+
+  // Callout text on Callout fill: FLAGGED-GAP (requires Figma 36:5 Callout inspection)
+  // [L_CALLOUT_TEXT, L_CALLOUT_FILL, 'light: callout text on callout fill',       4.5, true],
+
+  // ServiceCard default text on default fill: FLAGGED-GAP (requires Figma 36:5 inspection)
+  // [L_SC_DEFAULT_TEXT, L_SC_DEFAULT_FILL, 'light: servicecard default text on bg', 4.5, true],
+
+  // ServiceCard highlight text on highlight fill: FLAGGED-GAP (requires Figma 36:5 inspection)
+  // [L_SC_HIGHLIGHT_TEXT, L_SC_HIGHLIGHT_FILL, 'light: servicecard highlight text on bg', 4.5, true],
 ];
 
 // ── Main loop (runs only when executed directly, not when imported) ──────────
