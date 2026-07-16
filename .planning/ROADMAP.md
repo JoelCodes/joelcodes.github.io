@@ -180,7 +180,7 @@ Plans:
 3. All primitives are exercised on a temporary dev isolation page that is deleted before the phase branch is merged; the dev page is not reachable in production.
 4. Figma-frame vs. rendered screenshot comparison for the Components page primitives block approved before phase is marked done.
 
-**Plans:** 3/4 plans executed
+**Plans:** 4/4 plans complete
 
 Plans:
 **Wave 1**
@@ -194,7 +194,7 @@ Plans:
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
-- [ ] 35-04-PLAN.md — Dev isolation page + axe spec + Figma fidelity gate (Joel approval) + deletion
+- [x] 35-04-PLAN.md — Dev isolation page + axe spec + Figma fidelity gate (Joel approval) + deletion
 
 ---
 
@@ -317,7 +317,7 @@ Plans:
 | 23-32 | v2.0 (abandoned) | 34/34 | Executed, unconsumed (see archive branch) | 2026-05-31 → 2026-06-13 |
 | 33 | v3.0 | 6/6 | Complete    | 2026-07-15 |
 | 34 | v3.0 | 6/6 | Complete    | 2026-07-15 |
-| 35 | v3.0 | 3/4 | In Progress|  |
+| 35 | v3.0 | 4/4 | Complete   | 2026-07-16 |
 | 36 | v3.0 | — | Pending | — |
 | 37 | v3.0 | — | Pending | — |
 | 38 | v3.0 | — | Pending | — |
