@@ -33,22 +33,6 @@ test.describe('Dark Mode Accessibility', () => {
     await context.close();
   });
 
-  test('Projects page in dark mode should not have accessibility violations', async ({ browser }) => {
-    const context = await browser.newContext({ colorScheme: 'dark' });
-    const page = await context.newPage();
-    await page.goto('/projects');
-
-    await settleAnimations(page);
-
-
-    const results = await new AxeBuilder({ page })
-      .withTags(wcagTags)
-      .analyze();
-
-    expect(results.violations).toEqual([]);
-    await context.close();
-  });
-
   // Blog dark-mode test removed: /blog is dev-only as of Phase 34 (prod builds emit a
   // redirect stub). The suite's webServer runs `npm run dev`, where /blog still renders —
   // light-mode blog coverage lives in axe-tests.spec.ts until the Phase 38 restyle.

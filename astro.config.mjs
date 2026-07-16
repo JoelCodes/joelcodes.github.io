@@ -72,7 +72,8 @@ export default defineConfig({
 
   redirects: {
     '/portfolio': '/',
-    '/portfolio/[slug]': '/',
+    // Note: '/portfolio/[slug]' redirect omitted — Astro static mode cannot redirect a
+    // dynamic segment to a fixed URL; /portfolio/anything 404s until Phase 38 adds /showcase.
     '/contact': '/#contact',
     '/faq': '/',
   },
