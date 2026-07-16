@@ -333,13 +333,18 @@ export const PAIRS = [
   [D_ACCENT, CARD_DARK,  'dark: FAQItem toggle "+" accent on card-bg (21px large-text)',        3,   true],
 
   // Thumb block label (Fraunces Italic 16px, #FFFFFF @ opacity 0.85) on gradient bg.
-  // Gradient stops: #0E7078 (0%) → #14323B (70%). WCAG measures fg against actual bg;
-  // label is centered — worst case is lightest stop (#0E7078). opacity does not reduce
-  // the opaque background hex; text opacity (0.85) reduces perceived contrast but the
-  // WCAG formula uses the full-opacity hex (#FFFFFF). Tested against both stops.
+  // Gradient stops: #0E7078 (0%) → #14323B (70%). WCAG measures the RENDERED colour:
+  // an element-level `opacity: 0.85` composites the glyphs over the background, so the
+  // alpha MUST be flattened before computing the ratio (WR-07 — testing raw #FFFFFF
+  // overstated the margin: 5.82:1 instead of the true ≈4.71:1 on the light stop).
+  // Composite per channel: c = 0.85*255 + 0.15*bg_c
+  //   white @0.85 over #0E7078 → #DBEAEB (≈4.71:1 — passes 4.5:1 by 0.21, not 1.32)
+  //   white @0.85 over #14323B → #DCE0E2 (comfortably above 4.5:1)
+  // Worst case is the lightest stop (#0E7078); both stops tested.
   // Gradient does not flip in dark mode (thumb design is consistent across themes).
-  ['#FFFFFF', '#0E7078', 'thumb label: white on gradient light stop #0E7078 (worst case)',      4.5, true],
-  ['#FFFFFF', '#14323B', 'thumb label: white on gradient dark stop #14323B',                    4.5, true],
+  // If the label opacity or gradient stops ever change, recompute these composites.
+  ['#DBEAEB', '#0E7078', 'thumb label: white@0.85 composited, on gradient light stop #0E7078 (worst case)', 4.5, true],
+  ['#DCE0E2', '#14323B', 'thumb label: white@0.85 composited, on gradient dark stop #14323B',               4.5, true],
 ];
 
 // ── Main loop (runs only when executed directly, not when imported) ──────────
