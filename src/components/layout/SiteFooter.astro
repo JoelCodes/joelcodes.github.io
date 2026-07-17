@@ -1,8 +1,8 @@
 ---
 import WaveMark from '../WaveMark.astro';
+import { BOOKING_URL } from '../../lib/constants';
 const currentYear = new Date().getFullYear();
 const isDev = import.meta.env.DEV;
-const BOOKING_URL = '/#book'; // TODO: replace with real Calendly URL when Phase 37 wires IA-03
 ---
 
 <!-- Wavelength site footer — always-dark #0D2A31, zero client JS, wl-footer-* locals (Plan 34-04 / CHROME-03) -->
@@ -52,8 +52,11 @@ const BOOKING_URL = '/#book'; // TODO: replace with real Calendly URL when Phase
           class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--wl-footer-wordmark-color)]"
           style="color: var(--wl-footer-text-link);"
         >About</a>
+        <!-- Opens Calendly in new tab (CONTEXT D-06); rel=noopener prevents reverse tabnabbing (threat model) -->
         <a
           href={BOOKING_URL}
+          target="_blank"
+          rel="noopener"
           class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--wl-footer-wordmark-color)]"
           style="color: var(--wl-footer-text-link);"
         >Book a call</a>
