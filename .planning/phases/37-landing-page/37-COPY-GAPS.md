@@ -1,6 +1,6 @@
 # 37 — Copy Gaps
 
-Running log of `[COPY GAP]` items for Joel. Resolved at the fidelity gate (Wave 5).
+Running log of `[COPY GAP]` items for Joel. **RESOLVED 2026-07-17 — Joel approved both items as-is at the fidelity gate.**
 All items below are rendered as visible markers in the affected sections.
 
 | # | Section | Node / Description | Gap Type |
@@ -14,3 +14,8 @@ All items below are rendered as visible markers in the affected sections.
 - Item 1 is a pre-approved implementation decision (not a true copy gap — copy exists; animation behavior was unspecified).
 - Item 2 is a wiring decision logged for Joel's confirmation.
 - No visible `[COPY GAP]` markers needed in the rendered HTML for items 1 or 2 since both have reasonable resolutions. Gap markers would appear only if copy were truly missing/unreadable.
+
+## Resolution (2026-07-17)
+
+- Item 1: **Approved as-is** — hero ships static "time saved" + cursor bar.
+- Item 2: **Approved as-is** — Agencies CTA stays `mailto:contact@joelshinness.com`.
