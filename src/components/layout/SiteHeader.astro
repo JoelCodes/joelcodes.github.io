@@ -1,11 +1,13 @@
 ---
 import WaveMark from '../WaveMark.astro';
 import CTAButton from '../wl/CTAButton.astro';
-const BOOKING_URL = '/#book'; // TODO: replace with real Calendly URL when Phase 37 wires IA-03
+import { BOOKING_URL } from '../../lib/constants';
 const isDev = import.meta.env.DEV;
+const currentPath = Astro.url.pathname; // for build-time aria-current="page" on Showcase link
 ---
 
-<!-- Wavelength site header — sticky, zero client JS, wl-* tokens only (Plan 34-04 / CHROME-02) -->
+<!-- Wavelength site header — sticky, wl-* tokens only (Plan 34-04 / CHROME-02) -->
+<!-- Scroll-spy: vanilla IntersectionObserver IIFE at bottom of header (CONTEXT D-01, IA-04) -->
 <header
   class="sticky top-0 z-30 h-16 bg-wl-sea-glass"
   style="border-bottom: 1px solid var(--color-wl-accent);"
@@ -34,6 +36,7 @@ const isDev = import.meta.env.DEV;
       >Services</a>
       <a
         href="/showcase"
+        aria-current={currentPath === '/showcase' ? 'page' : undefined}
         class="wl-nav-link text-wl-ink hover:text-wl-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
       >Showcase</a>
       <a
@@ -47,7 +50,8 @@ const isDev = import.meta.env.DEV;
         >Blog</a>
       )}
       <!-- CTA: CTAButton small variant (COMP-01 — Phase 35 35-02) — pixel-neutral to pre-retrofit spec (D-02) -->
-      <CTAButton href={BOOKING_URL} variant="small">Book a call</CTAButton>
+      <!-- Opens Calendly in new tab (D-06); rel=noopener prevents reverse tabnabbing (threat model) -->
+      <CTAButton href={BOOKING_URL} variant="small" target="_blank" rel="noopener">Book a call</CTAButton>
     </nav>
 
     <!-- Mobile nav (&lt; 640px) — Showcase + CTA only (Services/About reachable via footer — D-01) -->
@@ -57,8 +61,61 @@ const isDev = import.meta.env.DEV;
         class="wl-nav-link text-wl-ink hover:text-wl-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
       >Showcase</a>
       <!-- CTA: CTAButton small variant (COMP-01 — Phase 35 35-02) — pixel-neutral to pre-retrofit spec (D-02) -->
-      <CTAButton href={BOOKING_URL} variant="small">Book a call</CTAButton>
+      <!-- Opens Calendly in new tab (D-06); rel=noopener prevents reverse tabnabbing (threat model) -->
+      <CTAButton href={BOOKING_URL} variant="small" target="_blank" rel="noopener">Book a call</CTAButton>
     </nav>
 
   </div>
+
+  <!-- Vanilla IntersectionObserver scroll-spy (CONTEXT D-01 through D-04, IA-04)
+       Sets aria-current="location" on /#services and /#about nav links while those
+       sections are visible. No active state when neither section is in view (D-03).
+       Guards on window.IntersectionObserver and element existence — inert on pages
+       without #services/#about (RESEARCH Pitfall 3). Progressive enhancement: zero JS
+       leaves nav functional with no active state. -->
+  <script is:inline>
+    (function () {
+      var ANCHORS = ['services', 'about'];
+      var navLinks = {};
+      ANCHORS.forEach(function (id) {
+        var link = document.querySelector('a[href="/#' + id + '"], a[href="#' + id + '"]');
+        if (link) navLinks[id] = link;
+      });
+
+      if (!window.IntersectionObserver || Object.keys(navLinks).length === 0) return;
+
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            var id = entry.target.id;
+            if (navLinks[id]) {
+              if (entry.isIntersecting) {
+                navLinks[id].setAttribute('aria-current', 'location');
+              } else {
+                navLinks[id].removeAttribute('aria-current');
+              }
+            }
+          });
+        },
+        { rootMargin: '-64px 0px 0px 0px', threshold: 0 }
+      );
+
+      ANCHORS.forEach(function (id) {
+        var section = document.getElementById(id);
+        if (section) observer.observe(section);
+      });
+    })();
+  </script>
 </header>
+
+<style>
+  /* Scroll-spy active state (CONTEXT D-02 — derived; flagged as APPROVED-DEVIATION at fidelity gate
+     since Figma static frames show no active nav state) */
+  nav a[aria-current="location"] {
+    color: var(--color-wl-accent);
+  }
+  /* Build-time current page marker — Showcase link on /showcase (CONTEXT D-04) */
+  nav a[aria-current="page"] {
+    color: var(--color-wl-accent);
+  }
+</style>
