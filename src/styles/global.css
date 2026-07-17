@@ -114,7 +114,7 @@
      --wl-footer-* above). */
   --wl-card-bg:            #FFFFFF;                                  /* card fill light — Figma: white literal */
   --wl-card-shadow:        0 20px 40px -30px rgba(18, 51, 59, 0.5); /* Shadow/Card light */
-  --wl-card-icon-tile-bg:  var(--color-wl-accent);                   /* ServiceCard icon tile light */
+  --wl-card-icon-tile-bg:  rgba(14, 112, 120, 0.1);                  /* icon tile light — accent @10% (landing 12:2, 37-EXTRACTION §Three-ways; supersedes Phase 35 solid-accent reading) */
 }
 
 /* Dark-mode card panel flip — matches .dark flip mechanism (D-01 / Phase 33 precedent).

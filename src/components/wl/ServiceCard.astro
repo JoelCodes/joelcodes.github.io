@@ -147,9 +147,11 @@ const Heading = `h${headingLevel}` as 'h2' | 'h3' | 'h4';
     style={[
       'width: 42px;',
       'height: 42px;',
-      /* bg: --wl-card-icon-tile-bg — accent light / rgba(90,169,165,0.14) dark */
+      /* bg: --wl-card-icon-tile-bg — accent@10% light / accent-soft@14% dark (12:2) */
       'background: var(--wl-card-icon-tile-bg);',
       'border-radius: 12px;',
+      /* Slotted icons stroke with currentColor — Figma strokes are accent (37-EXTRACTION §Icon SVGs) */
+      'color: var(--color-wl-accent);',
       /* Center the 22×22 inner icon with 10px offset on each side */
       'display: flex;',
       'align-items: center;',
