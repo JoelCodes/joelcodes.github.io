@@ -75,35 +75,45 @@ const currentPath = Astro.url.pathname; // for build-time aria-current="page" on
        leaves nav functional with no active state. -->
   <script is:inline>
     (function () {
-      var ANCHORS = ['services', 'about'];
-      var navLinks = {};
-      ANCHORS.forEach(function (id) {
-        var link = document.querySelector('a[href="/#' + id + '"], a[href="#' + id + '"]');
-        if (link) navLinks[id] = link;
-      });
+      /* This script renders inside the header, BEFORE the #services/#about
+         sections exist in the DOM — observation must wait for DOM ready. */
+      function initScrollSpy() {
+        var ANCHORS = ['services', 'about'];
+        var navLinks = {};
+        ANCHORS.forEach(function (id) {
+          var link = document.querySelector('a[href="/#' + id + '"], a[href="#' + id + '"]');
+          if (link) navLinks[id] = link;
+        });
 
-      if (!window.IntersectionObserver || Object.keys(navLinks).length === 0) return;
+        if (!window.IntersectionObserver || Object.keys(navLinks).length === 0) return;
 
-      var observer = new IntersectionObserver(
-        function (entries) {
-          entries.forEach(function (entry) {
-            var id = entry.target.id;
-            if (navLinks[id]) {
-              if (entry.isIntersecting) {
-                navLinks[id].setAttribute('aria-current', 'location');
-              } else {
-                navLinks[id].removeAttribute('aria-current');
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              var id = entry.target.id;
+              if (navLinks[id]) {
+                if (entry.isIntersecting) {
+                  navLinks[id].setAttribute('aria-current', 'location');
+                } else {
+                  navLinks[id].removeAttribute('aria-current');
+                }
               }
-            }
-          });
-        },
-        { rootMargin: '-64px 0px 0px 0px', threshold: 0 }
-      );
+            });
+          },
+          { rootMargin: '-64px 0px 0px 0px', threshold: 0 }
+        );
 
-      ANCHORS.forEach(function (id) {
-        var section = document.getElementById(id);
-        if (section) observer.observe(section);
-      });
+        ANCHORS.forEach(function (id) {
+          var section = document.getElementById(id);
+          if (section) observer.observe(section);
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initScrollSpy);
+      } else {
+        initScrollSpy();
+      }
     })();
   </script>
 </header>
