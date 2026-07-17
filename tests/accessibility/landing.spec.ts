@@ -60,13 +60,15 @@ test.describe('Landing Page Accessibility', () => {
       // These assertions will fail if the dark: class override stops working (e.g. inline style
       // is re-introduced on the section element, which beats any class in the CSS cascade).
 
+      // Scope to main > section — the Astro dev toolbar injects its own <section>
+      // elements in dev-server runs, which breaks bare `section` counts (37-VERIFICATION gap).
       // Hero section (first <section>): dark gradient #123640 → #0C2228
-      const heroSection = page.locator('section').first();
+      const heroSection = page.locator('main > section').first();
       const heroBg = await heroSection.evaluate((el) => getComputedStyle(el).backgroundImage);
       expect(heroBg).toMatch(/rgb\(18,\s*54,\s*64\)|rgb\(18, 54, 64\)/); // #123640
 
       // Final CTA section (last <section>): same dark gradient pair as Hero
-      const sections = page.locator('section');
+      const sections = page.locator('main > section');
       const sectionCount = await sections.count();
       const finalSection = sections.nth(sectionCount - 1);
       const finalBg = await finalSection.evaluate((el) => getComputedStyle(el).backgroundImage);
