@@ -31,7 +31,7 @@
 
 ### Pages
 
-- [ ] **PAGE-01**: Landing page (`/`) rebuilt with every Figma section (Hero, Who, Three-ways `#services`, How-it-works, Automations, Proof, About `#about`, Agencies, Final CTA) — verbatim Figma copy, all 4 breakpoints, light + dark verified against frames `12:2`/`117:103`
+- [x] **PAGE-01**: Landing page (`/`) rebuilt with every Figma section (Hero, Who, Three-ways `#services`, How-it-works, Automations, Proof, About `#about`, Agencies, Final CTA) — verbatim Figma copy, all 4 breakpoints, light + dark verified against frames `12:2`/`117:103`
 - [ ] **PAGE-02**: Showcase page (`/showcase`) with Client Work + Craft & Experiments sections using expandable Project Cards — all 4 breakpoints, verified against frame `12:3`
 - [ ] **PAGE-03**: Service Web page (`/services/web`) built from frame `85:103` — dev-hidden (noindex, out of sitemap, unlinked in prod)
 - [ ] **PAGE-04**: Area Abbotsford page (`/areas/abbotsford`) built from frame `85:104` with ProfessionalService JSON-LD (areaServed) — dev-hidden until copy is confirmed locally unique
@@ -42,14 +42,14 @@
 
 - [ ] **IA-01**: Redirects: `/projects` + `/projects/[slug]` → `/showcase`; `/faq` → `/`; `/thank-you` removed (form dropped)
 - [ ] **IA-02**: Dev-hidden mechanism: `noindex` prop on SEO.astro + sitemap `filter()` excluding dev-hidden URLs; verified in the production build output
-- [ ] **IA-03**: All Book-a-call CTAs wired to a single `BOOKING_URL` constant (Calendly placeholder); Email CTAs use `mailto:` to Joel's address
-- [ ] **IA-04**: Anchor nav behaves correctly: active states, smooth scroll with header offset, cross-page `/#services` links work from Showcase/blog
+- [x] **IA-03**: All Book-a-call CTAs wired to a single `BOOKING_URL` constant (Calendly placeholder); Email CTAs use `mailto:` to Joel's address
+- [x] **IA-04**: Anchor nav behaves correctly: active states, smooth scroll with header offset, cross-page `/#services` links work from Showcase/blog
 - [ ] **IA-05**: Contact form + n8n webhook flow removed (design has no form); no dead form code remains
 
 ### Content
 
 - [x] **CONT-01**: `projects.json` v2 schema carrying the Showcase card content (eyebrow, title, outcome line, summary, tags, expanded problem/built/result story) — populated verbatim from Figma
-- [ ] **CONT-02**: Landing/service/area copy sourced verbatim from the Figma mockups; any missing copy flagged to Joel, not invented
+- [x] **CONT-02**: Landing/service/area copy sourced verbatim from the Figma mockups; any missing copy flagged to Joel, not invented
 
 ### Cleanup & Quality
 
@@ -100,10 +100,10 @@
 | COMP-04 | Phase 36 | Complete |
 | COMP-05 | Phase 36 | Complete |
 | CONT-01 | Phase 36 | Complete |
-| PAGE-01 | Phase 37 | Pending |
-| CONT-02 | Phase 37 | Pending |
-| IA-03 | Phase 37 | Pending |
-| IA-04 | Phase 37 | Pending |
+| PAGE-01 | Phase 37 | Complete |
+| CONT-02 | Phase 37 | Complete |
+| IA-03 | Phase 37 | Complete |
+| IA-04 | Phase 37 | Complete |
 | PAGE-02 | Phase 38 | Pending |
 | PAGE-06 | Phase 38 | Pending |
 | PAGE-03 | Phase 39 | Pending |
