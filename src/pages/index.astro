@@ -599,10 +599,10 @@ import FrequencyWave from '../components/wl/FrequencyWave.astro';
             'font-family: var(--font-wl-body);',
             'font-size: 15px;',
             'font-weight: 400;',
-            /* Light: #4C6A70 (new literal — not a token). Dark: #8FB4B2 (new literal). */
-            'color: #4C6A70;',
+            /* Light: #4C6A70, Dark: #8FB4B2 — via CSS custom property (dark: class cannot
+               override inline style color; --wl-proof-companies-color flips in .dark block). */
+            'color: var(--wl-proof-companies-color);',
           ].join(' ')}
-          class="dark:[color:#8FB4B2]"
         >
           EA · Unity · lululemon · thatgamecompany.
         </span>
@@ -610,6 +610,241 @@ import FrequencyWave from '../components/wl/FrequencyWave.astro';
     </div>
   </section>
 
-  {/* ── Sections 7-9 (About, Agencies, Final CTA) appended by 37-04 ── */}
+  {/* ── Section 7: About ───────────────────────────────────────────────────
+      anchor #about — nav scroll target. scroll-margin-top: 64px via global.css.
+      Background: vertical gradient #EFF7F6 → #E6F1F1 (same pair as Make / Three-ways).
+      Dark: vertical gradient #10303A → #0E2B33 (same as Make dark).
+      py-[112px] all breakpoints.
+      Layout: 2 columns at 1440/1920 — text (flex-1) + portrait 440×550, gap 48, items-center.
+             Portrait below text at 768 (340×425) and 390 (300×375).
+      About photo: NO (extraction confirmed no photo asset). Build portrait placeholder as designed:
+        frame 16:25 "portrait", radius 20px, gradient light rgb(205,230,229)→rgb(169,210,210),
+        dark rgb(21,58,68)→rgb(14,43,51); label "PORTRAIT" HG Regular 13px tracking 1.82px.
+      Source: 37-EXTRACTION.md §Section 7 About.
+  ── */}
+  <section
+    id="about"
+    style={[
+      'padding-top: 112px;',
+      'padding-bottom: 112px;',
+      /* Light gradient: #EFF7F6 → #E6F1F1 (same pair as Make) */
+      'background: linear-gradient(to bottom, #EFF7F6, #E6F1F1);',
+    ].join(' ')}
+    class="px-[24px] sm:px-[32px] lg:px-[160px] xl:px-[400px] dark:[background:linear-gradient(to_bottom,#10303A,#0E2B33)]"
+  >
+    <div style="max-width: 1120px; margin: 0 auto;">
+      {/* Two-column layout: text + portrait at 1440/1920; stacked at 768/390.
+          Gap 48px, items-center in the two-col layout. */}
+      <div class="flex flex-col lg:flex-row lg:items-center lg:gap-[48px]">
+        {/* Text column */}
+        <div class="flex-1">
+          {/* Eyebrow: "WHO YOU'D WORK WITH" (49:182) */}
+          <Eyebrow>WHO YOU'D WORK WITH</Eyebrow>
+
+          <div style="height: 21px;"></div>
+
+          {/* h2: node 16:20 */}
+          <h2 class="wl-heading-h2" style="color: var(--color-wl-ink); margin: 0;">
+            Hi, I'm Joel.
+          </h2>
+
+          <div style="height: 18px;"></div>
+
+          {/* Para 1: node 16:22, .wl-text-lead 21px sub */}
+          <p
+            class="wl-text-lead"
+            style="color: var(--color-wl-sub); margin: 0;"
+          >
+            I'm a developer and designer who likes making complicated things feel simple. I've built for big companies and small ones, and the hard part is rarely the code — it's understanding what someone actually needs and getting it done without drama.
+          </p>
+
+          {/* Gap 19px between paragraphs */}
+          <div style="height: 19px;"></div>
+
+          {/* Para 2: node 16:24, .wl-text-body 16px sub */}
+          <p
+            class="wl-text-body"
+            style="color: var(--color-wl-sub); margin: 0;"
+          >
+            Away from the keyboard I'm usually solving some other kind of puzzle — I play a stack of string instruments, and I make digital and CNC art. Same instinct, different medium: I like figuring out how things work and building something good with it. That's the enthusiasm you get on your project, too.
+          </p>
+        </div>
+
+        {/* Portrait placeholder: node 16:25 "portrait".
+            440×550 at 1440/1920 (right column); 340×425 at 768; 300×375 at 390.
+            Radius 20px; gradient bg light/dark; centered label "PORTRAIT".
+            Source: 37-EXTRACTION.md "About photo present: NO" — placeholder as designed.
+            Note: no photo asset exists in Figma; swapping in a real photo is a future task.
+            Background uses Tailwind arbitrary utility classes (NOT inline style) so that
+            the dark: variant can override (inline style beats class specificity — Rule 1 pattern). */}
+        <div
+          class={[
+            'mt-[42px] lg:mt-0 mx-auto lg:mx-0 flex-shrink-0',
+            'flex items-center justify-center',
+            /* Width/height responsive: 300×375 @390, 340×425 @768, 440×550 @1440 */
+            'w-[300px] h-[375px] sm:w-[340px] sm:h-[425px] lg:w-[440px] lg:h-[550px]',
+            'rounded-[20px]',
+            /* Light gradient: rgb(205,230,229)→rgb(169,210,210) per node 16:25.
+               Dark gradient: rgb(21,58,68)→rgb(14,43,51) per node 117:249.
+               Class-based (no inline bg style) so dark: can override correctly. */
+            '[background:linear-gradient(128.66deg,rgb(205,230,229)_0%,rgb(169,210,210)_71.429%)]',
+            'dark:[background:linear-gradient(128.66deg,rgb(21,58,68)_0%,rgb(14,43,51)_71.429%)]',
+          ].join(' ')}
+          style="border: 1px solid var(--color-wl-line);"
+          aria-hidden="true"
+        >
+          {/* PORTRAIT label: node 16:26, HG Regular 13px, tracking 1.82px.
+              Color: --wl-portrait-label-color (flips in .dark: #5B8A8A light / #8FB4B2 dark). */}
+          <span
+            style={[
+              'font-family: var(--font-wl-body);',
+              'font-size: 13px;',
+              'font-weight: 400;',
+              'letter-spacing: 1.82px;',
+              'text-transform: uppercase;',
+              'color: var(--wl-portrait-label-color);',
+            ].join(' ')}
+          >
+            PORTRAIT
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Section 8: Agencies ─────────────────────────────────────────────────
+      ALWAYS-DARK ink-background section. Non-flippable footer-precedent literals.
+      Background: #12333B (light frame) / #16343C (dark frame) — both literal, slightly lighter in dark.
+      py-[112px] all breakpoints.
+      Layout: horizontal flex gap 32px at 1440/1920: text column (flex-1) + ghost-on-dark CTA right.
+              CTA drops below text at 768/390.
+      Components: Eyebrow on-dark (accent-soft #5AA9A5), CTAButton ghost-on-dark.
+      CTA destination: mailto per D-07 (no link in Figma — wired to CONTACT_EMAIL; see 37-COPY-GAPS.md #2).
+      Source: 37-EXTRACTION.md §Section 8 Agencies (ALWAYS-DARK).
+  ── */}
+  <section
+    style={[
+      'padding-top: 112px;',
+      'padding-bottom: 112px;',
+      /* ALWAYS-DARK: non-flippable literal. Light frame: #12333B. Dark frame: #16343C. */
+      'background: #12333B;',
+    ].join(' ')}
+    class="px-[24px] sm:px-[32px] lg:px-[160px] xl:px-[400px] dark:[background:#16343C]"
+  >
+    <div style="max-width: 1120px; margin: 0 auto;">
+      {/* Horizontal flex at 1440/1920: text (flex-1) + CTA right; stacked at 768/390 */}
+      <div class="flex flex-col lg:flex-row lg:items-center lg:gap-[32px]">
+        {/* Text column */}
+        <div class="flex-1">
+          {/* Eyebrow on-dark: accent-soft #5AA9A5 (dash + text) — always-dark surface.
+              Uses Eyebrow on-dark variant. Source: 49:185, Eyebrow 39:38. */}
+          <Eyebrow onDark>FOR AGENCIES</Eyebrow>
+
+          {/* Gap 21px eyebrow → h2 */}
+          <div style="height: 21px;"></div>
+
+          {/* h2: node 17:8, Fraunces 50 #EAF6F3 (on-ink literal), gap 15 to body */}
+          <h2
+            class="wl-heading-h2"
+            style="color: #EAF6F3; margin: 0;"
+          >
+            Need reliable overflow dev?
+          </h2>
+
+          {/* Gap 15px h2 → body (extraction: h2→lead gap is 15px for Agencies) */}
+          <div style="height: 15px;"></div>
+
+          {/* Body: node 17:10, HG 17px lh 1.6 #A9C9C7, width 620 */}
+          <p
+            style={[
+              'font-family: var(--font-wl-body);',
+              'font-size: 17px;',
+              'line-height: 1.6;',
+              'color: #A9C9C7;',
+              'margin: 0;',
+              'max-width: 620px;',
+            ].join(' ')}
+          >
+            An extra pair of experienced hands — React, TypeScript, Next.js, and the messy integration and API work most people would rather not touch. Dependable, low-drama, and easy to brief.
+          </p>
+        </div>
+
+        {/* CTA: ghost-on-dark, node I49:162;39:26.
+            Label: "Let's talk overflow →" (arrow is part of label text, no icon prop).
+            Destination: mailto per D-07 (extraction gap #2 — no Figma link target). */}
+        <div class="mt-[32px] lg:mt-0 flex-shrink-0">
+          <CTAButton
+            href={`mailto:${CONTACT_EMAIL}`}
+            variant="ghost-on-dark"
+          >
+            Let's talk overflow →
+          </CTAButton>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Section 9: Final CTA ────────────────────────────────────────────────
+      Background: vertical gradient #E6F1F1 → #D2E7E7 (same pair as Hero).
+      Dark: vertical gradient #123640 → #0C2228 (same as Hero dark).
+      py-[112px] all breakpoints.
+      Layout: column, center-aligned (only centered section). Lead width 660, centered.
+      Components: Eyebrow, CTAButton solid + ghost (identical to Hero CTAs).
+      Gaps: eyebrow→h2 21, h2→lead 18, lead→btns 35, btns gap 16.
+      Source: 37-EXTRACTION.md §Section 9 Final CTA.
+  ── */}
+  <section
+    style={[
+      'padding-top: 112px;',
+      'padding-bottom: 112px;',
+      /* Light gradient: #E6F1F1 → #D2E7E7 (same pair as Hero) */
+      'background: linear-gradient(to bottom, #E6F1F1, #D2E7E7);',
+    ].join(' ')}
+    class="px-[24px] sm:px-[32px] lg:px-[160px] xl:px-[400px] dark:[background:linear-gradient(to_bottom,#123640,#0C2228)]"
+  >
+    <div
+      style="max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center;"
+    >
+      {/* Eyebrow: "GET IN TOUCH" (49:188) */}
+      <Eyebrow>GET IN TOUCH</Eyebrow>
+
+      <div style="height: 21px;"></div>
+
+      {/* h2: node 17:18, centered */}
+      <h2 class="wl-heading-h2" style="color: var(--color-wl-ink); margin: 0;">
+        Have something in mind?
+      </h2>
+
+      <div style="height: 18px;"></div>
+
+      {/* Lead: node 17:20, width 660, centered */}
+      <p
+        class="wl-text-lead"
+        style="color: var(--color-wl-sub); margin: 0; max-width: 660px;"
+      >
+        Tell me what you're trying to do. If there's a solution that saves you time or money, I'll tell you what it'd take. If there isn't, I'll tell you that too.
+      </p>
+
+      <div style="height: 35px;"></div>
+
+      {/* CTAs: Book a call (solid + calendar) + Email me (ghost + mail). Gap 16px.
+          D-06: Calendly opens in new tab with rel="noopener".
+          D-07: email via mailto. ASVS L1: every _blank link carries rel="noopener". */}
+      <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: center;">
+        <CTAButton
+          href={BOOKING_URL}
+          variant="solid"
+          icon="calendar"
+          target="_blank"
+          rel="noopener"
+        >
+          Book a call
+        </CTAButton>
+        <CTAButton href={`mailto:${CONTACT_EMAIL}`} variant="ghost" icon="mail">
+          Email me
+        </CTAButton>
+      </div>
+    </div>
+  </section>
 
 </BaseLayout>
