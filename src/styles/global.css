@@ -96,6 +96,14 @@
      Dark mode uses --color-wl-sub dark value (#A9C9C7) as breadcrumb color --
      consistent trust-tint intent, AA on #0C2228 background. */
   --wl-breadcrumb-color: #4C6A70;
+  /* Proof section credentials companies color (16:13): #4C6A70 light (new literal, not a token).
+     Dark: #8FB4B2 per 117:249 extraction. Cannot use Tailwind dark: class override when the
+     light value is in an inline style attribute (inline beats class specificity).
+     Defined as a custom property so .dark can flip it (Rule 1 fix). */
+  --wl-proof-companies-color: #4C6A70;
+  /* About portrait label (16:26): #5B8A8A light, #8FB4B2 dark — new literals, not tokens.
+     Defined as custom property so .dark can flip it (same pattern as --wl-proof-companies-color). */
+  --wl-portrait-label-color: #5B8A8A;
 
   /* ── Phase 35 card-panel local tokens (footer-precedent pattern) ──────────
      White-card components (Callout 99:26, LinkCard 99:29, ServiceCard 40:32)
@@ -125,6 +133,10 @@
   /* Breadcrumb dark flip: #4C6A70 fails AA on dark paper (#0C2228 = 2.82:1).
      In dark mode, use --color-wl-sub dark value (#A9C9C7) for AA compliance. */
   --wl-breadcrumb-color: #A9C9C7;
+  /* Proof companies dark flip: #8FB4B2 per 117:249 extraction (7.32:1 on #0C2228 — PASS). */
+  --wl-proof-companies-color: #8FB4B2;
+  /* Portrait label dark flip: #8FB4B2 per 117:249 extraction (portrait inside dark gradient). */
+  --wl-portrait-label-color: #8FB4B2;
 }
 
 /* ============================================================
