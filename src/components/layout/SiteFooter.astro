@@ -1,6 +1,6 @@
 ---
 import WaveMark from '../WaveMark.astro';
-import { BOOKING_URL } from '../../lib/constants';
+import { BOOKING_URL, CONTACT_EMAIL } from '../../lib/constants';
 const currentYear = new Date().getFullYear();
 const isDev = import.meta.env.DEV;
 ---
@@ -61,7 +61,7 @@ const isDev = import.meta.env.DEV;
           style="color: var(--wl-footer-text-link);"
         >Book a call</a>
         <a
-          href="mailto:contact@joelshinness.com"
+          href={`mailto:${CONTACT_EMAIL}`}
           class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--wl-footer-wordmark-color)]"
           style="color: var(--wl-footer-text-link);"
         >Email</a>
@@ -88,10 +88,10 @@ const isDev = import.meta.env.DEV;
 
       <p>
         <a
-          href="mailto:contact@joelshinness.com"
+          href={`mailto:${CONTACT_EMAIL}`}
           class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--wl-footer-wordmark-color)]"
           style="color: var(--wl-footer-text-link);"
-        >contact@joelshinness.com</a><!--
+        >{CONTACT_EMAIL}</a><!--
         --><span aria-hidden="true" style="color: var(--wl-footer-text-link);"> · </span><!--
         --><a
           href="https://github.com/JoelCodes"
