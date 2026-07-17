@@ -39,14 +39,14 @@ import FrequencyWave from '../components/wl/FrequencyWave.astro';
   <section
     style={[
       'position: relative;',
-      'height: 840px;',
+      'min-height: 840px;',
       'overflow: hidden;',
       'display: flex;',
       'align-items: center;',
-      /* Light gradient: #E6F1F1 (sea-glass top) → #D2E7E7 (sea-glass-deep bottom) */
-      'background: linear-gradient(to bottom, #E6F1F1, #D2E7E7);',
+      /* CR-01: background moved to class so dark: can override (inline beats class specificity). */
+      /* WR-02: min-height preserves 840px design while allowing growth on zoom/reflow (WCAG 1.4.4/1.4.10). */
     ].join(' ')}
-    class="dark:[background:linear-gradient(to_bottom,#123640,#0C2228)]"
+    class="[background:linear-gradient(to_bottom,#E6F1F1,#D2E7E7)] dark:[background:linear-gradient(to_bottom,#123640,#0C2228)]"
   >
     {/* FrequencyWave: node 13:21 — left: -115px; top: -100px; w: 1670px; h: 1044px.
         absolutely positioned decorative background behind content.
@@ -55,7 +55,7 @@ import FrequencyWave from '../components/wl/FrequencyWave.astro';
 
     {/* Hero content: centered, above the wave layer */}
     <div
-      class="relative z-10 w-full px-[24px] sm:px-[32px] lg:px-[160px] xl:px-[400px]"
+      class="relative z-10 w-full px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px]"
       style="max-width: none;"
     >
       {/* Eyebrow: "SOLUTIONS FOR SMALL BUSINESSES" (49:164) — gap 21px to h1 */}
@@ -124,7 +124,7 @@ import FrequencyWave from '../components/wl/FrequencyWave.astro';
   ── */}
   <section
     style="background: var(--color-wl-paper); padding-top: 112px; padding-bottom: 112px;"
-    class="px-[24px] sm:px-[32px] lg:px-[160px] xl:px-[400px]"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px]"
   >
     <div style="max-width: 1120px; margin: 0 auto;">
       {/* Eyebrow: "WHO IT'S FOR" (49:167) */}
@@ -156,7 +156,7 @@ import FrequencyWave from '../components/wl/FrequencyWave.astro';
           Row = 22px check icon + 13px gap + HG 17px var(--sub).
           Check icon: viewBox "0 0 22 22", stroke #0E7078 (accent), path M18.3333 5.5L8.25 15.5833L3.66667 11.
           Note: Figma 390 frame shows nowrap overflow — building with wrapping text (pre-approved deviation). */}
-      <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px;">
+      <ul role="list" style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px;">
         {[
           "You're tired of duct-taping spreadsheets and manual steps together.",
           "Your website is out of date, or quietly working against you.",
@@ -206,13 +206,8 @@ import FrequencyWave from '../components/wl/FrequencyWave.astro';
   ── */}
   <section
     id="services"
-    style={[
-      'padding-top: 112px;',
-      'padding-bottom: 112px;',
-      /* Light gradient: #EFF7F6 (new literal, not a token) → #E6F1F1 (sea-glass) */
-      'background: linear-gradient(to bottom, #EFF7F6, #E6F1F1);',
-    ].join(' ')}
-    class="px-[24px] sm:px-[32px] lg:px-[160px] xl:px-[400px] dark:[background:linear-gradient(to_bottom,#10303A,#0E2B33)]"
+    style="padding-top: 112px; padding-bottom: 112px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#EFF7F6,#E6F1F1)] dark:[background:linear-gradient(to_bottom,#10303A,#0E2B33)]"
   >
     <div style="max-width: 1120px; margin: 0 auto;">
       {/* Eyebrow: "WHAT I BUILD" (49:170) */}
@@ -347,7 +342,7 @@ import FrequencyWave from '../components/wl/FrequencyWave.astro';
   ── */}
   <section
     style="background: var(--color-wl-paper); padding-top: 112px; padding-bottom: 112px;"
-    class="px-[24px] sm:px-[32px] lg:px-[160px] xl:px-[400px]"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px]"
   >
     <div style="max-width: 1120px; margin: 0 auto;">
       {/* Eyebrow: "HOW IT WORKS" (49:173) */}
@@ -365,6 +360,7 @@ import FrequencyWave from '../components/wl/FrequencyWave.astro';
       {/* Steps: 5 columns at lg, stacked below. Gap 26px.
           Step component wraps inside li; parent provides ol semantics. */}
       <ol
+        role="list"
         class="grid grid-cols-1 lg:grid-cols-5"
         style="gap: 26px; list-style: none; margin: 0; padding: 0;"
       >
@@ -428,13 +424,8 @@ import FrequencyWave from '../components/wl/FrequencyWave.astro';
       Source: 37-EXTRACTION.md §Section 5 Automations.
   ── */}
   <section
-    style={[
-      'padding-top: 112px;',
-      'padding-bottom: 112px;',
-      /* Light gradient: #E6F1F1 → #DCEDEC (new bottom literal) */
-      'background: linear-gradient(to bottom, #E6F1F1, #DCEDEC);',
-    ].join(' ')}
-    class="px-[24px] sm:px-[32px] lg:px-[160px] xl:px-[400px] dark:[background:linear-gradient(to_bottom,#0E2B33,#0D262E)]"
+    style="padding-top: 112px; padding-bottom: 112px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#E6F1F1,#DCEDEC)] dark:[background:linear-gradient(to_bottom,#0E2B33,#0D262E)]"
   >
     <div style="max-width: 1120px; margin: 0 auto;">
       {/* Eyebrow: "WHAT THAT LOOKS LIKE" (49:176) */}
@@ -547,7 +538,7 @@ import FrequencyWave from '../components/wl/FrequencyWave.astro';
   ── */}
   <section
     style="background: var(--color-wl-paper); padding-top: 112px; padding-bottom: 112px;"
-    class="px-[24px] sm:px-[32px] lg:px-[160px] xl:px-[400px]"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px]"
   >
     <div style="max-width: 1120px; margin: 0 auto;">
       {/* Eyebrow: "WHY TRUST ME WITH IT" (49:179) */}
@@ -624,13 +615,8 @@ import FrequencyWave from '../components/wl/FrequencyWave.astro';
   ── */}
   <section
     id="about"
-    style={[
-      'padding-top: 112px;',
-      'padding-bottom: 112px;',
-      /* Light gradient: #EFF7F6 → #E6F1F1 (same pair as Make) */
-      'background: linear-gradient(to bottom, #EFF7F6, #E6F1F1);',
-    ].join(' ')}
-    class="px-[24px] sm:px-[32px] lg:px-[160px] xl:px-[400px] dark:[background:linear-gradient(to_bottom,#10303A,#0E2B33)]"
+    style="padding-top: 112px; padding-bottom: 112px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#EFF7F6,#E6F1F1)] dark:[background:linear-gradient(to_bottom,#10303A,#0E2B33)]"
   >
     <div style="max-width: 1120px; margin: 0 auto;">
       {/* Two-column layout: text + portrait at 1440/1920; stacked at 768/390.
@@ -723,13 +709,8 @@ import FrequencyWave from '../components/wl/FrequencyWave.astro';
       Source: 37-EXTRACTION.md §Section 8 Agencies (ALWAYS-DARK).
   ── */}
   <section
-    style={[
-      'padding-top: 112px;',
-      'padding-bottom: 112px;',
-      /* ALWAYS-DARK: non-flippable literal. Light frame: #12333B. Dark frame: #16343C. */
-      'background: #12333B;',
-    ].join(' ')}
-    class="px-[24px] sm:px-[32px] lg:px-[160px] xl:px-[400px] dark:[background:#16343C]"
+    style="padding-top: 112px; padding-bottom: 112px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:#12333B] dark:[background:#16343C]"
   >
     <div style="max-width: 1120px; margin: 0 auto;">
       {/* Horizontal flex at 1440/1920: text (flex-1) + CTA right; stacked at 768/390 */}
@@ -794,13 +775,8 @@ import FrequencyWave from '../components/wl/FrequencyWave.astro';
       Source: 37-EXTRACTION.md §Section 9 Final CTA.
   ── */}
   <section
-    style={[
-      'padding-top: 112px;',
-      'padding-bottom: 112px;',
-      /* Light gradient: #E6F1F1 → #D2E7E7 (same pair as Hero) */
-      'background: linear-gradient(to bottom, #E6F1F1, #D2E7E7);',
-    ].join(' ')}
-    class="px-[24px] sm:px-[32px] lg:px-[160px] xl:px-[400px] dark:[background:linear-gradient(to_bottom,#123640,#0C2228)]"
+    style="padding-top: 112px; padding-bottom: 112px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#E6F1F1,#D2E7E7)] dark:[background:linear-gradient(to_bottom,#123640,#0C2228)]"
   >
     <div
       style="max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center;"
