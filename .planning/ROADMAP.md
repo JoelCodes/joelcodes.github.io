@@ -234,7 +234,7 @@ Plans:
 
 *Note: CONT-02 covers verbatim copy for all pages (landing, service, area). It is owned here because the landing page is the primary copy surface; the same discipline applies when Phase 39 assembles the service and area pages.*
 
-**Plans:** 3/5 plans executed
+**Plans:** 4/5 plans executed
 
 Plans:
 **Wave 1**
@@ -251,7 +251,7 @@ Plans:
 
 **Wave 4** *(blocked on 37-03 — shares index.astro)*
 
-- [ ] 37-04-PLAN.md — index.astro sections 7–9 + FAQ if present (About #about, Agencies, Final CTA) + durable landing axe spec (PAGE-01, CONT-02, IA-04)
+- [x] 37-04-PLAN.md — index.astro sections 7–9 + FAQ if present (About #about, Agencies, Final CTA) + durable landing axe spec (PAGE-01, CONT-02, IA-04)
 
 **Wave 5** *(blocked on 37-04)*
 
@@ -342,7 +342,7 @@ Plans:
 | 34 | v3.0 | 6/6 | Complete    | 2026-07-15 |
 | 35 | v3.0 | 4/4 | Complete    | 2026-07-16 |
 | 36 | v3.0 | 6/6 | Complete    | 2026-07-16 |
-| 37 | v3.0 | 3/5 | In Progress|  |
+| 37 | v3.0 | 4/5 | In Progress|  |
 | 38 | v3.0 | — | Pending | — |
 | 39 | v3.0 | — | Pending | — |
 | 40 | v3.0 | — | Pending | — |
