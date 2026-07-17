@@ -39,9 +39,11 @@ interface Props {
   variant?: 'solid' | 'ghost' | 'ghost-on-dark' | 'small';
   icon?: 'calendar' | 'mail';
   class?: string;
+  target?: string;
+  rel?: string;
 }
 
-const { href, variant = 'solid', icon, class: className = '' } = Astro.props;
+const { href, variant = 'solid', icon, class: className = '', target, rel } = Astro.props;
 
 // Resolve whether this variant uses wl-label-button (solid/ghost/ghost-on-dark = 16px/600)
 // or wl-cta-label (small = 14px/600). Source: 35-FIGMA-EXTRACTION.md §Fresh MCP Extraction.
@@ -57,6 +59,8 @@ const hasIcon = icon !== undefined;
 {isGhostOnDark ? (
   <a
     href={href}
+    target={target}
+    rel={rel}
     class:list={[
       /* non-flippable type class — same as solid/ghost (16px/600) */
       'wl-label-button',
@@ -127,6 +131,8 @@ const hasIcon = icon !== undefined;
 ) : isSmall ? (
   <a
     href={href}
+    target={target}
+    rel={rel}
     class:list={[
       /* small variant: .wl-cta-label (14px/600) — SiteHeader CTA spec (D-02 pixel-neutral) */
       'wl-cta-label',
@@ -179,6 +185,8 @@ const hasIcon = icon !== undefined;
 ) : (
   <a
     href={href}
+    target={target}
+    rel={rel}
     class:list={[
       /* solid and ghost variants: .wl-label-button (16px/600) — Figma nodes 39:15 / 39:22 */
       'wl-label-button',
