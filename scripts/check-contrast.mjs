@@ -345,6 +345,42 @@ export const PAIRS = [
   // If the label opacity or gradient stops ever change, recompute these composites.
   ['#DBEAEB', '#0E7078', 'thumb label: white@0.85 composited, on gradient light stop #0E7078 (worst case)', 4.5, true],
   ['#DCE0E2', '#14323B', 'thumb label: white@0.85 composited, on gradient dark stop #14323B',               4.5, true],
+
+  // ── PHASE 37 ADDITIONS ────────────────────────────────────────────────────
+  // Source: .planning/phases/37-landing-page/37-EXTRACTION.md §Contrast-pair additions
+  //         .planning/phases/37-landing-page/37-UI-SPEC.md §Contrast Script Extension table
+  //
+  // Sections 1–6 introduce gradient-surface backgrounds not already in the matrix.
+  // Pairs already covered (no new entry needed):
+  //   - ink/sub/accent on sea-glass (#E6F1F1 / #123640): covered above (Section 3 Make worst light stop = sea-glass ✓)
+  //   - ink/sub on paper (#F6FBFA / #0C2228): covered above (Section 2 Who, 4 How, 6 Proof ✓)
+  //   - on-ink Agencies strip (ONDARK_SURFACE #12333B): covered Phase 35 block ✓
+  //   - D_INK/D_SUB on dark paper #0C2228: covered above ✓
+  //   - L_ACCENT on CARD_WHITE (tag-pill): covered Phase 35 ✓
+  //   - L_INK on CARD_WHITE (flow result ink on card): covered Phase 35 ✓
+  //   - L_ACCENT on paper (kicker, eyebrow): covered above ✓
+  //   - Proof credentials #4C6A70 on paper: same hex as BREADCRUMB on L_PAPER — covered Phase 35 ✓
+  //
+  // NEW: Hero/Final gradient worst stop #D2E7E7 (sea-glass-deep) — not in matrix.
+  // Source: 37-EXTRACTION.md §Hero background "vertical gradient #E6F1F1 → #D2E7E7"
+  // Worst stop for text contrast is the lightest (#D2E7E7 = sea-glass-deep, bottom stop).
+  [L_INK,    L_SEA_GLASS_DEEP, 'phase37: ink on hero/final gradient worst stop #D2E7E7',                     4.5, true],
+  [L_SUB,    L_SEA_GLASS_DEEP, 'phase37: sub on hero/final gradient worst stop #D2E7E7',                     4.5, true],
+  // Accent italic "time saved" 76px on gradient worst stop — LARGE TEXT (76px >> 18pt threshold)
+  [L_ACCENT, L_SEA_GLASS_DEEP, 'phase37: accent italic "time saved" 76px on hero gradient (large-text 3:1)', 3,   true],
+
+  // NEW: Automations section gradient worst stop #DCEDEC (bottom literal, new surface).
+  // Source: 37-EXTRACTION.md §Section 5 Auto "vertical gradient #E6F1F1 → #DCEDEC"
+  // Bottom stop #DCEDEC is lighter than #E6F1F1 (sea-glass), so it is the worst case.
+  // Adding #DCEDEC as a new surface: ink and sub on it.
+  [L_INK,    '#DCEDEC', 'phase37: ink on auto gradient worst stop #DCEDEC',                                  4.5, true],
+  [L_SUB,    '#DCEDEC', 'phase37: sub on auto gradient worst stop #DCEDEC',                                  4.5, true],
+
+  // NEW: Proof credentials companies literal #8FB4B2 in dark mode on dark paper.
+  // Source: 37-EXTRACTION.md §Section 6 Proof "16:13 HG Regular #4C6A70 light / #8FB4B2 dark"
+  // #4C6A70 on L_PAPER is the BREADCRUMB pair already in the matrix — no new entry needed for light.
+  // #8FB4B2 on D_PAPER is new (D_SUB is #A9C9C7; this is a different, lighter teal-grey literal).
+  ['#8FB4B2', D_PAPER, 'phase37: proof credentials #8FB4B2 on dark paper (new literal)',                     4.5, true],
 ];
 
 // ── Main loop (runs only when executed directly, not when imported) ──────────
