@@ -234,6 +234,29 @@ Plans:
 
 *Note: CONT-02 covers verbatim copy for all pages (landing, service, area). It is owned here because the landing page is the primary copy surface; the same discipline applies when Phase 39 assembles the service and area pages.*
 
+**Plans:** 5 plans
+
+Plans:
+**Wave 1**
+
+- [ ] 37-01-PLAN.md — Figma extraction artifact (all landing FIDELITY-GAPs: section geometry, copy, backgrounds, FAQ/dark/FrequencyWave resolutions) [figma-desktop MCP]
+
+**Wave 2** *(no Figma dependency — parallel-eligible with Wave 1)*
+
+- [ ] 37-02-PLAN.md — Shared constants module + CTAButton target/rel + SiteHeader scroll-spy/aria-current + SiteFooter constants (IA-03, IA-04)
+
+**Wave 3** *(blocked on 37-01 + 37-02)*
+
+- [ ] 37-03-PLAN.md — index.astro sections 1–6 (Hero, Who, Three-ways #services, How-it-works, Automations, Proof) + copy-gap log + contrast script (PAGE-01, CONT-02)
+
+**Wave 4** *(blocked on 37-03 — shares index.astro)*
+
+- [ ] 37-04-PLAN.md — index.astro sections 7–9 + FAQ if present (About #about, Agencies, Final CTA) + durable landing axe spec (PAGE-01, CONT-02, IA-04)
+
+**Wave 5** *(blocked on 37-04)*
+
+- [ ] 37-05-PLAN.md — Manual gates: anchor-nav functional + copy-gap audit + fidelity gate, 8 screenshots, Joel approval [non-autonomous]
+
 ---
 
 #### Phase 38: Showcase Page + Blog Restyle
