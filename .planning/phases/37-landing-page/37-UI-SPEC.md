@@ -1,7 +1,8 @@
 ---
 phase: 37
 slug: landing-page
-status: draft
+status: approved
+reviewed_at: 2026-07-16
 shadcn_initialized: false
 preset: none
 created: 2026-07-16
