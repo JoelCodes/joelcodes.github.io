@@ -234,16 +234,16 @@ Plans:
 
 *Note: CONT-02 covers verbatim copy for all pages (landing, service, area). It is owned here because the landing page is the primary copy surface; the same discipline applies when Phase 39 assembles the service and area pages.*
 
-**Plans:** 5 plans
+**Plans:** 2/5 plans executed
 
 Plans:
 **Wave 1**
 
-- [ ] 37-01-PLAN.md — Figma extraction artifact (all landing FIDELITY-GAPs: section geometry, copy, backgrounds, FAQ/dark/FrequencyWave resolutions) [figma-desktop MCP]
+- [x] 37-01-PLAN.md — Figma extraction artifact (all landing FIDELITY-GAPs: section geometry, copy, backgrounds, FAQ/dark/FrequencyWave resolutions) [figma-desktop MCP]
 
 **Wave 2** *(no Figma dependency — parallel-eligible with Wave 1)*
 
-- [ ] 37-02-PLAN.md — Shared constants module + CTAButton target/rel + SiteHeader scroll-spy/aria-current + SiteFooter constants (IA-03, IA-04)
+- [x] 37-02-PLAN.md — Shared constants module + CTAButton target/rel + SiteHeader scroll-spy/aria-current + SiteFooter constants (IA-03, IA-04)
 
 **Wave 3** *(blocked on 37-01 + 37-02)*
 
@@ -342,7 +342,7 @@ Plans:
 | 34 | v3.0 | 6/6 | Complete    | 2026-07-15 |
 | 35 | v3.0 | 4/4 | Complete    | 2026-07-16 |
 | 36 | v3.0 | 6/6 | Complete    | 2026-07-16 |
-| 37 | v3.0 | — | Pending | — |
+| 37 | v3.0 | 2/5 | In Progress|  |
 | 38 | v3.0 | — | Pending | — |
 | 39 | v3.0 | — | Pending | — |
 | 40 | v3.0 | — | Pending | — |
