@@ -46,6 +46,7 @@ Small business owners can understand what Joel does, trust his process, and easi
 - ✓ Fraunces + Hanken Grotesk self-hosted fonts — v3.0 Phase 33 (fontsource-variable + Fontaine fallback metrics, 13-style `.wl-*` type ramp, WCAG AA contrast gate script, waveform mark/favicon/OG assets)
 - ✓ Wavelength chrome site-wide — v3.0 Phase 34 (SiteHeader/SiteFooter per Figma with circle-badge mark on dark, zero client JS, system-only FOUC-safe dark mode, blog gated out of prod, /faq → / redirect, fidelity gate approved 2026-07-15; validates CHROME-01..04)
 - ✓ UI primitive library — v3.0 Phase 35 (8 components in `src/components/wl/`: CTAButton ×4 variants + calendar/mail icons, Eyebrow, Tag, Callout, LinkCard, Breadcrumb, Step, ServiceCard; Figma-extracted values, D-10 non-flippable on-dark literals, `--wl-card-*` dark panel tokens, SiteHeader CTA retrofit; fidelity gate approved 2026-07-15, code review fixed 11 findings, verification 12/12; validates COMP-01..02)
+- ✓ Landing page — v3.0 Phase 37 (all nine Figma sections at 4 breakpoints, light + dark; real Calendly URL live via src/lib/constants.ts BOOKING_URL — resolves FUT-01; IntersectionObserver scroll-spy with aria-current; landing frame 12:2 has NO FAQ section; Agencies is always-dark ink strip; fidelity gate approved 2026-07-17, deep code review 13 findings — all 7 Critical/Warning fixed incl. dark-mode gradient cascade bug; verification 9/9; validates PAGE-01, CONT-02, IA-03, IA-04)
 - ✓ Content components + expandable cards — v3.0 Phase 36 (ProjectCard with native `<details>` whole-card summary, gradient thumb block, story-in-DOM SEO; FAQItem exclusive-open via `name` attr with rotating `+` toggle; FrequencyWave 5-path inline SVG; projects.json v2 as Zod-validated `file()` content collection with D-09 placeholder copy; v1 `/projects` pages deleted early; `::details-content` progressive enhancement; fidelity gate approved 2026-07-16, code review fixed 7 of 8 findings, verification 14/14; validates COMP-03..05, CONT-01)
 
 ### Active
@@ -53,7 +54,7 @@ Small business owners can understand what Joel does, trust his process, and easi
 *v3.0 scope — detailed in `.planning/REQUIREMENTS.md` once defined:*
 
 - [x] Component library per Figma Components page — primitives done (Phase 35); interactive pieces done (Phase 36: Project Card, FAQ, wave bg)
-- [ ] Landing page (responsive, all 4 Figma breakpoints, dark mode)
+- [x] Landing page (responsive, all 4 Figma breakpoints, dark mode) — Phase 37
 - [ ] Showcase page (responsive, expandable project cards)
 - [ ] Service Web + Area Abbotsford pages (dev-hidden)
 - [ ] Nav/IA: Services (anchor) / Showcase / About (anchor) / Book a call (Calendly placeholder)
@@ -62,7 +63,7 @@ Small business owners can understand what Joel does, trust his process, and easi
 
 ### Out of Scope
 
-- Real Calendly URL — placeholder `BOOKING_URL` constant until Joel supplies it
+- ~~Real Calendly URL~~ — RESOLVED in Phase 37: Joel supplied `https://calendly.com/discovery-joelshinness/discovery-call`, shipped live (FUT-01 done)
 - Publishing Service Web / Area Abbotsford — built dev-only this milestone
 - New blog content — content untouched, only restyled
 - CMS backend — Joel edits code directly
@@ -101,12 +102,12 @@ Small business owners can understand what Joel does, trust his process, and easi
 | contact@joelshinness.com site-wide | Figma copy shipped verbatim; Joel sets up the alias before launch (amends Phase 37's me@ criterion) | — 2026-07-15 |
 | No theme toggle in v3.0 chrome | Figma specs none; site follows prefers-color-scheme; toggle deferred (design in Figma first) | ✓ Shipped in 34 |
 | Service/Area pages dev-hidden | Fully designed, but Joel wants them unpublished for now | — Pending |
-| Calendly placeholder constant | Real URL not yet chosen; single `BOOKING_URL` to swap later | — Pending |
-| Dark mode from Figma dark mockup | Landing dark variant exists (`117:103`); system-only (toggle deferred per Phase 34) | — Pending |
+| Calendly placeholder constant | Real URL supplied by Joel mid-Phase-37 discussion; shipped live | ✓ Shipped in 37 |
+| Dark mode from Figma dark mockup | Landing dark variant exists (`117:103`); system-only (toggle deferred per Phase 34) | ✓ Shipped in 37 |
 
 ## Evolution
 
 This document evolves at phase transitions and milestone boundaries.
 
 ---
-*Last updated: 2026-07-16 — Phase 36 (Content Components + Expandable Cards) complete*
+*Last updated: 2026-07-17 — Phase 37 (Landing Page) complete*
