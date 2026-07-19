@@ -118,6 +118,13 @@
 | QUAL-01 | Phase 41 | Pending |
 | QUAL-02 | Phase 41 | Pending |
 | QUAL-03 | Phase 41 | Pending |
+| FUT-01 | Phase 37 | Complete |
+| FUT-02 | Future | Deferred |
+| FUT-03 | Future | Deferred |
+| FUT-04 | Future | Deferred |
+| FUT-05 | Future | Deferred |
+| FUT-06 | Future | Deferred |
+| FUT-07 | Future | Deferred |
 
 **Coverage:**
 
