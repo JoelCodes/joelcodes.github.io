@@ -1,8 +1,27 @@
 ---
+/**
+ * Blog post page — Phase 38, Plan 06 (PAGE-06, D-12)
+ *
+ * Dev-gated: returns [] in getStaticPaths when PROD (D-13).
+ * Title-first layout: h1 → meta row (date + tag pills) → featured image → .wl-prose body.
+ * Single centered column (no TOC, no 3-column grid).
+ *
+ * Frame authority: Blog Post / 1440 (211:5) + Blog Post / 390 (211:6).
+ * Approved 2026-07-19 (38-BLOG-FRAMES.md, D-08 gate cleared).
+ *
+ * Layout per 211:5:
+ *   Site Header → Article (centered 720 column):
+ *     Fraunces 52 h1 → meta row (date + Tag instances) → FeaturedImage (720×405,
+ *     sea-glass gradient fill, radius 18, loading="eager" LCP fix) →
+ *     .wl-prose body → Site Footer
+ *
+ * LCP fix: loading="eager" on featured image (D-14, roadmap criterion 3).
+ * Previous: loading="lazy" — caused Lighthouse lcp-lazy-loaded fail.
+ */
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import TableOfContents from '../../components/TableOfContents.astro';
-import { readingTime } from 'reading-time-estimator';
+import Breadcrumb from '../../components/wl/Breadcrumb.astro';
+import Tag from '../../components/wl/Tag.astro';
 
 export async function getStaticPaths() {
   if (import.meta.env.PROD) return [];  // No blog pages in production (D-13)
@@ -17,10 +36,7 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content, headings } = await render(post);
-
-// Calculate reading time from rendered content
-const readTime = readingTime(post.body || '', { wordsPerMinute: 200 });
+const { Content } = await render(post);
 
 // Format date
 const formattedDate = new Date(post.data.pubDate).toLocaleDateString('en-US', {
@@ -31,84 +47,125 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString('en-US', {
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description}>
-  <div class="container mx-auto px-4 py-12">
-    <!-- Back link -->
-    <a href="/blog" class="inline-flex items-center gap-2 text-turquoise hover:text-turquoise-hover dark:text-turquoise-dark dark:hover:text-turquoise transition-colors mb-8">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="m15 18-6-6 6-6"/>
-      </svg>
-      Back to Blog
-    </a>
 
-    <!-- Three-column grid on desktop -->
-    <div class="grid grid-cols-1 lg:grid-cols-[200px_1fr_200px] gap-8 lg:gap-12">
-      <!-- Left column: TOC (sticky) -->
-      <aside class="hidden lg:block">
-        <TableOfContents headings={headings} />
-      </aside>
+  {/* ── Article: centered 720 column (frame 211:5) ───────────────────────────
+      Background: var(--color-wl-paper) — flips in dark.
+      Padding: py-112px standard section; gutters match landing/showcase.
+      Column: max-width 720px (frame 211:5 "centered 720 column").
+  ── */}
+  <div
+    style="background: var(--color-wl-paper); padding-top: 112px; padding-bottom: 112px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px]"
+  >
+    <div style="max-width: 720px; margin: 0 auto;">
 
-      <!-- Center column: Main content -->
-      <article class="max-w-[65ch] mx-auto lg:mx-0">
-        <!-- Post header -->
-        <header class="mb-8">
-          <h1 class="font-heading text-3xl md:text-4xl font-bold uppercase mb-4">
+      {/* Breadcrumb back-link: Blog → {post title} */}
+      <Breadcrumb
+        items={[
+          { label: 'Blog', href: '/blog' },
+          { label: post.data.title }
+        ]}
+      />
+
+      <article>
+        {/* Article header: title → meta → image (D-12 title-first order) */}
+        <header>
+
+          {/* gap breadcrumb → h1 */}
+          <div style="height: 32px;"></div>
+
+          {/* h1: post title.
+              Frame 211:5: Fraunces 52px — RAMP MISMATCH (wl-heading-h1-interior = 61px,
+              nearest ramp heading = h2 at 50px). Local style per Phase 36/38 precedent.
+              390: 34px (frame 211:6). */}
+          <h1 class="post-h1" style="color: var(--color-wl-ink); margin: 0;">
             {post.data.title}
           </h1>
 
-          <!-- Metadata row -->
-          <div class="flex flex-wrap items-center gap-4 text-sm text-text-muted-light dark:text-text-muted-dark mb-6">
-            <time datetime={post.data.pubDate.toISOString()}>
+          {/* gap h1 → meta: 24px */}
+          <div style="height: 24px;"></div>
+
+          {/* Meta row: date + tag pills (frame 211:5 "meta row") */}
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
+            <time
+              datetime={post.data.pubDate.toISOString()}
+              class="wl-text-note"
+              style="color: var(--color-wl-sub);"
+            >
               {formattedDate}
             </time>
-            <span aria-hidden="true">|</span>
-            <span>{readTime.text}</span>
+            {post.data.tags && post.data.tags.length > 0 && post.data.tags.map((tag: string) => (
+              <a
+                href={`/blog/tags/${tag}`}
+                style="text-decoration: none;"
+              >
+                <Tag>{tag}</Tag>
+              </a>
+            ))}
           </div>
 
-          <!-- Tags -->
-          {post.data.tags && post.data.tags.length > 0 && (
-            <div class="flex flex-wrap gap-2 mb-6">
-              {post.data.tags.map((tag: string) => (
-                <a
-                  href={`/blog/tags/${tag}`}
-                  class="px-3 py-1 text-sm rounded-full border-[3px] border-turquoise dark:border-turquoise-dark bg-turquoise/10 dark:bg-turquoise-dark/10 text-text-light dark:text-text-dark hover:bg-turquoise hover:text-bg-dark dark:hover:bg-turquoise-dark dark:hover:text-bg-dark transition-colors"
-                >
-                  {tag}
-                </a>
-              ))}
-            </div>
-          )}
+          {/* gap meta → image: 32px */}
+          <div style="height: 32px;"></div>
 
-          <!-- Featured image -->
-          <div class="bg-gray-200 dark:bg-gray-700 rounded-lg mb-8 border-2 border-text-light/20 dark:border-text-dark/20">
+          {/* Featured image: 720×405, radius 18px (frame 211:5 "radius 18").
+              LCP FIX: loading="eager" (D-14, roadmap criterion 3 — was "lazy", caused
+              Lighthouse lcp-lazy-loaded fail). */}
+          <div style="overflow: hidden; border-radius: 18px;">
             <img
               src={post.data.featuredImage}
               alt={post.data.title}
-              class="w-full rounded-lg"
-              width="1200"
-              height="675"
-              loading="lazy"
+              class="w-full block"
+              width="720"
+              height="405"
+              loading="eager"
+              style="border-radius: 18px;"
             />
           </div>
+
+          {/* gap image → prose: 48px */}
+          <div style="height: 48px;"></div>
+
         </header>
 
-        <!-- MDX content -->
-        <div class="prose">
+        {/* MDX content in .wl-prose scope (Plan 05 foundation) */}
+        <div class="wl-prose">
           <Content />
         </div>
 
-        <!-- Back link at bottom -->
-        <div class="mt-12 pt-8 border-t border-text-muted-light/20 dark:border-text-muted-dark/20">
-          <a href="/blog" class="inline-flex items-center gap-2 text-turquoise hover:text-turquoise-hover dark:text-turquoise-dark dark:hover:text-turquoise transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="m15 18-6-6 6-6"/>
-            </svg>
-            Back to Blog
-          </a>
+        {/* Post footer: Breadcrumb back-link */}
+        <div style="margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--color-wl-line);">
+          <Breadcrumb
+            items={[
+              { label: 'Blog', href: '/blog' },
+              { label: post.data.title }
+            ]}
+          />
         </div>
-      </article>
 
-      <!-- Right column: Empty (for balance) -->
-      <div class="hidden lg:block"></div>
+      </article>
     </div>
   </div>
+
 </BaseLayout>
+
+<style>
+  /* h1: Fraunces 52px @1440 / 34px @390 — source nodes 211:5 / 211:6.
+     No .wl-* ramp match (h1-interior = 61px, h2 = 50px — 52px is between them).
+     Local style per Phase 36/38 precedent. */
+  .post-h1 {
+    font-family: var(--font-wl-heading);
+    font-size: 52px; /* source node 211:5 Blog Post/1440 */
+    font-weight: 400;
+    line-height: 1.06;
+    letter-spacing: -1.5px;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings: "SOFT" 0, "WONK" 1;
+  }
+
+  @media (max-width: 390px) {
+    .post-h1 {
+      font-size: 34px; /* source node 211:6 Blog Post/390 */
+    }
+  }
+</style>
