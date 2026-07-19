@@ -4,7 +4,7 @@
 
 A lead-generation consulting site for **Joel Shinness Solutions** — web development, automations, and AI for small businesses in Abbotsford, Vancouver, and the Fraser Valley (plus remote). The site follows the "On your wavelength" brand: calm sea-cool palette, Fraunces + Hanken Grotesk typography, wave/frequency motif, and a Landing / Showcase / Book-a-call structure aimed at non-technical SMB owners.
 
-**Current state:** v3.0 rebuild past the halfway mark (5 of 9 phases complete). Tokens, fonts, chrome, the full component library, and the rebuilt landing page (all nine Figma sections, 4 breakpoints, light + dark, real Calendly booking URL) now render the Wavelength brand; blog and remaining v1.3 neobrutalist surfaces await Phases 38–41. v2.0 (Crito `.pen` reconstruction) was completed but abandoned unconsumed — direction changed.
+**Current state:** v3.0 rebuild two-thirds through (6 of 9 phases complete). Tokens, fonts, chrome, the full component library, the rebuilt landing page, the dev-gated Showcase page, and the fully restyled (dev-only) blog now render the Wavelength brand; the remaining v1.3 neobrutalist surfaces await Phases 39–41. v2.0 (Crito `.pen` reconstruction) was completed but abandoned unconsumed — direction changed.
 
 ## Core Value
 
@@ -48,6 +48,7 @@ Small business owners can understand what Joel does, trust his process, and easi
 - ✓ UI primitive library — v3.0 Phase 35 (8 components in `src/components/wl/`: CTAButton ×4 variants + calendar/mail icons, Eyebrow, Tag, Callout, LinkCard, Breadcrumb, Step, ServiceCard; Figma-extracted values, D-10 non-flippable on-dark literals, `--wl-card-*` dark panel tokens, SiteHeader CTA retrofit; fidelity gate approved 2026-07-15, code review fixed 11 findings, verification 12/12; validates COMP-01..02)
 - ✓ Landing page — v3.0 Phase 37 (all nine Figma sections at 4 breakpoints, light + dark; real Calendly URL live via src/lib/constants.ts BOOKING_URL — resolves FUT-01; IntersectionObserver scroll-spy with aria-current; landing frame 12:2 has NO FAQ section; Agencies is always-dark ink strip; fidelity gate approved 2026-07-17, deep code review 13 findings — all 7 Critical/Warning fixed incl. dark-mode gradient cascade bug; verification 9/9; validates PAGE-01, CONT-02, IA-03, IA-04)
 - ✓ Content components + expandable cards — v3.0 Phase 36 (ProjectCard with native `<details>` whole-card summary, gradient thumb block, story-in-DOM SEO; FAQItem exclusive-open via `name` attr with rotating `+` toggle; FrequencyWave 5-path inline SVG; projects.json v2 as Zod-validated `file()` content collection with D-09 placeholder copy; v1 `/projects` pages deleted early; `::details-content` progressive enhancement; fidelity gate approved 2026-07-16, code review fixed 7 of 8 findings, verification 14/14; validates COMP-03..05, CONT-01)
+- ✓ Showcase page + blog restyle — v3.0 Phase 38 (dev-gated `/showcase` composing ProjectCard from frame 12:3 — Client Work + Craft & Experiments, 6 distinct Figma-sourced placeholder cards, per-card detail labels, all closed by default, nav link + page dev-only, sitemap-excluded; blog index/post/tag fully restyled against Joel's canonical Figma pages `195:103`/`195:211` after a mid-phase re-baseline from a mistakenly-drafted design — wave hero, "Start here." FeaturedPostCard, 3-col grid, AuthorCard, Related rail, canonical `.wl-prose`, self-hosted Roboto Mono, rethemed expressive-code; drafts excluded from listings with graceful empty-section hiding; LCP bug resolved structurally — post layout renders no top image; both fidelity gates Joel-approved 2026-07-19; verification 9/9; code review 1 critical + 5 warnings all fixed; validates PAGE-02, PAGE-06)
 
 ### Active
 
@@ -55,10 +56,10 @@ Small business owners can understand what Joel does, trust his process, and easi
 
 - [x] Component library per Figma Components page — primitives done (Phase 35); interactive pieces done (Phase 36: Project Card, FAQ, wave bg)
 - [x] Landing page (responsive, all 4 Figma breakpoints, dark mode) — Phase 37
-- [ ] Showcase page (responsive, expandable project cards)
+- [x] Showcase page (responsive, expandable project cards) — Phase 38 (dev-gated with placeholder data)
 - [ ] Service Web + Area Abbotsford pages (dev-hidden)
 - [ ] Nav/IA: Services (anchor) / Showcase / About (anchor) / Book a call (Calendly placeholder)
-- [ ] Blog restyled (dev-only in prod as of Phase 34; Phase 38 restyles against dev builds)
+- [x] Blog restyled (dev-only in prod as of Phase 34) — Phase 38 (canonical Figma pages 195:103/195:211)
 - [ ] Legacy design cleanup + CLAUDE.md update
 
 ### Out of Scope
