@@ -381,6 +381,42 @@ export const PAIRS = [
   // #4C6A70 on L_PAPER is the BREADCRUMB pair already in the matrix — no new entry needed for light.
   // #8FB4B2 on D_PAPER is new (D_SUB is #A9C9C7; this is a different, lighter teal-grey literal).
   ['#8FB4B2', D_PAPER, 'phase37: proof credentials #8FB4B2 on dark paper (new literal)',                     4.5, true],
+
+  // ── PHASE 38 ADDITIONS ────────────────────────────────────────────────────
+  // Source: .planning/phases/38-showcase-page-blog-restyle/38-EXTRACTION.md
+  //         Figma frame 12:3 — showcase section-band text/background pairs.
+  //
+  // Pairs ALREADY COVERED by earlier blocks (no new entry needed):
+  //   - L_INK / L_SUB on L_SEA_GLASS (#E6F1F1): PageHero + CTA band worst gradient stop
+  //     (gradient #E6F1F1 → #D2E7E7; worst is #D2E7E7 = L_SEA_GLASS_DEEP, Phase 37 block ✓)
+  //   - L_INK / L_SUB on L_SEA_GLASS_DEEP (#D2E7E7): covered phase37 block ✓
+  //   - L_INK / L_SUB on L_PAPER (#F6FBFA): Client Work section bg = var(--color-wl-paper) ✓
+  //   - D_INK / D_SUB on D_SEA_GLASS (#123640): PageHero/CTA band dark gradient worst stop ✓
+  //   - D_INK / D_SUB on D_PAPER (#0C2228): Client Work dark bg ✓
+  //   - All ProjectCard / Eyebrow / CTAButton text pairs: covered Phase 35/36 blocks ✓
+  //
+  // NEW: Client Work section sub-line literal (non-token, dev-note treatment).
+  //   Source: frame 27:35 — HG Italic 14px / 1.6.
+  //   Light: Figma literal #6B8B90 on paper. Original #6B8B90 → 3.51:1 FAIL at 4.5:1 AA normal-text
+  //   threshold (14px italic is not large-text). Rule 1 fix: darkened to #597880 → 4.544:1 PASS.
+  //   showcase.astro updated to use #597880 (minimum darkening to clear 4.5:1).
+  //   Dark: #8FB4B2 (derived per 38-01 — landing small-literal precedent, 38-01-SUMMARY decision).
+  //   #8FB4B2 on D_PAPER → 7.32:1 PASS (no adjustment needed in dark mode).
+  ['#597880', L_PAPER, 'phase38: showcase ClientWork sub-line on paper (light, 14px italic, min-darken fix)', 4.5, true],
+  ['#8FB4B2', D_PAPER, 'phase38: showcase ClientWork sub-line on dark paper (dark, derived #8FB4B2)',         4.5, true],
+
+  // NEW: Craft & Experiments section — gradient #EFF7F6 → #E6F1F1 (source: 31:2 fill).
+  //   The worst (lightest) stop is #EFF7F6. #E6F1F1 = L_SEA_GLASS, already in matrix.
+  //   Check ink and sub on #EFF7F6 (the unlisted lighter stop):
+  //   L_INK on #EFF7F6 → 12.36:1 PASS; L_SUB on #EFF7F6 → 7.70:1 PASS.
+  [L_INK, '#EFF7F6', 'phase38: showcase Craft gradient worst stop #EFF7F6 — ink',                             4.5, true],
+  [L_SUB, '#EFF7F6', 'phase38: showcase Craft gradient worst stop #EFF7F6 — sub (wl-text-lead)',              4.5, true],
+
+  // NEW: Craft & Experiments dark gradient #10303A → #0E2B33 (source: D-04 derived / index.astro #services).
+  //   Worst (lightest) dark stop is #10303A. D_INK / D_SUB on #10303A:
+  //   D_INK on #10303A → 12.60:1 PASS; D_SUB on #10303A → 7.88:1 PASS.
+  [D_INK, '#10303A', 'phase38: showcase Craft dark gradient worst stop #10303A — dark ink',                   4.5, true],
+  [D_SUB, '#10303A', 'phase38: showcase Craft dark gradient worst stop #10303A — dark sub',                   4.5, true],
 ];
 
 // ── Main loop (runs only when executed directly, not when imported) ──────────

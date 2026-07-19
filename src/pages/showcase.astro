@@ -147,22 +147,13 @@ const craftExperiments = projects.filter((p) => p.data.section === 'craft-experi
       {/* gap h2 → sub: 12px — source node 27:34 spacer */}
       <div style="height: 12px;"></div>
 
-      {/* Sub-line (dev-note treatment): HG Italic 14px / 1.6 / #6B8B90 — source node 27:35.
-          Width 600px. Color #6B8B90 is a non-token literal (no dark counterpart in D-04 recipe).
-          DERIVED: dark uses #8FB4B2 (landing precedent for small literals). Flagged for gate. */}
+      {/* Sub-line (dev-note treatment): HG Italic 14px / 1.6 — source node 27:35.
+          Width 600px. Figma literal #6B8B90 → Rule 1 fixed to #597880 (4.544:1 AA pass) in 38-03.
+          Dark: #8FB4B2 derived (no Figma dark value — 38-01-SUMMARY decision).
+          Color applied via class only (not inline style) so dark: class can override (specificity). */}
       <p
-        style={[
-          'font-family: var(--font-wl-body);',
-          'font-size: 14px;',
-          'font-style: italic;',
-          'font-weight: 400;',
-          'line-height: 1.6;',
-          /* Light: #6B8B90 — source node 27:35. Dark: #8FB4B2 derived (no Figma dark value). */
-          'color: #6B8B90;',
-          'margin: 0;',
-          'max-width: 600px;',
-        ].join(' ')}
-        class="dark:[color:#8FB4B2]"
+        style="font-family: var(--font-wl-body); font-size: 14px; font-style: italic; font-weight: 400; line-height: 1.6; margin: 0; max-width: 600px;"
+        class="[color:#597880] dark:[color:#8FB4B2]"
       >
         Placeholder content — swap in your real specifics, numbers, and any you'd rather feature.
       </p>
