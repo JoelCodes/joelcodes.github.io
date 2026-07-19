@@ -417,6 +417,28 @@ export const PAIRS = [
   //   D_INK on #10303A → 12.60:1 PASS; D_SUB on #10303A → 7.88:1 PASS.
   [D_INK, '#10303A', 'phase38: showcase Craft dark gradient worst stop #10303A — dark ink',                   4.5, true],
   [D_SUB, '#10303A', 'phase38: showcase Craft dark gradient worst stop #10303A — dark sub',                   4.5, true],
+
+  // ── PHASE 38 BLOG ADDITIONS (Plan 06) ────────────────────────────────────────
+  // Source: .planning/phases/38-showcase-page-blog-restyle/38-05-SUMMARY.md
+  //         (expressive-code literals measured 2026-07-19) + 38-UI-SPEC.md §Contrast additions
+  //
+  // .wl-prose link (accent underlined) on paper — already covered by "accent on paper (link text)"
+  // and "accent on paper (Eyebrow on-light)" above. Adding blog-explicit label for traceability.
+  [L_ACCENT, L_PAPER, 'phase38-blog: wl-prose accent link on paper (light, blog post)',                       4.5, true],
+  [D_ACCENT, D_PAPER, 'phase38-blog: wl-prose accent link on dark paper (dark, blog post)',                   4.5, true],
+
+  // Inline code: --wl-sub text on --wl-sea-glass background tint.
+  // Already covered by "sub on sea-glass (secondary)" rows above; adding blog-explicit labels.
+  [L_SUB, L_SEA_GLASS, 'phase38-blog: inline-code text (wl-sub) on sea-glass tint (light)',                  4.5, true],
+  [D_SUB, D_SEA_GLASS, 'phase38-blog: inline-code text (wl-sub) on sea-glass tint (dark)',                   4.5, true],
+
+  // expressive-code block text vs rethemed block background literals.
+  // Source: 38-05-SUMMARY §"expressive-code literals chosen (+ AA results)"
+  //   Light: github-light foreground #24292e on codeBackground #E6F1F1 — measured 12.72:1 ✓ AA
+  //   Dark: github-dark foreground #e1e4e8 on codeBackground #123640 — measured 10.12:1 ✓ AA
+  // Using uppercase-normalised hex to match the script's hexToRgb (both forms parse identically).
+  ['#24292e', '#E6F1F1', 'phase38-blog: ec code text (github-light #24292e) on block bg #E6F1F1 (light)',     4.5, true],
+  ['#e1e4e8', '#123640', 'phase38-blog: ec code text (github-dark #e1e4e8) on block bg #123640 (dark)',       4.5, true],
 ];
 
 // ── Main loop (runs only when executed directly, not when imported) ──────────
