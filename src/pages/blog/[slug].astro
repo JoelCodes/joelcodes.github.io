@@ -61,9 +61,9 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString('en-US', {
 });
 
 // Related posts: up to 2 other posts sharing ≥1 tag (fallback: most-recent others).
-const allPosts = await getCollection('blog', ({ data }) => {
-  return import.meta.env.PROD ? !data.draft : true;
-});
+// Drafts are excluded everywhere — the "Related posts." section (guarded below on
+// relatedPosts.length) is omitted entirely when no other published post exists.
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
 
 const otherPosts = allPosts
   .filter(p => p.id !== post.id)

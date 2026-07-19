@@ -27,9 +27,9 @@ import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
   if (import.meta.env.PROD) return [];  // No blog pages in production (D-13)
-  const allPosts = await getCollection('blog', ({ data }) => {
-    return import.meta.env.PROD ? !data.draft : true;
-  });
+  // Drafts excluded — tag routes and their listings are built only from published
+  // posts, so a tag that exists solely on a draft generates no (empty) page.
+  const allPosts = await getCollection('blog', ({ data }) => !data.draft);
 
   // Get unique tags from all posts (flatMap deduplicated).
   const uniqueTags = [...new Set(allPosts.flatMap(post => post.data.tags ?? []))];

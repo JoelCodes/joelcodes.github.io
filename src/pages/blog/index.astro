@@ -35,10 +35,10 @@ if (import.meta.env.PROD) {
   return Astro.redirect('/');  // No blog index in production (D-13)
 }
 
-// Get published posts (drafts visible in dev, hidden in prod), sorted newest first.
-const allPosts = await getCollection('blog', ({ data }) => {
-  return import.meta.env.PROD ? !data.draft : true;
-});
+// Listings exclude drafts everywhere (dev + prod) — a draft is unpublished, so it
+// never appears in the featured slot or the grid. The empty-state guards below then
+// omit the "Everything so far." section entirely when only the featured post is live.
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
 
 const sortedPosts = allPosts.sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
