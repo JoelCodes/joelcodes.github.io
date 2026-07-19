@@ -2,30 +2,40 @@
 /**
  * Blog index — Phase 38, Plan 06 (PAGE-06)
  *
+ * Re-baselined 2026-07-19 against canonical Figma page 195:102 / frame 195:103
+ * ("Site · Blog" — 38-BLOG-EXTRACTION.md §1-4, 38-BLOG-FRAMES.md).
+ * The prior draft frame (211:3/211:4 "Blog Index") is deleted from Figma — all values
+ * in this file are sourced from the canonical 195:103 frame.
+ *
  * Dev-gated: redirects to / in production (D-13 — blog is dev-only until Phase 40 IA).
- * Single-column editorial list using wl/BlogCard (Plan 05 foundation).
  *
- * Frame authority: Blog Index / 1440 (211:3) + Blog Index / 390 (211:4).
- * Approved 2026-07-19 (38-BLOG-FRAMES.md, D-08 gate cleared).
+ * Sections (195:103 layout order):
+ *   §1 Hero        — FrequencyWave + sea-glass gradient + Breadcrumb + Eyebrow + h1 + lead
+ *   §2 Featured    — paper bg + Eyebrow "LATEST" + h2 "Start here." + FeaturedPostCard
+ *   §3 Posts       — sea-glass gradient + Eyebrow "ALL POSTS" + h2 + 3-col BlogCard grid
+ *   §4 CTA band    — sea-glass gradient + Eyebrow "GET IN TOUCH" + h2 + sub + CTAButton pair
  *
- * Structure per 211:3:
- *   PageHero: gradient #E6F1F1→#D2E7E7, pt88 pb72, Eyebrow "WRITING", h1 "Blog",
- *              HG 21 lead, 1120 column
- *   Post list: px-160 @1440, 1120 column, ul role="list", 1px color/line dividers,
- *              BlogCard entries (title + date/tags meta + description — no thumbnails)
- *
- * Zero JS. Zero old neobrutalist tokens.
+ * Content: featured = posts[0] (latest); grid = posts.slice(1).
+ * Read time computed via src/lib/reading-time.ts (ceil(words/200)).
+ * Zero old neobrutalist tokens.
  */
+
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BlogCard from '../../components/wl/BlogCard.astro';
+import FeaturedPostCard from '../../components/wl/FeaturedPostCard.astro';
+import Breadcrumb from '../../components/wl/Breadcrumb.astro';
 import Eyebrow from '../../components/wl/Eyebrow.astro';
+import CTAButton from '../../components/wl/CTAButton.astro';
+import FrequencyWave from '../../components/wl/FrequencyWave.astro';
 import { getCollection } from 'astro:content';
+import { BOOKING_URL, CONTACT_EMAIL } from '../../lib/constants';
+import { readingMinutes } from '../../lib/reading-time';
 
 if (import.meta.env.PROD) {
   return Astro.redirect('/');  // No blog index in production (D-13)
 }
 
-// Get published posts, sorted newest first
+// Get published posts (drafts visible in dev, hidden in prod), sorted newest first.
 const allPosts = await getCollection('blog', ({ data }) => {
   return import.meta.env.PROD ? !data.draft : true;
 });
@@ -33,113 +43,266 @@ const allPosts = await getCollection('blog', ({ data }) => {
 const sortedPosts = allPosts.sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+
+// Content mapping (38-BLOG-FRAMES.md): featured = latest post; grid = remaining posts.
+const featured = sortedPosts[0];
+const gridPosts = sortedPosts.slice(1);
+
+// Compute read time for the featured post (body word count).
+const featuredReadMinutes = featured ? readingMinutes(featured.body ?? '') : 1;
 ---
 
 <BaseLayout
   title="Blog | Joel Shinness"
-  description="Thoughts on web development, automation, and AI for small businesses. Practical insights to help you work smarter."
+  description="Short, practical posts for people running a business, not a dev team. What things cost, when a spreadsheet has done its job, where AI actually pays off."
 >
 
-  {/* ── PageHero (Blog Index, 211:3) ─────────────────────────────────────────
-      Background (light): linear-gradient(to bottom, #E6F1F1, #D2E7E7) — source 211:3 fill.
-      Background (dark, derived D-04): linear-gradient(to bottom, #123640, #0C2228).
-      Padding: pt-88px pb-72px — 38-BLOG-FRAMES.md "pt88/pb72/px160, sea-glass gradient".
-      Gutters: 24/32/160/400px matching showcase/landing values.
+  {/* ── §1 Hero (195:105) ────────────────────────────────────────────────────
+      Background (light): linear-gradient(to bottom, #E6F1F1, #D2E7E7) — 195:105 fill.
+      Background (dark, DERIVED D-04): linear-gradient(to bottom, #123640, #0C2228).
+      Rule 1: background in class so dark: override wins over inline.
+      FrequencyWave: 1670×1044 at left:-115 top:-100 — byte-identical geometry to
+        landing hero field (195:106 = 13:21, §10 wave-field treatment).
+      Section height: min-h 500px matching prior metadata (FIDELITY-GAP: design context
+        reports size-full; re-verify in fidelity screenshots).
+      Gutters: 24/32/160/400px landing pattern.
   ── */}
   <section
-    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#E6F1F1,#D2E7E7)] dark:[background:linear-gradient(to_bottom,#123640,#0C2228)]"
-    style="padding-top: 88px; padding-bottom: 72px;"
+    class="relative overflow-hidden flex items-center px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#E6F1F1,#D2E7E7)] dark:[background:linear-gradient(to_bottom,#123640,#0C2228)]"
+    style="min-height: 500px;"
   >
-    <div style="max-width: 1120px; margin: 0 auto;">
+    {/* FrequencyWave: node 195:106 — same geometry as landing hero field 13:21 (§10).
+        Wrapped in a positioned div to avoid passing style= to the component (which only accepts class=).
+        See index.astro L54 for the pre-existing pattern; this approach avoids the TS error. */}
+    <div class="absolute pointer-events-none" style="left: -115px; top: -100px; width: 1670px; height: 1044px;">
+      <FrequencyWave class="w-full h-full" />
+    </div>
 
-      {/* Eyebrow: "WRITING" — source node 212:21, 38-BLOG-FRAMES.md approved copy */}
-      <Eyebrow>WRITING</Eyebrow>
+    {/* Hero content: above wave layer */}
+    <div class="relative z-10 w-full" style="max-width: 1120px; margin: 0 auto; padding-top: 72px; padding-bottom: 72px;">
 
-      {/* gap eyebrow → h1: 21px — matching showcase 27:24 spacer (same PageHero pattern) */}
-      <div style="height: 21px;"></div>
+      {/* Breadcrumb: "Home / Blog" — 2 levels, source node 195:112 */}
+      <Breadcrumb
+        items={[
+          { label: 'Home', href: '/' },
+          { label: 'Blog' },
+        ]}
+      />
 
-      {/* h1: "Blog" — source 38-BLOG-FRAMES.md "verbatim from src/pages/blog/index.astro title".
-          Frame 211:3 specifies Fraunces 64px — RAMP MISMATCH (wl-heading-h1-interior = 61px).
-          Built as local style per Phase 36/38 precedent. Flagged for gate. */}
+      {/* gap breadcrumb → eyebrow: 20px (195:113 spacer) */}
+      <div style="height: 20px;" aria-hidden="true"></div>
+
+      {/* Eyebrow: "PLAIN ANSWERS, WRITTEN DOWN" — source node 195:114 (VERBATIM) */}
+      <Eyebrow>PLAIN ANSWERS, WRITTEN DOWN</Eyebrow>
+
+      {/* gap eyebrow → h1: 21px (195:115 spacer) */}
+      <div style="height: 21px;" aria-hidden="true"></div>
+
+      {/* h1: "Notes on web, automations, and AI — minus the jargon" — source node 195:116.
+          Style: Fraunces Regular 61px / 1.06 → .wl-heading-h1-interior MATCH (§11 ramp audit).
+          Width 980 → max-width guard applied. */}
       <h1
-        style={[
-          'font-family: var(--font-wl-heading);',
-          'font-size: 64px;',
-          'font-weight: 400;',
-          'line-height: 1.06;',
-          'font-style: normal;',
-          'font-variation-settings: "SOFT" 0, "WONK" 1;',
-          'color: var(--color-wl-ink);',
-          'margin: 0;',
-        ].join(' ')}
+        class="wl-heading-h1-interior"
+        style="color: var(--color-wl-ink); margin: 0; max-width: 980px;"
       >
-        Blog
+        Notes on web, automations, and AI — minus the jargon
       </h1>
 
-      {/* gap h1 → lead: 18px — matching showcase 27:26 spacer */}
-      <div style="height: 18px;"></div>
+      {/* gap h1 → lead: 26px (195:117 spacer) */}
+      <div style="height: 26px;" aria-hidden="true"></div>
 
-      {/* Lead: source 38-BLOG-FRAMES.md "HG 21 lead".
-          Copy per 38-BLOG-FRAMES.md: "verbatim from src/pages/blog/index.astro (title/description)". */}
+      {/* Lead: VERBATIM from source node 195:118.
+          Style: HG Regular 21px / 1.6, sub, width 700 → .wl-text-lead EXACT MATCH (§11). */}
       <p
         class="wl-text-lead"
         style="color: var(--color-wl-sub); margin: 0; max-width: 700px;"
       >
-        Thoughts on web development, automation, and AI for small businesses. Practical insights to help you work smarter.
+        Short, practical posts for people running a business, not a dev team: what things cost, when a spreadsheet has done its job, where AI actually pays off. The same straight answers you'd get on a call, free to read.
       </p>
     </div>
   </section>
 
-  {/* ── Editorial post list ──────────────────────────────────────────────────
-      Background: var(--color-wl-paper) — matches Blog Index / 1440 frame body.
-      Padding: py-112px — standard landing section spacing.
-      Column: 1120px max-width, centered.
-      Entry dividers: 1px var(--color-wl-line) hairlines between posts (38-BLOG-FRAMES.md
-        "1px color/line hairline dividers").
+  {/* ── §2 Featured (197:58) ─────────────────────────────────────────────────
+      Background (light): #F6FBFA = var(--color-wl-paper) — 197:58 fill.
+      Background (dark, DERIVED): #0C2228 — paper token flip.
+      Padding: py 96, px 160; section gap 42 (header → card) — source 197:58.
+      Header: gap 21, Eyebrow "LATEST" → h2 "Start here." (197:59/197:63).
   ── */}
-  <main
-    style="background: var(--color-wl-paper); padding-top: 112px; padding-bottom: 112px;"
-    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px]"
+  {featured && (
+    <section
+      style="background: var(--color-wl-paper); padding-top: 96px; padding-bottom: 96px;"
+      class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px]"
+    >
+      <div style="max-width: 1120px; margin: 0 auto;">
+
+        {/* Section header: Eyebrow + h2 (197:59, column gap 21) */}
+        <div style="display: flex; flex-direction: column; gap: 21px; margin-bottom: 42px;">
+          {/* Eyebrow: "LATEST" — source node 197:60 (VERBATIM) */}
+          <Eyebrow>LATEST</Eyebrow>
+
+          {/* h2: "Start here." — source node 197:63 (VERBATIM).
+              Style: Fraunces 50px / 1.06 → .wl-heading-h2 MATCH (§11; tracking caveat logged). */}
+          <h2 class="wl-heading-h2" style="color: var(--color-wl-ink); margin: 0;">
+            Start here.
+          </h2>
+        </div>
+
+        {/* FeaturedPostCard: compose, don't modify (Plan 05 foundation component). */}
+        <FeaturedPostCard
+          title={featured.data.title}
+          description={featured.data.description}
+          url={`/blog/${featured.id}`}
+          tags={featured.data.tags}
+          pubDate={featured.data.pubDate}
+          readMinutes={featuredReadMinutes}
+        />
+      </div>
+    </section>
+  )}
+
+  {/* ── §3 Posts (198:61) ────────────────────────────────────────────────────
+      Background (light): linear-gradient(to bottom, #EFF7F6, #E6F1F1) — 198:61 fill.
+      Background (dark, DERIVED D-04): linear-gradient(to bottom, #10303A, #0E2B33)
+        (landing #services pair, index.astro L210 precedent).
+      Rule 1: background in class.
+      Padding: py 96, px 160; gap 42 (header → grid) — source 198:61/198:62.
+      Grid: 3-col, 22px gap both axes (198:67 measured). BlogCard variant="grid".
+      Responsive: 1-col mobile / 2-col tablet / 3-col desktop.
+      Only rendered when there are grid posts (clean empty-state behavior).
+  ── */}
+  {gridPosts.length > 0 && (
+    <section
+      class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#EFF7F6,#E6F1F1)] dark:[background:linear-gradient(to_bottom,#10303A,#0E2B33)]"
+      style="padding-top: 96px; padding-bottom: 96px;"
+    >
+      <div style="max-width: 1120px; margin: 0 auto;">
+
+        {/* Section header: Eyebrow + h2 (198:62, column gap 21) */}
+        <div style="display: flex; flex-direction: column; gap: 21px; margin-bottom: 42px;">
+          {/* Eyebrow: "ALL POSTS" — source node 198:63 (VERBATIM) */}
+          <Eyebrow>ALL POSTS</Eyebrow>
+
+          {/* h2: "Everything so far." — source node 198:66 (VERBATIM).
+              Style: Fraunces 50 / 1.06 → .wl-heading-h2 MATCH (§11). */}
+          <h2 class="wl-heading-h2" style="color: var(--color-wl-ink); margin: 0;">
+            Everything so far.
+          </h2>
+        </div>
+
+        {/* 3-col grid: 22px gap (198:67 measured; card width ≈ 358.7px flex-1).
+            Responsive: 1-col @mobile, 2-col @tablet, 3-col @desktop. */}
+        <ul
+          role="list"
+          class="blog-grid"
+          style="list-style: none; margin: 0; padding: 0;"
+        >
+          {gridPosts.map((post) => (
+            <li class="blog-grid-item">
+              <BlogCard
+                variant="grid"
+                title={post.data.title}
+                description={post.data.description}
+                url={`/blog/${post.id}`}
+                tags={post.data.tags}
+                pubDate={post.data.pubDate}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  {/* ── §4 CTA band (195:197) ────────────────────────────────────────────────
+      Background (light): linear-gradient(to bottom, #E6F1F1, #D2E7E7) — 195:197 fill.
+      Background (dark, DERIVED): linear-gradient(to bottom, #123640, #0C2228)
+        (same pair as hero — source 195:197 = hero pair per §4 table).
+      Rule 1: background in class.
+      Padding: py 112 (CTA landing padding, NOT the 96 of content sections) — 195:197.
+      Layout: column flex, items-center, text-center — source 195:197.
+      Copy: VERBATIM from 38-BLOG-EXTRACTION §4 / §9 copy inventory.
+  ── */}
+  <section
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#E6F1F1,#D2E7E7)] dark:[background:linear-gradient(to_bottom,#123640,#0C2228)]"
+    style="padding-top: 112px; padding-bottom: 112px;"
   >
-    <div style="max-width: 1120px; margin: 0 auto;">
-      <ul role="list" class="blog-index-list" style="list-style: none; margin: 0; padding: 0;">
-        {sortedPosts.map((post) => (
-          <li class="blog-index-item">
-            <BlogCard
-              title={post.data.title}
-              slug={post.id}
-              pubDate={post.data.pubDate}
-              description={post.data.description}
-              featuredImage={post.data.featuredImage}
-              tags={post.data.tags}
-            />
-          </li>
-        ))}
-      </ul>
+    <div
+      style="max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center;"
+    >
+      {/* Eyebrow: "GET IN TOUCH" — source node 195:198 (VERBATIM) */}
+      <Eyebrow>GET IN TOUCH</Eyebrow>
+
+      {/* gap eyebrow → h2: 21px (195:199 spacer) */}
+      <div style="height: 21px;" aria-hidden="true"></div>
+
+      {/* h2: "Prefer answers to articles?" — source node 195:200 (VERBATIM).
+          Style: Fraunces 50 / 1.06 / ink, centered, width 760 → .wl-heading-h2 MATCH.
+          Note: source node 195:200 carries NO tracking attr — tracking delta logged §11. */}
+      <h2 class="wl-heading-h2" style="color: var(--color-wl-ink); margin: 0;">
+        Prefer answers to articles?
+      </h2>
+
+      {/* gap h2 → sub: 18px (195:201 spacer) */}
+      <div style="height: 18px;" aria-hidden="true"></div>
+
+      {/* Sub: VERBATIM from source node 195:202.
+          Style: HG Regular 21px / 1.6, sub, centered, width 660 → .wl-text-lead MATCH. */}
+      <p
+        class="wl-text-lead"
+        style="color: var(--color-wl-sub); margin: 0; max-width: 660px;"
+      >
+        Bring the question these posts almost answered. If there's a solution that saves you time or money, I'll tell you what it'd take — and if there isn't, I'll tell you that too.
+      </p>
+
+      {/* gap sub → btns: 35px (195:203 spacer) */}
+      <div style="height: 35px;" aria-hidden="true"></div>
+
+      {/* Button pair: gap 16 (195:204).
+          Solid "Book a call" (calendar icon, BOOKING_URL) — source I195:205;39:14.
+          Ghost "Email me" (mail icon, mailto) — source I195:206;39:21. */}
+      <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: center;">
+        <CTAButton
+          href={BOOKING_URL}
+          variant="solid"
+          icon="calendar"
+          target="_blank"
+          rel="noopener"
+        >
+          Book a call
+        </CTAButton>
+        <CTAButton href={`mailto:${CONTACT_EMAIL}`} variant="ghost" icon="mail">
+          Email me
+        </CTAButton>
+      </div>
     </div>
-  </main>
+  </section>
 
 </BaseLayout>
 
 <style>
-  /* Entry hairline dividers between posts — 1px color/line (38-BLOG-FRAMES.md).
-     Divider appears BELOW each item except the last. */
-  .blog-index-item + .blog-index-item {
-    border-top: 1px solid var(--color-wl-line);
+  /* ── 3-column post grid — 22px gap (198:67 measured) ───────────────────────
+     Responsive: 1-col mobile → 2-col tablet → 3-col desktop.
+     BlogCard sets height:100% so equal-height cards work via the grid track. */
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px; /* source 198:67 — column gap 22px, row gap 22px (both axes measured) */
   }
 
-  /* Vertical padding around each entry (frame 211:3 entry spacing).
-     32px above + below each card for visual rhythm — 8-point family. */
-  .blog-index-item {
-    padding-top: 32px;
-    padding-bottom: 32px;
+  @media (max-width: 768px) {
+    .blog-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
-  .blog-index-item:first-child {
-    padding-top: 0;
+  @media (max-width: 500px) {
+    .blog-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
-  .blog-index-item:last-child {
-    padding-bottom: 0;
+  .blog-grid-item {
+    /* Remove list-item default spacing; BlogCard fills the grid track. */
+    min-width: 0;
   }
 </style>
