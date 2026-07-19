@@ -1,16 +1,38 @@
-# Phase 38 — Blog Frame Drafts (D-05–D-08)
+# Phase 38 — Blog Frame Record (D-05–D-08)
 
-> Drafted 2026-07-18 by Claude via claude.ai Figma MCP (`use_figma`), per plan 38-02.
-> File key: `1tg8wIPcvOVC5tPZ8pkGO2` ("Joel Shinness Solutions — Brand Exploration").
-> All four frames live on the NEW page **"Blog"** (page node `211:2`). LIGHT-ONLY per the
-> UI-SPEC discretion call — dark is derived at build via the D-04 landing recipe.
+> **RE-BASELINED 2026-07-19.** The 2026-07-18 draft approval was based on a misunderstanding:
+> Joel's intended blog designs were the pre-existing pages **"Site · Blog" (195:102)** and
+> **"Site · Blog Post" (195:210)** already in the file — not new drafts. The drafted "Blog"
+> page (211:2) is superseded and deleted from the Figma file.
+> File key: `1tg8wIPcvOVC5tPZ8pkGO2`.
 
-**Approval status: APPROVED** — Joel, 2026-07-19. Approved as drafted, no edits.
-Canonical build references: `Blog Index / 1440` (`211:3`), `Blog Index / 390` (`211:4`),
-`Blog Post / 1440` (`211:5`), `Blog Post / 390` (`211:6`). COPY GAP resolved: **"WRITING"**
-eyebrow label confirmed. Blog build work (Plans 05–06) is unlocked (D-08 gate cleared).
+**Approval status: APPROVED (re-baselined)** — Joel, 2026-07-19.
 
-## Frames
+## Canonical build references (FINAL)
+
+| Frame | Node ID | Width | Notes |
+|---|---|---|---|
+| `Blog / Desktop · 1440` | `195:103` | 1440 | Index: wave-field hero + Breadcrumb + Eyebrow + h1 "Notes on web, automations, and AI — minus the jargon" + lead; "Start here." Featured section (feature-card: Tag/date/read-time meta, title, description, "Read the post →", wave art); "Everything so far." 3-column post-card grid; "Prefer answers to articles?" CTA band; footer |
+| `Blog Post / Desktop · 1440` | `195:211` | 1440 | Post: wave-field hero (Breadcrumb, Tag/date/read-time meta, h1, lead); 735px prose (h2s, ul, "THE SHORT VERSION" callout, attributed blockquote, comparison table, code block, wave figure + caption, hr); author card (glyph, name, bio, Book-a-call + Email CTAs); "Related posts." 2-up mini-cards; footer |
+
+Desktop-only frames — 390/768/1920 behavior is DERIVED from these. Dark is derived via the D-04 landing recipe.
+
+## Content mapping (Joel, 2026-07-19)
+
+- **Featured ("Start here.") = latest real post; grid ("Everything so far.") = remaining posts.** The frame's ~7 sample posts are placeholder content — real MDX posts flow into the design.
+- Frame chrome copy ships VERBATIM: hero h1 + lead, "Start here.", "Everything so far.", CTA band copy, author-card bio, "Related posts."
+- Read time computed from post word count.
+- **Featured images DROP from the post layout** (frame has no top image; title sits in the hero). `featuredImage` stays in the schema for OG/social meta only. The LCP element becomes the hero text/band — roadmap criterion 3's lazy-image bug is moot in the new layout (no featured `<img>` renders on posts).
+
+## Superseded draft (deleted from Figma)
+
+The 2026-07-18 drafted frames `Blog Index / 1440` (211:3), `Blog Index / 390` (211:4),
+`Blog Post / 1440` (211:5), `Blog Post / 390` (211:6) on page "Blog" (211:2) are obsolete.
+Joel opted to delete the page from the file. Their PNG snapshots remain in `fidelity/` for the audit trail.
+
+## Superseded draft details (audit trail)
+
+
 
 | Frame | Node ID | Width | Composition |
 |---|---|---|---|
