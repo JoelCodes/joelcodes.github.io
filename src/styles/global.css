@@ -4,6 +4,10 @@
 @import '@fontsource-variable/fraunces/wght.css';
 @import '@fontsource-variable/fraunces/wght-italic.css';
 @import '@fontsource-variable/hanken-grotesk/wght.css';
+/* Roboto Mono Variable — self-hosted code font (Phase 38 / GDPR constraint: no external CDN).
+   Canonical source: 38-BLOG-EXTRACTION §6.1 (prose code blocks, 14.5px/1.55) and §12 (inline
+   code 15px). Replaces the bare "JetBrains Mono" fallback-only reference from deleted 211:5. */
+@import '@fontsource-variable/roboto-mono/wght.css';
 
 /* ============================================================
    WL TOKENS (v3.0 Wavelength — namespace isolated via --wl- prefix)
@@ -39,6 +43,10 @@
      CLS mitigation is a no-op (CR-01). */
   --font-wl-heading: 'Fraunces Variable', 'Fraunces Variable fallback', Georgia, serif;
   --font-wl-body:    'Hanken Grotesk Variable', 'Hanken Grotesk Variable fallback', ui-sans-serif, system-ui, sans-serif;
+  /* Roboto Mono Variable — canonical prose code font (38-BLOG-EXTRACTION §6.1, §12).
+     Self-hosted via @fontsource-variable/roboto-mono (GDPR constraint, same pattern as brand fonts).
+     Fallbacks: ui-monospace (system mono on modern macOS/iOS), monospace (universal fallback). */
+  --font-wl-mono:    'Roboto Mono Variable', 'Roboto Mono', ui-monospace, monospace;
 }
 
 /* Dark mode semantic flip — plain .dark block (NOT @theme) so runtime class toggle works (D-01) */
