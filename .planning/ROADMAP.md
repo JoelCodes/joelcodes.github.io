@@ -275,6 +275,29 @@ Plans:
 4. Existing blog post URLs (`/blog/[slug]`) return HTTP 200 with the correct canonical; no post URL changes; all posts remain in the sitemap.
 5. Figma-frame vs. rendered screenshot comparison for Showcase (`12:3`, closed and expanded card states) approved before phase is marked done.
 
+> **CONTEXT.md amendments (D-01/D-13):** Criterion 2's "removed from main nav / footer link present" is already satisfied by the Phase 34 dev-gate; the blog is dev-gated out of prod entirely, so criterion 4 (prod HTTP 200 / sitemap) is superseded — blog URLs return 200 in **dev** and stay out of prod until relaunch. `/showcase` is likewise dev-gated (D-01).
+
+**Plans:** 6 plans
+
+Plans:
+**Wave 1** (parallel — showcase build + blog frame drafting, no file overlap)
+
+- [ ] 38-01-PLAN.md — Extract frame 12:3 + build dev-gated /showcase (page, projects.json, nav gate, sitemap) [PAGE-02]
+- [ ] 38-02-PLAN.md — Draft blog Figma frames (index+post @1440/390, light-only) via use_figma [PAGE-06]
+
+**Wave 2** (parallel — showcase verify + blog frame approval)
+
+- [ ] 38-03-PLAN.md — Showcase axe + contrast + fidelity gate (frame 12:3) [checkpoint] [PAGE-02]
+- [ ] 38-04-PLAN.md — HARD CHECKPOINT: Joel approves blog frames (gates all blog build) [checkpoint] [PAGE-06]
+
+**Wave 3** (blog build foundations — depends on frame approval)
+
+- [ ] 38-05-PLAN.md — .wl-prose scope + expressive-code retheme + wl/BlogCard component [PAGE-06]
+
+**Wave 4** (blog page restyles + gate)
+
+- [ ] 38-06-PLAN.md — Restyle blog index/post/tag + LCP fix + axe/contrast + blog fidelity gate [checkpoint] [PAGE-06]
+
 ---
 
 #### Phase 39: Utility Pages + Dev-Hidden Pages
