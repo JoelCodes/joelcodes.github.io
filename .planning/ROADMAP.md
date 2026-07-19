@@ -277,7 +277,7 @@ Plans:
 
 > **CONTEXT.md amendments (D-01/D-13):** Criterion 2's "removed from main nav / footer link present" is already satisfied by the Phase 34 dev-gate; the blog is dev-gated out of prod entirely, so criterion 4 (prod HTTP 200 / sitemap) is superseded — blog URLs return 200 in **dev** and stay out of prod until relaunch. `/showcase` is likewise dev-gated (D-01).
 
-**Plans:** 4/6 plans executed
+**Plans:** 5/6 plans executed
 
 Plans:
 **Wave 1** (parallel — showcase build + blog frame drafting, no file overlap)
@@ -292,7 +292,7 @@ Plans:
 
 **Wave 3** (blog build foundations — depends on frame approval)
 
-- [ ] 38-05-PLAN.md — .wl-prose scope + expressive-code retheme + wl/BlogCard component [PAGE-06]
+- [x] 38-05-PLAN.md — .wl-prose scope + expressive-code retheme + wl/BlogCard component [PAGE-06]
 
 **Wave 4** (blog page restyles + gate)
 
@@ -366,7 +366,7 @@ Plans:
 | 35 | v3.0 | 4/4 | Complete    | 2026-07-16 |
 | 36 | v3.0 | 6/6 | Complete    | 2026-07-16 |
 | 37 | v3.0 | 5/5 | Complete    | 2026-07-18 |
-| 38 | v3.0 | 4/6 | In Progress|  |
+| 38 | v3.0 | 5/6 | In Progress|  |
 | 39 | v3.0 | — | Pending | — |
 | 40 | v3.0 | — | Pending | — |
 | 41 | v3.0 | — | Pending | — |

@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v3.0
 milestone_name: Wavelength Rebrand
 status: executing
-stopped_at: Phase 38 Plan 01 complete
-last_updated: "2026-07-19T07:02:00Z"
-last_activity: 2026-07-19 -- Completed 38-01-PLAN.md (showcase page dev-gated)
+stopped_at: Phase 38 Plan 05 complete
+last_updated: "2026-07-19T18:30:35Z"
+last_activity: 2026-07-19 -- Completed 38-05-PLAN.md (blog build foundations: .wl-prose, expressive-code retheme, wl/BlogCard)
 progress:
   total_phases: 9
   completed_phases: 5
   total_plans: 33
-  completed_plans: 28
-  percent: 57
+  completed_plans: 32
+  percent: 97
 ---
 
 # Project State
@@ -26,14 +26,14 @@ See: .planning/PROJECT.md (updated 2026-07-14)
 ## Current Position
 
 Phase: 38 (showcase-page-blog-restyle) — EXECUTING
-Plan: 1 of 6 COMPLETE — Plan 2 next
+Plan: 5 of 6 COMPLETE — Plan 6 next (blog page restyles)
 Status: Executing Phase 38
-Last activity: 2026-07-19 -- Completed 38-01-PLAN.md (/showcase dev-gated page + 6 project cards)
+Last activity: 2026-07-19 -- Completed 38-05-PLAN.md (.wl-prose scope, expressive-code .dark retheme, wl/BlogCard.astro)
 
 ```
-v3.0 Progress: [██████████████████████░                 ] 5/9 phases (57%, 28/33 plans)
-               33 ██ 34 ██ 35 ██ 36 ██ 37 ██ 38░░ 39░░ 40░░ 41░░
-               (38-01 ✓ — showcase page, 5 plans remain in phase 38)
+v3.0 Progress: [██████████████████████████████████████░ ] 5/9 phases (97%, 32/33 plans)
+               33 ██ 34 ██ 35 ██ 36 ██ 37 ██ 38█░ 39░░ 40░░ 41░░
+               (38-01..05 ✓ — blog foundations done, Plan 06 blog page restyles remains)
 ```
 
 ## Phase Index
@@ -114,6 +114,9 @@ See `.planning/MILESTONES.md` for full milestone details.
 - **Phase 38-01 2026-07-19**: Ramp mismatches flagged for gate — h1 64px (no match), section h2 37px (no match), CTA h2 42px (no match). Built as local styles per Phase 36 precedent.
 - **Phase 38-01 2026-07-19**: COPY GAP — "Your Project Here" card third detail section ("Book a call" label I52:650;41:92) has no body text in Figma. `result` field omitted; gate decides link treatment.
 - **Phase 38-01 2026-07-19**: SiteFooter has ungated /showcase link (footer was not in plan scope for 38-01). Carry to Phase 39/40 IA cleanup.
+- **Phase 38-05 2026-07-19**: `.wl-prose` h2 34px/26px@390 and blockquote 22px/19px@390 are LOCAL sizes per approved frames 211:5/211:6 (no ramp match); blockquote left bar is 3px (frame-recorded, supersedes UI-SPEC's 4px placeholder). h3 defaults to ramp 21px, h4 local 18px (no frame authority — flag at gate).
+- **Phase 38-05 2026-07-19**: expressive-code `styleOverrides.frameBackground` does not exist in 0.41.6 — frame chrome must use nested `frames.editorTabBarBackground`/`terminalTitlebarBackground`/`terminalBackground`. Chosen chrome: code bg #E6F1F1/#123640, frame bg #D2E7E7/#0C2228 — all pairs measured AA (10.12:1–12.91:1). Syntax token colors kept from base github themes.
+- **Phase 38-05 2026-07-19**: BlogCard click target = whole-entry link (article > block a, LinkCard/ProjectCard precedent) — approved frame draws no per-element affordance. featuredImage/readingTime props accepted but NOT rendered (frame 211:3 entries = title + date/tags + description only). Entry hairline dividers are page-level (Plan 06), not in BlogCard.
 
 ### Lessons carried forward
 
@@ -140,7 +143,7 @@ None currently.
 
 ## Session Continuity
 
-Last session: 2026-07-19T07:02:00Z
-Stopped at: Phase 38 Plan 01 complete (38-01-PLAN.md)
+Last session: 2026-07-19T18:30:35Z
+Stopped at: Phase 38 Plan 05 complete (38-05-PLAN.md)
 Resume file: None
-Next action: Execute Phase 38 Plan 02 (/gsd:execute-phase 38 --plan 02)
+Next action: Execute Phase 38 Plan 06 (/gsd:execute-phase 38 --plan 06)
