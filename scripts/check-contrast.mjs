@@ -439,6 +439,29 @@ export const PAIRS = [
   // Using uppercase-normalised hex to match the script's hexToRgb (both forms parse identically).
   ['#24292e', '#E6F1F1', 'phase38-blog: ec code text (github-light #24292e) on block bg #E6F1F1 (light)',     4.5, true],
   ['#e1e4e8', '#123640', 'phase38-blog: ec code text (github-dark #e1e4e8) on block bg #123640 (dark)',       4.5, true],
+
+  // ── PHASE 38-06 ADDITIONS (blog page rebuild) ─────────────────────────────
+  // Source: .planning/phases/38-showcase-page-blog-restyle/38-BLOG-EXTRACTION.md §6.2 (pre block)
+  //         and §5 / §2 (hero/feature meta row on gradient band).
+  //
+  // NEW: .wl-prose pre block — always-dark surface (footer-precedent: --wl-footer-bg #0D2A31).
+  //   Text: #CDE6E5 = --wl-footer-text-link (always-light-on-dark, source 199:1061).
+  //   No dark-flip needed: surface is always-dark. Measured 11.52:1 AAA PASS.
+  ['#CDE6E5', '#0D2A31', 'phase38-blog: pre block text #CDE6E5 on always-dark bg #0D2A31 (source 199:1061)', 4.5, true],
+
+  // NEW: Breadcrumb / meta date / meta read-time (--wl-breadcrumb-color) on hero gradient band.
+  //   Light: BREADCRUMB #4C6A70 on hero gradient worst stop #D2E7E7 (sea-glass-deep).
+  //   BREADCRUMB on paper and white are already in matrix; this adds the gradient band surface.
+  //   4.53:1 — passes 4.5:1 AA (barely; noted in contrast log).
+  [BREADCRUMB, L_SEA_GLASS_DEEP, 'phase38-blog: breadcrumb #4C6A70 on hero gradient worst stop #D2E7E7 (light)', 4.5, true],
+
+  // NEW: Dark breadcrumb #A9C9C7 on dark hero gradient worst stop #123640 (dark sea-glass).
+  //   Derived dark pair for the hero band (D-04 recipe: dark gradient = #123640 → #0C2228;
+  //   worst/lightest dark stop is #123640). Measured 7.29:1 PASS.
+  [BREADCRUMB_DARK, D_SEA_GLASS, 'phase38-blog: breadcrumb #A9C9C7 on dark hero gradient worst stop #123640 (dark)', 4.5, true],
+
+  // NOTE: accent-soft separator "·" on hero band is DECORATIVE (aria-hidden="true" in post-meta-sep);
+  //   #5AA9A5 on #E6F1F1 = 2.38:1 — same token pair as existing decorative row above. No new entry.
 ];
 
 // ── Main loop (runs only when executed directly, not when imported) ──────────
