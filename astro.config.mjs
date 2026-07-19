@@ -94,7 +94,49 @@ export default defineConfig({
   },
 
   integrations: [
-    expressiveCode(),
+    expressiveCode({
+      // Step 1: align with class-based .dark toggle (not prefers-color-scheme)
+      // Site uses .dark class on <html> (localStorage toggle, Phase 33/34).
+      // Default config uses prefers-color-scheme — mismatched with site's dark mode.
+      themes: ['github-light', 'github-dark'],
+      themeCssSelector: (theme) => {
+        return theme.name === 'github-dark' ? '.dark' : ':not(.dark)';
+      },
+      useDarkModeMediaQuery: false,
+      // Step 2: brand palette — styleOverrides mapping chrome toward --wl-* family
+      // WCAG AA verified (measured 2026-07-19, WCAG relative-luminance formula):
+      //   Light block bg #E6F1F1 (--wl-sea-glass light) vs github-light fg #24292e = 12.72:1 ✓ AA
+      //   Dark  block bg #123640 (--wl-sea-glass dark)  vs github-dark  fg #e1e4e8 = 10.12:1 ✓ AA
+      //   Light frame bg #D2E7E7 vs #24292e = 11.40:1 ✓ | Dark frame bg #0C2228 vs #e1e4e8 = 12.91:1 ✓
+      // Border toward --wl-line family. Keeping syntax-token colors from the base
+      // github-light/github-dark themes (frame 211:5 specifies chrome only — dark
+      // JetBrains Mono code block on color/ink, radius 12).
+      styleOverrides: {
+        // Code block background: --wl-sea-glass family (light #E6F1F1 / dark #123640)
+        codeBackground: ({ theme }) =>
+          theme.name === 'github-dark' ? '#123640' : '#E6F1F1',
+        // Frame/title-bar backgrounds — slightly deeper than code area
+        // Light: #D2E7E7 (--wl-sea-glass-deep); Dark: #0C2228 (--wl-paper dark)
+        frames: {
+          editorTabBarBackground: ({ theme }) =>
+            theme.name === 'github-dark' ? '#0C2228' : '#D2E7E7',
+          terminalTitlebarBackground: ({ theme }) =>
+            theme.name === 'github-dark' ? '#0C2228' : '#D2E7E7',
+          // Terminal code area matches the editor code area (sea-glass family)
+          terminalBackground: ({ theme }) =>
+            theme.name === 'github-dark' ? '#123640' : '#E6F1F1',
+        },
+        // Border color toward --wl-line
+        // Light: soft teal tint to match color-mix(in oklch,#0E7078 16%,transparent)
+        // Dark: --wl-line dark #5AA9A538 opacity-equivalent
+        borderColor: ({ theme }) =>
+          theme.name === 'github-dark' ? 'rgba(90,169,165,0.22)' : 'rgba(14,112,120,0.16)',
+        // Border radius: 12px from frame 211:5 code block spec
+        borderRadius: '12px',
+        // Keep syntax token colors from base themes (github-light / github-dark defaults)
+        // Only chrome overrides above; no syntax token changes.
+      },
+    }),
     mdx(),
     sitemap({
       filter: (page) => !page.includes('/blog') && !page.includes('/showcase'),
