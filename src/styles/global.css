@@ -654,17 +654,20 @@ section[id] {
    Authored below untouched .prose scope (Phase 41 will delete .prose).
    Token-based: all --wl-* colors flip automatically in .dark via the block at lines ~44-57.
    No .dark .wl-prose overrides needed unless a literal (non-token) value is introduced.
-   Frame authority: Blog Post / 1440 (node 211:5) and Blog Post / 390 (node 211:6),
-   approved 2026-07-19. Heading sizes use local values (no ramp match) per Phase 36 precedent.
+   Frame authority: Blog Post / Desktop 1440 (node 195:210 / frame 195:211).
+   Prior authority (211:5 / 211:6) was from the now-DELETED draft page — see §12 in
+   38-BLOG-EXTRACTION.md for the superseded-vs-canonical diff table.
+   Heading sizes use local values (no ramp match) per Phase 36 precedent.
    ============================================================ */
 
-/* h2: frame 211:5 = 34px (1440), 26px (390). No .wl-heading-* ramp match — local sizes. */
+/* h2: source node 197:1021 — 34px / lh 1.1 / ls −0.51px. No .wl-heading-* ramp match → local.
+   §12 diff: shipped was lh 1.15 / ls −1.5px from deleted 211:5 draft — CORRECTED. */
 .wl-prose h2 {
   font-family: var(--font-wl-heading);
-  font-size: 34px; /* source node 211:5 Blog Post/1440 — Fraunces 34; no ramp match */
+  font-size: 34px; /* source node 197:1021 Blog Post/1440 — Fraunces 34; no ramp match */
   font-weight: 400;
-  line-height: 1.15;
-  letter-spacing: -1.5px;
+  line-height: 1.1;       /* canonical 195:210 — was 1.15 in deleted 211:5 draft */
+  letter-spacing: -0.51px; /* canonical 195:210 — was -1.5px in deleted 211:5 draft */
   font-optical-sizing: auto;
   font-style: normal;
   font-variation-settings: "SOFT" 0, "WONK" 1;
@@ -674,18 +677,21 @@ section[id] {
 }
 
 @media (max-width: 390px) {
+  /* [FIDELITY-GAP] no-frame-spec: no 390 frame in canonical 195:210 — derived from landing
+     interior h1 scaling convention; value kept from prior shipped work, flagged for gate review. */
   .wl-prose h2 {
-    font-size: 26px; /* source node 211:6 Blog Post/390 */
+    font-size: 26px; /* derived — no 390 canonical frame for blog post (FIDELITY-GAP) */
   }
 }
 
-/* h3: no frame spec for h3 — use .wl-heading-h3 ramp value (21px) as default */
+/* h3: [FIDELITY-GAP] no-frame-spec — no h3 in canonical 195:211 article prose.
+   Using .wl-heading-h3 ramp value (21px) as sensible fallback. Flagged for gate. */
 .wl-prose h3 {
   font-family: var(--font-wl-heading);
-  font-size: 21px; /* .wl-heading-h3 ramp value; no explicit h3 in approved frame */
+  font-size: 21px; /* [FIDELITY-GAP] .wl-heading-h3 ramp value; no h3 in canonical 195:211 frame */
   font-weight: 400;
   line-height: 1.2;
-  letter-spacing: -1.5px;
+  letter-spacing: -1.5px; /* ramp convention — no frame spec */
   font-optical-sizing: auto;
   font-style: normal;
   font-variation-settings: "SOFT" 0, "WONK" 1;
@@ -694,10 +700,10 @@ section[id] {
   margin-bottom: 0.75rem;
 }
 
-/* h4: no frame spec — use a conservative local size */
+/* h4: [FIDELITY-GAP] no-frame-spec — no h4 in canonical 195:211 article prose. */
 .wl-prose h4 {
   font-family: var(--font-wl-heading);
-  font-size: 18px; /* local — no h4 in approved frame; conservatively below h3 */
+  font-size: 18px; /* [FIDELITY-GAP] local — no h4 in canonical 195:211 frame */
   font-weight: 400;
   line-height: 1.3;
   letter-spacing: -0.5px;
@@ -709,10 +715,11 @@ section[id] {
   margin-bottom: 0.5rem;
 }
 
-/* p, li: frame 211:5 body = HG 16px/1.6 */
+/* p: source node 197:1018 — HG 17px / 1.6, sub.
+   §12 diff: shipped was 16px from deleted 211:5 draft — CORRECTED to 17px. */
 .wl-prose p {
   font-family: var(--font-wl-body);
-  font-size: 16px;
+  font-size: 17px; /* source node 197:1018 Blog Post/1440 — was 16px in deleted 211:5 draft */
   font-weight: 400;
   line-height: 1.6;
   color: var(--color-wl-sub); /* token flips */
@@ -734,79 +741,257 @@ section[id] {
   outline-offset: 2px;
 }
 
-/* strong: ink at 600 */
+/* strong: source node 197:1025 spans — HG SemiBold, ink */
 .wl-prose strong {
   color: var(--color-wl-ink); /* token flips */
   font-weight: 600;
 }
 
-/* blockquote: frame 211:5 = 3px accent left bar, Fraunces Italic 22px (1440), 19px (390) */
+/* blockquote: source nodes 198:1039–1043.
+   §12 diff: shipped was 22px / sub color / 3px accent bar from deleted 211:5 draft.
+   Canonical: 20px / lh 1.4 / INK color / 3px accent-SOFT bar / + attribution row.
+   Layout: flex row, gap 22px — 3px bar (self-stretch) + content column (gap 10, py 5). */
 .wl-prose blockquote {
-  border-left: 3px solid var(--color-wl-accent); /* 3px per node 211:5; token flips */
-  padding-left: 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 22px; /* 198:1039 row gap */
+  align-items: stretch;
+  margin: 1.5rem 0;
+  padding: 0;
+  border: none; /* no CSS border-left — left bar is a sibling element below */
+  background: none;
+  border-radius: 0;
+}
+
+/* 3px accent-soft bar — source node 198:1040; canonical bar is accent-SOFT (#5AA9A5 / dark #7FC4C0)
+   §12 diff: shipped was plain --color-wl-accent bar from deleted 211:5 draft — CORRECTED. */
+.wl-prose blockquote::before {
+  content: '';
+  display: block;
+  flex-shrink: 0;
+  width: 3px;
+  align-self: stretch;
+  background: var(--color-wl-accent-soft); /* #5AA9A5 light / #7FC4C0 dark — token flips */
+  border-radius: 2px;
+}
+
+/* Content column inside blockquote: py 5, column gap 10 */
+.wl-prose blockquote > * {
+  padding: 5px 0; /* py 5 per node 198:1039 content column */
+}
+
+/* Blockquote body (first child / p or direct text): Fraunces Italic 20px / 1.4 / ink.
+   §12 diff: was 22px / sub color. Canonical 198:1042 = 20px / 1.4 / ink / SOFT 0 WONK 1. */
+.wl-prose blockquote p,
+.wl-prose blockquote > p {
   font-family: var(--font-wl-heading);
-  font-size: 22px; /* source node 211:5 Blog Post/1440 — Fraunces Italic 22; no ramp match */
+  font-size: 20px; /* source node 198:1042 — was 22px in deleted 211:5 draft */
   font-weight: 400;
   font-style: italic;
   font-optical-sizing: auto;
   font-variation-settings: "SOFT" 0, "WONK" 1;
-  color: var(--color-wl-sub); /* token flips */
-  margin: 1.5rem 0;
+  line-height: 1.4; /* canonical 198:1042 — was implicit lh in old draft */
+  color: var(--color-wl-ink); /* INK — was sub color in deleted 211:5 draft */
+  margin: 0;
 }
 
-@media (max-width: 390px) {
-  .wl-prose blockquote {
-    font-size: 19px; /* source node 211:6 Blog Post/390 */
-  }
-}
-
-/* ul, ol, li */
-.wl-prose ul,
-.wl-prose ol {
-  margin-bottom: 1rem;
-  padding-left: 1.5rem;
-  color: var(--color-wl-sub); /* token flips */
-}
-
-.wl-prose ul { list-style-type: disc; }
-.wl-prose ol { list-style-type: decimal; }
-
-.wl-prose li {
+/* Attribution line: source node 198:1043 — HG Regular 14px, #4C6A70 (dark #A9C9C7 DERIVED via
+   --wl-breadcrumb-color token flip). Written as "— A client, after week one".
+   Targeting last-child (cite, footer, or p) within the content column. */
+.wl-prose blockquote footer,
+.wl-prose blockquote cite {
   font-family: var(--font-wl-body);
-  font-size: 16px;
+  font-size: 14px; /* source node 198:1043 */
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.5;
+  color: var(--wl-breadcrumb-color); /* #4C6A70 light / #A9C9C7 dark — token flip (breadcrumb precedent) */
+  display: block;
+  margin: 0;
+}
+
+/* ul: source node 197:1022 — custom bullet in accent, column gap 9px, li flex row gap 8.
+   §12 diff: shipped used list-style-type: disc (browser default) — replaced with
+   custom bullet via pseudo-element for accent color. */
+.wl-prose ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 9px; /* source node 197:1022 column gap */
+}
+
+/* [FIDELITY-GAP] no-frame-spec: no <ol> in canonical 195:211 prose.
+   Keeping sensible fallback from prior work. */
+.wl-prose ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--color-wl-sub);
+}
+
+/* li: flex row, gap 8px — bullet (•) in accent + body text 17/1.6 sub.
+   Source nodes 197:1022–1037: li = flex row gap 8, bullet • accent, text body sub. */
+.wl-prose ul li {
+  font-family: var(--font-wl-body);
+  font-size: 17px; /* matches corrected p size — source 197:1022 */
+  line-height: 1.6;
+  color: var(--color-wl-sub); /* token flips */
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 8px; /* source node 197:1022 li flex gap */
+  margin: 0;
+}
+
+/* Bullet: • in accent color (source: per-li bullet is accent stroke in frame 197:1022) */
+.wl-prose ul li::before {
+  content: '•';
+  color: var(--color-wl-accent); /* token flips */
+  flex-shrink: 0;
+  font-size: 1em;
+  line-height: 1.6;
+  margin-top: 0;
+}
+
+.wl-prose ol li {
+  font-family: var(--font-wl-body);
+  font-size: 17px; /* [FIDELITY-GAP] no-frame-spec — matches corrected p size */
   line-height: 1.6;
   margin-bottom: 0.5rem;
 }
 
-/* Inline code: sea-glass tint background (token flips: #E6F1F1 light / #123640 dark) */
-/* frame 211:5: code block on color/ink with JetBrains Mono; inline treatment uses sea-glass */
+/* Inline code: source node 199:1063 — Roboto Mono 15px / ink / NO bg tint.
+   §12 diff: shipped was JetBrains Mono + sea-glass bg from deleted 211:5 draft.
+   Canonical 199:1063 span has no bg tint; ink color (dark: ink-flip DERIVED). */
 .wl-prose code:not(pre code) {
-  background-color: var(--color-wl-sea-glass); /* token flips */
-  padding: 0.125rem 0.375rem;
-  border-radius: 4px;
-  font-size: 0.875em;
-  font-family: 'JetBrains Mono', 'Courier New', monospace; /* frame 211:5 — JetBrains Mono */
+  font-family: var(--font-wl-mono); /* Roboto Mono Variable — was JetBrains Mono */
+  font-size: 15px; /* source node 199:1063 */
+  font-weight: 400;
+  color: var(--color-wl-ink); /* INK — no bg tint per canonical 199:1063 frame span */
+  /* §12: no background, no padding, no border-radius on inline spans in canonical frame */
 }
 
-/* pre: margin + radius. frame 211:5 code block radius = 12px */
+/* pre: source node 199:1061 — ALWAYS-DARK surface (footer-precedent: bg = --wl-footer-bg).
+   §12 diff: shipped was radius 12 + no bg spec from deleted 211:5 draft — CORRECTED.
+   No .dark flip needed: this surface is always-dark (matched to footer pattern). */
 .wl-prose pre {
   margin: 1.5rem 0;
-  border-radius: 12px; /* source node 211:5 Blog Post — code block radius 12 */
+  border-radius: 14px; /* source node 199:1061 — was 12px in deleted 211:5 draft */
+  background: var(--wl-footer-bg); /* #0D2A31 always-dark surface — no dark flip (footer-precedent) */
+  color: var(--wl-footer-text-link); /* #CDE6E5 — always-light-on-dark (footer-precedent) */
+  padding: 21px 24px; /* source node 199:1061 py21 px24 */
+  font-family: var(--font-wl-mono); /* Roboto Mono Variable */
+  font-size: 14.5px; /* source node 199:1062 */
+  line-height: 1.55; /* source node 199:1062 */
+  overflow-x: auto;
 }
 
-/* img: frame 211:5 featured image radius 18 (large slot); prose body images default 8px */
+/* pre code: reset inline-code overrides — font/color already set on pre */
+.wl-prose pre code {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  background: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+/* img: frame shows figure component (radius 16 on figure wrapper — see figcaption below);
+   bare <img> in prose defaults to full-width, small radius. */
 .wl-prose img {
   width: 100%;
-  border-radius: 8px; /* UI-SPEC default "radius 8px" — featured image at 18px handled separately */
+  border-radius: 8px;
   display: block;
   margin: 1.5rem 0;
 }
 
-/* hr: hairline line token */
+/* figure: source node 200:1005 — column gap 11, centered; figure wrapper = full-width × 245px,
+   radius 16, border 1px --wl-line, sea-glass gradient bg.
+   Applied via .wl-prose figure (MDX emits <figure> for remark-image syntax). */
+.wl-prose figure {
+  display: flex;
+  flex-direction: column;
+  gap: 11px; /* source node 200:1005 column gap */
+  align-items: center;
+  margin: 1.5rem 0;
+}
+
+.wl-prose figure > :first-child:not(figcaption) {
+  width: 100%;
+  border-radius: 16px; /* source node 200:1006 */
+  border: 1px solid var(--color-wl-line); /* token flips */
+  background: linear-gradient(to bottom, #E6F1F1, #D2E7E7); /* source node 200:1005; dark: DERIVED */
+  overflow: hidden;
+}
+
+/* figcaption: source node 200:1011 — HG 14px, #4C6A70 (dark #A9C9C7 DERIVED), centered */
+.wl-prose figcaption {
+  font-family: var(--font-wl-body);
+  font-size: 14px; /* source node 200:1011 */
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--wl-breadcrumb-color); /* #4C6A70 / #A9C9C7 dark — breadcrumb-token precedent */
+  text-align: center;
+}
+
+/* table: source node 199:1029 — full-width (735 context), 3-col × 245px; no outer border/header fill.
+   thead border-bottom: 2px rgba(14,112,120,0.3) (accent @30%, stronger than --wl-line).
+   Dark thead border: [FIDELITY-GAP] no recipe entry — derived-decision: #5AA9A54D
+   (accent-soft @30%) applied in .dark override below.
+   Body rows: 1px --wl-line border-bottom (token flips). */
+.wl-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-family: var(--font-wl-body);
+}
+
+.wl-prose table th {
+  font-size: 15.5px; /* source node 199:1032 */
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--color-wl-ink); /* token flips */
+  padding: 10px 13px 9px; /* source node 199:1030 — pt 10 / px 13 / pb 9 */
+  text-align: left;
+  border-bottom: 2px solid rgba(14, 112, 120, 0.3); /* source node 199:1030 thead border (accent @30%) */
+  background: transparent; /* no header fill per canonical 199:1029 */
+}
+
+/* [FIDELITY-GAP] no dark-recipe for thead border: derived-decision #5AA9A54D (accent-soft @30%).
+   Not frame-verified — flagged for fidelity gate review. */
+.dark .wl-prose table th {
+  border-bottom-color: #5AA9A54D; /* DERIVED: accent-soft @30% — FIDELITY-GAP, no dark frame */
+}
+
+.wl-prose table td {
+  font-size: 15.5px; /* source node 199:1039 */
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-wl-sub); /* token flips */
+  padding: 10px 13px 9px; /* source node 199:1039 cell padding */
+  border-bottom: 1px solid var(--color-wl-line); /* token flips */
+}
+
+/* hr: source node 200:1012 — 1px × 441px centered, py-14 wrapper spacing.
+   §12 diff: shipped was full-width from deleted 211:5 draft — CORRECTED to 441px centered. */
 .wl-prose hr {
   border: none;
-  border-top: 1px solid var(--color-wl-line); /* token flips */
-  margin: 2rem 0;
+  display: flex;
+  justify-content: center;
+  padding: 14px 0; /* source node 200:1012 py-14 wrapper */
+  margin: 0;
+}
+
+.wl-prose hr::after {
+  content: '';
+  display: block;
+  width: 441px; /* source node 200:1013 — NOT full-width (was full-width in deleted 211:5 draft) */
+  max-width: 100%;
+  height: 1px;
+  background: var(--color-wl-line); /* token flips */
 }
 
 /* ============================================================
