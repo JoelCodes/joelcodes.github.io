@@ -5,10 +5,10 @@
 > All four frames live on the NEW page **"Blog"** (page node `211:2`). LIGHT-ONLY per the
 > UI-SPEC discretion call — dark is derived at build via the D-04 landing recipe.
 
-**Approval status: PENDING JOEL**
-
-These frames become the canonical build references for `/blog` and `/blog/[slug]`
-**only after Joel approves them** (hard checkpoint D-08 — no blog build work before approval).
+**Approval status: APPROVED** — Joel, 2026-07-19. Approved as drafted, no edits.
+Canonical build references: `Blog Index / 1440` (`211:3`), `Blog Index / 390` (`211:4`),
+`Blog Post / 1440` (`211:5`), `Blog Post / 390` (`211:6`). COPY GAP resolved: **"WRITING"**
+eyebrow label confirmed. Blog build work (Plans 05–06) is unlocked (D-08 gate cleared).
 
 ## Frames
 
