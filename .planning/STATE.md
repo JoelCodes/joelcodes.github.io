@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v3.0
 milestone_name: Wavelength Rebrand
 status: executing
-stopped_at: Phase 38 UI-SPEC approved
-last_updated: "2026-07-19T06:17:16.163Z"
-last_activity: 2026-07-19 -- Phase 38 planning complete
+stopped_at: Phase 38 Plan 01 complete
+last_updated: "2026-07-19T07:02:00Z"
+last_activity: 2026-07-19 -- Completed 38-01-PLAN.md (showcase page dev-gated)
 progress:
   total_phases: 9
   completed_phases: 5
   total_plans: 33
-  completed_plans: 27
-  percent: 56
+  completed_plans: 28
+  percent: 57
 ---
 
 # Project State
@@ -21,18 +21,19 @@ progress:
 See: .planning/PROJECT.md (updated 2026-07-14)
 
 **Core value:** Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
-**Current focus:** Phase 38 — Showcase Page + Blog Restyle
+**Current focus:** Phase 38 — showcase-page-blog-restyle
 
 ## Current Position
 
-Phase: 38
-Plan: Not started
-Status: Ready to execute
-Last activity: 2026-07-19 -- Phase 38 planning complete
+Phase: 38 (showcase-page-blog-restyle) — EXECUTING
+Plan: 1 of 6 COMPLETE — Plan 2 next
+Status: Executing Phase 38
+Last activity: 2026-07-19 -- Completed 38-01-PLAN.md (/showcase dev-gated page + 6 project cards)
 
 ```
-v3.0 Progress: [██████████████████████░                 ] 5/9 phases (56%)
+v3.0 Progress: [██████████████████████░                 ] 5/9 phases (57%, 28/33 plans)
                33 ██ 34 ██ 35 ██ 36 ██ 37 ██ 38░░ 39░░ 40░░ 41░░
+               (38-01 ✓ — showcase page, 5 plans remain in phase 38)
 ```
 
 ## Phase Index
@@ -108,6 +109,11 @@ See `.planning/MILESTONES.md` for full milestone details.
 - **Phase 36-05 2026-07-16**: FAQItem question: local Fraunces Regular 18px ink (no .wl-* class match). ::details-content animation reused from global.css (36-04) — not duplicated in component. Scoped CSS overrides global 180° rotation to 45° for the + glyph.
 - **Phase 36-06 fidelity gate 2026-07-16**: Joel approved rendered ProjectCard (closed + expanded), FAQItem group, FrequencyWave on paper + sea-glass vs Figma 36:5 at 1440px, light + dark. No fidelity gaps to address. Screenshots stored at .planning/phases/36-content-components-expandable-cards/fidelity/.
 - **Phase 36-06 2026-07-16**: Isolation page + axe spec treated as true temporary scaffolding — deleted in final cleanup commit after all gates passed. Fidelity screenshots are permanent gate artifacts (not deleted). Build proven clean: grep -r 'content-components' dist/ returns zero.
+- **Phase 38-01 2026-07-19**: Frame 12:3 has 6 DISTINCT project cards (not duplicates) — 4 client-work (Chat Safety Pipeline, Design Systems, Service Apps for Large Teams, Your Project Here) + 2 craft-experiments (Code That Carves, Interactive Sketches). projects.json rebuilt with verbatim per-card copy.
+- **Phase 38-01 2026-07-19**: Per-card detail label system — extraction confirmed 3 distinct label sets (The problem/built/result; The idea/How it works/Why I made it; A few ideas/How it starts/Book a call). Added optional problemLabel/builtLabel/resultLabel props to ProjectCard (defaults to original strings) and matching Zod fields in content.config.ts.
+- **Phase 38-01 2026-07-19**: Ramp mismatches flagged for gate — h1 64px (no match), section h2 37px (no match), CTA h2 42px (no match). Built as local styles per Phase 36 precedent.
+- **Phase 38-01 2026-07-19**: COPY GAP — "Your Project Here" card third detail section ("Book a call" label I52:650;41:92) has no body text in Figma. `result` field omitted; gate decides link treatment.
+- **Phase 38-01 2026-07-19**: SiteFooter has ungated /showcase link (footer was not in plan scope for 38-01). Carry to Phase 39/40 IA cleanup.
 
 ### Lessons carried forward
 
@@ -134,7 +140,7 @@ None currently.
 
 ## Session Continuity
 
-Last session: 2026-07-19T05:55:28.995Z
-Stopped at: Phase 38 UI-SPEC approved
-Resume file: .planning/phases/38-showcase-page-blog-restyle/38-UI-SPEC.md
-Next action: Discuss Phase 38 (/gsd:discuss-phase 38 --chain)
+Last session: 2026-07-19T07:02:00Z
+Stopped at: Phase 38 Plan 01 complete (38-01-PLAN.md)
+Resume file: None
+Next action: Execute Phase 38 Plan 02 (/gsd:execute-phase 38 --plan 02)
