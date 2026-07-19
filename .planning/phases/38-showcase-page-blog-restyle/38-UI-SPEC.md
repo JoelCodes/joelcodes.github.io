@@ -1,7 +1,8 @@
 ---
 phase: 38
 slug: showcase-page-blog-restyle
-status: draft
+status: approved
+reviewed_at: 2026-07-18
 shadcn_initialized: false
 preset: none
 created: 2026-07-18
