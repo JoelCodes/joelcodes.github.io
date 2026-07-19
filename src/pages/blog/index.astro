@@ -1,9 +1,25 @@
 ---
+/**
+ * Blog index — Phase 38, Plan 06 (PAGE-06)
+ *
+ * Dev-gated: redirects to / in production (D-13 — blog is dev-only until Phase 40 IA).
+ * Single-column editorial list using wl/BlogCard (Plan 05 foundation).
+ *
+ * Frame authority: Blog Index / 1440 (211:3) + Blog Index / 390 (211:4).
+ * Approved 2026-07-19 (38-BLOG-FRAMES.md, D-08 gate cleared).
+ *
+ * Structure per 211:3:
+ *   PageHero: gradient #E6F1F1→#D2E7E7, pt88 pb72, Eyebrow "WRITING", h1 "Blog",
+ *              HG 21 lead, 1120 column
+ *   Post list: px-160 @1440, 1120 column, ul role="list", 1px color/line dividers,
+ *              BlogCard entries (title + date/tags meta + description — no thumbnails)
+ *
+ * Zero JS. Zero old neobrutalist tokens.
+ */
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import BlogCard from '../../components/BlogCard.astro';
-import Button from '../../components/ui/Button.astro';
+import BlogCard from '../../components/wl/BlogCard.astro';
+import Eyebrow from '../../components/wl/Eyebrow.astro';
 import { getCollection } from 'astro:content';
-import { readingTime } from 'reading-time-estimator';
 
 if (import.meta.env.PROD) {
   return Astro.redirect('/');  // No blog index in production (D-13)
@@ -17,164 +33,113 @@ const allPosts = await getCollection('blog', ({ data }) => {
 const sortedPosts = allPosts.sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
-
-// Get unique tags from all posts
-const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags))];
-
-// Calculate reading time for each post
-const postsWithMeta = sortedPosts.map((post) => {
-  const stats = readingTime(post.body || '', { wordsPerMinute: 265 });
-  return { ...post, readingTime: Math.ceil(stats.minutes) };
-});
 ---
 
 <BaseLayout
   title="Blog | Joel Shinness"
   description="Thoughts on web development, automation, and AI for small businesses. Practical insights to help you work smarter."
 >
-  <main class="py-16 px-4">
-    <div class="max-w-7xl mx-auto">
-      <!-- Page header -->
-      <header class="text-center mb-12">
-        <h1 class="font-heading text-4xl md:text-5xl font-bold uppercase mb-4">Blog</h1>
-        <p class="text-lg text-text-muted-light dark:text-text-muted-dark max-w-2xl mx-auto">
-          Practical insights on automation, AI, and custom software for small businesses.
-          Learn how to work smarter, not harder.
-        </p>
-      </header>
 
-      <!-- Filter buttons -->
-      <div class="flex flex-wrap justify-center gap-3 mb-12" id="filter-container">
-        <Button
-          variant="turquoise"
-          size="md"
-          data-filter="all"
-          data-active="true"
-          class="filter-btn rounded-full"
-        >
-          All Posts
-        </Button>
-        {allTags.map((tag) => (
-          <Button
-            variant="outline"
-            size="md"
-            data-filter={tag}
-            class="filter-btn rounded-full"
-          >
-            {tag}
-          </Button>
+  {/* ── PageHero (Blog Index, 211:3) ─────────────────────────────────────────
+      Background (light): linear-gradient(to bottom, #E6F1F1, #D2E7E7) — source 211:3 fill.
+      Background (dark, derived D-04): linear-gradient(to bottom, #123640, #0C2228).
+      Padding: pt-88px pb-72px — 38-BLOG-FRAMES.md "pt88/pb72/px160, sea-glass gradient".
+      Gutters: 24/32/160/400px matching showcase/landing values.
+  ── */}
+  <section
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#E6F1F1,#D2E7E7)] dark:[background:linear-gradient(to_bottom,#123640,#0C2228)]"
+    style="padding-top: 88px; padding-bottom: 72px;"
+  >
+    <div style="max-width: 1120px; margin: 0 auto;">
+
+      {/* Eyebrow: "WRITING" — source node 212:21, 38-BLOG-FRAMES.md approved copy */}
+      <Eyebrow>WRITING</Eyebrow>
+
+      {/* gap eyebrow → h1: 21px — matching showcase 27:24 spacer (same PageHero pattern) */}
+      <div style="height: 21px;"></div>
+
+      {/* h1: "Blog" — source 38-BLOG-FRAMES.md "verbatim from src/pages/blog/index.astro title".
+          Frame 211:3 specifies Fraunces 64px — RAMP MISMATCH (wl-heading-h1-interior = 61px).
+          Built as local style per Phase 36/38 precedent. Flagged for gate. */}
+      <h1
+        style={[
+          'font-family: var(--font-wl-heading);',
+          'font-size: 64px;',
+          'font-weight: 400;',
+          'line-height: 1.06;',
+          'font-style: normal;',
+          'font-variation-settings: "SOFT" 0, "WONK" 1;',
+          'color: var(--color-wl-ink);',
+          'margin: 0;',
+        ].join(' ')}
+      >
+        Blog
+      </h1>
+
+      {/* gap h1 → lead: 18px — matching showcase 27:26 spacer */}
+      <div style="height: 18px;"></div>
+
+      {/* Lead: source 38-BLOG-FRAMES.md "HG 21 lead".
+          Copy per 38-BLOG-FRAMES.md: "verbatim from src/pages/blog/index.astro (title/description)". */}
+      <p
+        class="wl-text-lead"
+        style="color: var(--color-wl-sub); margin: 0; max-width: 700px;"
+      >
+        Thoughts on web development, automation, and AI for small businesses. Practical insights to help you work smarter.
+      </p>
+    </div>
+  </section>
+
+  {/* ── Editorial post list ──────────────────────────────────────────────────
+      Background: var(--color-wl-paper) — matches Blog Index / 1440 frame body.
+      Padding: py-112px — standard landing section spacing.
+      Column: 1120px max-width, centered.
+      Entry dividers: 1px var(--color-wl-line) hairlines between posts (38-BLOG-FRAMES.md
+        "1px color/line hairline dividers").
+  ── */}
+  <main
+    style="background: var(--color-wl-paper); padding-top: 112px; padding-bottom: 112px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px]"
+  >
+    <div style="max-width: 1120px; margin: 0 auto;">
+      <ul role="list" class="blog-index-list" style="list-style: none; margin: 0; padding: 0;">
+        {sortedPosts.map((post) => (
+          <li class="blog-index-item">
+            <BlogCard
+              title={post.data.title}
+              slug={post.id}
+              pubDate={post.data.pubDate}
+              description={post.data.description}
+              featuredImage={post.data.featuredImage}
+              tags={post.data.tags}
+            />
+          </li>
         ))}
-      </div>
-
-      <!-- Blog card grid -->
-      <section id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {postsWithMeta.map((post, index) => (
-          <BlogCard
-            title={post.data.title}
-            slug={post.id}
-            pubDate={post.data.pubDate}
-            description={post.data.description}
-            featuredImage={post.data.featuredImage}
-            tags={post.data.tags}
-            readingTime={post.readingTime}
-            data-index={index}
-          />
-        ))}
-      </section>
-
-      <!-- Load more button (shown only if more than 9 posts) -->
-      {postsWithMeta.length > 9 && (
-        <div class="text-center mt-12">
-          <Button
-            id="load-more-btn"
-            variant="turquoise"
-            size="lg"
-          >
-            Load More Posts
-          </Button>
-        </div>
-      )}
+      </ul>
     </div>
   </main>
 
-  <script is:inline>
-    // Track how many posts are visible
-    const INITIAL_POSTS = 9;
-    const POSTS_PER_LOAD = 6;
-    let visiblePosts = INITIAL_POSTS;
-    let currentFilter = 'all';
-
-    function filterSelection(tag) {
-      currentFilter = tag;
-      const cards = document.getElementsByClassName('blog-card');
-
-      for (let i = 0; i < cards.length; i++) {
-        cards[i].classList.remove('show');
-
-        const cardTags = cards[i].getAttribute('data-tags');
-        const tagsArray = cardTags ? cardTags.split(',') : [];
-
-        if (tag === 'all' || tagsArray.includes(tag)) {
-          cards[i].classList.add('show');
-        }
-      }
-
-      // Reset load more state when filtering
-      visiblePosts = INITIAL_POSTS;
-      updateLoadMoreVisibility();
-      setActiveButton(tag);
-    }
-
-    function setActiveButton(tag) {
-      const buttons = document.querySelectorAll('.filter-btn');
-      buttons.forEach(btn => {
-        const isActive = btn.getAttribute('data-filter') === tag;
-        btn.setAttribute('data-active', isActive ? 'true' : 'false');
-        // Toggle Button CSS classes for variant swap
-        if (isActive) {
-          btn.classList.remove('btn-outline');
-          btn.classList.add('btn-turquoise');
-        } else {
-          btn.classList.remove('btn-turquoise');
-          btn.classList.add('btn-outline');
-        }
-      });
-    }
-
-    function loadMorePosts() {
-      visiblePosts += POSTS_PER_LOAD;
-      filterSelection(currentFilter);
-      updateLoadMoreVisibility();
-    }
-
-    function updateLoadMoreVisibility() {
-      const loadMoreBtn = document.getElementById('load-more-btn');
-      if (loadMoreBtn) {
-        const totalCards = document.getElementsByClassName('blog-card').length;
-        if (visiblePosts >= totalCards) {
-          loadMoreBtn.style.display = 'none';
-        } else {
-          loadMoreBtn.style.display = 'inline-block';
-        }
-      }
-    }
-
-    // Add click handlers via event delegation for filter buttons
-    document.getElementById('filter-container').addEventListener('click', (e) => {
-      const btn = e.target.closest('.filter-btn');
-      if (btn) {
-        const filter = btn.getAttribute('data-filter');
-        filterSelection(filter);
-      }
-    });
-
-    // Add event listener for Load More button
-    const loadMoreBtn = document.getElementById('load-more-btn');
-    if (loadMoreBtn) {
-      loadMoreBtn.addEventListener('click', loadMorePosts);
-    }
-
-    // Initialize with all posts visible
-    filterSelection('all');
-  </script>
 </BaseLayout>
+
+<style>
+  /* Entry hairline dividers between posts — 1px color/line (38-BLOG-FRAMES.md).
+     Divider appears BELOW each item except the last. */
+  .blog-index-item + .blog-index-item {
+    border-top: 1px solid var(--color-wl-line);
+  }
+
+  /* Vertical padding around each entry (frame 211:3 entry spacing).
+     32px above + below each card for visual rhythm — 8-point family. */
+  .blog-index-item {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  .blog-index-item:first-child {
+    padding-top: 0;
+  }
+
+  .blog-index-item:last-child {
+    padding-bottom: 0;
+  }
+</style>

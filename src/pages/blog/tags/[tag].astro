@@ -1,8 +1,17 @@
 ---
+/**
+ * Blog tag page — Phase 38, Plan 06 (PAGE-06, D-10)
+ *
+ * Derived surface: index layout + filtered heading.
+ * Dev-gated: returns [] in getStaticPaths when PROD (D-13).
+ *
+ * Frame authority: Derived surface — no separate frame comparison.
+ * Uses same wl/BlogCard editorial list as blog/index.astro.
+ */
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import BlogCard from '../../../components/BlogCard.astro';
+import BlogCard from '../../../components/wl/BlogCard.astro';
+import Breadcrumb from '../../../components/wl/Breadcrumb.astro';
 import { getCollection } from 'astro:content';
-import { readingTime } from 'reading-time-estimator';
 
 export async function getStaticPaths() {
   if (import.meta.env.PROD) return [];  // No blog pages in production (D-13)
@@ -26,12 +35,6 @@ export async function getStaticPaths() {
 
 const { tag, posts } = Astro.props;
 
-// Calculate reading time for each post
-const postsWithMeta = posts.map((post) => {
-  const stats = readingTime(post.body || '', { wordsPerMinute: 265 });
-  return { ...post, readingTime: Math.ceil(stats.minutes) };
-});
-
 // Format tag for display (capitalize first letter)
 const displayTag = tag.charAt(0).toUpperCase() + tag.slice(1);
 ---
@@ -40,58 +43,99 @@ const displayTag = tag.charAt(0).toUpperCase() + tag.slice(1);
   title={`Posts tagged "${displayTag}" | Joel Shinness`}
   description={`All blog posts about ${displayTag}. Practical insights on automation, AI, and custom software for small businesses.`}
 >
-  <main class="py-16 px-4">
-    <div class="max-w-7xl mx-auto">
-      <!-- Page header -->
-      <header class="text-center mb-12">
-        <nav class="mb-6">
-          <a
-            href="/blog"
-            class="text-turquoise hover:text-turquoise-hover dark:text-turquoise-dark dark:hover:text-turquoise transition-colors inline-flex items-center gap-2"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-            </svg>
-            Back to all posts
-          </a>
-        </nav>
-        <h1 class="font-heading text-4xl md:text-5xl font-bold uppercase mb-4">
-          Posts tagged "{displayTag}"
-        </h1>
-        <p class="text-lg text-text-muted-light dark:text-text-muted-dark max-w-2xl mx-auto">
-          {postsWithMeta.length} {postsWithMeta.length === 1 ? 'post' : 'posts'} about {displayTag.toLowerCase()}
-        </p>
-      </header>
 
-      <!-- Blog card grid -->
-      <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {postsWithMeta.map((post) => (
-          <BlogCard
-            title={post.data.title}
-            slug={post.id}
-            pubDate={post.data.pubDate}
-            description={post.data.description}
-            featuredImage={post.data.featuredImage}
-            tags={post.data.tags}
-            readingTime={post.readingTime}
-          />
-        ))}
-      </section>
+  {/* ── Page hero (derived — index layout with filtered heading) ─────────────
+      Sea-glass gradient + Eyebrow pattern from Blog Index hero (211:3).
+      Heading announces tag context per D-10 "filtered heading".
+  ── */}
+  <section
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#E6F1F1,#D2E7E7)] dark:[background:linear-gradient(to_bottom,#123640,#0C2228)]"
+    style="padding-top: 88px; padding-bottom: 72px;"
+  >
+    <div style="max-width: 1120px; margin: 0 auto;">
 
-      <!-- Empty state (shouldn't normally happen) -->
-      {postsWithMeta.length === 0 && (
-        <div class="text-center py-12">
-          <p class="text-text-muted-light dark:text-text-muted-dark">
-            No posts found with this tag.
-          </p>
-          <a
-            href="/blog"
-            class="mt-4 inline-block text-turquoise hover:text-turquoise-hover dark:text-turquoise-dark dark:hover:text-turquoise transition-colors"
-          >
-            View all posts
-          </a>
-        </div>
+      {/* Breadcrumb back-link: Blog → {displayTag} */}
+      <Breadcrumb
+        items={[
+          { label: 'Blog', href: '/blog' },
+          { label: displayTag }
+        ]}
+      />
+
+      <div style="height: 21px;"></div>
+
+      {/* h1: "Posts tagged '{displayTag}'" — filtered heading per D-10 */}
+      <h1
+        style={[
+          'font-family: var(--font-wl-heading);',
+          'font-size: 64px;',
+          'font-weight: 400;',
+          'line-height: 1.06;',
+          'font-style: normal;',
+          'font-variation-settings: "SOFT" 0, "WONK" 1;',
+          'color: var(--color-wl-ink);',
+          'margin: 0;',
+        ].join(' ')}
+      >
+        Posts tagged "{displayTag}"
+      </h1>
+
+      <div style="height: 18px;"></div>
+
+      <p
+        class="wl-text-lead"
+        style="color: var(--color-wl-sub); margin: 0;"
+      >
+        {posts.length} {posts.length === 1 ? 'post' : 'posts'} tagged {displayTag.toLowerCase()}.
+      </p>
+    </div>
+  </section>
+
+  {/* ── Editorial post list (same pattern as blog/index.astro) ───────────── */}
+  <main
+    style="background: var(--color-wl-paper); padding-top: 112px; padding-bottom: 112px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px]"
+  >
+    <div style="max-width: 1120px; margin: 0 auto;">
+      {posts.length === 0 ? (
+        <p style="color: var(--color-wl-sub);">No posts found with this tag.</p>
+      ) : (
+        <ul role="list" class="blog-index-list" style="list-style: none; margin: 0; padding: 0;">
+          {posts.map((post) => (
+            <li class="blog-index-item">
+              <BlogCard
+                title={post.data.title}
+                slug={post.id}
+                pubDate={post.data.pubDate}
+                description={post.data.description}
+                featuredImage={post.data.featuredImage}
+                tags={post.data.tags}
+              />
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   </main>
+
 </BaseLayout>
+
+<style>
+  /* Entry hairline dividers — matching blog/index.astro */
+  .blog-index-item + .blog-index-item {
+    border-top: 1px solid var(--color-wl-line);
+  }
+
+  .blog-index-item {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  .blog-index-item:first-child {
+    padding-top: 0;
+  }
+
+  .blog-index-item:last-child {
+    padding-bottom: 0;
+  }
+</style>
