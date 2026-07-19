@@ -1,0 +1,167 @@
+---
+/**
+ * AuthorCard — Phase 38 blog post author section (PAGE-06 / D-11)
+ *
+ * Source: Figma canonical page 195:210 / frame 195:211, node 200:1015.
+ *
+ * Sits directly on a sea-glass gradient band (no white card bg of its own).
+ * Layout: width 760, row gap 26: 64×64 glyph + content column.
+ * Content column (200:1025): gap 10 — Eyebrow → name → bio → 12px spacer → btns.
+ *
+ * Glyph (200:1017): 64×64 wave-mark glyph (circular-masked wave lines).
+ *   [FIDELITY-GAP] exact glyph vector cannot be verified from raster MCP export —
+ *   reusing WaveMark component at size=64 with badge=false (bare strokes in currentColor).
+ *   The glyph sits on the light sea-glass gradient band, so bare strokes in ink are
+ *   appropriate (badge variant is for dark surfaces per WaveMark convention).
+ *   Color: --color-wl-ink via style; dark: #EAF6F3 (ink token flip automatic).
+ *   Compare exact asset at fidelity gate.
+ *
+ * Eyebrow (200:1026): "WRITTEN BY" → .wl-label-eyebrow via Eyebrow component.
+ * Name (200:1029): "Joel Shinness" — Fraunces Regular 30px / 1.1 / −0.45px, ink.
+ *   No ramp match → local style.
+ * Bio (200:1030): VERBATIM copy from 38-BLOG-EXTRACTION §7:
+ *   "I build web apps, automations, and practical AI for small businesses — previously
+ *   at EA, Unity, lululemon, and thatgamecompany. If this post sounded like your week,
+ *   the next step is a free call, and it comes with a straight answer either way."
+ *   HG Regular 16px / 1.6, sub → .wl-text-body.
+ * Buttons (200:1032): gap 16. Solid "Book a call" (calendar icon) + Ghost "Email me"
+ *   (mail icon) — identical pair to landing/showcase CTAs. Uses BOOKING_URL / CONTACT_EMAIL.
+ *
+ * Background/padding: the gradient band is PAGE-level (Plan 06); this component
+ * is the inner content. Accept a `class` prop for the consumer to add band styles
+ * if needed, or wrap in a section with py-[112px] px-[160px] at page level.
+ *
+ * Dark mode: tokens flip automatically. The gradient band's dark values (#123640 → #0C2228)
+ * are PAGE-level CSS — not in this component. [FIDELITY-GAP] No dark blog frames exist;
+ * dark values DERIVED via D-04 recipe (38-BLOG-EXTRACTION §13).
+ *
+ * Zero old-token references. No <script> tag.
+ */
+
+import Eyebrow from './Eyebrow.astro';
+import CTAButton from './CTAButton.astro';
+import WaveMark from '../WaveMark.astro';
+import { BOOKING_URL, CONTACT_EMAIL } from '../../lib/constants';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<div class:list={['author-card', className]}>
+  {/* Glyph: 64×64 wave-mark (200:1017).
+      [FIDELITY-GAP] exact vector unverified — reusing WaveMark bare-stroke variant
+      (badge=false) at size=64 in ink color. Sits on light sea-glass gradient band.
+      If dark mode causes contrast issues, revisit badge=true at gate. */}
+  {/* WaveMark uses currentColor for bare strokes — set color via wrapper class */}
+  <div class="author-card__glyph text-wl-ink" aria-hidden="true">
+    <WaveMark
+      size={64}
+      badge={false}
+    />
+  </div>
+
+  {/* Content column: gap 10 (200:1025) */}
+  <div class="author-card__content">
+
+    {/* Eyebrow: "WRITTEN BY" (200:1026 instance) */}
+    <Eyebrow>WRITTEN BY</Eyebrow>
+
+    {/* Name: "Joel Shinness" — Fraunces 30px / 1.1 / -0.45px, ink (200:1029, local, no ramp match) */}
+    <p class="author-card__name" style="color: var(--color-wl-ink);">
+      Joel Shinness
+    </p>
+
+    {/* Bio: VERBATIM from 38-BLOG-EXTRACTION §7 / node 200:1030
+        HG Regular 16px / 1.6, sub → .wl-text-body */}
+    <p class="wl-text-body author-card__bio" style="color: var(--color-wl-sub);">
+      I build web apps, automations, and practical AI for small businesses — previously at EA, Unity, lululemon, and thatgamecompany. If this post sounded like your week, the next step is a free call, and it comes with a straight answer either way.
+    </p>
+
+    {/* 12px spacer between bio and buttons (200:1031) */}
+    <div style="height: 12px;" aria-hidden="true"></div>
+
+    {/* Button row: gap 16 (200:1032).
+        Solid "Book a call" (calendar, BOOKING_URL) + Ghost "Email me" (mail, mailto).
+        Identical pair to landing/showcase CTAs per 38-BLOG-EXTRACTION §4 / §7. */}
+    <div class="author-card__btns">
+      <CTAButton href={BOOKING_URL} variant="solid" icon="calendar">Book a call</CTAButton>
+      <CTAButton href={`mailto:${CONTACT_EMAIL}`} variant="ghost" icon="mail">Email me</CTAButton>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ─── Author card row ─────────────────────────────────────────────── */
+  /* Width 760, row gap 26 (source 200:1016). Centered by page-level section. */
+  .author-card {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 26px; /* source 200:1016 row gap */
+    width: 760px;
+    max-width: 100%;
+  }
+
+  /* ─── Glyph ──────────────────────────────────────────────────────── */
+  /* 64×64 container (source 200:1017) */
+  .author-card__glyph {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ─── Content column ─────────────────────────────────────────────── */
+  .author-card__content {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* source 200:1025 column gap */
+  }
+
+  /* ─── Name ──────────────────────────────────────────────────────── */
+  /* source 200:1029 — Fraunces Regular 30px / 1.1 / −0.45px / SOFT 0 WONK 1 / ink */
+  .author-card__name {
+    font-family: var(--font-wl-heading);
+    font-size: 30px; /* source 200:1029 — no ramp match */
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.45px;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings: "SOFT" 0, "WONK" 1;
+    margin: 0;
+  }
+
+  /* ─── Bio ────────────────────────────────────────────────────────── */
+  /* .wl-text-body + sub color applied inline above. Margin override. */
+  .author-card__bio {
+    margin: 0;
+  }
+
+  /* ─── Button row ─────────────────────────────────────────────────── */
+  /* gap 16 (source 200:1032) */
+  .author-card__btns {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px; /* source 200:1032 */
+    align-items: center;
+  }
+
+  /* ─── Responsive: stack at mobile ───────────────────────────────── */
+  /* [FIDELITY-GAP] no mobile frame for blog post author — derived from landing CTA
+     pattern. Compare at fidelity gate. */
+  @media (max-width: 640px) {
+    .author-card {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

@@ -1,0 +1,239 @@
+---
+/**
+ * FeaturedPostCard — Phase 38 blog index "Start here." feature card (PAGE-06 / D-11)
+ *
+ * Source: Figma canonical page 195:102 / frame 197:58, node 197:64.
+ *
+ * Layout: horizontal split — body panel 672px (flex-1) + art panel 448px.
+ *   White --wl-card-bg, 1px --wl-line, radius 18, --wl-card-shadow.
+ *   Body padding: pt 38 / px 38 / pb 35 (source 197:65). Column gap 14.
+ *   Art panel: 448px wide, self-stretch; sea-glass gradient bg
+ *     (light: #E6F1F1 → #D2E7E7; dark: #123640 → #0C2228 DERIVED via D-04 recipe).
+ *     FrequencyWave stretched over the panel (197:76, 480×360 at -16/-10 offset;
+ *     [FIDELITY-GAP] exact wave-panel crop — reuse FrequencyWave with preserveAspectRatio none,
+ *     compare at fidelity gate).
+ *   At ≤768px: stack vertically (art panel moves below body).
+ *
+ * Meta row: Tag pill (12px) + date (HG 14px #4C6A70) + · (accent-soft) + "{N} min read"
+ *   (HG 14px #4C6A70). Source node 197:66. Gap 11.
+ *
+ * Title: Fraunces Regular 32px / 1.12 / −0.48px, ink (no ramp match → local). Source 197:72.
+ * Description: HG Regular 16px / 1.6, sub → .wl-text-body. Source 197:73.
+ * Link: "Read the post →" HG SemiBold 16px, accent. Source 197:74.
+ *
+ * Whole card is a link: article > a (same whole-surface pattern as BlogCard).
+ * Title hover: accent via group-hover.
+ *
+ * Props:
+ *   title        string  — post heading
+ *   description  string  — post teaser
+ *   url          string  — post href
+ *   tags?        string[] — rendered as Tag pills (up to 1)
+ *   pubDate      Date    — publication date
+ *   readMinutes? number  — read time for meta row (format: "{N} min read")
+ *   class?       string  — passthrough
+ *
+ * Dark mode: all colors via --wl-* tokens or explicit DERIVED literals per D-04.
+ * Zero old-token references. No <script> tag.
+ */
+
+import Tag from './Tag.astro';
+import FrequencyWave from './FrequencyWave.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  url: string;
+  tags?: string[];
+  pubDate: Date;
+  readMinutes?: number;
+  class?: string;
+}
+
+const {
+  title,
+  description,
+  url,
+  tags = [],
+  pubDate,
+  readMinutes,
+  class: className = '',
+} = Astro.props;
+---
+
+<article class:list={['featured-post-card', className]}>
+  <a
+    href={url}
+    class="group block no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+    style="text-decoration: none; display: flex; width: 100%; height: 100%;"
+  >
+    {/* ── Body panel (flex-1, 672px at 1120 context) ────────────────── */}
+    <div class="featured-post-card__body">
+
+      {/* Meta row: Tag + date + · + read-time (197:66, gap 11) */}
+      <div class="featured-post-card__meta">
+        {tags.length > 0 && tags.slice(0, 1).map((tag) => <Tag>{tag}</Tag>)}
+        <time
+          datetime={pubDate.toISOString()}
+          class="featured-post-card__date"
+        >
+          {pubDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+        </time>
+        {readMinutes !== undefined && (
+          <>
+            {/* separator · in accent-soft (197:70) */}
+            <span class="featured-post-card__sep" aria-hidden="true">·</span>
+            {/* read-time in same #4C6A70 crumb-tint as date (197:71) */}
+            <span class="featured-post-card__readtime">{readMinutes} min read</span>
+          </>
+        )}
+      </div>
+
+      {/* Title: Fraunces 32px / 1.12 / -0.48px ink (local, no ramp match). Source 197:72. */}
+      <h2
+        class:list={[
+          'featured-post-card__title',
+          'text-wl-ink group-hover:text-wl-accent transition-colors',
+        ]}
+      >
+        {title}
+      </h2>
+
+      {/* Description: HG 16px / 1.6 sub → .wl-text-body. Source 197:73. */}
+      <p class="wl-text-body featured-post-card__desc" style="color: var(--color-wl-sub); margin: 0;">
+        {description}
+      </p>
+
+      {/* Flex-grow spacer: push "Read the post →" toward bottom */}
+      <div style="flex: 1 1 auto;"></div>
+
+      {/* Link: "Read the post →" HG SemiBold 16px accent (197:74) */}
+      <span class="featured-post-card__link" aria-hidden="true">Read the post →</span>
+    </div>
+
+    {/* ── Art panel (448px, self-stretch) ───────────────────────────── */}
+    {/* Sea-glass gradient + FrequencyWave stretched over panel.
+        Light: #E6F1F1 → #D2E7E7 (197:75); Dark: #123640 → #0C2228 DERIVED (D-04 recipe).
+        [FIDELITY-GAP]: exact wave crop of 197:76 (480×360 at -16/-10) cannot be verified
+        from raster MCP export — reusing FrequencyWave with preserveAspectRatio:none
+        stretched to fill panel. Compare at fidelity gate. */}
+    <div class="featured-post-card__art dark:featured-post-card__art--dark">
+      <FrequencyWave class="featured-post-card__wave" />
+    </div>
+  </a>
+</article>
+
+<style>
+  /* ─── Card container ──────────────────────────────────────────────── */
+  .featured-post-card {
+    background: var(--wl-card-bg); /* #FFFFFF / #12333B dark — card token */
+    border: 1px solid var(--color-wl-line); /* token flips */
+    border-radius: 18px; /* source 197:64 = --radius-card */
+    box-shadow: var(--wl-card-shadow); /* flips in dark */
+    overflow: hidden; /* clip art panel gradient + wave to card radius */
+    height: 100%;
+  }
+
+  /* ─── Body panel ────────────────────────────────────────────────── */
+  .featured-post-card__body {
+    flex: 1 1 0;        /* fills remaining space; flex basis 0 so art panel can claim 448px */
+    min-width: 0;       /* prevent overflow in flex context */
+    padding: 38px 38px 35px; /* source 197:65: pt 38 / px 38 / pb 35 */
+    display: flex;
+    flex-direction: column;
+    gap: 14px; /* source 197:65 column gap */
+  }
+
+  /* ─── Art panel (448px at 1120 content column) ──────────────────── */
+  .featured-post-card__art {
+    flex: 0 0 448px; /* source 197:75 fixed width */
+    align-self: stretch;
+    position: relative;
+    overflow: hidden;
+    /* Light sea-glass gradient — source 197:75 */
+    background: linear-gradient(to bottom, #E6F1F1, #D2E7E7);
+  }
+
+  /* Dark art panel: swap gradient via .dark class on html (D-04 recipe) */
+  :global(.dark) .featured-post-card__art {
+    background: linear-gradient(to bottom, #123640, #0C2228);
+  }
+
+  /* FrequencyWave: stretched to fill the art panel.
+     [FIDELITY-GAP] 197:76 wave crop (480×360 at -16/-10) — reuse FrequencyWave
+     with absolute fill; compare exact crop at fidelity gate. */
+  .featured-post-card__wave {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ─── Meta row ──────────────────────────────────────────────────── */
+  .featured-post-card__meta {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 11px; /* source 197:66 */
+    flex-wrap: wrap;
+  }
+
+  .featured-post-card__date,
+  .featured-post-card__readtime {
+    font-family: var(--font-wl-body);
+    font-size: 14px; /* source 197:69 / 197:71 — crumb-tint HG 14px */
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--wl-breadcrumb-color); /* #4C6A70 / #A9C9C7 dark — token flip */
+  }
+
+  /* Separator · in accent-soft (197:70) */
+  .featured-post-card__sep {
+    font-family: var(--font-wl-body);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--color-wl-accent-soft); /* #5AA9A5 / #7FC4C0 dark — token flip */
+  }
+
+  /* ─── Title ──────────────────────────────────────────────────────── */
+  .featured-post-card__title {
+    font-family: var(--font-wl-heading);
+    font-size: 32px; /* source 197:72 — Fraunces 32/1.12/-0.48; no ramp match */
+    font-weight: 400;
+    line-height: 1.12;
+    letter-spacing: -0.48px;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings: "SOFT" 0, "WONK" 1;
+    margin: 0;
+  }
+
+  /* ─── Description ────────────────────────────────────────────────── */
+  .featured-post-card__desc {
+    /* .wl-text-body + sub color applied inline above */
+  }
+
+  /* ─── "Read the post →" link ─────────────────────────────────────── */
+  .featured-post-card__link {
+    font-family: var(--font-wl-body);
+    font-size: 16px; /* source 197:74 — HG SemiBold 16px accent */
+    font-weight: 600;
+    line-height: normal;
+    color: var(--color-wl-accent); /* token flips */
+    text-decoration: none;
+  }
+
+  /* ─── Responsive: stack vertically at ≤768px ─────────────────────── */
+  /* [FIDELITY-GAP] No 768/390 frame for blog index — derived from landing
+     pattern (art below body at mobile). Compare at fidelity gate. */
+  @media (max-width: 768px) {
+    .featured-post-card > a {
+      flex-direction: column;
+    }
+
+    .featured-post-card__art {
+      flex: 0 0 200px; /* give art panel a fixed height when stacked */
+      align-self: auto;
+    }
+  }
+</style>
