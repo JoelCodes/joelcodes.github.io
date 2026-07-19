@@ -1,0 +1,114 @@
+---
+/**
+ * BlogCard — Phase 38 editorial blog list entry (PAGE-06 / D-11)
+ *
+ * Single-column editorial entry for the Wavelength blog index (NOT a card grid).
+ * Replaces the old neobrutalist src/components/BlogCard.astro (Phase 41 cleanup
+ * target — never import that file).
+ *
+ * Frame authority: Blog Index / 1440 (node 211:3) + Blog Index / 390 (node 211:4),
+ * approved 2026-07-19 (38-BLOG-FRAMES.md). Entry composition per frame:
+ *   Title (Fraunces 28 @1440 / 24 @390 — local sizes, no .wl-* ramp match)
+ *   Meta row: date + Tag instances (39:44) — wraps at 390
+ *   Description: HG 16 (.wl-text-body / sub)
+ * The 1px color/line hairline dividers between entries are PAGE-level list
+ * styling (Plan 06), not part of this component.
+ *
+ * Click target: whole-entry link — <article> wraps a single block <a> containing
+ * title + meta + description (LinkCard / ProjectCard whole-surface precedent;
+ * approved frame draws no separate per-element affordance). <article> carries no
+ * href/tabindex and <Tag> is a non-interactive <span>, so there are no
+ * nested-interactive violations. Title turns accent on entry hover (group-hover,
+ * WR-02: color in class so the hover utility can win the cascade).
+ *
+ * API (Phase 35 D-08 props-for-data; no slot):
+ *   featuredImage / readingTime are accepted for API completeness but NOT
+ *   rendered — approved frame 211:3 entries show no thumbnail and no reading
+ *   time in the meta row.
+ *
+ * Dark mode: all colors via --wl-* tokens (flip automatically in .dark) —
+ * zero dark: pairs, zero literal hex. Zero old-token references. No <script>.
+ */
+
+import Tag from './Tag.astro';
+
+interface Props {
+  title: string;
+  slug: string;
+  pubDate: Date;
+  description: string;
+  tags?: string[];
+  featuredImage?: string;
+  readingTime?: number;
+  class?: string;
+}
+
+const {
+  title,
+  slug,
+  pubDate,
+  description,
+  tags = [],
+  class: className = '',
+} = Astro.props;
+---
+
+<article class:list={[className]}>
+  <a
+    href={`/blog/${slug}`}
+    class="group block no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+  >
+    {/* Title: Fraunces 28px (1440) / 24px (390) — source nodes 211:3 / 211:4.
+        Renders as <h2>: entry heading under the page <h1> (a11y contract).
+        Color via class (not inline) so group-hover:text-wl-accent wins (WR-02). */}
+    <h2
+      class="blog-card-title text-wl-ink group-hover:text-wl-accent transition-colors"
+      style="margin: 0 0 12px 0;"
+    >
+      {title}
+    </h2>
+
+    {/* Meta row: date + tag pills — frame 211:3 meta row; wraps at 390 (211:4).
+        Gap 8px = tag-row convention (sm spacing); exact meta-row gap deferred to
+        fidelity gate — 8-point family per 211:3 spacing record. */}
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 12px 0;">
+      <time
+        datetime={pubDate.toISOString()}
+        class="wl-text-note"
+        style="color: var(--color-wl-sub);"
+      >
+        {pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+      </time>
+      {tags.length > 0 && tags.map((tag) => <Tag>{tag}</Tag>)}
+    </div>
+
+    {/* Description: HG 16/1.6 sub — .wl-text-body per frame 211:3 */}
+    <p class="wl-text-body" style="color: var(--color-wl-sub); margin: 0;">
+      {description}
+    </p>
+  </a>
+</article>
+
+<style>
+  /* Entry title: Fraunces 28px (1440) / 24px (390) — source nodes 211:3 / 211:4.
+     No .wl-* ramp match (.wl-heading-h3 = 21px) — local style per Phase 36
+     precedent (ProjectCard local 22px). Weight/line-height/tracking follow the
+     ramp-wide Fraunces convention (400 / 1.2 / -1.5px / SOFT 0 WONK 1).
+     Color intentionally NOT set here — lives in class (WR-02 group-hover). */
+  .blog-card-title {
+    font-family: var(--font-wl-heading);
+    font-size: 28px; /* source node 211:3 Blog Index/1440 */
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -1.5px;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings: "SOFT" 0, "WONK" 1;
+  }
+
+  @media (max-width: 390px) {
+    .blog-card-title {
+      font-size: 24px; /* source node 211:4 Blog Index/390 */
+    }
+  }
+</style>
