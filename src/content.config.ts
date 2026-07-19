@@ -17,7 +17,8 @@ const blog = defineCollection({
 
 // NOTE: 'id' is the file() loader key — Astro exposes as entry.id, NOT entry.data.id.
 // Do not declare 'id' in the schema (Pitfall 7 — 36-RESEARCH.md).
-// Phase 38 uses entry.data.slug for URL construction.
+// The showcase composes ProjectCard inline (no per-project routes yet), so `slug`
+// is currently carried for future detail pages, not used for routing in Phase 38.
 const projects = defineCollection({
   loader: file('src/data/projects.json'),
   schema: z.object({

@@ -37,9 +37,10 @@ import { readingMinutes } from '../../lib/reading-time';
 
 export async function getStaticPaths() {
   if (import.meta.env.PROD) return [];  // No blog pages in production (D-13)
-  const posts = await getCollection('blog', ({ data }) => {
-    return import.meta.env.PROD ? !data.draft : true;
-  });
+  // Dev only (guard above): generate a page for every post INCLUDING drafts, so an
+  // author can preview a draft by its direct URL. Drafts are excluded from listings
+  // (index/grid/related/tags), so nothing links here — this is preview-only.
+  const posts = await getCollection('blog');
 
   return posts.map(post => ({
     params: { slug: post.id },

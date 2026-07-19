@@ -9,9 +9,10 @@ import SEO from '../components/SEO.astro';
 import frauncesWoff2 from '@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2?url';
 import frauncesItalicWoff2 from '@fontsource-variable/fraunces/files/fraunces-latin-wght-italic.woff2?url';
 import hankenWoff2 from '@fontsource-variable/hanken-grotesk/files/hanken-grotesk-latin-wght-normal.woff2?url';
-// Roboto Mono Variable — self-hosted code font preload (Phase 38, same GDPR/CLS pattern as brand fonts).
-// Canonical: 38-BLOG-EXTRACTION §6.1 — prose code blocks 14.5px/1.55, inline code 15px.
-import robotoMonoWoff2 from '@fontsource-variable/roboto-mono/files/roboto-mono-latin-wght-normal.woff2?url';
+// Roboto Mono (self-hosted @font-face lives in global.css) is intentionally NOT preloaded:
+// it is used only in blog prose code blocks — rare, below-the-fold, and blog is dev-only —
+// so a site-wide preload would waste bandwidth and trigger "preloaded but unused" warnings on
+// every brand page. It loads on demand when a code block renders. (38-BLOG-EXTRACTION §6.1)
 
 interface Props {
   title: string;
@@ -40,8 +41,6 @@ const { title, description = 'Web apps, automation, and AI development for small
     <link rel="preload" as="font" type="font/woff2" href={frauncesWoff2} crossorigin="anonymous" />
     <link rel="preload" as="font" type="font/woff2" href={frauncesItalicWoff2} crossorigin="anonymous" />
     <link rel="preload" as="font" type="font/woff2" href={hankenWoff2} crossorigin="anonymous" />
-    <!-- Roboto Mono Variable preload — code font for blog prose (38-BLOG-EXTRACTION §6.1) -->
-    <link rel="preload" as="font" type="font/woff2" href={robotoMonoWoff2} crossorigin="anonymous" />
 
     <!-- Google Fonts - preconnect for initial connection, dns-prefetch as fallback -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

@@ -87,7 +87,8 @@ const { class: className = '' } = Astro.props;
         Solid "Book a call" (calendar, BOOKING_URL) + Ghost "Email me" (mail, mailto).
         Identical pair to landing/showcase CTAs per 38-BLOG-EXTRACTION §4 / §7. */}
     <div class="author-card__btns">
-      <CTAButton href={BOOKING_URL} variant="solid" icon="calendar">Book a call</CTAButton>
+      {/* Calendly opens in a new tab (D-06); rel="noopener" is the site-wide convention. */}
+      <CTAButton href={BOOKING_URL} variant="solid" icon="calendar" target="_blank" rel="noopener">Book a call</CTAButton>
       <CTAButton href={`mailto:${CONTACT_EMAIL}`} variant="ghost" icon="mail">Email me</CTAButton>
     </div>
   </div>

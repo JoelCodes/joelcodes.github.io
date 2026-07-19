@@ -117,7 +117,7 @@ const {
         [FIDELITY-GAP]: exact wave crop of 197:76 (480×360 at -16/-10) cannot be verified
         from raster MCP export — reusing FrequencyWave with preserveAspectRatio:none
         stretched to fill panel. Compare at fidelity gate. */}
-    <div class="featured-post-card__art dark:featured-post-card__art--dark">
+    <div class="featured-post-card__art">
       <FrequencyWave class="featured-post-card__wave" />
     </div>
   </a>
@@ -154,7 +154,9 @@ const {
     background: linear-gradient(to bottom, #E6F1F1, #D2E7E7);
   }
 
-  /* Dark art panel: swap gradient via .dark class on html (D-04 recipe) */
+  /* Dark art panel: this :global(.dark) rule is the INTENTIONAL dark handler
+     (D-04 recipe). Do not replace with a Tailwind `dark:` utility — the gradient
+     is a literal, not a token, so it needs an explicit scoped rule. */
   :global(.dark) .featured-post-card__art {
     background: linear-gradient(to bottom, #123640, #0C2228);
   }

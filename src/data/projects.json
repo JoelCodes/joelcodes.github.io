@@ -63,8 +63,7 @@
     "problem": "A booking system that fills your calendar. A customer portal that cuts the back-and-forth. An automation that hands you back a day a week. Whatever's slow or manual right now.",
     "built": "A quick call where you tell me what's eating your time. If there's a solution worth building, I'll tell you what it'd take.",
     "problemLabel": "A few ideas",
-    "builtLabel": "How it starts",
-    "resultLabel": "Book a call"
+    "builtLabel": "How it starts"
   },
   {
     "id": "code-that-carves",
