@@ -62,6 +62,17 @@ completed: 2026-07-19
 
 # Phase 38 Plan 05: Blog Build Foundations Summary
 
+> **⚠ RE-BASELINED 2026-07-19 — the detail below describes the ORIGINAL draft-based build.**
+> This plan first ran against a Claude-drafted Figma page (211:x) that Joel later identified as a
+> misunderstanding; his canonical designs were the pre-existing **Site · Blog (195:103)** / **Site ·
+> Blog Post (195:211)** pages. The draft page was deleted from Figma and the foundations were
+> **corrected to the 195:210 canonical values** (see `38-BLOG-EXTRACTION.md`). Net changes vs the
+> text below: `.wl-prose` corrected (body 17px, blockquote 20px ink + accent-soft bar + attribution,
+> pre on always-dark `#0D2A31`); **code font changed JetBrains Mono → self-hosted Roboto Mono**
+> (`@fontsource-variable/roboto-mono`, `--font-wl-mono`); `BlogCard` reworked from an editorial
+> single-column entry into `variant="grid"|"mini"` cards; new `FeaturedPostCard.astro` +
+> `AuthorCard.astro` + `src/lib/reading-time.ts`. Correction commits: 76c4b41, 267b0bb, 2790fb9, 2ae973f.
+
 **Token-based .wl-prose scope, expressive-code rethemed to the .dark class with AA-verified sea-glass chrome, and the wl/BlogCard editorial entry component (Fraunces 28 local title, whole-entry link) — the three foundations Plan 06's blog page restyles import**
 
 ## Performance
