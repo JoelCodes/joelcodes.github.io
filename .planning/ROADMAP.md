@@ -277,13 +277,13 @@ Plans:
 
 > **CONTEXT.md amendments (D-01/D-13):** Criterion 2's "removed from main nav / footer link present" is already satisfied by the Phase 34 dev-gate; the blog is dev-gated out of prod entirely, so criterion 4 (prod HTTP 200 / sitemap) is superseded — blog URLs return 200 in **dev** and stay out of prod until relaunch. `/showcase` is likewise dev-gated (D-01).
 
-**Plans:** 6 plans
+**Plans:** 2/6 plans executed
 
 Plans:
 **Wave 1** (parallel — showcase build + blog frame drafting, no file overlap)
 
-- [ ] 38-01-PLAN.md — Extract frame 12:3 + build dev-gated /showcase (page, projects.json, nav gate, sitemap) [PAGE-02]
-- [ ] 38-02-PLAN.md — Draft blog Figma frames (index+post @1440/390, light-only) via use_figma [PAGE-06]
+- [x] 38-01-PLAN.md — Extract frame 12:3 + build dev-gated /showcase (page, projects.json, nav gate, sitemap) [PAGE-02]
+- [x] 38-02-PLAN.md — Draft blog Figma frames (index+post @1440/390, light-only) via use_figma [PAGE-06]
 
 **Wave 2** (parallel — showcase verify + blog frame approval)
 
@@ -366,7 +366,7 @@ Plans:
 | 35 | v3.0 | 4/4 | Complete    | 2026-07-16 |
 | 36 | v3.0 | 6/6 | Complete    | 2026-07-16 |
 | 37 | v3.0 | 5/5 | Complete    | 2026-07-18 |
-| 38 | v3.0 | — | Pending | — |
+| 38 | v3.0 | 2/6 | In Progress|  |
 | 39 | v3.0 | — | Pending | — |
 | 40 | v3.0 | — | Pending | — |
 | 41 | v3.0 | — | Pending | — |
