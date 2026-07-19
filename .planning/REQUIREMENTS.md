@@ -32,11 +32,11 @@
 ### Pages
 
 - [x] **PAGE-01**: Landing page (`/`) rebuilt with every Figma section (Hero, Who, Three-ways `#services`, How-it-works, Automations, Proof, About `#about`, Agencies, Final CTA) — verbatim Figma copy, all 4 breakpoints, light + dark verified against frames `12:2`/`117:103`
-- [ ] **PAGE-02**: Showcase page (`/showcase`) with Client Work + Craft & Experiments sections using expandable Project Cards — all 4 breakpoints, verified against frame `12:3`
+- [x] **PAGE-02**: Showcase page (`/showcase`) with Client Work + Craft & Experiments sections using expandable Project Cards — all 4 breakpoints, verified against frame `12:3`
 - [ ] **PAGE-03**: Service Web page (`/services/web`) built from frame `85:103` — dev-hidden (noindex, out of sitemap, unlinked in prod)
 - [ ] **PAGE-04**: Area Abbotsford page (`/areas/abbotsford`) built from frame `85:104` with ProfessionalService JSON-LD (areaServed) — dev-hidden until copy is confirmed locally unique
 - [ ] **PAGE-05**: 404 page restyled to the new brand
-- [ ] **PAGE-06**: Blog index/post/tag pages restyled to the new brand — URLs unchanged, posts stay in sitemap, featured-image `loading="lazy"` LCP bug fixed
+- [x] **PAGE-06**: Blog index/post/tag pages restyled to the new brand — URLs unchanged, posts stay in sitemap, featured-image `loading="lazy"` LCP bug fixed
 
 ### IA & URLs
 
@@ -104,8 +104,8 @@
 | CONT-02 | Phase 37 | Complete |
 | IA-03 | Phase 37 | Complete |
 | IA-04 | Phase 37 | Complete |
-| PAGE-02 | Phase 38 | Pending |
-| PAGE-06 | Phase 38 | Pending |
+| PAGE-02 | Phase 38 | Complete |
+| PAGE-06 | Phase 38 | Complete |
 | PAGE-03 | Phase 39 | Pending |
 | PAGE-04 | Phase 39 | Pending |
 | PAGE-05 | Phase 39 | Pending |
