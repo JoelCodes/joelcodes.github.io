@@ -32,6 +32,12 @@ const projects = defineCollection({
     built: z.string().optional(),
     result: z.string().optional(),
     thumbLabel: z.string().optional(),
+    // Per-card detail section label overrides (38-01 deviation — extraction found labels vary
+    // per card: "The idea/How it works/Why I made it" for Craft; "A few ideas/How it starts/
+    // Book a call" for Your Project Here). Defaults handled in ProjectCard.astro.
+    problemLabel: z.string().optional(),
+    builtLabel: z.string().optional(),
+    resultLabel: z.string().optional(),
   }),
 });
 

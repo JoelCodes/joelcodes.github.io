@@ -82,6 +82,13 @@ interface Props {
   thumbLabel?: string;
   headingLevel?: 2 | 3 | 4;
   class?: string;
+  // Per-card detail section label overrides (38-01 deviation — extraction found labels vary
+  // per card: Craft cards use "The idea/How it works/Why I made it"; "Your Project Here" uses
+  // "A few ideas/How it starts/Book a call". Defaults to the original "The problem / What I
+  // built / The result" Figma values so existing consumers are fully backward-compatible.
+  problemLabel?: string;
+  builtLabel?: string;
+  resultLabel?: string;
 }
 
 const {
@@ -95,7 +102,10 @@ const {
   result,
   thumbLabel,
   headingLevel = 3,
-  class: className = ''
+  class: className = '',
+  problemLabel = 'The problem',
+  builtLabel = 'What I built',
+  resultLabel = 'The result',
 } = Astro.props;
 
 // Dynamic heading tag (WR-09): visual style stays local 22px regardless of level.
@@ -343,8 +353,10 @@ const Heading = `h${headingLevel}` as 'h2' | 'h3' | 'h4';
       {problem && (
         <div>
           {/* Section label: Fraunces Italic 16px var(--color-wl-accent) — source node 41:84
-              .wl-accent-outcome is Fraunces Italic 16px — matches extraction styling exactly. */}
-          <p class="wl-accent-outcome" style="color: var(--color-wl-accent); margin: 0;">The problem</p>
+              .wl-accent-outcome is Fraunces Italic 16px — matches extraction styling exactly.
+              Label text comes from problemLabel prop (default: "The problem") — per-card
+              override added in 38-01 to support Craft and "Your Project Here" card variants. */}
+          <p class="wl-accent-outcome" style="color: var(--color-wl-accent); margin: 0;">{problemLabel}</p>
           {/* gap label→body: 3px — source node 41:85 */}
           <div style="height: 3px;"></div>
           {/* Body: .wl-text-body (HG Regular 16px/1.6/sub) — source node 41:86 */}
@@ -358,8 +370,9 @@ const Heading = `h${headingLevel}` as 'h2' | 'h3' | 'h4';
       {/* "What I built" section — renders only when prop is present */}
       {built && (
         <div>
-          {/* Section label: Fraunces Italic 16px accent — source node 41:88 */}
-          <p class="wl-accent-outcome" style="color: var(--color-wl-accent); margin: 0;">What I built</p>
+          {/* Section label: Fraunces Italic 16px accent — source node 41:88
+              Label text comes from builtLabel prop (default: "What I built") — per-card override. */}
+          <p class="wl-accent-outcome" style="color: var(--color-wl-accent); margin: 0;">{builtLabel}</p>
           {/* gap label→body: 3px — source node 41:89 */}
           <div style="height: 3px;"></div>
           {/* Body: .wl-text-body — source node 41:90 */}
@@ -373,8 +386,9 @@ const Heading = `h${headingLevel}` as 'h2' | 'h3' | 'h4';
       {/* "The result" section — renders only when prop is present */}
       {result && (
         <div>
-          {/* Section label: Fraunces Italic 16px accent — source node 41:92 */}
-          <p class="wl-accent-outcome" style="color: var(--color-wl-accent); margin: 0;">The result</p>
+          {/* Section label: Fraunces Italic 16px accent — source node 41:92
+              Label text comes from resultLabel prop (default: "The result") — per-card override. */}
+          <p class="wl-accent-outcome" style="color: var(--color-wl-accent); margin: 0;">{resultLabel}</p>
           {/* gap label→body: 3px — source node 41:93 */}
           <div style="height: 3px;"></div>
           {/* Body: .wl-text-body — source node 41:94 */}

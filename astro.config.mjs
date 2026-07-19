@@ -97,7 +97,7 @@ export default defineConfig({
     expressiveCode(),
     mdx(),
     sitemap({
-      filter: (page) => !page.includes('/blog'),
+      filter: (page) => !page.includes('/blog') && !page.includes('/showcase'),
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),

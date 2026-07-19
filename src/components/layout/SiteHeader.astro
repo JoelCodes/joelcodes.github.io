@@ -34,11 +34,13 @@ const currentPath = Astro.url.pathname; // for build-time aria-current="page" on
         href="/#services"
         class="wl-nav-link text-wl-ink hover:text-wl-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
       >Services</a>
-      <a
-        href="/showcase"
-        aria-current={currentPath === '/showcase' ? 'page' : undefined}
-        class="wl-nav-link text-wl-ink hover:text-wl-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
-      >Showcase</a>
+      {isDev && (
+        <a
+          href="/showcase"
+          aria-current={currentPath === '/showcase' ? 'page' : undefined}
+          class="wl-nav-link text-wl-ink hover:text-wl-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+        >Showcase</a>
+      )}
       <a
         href="/#about"
         class="wl-nav-link text-wl-ink hover:text-wl-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
@@ -56,10 +58,12 @@ const currentPath = Astro.url.pathname; // for build-time aria-current="page" on
 
     <!-- Mobile nav (&lt; 640px) — Showcase + CTA only (Services/About reachable via footer — D-01) -->
     <nav aria-label="Mobile navigation" class="flex sm:hidden items-center gap-[18px]">
-      <a
-        href="/showcase"
-        class="wl-nav-link text-wl-ink hover:text-wl-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
-      >Showcase</a>
+      {isDev && (
+        <a
+          href="/showcase"
+          class="wl-nav-link text-wl-ink hover:text-wl-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+        >Showcase</a>
+      )}
       <!-- CTA: CTAButton small variant (COMP-01 — Phase 35 35-02) — pixel-neutral to pre-retrofit spec (D-02) -->
       <!-- Opens Calendly in new tab (D-06); rel=noopener prevents reverse tabnabbing (threat model) -->
       <CTAButton href={BOOKING_URL} variant="small" target="_blank" rel="noopener">Book a call</CTAButton>
