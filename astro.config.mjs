@@ -103,38 +103,44 @@ export default defineConfig({
         return theme.name === 'github-dark' ? '.dark' : ':not(.dark)';
       },
       useDarkModeMediaQuery: false,
-      // Step 2: brand palette — styleOverrides mapping chrome toward --wl-* family
-      // WCAG AA verified (measured 2026-07-19, WCAG relative-luminance formula):
-      //   Light block bg #E6F1F1 (--wl-sea-glass light) vs github-light fg #24292e = 12.72:1 ✓ AA
-      //   Dark  block bg #123640 (--wl-sea-glass dark)  vs github-dark  fg #e1e4e8 = 10.12:1 ✓ AA
-      //   Light frame bg #D2E7E7 vs #24292e = 11.40:1 ✓ | Dark frame bg #0C2228 vs #e1e4e8 = 12.91:1 ✓
-      // Border toward --wl-line family. Keeping syntax-token colors from the base
-      // github-light/github-dark themes (frame 211:5 specifies chrome only — dark
-      // JetBrains Mono code block on color/ink, radius 12).
+      // Step 2: brand palette — canonical 195:210 frame (node 199:1061).
+      // Code surface is ALWAYS-DARK (= --wl-footer-bg #0D2A31, footer-precedent).
+      // Both light and dark themes share the same dark chrome so there is no
+      // prefers-color-scheme or .dark conditional in the emitted ec.css — the
+      // surface never flips (matching .wl-prose pre and the footer strip).
+      //
+      // WCAG AA verified (WCAG relative-luminance formula):
+      //   Code bg #0D2A31 vs code text #CDE6E5 = 11.03:1 ✓ AA (same footer pair)
+      //   Frame bg #0C2228 vs #CDE6E5 = 12.91:1 ✓ AA
+      //   Border rgba(90,169,165,0.22) is decorative (not text) — no AA req.
+      // Code font: Roboto Mono Variable per canonical 199:1062 (was JetBrains Mono
+      // from deleted 211:5 draft — CORRECTED).
       styleOverrides: {
-        // Code block background: --wl-sea-glass family (light #E6F1F1 / dark #123640)
-        codeBackground: ({ theme }) =>
-          theme.name === 'github-dark' ? '#123640' : '#E6F1F1',
-        // Frame/title-bar backgrounds — slightly deeper than code area
-        // Light: #D2E7E7 (--wl-sea-glass-deep); Dark: #0C2228 (--wl-paper dark)
+        // Code font: Roboto Mono Variable — source 199:1062 (canonical 195:210).
+        // Previously referenced JetBrains Mono from deleted 211:5 draft.
+        codeFontFamily: "'Roboto Mono Variable', 'Roboto Mono', ui-monospace, monospace",
+        // Code font size: 14.5px — source 199:1062
+        codeFontSize: '14.5px',
+        // Code line-height: 1.55 — source 199:1062
+        codeLineHeight: '1.55',
+        // Code block background: #0D2A31 = --wl-footer-bg (always-dark surface).
+        // Same value in BOTH themes — no light/dark split (footer-precedent).
+        // §12 diff: was sea-glass family (#E6F1F1 light / #123640 dark) from 211:5 draft.
+        codeBackground: '#0D2A31',
+        // Frame/title-bar backgrounds — slightly deeper than code area (same footer-dark family)
         frames: {
-          editorTabBarBackground: ({ theme }) =>
-            theme.name === 'github-dark' ? '#0C2228' : '#D2E7E7',
-          terminalTitlebarBackground: ({ theme }) =>
-            theme.name === 'github-dark' ? '#0C2228' : '#D2E7E7',
-          // Terminal code area matches the editor code area (sea-glass family)
-          terminalBackground: ({ theme }) =>
-            theme.name === 'github-dark' ? '#123640' : '#E6F1F1',
+          editorTabBarBackground: '#0C2228',      /* deeper dark — matches .wl-footer-bg deep */
+          terminalTitlebarBackground: '#0C2228',
+          terminalBackground: '#0D2A31',          /* matches codeBackground */
         },
-        // Border color toward --wl-line
-        // Light: soft teal tint to match color-mix(in oklch,#0E7078 16%,transparent)
-        // Dark: --wl-line dark #5AA9A538 opacity-equivalent
-        borderColor: ({ theme }) =>
-          theme.name === 'github-dark' ? 'rgba(90,169,165,0.22)' : 'rgba(14,112,120,0.16)',
-        // Border radius: 12px from frame 211:5 code block spec
-        borderRadius: '12px',
-        // Keep syntax token colors from base themes (github-light / github-dark defaults)
-        // Only chrome overrides above; no syntax token changes.
+        // Border: teal line token equivalent — accent-soft @22% on the always-dark surface.
+        // Same in both themes (always-dark).
+        borderColor: 'rgba(90,169,165,0.22)',
+        // Border radius: 14px — source node 199:1061 (was 12px from deleted 211:5 draft).
+        borderRadius: '14px',
+        // Syntax token colors: keep from base github-dark defaults for readability on dark bg.
+        // The canonical frame (199:1062) only specifies the text color #CDE6E5 globally;
+        // per-token syntax colors are not specified — use github-dark defaults.
       },
     }),
     mdx(),
