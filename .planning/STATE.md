@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v3.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 39 context gathered
-last_updated: "2026-07-20T20:57:06.677Z"
-last_activity: 2026-07-20 -- Phase 39 planning complete
+stopped_at: Phase 39 Plan 02 complete
+last_updated: "2026-07-20T21:02:34Z"
+last_activity: 2026-07-20 -- Completed 39-02 (404 page + sitemap filter)
 progress:
   total_phases: 16
   completed_phases: 14
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-07-14)
 
 **Core value:** Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
-**Current focus:** Phase 38 — showcase-page-blog-restyle
+**Current focus:** Phase 39 — utility-pages-dev-hidden-pages
 
 ## Current Position
 
-Phase: 39
-Plan: Not started
-Status: Ready to execute
-Last activity: 2026-07-20 -- Phase 39 planning complete
+Phase: 39 (utility-pages-dev-hidden-pages) — EXECUTING
+Plan: 2 of 5 complete
+Status: Executing Phase 39
+Last activity: 2026-07-20 -- Completed 39-02 (404 page + sitemap filter)
 
 ```
 v3.0 Progress: [██████████████████████████████████████░ ] 5/9 phases (97%, 32/33 plans)
@@ -137,13 +137,16 @@ See `.planning/MILESTONES.md` for full milestone details.
 1. Delete untracked `design/image-import-*.{png,jpg}` duplicates at `design/` root (Pencil artifacts; originals tracked in `design/images/`)
 2. Decide fate of `design/Crito.pen`, `design/*.fig` in the repo (archives — keep or move)
 
+- **Phase 39-02 2026-07-20**: D-06 resolved — FrequencyWave included on 404. Single 640px text column at full viewport height feels sparse without background texture; wave placed absolutely behind content (landing hero pattern). No new SVG invented.
+- **Phase 39-02 2026-07-20**: IA-02 sitemap half complete. Filter now excludes /blog, /showcase, /services/, /areas/. Trailing-slash form used per Pitfall 5.
+
 ### Blockers/Concerns
 
 None currently.
 
 ## Session Continuity
 
-Last session: 2026-07-20T20:38:40.234Z
-Stopped at: Phase 39 context gathered
-Resume file: .planning/phases/39-utility-pages-dev-hidden-pages/39-CONTEXT.md
-Next action: Execute Phase 38 Plan 06 (/gsd:execute-phase 38 --plan 06)
+Last session: 2026-07-20T21:02:34Z
+Stopped at: Completed 39-02-PLAN.md (404 page + sitemap filter)
+Resume file: None
+Next action: Execute Phase 39 Plan 03 (/gsd:execute-phase 39 --plan 03)
