@@ -1,0 +1,458 @@
+---
+/**
+ * Area Abbotsford page — Phase 39, Plan 04
+ *
+ * Dev-hidden (noindex + sitemap filter) — NOT redirected (CONTEXT D-01/D-02).
+ * Copy is SCAFFOLD (D-03) — polished but not final for publish; FUT-03 gates rewrite.
+ * ProfessionalService JSON-LD (minimal, D-04) injected via head slot.
+ *
+ * Copy verbatim from 39-EXTRACTION.md PAGE B (frame 85:104 / 85:281).
+ * Dark treatment derived (no dark frame) — Phase 38 D-04 landing-recipe precedent.
+ *
+ * Sections:
+ *   1. Hero    — Breadcrumb, Eyebrow, h1, lead, CTAs, serving line
+ *   2. Local   — Eyebrow, h2, 2× prose paragraphs
+ *   3. Ops     — Eyebrow, h2, lead, 2× prose paragraphs
+ *   4. Promise — Eyebrow, h2, 4-item list
+ *   5. Make    — Eyebrow, h2, 3× ServiceCard (headingLevel=3)
+ *   6. Final CTA — Eyebrow, h2, lead, CTAs
+ *
+ * CRITICAL: NO import.meta.env.PROD / Astro.redirect on this page (D-02).
+ */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { BOOKING_URL, CONTACT_EMAIL } from '../../lib/constants';
+import CTAButton from '../../components/wl/CTAButton.astro';
+import Eyebrow from '../../components/wl/Eyebrow.astro';
+import ServiceCard from '../../components/wl/ServiceCard.astro';
+import Breadcrumb from '../../components/wl/Breadcrumb.astro';
+import FrequencyWave from '../../components/wl/FrequencyWave.astro';
+
+/**
+ * ProfessionalService JSON-LD (MINIMAL, D-04).
+ * Exactly: name, url, areaServed, serviceType, provider (Person).
+ * NO address, NO telephone — deferred to FUT-03 (real GBP-consistent NAP).
+ * Source: 39-CONTEXT.md D-04 + 39-UI-SPEC.md §ProfessionalService JSON-LD.
+ */
+const professionalServiceSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Joel Shinness Solutions",
+  "url": "https://joelshinness.com",
+  "areaServed": "Abbotsford, BC",
+  "serviceType": "Web Development",
+  "provider": {
+    "@type": "Person",
+    "name": "Joel Shinness"
+  }
+};
+---
+
+<BaseLayout
+  title="Web Development in Abbotsford, BC | Joel Shinness Solutions"
+  description="A software developer based right here in Abbotsford. I build websites, custom tools, automations, and practical AI for businesses in Abbotsford, Vancouver, and the Fraser Valley."
+>
+
+  {/* noindex — dev-hidden page (CONTEXT D-01/D-02). Strategy A: ship to prod + noindex. */}
+  <meta slot="head" name="robots" content="noindex, nofollow" />
+
+  {/* ProfessionalService JSON-LD (minimal, D-04).
+      set:html avoids HTML-escaping — mirrors SEO.astro line 75 exactly.
+      Source: 39-CONTEXT.md D-04 / 39-PATTERNS.md §areas/abbotsford.astro. */}
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(professionalServiceSchema)} />
+
+  {/* ── Section 1: Hero ─────────────────────────────────────────────────────
+      Background (light): gradient #E6F1F1 → #D2E7E7 — Phase 38 D-04 landing-recipe.
+      Background (dark): gradient #123640 → #0C2228 — same recipe.
+      FrequencyWave: absolutely positioned behind content (landing hero pattern).
+      Standard 112px vertical padding per UI-SPEC.
+      Source: 39-EXTRACTION.md PAGE B §1 Hero.
+  ── */}
+  <section
+    style="position: relative; overflow: hidden; padding-top: 112px; padding-bottom: 112px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#E6F1F1,#D2E7E7)] dark:[background:linear-gradient(to_bottom,#123640,#0C2228)]"
+  >
+    {/* FrequencyWave: decorative background behind content. */}
+    <FrequencyWave class="absolute pointer-events-none" style="left: -115px; top: -100px; width: 1670px; height: 1044px;" />
+
+    <div class="relative z-10" style="max-width: 1120px; margin: 0 auto;">
+
+      {/* Breadcrumb: Home / Abbotsford, BC — source 39-EXTRACTION.md PAGE B */}
+      <Breadcrumb
+        items={[
+          { label: 'Home', href: '/' },
+          { label: 'Abbotsford, BC' },
+        ]}
+      />
+
+      {/* gap breadcrumb → eyebrow: 24px */}
+      <div style="height: 24px;"></div>
+
+      {/* Eyebrow: "SERVICE AREA · ABBOTSFORD" — source 39-EXTRACTION.md PAGE B §1 */}
+      <Eyebrow>SERVICE AREA · ABBOTSFORD</Eyebrow>
+
+      {/* gap eyebrow → h1: 21px */}
+      <div style="height: 21px;"></div>
+
+      {/* h1 — source 39-EXTRACTION.md PAGE B §1. One h1 per page (axe enforced). */}
+      <h1
+        class="wl-heading-h1-interior"
+        style="color: var(--color-wl-ink); margin: 0; max-width: 700px;"
+      >
+        A software developer based right here in Abbotsford
+      </h1>
+
+      {/* gap h1 → lead: 18px */}
+      <div style="height: 18px;"></div>
+
+      {/* Lead — source 39-EXTRACTION.md PAGE B §1 */}
+      <p
+        class="wl-text-lead"
+        style="color: var(--color-wl-sub); margin: 0; max-width: 700px;"
+      >
+        I live and work in Abbotsford, and I build websites and custom tools, automations, and
+        practical AI for the businesses that run this part of BC — agriculture, trades,
+        manufacturing, and the shops and services on the ground. When it helps, I show up in
+        person: same table, same whiteboard, no discovery call lost in a video-chat lag.
+      </p>
+
+      {/* gap lead → CTAs: 32px */}
+      <div style="height: 32px;"></div>
+
+      {/* CTAs: Book a call (solid) + Email me (ghost) */}
+      <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center;">
+        <CTAButton
+          href={BOOKING_URL}
+          variant="solid"
+          icon="calendar"
+          target="_blank"
+          rel="noopener"
+        >
+          Book a call
+        </CTAButton>
+        <CTAButton href={`mailto:${CONTACT_EMAIL}`} variant="ghost" icon="mail">
+          Email me
+        </CTAButton>
+      </div>
+
+      {/* gap CTAs → serving line: 24px */}
+      <div style="height: 24px;"></div>
+
+      {/* Serving line */}
+      <p
+        class="wl-text-body"
+        style="color: var(--color-wl-sub); margin: 0;"
+      >
+        Serving Abbotsford, Vancouver, and the Fraser Valley — in person and remote.
+      </p>
+
+    </div>
+  </section>
+
+  {/* ── Section 2: Local — "Most consultants serve Abbotsford from somewhere else." ──
+      Background (light): var(--color-wl-paper) — semantic flip for dark.
+      Source: 39-EXTRACTION.md PAGE B §2 Local.
+  ── */}
+  <section
+    style="background: var(--color-wl-paper); padding-top: 112px; padding-bottom: 112px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px]"
+  >
+    <div style="max-width: 1120px; margin: 0 auto;">
+
+      {/* Eyebrow: "LOCAL BY DEFAULT" */}
+      <Eyebrow>LOCAL BY DEFAULT</Eyebrow>
+
+      {/* gap eyebrow → h2: 21px */}
+      <div style="height: 21px;"></div>
+
+      {/* Section h2 */}
+      <h2
+        class="wl-heading-h2"
+        style="color: var(--color-wl-ink); margin: 0; max-width: 800px;"
+      >
+        Most consultants serve Abbotsford from somewhere else.
+      </h2>
+
+      {/* gap h2 → paragraphs: 24px */}
+      <div style="height: 24px;"></div>
+
+      {/* Para 1 — source 39-EXTRACTION.md PAGE B §2 */}
+      <p
+        class="wl-text-lead"
+        style="color: var(--color-wl-sub); margin: 0; max-width: 700px;"
+      >
+        I'm the other way around — based here, serving Vancouver and the rest of the Fraser Valley from here.
+      </p>
+
+      {/* gap para 1 → para 2: 16px */}
+      <div style="height: 16px;"></div>
+
+      {/* Para 2 — source 39-EXTRACTION.md PAGE B §2 */}
+      <p
+        class="wl-text-lead"
+        style="color: var(--color-wl-sub); margin: 0; max-width: 700px;"
+      >
+        For you that means real meetings when the problem is easier to show than describe, and
+        someone who understands that a feed schedule, a crew dispatch board, or a farm-gate
+        storefront is not the same problem as a downtown startup's app.
+      </p>
+
+    </div>
+  </section>
+
+  {/* ── Section 3: Ops — "Deep operations, thin IT." ────────────────────────
+      Background (light): gradient #EFF7F6 → #E6F1F1 — Phase 38 D-04 recipe.
+      Background (dark): gradient #10303A → #0E2B33.
+      Source: 39-EXTRACTION.md PAGE B §3 Ops.
+  ── */}
+  <section
+    style="padding-top: 112px; padding-bottom: 112px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#EFF7F6,#E6F1F1)] dark:[background:linear-gradient(to_bottom,#10303A,#0E2B33)]"
+  >
+    <div style="max-width: 1120px; margin: 0 auto;">
+
+      {/* Eyebrow: "BUILT FOR HOW BUSINESSES HERE RUN" */}
+      <Eyebrow>BUILT FOR HOW BUSINESSES HERE RUN</Eyebrow>
+
+      {/* gap eyebrow → h2: 21px */}
+      <div style="height: 21px;"></div>
+
+      {/* Section h2 */}
+      <h2
+        class="wl-heading-h2"
+        style="color: var(--color-wl-ink); margin: 0;"
+      >
+        Deep operations, thin IT.
+      </h2>
+
+      {/* gap h2 → lead: 24px */}
+      <div style="height: 24px;"></div>
+
+      {/* Lead — source 39-EXTRACTION.md PAGE B §3 */}
+      <p
+        class="wl-text-lead"
+        style="color: var(--color-wl-sub); margin: 0; max-width: 700px;"
+      >
+        Abbotsford businesses tend to have decades of process knowledge held together by spreadsheets, whiteboards, and one overloaded office manager.
+      </p>
+
+      {/* gap lead → body 1: 16px */}
+      <div style="height: 16px;"></div>
+
+      {/* Body 1 — source 39-EXTRACTION.md PAGE B §3 */}
+      <p
+        class="wl-text-body"
+        style="color: var(--color-wl-sub); margin: 0; max-width: 700px;"
+      >
+        That's exactly the gap I fill: purpose-built tools that fit the operation you already have,
+        instead of forcing your operation into someone's off-the-shelf software.
+      </p>
+
+      {/* gap body 1 → body 2: 16px */}
+      <div style="height: 16px;"></div>
+
+      {/* Body 2 — source 39-EXTRACTION.md PAGE B §3 */}
+      <p
+        class="wl-text-body"
+        style="color: var(--color-wl-sub); margin: 0; max-width: 700px;"
+      >
+        I'm currently building operational software for a local feed business — replacing
+        paper-and-spreadsheet workflows with web tools their team uses daily.
+      </p>
+
+    </div>
+  </section>
+
+  {/* ── Section 4: Promise — "The same promise, closer to home." ───────────
+      Background (light): var(--color-wl-paper) — semantic flip for dark.
+      4-item list.
+      Source: 39-EXTRACTION.md PAGE B §4 Promise.
+  ── */}
+  <section
+    style="background: var(--color-wl-paper); padding-top: 112px; padding-bottom: 112px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px]"
+  >
+    <div style="max-width: 1120px; margin: 0 auto;">
+
+      {/* Eyebrow: "HOW IT WORKS" */}
+      <Eyebrow>HOW IT WORKS</Eyebrow>
+
+      {/* gap eyebrow → h2: 21px */}
+      <div style="height: 21px;"></div>
+
+      {/* Section h2 */}
+      <h2
+        class="wl-heading-h2"
+        style="color: var(--color-wl-ink); margin: 0;"
+      >
+        The same promise, closer to home.
+      </h2>
+
+      {/* gap h2 → list: 32px */}
+      <div style="height: 32px;"></div>
+
+      {/* 4-item list — source 39-EXTRACTION.md PAGE B §4 list items */}
+      <ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 16px;">
+        <li style="display: flex; align-items: flex-start; gap: 16px;">
+          <span
+            style="font-family: var(--font-wl-body); font-size: 16px; font-weight: 600; color: var(--color-wl-accent); flex-shrink: 0; min-width: 24px;"
+            aria-hidden="true"
+          >1.</span>
+          <p class="wl-text-body" style="color: var(--color-wl-ink); margin: 0;">
+            Discovery call (or coffee) first — you talk, I listen.
+          </p>
+        </li>
+        <li style="display: flex; align-items: flex-start; gap: 16px;">
+          <span
+            style="font-family: var(--font-wl-body); font-size: 16px; font-weight: 600; color: var(--color-wl-accent); flex-shrink: 0; min-width: 24px;"
+            aria-hidden="true"
+          >2.</span>
+          <p class="wl-text-body" style="color: var(--color-wl-ink); margin: 0;">
+            You'll know what it costs before I start building.
+          </p>
+        </li>
+        <li style="display: flex; align-items: flex-start; gap: 16px;">
+          <span
+            style="font-family: var(--font-wl-body); font-size: 16px; font-weight: 600; color: var(--color-wl-accent); flex-shrink: 0; min-width: 24px;"
+            aria-hidden="true"
+          >3.</span>
+          <p class="wl-text-body" style="color: var(--color-wl-ink); margin: 0;">
+            Plain words the whole way. Not fewer details — clearer ones, so every decision is genuinely yours.
+          </p>
+        </li>
+        <li style="display: flex; align-items: flex-start; gap: 16px;">
+          <span
+            style="font-family: var(--font-wl-body); font-size: 16px; font-weight: 600; color: var(--color-wl-accent); flex-shrink: 0; min-width: 24px;"
+            aria-hidden="true"
+          >4.</span>
+          <p class="wl-text-body" style="color: var(--color-wl-ink); margin: 0;">
+            After launch you've got a person ten minutes away, not a ticket queue.
+          </p>
+        </li>
+      </ol>
+
+    </div>
+  </section>
+
+  {/* ── Section 5: Make — "Three ways I help, right here." ──────────────────
+      Background (light): gradient #EFF7F6 → #E6F1F1 — Phase 38 D-04 recipe.
+      Background (dark): gradient #10303A → #0E2B33.
+      3× ServiceCard (headingLevel=3 — under h2, no heading skip).
+      Source: 39-EXTRACTION.md PAGE B §5 Make.
+  ── */}
+  <section
+    style="padding-top: 112px; padding-bottom: 112px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#EFF7F6,#E6F1F1)] dark:[background:linear-gradient(to_bottom,#10303A,#0E2B33)]"
+  >
+    <div style="max-width: 1120px; margin: 0 auto;">
+
+      {/* Eyebrow: "WHAT I BUILD" */}
+      <Eyebrow>WHAT I BUILD</Eyebrow>
+
+      {/* gap eyebrow → h2: 21px */}
+      <div style="height: 21px;"></div>
+
+      {/* Section h2 */}
+      <h2
+        class="wl-heading-h2"
+        style="color: var(--color-wl-ink); margin: 0;"
+      >
+        Three ways I help, right here.
+      </h2>
+
+      {/* gap h2 → cards: 42px */}
+      <div style="height: 42px;"></div>
+
+      {/* 3-column card grid at lg+, 1-col on mobile — adjusted for 3 cards */}
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" style="gap: 26px;">
+
+        {/* Card 1: Web — source 39-EXTRACTION.md PAGE B §5 Card 1 */}
+        <ServiceCard
+          headingLevel={3}
+          variant="default"
+          benefit="Win more customers"
+          title="Web"
+          body="The site that earns their trust and the custom tools that run your day — booking, tracking, dashboards, portals."
+        />
+
+        {/* Card 2: Automations — source 39-EXTRACTION.md PAGE B §5 Card 2 */}
+        <ServiceCard
+          headingLevel={3}
+          variant="default"
+          benefit="Get hours back, every week"
+          title="Automations"
+          body="The tools you already use, wired together so data moves itself — no copy-pasting, no forgotten follow-ups."
+        />
+
+        {/* Card 3: AI — source 39-EXTRACTION.md PAGE B §5 Card 3 */}
+        <ServiceCard
+          headingLevel={3}
+          variant="default"
+          benefit="The judgment work, handled"
+          title="AI"
+          body="Straight answers on where AI pays off — then it works inside your workflow: reading, sorting, drafting, summarizing."
+        />
+
+      </div>
+    </div>
+  </section>
+
+  {/* ── Section 6: Final CTA ─────────────────────────────────────────────────
+      Background (light): gradient #E6F1F1 → #D2E7E7 — Phase 38 D-04 landing recipe.
+      Background (dark): gradient #123640 → #0C2228.
+      Source: 39-EXTRACTION.md PAGE B §6 Final CTA.
+  ── */}
+  <section
+    style="padding-top: 112px; padding-bottom: 112px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#E6F1F1,#D2E7E7)] dark:[background:linear-gradient(to_bottom,#123640,#0C2228)]"
+  >
+    <div style="max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center;">
+
+      {/* Eyebrow: "GET IN TOUCH" */}
+      <Eyebrow>GET IN TOUCH</Eyebrow>
+
+      {/* gap eyebrow → h2: 21px */}
+      <div style="height: 21px;"></div>
+
+      {/* Section h2 */}
+      <h2
+        class="wl-heading-h2"
+        style="color: var(--color-wl-ink); margin: 0; max-width: 800px;"
+      >
+        Got a business in Abbotsford and a problem that smells like software?
+      </h2>
+
+      {/* gap h2 → lead: 18px */}
+      <div style="height: 18px;"></div>
+
+      {/* Lead */}
+      <p
+        class="wl-text-lead"
+        style="color: var(--color-wl-sub); margin: 0; max-width: 660px;"
+      >
+        Tell me what you're trying to do. If there's a solution that saves you time or money, I'll tell you what it'd take. If there isn't, I'll tell you that too.
+      </p>
+
+      {/* gap lead → CTAs: 32px */}
+      <div style="height: 32px;"></div>
+
+      {/* CTAs */}
+      <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: center;">
+        <CTAButton
+          href={BOOKING_URL}
+          variant="solid"
+          icon="calendar"
+          target="_blank"
+          rel="noopener"
+        >
+          Book a call
+        </CTAButton>
+        <CTAButton href={`mailto:${CONTACT_EMAIL}`} variant="ghost" icon="mail">
+          Email me
+        </CTAButton>
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>

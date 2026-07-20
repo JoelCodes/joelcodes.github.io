@@ -1,0 +1,448 @@
+---
+/**
+ * Service Web page — Phase 39, Plan 04
+ *
+ * Dev-hidden (noindex + sitemap filter) — NOT redirected (CONTEXT D-01/D-02).
+ * Pages ship to prod reachable by direct URL. Hidden ONLY via:
+ *   1. noindex meta in <head> (head slot below)
+ *   2. sitemap filter in astro.config.mjs (39-02)
+ *   3. Unlinked in nav
+ *
+ * Copy verbatim from 39-EXTRACTION.md PAGE A (frames 85:103 / 85:105).
+ * 4 FAQ answers are [COPY GAP] — answers not in Figma frame; markers rendered.
+ * Dark treatment derived (no dark frame) — Phase 38 D-04 landing-recipe precedent.
+ *
+ * Sections:
+ *   1. Hero        — Breadcrumb, Eyebrow, h1, lead, CTAs, FrequencyWave bg
+ *   2. Kinds       — Eyebrow, h2, 2× ServiceCard (headingLevel=3)
+ *   3. Proper      — Eyebrow, h2, 4-item list, footnote row
+ *   4. FAQ         — Eyebrow, h2, 4× FAQItem (answers are [COPY GAP])
+ *   5. Paired      — Eyebrow, h2, 2× LinkCard
+ *   6. Final CTA   — Eyebrow, h2, lead, CTAs, serving line
+ *
+ * CRITICAL: NO import.meta.env.PROD / Astro.redirect on this page (D-02).
+ */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { BOOKING_URL, CONTACT_EMAIL } from '../../lib/constants';
+import CTAButton from '../../components/wl/CTAButton.astro';
+import Eyebrow from '../../components/wl/Eyebrow.astro';
+import ServiceCard from '../../components/wl/ServiceCard.astro';
+import FAQItem from '../../components/wl/FAQItem.astro';
+import LinkCard from '../../components/wl/LinkCard.astro';
+import Breadcrumb from '../../components/wl/Breadcrumb.astro';
+import FrequencyWave from '../../components/wl/FrequencyWave.astro';
+---
+
+<BaseLayout
+  title="Web Development Services | Joel Shinness Solutions"
+  description="Web development that wins you customers — and tools that run your day. Fast, modern, perfect on a phone, shaped around how your business actually works."
+>
+
+  {/* noindex — dev-hidden page (CONTEXT D-01/D-02). Strategy A: ship to prod + noindex. */}
+  <meta slot="head" name="robots" content="noindex, nofollow" />
+
+  {/* ── Section 1: Hero ─────────────────────────────────────────────────────
+      Background (light): gradient #E6F1F1 → #D2E7E7 — Phase 38 D-04 landing-recipe.
+      Background (dark): gradient #123640 → #0C2228 — same recipe.
+      FrequencyWave: absolutely positioned behind content (landing hero pattern).
+      Standard 112px vertical padding per UI-SPEC.
+      Source: 39-EXTRACTION.md PAGE A §1 Hero.
+  ── */}
+  <section
+    style="position: relative; overflow: hidden; padding-top: 112px; padding-bottom: 112px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#E6F1F1,#D2E7E7)] dark:[background:linear-gradient(to_bottom,#123640,#0C2228)]"
+  >
+    {/* FrequencyWave: decorative background behind content (landing hero pattern). */}
+    <FrequencyWave class="absolute pointer-events-none" style="left: -115px; top: -100px; width: 1670px; height: 1044px;" />
+
+    <div class="relative z-10" style="max-width: 1120px; margin: 0 auto;">
+
+      {/* Breadcrumb: Home / Services / Web — source 39-EXTRACTION.md PAGE A */}
+      <Breadcrumb
+        items={[
+          { label: 'Home', href: '/' },
+          { label: 'Services', href: '/#services' },
+          { label: 'Web' },
+        ]}
+      />
+
+      {/* gap breadcrumb → eyebrow: 24px */}
+      <div style="height: 24px;"></div>
+
+      {/* Eyebrow: "WIN MORE CUSTOMERS" — source 39-EXTRACTION.md PAGE A §1 */}
+      <Eyebrow>WIN MORE CUSTOMERS</Eyebrow>
+
+      {/* gap eyebrow → h1: 21px */}
+      <div style="height: 21px;"></div>
+
+      {/* h1 — source 39-EXTRACTION.md PAGE A §1. One h1 per page (axe enforced). */}
+      <h1
+        class="wl-heading-h1-interior"
+        style="color: var(--color-wl-ink); margin: 0; max-width: 800px;"
+      >
+        Web development that wins you customers — and tools that run your day
+      </h1>
+
+      {/* gap h1 → lead: 18px */}
+      <div style="height: 18px;"></div>
+
+      {/* Lead — source 39-EXTRACTION.md PAGE A §1 */}
+      <p
+        class="wl-text-lead"
+        style="color: var(--color-wl-sub); margin: 0; max-width: 700px;"
+      >
+        Your website is the first employee a customer ever meets. I build sites that earn trust
+        the moment they load — and the custom tools behind them: booking systems, customer portals,
+        job trackers, dashboards. Fast, modern, perfect on a phone, and shaped around how your
+        business actually works.
+      </p>
+
+      {/* gap lead → CTAs: 32px */}
+      <div style="height: 32px;"></div>
+
+      {/* CTAs: Book a call (solid) + Email me (ghost) */}
+      <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center;">
+        <CTAButton
+          href={BOOKING_URL}
+          variant="solid"
+          icon="calendar"
+          target="_blank"
+          rel="noopener"
+        >
+          Book a call
+        </CTAButton>
+        <CTAButton href={`mailto:${CONTACT_EMAIL}`} variant="ghost" icon="mail">
+          Email me
+        </CTAButton>
+      </div>
+
+    </div>
+  </section>
+
+  {/* ── Section 2: Kinds — "Two kinds of web work." ─────────────────────────
+      Background (light): var(--color-wl-paper) — semantic token flip for dark.
+      2× ServiceCard (headingLevel=3 — under h2, no heading skip).
+      Source: 39-EXTRACTION.md PAGE A §2 Kinds.
+  ── */}
+  <section
+    style="background: var(--color-wl-paper); padding-top: 112px; padding-bottom: 112px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px]"
+  >
+    <div style="max-width: 1120px; margin: 0 auto;">
+
+      {/* Eyebrow: "WHAT THIS COVERS" */}
+      <Eyebrow>WHAT THIS COVERS</Eyebrow>
+
+      {/* gap eyebrow → h2: 21px */}
+      <div style="height: 21px;"></div>
+
+      {/* Section h2 */}
+      <h2
+        class="wl-heading-h2"
+        style="color: var(--color-wl-ink); margin: 0;"
+      >
+        Two kinds of web work.
+      </h2>
+
+      {/* gap h2 → cards: 42px */}
+      <div style="height: 42px;"></div>
+
+      {/* 2-column card grid at sm+, stacked on mobile */}
+      <div class="grid grid-cols-1 sm:grid-cols-2" style="gap: 26px;">
+
+        {/* Card 1: Websites — source 39-EXTRACTION.md PAGE A §2 Card 1 */}
+        <ServiceCard
+          headingLevel={3}
+          variant="default"
+          benefit="The site that brings customers in"
+          title="Websites"
+          body={`Design, copy structure, and build — a site that looks like you take your work seriously, loads instantly, and makes “get in touch” the easy next step. No page-builder bloat, no monthly platform ransom. You own it.`}
+        />
+
+        {/* Card 2: Custom web apps — source 39-EXTRACTION.md PAGE A §2 Card 2 */}
+        <ServiceCard
+          headingLevel={3}
+          variant="default"
+          benefit="The tools that run the day"
+          title="Custom web apps"
+          body="When spreadsheets and sticky notes stop scaling: a booking system that fills your calendar, a portal that cuts the customer back-and-forth, a dashboard that shows you this week's numbers without asking anyone. Purpose-built, which means it fits — nothing to work around."
+        />
+
+      </div>
+    </div>
+  </section>
+
+  {/* ── Section 3: Proper — "What 'built properly' means." ──────────────────
+      Background (light): gradient #EFF7F6 → #E6F1F1 — Phase 38 D-04 recipe.
+      Background (dark): gradient #10303A → #0E2B33 — same derived recipe.
+      4-item list + footnote row.
+      Source: 39-EXTRACTION.md PAGE A §3 Proper.
+  ── */}
+  <section
+    style="padding-top: 112px; padding-bottom: 112px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#EFF7F6,#E6F1F1)] dark:[background:linear-gradient(to_bottom,#10303A,#0E2B33)]"
+  >
+    <div style="max-width: 1120px; margin: 0 auto;">
+
+      {/* Eyebrow: "THE STANDARD" */}
+      <Eyebrow>THE STANDARD</Eyebrow>
+
+      {/* gap eyebrow → h2: 21px */}
+      <div style="height: 21px;"></div>
+
+      {/* Section h2 */}
+      <h2
+        class="wl-heading-h2"
+        style="color: var(--color-wl-ink); margin: 0;"
+      >
+        What "built properly" means.
+      </h2>
+
+      {/* gap h2 → list: 32px */}
+      <div style="height: 32px;"></div>
+
+      {/* 4-item list — source 39-EXTRACTION.md PAGE A §3 list items */}
+      <ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 16px;">
+        <li style="display: flex; align-items: flex-start; gap: 16px;">
+          <span
+            style="font-family: var(--font-wl-body); font-size: 16px; font-weight: 600; color: var(--color-wl-accent); flex-shrink: 0; min-width: 24px;"
+            aria-hidden="true"
+          >1.</span>
+          <p class="wl-text-body" style="color: var(--color-wl-ink); margin: 0;">
+            Fast on a phone, because that's where your customers are.
+          </p>
+        </li>
+        <li style="display: flex; align-items: flex-start; gap: 16px;">
+          <span
+            style="font-family: var(--font-wl-body); font-size: 16px; font-weight: 600; color: var(--color-wl-accent); flex-shrink: 0; min-width: 24px;"
+            aria-hidden="true"
+          >2.</span>
+          <p class="wl-text-body" style="color: var(--color-wl-ink); margin: 0;">
+            You'll understand what you're getting and why it's worth it — plain words, no jargon tax.
+          </p>
+        </li>
+        <li style="display: flex; align-items: flex-start; gap: 16px;">
+          <span
+            style="font-family: var(--font-wl-body); font-size: 16px; font-weight: 600; color: var(--color-wl-accent); flex-shrink: 0; min-width: 24px;"
+            aria-hidden="true"
+          >3.</span>
+          <p class="wl-text-body" style="color: var(--color-wl-ink); margin: 0;">
+            Tested and solid — a five-page site gets the same rigor as software people rely on every day.
+          </p>
+        </li>
+        <li style="display: flex; align-items: flex-start; gap: 16px;">
+          <span
+            style="font-family: var(--font-wl-body); font-size: 16px; font-weight: 600; color: var(--color-wl-accent); flex-shrink: 0; min-width: 24px;"
+            aria-hidden="true"
+          >4.</span>
+          <p class="wl-text-body" style="color: var(--color-wl-ink); margin: 0;">
+            You'll know what it costs before I start building. That promise holds the whole way through.
+          </p>
+        </li>
+      </ol>
+
+      {/* gap list → footnote: 32px */}
+      <div style="height: 32px;"></div>
+
+      {/* Footnote row — source 39-EXTRACTION.md PAGE A §3 footnote */}
+      <p
+        class="wl-text-body"
+        style="color: var(--color-wl-sub); margin: 0;"
+      >
+        Previously built software at <span style="color: var(--color-wl-ink); font-weight: 500;">EA · Unity · lululemon · thatgamecompany.</span>
+      </p>
+
+    </div>
+  </section>
+
+  {/* ── Section 4: FAQ — "Straight answers first." ──────────────────────────
+      Background (light): var(--color-wl-paper) — semantic flip for dark.
+      4× FAQItem. Answers are [COPY GAP] — not in Figma frame 85:103.
+      Source: 39-EXTRACTION.md PAGE A §4 FAQ + 39-COPY-GAPS.md.
+  ── */}
+  <section
+    style="background: var(--color-wl-paper); padding-top: 112px; padding-bottom: 112px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px]"
+  >
+    <div style="max-width: 1120px; margin: 0 auto;">
+
+      {/* Eyebrow: "QUESTIONS PEOPLE ASK" */}
+      <Eyebrow>QUESTIONS PEOPLE ASK</Eyebrow>
+
+      {/* gap eyebrow → h2: 21px */}
+      <div style="height: 21px;"></div>
+
+      {/* Section h2 */}
+      <h2
+        class="wl-heading-h2"
+        style="color: var(--color-wl-ink); margin: 0;"
+      >
+        Straight answers first.
+      </h2>
+
+      {/* gap h2 → FAQ items: 32px */}
+      <div style="height: 32px;"></div>
+
+      {/* FAQ items — questions verbatim from 39-EXTRACTION.md PAGE A §4.
+          Answers are [COPY GAP] — not in Figma frame 85:103 (logged in 39-COPY-GAPS.md).
+          Yellow-bg/red-outline gap markers per copy-gap protocol. */}
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+
+        <FAQItem
+          question="What does a small-business website cost?"
+          groupName="web-faq"
+        >
+          <span style="background: yellow; outline: 2px solid red; display: inline-block; padding: 2px 6px;">[COPY GAP: 39-COPY-GAPS.md #1 — FAQ answer not in frame 85:103]</span>
+        </FAQItem>
+
+        <FAQItem
+          question="Can you fix or extend my existing site?"
+          groupName="web-faq"
+        >
+          <span style="background: yellow; outline: 2px solid red; display: inline-block; padding: 2px 6px;">[COPY GAP: 39-COPY-GAPS.md #2 — FAQ answer not in frame 85:103]</span>
+        </FAQItem>
+
+        <FAQItem
+          question="Do you do e-commerce?"
+          groupName="web-faq"
+        >
+          <span style="background: yellow; outline: 2px solid red; display: inline-block; padding: 2px 6px;">[COPY GAP: 39-COPY-GAPS.md #3 — FAQ answer not in frame 85:103]</span>
+        </FAQItem>
+
+        <FAQItem
+          question="Where do you work?"
+          groupName="web-faq"
+        >
+          <span style="background: yellow; outline: 2px solid red; display: inline-block; padding: 2px 6px;">[COPY GAP: 39-COPY-GAPS.md #4 — FAQ answer not in frame 85:103]</span>
+        </FAQItem>
+
+      </div>
+    </div>
+  </section>
+
+  {/* ── Section 5: Paired — "A site gets more valuable when the work around it moves itself." ─
+      Background (light): gradient #E6F1F1 → #D2E7E7 — Phase 38 D-04 landing recipe.
+      Background (dark): gradient #123640 → #0C2228.
+      2× LinkCard.
+      Source: 39-EXTRACTION.md PAGE A §5 Paired.
+  ── */}
+  <section
+    style="padding-top: 112px; padding-bottom: 112px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#E6F1F1,#D2E7E7)] dark:[background:linear-gradient(to_bottom,#123640,#0C2228)]"
+  >
+    <div style="max-width: 1120px; margin: 0 auto;">
+
+      {/* Eyebrow: "OFTEN PAIRED WITH" */}
+      <Eyebrow>OFTEN PAIRED WITH</Eyebrow>
+
+      {/* gap eyebrow → h2: 21px */}
+      <div style="height: 21px;"></div>
+
+      {/* Section h2 */}
+      <h2
+        class="wl-heading-h2"
+        style="color: var(--color-wl-ink); margin: 0; max-width: 800px;"
+      >
+        A site gets more valuable when the work around it moves itself.
+      </h2>
+
+      {/* gap h2 → cards: 42px */}
+      <div style="height: 42px;"></div>
+
+      {/* 2-column LinkCard grid at sm+, stacked on mobile */}
+      <div class="grid grid-cols-1 sm:grid-cols-2" style="gap: 26px;">
+
+        {/* Card 1: Automations — source 39-EXTRACTION.md PAGE A §5 Card 1 */}
+        <LinkCard
+          href="/#services"
+          title="Automations"
+          outcome="Get hours back, every week"
+          goLabel="Automations →"
+        >
+          The tools you already use, wired together so data moves itself — no copy-pasting, no forgotten follow-ups.
+        </LinkCard>
+
+        {/* Card 2: AI — source 39-EXTRACTION.md PAGE A §5 Card 2 */}
+        <LinkCard
+          href="/#services"
+          title="AI"
+          outcome="The judgment work, handled"
+          goLabel="Practical AI →"
+        >
+          Straight answers on where AI pays off — then it works inside your workflow: reading, sorting, drafting, summarizing.
+        </LinkCard>
+
+      </div>
+    </div>
+  </section>
+
+  {/* ── Section 6: Final CTA ─────────────────────────────────────────────────
+      Background (light): var(--color-wl-paper) — semantic flip for dark.
+      Source: 39-EXTRACTION.md PAGE A §6 Final CTA.
+  ── */}
+  <section
+    style="background: var(--color-wl-paper); padding-top: 112px; padding-bottom: 112px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px]"
+  >
+    <div style="max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center;">
+
+      {/* Eyebrow: "GET IN TOUCH" */}
+      <Eyebrow>GET IN TOUCH</Eyebrow>
+
+      {/* gap eyebrow → h2: 21px */}
+      <div style="height: 21px;"></div>
+
+      {/* Section h2 */}
+      <h2
+        class="wl-heading-h2"
+        style="color: var(--color-wl-ink); margin: 0;"
+      >
+        Tell me what your website should be doing for you.
+      </h2>
+
+      {/* gap h2 → lead: 18px */}
+      <div style="height: 18px;"></div>
+
+      {/* Lead */}
+      <p
+        class="wl-text-lead"
+        style="color: var(--color-wl-sub); margin: 0; max-width: 660px;"
+      >
+        If there's a solution that saves you time or money, I'll tell you what it'd take. If there isn't, I'll tell you that too.
+      </p>
+
+      {/* gap lead → CTAs: 32px */}
+      <div style="height: 32px;"></div>
+
+      {/* CTAs */}
+      <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: center;">
+        <CTAButton
+          href={BOOKING_URL}
+          variant="solid"
+          icon="calendar"
+          target="_blank"
+          rel="noopener"
+        >
+          Book a call
+        </CTAButton>
+        <CTAButton href={`mailto:${CONTACT_EMAIL}`} variant="ghost" icon="mail">
+          Email me
+        </CTAButton>
+      </div>
+
+      {/* gap CTAs → serving line: 24px */}
+      <div style="height: 24px;"></div>
+
+      {/* Serving line */}
+      <p
+        class="wl-text-body"
+        style="color: var(--color-wl-sub); margin: 0;"
+      >
+        Serving Abbotsford, Vancouver, and the Fraser Valley — and remote clients everywhere.
+      </p>
+
+    </div>
+  </section>
+
+</BaseLayout>
