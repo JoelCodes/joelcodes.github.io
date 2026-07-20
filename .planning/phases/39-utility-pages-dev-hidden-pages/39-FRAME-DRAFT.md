@@ -74,3 +74,7 @@ Method: cloned each finished desktop frame, resized to 390, and reflowed to the 
 
 - Both mobile frames render as complete page compositions (screenshots reviewed section-by-section: header, hero, cards, footer all clean, no clipped text or overflow after reflow).
 - **Manual save required:** Joel to ⌘S in the Figma editor to persist (per MEMORY.md Pencil/Figma-MCP constraint) before the frames are treated as canonical extraction authority for Wave 3.
+
+## Approval (Wave 2 · 39-03)
+
+**APPROVED by Joel** — both `1440` desktops (`85:105`, `85:281`) and both `390` mobiles (`248:102`, `255:95`) approved as canonical extraction authority. Wave 3 (39-04) page build released. Joel to ⌘S the file to persist the new mobile frames.
