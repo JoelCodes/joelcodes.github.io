@@ -10,7 +10,7 @@ Plans:
 
 **Wave 2** (hard checkpoint — gates service/area build)
 
-- [ ] 39-03-PLAN.md — HARD CHECKPOINT: Joel approves drafted frames [checkpoint] [PAGE-03, PAGE-04]
+- [x] 39-03-PLAN.md — HARD CHECKPOINT: Joel approves drafted frames [checkpoint] [PAGE-03, PAGE-04]
 
 **Wave 3** (blocked on frame approval)
 
