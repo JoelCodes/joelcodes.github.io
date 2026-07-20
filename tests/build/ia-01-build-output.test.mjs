@@ -165,6 +165,138 @@ if (existsSync(faqIndexPath)) {
   );
 }
 
+// ── Phase 40 Assertions: IA-01 redirect stubs + sitemap exclusion ─────────────
+//
+// Verifies five redirect stubs emitted by the updated astro.config.mjs redirects block.
+// All stubs must carry <meta http-equiv="refresh"> with the correct url= destination
+// and <meta name="robots" content="noindex"> (auto-added by Astro for redirect stubs).
+// Redirect stubs must NOT appear in dist/sitemap-0.xml.
+
+console.log('\n[Phase 40] IA-01 redirect stubs\n');
+
+// Helper: read a file if it exists, return null otherwise
+function readIfExists(filePath) {
+  return existsSync(filePath) ? readFileSync(filePath, 'utf-8') : null;
+}
+
+// /portfolio → /showcase
+const portfolioIndexPath = join(distDir, 'portfolio', 'index.html');
+const portfolioContent = readIfExists(portfolioIndexPath);
+assert(
+  '[40] dist/portfolio/index.html exists',
+  portfolioContent !== null,
+  `Expected: ${portfolioIndexPath}`
+);
+assert(
+  '[40] dist/portfolio/index.html redirects to /showcase',
+  portfolioContent !== null && /url=\/showcase/.test(portfolioContent),
+  portfolioContent !== null ? 'Expected url=/showcase not found' : 'File missing'
+);
+assert(
+  '[40] dist/portfolio/index.html has noindex',
+  portfolioContent !== null && /noindex/.test(portfolioContent),
+  portfolioContent !== null ? 'Expected noindex not found' : 'File missing'
+);
+
+// /projects → /showcase (new entry — previously not in config)
+const projectsIndexPath = join(distDir, 'projects', 'index.html');
+const projectsContent = readIfExists(projectsIndexPath);
+assert(
+  '[40] dist/projects/index.html exists',
+  projectsContent !== null,
+  `Expected: ${projectsIndexPath}`
+);
+assert(
+  '[40] dist/projects/index.html redirects to /showcase',
+  projectsContent !== null && /url=\/showcase/.test(projectsContent),
+  projectsContent !== null ? 'Expected url=/showcase not found' : 'File missing'
+);
+assert(
+  '[40] dist/projects/index.html has noindex',
+  projectsContent !== null && /noindex/.test(projectsContent),
+  projectsContent !== null ? 'Expected noindex not found' : 'File missing'
+);
+
+// /contact → Calendly BOOKING_URL (external URL redirect, Astro ≥ 5.2.0)
+const contactIndexPath = join(distDir, 'contact', 'index.html');
+const contactContent = readIfExists(contactIndexPath);
+assert(
+  '[40] dist/contact/index.html exists',
+  contactContent !== null,
+  `Expected: ${contactIndexPath}`
+);
+assert(
+  '[40] dist/contact/index.html redirects to calendly.com',
+  contactContent !== null && /url=https:\/\/calendly\.com/.test(contactContent),
+  contactContent !== null ? 'Expected url=https://calendly.com not found' : 'File missing'
+);
+
+// /thank-you → / (safety redirect; source page deleted in Plan 02)
+const thankYouIndexPath = join(distDir, 'thank-you', 'index.html');
+const thankYouContent = readIfExists(thankYouIndexPath);
+assert(
+  '[40] dist/thank-you/index.html exists',
+  thankYouContent !== null,
+  `Expected: ${thankYouIndexPath}`
+);
+assert(
+  '[40] dist/thank-you/index.html redirects to /',
+  thankYouContent !== null && /url=\/["'>]/.test(thankYouContent),
+  thankYouContent !== null ? 'Expected url=/ not found' : 'File missing'
+);
+
+// /faq → / (regression — must still pass; existing redirect unchanged)
+// (already asserted in Assertion 3 above; this block confirms it in Phase 40 context)
+const faqContent40 = readIfExists(faqIndexPath);
+assert(
+  '[40] dist/faq/index.html still redirects to / (regression check)',
+  faqContent40 !== null && /url=\/["'>]/.test(faqContent40),
+  faqContent40 !== null ? 'Expected url=/ not found' : 'File missing'
+);
+
+// D-02 gate: /projects/[slug] and /portfolio/[slug] must NOT produce redirect stubs
+// (Astro static mode raises GetStaticPathsRequired for dynamic→fixed redirects)
+// We verify by confirming there is NO projects/ subdirectory beyond the root stub.
+const projectsDir = join(distDir, 'projects');
+if (existsSync(projectsDir)) {
+  const projectsEntries = readdirSync(projectsDir, { withFileTypes: true });
+  const slugDirs = projectsEntries.filter(e => e.isDirectory());
+  assert(
+    '[40] dist/projects/ has no per-slug subdirectories (D-02: no dynamic redirect entry)',
+    slugDirs.length === 0,
+    slugDirs.length > 0 ? `Found unexpected subdirs: ${slugDirs.map(d => d.name).join(', ')}` : ''
+  );
+}
+
+// Sitemap exclusion: redirect stubs must NOT appear in dist/sitemap-0.xml
+if (existsSync(sitemapPath)) {
+  const sitemapContent40 = readFileSync(sitemapPath, 'utf-8');
+  const hasPortfolioInSitemap = /\/portfolio/.test(sitemapContent40);
+  const hasProjectsInSitemap = /\/projects/.test(sitemapContent40);
+  const hasContactInSitemap = /\/contact/.test(sitemapContent40);
+  const hasThankYouInSitemap = /\/thank-you/.test(sitemapContent40);
+  assert(
+    '[40] sitemap-0.xml excludes /portfolio redirect stub',
+    !hasPortfolioInSitemap,
+    hasPortfolioInSitemap ? 'Found /portfolio in sitemap — redirect stubs should be excluded' : ''
+  );
+  assert(
+    '[40] sitemap-0.xml excludes /projects redirect stub',
+    !hasProjectsInSitemap,
+    hasProjectsInSitemap ? 'Found /projects in sitemap — redirect stubs should be excluded' : ''
+  );
+  assert(
+    '[40] sitemap-0.xml excludes /contact redirect stub',
+    !hasContactInSitemap,
+    hasContactInSitemap ? 'Found /contact in sitemap — redirect stubs should be excluded' : ''
+  );
+  assert(
+    '[40] sitemap-0.xml excludes /thank-you redirect stub',
+    !hasThankYouInSitemap,
+    hasThankYouInSitemap ? 'Found /thank-you in sitemap — redirect stubs should be excluded' : ''
+  );
+}
+
 // ── Summary ───────────────────────────────────────────────────────────────────
 
 console.log(`\n${passed + failed} assertions: ${passed} passed, ${failed} failed\n`);
