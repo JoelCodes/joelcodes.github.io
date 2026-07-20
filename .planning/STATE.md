@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v3.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 39 Plan 02 complete
-last_updated: "2026-07-20T21:02:34Z"
-last_activity: 2026-07-20 -- Completed 39-02 (404 page + sitemap filter)
+stopped_at: Phase 39 Plan 04 complete
+last_updated: "2026-07-20T22:00:00Z"
+last_activity: 2026-07-20 -- Completed 39-04 (service web + area Abbotsford pages)
 progress:
   total_phases: 16
   completed_phases: 14
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-07-14)
 ## Current Position
 
 Phase: 39 (utility-pages-dev-hidden-pages) — EXECUTING
-Plan: 2 of 5 complete
+Plan: 4 of 5 complete
 Status: Executing Phase 39
-Last activity: 2026-07-20 -- Completed 39-02 (404 page + sitemap filter)
+Last activity: 2026-07-20 -- Completed 39-04 (service web + area Abbotsford pages)
 
 ```
 v3.0 Progress: [██████████████████████████████████████░ ] 5/9 phases (97%, 32/33 plans)
@@ -139,6 +139,8 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 - **Phase 39-02 2026-07-20**: D-06 resolved — FrequencyWave included on 404. Single 640px text column at full viewport height feels sparse without background texture; wave placed absolutely behind content (landing hero pattern). No new SVG invented.
 - **Phase 39-02 2026-07-20**: IA-02 sitemap half complete. Filter now excludes /blog, /showcase, /services/, /areas/. Trailing-slash form used per Pitfall 5.
+- **Phase 39-04 2026-07-20**: /services/web + /areas/abbotsford built. Strategy A confirmed: no PROD redirect; noindex via BaseLayout head slot only. ProfessionalService JSON-LD minimal per D-04 (no address/telephone). 4 FAQ answers are [COPY GAP] — answer copy not in frame 85:103. Curly quotes in JSX body= prop require template literal syntax (not double-quoted attribute) when copy contains typographic quotes.
+- **Phase 39-04 2026-07-20**: Interior page template established — Breadcrumb → Eyebrow (21px gap) → h1 (.wl-heading-h1-interior) → lead (18px gap) → CTAs, FrequencyWave absolutely positioned behind hero section. No net-new contrast pairs for these pages (all bg literals already covered in Phases 37/38).
 
 ### Blockers/Concerns
 
@@ -146,7 +148,7 @@ None currently.
 
 ## Session Continuity
 
-Last session: 2026-07-20T21:02:34Z
-Stopped at: Completed 39-02-PLAN.md (404 page + sitemap filter)
+Last session: 2026-07-20T22:00:00Z
+Stopped at: Completed 39-04-PLAN.md (service web + area Abbotsford dev-hidden pages)
 Resume file: None
-Next action: Execute Phase 39 Plan 03 (/gsd:execute-phase 39 --plan 03)
+Next action: Execute Phase 39 Plan 05 (/gsd:execute-phase 39 --plan 05) — fidelity gate
