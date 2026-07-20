@@ -6,7 +6,7 @@ Plans:
 **Wave 1** (parallel — frame drafting + 404/config, no file overlap)
 
 - [ ] 39-01-PLAN.md — Draft Figma frames 85:103 + 85:104 (@1440/390) via use_figma [manual/Figma] [PAGE-03, PAGE-04]
-- [ ] 39-02-PLAN.md — 404 page (locked copy) + sitemap filter (/services/, /areas/) + 404 axe spec [PAGE-05, IA-02]
+- [x] 39-02-PLAN.md — 404 page (locked copy) + sitemap filter (/services/, /areas/) + 404 axe spec [PAGE-05, IA-02]
 
 **Wave 2** (hard checkpoint — gates service/area build)
 
