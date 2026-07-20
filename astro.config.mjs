@@ -71,11 +71,15 @@ export default defineConfig({
   site: 'https://joelshinness.com',
 
   redirects: {
-    '/portfolio': '/',
+    '/portfolio': '/showcase',
     // Note: '/portfolio/[slug]' redirect omitted — Astro static mode cannot redirect a
-    // dynamic segment to a fixed URL; /portfolio/anything 404s until Phase 38 adds /showcase.
-    '/contact': '/#contact',
+    // dynamic segment to a fixed URL; /portfolio/anything 404s (D-02, Phase 36-02 learning).
+    '/projects': '/showcase',
+    // Note: '/projects/[slug]' redirect omitted — same reason; /projects/anything 404s.
+    // Keep in sync with BOOKING_URL in src/lib/constants.ts
+    '/contact': 'https://calendly.com/discovery-joelshinness/discovery-call',
     '/faq': '/',
+    '/thank-you': '/',
   },
 
   // base: '/joel-shinness-website', // Uncomment if not using custom domain
