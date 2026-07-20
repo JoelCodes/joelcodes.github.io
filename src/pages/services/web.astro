@@ -20,7 +20,8 @@
  *   5. Paired      — Eyebrow, h2, 2× LinkCard
  *   6. Final CTA   — Eyebrow, h2, lead, CTAs, serving line
  *
- * CRITICAL: NO import.meta.env.PROD / Astro.redirect on this page (D-02).
+ * CRITICAL: this page does NOT redirect out of production (D-02, Strategy A) —
+ * it ships to the prod build and is hidden only via noindex + sitemap filter.
  */
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
