@@ -1,10 +1,11 @@
 ---
 phase: 39
 slug: utility-pages-dev-hidden-pages
-status: draft
+status: approved
 shadcn_initialized: false
 preset: none
 created: 2026-07-20
+reviewed_at: 2026-07-20
 ---
 
 # Phase 39 — UI Design Contract
