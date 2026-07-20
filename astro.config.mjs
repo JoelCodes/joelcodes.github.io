@@ -145,7 +145,11 @@ export default defineConfig({
     }),
     mdx(),
     sitemap({
-      filter: (page) => !page.includes('/blog') && !page.includes('/showcase'),
+      filter: (page) =>
+        !page.includes('/blog') &&
+        !page.includes('/showcase') &&
+        !page.includes('/services/') &&
+        !page.includes('/areas/'),
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
