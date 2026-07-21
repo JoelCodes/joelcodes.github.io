@@ -156,3 +156,36 @@
 
 ---
 
+## v3.0 Wavelength Rebrand (Shipped: 2026-07-21)
+
+**Delivered:** Rebuilt the entire site in place to the "Joel Shinness Solutions" Figma brand — sea-cool palette, Fraunces + Hanken Grotesk, waveform mark, new Landing/Showcase IA in light + dark themes — replacing the neobrutalist design wholesale while keeping the Astro 5 / Tailwind 4 infrastructure, CI, SEO plumbing, and blog content. Every visible-UI phase closed with a Figma-frame vs. rendered screenshot fidelity gate (the discipline absent in the abandoned v1.4).
+
+**Phases completed:** 33-41 (45 plans total)
+
+**Key accomplishments:**
+
+- Sea-cool `--wl-*` token foundation (light + dark) and self-hosted Fraunces + Hanken Grotesk (CLS=0 via Fontaine), with a 13-style type ramp and a WCAG AA contrast gate script
+- Full Wavelength chrome (SiteHeader/SiteFooter, circle-badge mark on dark, zero client JS, system-only FOUC-safe dark mode) plus a 13-component `src/components/wl/` library matching the Figma Components page
+- Rebuilt landing page — all 9 Figma sections at 4 breakpoints, light + dark, scroll-spy anchor nav, real Calendly URL live via `BOOKING_URL` (resolved FUT-01)
+- Dev-gated Showcase (expandable ProjectCards from frame 12:3) and a fully restyled dev-only blog (`.wl-prose`, rethemed expressive-code, LCP fixed structurally)
+- Dev-hidden Service Web + Area Abbotsford pages (noindex + sitemap filter + PROD redirect guards, ProfessionalService JSON-LD) and a branded 404
+- Legacy cleanup: neobrutalist components/pages/tokens purged, redirects wired (`/projects`, `/faq`, `/thank-you`), n8n contact form removed, CLAUDE.md rewritten for v3.0
+- Quality gate passed: axe-core 20/20 zero violations across all pages both themes (QUAL-01); Lighthouse URL set scoped to `/` + `/404` (QUAL-02); Joel approved the milestone-close visual fidelity comparison (QUAL-03)
+
+**Milestone audit:** PASSED — 33/33 requirements satisfied, no critical blockers, all 8 cross-phase integration flows verified against a clean build (`.planning/milestones/v3.0-MILESTONE-AUDIT.md`).
+
+**Known deferred items at close (tracked, non-blocking):** QUAL-02 Lighthouse score runs in CI on push to main (auto-resolves on PR merge); `/projects/[slug]` dynamic redirect omitted (static-mode limit, D-02); 4 Service Web FAQ answers = COPY GAP (FUT-08); `BOOKING_URL` literal duplicated in `/contact` config redirect (sync-guarded); untracked `design/image-import.*` root duplicates.
+
+**Stats:**
+
+- ~6,968 lines across `src/` (Astro/TypeScript/CSS/MDX)
+- 9 phases, 45 plans, 167 milestone commits
+- 7 days from milestone start to ship (Jul 14-21, 2026)
+- Git range: `6534b0b` → `cb52ece`
+
+**Git tag:** `v3.0`
+
+**What's next:** Open PR to `main` (triggers GitHub Pages deploy + Lighthouse CI); then plan the next milestone (publishing Service/Area pages, blog back into nav, real case study — FUT-02..07).
+
+---
+

@@ -2,10 +2,10 @@
 gsd_state_version: 1.0
 milestone: v3.0
 milestone_name: Wavelength Rebrand
-status: milestone-shipped
-stopped_at: v3.0 shipped — QUAL-03 approved by Joel 2026-07-21; all 9 phases complete
-last_updated: "2026-07-21T11:15:00Z"
-last_activity: 2026-07-21 -- Joel approved QUAL-03 fidelity gate; v3.0 marked shipped, tagged v3.0
+status: milestone-archived
+stopped_at: v3.0 archived — milestone audit PASSED (33/33); roadmap/requirements archived; awaiting PR to main
+last_updated: "2026-07-21T12:00:00Z"
+last_activity: 2026-07-21 -- v3.0 milestone audited (PASSED) and archived; next: PR to main + new milestone
 progress:
   total_phases: 9
   completed_phases: 9
@@ -21,19 +21,18 @@ progress:
 See: .planning/PROJECT.md (updated 2026-07-14)
 
 **Core value:** Small business owners can understand what Joel does, trust his process, and easily reach out to start a conversation.
-**Current focus:** Phase 41 — legacy-cleanup-quality-gate
+**Current focus:** v3.0 archived — open a PR to `main` (deploy + finalize QUAL-02), then `/gsd:new-milestone`
 
 ## Current Position
 
-Phase: 41 (legacy-cleanup-quality-gate) — COMPLETE
-Plan: 5 of 5 COMPLETE (41-05 QUAL-03 approved by Joel 2026-07-21)
-Status: v3.0 MILESTONE SHIPPED — all 9 phases complete, tagged v3.0
-Last activity: 2026-07-21 -- Joel approved QUAL-03; milestone marked shipped
+Phase: 41 (legacy-cleanup-quality-gate) — COMPLETE (final phase of v3.0)
+Status: v3.0 MILESTONE ARCHIVED — audit PASSED 33/33; roadmap + requirements archived to milestones/; tagged v3.0
+Last activity: 2026-07-21 -- milestone audited (PASSED) and archived; REQUIREMENTS.md retired for next cycle
 
 ```
 v3.0 Progress: [████████████████████████████████████████] 9/9 phases (100%, 45/45 plans)
                33 ██ 34 ██ 35 ██ 36 ██ 37 ██ 38 ██ 39 ██ 40 ██ 41 ██
-               SHIPPED — next: /gsd:complete-milestone to archive
+               SHIPPED + ARCHIVED — next: PR to main, then /gsd:new-milestone
 ```
 
 ## Phase Index
@@ -60,7 +59,7 @@ v3.0 Progress: [█████████████████████�
 | v1.3 | Design System & Nav Cleanup | 17-22 | 2026-02-11 |
 | v1.4 | Design Overhaul | (23-30 attempted) | Abandoned 2026-05-31 |
 | v2.0 | Prep Crito Design File | 23-32 (all executed) | Abandoned 2026-07-14 |
-| v3.0 | Wavelength Rebrand | 33-41 | — |
+| v3.0 | Wavelength Rebrand | 33-41 | 2026-07-21 |
 
 See `.planning/MILESTONES.md` for full milestone details.
 
@@ -153,8 +152,8 @@ None currently.
 
 ## Session Continuity
 
-Last session: 2026-07-21T11:15:00Z
-Stopped at: v3.0 SHIPPED — Joel approved QUAL-03 fidelity gate 2026-07-21; 41-05 closed, milestone marked shipped in STATE.md + ROADMAP.md, tagged v3.0 in git
+Last session: 2026-07-21T12:00:00Z
+Stopped at: v3.0 ARCHIVED — milestone audit PASSED (33/33); roadmap/requirements/audit archived to milestones/v3.0-*, MILESTONES.md + PROJECT.md + RETROSPECTIVE.md updated, REQUIREMENTS.md retired
 Resume file: None
-Next action: /gsd:complete-milestone — archive v3.0 phases and prepare for the next milestone cycle
+Next action: Open PR from gsd/v3.0-milestone → main (deploy + finalize QUAL-02 Lighthouse in CI); then /clear and /gsd:new-milestone
 Post-ship note: landing hero gained a JS typing rotor (commit 1a8b290) — a deliberate deviation from Figma (frames showed static "time saved"); QUAL-03 screenshots predate it but capture the identical static first frame.
