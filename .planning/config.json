@@ -30,7 +30,8 @@
   },
   "git": {
     "branching_strategy": "milestone",
-    "create_tag": true
+    "create_tag": true,
+    "milestone_branch_template": "gsd/{milestone}-milestone"
   },
   "granularity": "standard"
 }
