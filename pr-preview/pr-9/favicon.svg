@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 104 104">
+  <!-- Wavelength brand mark — badge presentation (matches SiteHeader dark / SiteFooter, Figma 42:77 / 117:104). -->
+  <!-- Sea-glass disc (#EAF6F3) + ink wave strokes (#12333B); same wave paths as WaveMark.astro. -->
+  <circle cx="52" cy="52" r="52" fill="#EAF6F3"/>
+  <path d="M14 36C30 24 46 44 62 34C74 27 84 38 90 32" stroke="#12333B" stroke-opacity="0.45" stroke-width="5" stroke-linecap="round"/>
+  <path d="M10 54C28 40 48 64 68 52C80 44 90 56 96 50" stroke="#12333B" stroke-width="6" stroke-linecap="round"/>
+  <path d="M14 72C30 62 48 80 64 70C76 63 86 72 90 68" stroke="#12333B" stroke-opacity="0.65" stroke-width="5" stroke-linecap="round"/>
+</svg>
