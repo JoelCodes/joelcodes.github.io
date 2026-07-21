@@ -1,12 +1,12 @@
 {
-  "_comment": "URL list: real prod pages only. landing (/) + 404. All other routes (showcase, blog, services/*, areas/*) redirect to / in prod via PROD guard (D-06).",
+  "_comment": "URL list: real prod pages only. landing (/) + 404. 404 is served as /404.html because Astro emits dist/404.html (no /404/index.html) and the LHCI static server 404s on a bare /404 path. All other routes (showcase, blog, services/*, areas/*) redirect to / in prod via PROD guard (D-06).",
   "ci": {
     "collect": {
       "numberOfRuns": 3,
       "staticDistDir": "./dist",
       "url": [
         "http://localhost/",
-        "http://localhost/404"
+        "http://localhost/404.html"
       ]
     },
     "assert": {
