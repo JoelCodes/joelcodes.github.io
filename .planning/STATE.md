@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v3.0
 milestone_name: Wavelength Rebrand
 status: executing
-stopped_at: Completed 41-02 (CLEAN-02 — global.css neobrutalist token purge + BaseLayout body migration)
-last_updated: "2026-07-21T23:58:00Z"
-last_activity: 2026-07-21 -- Completed 41-02-PLAN.md
+stopped_at: Completed 41-04 (QUAL-01 axe gate green + QUAL-02 Lighthouse URL scoped; PROD guards on services/web + areas/abbotsford)
+last_updated: "2026-07-20T23:57:00Z"
+last_activity: 2026-07-20 -- Completed 41-04-PLAN.md
 progress:
   total_phases: 9
   completed_phases: 8
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-07-14)
 ## Current Position
 
 Phase: 41 (legacy-cleanup-quality-gate) — EXECUTING
-Plan: 2 of 5 COMPLETE (41-01, 41-02 done; 41-03 done separately)
+Plan: 4 of 5 COMPLETE (41-01, 41-02, 41-03, 41-04 done)
 Status: Executing Phase 41
-Last activity: 2026-07-21 -- Completed 41-02 (CLEAN-02 token purge + BaseLayout body migration)
+Last activity: 2026-07-20 -- Completed 41-04 (QUAL-01 axe gate + QUAL-02 Lighthouse URL scope + PROD guards)
 
 ```
 v3.0 Progress: [██████████████████████████████████████░ ] 5/9 phases (97%, 32/33 plans)
@@ -141,6 +141,9 @@ See `.planning/MILESTONES.md` for full milestone details.
 - **Phase 39-02 2026-07-20**: IA-02 sitemap half complete. Filter now excludes /blog, /showcase, /services/, /areas/. Trailing-slash form used per Pitfall 5.
 - **Phase 39-04 2026-07-20**: /services/web + /areas/abbotsford built. Strategy A confirmed: no PROD redirect; noindex via BaseLayout head slot only. ProfessionalService JSON-LD minimal per D-04 (no address/telephone). 4 FAQ answers are [COPY GAP] — answer copy not in frame 85:103. Curly quotes in JSX body= prop require template literal syntax (not double-quoted attribute) when copy contains typographic quotes.
 - **Phase 39-04 2026-07-20**: Interior page template established — Breadcrumb → Eyebrow (21px gap) → h1 (.wl-heading-h1-interior) → lead (18px gap) → CTAs, FrequencyWave absolutely positioned behind hero section. No net-new contrast pairs for these pages (all bg literals already covered in Phases 37/38).
+- **Phase 41-04 2026-07-20**: PROD guard placement: `if (import.meta.env.PROD) return Astro.redirect('/')` MUST come after all import statements (not before) — esbuild ESM hoisting causes "Unterminated string literal" build error if return precedes imports. services/web and areas/abbotsford now redirect in prod (D-06 applied).
+- **Phase 41-04 2026-07-20**: QUAL-01 green — axe-core 20/20 tests pass, zero violations, all pages (landing, showcase, blog index+post, 404, services/web, areas/abbotsford) in both light and dark themes. One WR-05 incomplete gradient-bg contrast check logged (not a violation).
+- **Phase 41-04 2026-07-20**: QUAL-02 Lighthouse URL set landed: lighthouserc.json + lighthouserc-mobile.json now test exactly / and /404. Stale /blog/im-pivoting/ removed. CI will score these on next push to main.
 
 ### Blockers/Concerns
 
@@ -148,7 +151,7 @@ None currently.
 
 ## Session Continuity
 
-Last session: 2026-07-21T23:58:00Z
-Stopped at: Completed 41-02-PLAN.md (CLEAN-02 — global.css purged to --wl-* only, BaseLayout body migrated to bg-wl-paper text-wl-ink)
+Last session: 2026-07-20T23:57:00Z
+Stopped at: Completed 41-04-PLAN.md (QUAL-01 axe 20/20 pass zero violations; QUAL-02 Lighthouse URL set scoped to / + /404; PROD guards on services/web + areas/abbotsford)
 Resume file: None
-Next action: Execute Phase 41 Plan 03 (/gsd:execute-phase 41 --plan 03) — CLEAN-03 docs + design/ cleanup (if not yet done), then Plan 04 QUAL-01
+Next action: Execute Phase 41 Plan 05 (/gsd:execute-phase 41 --plan 05) — QUAL-03 Figma-vs-rendered visual-fidelity sign-off (human checkpoint)
