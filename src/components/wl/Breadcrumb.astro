@@ -1,0 +1,117 @@
+---
+/**
+ * Breadcrumb — COMP-02 Breadcrumb primitive
+ *
+ * Interior-page breadcrumb. WAI-ARIA pattern: nav[aria-label="Breadcrumb"] > ol > li.
+ * Source: 35-FIGMA-EXTRACTION.md §Fresh MCP Extraction (2026-07-15), node 100:14.
+ *
+ * Extraction values:
+ *   Text:      HG Regular 14px, color #4C6A70 (literal, designer-confirmed non-token)
+ *              14px is a local Figma-extracted size (35-FIGMA-EXTRACTION.md local values)
+ *   Separator: " / " text with spaces, same color — no SVG (designer confirmed)
+ *   A11y:      nav[aria-label="Breadcrumb"] + ol + aria-current="page" on last item
+ *
+ * Color #4C6A70 note:
+ *   Designer description: "Color #4C6A70 (matches the site's crumb/trust tint -- not a
+ *   token in code either)". This is a non-token literal sourced from Figma 100:14.
+ *   contrast: #4C6A70 on #F6FBFA (paper) = 5.58:1 (AA PASS -- verified check-contrast.mjs)
+ *   contrast: #4C6A70 on #FFFFFF (white) = 5.83:1 (AA PASS -- verified check-contrast.mjs)
+ *   Dark mode: #4C6A70 on #0C2228 (dark paper) = 2.82:1 -- FAIL. Fixed via --wl-breadcrumb-color
+ *   local token (global.css Phase 35): flips #4C6A70 light / #A9C9C7 dark. (Rule 1 bug fix)
+ *
+ * Separator: " / " as aria-hidden text span (no SVG by design — designer confirmed).
+ *
+ * WAI-ARIA pattern:
+ *   - Last item: <span aria-current="page"> — NOT a link (exactly ONE aria-current
+ *     per trail, per the WAI-ARIA breadcrumb pattern — WR-06)
+ *   - Middle items without href: plain <span> (non-navigable, NO aria-current)
+ *   - Other items: <a href> with hover:text-wl-accent and focus ring
+ *   - Between items: <span aria-hidden="true"> / </span>
+ *
+ * Props:
+ *   items:  Array<{ label: string; href?: string }> — breadcrumb trail
+ *           last item is current page (rendered as span, not link)
+ *   class?: string — passthrough
+ *
+ * Zero old-token references (D-03). No <script> tag.
+ */
+
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+  class?: string;
+}
+
+const { items, class: className = '' } = Astro.props;
+
+// Shared text style for all items: HG Regular 14px, #4C6A70 literal on light, #A9C9C7 on dark.
+// Source: Figma node 100:14. Designer description: "Color #4C6A70 -- not a token in code either."
+// #4C6A70 on paper (#F6FBFA) = 5.58:1 AA PASS light mode (check-contrast.mjs).
+// Dark mode: #4C6A70 on dark paper (#0C2228) = 2.82:1 FAIL -- use --wl-breadcrumb-color
+// which flips to #A9C9C7 in .dark (global.css Phase 35 breadcrumb local token).
+// #A9C9C7 on #0C2228 = 9.31:1 AA PASS dark mode (verified check-contrast.mjs).
+// Color is applied via CLASS (itemColorClass), NOT inline style — an inline
+// `color:` declaration would beat `hover:text-wl-accent` in the cascade and
+// kill the link hover state (WR-01 fix).
+const itemStyle = [
+  'font-family: var(--font-wl-body);',
+  'font-size: 14px;',
+  'font-weight: 400;',
+  'line-height: 1.5;',
+].join(' ');
+
+// Flips #4C6A70 light / #A9C9C7 dark (global.css Phase 35 breadcrumb local token).
+const itemColorClass = 'text-[color:var(--wl-breadcrumb-color)]';
+---
+
+<nav aria-label="Breadcrumb" class:list={[className]}>
+  <ol
+    style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 0;"
+  >
+    {items.map((item, index) => {
+      const isLast = index === items.length - 1;
+      const isLink = !isLast && Boolean(item.href);
+
+      return (
+        <li style="display: flex; align-items: center;">
+          {!isLink ? (
+            /* Non-link item: aria-current="page" ONLY on the last item (WR-06) —
+               href-less middle items are plain spans per the WAI-ARIA pattern. */
+            <span
+              aria-current={isLast ? 'page' : undefined}
+              class={itemColorClass}
+              style={itemStyle}
+            >
+              {item.label}
+            </span>
+          ) : (
+            /* Non-current: anchor with hover + focus ring. Color class first so the
+               hover variant (higher specificity via :hover) can override it (WR-01). */
+            <a
+              href={item.href}
+              class:list={[itemColorClass, 'hover:text-wl-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent transition-colors']}
+              style={[itemStyle, 'text-decoration: none;'].join(' ')}
+            >
+              {item.label}
+            </a>
+          )}
+
+          {/* Separator: " / " as aria-hidden text, same color — no SVG by design */}
+          {!isLast && (
+            <span
+              aria-hidden="true"
+              class={itemColorClass}
+              style={[itemStyle, 'padding: 0 4px; user-select: none;'].join(' ')}
+            >
+              /
+            </span>
+          )}
+        </li>
+      );
+    })}
+  </ol>
+</nav>

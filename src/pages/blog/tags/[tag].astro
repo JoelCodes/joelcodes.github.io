@@ -1,96 +1,169 @@
 ---
+/**
+ * Blog tag page — Phase 38, Plan 06 (PAGE-06, derived surface)
+ *
+ * Re-baselined 2026-07-19 as a derived surface from the canonical blog index (195:103).
+ * No separate Figma frame exists for the tag page — derived from the index pattern.
+ *
+ * Dev-gated: returns [] in getStaticPaths when PROD (D-13).
+ *
+ * Structure (lean derived surface per plan brief):
+ *   Hero band (same FrequencyWave + sea-glass gradient pattern as index hero)
+ *     → Breadcrumb "Home / Blog / Tagged: {tag}" (3 levels)
+ *     → Eyebrow "ALL POSTS" + h1 "Posts tagged "{tag}""
+ *     → optional lead: post count
+ *   3-col BlogCard grid (same grid pattern as §3 index posts)
+ *
+ * No featured card, no CTA band (derived surface is lean per plan brief).
+ * Zero old neobrutalist tokens.
+ */
+
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import BlogCard from '../../../components/BlogCard.astro';
+import BlogCard from '../../../components/wl/BlogCard.astro';
+import Breadcrumb from '../../../components/wl/Breadcrumb.astro';
+import Eyebrow from '../../../components/wl/Eyebrow.astro';
+import FrequencyWave from '../../../components/wl/FrequencyWave.astro';
 import { getCollection } from 'astro:content';
-import { readingTime } from 'reading-time-estimator';
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection('blog', ({ data }) => {
-    return import.meta.env.PROD ? !data.draft : true;
-  });
+  if (import.meta.env.PROD) return [];  // No blog pages in production (D-13)
+  // Drafts excluded — tag routes and their listings are built only from published
+  // posts, so a tag that exists solely on a draft generates no (empty) page.
+  const allPosts = await getCollection('blog', ({ data }) => !data.draft);
 
-  // Get unique tags from all posts
-  const uniqueTags = [...new Set(allPosts.flatMap(post => post.data.tags))];
+  // Get unique tags from all posts (flatMap deduplicated).
+  const uniqueTags = [...new Set(allPosts.flatMap(post => post.data.tags ?? []))];
 
   return uniqueTags.map(tag => ({
     params: { tag },
     props: {
       tag,
       posts: allPosts
-        .filter(post => post.data.tags.includes(tag))
+        .filter(post => (post.data.tags ?? []).includes(tag))
         .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
     }
   }));
 }
 
 const { tag, posts } = Astro.props;
-
-// Calculate reading time for each post
-const postsWithMeta = posts.map((post) => {
-  const stats = readingTime(post.body || '', 265);
-  return { ...post, readingTime: Math.ceil(stats.minutes) };
-});
-
-// Format tag for display (capitalize first letter)
-const displayTag = tag.charAt(0).toUpperCase() + tag.slice(1);
 ---
 
 <BaseLayout
-  title={`Posts tagged "${displayTag}" | Joel Shinness`}
-  description={`All blog posts about ${displayTag}. Practical insights on automation, AI, and custom software for small businesses.`}
+  title={`Posts tagged "${tag}" | Joel Shinness`}
+  description={`All blog posts tagged "${tag}". Practical posts on web, automations, and AI for small businesses.`}
 >
-  <main class="py-16 px-4">
-    <div class="max-w-7xl mx-auto">
-      <!-- Page header -->
-      <header class="text-center mb-12">
-        <nav class="mb-6">
-          <a
-            href="/blog"
-            class="text-turquoise hover:text-turquoise-hover dark:text-turquoise-dark dark:hover:text-turquoise transition-colors inline-flex items-center gap-2"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-            </svg>
-            Back to all posts
-          </a>
-        </nav>
-        <h1 class="font-heading text-4xl md:text-5xl font-bold uppercase mb-4">
-          Posts tagged "{displayTag}"
-        </h1>
-        <p class="text-lg text-text-muted-light dark:text-text-muted-dark max-w-2xl mx-auto">
-          {postsWithMeta.length} {postsWithMeta.length === 1 ? 'post' : 'posts'} about {displayTag.toLowerCase()}
-        </p>
-      </header>
 
-      <!-- Blog card grid -->
-      <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {postsWithMeta.map((post) => (
-          <BlogCard
-            title={post.data.title}
-            slug={post.id}
-            pubDate={post.data.pubDate}
-            description={post.data.description}
-            featuredImage={post.data.featuredImage}
-            tags={post.data.tags}
-            readingTime={post.readingTime}
-          />
-        ))}
-      </section>
+  {/* ── Hero band (derived from §1 index hero 195:105) ───────────────────────
+      Same FrequencyWave + sea-glass gradient treatment as blog index hero.
+      Breadcrumb: 3 levels — Home / Blog / Tagged: {tag}.
+      Eyebrow: "ALL POSTS" (from §3 index posts eyebrow, same source 198:63).
+      h1: "Posts tagged "{tag}"" using .wl-heading-h1-interior class.
+  ── */}
+  <section
+    class="relative overflow-hidden flex items-center px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#E6F1F1,#D2E7E7)] dark:[background:linear-gradient(to_bottom,#123640,#0C2228)]"
+    style="min-height: 400px;"
+  >
+    {/* FrequencyWave: same geometry as index hero (195:106 = 13:21).
+        Wrapped in a positioned div to avoid the style= TS error (FrequencyWave only accepts class=). */}
+    <div class="absolute pointer-events-none" style="left: -115px; top: -100px; width: 1670px; height: 1044px;">
+      <FrequencyWave class="w-full h-full" />
+    </div>
 
-      <!-- Empty state (shouldn't normally happen) -->
-      {postsWithMeta.length === 0 && (
-        <div class="text-center py-12">
-          <p class="text-text-muted-light dark:text-text-muted-dark">
-            No posts found with this tag.
-          </p>
-          <a
-            href="/blog"
-            class="mt-4 inline-block text-turquoise hover:text-turquoise-hover dark:text-turquoise-dark dark:hover:text-turquoise transition-colors"
-          >
-            View all posts
-          </a>
-        </div>
+    <div class="relative z-10 w-full" style="max-width: 1120px; margin: 0 auto; padding-top: 72px; padding-bottom: 72px;">
+
+      {/* Breadcrumb: Home / Blog / Tagged: {tag} */}
+      <Breadcrumb
+        items={[
+          { label: 'Home', href: '/' },
+          { label: 'Blog', href: '/blog' },
+          { label: `Tagged: ${tag}` },
+        ]}
+      />
+
+      <div style="height: 20px;" aria-hidden="true"></div>
+
+      {/* Eyebrow: "ALL POSTS" (index §3 precedent, source 198:63) */}
+      <Eyebrow>ALL POSTS</Eyebrow>
+
+      <div style="height: 21px;" aria-hidden="true"></div>
+
+      {/* h1: reuse .wl-heading-h1-interior class (61px / 1.06 — index hero h1 class). */}
+      <h1
+        class="wl-heading-h1-interior"
+        style="color: var(--color-wl-ink); margin: 0;"
+      >
+        Posts tagged "{tag}"
+      </h1>
+
+      <div style="height: 18px;" aria-hidden="true"></div>
+
+      {/* Lead: post count — concise context for the filtered view */}
+      <p
+        class="wl-text-lead"
+        style="color: var(--color-wl-sub); margin: 0;"
+      >
+        {posts.length} {posts.length === 1 ? 'post' : 'posts'} tagged {tag}.
+      </p>
+    </div>
+  </section>
+
+  {/* ── 3-col BlogCard grid (§3 index posts pattern) ─────────────────────────
+      Same sea-glass gradient band as §3 (198:61).
+      Same 3-col / 22px-gap grid as blog index.
+  ── */}
+  <section
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#EFF7F6,#E6F1F1)] dark:[background:linear-gradient(to_bottom,#10303A,#0E2B33)]"
+    style="padding-top: 96px; padding-bottom: 96px;"
+  >
+    <div style="max-width: 1120px; margin: 0 auto;">
+      {posts.length === 0 ? (
+        <p style="color: var(--color-wl-sub);">No posts found with this tag.</p>
+      ) : (
+        <ul
+          role="list"
+          class="tag-grid"
+          style="list-style: none; margin: 0; padding: 0;"
+        >
+          {posts.map((post) => (
+            <li class="tag-grid-item">
+              <BlogCard
+                variant="grid"
+                title={post.data.title}
+                description={post.data.description}
+                url={`/blog/${post.id}`}
+                tags={post.data.tags}
+                pubDate={post.data.pubDate}
+              />
+            </li>
+          ))}
+        </ul>
       )}
     </div>
-  </main>
+  </section>
+
 </BaseLayout>
+
+<style>
+  /* 3-column grid (§3 198:67 pattern — 22px gap, same as blog/index.astro). */
+  .tag-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+
+  @media (max-width: 768px) {
+    .tag-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 500px) {
+    .tag-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .tag-grid-item {
+    min-width: 0;
+  }
+</style>

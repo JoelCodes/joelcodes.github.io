@@ -1,176 +1,308 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import BlogCard from '../../components/BlogCard.astro';
-import Button from '../../components/ui/Button.astro';
-import { getCollection } from 'astro:content';
-import { readingTime } from 'reading-time-estimator';
+/**
+ * Blog index — Phase 38, Plan 06 (PAGE-06)
+ *
+ * Re-baselined 2026-07-19 against canonical Figma page 195:102 / frame 195:103
+ * ("Site · Blog" — 38-BLOG-EXTRACTION.md §1-4, 38-BLOG-FRAMES.md).
+ * The prior draft frame (211:3/211:4 "Blog Index") is deleted from Figma — all values
+ * in this file are sourced from the canonical 195:103 frame.
+ *
+ * Dev-gated: redirects to / in production (D-13 — blog is dev-only until Phase 40 IA).
+ *
+ * Sections (195:103 layout order):
+ *   §1 Hero        — FrequencyWave + sea-glass gradient + Breadcrumb + Eyebrow + h1 + lead
+ *   §2 Featured    — paper bg + Eyebrow "LATEST" + h2 "Start here." + FeaturedPostCard
+ *   §3 Posts       — sea-glass gradient + Eyebrow "ALL POSTS" + h2 + 3-col BlogCard grid
+ *   §4 CTA band    — sea-glass gradient + Eyebrow "GET IN TOUCH" + h2 + sub + CTAButton pair
+ *
+ * Content: featured = posts[0] (latest); grid = posts.slice(1).
+ * Read time computed via src/lib/reading-time.ts (ceil(words/200)).
+ * Zero old neobrutalist tokens.
+ */
 
-// Get published posts, sorted newest first
-const allPosts = await getCollection('blog', ({ data }) => {
-  return import.meta.env.PROD ? !data.draft : true;
-});
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogCard from '../../components/wl/BlogCard.astro';
+import FeaturedPostCard from '../../components/wl/FeaturedPostCard.astro';
+import Breadcrumb from '../../components/wl/Breadcrumb.astro';
+import Eyebrow from '../../components/wl/Eyebrow.astro';
+import CTAButton from '../../components/wl/CTAButton.astro';
+import FrequencyWave from '../../components/wl/FrequencyWave.astro';
+import { getCollection } from 'astro:content';
+import { BOOKING_URL, CONTACT_EMAIL } from '../../lib/constants';
+import { readingMinutes } from '../../lib/reading-time';
+
+if (import.meta.env.PROD) {
+  return Astro.redirect('/');  // No blog index in production (D-13)
+}
+
+// Listings exclude drafts everywhere (dev + prod) — a draft is unpublished, so it
+// never appears in the featured slot or the grid. The empty-state guards below then
+// omit the "Everything so far." section entirely when only the featured post is live.
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
 
 const sortedPosts = allPosts.sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
-// Get unique tags from all posts
-const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags))];
+// Content mapping (38-BLOG-FRAMES.md): featured = latest post; grid = remaining posts.
+const featured = sortedPosts[0];
+const gridPosts = sortedPosts.slice(1);
 
-// Calculate reading time for each post
-const postsWithMeta = sortedPosts.map((post) => {
-  const stats = readingTime(post.body || '', { wordsPerMinute: 265 });
-  return { ...post, readingTime: Math.ceil(stats.minutes) };
-});
+// Compute read time for the featured post (body word count).
+const featuredReadMinutes = featured ? readingMinutes(featured.body ?? '') : 1;
 ---
 
 <BaseLayout
   title="Blog | Joel Shinness"
-  description="Thoughts on web development, automation, and AI for small businesses. Practical insights to help you work smarter."
+  description="Short, practical posts for people running a business, not a dev team. What things cost, when a spreadsheet has done its job, where AI actually pays off."
 >
-  <main class="py-16 px-4">
-    <div class="max-w-7xl mx-auto">
-      <!-- Page header -->
-      <header class="text-center mb-12">
-        <h1 class="font-heading text-4xl md:text-5xl font-bold uppercase mb-4">Blog</h1>
-        <p class="text-lg text-text-muted-light dark:text-text-muted-dark max-w-2xl mx-auto">
-          Practical insights on automation, AI, and custom software for small businesses.
-          Learn how to work smarter, not harder.
-        </p>
-      </header>
 
-      <!-- Filter buttons -->
-      <div class="flex flex-wrap justify-center gap-3 mb-12" id="filter-container">
-        <Button
-          variant="turquoise"
-          size="md"
-          data-filter="all"
-          data-active="true"
-          class="filter-btn rounded-full"
-        >
-          All Posts
-        </Button>
-        {allTags.map((tag) => (
-          <Button
-            variant="outline"
-            size="md"
-            data-filter={tag}
-            class="filter-btn rounded-full"
-          >
-            {tag}
-          </Button>
-        ))}
-      </div>
-
-      <!-- Blog card grid -->
-      <section id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {postsWithMeta.map((post, index) => (
-          <BlogCard
-            title={post.data.title}
-            slug={post.id}
-            pubDate={post.data.pubDate}
-            description={post.data.description}
-            featuredImage={post.data.featuredImage}
-            tags={post.data.tags}
-            readingTime={post.readingTime}
-            data-index={index}
-          />
-        ))}
-      </section>
-
-      <!-- Load more button (shown only if more than 9 posts) -->
-      {postsWithMeta.length > 9 && (
-        <div class="text-center mt-12">
-          <Button
-            id="load-more-btn"
-            variant="turquoise"
-            size="lg"
-          >
-            Load More Posts
-          </Button>
-        </div>
-      )}
+  {/* ── §1 Hero (195:105) ────────────────────────────────────────────────────
+      Background (light): linear-gradient(to bottom, #E6F1F1, #D2E7E7) — 195:105 fill.
+      Background (dark, DERIVED D-04): linear-gradient(to bottom, #123640, #0C2228).
+      Rule 1: background in class so dark: override wins over inline.
+      FrequencyWave: 1670×1044 at left:-115 top:-100 — byte-identical geometry to
+        landing hero field (195:106 = 13:21, §10 wave-field treatment).
+      Section height: min-h 500px matching prior metadata (FIDELITY-GAP: design context
+        reports size-full; re-verify in fidelity screenshots).
+      Gutters: 24/32/160/400px landing pattern.
+  ── */}
+  <section
+    class="relative overflow-hidden flex items-center px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#E6F1F1,#D2E7E7)] dark:[background:linear-gradient(to_bottom,#123640,#0C2228)]"
+    style="min-height: 500px;"
+  >
+    {/* FrequencyWave: node 195:106 — same geometry as landing hero field 13:21 (§10).
+        Wrapped in a positioned div to avoid passing style= to the component (which only accepts class=).
+        See index.astro L54 for the pre-existing pattern; this approach avoids the TS error. */}
+    <div class="absolute pointer-events-none" style="left: -115px; top: -100px; width: 1670px; height: 1044px;">
+      <FrequencyWave class="w-full h-full" />
     </div>
-  </main>
 
-  <script is:inline>
-    // Track how many posts are visible
-    const INITIAL_POSTS = 9;
-    const POSTS_PER_LOAD = 6;
-    let visiblePosts = INITIAL_POSTS;
-    let currentFilter = 'all';
+    {/* Hero content: above wave layer */}
+    <div class="relative z-10 w-full" style="max-width: 1120px; margin: 0 auto; padding-top: 72px; padding-bottom: 72px;">
 
-    function filterSelection(tag) {
-      currentFilter = tag;
-      const cards = document.getElementsByClassName('blog-card');
+      {/* Breadcrumb: "Home / Blog" — 2 levels, source node 195:112 */}
+      <Breadcrumb
+        items={[
+          { label: 'Home', href: '/' },
+          { label: 'Blog' },
+        ]}
+      />
 
-      for (let i = 0; i < cards.length; i++) {
-        cards[i].classList.remove('show');
+      {/* gap breadcrumb → eyebrow: 20px (195:113 spacer) */}
+      <div style="height: 20px;" aria-hidden="true"></div>
 
-        const cardTags = cards[i].getAttribute('data-tags');
-        const tagsArray = cardTags ? cardTags.split(',') : [];
+      {/* Eyebrow: "PLAIN ANSWERS, WRITTEN DOWN" — source node 195:114 (VERBATIM) */}
+      <Eyebrow>PLAIN ANSWERS, WRITTEN DOWN</Eyebrow>
 
-        if (tag === 'all' || tagsArray.includes(tag)) {
-          cards[i].classList.add('show');
-        }
-      }
+      {/* gap eyebrow → h1: 21px (195:115 spacer) */}
+      <div style="height: 21px;" aria-hidden="true"></div>
 
-      // Reset load more state when filtering
-      visiblePosts = INITIAL_POSTS;
-      updateLoadMoreVisibility();
-      setActiveButton(tag);
-    }
+      {/* h1: "Notes on web, automations, and AI — minus the jargon" — source node 195:116.
+          Style: Fraunces Regular 61px / 1.06 → .wl-heading-h1-interior MATCH (§11 ramp audit).
+          Width 980 → max-width guard applied. */}
+      <h1
+        class="wl-heading-h1-interior"
+        style="color: var(--color-wl-ink); margin: 0; max-width: 980px;"
+      >
+        Notes on web, automations, and AI — minus the jargon
+      </h1>
 
-    function setActiveButton(tag) {
-      const buttons = document.querySelectorAll('.filter-btn');
-      buttons.forEach(btn => {
-        const isActive = btn.getAttribute('data-filter') === tag;
-        btn.setAttribute('data-active', isActive ? 'true' : 'false');
-        // Toggle Button CSS classes for variant swap
-        if (isActive) {
-          btn.classList.remove('btn-outline');
-          btn.classList.add('btn-turquoise');
-        } else {
-          btn.classList.remove('btn-turquoise');
-          btn.classList.add('btn-outline');
-        }
-      });
-    }
+      {/* gap h1 → lead: 26px (195:117 spacer) */}
+      <div style="height: 26px;" aria-hidden="true"></div>
 
-    function loadMorePosts() {
-      visiblePosts += POSTS_PER_LOAD;
-      filterSelection(currentFilter);
-      updateLoadMoreVisibility();
-    }
+      {/* Lead: VERBATIM from source node 195:118.
+          Style: HG Regular 21px / 1.6, sub, width 700 → .wl-text-lead EXACT MATCH (§11). */}
+      <p
+        class="wl-text-lead"
+        style="color: var(--color-wl-sub); margin: 0; max-width: 700px;"
+      >
+        Short, practical posts for people running a business, not a dev team: what things cost, when a spreadsheet has done its job, where AI actually pays off. The same straight answers you'd get on a call, free to read.
+      </p>
+    </div>
+  </section>
 
-    function updateLoadMoreVisibility() {
-      const loadMoreBtn = document.getElementById('load-more-btn');
-      if (loadMoreBtn) {
-        const totalCards = document.getElementsByClassName('blog-card').length;
-        if (visiblePosts >= totalCards) {
-          loadMoreBtn.style.display = 'none';
-        } else {
-          loadMoreBtn.style.display = 'inline-block';
-        }
-      }
-    }
+  {/* ── §2 Featured (197:58) ─────────────────────────────────────────────────
+      Background (light): #F6FBFA = var(--color-wl-paper) — 197:58 fill.
+      Background (dark, DERIVED): #0C2228 — paper token flip.
+      Padding: py 96, px 160; section gap 42 (header → card) — source 197:58.
+      Header: gap 21, Eyebrow "LATEST" → h2 "Start here." (197:59/197:63).
+  ── */}
+  {featured && (
+    <section
+      style="background: var(--color-wl-paper); padding-top: 96px; padding-bottom: 96px;"
+      class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px]"
+    >
+      <div style="max-width: 1120px; margin: 0 auto;">
 
-    // Add click handlers via event delegation for filter buttons
-    document.getElementById('filter-container').addEventListener('click', (e) => {
-      const btn = e.target.closest('.filter-btn');
-      if (btn) {
-        const filter = btn.getAttribute('data-filter');
-        filterSelection(filter);
-      }
-    });
+        {/* Section header: Eyebrow + h2 (197:59, column gap 21) */}
+        <div style="display: flex; flex-direction: column; gap: 21px; margin-bottom: 42px;">
+          {/* Eyebrow: "LATEST" — source node 197:60 (VERBATIM) */}
+          <Eyebrow>LATEST</Eyebrow>
 
-    // Add event listener for Load More button
-    const loadMoreBtn = document.getElementById('load-more-btn');
-    if (loadMoreBtn) {
-      loadMoreBtn.addEventListener('click', loadMorePosts);
-    }
+          {/* h2: "Start here." — source node 197:63 (VERBATIM).
+              Style: Fraunces 50px / 1.06 → .wl-heading-h2 MATCH (§11; tracking caveat logged). */}
+          <h2 class="wl-heading-h2" style="color: var(--color-wl-ink); margin: 0;">
+            Start here.
+          </h2>
+        </div>
 
-    // Initialize with all posts visible
-    filterSelection('all');
-  </script>
+        {/* FeaturedPostCard: compose, don't modify (Plan 05 foundation component). */}
+        <FeaturedPostCard
+          title={featured.data.title}
+          description={featured.data.description}
+          url={`/blog/${featured.id}`}
+          tags={featured.data.tags}
+          pubDate={featured.data.pubDate}
+          readMinutes={featuredReadMinutes}
+        />
+      </div>
+    </section>
+  )}
+
+  {/* ── §3 Posts (198:61) ────────────────────────────────────────────────────
+      Background (light): linear-gradient(to bottom, #EFF7F6, #E6F1F1) — 198:61 fill.
+      Background (dark, DERIVED D-04): linear-gradient(to bottom, #10303A, #0E2B33)
+        (landing #services pair, index.astro L210 precedent).
+      Rule 1: background in class.
+      Padding: py 96, px 160; gap 42 (header → grid) — source 198:61/198:62.
+      Grid: 3-col, 22px gap both axes (198:67 measured). BlogCard variant="grid".
+      Responsive: 1-col mobile / 2-col tablet / 3-col desktop.
+      Only rendered when there are grid posts (clean empty-state behavior).
+  ── */}
+  {gridPosts.length > 0 && (
+    <section
+      class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#EFF7F6,#E6F1F1)] dark:[background:linear-gradient(to_bottom,#10303A,#0E2B33)]"
+      style="padding-top: 96px; padding-bottom: 96px;"
+    >
+      <div style="max-width: 1120px; margin: 0 auto;">
+
+        {/* Section header: Eyebrow + h2 (198:62, column gap 21) */}
+        <div style="display: flex; flex-direction: column; gap: 21px; margin-bottom: 42px;">
+          {/* Eyebrow: "ALL POSTS" — source node 198:63 (VERBATIM) */}
+          <Eyebrow>ALL POSTS</Eyebrow>
+
+          {/* h2: "Everything so far." — source node 198:66 (VERBATIM).
+              Style: Fraunces 50 / 1.06 → .wl-heading-h2 MATCH (§11). */}
+          <h2 class="wl-heading-h2" style="color: var(--color-wl-ink); margin: 0;">
+            Everything so far.
+          </h2>
+        </div>
+
+        {/* 3-col grid: 22px gap (198:67 measured; card width ≈ 358.7px flex-1).
+            Responsive: 1-col @mobile, 2-col @tablet, 3-col @desktop. */}
+        <ul
+          role="list"
+          class="blog-grid"
+          style="list-style: none; margin: 0; padding: 0;"
+        >
+          {gridPosts.map((post) => (
+            <li class="blog-grid-item">
+              <BlogCard
+                variant="grid"
+                title={post.data.title}
+                description={post.data.description}
+                url={`/blog/${post.id}`}
+                tags={post.data.tags}
+                pubDate={post.data.pubDate}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  {/* ── §4 CTA band (195:197) ────────────────────────────────────────────────
+      Background (light): linear-gradient(to bottom, #E6F1F1, #D2E7E7) — 195:197 fill.
+      Background (dark, DERIVED): linear-gradient(to bottom, #123640, #0C2228)
+        (same pair as hero — source 195:197 = hero pair per §4 table).
+      Rule 1: background in class.
+      Padding: py 112 (CTA landing padding, NOT the 96 of content sections) — 195:197.
+      Layout: column flex, items-center, text-center — source 195:197.
+      Copy: VERBATIM from 38-BLOG-EXTRACTION §4 / §9 copy inventory.
+  ── */}
+  <section
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#E6F1F1,#D2E7E7)] dark:[background:linear-gradient(to_bottom,#123640,#0C2228)]"
+    style="padding-top: 112px; padding-bottom: 112px;"
+  >
+    <div
+      style="max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center;"
+    >
+      {/* Eyebrow: "GET IN TOUCH" — source node 195:198 (VERBATIM) */}
+      <Eyebrow>GET IN TOUCH</Eyebrow>
+
+      {/* gap eyebrow → h2: 21px (195:199 spacer) */}
+      <div style="height: 21px;" aria-hidden="true"></div>
+
+      {/* h2: "Prefer answers to articles?" — source node 195:200 (VERBATIM).
+          Style: Fraunces 50 / 1.06 / ink, centered, width 760 → .wl-heading-h2 MATCH.
+          Note: source node 195:200 carries NO tracking attr — tracking delta logged §11. */}
+      <h2 class="wl-heading-h2" style="color: var(--color-wl-ink); margin: 0;">
+        Prefer answers to articles?
+      </h2>
+
+      {/* gap h2 → sub: 18px (195:201 spacer) */}
+      <div style="height: 18px;" aria-hidden="true"></div>
+
+      {/* Sub: VERBATIM from source node 195:202.
+          Style: HG Regular 21px / 1.6, sub, centered, width 660 → .wl-text-lead MATCH. */}
+      <p
+        class="wl-text-lead"
+        style="color: var(--color-wl-sub); margin: 0; max-width: 660px;"
+      >
+        Bring the question these posts almost answered. If there's a solution that saves you time or money, I'll tell you what it'd take — and if there isn't, I'll tell you that too.
+      </p>
+
+      {/* gap sub → btns: 35px (195:203 spacer) */}
+      <div style="height: 35px;" aria-hidden="true"></div>
+
+      {/* Button pair: gap 16 (195:204).
+          Solid "Book a call" (calendar icon, BOOKING_URL) — source I195:205;39:14.
+          Ghost "Email me" (mail icon, mailto) — source I195:206;39:21. */}
+      <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: center;">
+        <CTAButton
+          href={BOOKING_URL}
+          variant="solid"
+          icon="calendar"
+          target="_blank"
+          rel="noopener"
+        >
+          Book a call
+        </CTAButton>
+        <CTAButton href={`mailto:${CONTACT_EMAIL}`} variant="ghost" icon="mail">
+          Email me
+        </CTAButton>
+      </div>
+    </div>
+  </section>
+
 </BaseLayout>
+
+<style>
+  /* ── 3-column post grid — 22px gap (198:67 measured) ───────────────────────
+     Responsive: 1-col mobile → 2-col tablet → 3-col desktop.
+     BlogCard sets height:100% so equal-height cards work via the grid track. */
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px; /* source 198:67 — column gap 22px, row gap 22px (both axes measured) */
+  }
+
+  @media (max-width: 768px) {
+    .blog-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 500px) {
+    .blog-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .blog-grid-item {
+    /* Remove list-item default spacing; BlogCard fills the grid track. */
+    min-width: 0;
+  }
+</style>

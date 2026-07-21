@@ -1,0 +1,213 @@
+---
+/**
+ * BlogCard — Phase 38 blog grid post-card and mini related-card (PAGE-06 / D-11)
+ *
+ * Re-baselined from canonical Figma page 195:102 / frame 195:103 (replacing the
+ * prior editorial single-column layout sourced from the now-DELETED 211:3 draft).
+ *
+ * GRID VARIANT (default / variant="grid", §3 post-card):
+ *   Source nodes 198:70–78. Vertical article>anchor card inside a 3-col grid.
+ *   White --wl-card-bg, 1px --wl-line, radius 18 (--radius-card), --wl-card-shadow.
+ *   Padding pt 27 / px 26 / pb 24. Column gap 14. Equal-height with a flex-grow spacer
+ *   pinning "Read →" to the bottom (198:77). Meta row: Tag pill 12px + date HG 14px
+ *   #4C6A70 — NO read-time on grid cards (read-time is feature-card + post-hero only,
+ *   per §3 and 38-BLOG-EXTRACTION §2 comparison). Title: Fraunces 20px/1.18 ink (198:75).
+ *   Description: HG 15.5px/1.6 sub (198:76). Link "Read →" HG SemiBold 15px accent (198:78).
+ *   Whole card is the link — article wraps a single block anchor (LinkCard/ProjectCard precedent;
+ *   no nested-interactive violations since Tag is non-interactive span). Title hover: accent.
+ *
+ * MINI VARIANT (variant="mini", §8 related mini-card):
+ *   Source nodes 200:1050–1057. Two-up related posts on the blog post page.
+ *   Radius 16 (NOT the 18 card radius — local value per 200:1050). NO shadow (differs from
+ *   post-card). Padding px 26 / py 24. Column gap 11. Title: Fraunces 21px/1.2 ink
+ *   (= .wl-heading-h3 size/lh exact match per §11 ramp audit). Description and link
+ *   share the same local styles as grid variant.
+ *
+ * Props:
+ *   title       string — post heading
+ *   description string — post teaser
+ *   url         string — post href (preferred over slug for flexibility; fallback: /blog/${slug})
+ *   slug?       string — used for href fallback if url not provided
+ *   tags?       string[] — rendered as Tag pills (up to N; typically 1)
+ *   pubDate     Date — post publication date
+ *   variant?    "grid" | "mini" — defaults to "grid"
+ *   class?      string — passthrough
+ *
+ *   Accepted-but-not-rendered (API completeness):
+ *   featuredImage? string — kept in schema for OG/social; frame shows no thumbnail
+ *   readingTime?   number — frame 198:70 grid cards carry NO read-time (see §3)
+ *
+ * Dark mode: all colors via --wl-* tokens (flip automatically in .dark).
+ * Zero old-token references. No <script> tag.
+ */
+
+import Tag from './Tag.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  url?: string;
+  slug?: string;
+  pubDate: Date;
+  tags?: string[];
+  variant?: 'grid' | 'mini';
+  featuredImage?: string;
+  readingTime?: number;
+  class?: string;
+}
+
+const {
+  title,
+  description,
+  url,
+  slug,
+  pubDate,
+  tags = [],
+  variant = 'grid',
+  class: className = '',
+} = Astro.props;
+
+const href = url ?? (slug ? `/blog/${slug}` : '#');
+const isMini = variant === 'mini';
+---
+
+<article class:list={['blog-card', isMini ? 'blog-card--mini' : 'blog-card--grid', className]}>
+  <a
+    href={href}
+    class="group block no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+    style="height: 100%; display: flex; flex-direction: column; text-decoration: none;"
+  >
+    {/* Meta row: Tag pill(s) + date. NO read-time on grid/mini cards (§3 §8). */}
+    <div class="blog-card-meta">
+      {tags.length > 0 && tags.slice(0, 1).map((tag) => <Tag>{tag}</Tag>)}
+      <time
+        datetime={pubDate.toISOString()}
+        class="blog-card-date"
+      >
+        {pubDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+      </time>
+    </div>
+
+    {/* Title: Fraunces 20px/1.18 ink for grid (198:75); 21px/1.2 for mini (200:1055 = .wl-heading-h3).
+        Color intentionally via class so group-hover:text-wl-accent wins (WR-02). */}
+    <h2
+      class:list={[
+        'blog-card-title',
+        'text-wl-ink group-hover:text-wl-accent transition-colors',
+        isMini ? 'blog-card-title--mini' : 'blog-card-title--grid',
+      ]}
+    >
+      {title}
+    </h2>
+
+    {/* Description: HG 15.5px/1.6 sub (198:76 / 200:1056) */}
+    <p class="blog-card-desc">
+      {description}
+    </p>
+
+    {/* Flex-grow spacer: pushes "Read →" to the bottom for equal-height grids (198:77) */}
+    <div style="flex: 1 1 auto;"></div>
+
+    {/* Link: "Read →" HG SemiBold 15px accent (198:78 / 200:1057) */}
+    <span class="blog-card-link" aria-hidden="true">Read →</span>
+  </a>
+</article>
+
+<style>
+  /* ─── Base card ─────────────────────────────────────────────────────── */
+  .blog-card {
+    /* Background: Phase 35 card token — #FFFFFF light / #12333B dark */
+    background: var(--wl-card-bg);
+    border: 1px solid var(--color-wl-line); /* token flips */
+    height: 100%; /* equal-height in CSS grid */
+  }
+
+  /* ─── Grid variant (§3, source 198:70) ─────────────────────────────── */
+  .blog-card--grid {
+    /* radius 18 = --radius-card convention (ServiceCard / ProjectCard precedent) */
+    border-radius: 18px; /* source node 198:70 */
+    box-shadow: var(--wl-card-shadow); /* flips in dark */
+    padding: 27px 26px 24px; /* source 198:70: pt 27 / px 26 / pb 24 */
+  }
+
+  .blog-card--grid a {
+    gap: 14px; /* source 198:70 column gap */
+  }
+
+  .blog-card--grid .blog-card-title--grid {
+    font-size: 20px; /* source 198:75 — Fraunces 20/1.18; no ramp match */
+    line-height: 1.18;
+  }
+
+  /* ─── Mini variant (§8, source 200:1050) ───────────────────────────── */
+  .blog-card--mini {
+    border-radius: 16px; /* source 200:1050 — NOT 18; local value */
+    /* NO shadow — source 200:1050 explicitly has no shadow (differs from post-card) */
+    box-shadow: none;
+    padding: 24px 26px; /* source 200:1050: px 26 / py 24 */
+  }
+
+  .blog-card--mini a {
+    gap: 11px; /* source 200:1050 column gap */
+  }
+
+  .blog-card--mini .blog-card-title--mini {
+    /* source 200:1055: Fraunces 21px/1.2 = .wl-heading-h3 exact match (§11 ramp audit) */
+    font-size: 21px;
+    line-height: 1.2;
+  }
+
+  /* ─── Shared inner elements ─────────────────────────────────────────── */
+
+  /* Meta row: flex row, gap 11 (198:71 / 200:1051) */
+  .blog-card-meta {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 11px; /* source nodes 198:71 / 200:1051 */
+    flex-wrap: wrap;
+  }
+
+  /* Date: HG Regular 14px, #4C6A70 (dark #A9C9C7 DERIVED via --wl-breadcrumb-color)
+     Source nodes 198:72 / 200:1052 — same crumb-tint as Breadcrumb component */
+  .blog-card-date {
+    font-family: var(--font-wl-body);
+    font-size: 14px; /* source nodes 198:72 / 200:1052 */
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--wl-breadcrumb-color); /* #4C6A70 / #A9C9C7 dark — token flip */
+  }
+
+  /* Title: Fraunces Regular, ink. Sizes set per-variant above. */
+  .blog-card-title {
+    font-family: var(--font-wl-heading);
+    font-weight: 400;
+    font-style: normal;
+    font-optical-sizing: auto;
+    font-variation-settings: "SOFT" 0, "WONK" 1;
+    /* No letter-spacing: canonical frame nodes carry no tracking attr on card titles —
+       unlike the ramp class. Deferred to fidelity gate (Phase 36 precedent). */
+    letter-spacing: 0; /* local — no tracking attr on 198:75 / 200:1055 */
+    margin: 0;
+  }
+
+  /* Description: HG Regular 15.5px/1.6, sub (198:76 / 200:1056) */
+  .blog-card-desc {
+    font-family: var(--font-wl-body);
+    font-size: 15.5px; /* source nodes 198:76 / 200:1056 — no ramp match */
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--color-wl-sub); /* token flips */
+    margin: 0;
+  }
+
+  /* Link "Read →": HG SemiBold 15px, accent (198:78 / 200:1057) */
+  .blog-card-link {
+    font-family: var(--font-wl-body);
+    font-size: 15px; /* source nodes 198:78 / 200:1057 — no ramp match (.wl-text-small is 400+1px ls) */
+    font-weight: 600; /* SemiBold */
+    line-height: normal;
+    color: var(--color-wl-accent); /* token flips */
+    text-decoration: none;
+  }
+</style>

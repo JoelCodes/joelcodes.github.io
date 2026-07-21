@@ -1,457 +1,824 @@
 @import "tailwindcss";
 
+/* Self-hosted variable fonts (FOUND-02 / 33-05) */
+@import '@fontsource-variable/fraunces/wght.css';
+@import '@fontsource-variable/fraunces/wght-italic.css';
+@import '@fontsource-variable/hanken-grotesk/wght.css';
+/* Roboto Mono Variable — self-hosted code font (Phase 38 / GDPR constraint: no external CDN).
+   Canonical source: 38-BLOG-EXTRACTION §6.1 (prose code blocks, 14.5px/1.55) and §12 (inline
+   code 15px). Replaces the bare "JetBrains Mono" fallback-only reference from deleted 211:5. */
+@import '@fontsource-variable/roboto-mono/wght.css';
+
+/* ============================================================
+   WL TOKENS (v3.0 Wavelength — namespace isolated via --wl- prefix)
+   DO NOT edit old token block below until Phase 41 cleanup
+   ============================================================ */
+
 @theme {
-  /* Primary accent colors */
-  --color-yellow: oklch(0.85 0.18 95);
-  --color-yellow-hover: oklch(0.80 0.20 95);
-  --color-turquoise: oklch(0.70 0.15 195);
-  --color-turquoise-hover: oklch(0.65 0.17 195);
-  --color-magenta: oklch(0.65 0.20 350);
-  --color-magenta-hover: oklch(0.60 0.22 350);
+  /* Wavelength Palette — light values (Figma-traced from file 1tg8wIPcvOVC5tPZ8pkGO2) */
+  --color-wl-ink:             #12333B;
+  --color-wl-sub:             #35525A;
+  --color-wl-accent:          #0E7078;
+  --color-wl-accent-soft:     #5AA9A5;
+  --color-wl-sea-glass:       #E6F1F1;
+  --color-wl-sea-glass-deep:  #D2E7E7;
+  --color-wl-paper:           #F6FBFA;
+  --color-wl-line:            color-mix(in oklch, #0E7078 16%, transparent);
 
-  /* Dark mode variants (reduced L by 5%, reduced C by 0.02) */
-  --color-yellow-dark: oklch(0.80 0.16 95);
-  --color-turquoise-dark: oklch(0.65 0.13 195);
-  --color-magenta-dark: oklch(0.63 0.18 350); /* Increased L from 0.60 to 0.63 for WCAG AA contrast */
+  /* Companion token — text use of accent-soft (FOUND-03 / D-09) */
+  /* --wl-accent-soft (#5AA9A5) fails WCAG AA on paper at 2.63:1; companion darkened to 4.55:1 */
+  /* ⚠ PAPER-ONLY: --wl-accent-soft-text is AA-validated on --wl-paper ONLY (4.55:1).
+     It FAILS AA on sea-glass (4.12:1) and sea-glass-deep (3.7:1) — do NOT use it
+     on those surfaces. See scripts/check-contrast.mjs PAIRS matrix (WR-02). */
+  --color-wl-accent-soft-text: #347E7B;
 
-  /* WCAG-compliant text variants for accessibility */
-  --color-yellow-text: oklch(0.55 0.15 95); /* 3:1+ contrast on white for large text */
-  --color-turquoise-text: oklch(0.45 0.12 195); /* 4.5:1+ contrast on white for normal text */
-  --color-yellow-text-dark: oklch(0.85 0.18 95); /* Original yellow works on dark bg */
-  --color-turquoise-text-dark: oklch(0.70 0.15 195); /* Original turquoise works on dark bg */
+  /* On-ink text — participates in Figma variable system (node 42:27 --on-ink) */
+  /* Used for: CTA button label on ink bg, footer wordmark. */
+  /* Light value #EAF6F3 (a light-surface color for use on ink/dark backgrounds). */
+  --color-wl-on-ink: #EAF6F3;
 
-  /* Neutral colors (OKLCH format) */
-  --color-bg-light: oklch(1.0 0 0);
-  --color-bg-dark: oklch(0.15 0 0);
-  --color-text-light: oklch(0.2 0 0);
-  --color-text-dark: oklch(0.95 0 0);
-  --color-text-muted-light: oklch(0.5 0 0);
-  --color-text-muted-dark: oklch(0.7 0 0);
+  /* Wavelength font families */
+  /* "... Variable fallback" families are the metric-adjusted @font-face blocks injected by
+     fontaineFallbackPlugin (astro.config.mjs) — they MUST appear in these stacks or the
+     CLS mitigation is a no-op (CR-01). */
+  --font-wl-heading: 'Fraunces Variable', 'Fraunces Variable fallback', Georgia, serif;
+  --font-wl-body:    'Hanken Grotesk Variable', 'Hanken Grotesk Variable fallback', ui-sans-serif, system-ui, sans-serif;
+  /* Roboto Mono Variable — canonical prose code font (38-BLOG-EXTRACTION §6.1, §12).
+     Self-hosted via @fontsource-variable/roboto-mono (GDPR constraint, same pattern as brand fonts).
+     Fallbacks: ui-monospace (system mono on modern macOS/iOS), monospace (universal fallback). */
+  --font-wl-mono:    'Roboto Mono Variable', 'Roboto Mono', ui-monospace, monospace;
+}
 
-  /* Border Tokens */
-  --border-neo: 3px;
-  --border-neo-thick: 4px;
+/* Dark mode semantic flip — plain .dark block (NOT @theme) so runtime class toggle works (D-01) */
+/* sea-glass-deep omitted: no dark evidence in Figma; keeps light value #D2E7E7 (D-04 / FIDELITY-GAP) */
+.dark {
+  --color-wl-ink:              #EAF6F3;
+  --color-wl-sub:              #A9C9C7;
+  --color-wl-accent:           #4FB3B8;
+  --color-wl-accent-soft:      #7FC4C0;
+  --color-wl-sea-glass:        #123640;
+  --color-wl-paper:            #0C2228;
+  --color-wl-line:             #5AA9A538;
+  --color-wl-accent-soft-text: #7FC4C0;
+  /* on-ink: #EAF6F3 is already a light color designed for dark surfaces; assumed same in dark mode. */
+  /* NOTE: dark --wl-on-ink assumed #EAF6F3; confirm at fidelity gate via Figma dark variable mode. */
+  --color-wl-on-ink:           #12333B;
+}
 
-  /* Spacing Tokens (4pt grid) */
-  --spacing-neo-xs: 8px;
-  --spacing-neo-sm: 12px;
-  --spacing-neo-md: 16px;
-  --spacing-neo-lg: 24px;
-  --spacing-neo-xl: 32px;
-  --spacing-neo-2xl: 64px;
+/* Footer-local color tokens — always dark-background, do NOT flip with .dark.
+   Not part of the 8-token --wl-* palette (designer intent: local values per 34-UI-SPEC.md).
+   Source: 34-FIGMA-EXTRACTION.md "Footer color inventory" — node 42:77 extractions.
+   Centralized as CSS custom properties for maintainability; Figma description explicitly
+   blesses them as local values outside the variable system. */
+:root {
+  /* interpolate-size: progressive enhancement — Chromium gets smooth height-to-auto on
+     ::details-content; FF/Safari ignore this and snap (D-07: no max-height fallback). */
+  interpolate-size: allow-keywords;
 
-  /* Typography - font families */
-  --font-heading: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
-  --font-body: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --wl-footer-bg:             #0D2A31;
+  --wl-footer-tagline-color:  #5AA9A5;
+  --wl-footer-text-secondary: #7FA4A2;
+  --wl-footer-text-link:      #CDE6E5;
+  --wl-footer-text-muted:     #8FB4B2;
+  --wl-footer-divider:        rgba(255, 255, 255, 0.09);
+  /* Footer wordmark: always light on the always-dark footer background.
+     Uses --color-wl-on-ink light value (#EAF6F3) explicitly — NOT referencing
+     the flippable --color-wl-on-ink token which becomes #12333B in dark mode
+     (contrast 1.12:1 against footer bg — WCAG AA violation). Rule 1 fix. */
+  --wl-footer-wordmark-color: #EAF6F3;
 
-  /* Typography - font weights */
-  --font-weight-h1: 800;
-  --font-weight-h2: 700;
-  --font-weight-h3: 600;
-  --font-weight-h4: 500;
-  --font-weight-body: 400;
+  /* ── Phase 35 CTAButton ghost + Breadcrumb local tokens ───────────────────
+     CTAButton ghost (39:22): rgba(255,255,255,0.4) on light paper -- passes AA.
+     In dark mode, light paper flips to #0C2228 and rgba(255,255,255,0.4) resolves
+     to ~#6d7a7e. The ghost ink text (#EAF6F3 in dark) on that = 4.0:1 (AA fail).
+     Fix: in dark mode, drop opacity to 0.08 so the base dark surface stays dark
+     enough for #EAF6F3 text to pass AA (estimated > 8:1). */
+  --wl-cta-ghost-bg: rgba(255, 255, 255, 0.4);
+  /* Ghost hover (derived — no Figma hover spec): lighten the frosted bg on light
+     paper. Must flip like --wl-cta-ghost-bg: a hard-coded 0.6 white in dark mode
+     composites to ~#9EA7A9 on dark paper — #EAF6F3 ink text = 2.22:1 (AA FAIL).
+     Dark flip below keeps the surface dark (CR-02 / Rule 1). */
+  --wl-cta-ghost-bg-hover: rgba(255, 255, 255, 0.6);
+  /* Breadcrumb (100:14): #4C6A70 designer-confirmed non-token, AA on light paper.
+     In dark mode paper (#0C2228), #4C6A70 = 2.82:1 (AA fail).
+     Dark mode uses --color-wl-sub dark value (#A9C9C7) as breadcrumb color --
+     consistent trust-tint intent, AA on #0C2228 background. */
+  --wl-breadcrumb-color: #4C6A70;
+  /* Proof section credentials companies color (16:13): #4C6A70 light (new literal, not a token).
+     Dark: #8FB4B2 per 117:249 extraction. Cannot use Tailwind dark: class override when the
+     light value is in an inline style attribute (inline beats class specificity).
+     Defined as a custom property so .dark can flip it (Rule 1 fix). */
+  --wl-proof-companies-color: #4C6A70;
+  /* About portrait label (16:26): #5B8A8A light, #8FB4B2 dark — new literals, not tokens.
+     Defined as custom property so .dark can flip it (same pattern as --wl-proof-companies-color). */
+  --wl-portrait-label-color: #5B8A8A;
 
-  /* Typography - font sizes (1.25 ratio scale) */
-  --text-xs: 0.75rem;    /* 12px */
-  --text-sm: 0.875rem;   /* 14px */
-  --text-base: 1rem;     /* 16px */
-  --text-lg: 1.125rem;   /* 18px */
-  --text-xl: 1.25rem;    /* 20px */
-  --text-2xl: 1.5rem;    /* 24px */
-  --text-3xl: 1.875rem;  /* 30px */
-  --text-4xl: 2.25rem;   /* 36px */
+  /* ── Phase 35 card-panel local tokens (footer-precedent pattern) ──────────
+     White-card components (Callout 99:26, LinkCard 99:29, ServiceCard 40:32)
+     flip in dark mode via local custom properties — see dark-mode card panel
+     subsection in 35-FIGMA-EXTRACTION.md §Fresh MCP Extraction (2026-07-15).
+     Source nodes: 117:159 "Card / Web" dark mockup.
+     These are local values outside the --wl-* palette (same precedent as
+     --wl-footer-* above). */
+  --wl-card-bg:            #FFFFFF;                                  /* card fill light — Figma: white literal */
+  --wl-card-shadow:        0 20px 40px -30px rgba(18, 51, 59, 0.5); /* Shadow/Card light */
+  --wl-card-icon-tile-bg:  rgba(14, 112, 120, 0.1);                  /* icon tile light — accent @10% (landing 12:2, 37-EXTRACTION §Three-ways; supersedes Phase 35 solid-accent reading) */
+}
 
-  /* Typography - line heights */
-  --leading-tight: 1.25;
-  --leading-normal: 1.5;
-  --leading-relaxed: 1.75;
+/* Dark-mode card panel flip — matches .dark flip mechanism (D-01 / Phase 33 precedent).
+   Source: 35-FIGMA-EXTRACTION.md §Fresh MCP Extraction, 117:159 "Card / Web" dark mockup. */
+.dark {
+  --wl-card-bg:            #12333B;                                  /* card fill dark — dark mockup 117:159 */
+  --wl-card-shadow:        0 20px 40px -30px rgba(0, 0, 0, 0.8);    /* Shadow/Card dark */
+  --wl-card-icon-tile-bg:  rgba(90, 169, 165, 0.14);                 /* icon tile dark — accent-soft @14% */
+  /* CTAButton ghost dark flip: in dark mode paper (#0C2228), opacity-0.4 white resolves
+     to ~#6d7a7e which fails AA with #EAF6F3 ink text. Use 0.08 opacity so the effective
+     bg stays near-dark and #EAF6F3 text achieves 8:1+ contrast. */
+  --wl-cta-ghost-bg: rgba(255, 255, 255, 0.08);
+  /* Ghost hover dark flip: 0.16 white over dark paper (#0C2228) -> effective #33454A;
+     #EAF6F3 ink text on #33454A = 9.08:1 AA PASS (verified in check-contrast.mjs). */
+  --wl-cta-ghost-bg-hover: rgba(255, 255, 255, 0.16);
+  /* Breadcrumb dark flip: #4C6A70 fails AA on dark paper (#0C2228 = 2.82:1).
+     In dark mode, use --color-wl-sub dark value (#A9C9C7) for AA compliance. */
+  --wl-breadcrumb-color: #A9C9C7;
+  /* Proof companies dark flip: #8FB4B2 per 117:249 extraction (7.32:1 on #0C2228 — PASS). */
+  --wl-proof-companies-color: #8FB4B2;
+  /* Portrait label dark flip: #8FB4B2 per 117:249 extraction (portrait inside dark gradient). */
+  --wl-portrait-label-color: #8FB4B2;
 }
 
 /* Dark mode variant for class-based toggle */
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* Body default — Hanken Grotesk + Figma body-style line-height (D-08) */
+@layer base {
+  body {
+    font-family: var(--font-wl-body);
+    line-height: 1.6;
+  }
+}
 
 /* Smooth scroll behavior with accessibility consideration */
 html {
   scroll-behavior: smooth;
 }
 
+/* Phase 36 (COMP-03/COMP-04): native <details> expand/collapse animation.
+   ::details-content is Baseline 2025 (Chrome 131+/FF 143+/Safari 18.4+). height 0→auto needs
+   interpolate-size (Chromium only, 2026); FF/Safari snap — intentional per D-07, no max-height fallback.
+   Placed in global.css (not per-component <style>) so ProjectCard (COMP-03) AND FAQItem (36-05)
+   share one definition — DRY, consistent timing, single prefers-reduced-motion override. */
+details::details-content {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s ease, content-visibility 0.3s ease allow-discrete;
+}
+
+details[open]::details-content {
+  height: auto;
+}
+
+/* Chevron rotation (D-08) — ships independently of ::details-content support;
+   works in all browsers that support the details[open] attribute selector. */
+details .wl-toggle-indicator {
+  transition: transform 0.3s ease;
+}
+
+details[open] .wl-toggle-indicator {
+  transform: rotate(180deg);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
+  /* Disable details expand/collapse height animation for users who prefer reduced motion */
+  details::details-content {
+    transition: none;
+  }
+  /* Disable chevron rotation animation for users who prefer reduced motion */
+  details .wl-toggle-indicator {
+    transition: none;
+  }
 }
 
 section[id] {
-  scroll-margin-top: 60px;
+  scroll-margin-top: 64px; /* updated from 60px to match new 64px header height (Phase 34) */
 }
 
-/* Shadow utilities for neobrutalist design */
-@layer utilities {
-  /* WCAG-compliant text color utilities */
-  .text-yellow-text {
-    color: var(--color-yellow-text);
-  }
-  .dark .text-yellow-text {
-    color: var(--color-yellow-text-dark);
-  }
+/* ============================================================
+   WL PROSE SCOPE — Wavelength MDX blog post styling (Phase 38 / PAGE-06 / D-13)
+   Token-based: all --wl-* colors flip automatically in .dark via the block at lines ~44-57.
+   No .dark .wl-prose overrides needed unless a literal (non-token) value is introduced.
+   Frame authority: Blog Post / Desktop 1440 (node 195:210 / frame 195:211).
+   Prior authority (211:5 / 211:6) was from the now-DELETED draft page — see §12 in
+   38-BLOG-EXTRACTION.md for the superseded-vs-canonical diff table.
+   Heading sizes use local values (no ramp match) per Phase 36 precedent.
+   ============================================================ */
 
-  .text-turquoise-text {
-    color: var(--color-turquoise-text);
-  }
-  .dark .text-turquoise-text {
-    color: var(--color-turquoise-text-dark);
-  }
-
-  .shadow-neo-yellow {
-    box-shadow: 5px 5px 0 var(--color-yellow);
-  }
-  .dark .shadow-neo-yellow {
-    box-shadow: 0 0 20px color-mix(in oklch, var(--color-yellow-dark) 50%, transparent);
-  }
-
-  .shadow-neo-turquoise {
-    box-shadow: 6px 6px 0 var(--color-turquoise);
-  }
-  .dark .shadow-neo-turquoise {
-    box-shadow: 0 0 20px color-mix(in oklch, var(--color-turquoise-dark) 75%, transparent);
-  }
-
-  .shadow-neo-magenta {
-    box-shadow: 5px 5px 0 var(--color-magenta);
-  }
-  .dark .shadow-neo-magenta {
-    box-shadow: 0 0 20px color-mix(in oklch, var(--color-magenta-dark) 50%, transparent);
-  }
-
-  /* Hover states - pressed effect */
-  .shadow-neo-yellow-hover {
-    box-shadow: 3px 3px 0 var(--color-yellow);
-    transform: translate(2px, 2px);
-  }
-  .shadow-neo-turquoise-hover {
-    box-shadow: 3px 3px 0 var(--color-turquoise);
-    transform: translate(3px, 3px);
-  }
-  .shadow-neo-magenta-hover {
-    box-shadow: 3px 3px 0 var(--color-magenta);
-    transform: translate(2px, 2px);
-  }
-
-  /* Isometric Transform Utilities */
-  .iso-container {
-    transform-style: preserve-3d;
-  }
-
-  /* Standard isometric rotation (45° on both axes) */
-  .iso-rotate {
-    transform: rotateX(45deg) rotateZ(45deg);
-  }
-
-  /* Subtle tilt (30° - less dramatic) */
-  .iso-rotate-subtle {
-    transform: rotateX(30deg) rotateZ(30deg);
-  }
-
-  /* Steep tilt (60° X, 45° Z - more dramatic) */
-  .iso-rotate-steep {
-    transform: rotateX(60deg) rotateZ(45deg);
-  }
-
-  /* Face positioning for multi-face isometric elements */
-  .iso-face-front {
-    transform: translateZ(20px);
-  }
-
-  .iso-face-top {
-    transform: rotateX(90deg) translateZ(20px);
-  }
-
-  .iso-face-side {
-    transform: rotateY(90deg) translateZ(20px);
-  }
-
-  /* Hover states */
-  .iso-hover-lift {
-    transition: transform 200ms ease;
-  }
-
-  .iso-hover-lift:hover {
-    transform: translateY(-8px);
-  }
-
-  .iso-hover-glow {
-    transition: box-shadow 200ms ease;
-  }
-
-  .iso-hover-glow:hover {
-    box-shadow: 0 0 20px currentColor;
-  }
-
-  /* Isometric Shadow Utilities (light mode: hard offset, dark mode: soft glow) */
-
-  /* Small shadow (3px offset) */
-  .iso-shadow-sm {
-    box-shadow: 3px 3px 0 currentColor;
-  }
-
-  /* Standard shadow (5px offset) */
-  .iso-shadow {
-    box-shadow: 5px 5px 0 currentColor;
-  }
-
-  /* Large shadow (8px offset) */
-  .iso-shadow-lg {
-    box-shadow: 8px 8px 0 currentColor;
-  }
-
-  /* Dark mode: transform shadows to glows */
-  .dark .iso-shadow-sm {
-    box-shadow: 0 0 15px color-mix(in oklch, currentColor 20%, transparent);
-  }
-
-  .dark .iso-shadow {
-    box-shadow: 0 0 20px color-mix(in oklch, currentColor 40%, transparent);
-  }
-
-  .dark .iso-shadow-lg {
-    box-shadow: 0 0 30px color-mix(in oklch, currentColor 60%, transparent);
-  }
-
-  /* Explicit glow utilities (always glow, regardless of theme) */
-  .iso-glow-subtle {
-    box-shadow: 0 0 15px color-mix(in oklch, currentColor 20%, transparent);
-  }
-
-  .iso-glow {
-    box-shadow: 0 0 20px color-mix(in oklch, currentColor 40%, transparent);
-  }
-
-  .iso-glow-strong {
-    box-shadow: 0 0 30px color-mix(in oklch, currentColor 60%, transparent);
-  }
-}
-
-/* Project card filtering animations */
-.project-card {
-  display: none;
-  opacity: 0;
-}
-
-.project-card.show {
-  display: block;
-  animation: fadeInScale 300ms ease-in-out forwards;
-}
-
-/* Blog card filtering animations - reuses portfolio pattern */
-.blog-card {
-  display: none;
-  opacity: 0;
-}
-
-.blog-card.show {
-  display: block;
-  animation: fadeInScale 300ms ease-in-out forwards;
-}
-
-@keyframes fadeInScale {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Table of Contents styling */
-.toc {
-  position: sticky;
-  top: 6rem; /* Below sticky header */
-  max-height: calc(100vh - 8rem);
-  overflow-y: auto;
-}
-
-.toc a {
-  display: block;
-  padding: 0.25rem 0;
-  color: var(--color-text-muted-light);
-  transition: color 0.2s, text-decoration-color 0.2s;
-  text-decoration: underline;
-  text-decoration-color: transparent;
-}
-
-.dark .toc a {
-  color: var(--color-text-muted-dark);
-}
-
-.toc a:hover,
-.toc a:focus,
-.toc a.active {
-  color: var(--color-accent-teal);
-  text-decoration-color: currentColor;
-}
-
-.toc-2 {
-  font-size: 0.875rem;
-}
-
-.toc-3 {
-  padding-left: 1rem;
-  font-size: 0.8125rem;
-}
-
-/* Blog post prose styling */
-.prose h1 {
-  font-family: var(--font-heading);
-  font-size: var(--text-4xl);
-  font-weight: var(--font-weight-h1);
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
-  margin-top: 0;
-  margin-bottom: 1.5rem;
-  color: var(--color-text-light);
-}
-
-.dark .prose h1 {
-  color: var(--color-text-dark);
-}
-
-.prose h2 {
-  font-family: var(--font-heading);
-  font-size: var(--text-3xl);
-  font-weight: var(--font-weight-h2);
+/* h2: source node 197:1021 — 34px / lh 1.1 / ls −0.51px. No .wl-heading-* ramp match → local.
+   §12 diff: shipped was lh 1.15 / ls −1.5px from deleted 211:5 draft — CORRECTED. */
+.wl-prose h2 {
+  font-family: var(--font-wl-heading);
+  font-size: 34px; /* source node 197:1021 Blog Post/1440 — Fraunces 34; no ramp match */
+  font-weight: 400;
+  line-height: 1.1;       /* canonical 195:210 — was 1.15 in deleted 211:5 draft */
+  letter-spacing: -0.51px; /* canonical 195:210 — was -1.5px in deleted 211:5 draft */
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+  color: var(--color-wl-ink); /* token flips in .dark automatically */
   margin-top: 2.5rem;
   margin-bottom: 1rem;
-  color: var(--color-text-light);
-  border-left: 4px solid var(--color-turquoise);
-  padding-left: 1rem;
 }
 
-.dark .prose h2 {
-  color: var(--color-text-dark);
-  border-left-color: var(--color-turquoise-dark);
+@media (max-width: 390px) {
+  /* [FIDELITY-GAP] no-frame-spec: no 390 frame in canonical 195:210 — derived from landing
+     interior h1 scaling convention; value kept from prior shipped work, flagged for gate review. */
+  .wl-prose h2 {
+    font-size: 26px; /* derived — no 390 canonical frame for blog post (FIDELITY-GAP) */
+  }
 }
 
-.prose h3 {
-  font-family: var(--font-heading);
-  font-size: var(--text-2xl);
-  font-weight: var(--font-weight-h3);
+/* h3: [FIDELITY-GAP] no-frame-spec — no h3 in canonical 195:211 article prose.
+   Using .wl-heading-h3 ramp value (21px) as sensible fallback. Flagged for gate. */
+.wl-prose h3 {
+  font-family: var(--font-wl-heading);
+  font-size: 21px; /* [FIDELITY-GAP] .wl-heading-h3 ramp value; no h3 in canonical 195:211 frame */
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -1.5px; /* ramp convention — no frame spec */
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+  color: var(--color-wl-ink); /* token flips */
   margin-top: 2rem;
   margin-bottom: 0.75rem;
-  color: var(--color-text-light);
 }
 
-.dark .prose h3 {
-  color: var(--color-text-dark);
-}
-
-.prose h4 {
-  font-family: var(--font-heading);
-  font-size: var(--text-xl);
-  font-weight: var(--font-weight-h4);
-  margin-top: 1.5rem;
+/* h4: [FIDELITY-GAP] no-frame-spec — no h4 in canonical 195:211 article prose. */
+.wl-prose h4 {
+  font-family: var(--font-wl-heading);
+  font-size: 18px; /* [FIDELITY-GAP] local — no h4 in canonical 195:211 frame */
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.5px;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+  color: var(--color-wl-ink); /* token flips */
+  margin-top: 1.75rem;
   margin-bottom: 0.5rem;
-  color: var(--color-text-light);
 }
 
-.dark .prose h4 {
-  color: var(--color-text-dark);
-}
-
-.prose p {
+/* p: source node 197:1018 — HG 17px / 1.6, sub.
+   §12 diff: shipped was 16px from deleted 211:5 draft — CORRECTED to 17px. */
+.wl-prose p {
+  font-family: var(--font-wl-body);
+  font-size: 17px; /* source node 197:1018 Blog Post/1440 — was 16px in deleted 211:5 draft */
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-wl-sub); /* token flips */
   margin-bottom: 1rem;
-  line-height: 1.75;
 }
 
-.prose ul, .prose ol {
-  margin-bottom: 1rem;
-  padding-left: 1.5rem;
-}
-
-.prose ul {
-  list-style-type: disc;
-}
-
-.prose ol {
-  list-style-type: decimal;
-}
-
-.prose li {
-  margin-bottom: 0.5rem;
-  line-height: 1.75;
-}
-
-.prose a {
-  color: var(--color-accent-teal);
+/* a: accent underlined; hover darkens to ink; focus-visible project convention */
+.wl-prose a {
+  color: var(--color-wl-accent); /* token flips */
   text-decoration: underline;
 }
 
-.prose a:hover {
-  color: var(--color-accent-teal-hover);
+.wl-prose a:hover {
+  color: var(--color-wl-ink); /* darken on hover — token flips */
 }
 
-.prose strong {
+.wl-prose a:focus-visible {
+  outline: 2px solid var(--color-wl-accent); /* token flips */
+  outline-offset: 2px;
+}
+
+/* strong: source node 197:1025 spans — HG SemiBold, ink */
+.wl-prose strong {
+  color: var(--color-wl-ink); /* token flips */
   font-weight: 600;
 }
 
-.prose blockquote {
-  border-left: 4px solid var(--color-accent-teal);
-  padding-left: 1rem;
+/* blockquote: source nodes 198:1039–1043.
+   §12 diff: shipped was 22px / sub color / 3px accent bar from deleted 211:5 draft.
+   Canonical: 20px / lh 1.4 / INK color / 3px accent-SOFT bar / + attribution row.
+   Layout: flex row, gap 22px — 3px bar (self-stretch) + content column (gap 10, py 5). */
+.wl-prose blockquote {
+  display: flex;
+  flex-direction: row;
+  gap: 22px; /* 198:1039 row gap */
+  align-items: stretch;
+  margin: 1.5rem 0;
+  padding: 0;
+  border: none; /* no CSS border-left — left bar is a sibling element below */
+  background: none;
+  border-radius: 0;
+}
+
+/* 3px accent-soft bar — source node 198:1040; canonical bar is accent-SOFT (#5AA9A5 / dark #7FC4C0)
+   §12 diff: shipped was plain --color-wl-accent bar from deleted 211:5 draft — CORRECTED. */
+.wl-prose blockquote::before {
+  content: '';
+  display: block;
+  flex-shrink: 0;
+  width: 3px;
+  align-self: stretch;
+  background: var(--color-wl-accent-soft); /* #5AA9A5 light / #7FC4C0 dark — token flips */
+  border-radius: 2px;
+}
+
+/* Content column inside blockquote: py 5, column gap 10 */
+.wl-prose blockquote > * {
+  padding: 5px 0; /* py 5 per node 198:1039 content column */
+}
+
+/* Blockquote body (first child / p or direct text): Fraunces Italic 20px / 1.4 / ink.
+   §12 diff: was 22px / sub color. Canonical 198:1042 = 20px / 1.4 / ink / SOFT 0 WONK 1. */
+.wl-prose blockquote p,
+.wl-prose blockquote > p {
+  font-family: var(--font-wl-heading);
+  font-size: 20px; /* source node 198:1042 — was 22px in deleted 211:5 draft */
+  font-weight: 400;
   font-style: italic;
-  color: var(--color-text-muted-light);
+  font-optical-sizing: auto;
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+  line-height: 1.4; /* canonical 198:1042 — was implicit lh in old draft */
+  color: var(--color-wl-ink); /* INK — was sub color in deleted 211:5 draft */
+  margin: 0;
+}
+
+/* Attribution line: source node 198:1043 — HG Regular 14px, #4C6A70 (dark #A9C9C7 DERIVED via
+   --wl-breadcrumb-color token flip). Written as "— A client, after week one".
+   Targeting last-child (cite, footer, or p) within the content column. */
+.wl-prose blockquote footer,
+.wl-prose blockquote cite {
+  font-family: var(--font-wl-body);
+  font-size: 14px; /* source node 198:1043 */
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.5;
+  color: var(--wl-breadcrumb-color); /* #4C6A70 light / #A9C9C7 dark — token flip (breadcrumb precedent) */
+  display: block;
+  margin: 0;
+}
+
+/* ul: source node 197:1022 — custom bullet in accent, column gap 9px, li flex row gap 8.
+   §12 diff: shipped used list-style-type: disc (browser default) — replaced with
+   custom bullet via pseudo-element for accent color. */
+.wl-prose ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 9px; /* source node 197:1022 column gap */
+}
+
+/* [FIDELITY-GAP] no-frame-spec: no <ol> in canonical 195:211 prose.
+   Keeping sensible fallback from prior work. */
+.wl-prose ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--color-wl-sub);
+}
+
+/* li: flex row, gap 8px — bullet (•) in accent + body text 17/1.6 sub.
+   Source nodes 197:1022–1037: li = flex row gap 8, bullet • accent, text body sub. */
+.wl-prose ul li {
+  font-family: var(--font-wl-body);
+  font-size: 17px; /* matches corrected p size — source 197:1022 */
+  line-height: 1.6;
+  color: var(--color-wl-sub); /* token flips */
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 8px; /* source node 197:1022 li flex gap */
+  margin: 0;
+}
+
+/* Bullet: • in accent color (source: per-li bullet is accent stroke in frame 197:1022) */
+.wl-prose ul li::before {
+  content: '•';
+  color: var(--color-wl-accent); /* token flips */
+  flex-shrink: 0;
+  font-size: 1em;
+  line-height: 1.6;
+  margin-top: 0;
+}
+
+.wl-prose ol li {
+  font-family: var(--font-wl-body);
+  font-size: 17px; /* [FIDELITY-GAP] no-frame-spec — matches corrected p size */
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+/* Inline code: source node 199:1063 — Roboto Mono 15px / ink / NO bg tint.
+   §12 diff: shipped was JetBrains Mono + sea-glass bg from deleted 211:5 draft.
+   Canonical 199:1063 span has no bg tint; ink color (dark: ink-flip DERIVED). */
+.wl-prose code:not(pre code) {
+  font-family: var(--font-wl-mono); /* Roboto Mono Variable — was JetBrains Mono */
+  font-size: 15px; /* source node 199:1063 */
+  font-weight: 400;
+  color: var(--color-wl-ink); /* INK — no bg tint per canonical 199:1063 frame span */
+  /* §12: no background, no padding, no border-radius on inline spans in canonical frame */
+}
+
+/* pre: source node 199:1061 — ALWAYS-DARK surface (footer-precedent: bg = --wl-footer-bg).
+   §12 diff: shipped was radius 12 + no bg spec from deleted 211:5 draft — CORRECTED.
+   No .dark flip needed: this surface is always-dark (matched to footer pattern). */
+.wl-prose pre {
   margin: 1.5rem 0;
+  border-radius: 14px; /* source node 199:1061 — was 12px in deleted 211:5 draft */
+  background: var(--wl-footer-bg); /* #0D2A31 always-dark surface — no dark flip (footer-precedent) */
+  color: var(--wl-footer-text-link); /* #CDE6E5 — always-light-on-dark (footer-precedent) */
+  padding: 21px 24px; /* source node 199:1061 py21 px24 */
+  font-family: var(--font-wl-mono); /* Roboto Mono Variable */
+  font-size: 14.5px; /* source node 199:1062 */
+  line-height: 1.55; /* source node 199:1062 */
+  overflow-x: auto;
 }
 
-.dark .prose blockquote {
-  color: var(--color-text-muted-dark);
+/* pre code: reset inline-code overrides — font/color already set on pre */
+.wl-prose pre code {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  background: none;
+  padding: 0;
+  border-radius: 0;
 }
 
-/* Code blocks get Expressive Code styling automatically */
-.prose pre {
-  margin: 1.5rem 0;
-  border-radius: 0.5rem;
-}
-
-/* Inline code styling */
-.prose code:not(pre code) {
-  background-color: rgba(0, 0, 0, 0.05);
-  padding: 0.125rem 0.375rem;
-  border-radius: 0.25rem;
-  font-size: 0.875em;
-}
-
-.dark .prose code:not(pre code) {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Images with caption support */
-.prose img {
+/* img: frame shows figure component (radius 16 on figure wrapper — see figcaption below);
+   bare <img> in prose defaults to full-width, small radius. */
+.wl-prose img {
   width: 100%;
-  border-radius: 0.5rem;
+  border-radius: 8px;
+  display: block;
   margin: 1.5rem 0;
 }
 
-.prose figcaption {
+/* figure: source node 200:1005 — column gap 11, centered; figure wrapper = full-width × 245px,
+   radius 16, border 1px --wl-line, sea-glass gradient bg.
+   Applied via .wl-prose figure (MDX emits <figure> for remark-image syntax). */
+.wl-prose figure {
+  display: flex;
+  flex-direction: column;
+  gap: 11px; /* source node 200:1005 column gap */
+  align-items: center;
+  margin: 1.5rem 0;
+}
+
+.wl-prose figure > :first-child:not(figcaption) {
+  width: 100%;
+  border-radius: 16px; /* source node 200:1006 */
+  border: 1px solid var(--color-wl-line); /* token flips */
+  background: linear-gradient(to bottom, #E6F1F1, #D2E7E7); /* source node 200:1005; dark: DERIVED */
+  overflow: hidden;
+}
+
+/* figcaption: source node 200:1011 — HG 14px, #4C6A70 (dark #A9C9C7 DERIVED), centered */
+.wl-prose figcaption {
+  font-family: var(--font-wl-body);
+  font-size: 14px; /* source node 200:1011 */
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--wl-breadcrumb-color); /* #4C6A70 / #A9C9C7 dark — breadcrumb-token precedent */
   text-align: center;
-  font-size: 0.875rem;
-  color: var(--color-text-muted-light);
-  margin-top: -1rem;
-  margin-bottom: 1.5rem;
 }
 
-.dark .prose figcaption {
-  color: var(--color-text-muted-dark);
+/* table: source node 199:1029 — full-width (735 context), 3-col × 245px; no outer border/header fill.
+   thead border-bottom: 2px rgba(14,112,120,0.3) (accent @30%, stronger than --wl-line).
+   Dark thead border: [FIDELITY-GAP] no recipe entry — derived-decision: #5AA9A54D
+   (accent-soft @30%) applied in .dark override below.
+   Body rows: 1px --wl-line border-bottom (token flips). */
+.wl-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-family: var(--font-wl-body);
 }
 
-/* Horizontal rule */
-.prose hr {
+.wl-prose table th {
+  font-size: 15.5px; /* source node 199:1032 */
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--color-wl-ink); /* token flips */
+  padding: 10px 13px 9px; /* source node 199:1030 — pt 10 / px 13 / pb 9 */
+  text-align: left;
+  border-bottom: 2px solid rgba(14, 112, 120, 0.3); /* source node 199:1030 thead border (accent @30%) */
+  background: transparent; /* no header fill per canonical 199:1029 */
+}
+
+/* [FIDELITY-GAP] no dark-recipe for thead border: derived-decision #5AA9A54D (accent-soft @30%).
+   Not frame-verified — flagged for fidelity gate review. */
+.dark .wl-prose table th {
+  border-bottom-color: #5AA9A54D; /* DERIVED: accent-soft @30% — FIDELITY-GAP, no dark frame */
+}
+
+.wl-prose table td {
+  font-size: 15.5px; /* source node 199:1039 */
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-wl-sub); /* token flips */
+  padding: 10px 13px 9px; /* source node 199:1039 cell padding */
+  border-bottom: 1px solid var(--color-wl-line); /* token flips */
+}
+
+/* hr: source node 200:1012 — 1px × 441px centered, py-14 wrapper spacing.
+   §12 diff: shipped was full-width from deleted 211:5 draft — CORRECTED to 441px centered. */
+.wl-prose hr {
   border: none;
-  border-top: 1px solid var(--color-text-muted-light);
-  opacity: 0.3;
-  margin: 2rem 0;
+  display: flex;
+  justify-content: center;
+  padding: 14px 0; /* source node 200:1012 py-14 wrapper */
+  margin: 0;
 }
 
-.dark .prose hr {
-  border-top-color: var(--color-text-muted-dark);
+.wl-prose hr::after {
+  content: '';
+  display: block;
+  width: 441px; /* source node 200:1013 — NOT full-width (was full-width in deleted 211:5 draft) */
+  max-width: 100%;
+  height: 1px;
+  background: var(--color-wl-line); /* token flips */
+}
+
+/* ============================================================
+   WL TYPE RAMP — 13 composite utilities (FOUND-02 / 33-05)
+   One class per Figma style on Components page 36:5.
+   Names: .wl-{kebab-figma-style-name}
+   Base font-size = 1440px Figma spec value (also the 1920 value for all specced styles).
+   Breakpoint overrides: @media (max-width: 768px) and @media (max-width: 390px) only where specced.
+   No clamp(), no fluid interpolation — D-07 decision.
+   Fraunces styles carry font-variation-settings "SOFT" 0 "WONK" 1 per mockup renders.
+   ============================================================ */
+
+@layer utilities {
+
+  /* ---- Display / Hero ---- */
+  /* specced: 390=42, 768=46, 1440=76, 1920=76 */
+  .wl-display-hero {
+    font-family: var(--font-wl-heading);
+    font-size: 76px;
+    font-weight: 400;
+    line-height: 1.06;
+    letter-spacing: -1.5px;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings: "SOFT" 0, "WONK" 1;
+  }
+  @media (max-width: 768px) {
+    .wl-display-hero { font-size: 46px; }
+  }
+  @media (max-width: 390px) {
+    .wl-display-hero { font-size: 42px; }
+  }
+
+  /* ---- Heading / H1 Interior ---- */
+  /* specced: 1440=61 only; not observed at 390/768/1920 */
+  .wl-heading-h1-interior {
+    font-family: var(--font-wl-heading);
+    font-size: 61px;
+    font-weight: 400;
+    line-height: 1.06;
+    letter-spacing: -1.5px;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings: "SOFT" 0, "WONK" 1;
+  }
+
+  /* ---- Heading / H2 ---- */
+  /* specced: 390=32, 768=34, 1440=50, 1920=50 */
+  .wl-heading-h2 {
+    font-family: var(--font-wl-heading);
+    font-size: 50px;
+    font-weight: 400;
+    line-height: 1.06;
+    letter-spacing: -1.5px;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings: "SOFT" 0, "WONK" 1;
+  }
+  @media (max-width: 768px) {
+    .wl-heading-h2 { font-size: 34px; }
+  }
+  @media (max-width: 390px) {
+    .wl-heading-h2 { font-size: 32px; }
+  }
+
+  /* ---- Heading / H3 ---- */
+  /* specced: 390=18, 768=18, 1440=21, 1920=21 */
+  .wl-heading-h3 {
+    font-family: var(--font-wl-heading);
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -1.5px;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings: "SOFT" 0, "WONK" 1;
+  }
+  @media (max-width: 768px) {
+    .wl-heading-h3 { font-size: 18px; }
+  }
+  @media (max-width: 390px) {
+    .wl-heading-h3 { font-size: 18px; }
+  }
+
+  /* ---- Text / Lead ---- */
+  /* specced: 390=18, 768=18, 1440=21, 1920=21 */
+  .wl-text-lead {
+    font-family: var(--font-wl-body);
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0;
+    font-style: normal;
+  }
+  @media (max-width: 768px) {
+    .wl-text-lead { font-size: 18px; }
+  }
+  @media (max-width: 390px) {
+    .wl-text-lead { font-size: 18px; }
+  }
+
+  /* ---- Text / Body Large ---- */
+  /* specced: 390=17, 768=17, 1440=17, 1920=17 (constant) */
+  .wl-text-body-large {
+    font-family: var(--font-wl-body);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0;
+    font-style: normal;
+  }
+
+  /* ---- Text / Body (D-08 base body style) ---- */
+  /* specced: 390=16, 768=16, 1440=16, 1920=16 (constant) */
+  .wl-text-body {
+    font-family: var(--font-wl-body);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0;
+    font-style: normal;
+  }
+
+  /* ---- Text / Small ---- */
+  /* specced: 1440=15 only; not observed at 390/768/1920 */
+  .wl-text-small {
+    font-family: var(--font-wl-body);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 1px;
+    font-style: normal;
+  }
+
+  /* ---- Text / Note ---- */
+  /* specced: 1440=13 only; not observed at 390/768/1920 */
+  .wl-text-note {
+    font-family: var(--font-wl-body);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0;
+    font-style: normal;
+  }
+
+  /* ---- Label / Eyebrow ---- */
+  /* specced: 390=13, 768=13, 1440=13, 1920=13 (constant); tracking=22%=0.22em */
+  .wl-label-eyebrow {
+    font-family: var(--font-wl-body);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.22em;
+    font-style: normal;
+  }
+
+  /* ---- Label / Button ---- */
+  /* specced: 390=16, 768=16, 1440=16, 1920=16 (constant) */
+  .wl-label-button {
+    font-family: var(--font-wl-body);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: 0;
+    font-style: normal;
+  }
+
+  /* ---- Accent / Outcome ---- */
+  /* specced: 390=16, 768=16, 1440=16, 1920=16 (constant); italic Fraunces */
+  /* Note: opsz not specced in extraction table (—); SOFT 0 / WONK 1 retained per
+     extraction's ramp-wide mockup-render note (applies to all Fraunces styles incl. accents) */
+  .wl-accent-outcome {
+    font-family: var(--font-wl-heading);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: 0;
+    font-style: italic;
+    font-variation-settings: "SOFT" 0, "WONK" 1;
+  }
+
+  /* ---- Accent / Kicker ---- */
+  /* specced: 1440=20 only; not observed at 390/768/1920; italic Fraunces */
+  .wl-accent-kicker {
+    font-family: var(--font-wl-heading);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: 0;
+    font-style: italic;
+    font-variation-settings: "SOFT" 0, "WONK" 1;
+  }
+
+  /* ============================================================
+     WL CHROME UTILITIES (Phase 34 — header + footer type)
+     All sizes extracted from Figma nodes; fidelity gate verifies.
+     These are NOT mismatched Phase 33 ramp classes (.wl-label-button = 16px/600,
+     .wl-accent-kicker = 20px, .wl-text-body = 16px) — new chrome-scoped utilities.
+     ============================================================ */
+
+  /* ---- Chrome / Wordmark (header + footer) ---- */
+  /* extracted: 18.4px / Fraunces 400 Regular / node 42:29 */
+  /* No existing Phase 33 class matches 18.4px — authoring new chrome-scoped utility */
+  .wl-wordmark {
+    font-family: var(--font-wl-heading);
+    font-size: 18.4px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0;
+    font-style: normal;
+    font-variation-settings: "SOFT" 0, "WONK" 1;
+  }
+
+  /* ---- Chrome / Nav Link (header nav) ---- */
+  /* extracted: 15px / Hanken Grotesk 500 Medium / node 42:29 */
+  /* Phase 33 .wl-label-button is 16px/600 — wrong size AND weight; not reused */
+  .wl-nav-link {
+    font-family: var(--font-wl-body);
+    font-size: 15px;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0;
+    font-style: normal;
+  }
+
+  /* ---- Chrome / CTA Label (Book a call button) ---- */
+  /* extracted: 14px / Hanken Grotesk 600 SemiBold / node 39:30 */
+  /* Phase 33 .wl-label-button is 16px/600 — wrong size; not reused */
+  .wl-cta-label {
+    font-family: var(--font-wl-body);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 0;
+    font-style: normal;
+  }
+
+  /* ---- Chrome / Footer Tagline ("On your wavelength.") ---- */
+  /* extracted: 17px / Fraunces 400 italic / node 42:77 */
+  /* No match in Phase 33 ramp — .wl-accent-kicker is 20px; authoring new utility */
+  .wl-footer-tagline {
+    font-family: var(--font-wl-heading);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0;
+    font-style: italic;
+    font-variation-settings: "SOFT" 0, "WONK" 1;
+  }
+
+  /* ---- Chrome / Footer Body (supporting line) ---- */
+  /* extracted: 14px / Hanken Grotesk 400 Regular / node 42:77 */
+  /* Phase 33 .wl-text-body is 16px — wrong size; authoring new utility */
+  .wl-footer-body {
+    font-family: var(--font-wl-body);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0;
+    font-style: normal;
+  }
+
+  /* ---- Chrome / Footer Link (nav + bottom row) ---- */
+  /* extracted: 14px / Hanken Grotesk 400 Regular / node 42:77 */
+  .wl-footer-link {
+    font-family: var(--font-wl-body);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0;
+    font-style: normal;
+  }
+
 }

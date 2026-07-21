@@ -1,0 +1,253 @@
+---
+/**
+ * CTAButton — COMP-01 CTA Button
+ *
+ * All four Figma variants sourced from 35-FIGMA-EXTRACTION.md §Fresh MCP Extraction (2026-07-15).
+ * Renders anchor tags ONLY — never a button element (D-07). href is a required prop.
+ *
+ * Variant geometry (Figma node 39:31 component set):
+ *   solid      (39:15) — bg wl-ink, padding 15px 27px, radius 13px, shadow, .wl-label-button, color wl-on-ink
+ *   ghost      (39:22) — bg rgba(255,255,255,0.4), border 1.5px wl-accent, padding 15px 27px, radius 13px, .wl-label-button, color wl-ink
+ *   ghost-on-dark (39:27) — transparent, border 1.5px solid rgba(255,255,255,0.35) LITERAL, padding 15px 27px, radius 13px, .wl-label-button, color #EAF6F3 LITERAL (D-10 non-flippable)
+ *   small      (39:30) — bg wl-ink, padding 9px 17px, radius 10px, .wl-cta-label, color wl-on-ink, no shadow (SiteHeader nav CTA)
+ *
+ * Icon slots (D-06 closed set — calendar + mail only):
+ *   viewBox 0 0 17 17, stroke-width 2, round linecap/linejoin, stroke="currentColor"
+ *   Paths from Figma nodes 39:4 (calendar) and 39:7 (mail). T-01 clean: no script/handlers/hrefs.
+ *
+ * Hover states: no hover specs exist in Figma — minimal derived hover per UI-SPEC convention:
+ *   solid/small: opacity-90 on hover (slight darken effect)
+ *   ghost: bg var(--wl-cta-ghost-bg-hover) on hover — rgba(255,255,255,0.6) light /
+ *          rgba(255,255,255,0.16) dark (flips like --wl-cta-ghost-bg so the surface
+ *          stays dark for #EAF6F3 ink text in dark mode — CR-02 / Rule 1)
+ *   ghost-on-dark: rgba(255,255,255,0.08) bg on hover (subtle lightening — always-dark surface)
+ *   These are APPROVED-DEVIATION candidates for fidelity gate per extraction_note.
+ *
+ * D-10 constraint: ghost-on-dark uses non-flippable literal #EAF6F3 (text) and
+ *   rgba(255,255,255,0.35) (border). MUST NOT use var(--color-wl-on-ink) which flips
+ *   to #12333B in dark mode — near-zero contrast on always-dark ink surface (threat T-02).
+ *
+ * Padding / radius delta note:
+ *   Solid/Ghost/Ghost-on-dark: Figma extraction gives 15px/27px padding and 13px radius
+ *     (these are LARGER than the SiteHeader inline CTA 9px/17px/10px).
+ *   Small: 9px/17px padding, 10px radius — matches SiteHeader inline CTA exactly (D-02 pixel-neutral).
+ *   The solid variant uses the full-size Figma spec (15px/27px/13px), not the header spec.
+ */
+
+interface Props {
+  href: string;
+  variant?: 'solid' | 'ghost' | 'ghost-on-dark' | 'small';
+  icon?: 'calendar' | 'mail';
+  class?: string;
+  target?: string;
+  rel?: string;
+}
+
+const { href, variant = 'solid', icon, class: className = '', target, rel } = Astro.props;
+
+// Resolve whether this variant uses wl-label-button (solid/ghost/ghost-on-dark = 16px/600)
+// or wl-cta-label (small = 14px/600). Source: 35-FIGMA-EXTRACTION.md §Fresh MCP Extraction.
+const isSmall = variant === 'small';
+const isGhostOnDark = variant === 'ghost-on-dark';
+
+// Icon gap: 9px (Figma extraction — 39:15 / 39:22). Gap applies when icon is present.
+// No icon in Figma for small/ghost-on-dark, but gap still activates if consumer uses icon prop.
+const hasIcon = icon !== undefined;
+---
+
+{/* ghost-on-dark uses inline style for non-flippable literal values (D-10, T-02) */}
+{isGhostOnDark ? (
+  <a
+    href={href}
+    target={target}
+    rel={rel}
+    class:list={[
+      /* non-flippable type class — same as solid/ghost (16px/600) */
+      'wl-label-button',
+      'inline-flex items-center',
+      hasIcon ? 'gap-[9px]' : '',
+      /* a11y focus ring — NON-FLIPPABLE literal (D-10): this sits on the always-dark
+         ink strip (#12333B) in BOTH themes. The flippable wl-accent token resolves to
+         #0E7078 in light mode = 2.31:1 on #12333B (FAIL 1.4.11). Literal #4FB3B8 on
+         #12333B = 5.42:1 in both themes (verified in check-contrast.mjs). */
+      'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4FB3B8]',
+      'no-underline',
+      /* base geometry */
+      'rounded-[13px] min-h-[44px] py-[15px] px-[27px]',
+      /* bg via class (NOT inline style) so the hover utility can win the cascade (CR-02).
+         hover: subtle bg lightening on always-dark surface (derived — no Figma hover spec).
+         0.08 white over #12333B -> effective #25434B; #EAF6F3 label = 9.57:1 AA PASS. */
+      'bg-transparent hover:bg-[rgba(255,255,255,0.08)]',
+      'transition-colors',
+      className
+    ]}
+    style={[
+      /* non-flippable literal text color — source Figma 117:103 dark mockup (D-10) */
+      /* #EAF6F3 on #12333B ink surface = 12.14:1 (AAA pass — check-contrast.mjs). */
+      'color: #EAF6F3;',
+      /* non-flippable literal border — source Figma 117:103 ghost-on-dark (D-10) */
+      'border: 1.5px solid rgba(255,255,255,0.35);',
+      'text-decoration: none;',
+    ].join(' ')}
+  >
+    {icon === 'calendar' && (
+      /* Calendar icon — Figma node 39:4, viewBox 0 0 17 17, stroke-width 2, round caps.
+         T-01 clean: fill none, no script/handlers/external hrefs. stroke=currentColor. */
+      <svg
+        aria-hidden="true"
+        width="17"
+        height="17"
+        viewBox="0 0 17 17"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M5.66667 1.41667V3.54167M11.3333 1.41667V3.54167M2.125 6.375H14.875M3.54167 3.54167H13.4583C13.6462 3.54167 13.8264 3.61629 13.9592 3.74913C14.092 3.88197 14.1667 4.06214 14.1667 4.25V13.4583C14.1667 13.6462 14.092 13.8264 13.9592 13.9592C13.8264 14.092 13.6462 14.1667 13.4583 14.1667H3.54167C3.3538 14.1667 3.17364 14.092 3.0408 13.9592C2.90796 13.8264 2.83333 13.6462 2.83333 13.4583V4.25C2.83333 4.06214 2.90796 3.88197 3.0408 3.74913C3.17364 3.61629 3.3538 3.54167 3.54167 3.54167Z" />
+      </svg>
+    )}
+    {icon === 'mail' && (
+      /* Mail icon — Figma node 39:7, viewBox 0 0 17 17, stroke-width 2, round caps.
+         T-01 clean: fill none, no script/handlers/external hrefs. stroke=currentColor. */
+      <svg
+        aria-hidden="true"
+        width="17"
+        height="17"
+        viewBox="0 0 17 17"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M2.125 4.95833L8.5 9.20833L14.875 4.95833M2.125 4.25H14.875V12.75H2.125V4.25Z" />
+      </svg>
+    )}
+    <slot />
+  </a>
+) : isSmall ? (
+  <a
+    href={href}
+    target={target}
+    rel={rel}
+    class:list={[
+      /* small variant: .wl-cta-label (14px/600) — SiteHeader CTA spec (D-02 pixel-neutral) */
+      'wl-cta-label',
+      'inline-flex items-center',
+      hasIcon ? 'gap-[9px]' : '',
+      'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent',
+      /* geometry matches SiteHeader inline CTA exactly (D-02): 9px/17px, 10px radius, 44px min-h */
+      'bg-wl-ink text-wl-on-ink rounded-[10px] py-[9px] px-[17px] min-h-[44px]',
+      /* hover: slight opacity darken (derived — no Figma hover spec) */
+      'hover:opacity-90',
+      'transition-opacity',
+      className
+    ]}
+    style="text-decoration: none;"
+  >
+    {icon === 'calendar' && (
+      <svg
+        aria-hidden="true"
+        width="17"
+        height="17"
+        viewBox="0 0 17 17"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M5.66667 1.41667V3.54167M11.3333 1.41667V3.54167M2.125 6.375H14.875M3.54167 3.54167H13.4583C13.6462 3.54167 13.8264 3.61629 13.9592 3.74913C14.092 3.88197 14.1667 4.06214 14.1667 4.25V13.4583C14.1667 13.6462 14.092 13.8264 13.9592 13.9592C13.8264 14.092 13.6462 14.1667 13.4583 14.1667H3.54167C3.3538 14.1667 3.17364 14.092 3.0408 13.9592C2.90796 13.8264 2.83333 13.6462 2.83333 13.4583V4.25C2.83333 4.06214 2.90796 3.88197 3.0408 3.74913C3.17364 3.61629 3.3538 3.54167 3.54167 3.54167Z" />
+      </svg>
+    )}
+    {icon === 'mail' && (
+      <svg
+        aria-hidden="true"
+        width="17"
+        height="17"
+        viewBox="0 0 17 17"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M2.125 4.95833L8.5 9.20833L14.875 4.95833M2.125 4.25H14.875V12.75H2.125V4.25Z" />
+      </svg>
+    )}
+    <slot />
+  </a>
+) : (
+  <a
+    href={href}
+    target={target}
+    rel={rel}
+    class:list={[
+      /* solid and ghost variants: .wl-label-button (16px/600) — Figma nodes 39:15 / 39:22 */
+      'wl-label-button',
+      'inline-flex items-center',
+      hasIcon ? 'gap-[9px]' : '',
+      'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent',
+      /* shared geometry for solid and ghost */
+      'rounded-[13px] min-h-[44px] py-[15px] px-[27px]',
+      {
+        /* solid (39:15): ink bg, on-ink text (flippable tokens — correct for page-level surfaces).
+           Shadow/CTA: 0 12px 28px -14px rgba(18,51,59,0.75) as box-shadow — drop-shadow()
+           takes max 3 lengths (no spread), so a 4-length filter is invalid and never
+           renders (WR-04). Extraction: "box-shadow with spread is authoritative". */
+        'bg-wl-ink text-wl-on-ink shadow-[0_12px_28px_-14px_rgba(18,51,59,0.75)] hover:opacity-90 transition-opacity':
+          variant === 'solid',
+        /* ghost (39:22): frosted bg rgba(255,255,255,0.4) via --wl-cta-ghost-bg (flips to
+           0.08 in dark mode for AA), wl-accent border 1.5px, ink text. bg applied via
+           class (NOT inline style) so the hover utility can win the cascade (CR-02).
+           Hover uses --wl-cta-ghost-bg-hover (0.6 light / 0.16 dark) — a hard-coded 0.6
+           literal would fail AA in dark mode (2.22:1); flipping token keeps surface dark. */
+        'text-wl-ink bg-[var(--wl-cta-ghost-bg)] hover:bg-[var(--wl-cta-ghost-bg-hover)] transition-colors':
+          variant === 'ghost',
+      },
+      className
+    ]}
+    style={variant === 'ghost'
+      ? 'border: 1.5px solid var(--color-wl-accent); text-decoration: none;'
+      : 'text-decoration: none;'}
+  >
+    {icon === 'calendar' && (
+      <svg
+        aria-hidden="true"
+        width="17"
+        height="17"
+        viewBox="0 0 17 17"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M5.66667 1.41667V3.54167M11.3333 1.41667V3.54167M2.125 6.375H14.875M3.54167 3.54167H13.4583C13.6462 3.54167 13.8264 3.61629 13.9592 3.74913C14.092 3.88197 14.1667 4.06214 14.1667 4.25V13.4583C14.1667 13.6462 14.092 13.8264 13.9592 13.9592C13.8264 14.092 13.6462 14.1667 13.4583 14.1667H3.54167C3.3538 14.1667 3.17364 14.092 3.0408 13.9592C2.90796 13.8264 2.83333 13.6462 2.83333 13.4583V4.25C2.83333 4.06214 2.90796 3.88197 3.0408 3.74913C3.17364 3.61629 3.3538 3.54167 3.54167 3.54167Z" />
+      </svg>
+    )}
+    {icon === 'mail' && (
+      <svg
+        aria-hidden="true"
+        width="17"
+        height="17"
+        viewBox="0 0 17 17"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M2.125 4.95833L8.5 9.20833L14.875 4.95833M2.125 4.25H14.875V12.75H2.125V4.25Z" />
+      </svg>
+    )}
+    <slot />
+  </a>
+)}

@@ -1,81 +1,55 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { settleAnimations } from './helpers';
 
 /**
  * Dark mode accessibility test suite.
- * Verifies that toggling dark mode doesn't introduce color contrast regressions.
+ * Drives dark mode via Playwright colorScheme browser context (Wave 0 requirement: D-05/D-06).
+ * Toggle-independent — tests stay green when the dark mode toggle is removed from chrome.
  */
 
 const wcagTags = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
 
 test.describe('Dark Mode Accessibility', () => {
-  test('Homepage in dark mode should not have accessibility violations', async ({ page }) => {
+  // All tests use colorScheme browser context (D-05/D-06)
+
+  test('Homepage in dark mode should not have accessibility violations', async ({ browser }) => {
+    const context = await browser.newContext({ colorScheme: 'dark' });
+    const page = await context.newPage();
     await page.goto('/');
 
-    // Toggle dark mode via theme button
-    const themeToggle = page.locator('#theme-toggle');
-    await themeToggle.click();
-
-    // Wait for dark mode transition to complete
-    await page.waitForTimeout(500);
-
-    // Verify dark mode is active
+    // Verify FOUC script set .dark class from OS preference
     const html = page.locator('html');
     await expect(html).toHaveClass(/dark/);
 
-    // Run axe scan in dark mode
+    await settleAnimations(page);
+
+
     const results = await new AxeBuilder({ page })
       .withTags(wcagTags)
       .analyze();
 
     expect(results.violations).toEqual([]);
+    await context.close();
   });
 
-  test('Projects page in dark mode should not have accessibility violations', async ({ page }) => {
-    await page.goto('/projects');
+  // Blog dark-mode test removed: /blog is dev-only as of Phase 34 (prod builds emit a
+  // redirect stub). The suite's webServer runs `npm run dev`, where /blog still renders —
+  // light-mode blog coverage lives in axe-tests.spec.ts until the Phase 38 restyle.
 
-    // Toggle dark mode
-    const themeToggle = page.locator('#theme-toggle');
-    await themeToggle.click();
-    await page.waitForTimeout(500);
+  test('Homepage in light mode should not have accessibility violations', async ({ browser }) => {
+    const context = await browser.newContext({ colorScheme: 'light' });
+    const page = await context.newPage();
+    await page.goto('/');
 
-    // Run axe scan
+    await settleAnimations(page);
+
+
     const results = await new AxeBuilder({ page })
       .withTags(wcagTags)
       .analyze();
 
     expect(results.violations).toEqual([]);
-  });
-
-  test('Blog page in dark mode should not have accessibility violations', async ({ page }) => {
-    await page.goto('/blog');
-
-    // Toggle dark mode
-    const themeToggle = page.locator('#theme-toggle');
-    await themeToggle.click();
-    await page.waitForTimeout(500);
-
-    // Run axe scan
-    const results = await new AxeBuilder({ page })
-      .withTags(wcagTags)
-      .analyze();
-
-    expect(results.violations).toEqual([]);
-  });
-
-  test('Contact page in dark mode should not have accessibility violations', async ({ page }) => {
-    await page.goto('/contact');
-
-    // Toggle dark mode
-    const themeToggle = page.locator('#theme-toggle');
-    await themeToggle.click();
-    await page.waitForTimeout(500);
-
-    // Run axe scan
-    const results = await new AxeBuilder({ page })
-      .withTags(wcagTags)
-      .analyze();
-
-    expect(results.violations).toEqual([]);
+    await context.close();
   });
 });

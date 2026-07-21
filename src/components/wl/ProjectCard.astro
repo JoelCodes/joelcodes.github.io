@@ -1,0 +1,445 @@
+---
+/**
+ * ProjectCard — COMP-03 expandable project card
+ *
+ * Expandable project showcase card using native <details>/<summary>.
+ * Whole closed card is the <summary> (D-01). Cards open independently
+ * — no name attribute (D-03). Native AT flattening accepted, no ARIA
+ * override for role/aria-expanded/aria-labelledby (D-02). Zero client JS.
+ *
+ * Geometry sourced from 36-EXTRACTION.md nodes 41:45 (closed) / 41:95 (expanded):
+ *   Background:        #FFFFFF → --wl-card-bg   (flips dark via Phase 35 card token)
+ *   Shadow:            Shadow/Card → --wl-card-shadow
+ *   Border-radius:     18px (radius/card) — node 41:45
+ *   Border closed:     1px solid var(--color-wl-line) — node 41:45
+ *   Border open:       1px solid var(--color-wl-accent) — node 41:95 (stronger when open)
+ *   Overflow:          clip; flex column
+ *
+ * Thumb block (41:5 — NOT in original UI-SPEC; present in Figma; deviation from plan):
+ *   Height:    308px
+ *   Gradient:  linear-gradient(150.617deg, #0E7078 0%, #14323B 70.721%)
+ *   Label:     Fraunces Italic 16px #FFFFFF opacity .85, centered, SOFT 0 / WONK 1
+ *   Content:   thumbLabel prop (per-project string)
+ *   Gradient does NOT flip in dark mode (always dark gradient).
+ *
+ * Body (41:7) — body padding: 26px top / 29px bottom / 27px left+right
+ *   Kicker:       HG Bold 12px, tracking 1.44px, accent, uppercase (41:8) — via <Eyebrow>
+ *   gap kicker→title:   8px (41:9)
+ *   Title:        Fraunces Regular 22px ink (41:10) — NOT .wl-heading-h3 (21px); local 22px
+ *   gap title→hook:     8px (41:11)
+ *   Hook:         Fraunces Italic 17px INK (41:12) — NOT accent; differs from .wl-accent-outcome (16px accent)
+ *   gap hook→summary:   10px (41:13)
+ *   Summary:      .wl-text-body / sub (41:14)
+ *   gap summary→tags:   18px (41:15)
+ *   Tags row:     flex, gap 8px (41:16)
+ *   gap tags→toggle:    21px (41:25)
+ *   Toggle row:   HG SemiBold 14px accent + 16×16 chevron SVG (41:26/27/28)
+ *     Label text: "Read the story" (closed) / "Hide" (open) — swapped via CSS, zero JS
+ *
+ * Expanded panel (41:81→41:95 — inside <details> but after </summary>, so in DOM when closed for SEO):
+ *   gap toggle→divider:     21px (41:81)
+ *   Divider:                1px var(--color-wl-line) (41:82)
+ *   gap divider→first label: 18px (41:83)
+ *   Section labels:         Fraunces Italic 16px var(--color-wl-accent) — matches .wl-accent-outcome styling (41:84/88/92)
+ *   Label text:             "The problem" / "What I built" / "The result" (verbatim Figma)
+ *   gap label→body:         3px (41:85)
+ *   Section body:           .wl-text-body / sub (41:86/90/94)
+ *   gap between sections:   18px (41:87/91)
+ *
+ * Props:
+ *   eyebrow?:      string — kicker/eyebrow label
+ *   title:         string (required)
+ *   outcome?:      string — hook line (Fraunces Italic 17px ink)
+ *   summary?:      string — body summary paragraph
+ *   tags?:         string[] — tag pills
+ *   problem?:      string — expanded "The problem" section
+ *   built?:        string — expanded "What I built" section
+ *   result?:       string — expanded "The result" section
+ *   thumbLabel?:   string — italic label in the thumb gradient block
+ *   headingLevel?: 2 | 3 | 4 (default: 3) — WR-09 heading outline contract
+ *   class?:        string — passthrough
+ *
+ * Headings-outline contract (WR-09):
+ *   Title renders as a real heading (h2/h3/h4) via headingLevel dispatch.
+ *   display: inline keeps heading in outline while not forcing full-width block
+ *   layout inside the summary row (RESEARCH Pitfall 3).
+ *
+ * Zero old-token references (D-03). No script tag.
+ */
+
+import Eyebrow from './Eyebrow.astro';
+import Tag from './Tag.astro';
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  outcome?: string;
+  summary?: string;
+  tags?: string[];
+  problem?: string;
+  built?: string;
+  result?: string;
+  thumbLabel?: string;
+  headingLevel?: 2 | 3 | 4;
+  class?: string;
+  // Per-card detail section label overrides (38-01 deviation — extraction found labels vary
+  // per card: Craft cards use "The idea/How it works/Why I made it"; "Your Project Here" uses
+  // "A few ideas/How it starts/Book a call". Defaults to the original "The problem / What I
+  // built / The result" Figma values so existing consumers are fully backward-compatible.
+  problemLabel?: string;
+  builtLabel?: string;
+  resultLabel?: string;
+}
+
+const {
+  eyebrow,
+  title,
+  outcome,
+  summary,
+  tags = [],
+  problem,
+  built,
+  result,
+  thumbLabel,
+  headingLevel = 3,
+  class: className = '',
+  problemLabel = 'The problem',
+  builtLabel = 'What I built',
+  resultLabel = 'The result',
+} = Astro.props;
+
+// Dynamic heading tag (WR-09): visual style stays local 22px regardless of level.
+const Heading = `h${headingLevel}` as 'h2' | 'h3' | 'h4';
+---
+
+{/* article > details > summary: UI-SPEC Accessibility Contract (D-02) */}
+<article class:list={[className]}>
+  <details
+    style={[
+      /* Background: Phase 35 card token — #FFFFFF light / #12333B dark */
+      'background: var(--wl-card-bg);',
+      /* Shadow: Shadow/Card — --wl-card-shadow flips in dark mode */
+      'box-shadow: var(--wl-card-shadow);',
+      /* Border-radius: 18px (radius/card) — source node 41:45 */
+      'border-radius: 18px;',
+      /* Overflow: clip + flex column for thumb+body stacking */
+      'overflow: clip;',
+      'display: flex;',
+      'flex-direction: column;',
+    ].join(' ')}
+    class:list={[
+      'wl-project-card-details',
+      /* WR-06: marks cards that render the expanded panel — the WR-03 [open]
+         padding-bottom:0 override only applies when the panel exists to supply
+         the card's bottom padding. */
+      (problem || built || result) && 'wl-has-story',
+    ]}
+  >
+    {/* <summary> = the ENTIRE closed card (D-01).
+        list-style: none removes Safari's native disclosure triangle.
+        focus-visible outline uses the accent token for keyboard accessibility. */}
+    <summary
+      class="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wl-accent"
+      style="list-style: none; cursor: pointer; display: flex; flex-direction: column;"
+    >
+      {/* ── Thumb block (41:5) — 308px gradient above body content.
+             Gradient does NOT flip in dark mode (always dark surface).
+             Label: Fraunces Italic 16px white opacity .85, SOFT 0 / WONK 1. */}
+      <div
+        style={[
+          /* Height: 308px — source node 41:5 */
+          'height: 308px;',
+          /* Gradient: 150.617deg from #0E7078 to #14323B — source node 41:5 */
+          'background: linear-gradient(150.617deg, #0E7078 0%, #14323B 70.721%);',
+          /* Center the label text */
+          'display: flex;',
+          'align-items: center;',
+          'justify-content: center;',
+        ].join(' ')}
+      >
+        {thumbLabel && (
+          <span
+            style={[
+              /* Fraunces Italic 16px #FFFFFF opacity .85, SOFT 0 / WONK 1 — source node 41:6 */
+              'font-family: var(--font-wl-heading);',
+              'font-size: 16px;',
+              'font-weight: 400;',
+              'font-style: italic;',
+              'font-variation-settings: "SOFT" 0, "WONK" 1;',
+              'color: #FFFFFF;',
+              'opacity: 0.85;',
+              'text-align: center;',
+              'padding: 0 24px;',
+            ].join(' ')}
+          >
+            {thumbLabel}
+          </span>
+        )}
+      </div>
+
+      {/* ── Body closed-state content ──
+          Padding: 26px top / 29px bottom / 27px left+right — source node 41:7.
+          Padding lives in the scoped <style> block (not inline) so the [open] rule can
+          zero the bottom padding: the 29px is CARD bottom padding for the closed state;
+          when open, the expanded panel owns the card bottom padding and the toggle→divider
+          gap must be exactly the 21px spacer, not 29+21=50px (WR-03, node 41:81). */}
+      <div
+        class="wl-project-card-body"
+        style={[
+          'display: flex;',
+          'flex-direction: column;',
+        ].join(' ')}
+      >
+        {/* Kicker/Eyebrow — HG Bold 12px, tracking 1.44px, accent, uppercase via <Eyebrow> */}
+        {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+
+        {/* gap kicker→title: 8px — source node 41:9 */}
+        {eyebrow && <div style="height: 8px;"></div>}
+
+        {/* Title: Fraunces Regular 22px ink — source node 41:10
+            display:inline keeps heading in page outline (RESEARCH Pitfall 3, D-02).
+            NOT .wl-heading-h3 (21px) — local 22px per extraction override. */}
+        <Heading
+          style={[
+            'display: inline;',
+            /* Fraunces Regular 22px — local size, extraction override over .wl-heading-h3 (21px) */
+            'font-family: var(--font-wl-heading);',
+            'font-size: 22px;',
+            'font-weight: 400;',
+            'line-height: 1.2;',
+            'letter-spacing: -1.5px;',
+            'font-style: normal;',
+            'font-variation-settings: "SOFT" 0, "WONK" 1;',
+            /* Color: ink — source node 41:10 */
+            'color: var(--color-wl-ink);',
+            'margin: 0;',
+          ].join(' ')}
+        >
+          {title}
+        </Heading>
+
+        {/* gap title→hook: 8px — source node 41:11 */}
+        {outcome && <div style="height: 8px;"></div>}
+
+        {/* Hook/outcome: Fraunces Italic 17px INK (not accent) — source node 41:12
+            Differs from .wl-accent-outcome (16px accent) — extraction override. */}
+        {outcome && (
+          <p
+            style={[
+              /* Fraunces Italic 17px ink — source node 41:12 */
+              'font-family: var(--font-wl-heading);',
+              'font-size: 17px;',
+              'font-weight: 400;',
+              'font-style: italic;',
+              'line-height: normal;',
+              'font-variation-settings: "SOFT" 0, "WONK" 1;',
+              /* Color: INK (not accent) — extraction override */
+              'color: var(--color-wl-ink);',
+              'margin: 0;',
+            ].join(' ')}
+          >
+            {outcome}
+          </p>
+        )}
+
+        {/* gap hook→summary: 10px — source node 41:13 */}
+        {summary && <div style="height: 10px;"></div>}
+
+        {/* Summary: .wl-text-body (HG Regular 16px/1.6/sub) — source node 41:14 */}
+        {summary && (
+          <p class="wl-text-body" style="color: var(--color-wl-sub); margin: 0;">
+            {summary}
+          </p>
+        )}
+
+        {/* gap summary→tags: 18px — source node 41:15 */}
+        {tags.length > 0 && <div style="height: 18px;"></div>}
+
+        {/* Tags row: flex, gap 8px — source node 41:16 */}
+        {tags.length > 0 && (
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            {tags.map((t) => <Tag>{t}</Tag>)}
+          </div>
+        )}
+
+        {/* gap tags→toggle: 21px — source node 41:25 */}
+        <div style="height: 21px;"></div>
+
+        {/* Toggle row: flex, gap 7px, items-center — source node 41:26
+            Label text swapped via CSS details[open] selectors — zero JS.
+            "Read the story" (closed) / "Hide" (open) — source nodes 41:27 / 41:77. */}
+        <div
+          style={[
+            'display: flex;',
+            'align-items: center;',
+            /* gap: 7px between label and chevron — source node 41:26 */
+            'gap: 7px;',
+          ].join(' ')}
+        >
+          {/* Toggle label: HG SemiBold 14px accent — source node 41:27
+              Text swapped via CSS .wl-toggle-label / .wl-toggle-label-open selectors. */}
+          <span
+            class="wl-toggle-label"
+            style={[
+              'font-family: var(--font-wl-body);',
+              'font-size: 14px;',
+              'font-weight: 600;',
+              'line-height: normal;',
+              'color: var(--color-wl-accent);',
+            ].join(' ')}
+          >Read the story</span>
+          {/* Hidden by default via stylesheet rule (.wl-toggle-label-open) — NOT inline
+              style: an inline `display: none` beats every stylesheet selector, so the
+              details[open] reveal rule below could never apply (CR-01). */}
+          <span
+            class="wl-toggle-label-open"
+            style={[
+              'font-family: var(--font-wl-body);',
+              'font-size: 14px;',
+              'font-weight: 600;',
+              'line-height: normal;',
+              'color: var(--color-wl-accent);',
+            ].join(' ')}
+          >Hide</span>
+
+          {/* Toggle chevron SVG: 16×16, path M4 6L8 10L12 6, accent stroke — source node 41:28
+              aria-hidden: decorative; class wl-toggle-indicator for CSS rotation (Task 1). */}
+          <svg
+            class="wl-toggle-indicator"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            aria-hidden="true"
+            style="flex-shrink: 0; color: var(--color-wl-accent);"
+          >
+            <path
+              d="M4 6L8 10L12 6"
+              stroke="currentColor"
+              stroke-width="1.33333"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+    </summary>
+
+    {/* ── Expanded panel (inside <details>, after </summary>).
+        Story content present in DOM when card is closed — CSS ::details-content hides it.
+        NOT conditionally omitted when ANY story prop exists: enables SEO indexing of
+        problem/built/result text.
+        WR-06: the whole panel (spacer + divider chrome included) renders ONLY when at
+        least one of problem/built/result is provided — otherwise opening the card
+        revealed ~40px of blank space with a floating divider. */}
+    {(problem || built || result) && (
+    <div
+      style={[
+        /* Horizontal padding matches body: 27px — source node 41:82 */
+        'padding: 0 27px 29px 27px;',
+      ].join(' ')}
+    >
+      {/* gap toggle→divider: 21px — source node 41:81 */}
+      <div style="height: 21px;"></div>
+
+      {/* Divider: 1px var(--color-wl-line) full-width — source node 41:82 */}
+      <div style="height: 1px; background: var(--color-wl-line); width: 100%;"></div>
+
+      {/* gap divider→first label: 18px — source node 41:83 */}
+      <div style="height: 18px;"></div>
+
+      {/* "The problem" section — renders only when prop is present */}
+      {problem && (
+        <div>
+          {/* Section label: Fraunces Italic 16px var(--color-wl-accent) — source node 41:84
+              .wl-accent-outcome is Fraunces Italic 16px — matches extraction styling exactly.
+              Label text comes from problemLabel prop (default: "The problem") — per-card
+              override added in 38-01 to support Craft and "Your Project Here" card variants. */}
+          <p class="wl-accent-outcome" style="color: var(--color-wl-accent); margin: 0;">{problemLabel}</p>
+          {/* gap label→body: 3px — source node 41:85 */}
+          <div style="height: 3px;"></div>
+          {/* Body: .wl-text-body (HG Regular 16px/1.6/sub) — source node 41:86 */}
+          <p class="wl-text-body" style="color: var(--color-wl-sub); margin: 0;">{problem}</p>
+        </div>
+      )}
+
+      {/* gap between sections: 18px — source node 41:87 */}
+      {problem && built && <div style="height: 18px;"></div>}
+
+      {/* "What I built" section — renders only when prop is present */}
+      {built && (
+        <div>
+          {/* Section label: Fraunces Italic 16px accent — source node 41:88
+              Label text comes from builtLabel prop (default: "What I built") — per-card override. */}
+          <p class="wl-accent-outcome" style="color: var(--color-wl-accent); margin: 0;">{builtLabel}</p>
+          {/* gap label→body: 3px — source node 41:89 */}
+          <div style="height: 3px;"></div>
+          {/* Body: .wl-text-body — source node 41:90 */}
+          <p class="wl-text-body" style="color: var(--color-wl-sub); margin: 0;">{built}</p>
+        </div>
+      )}
+
+      {/* gap between sections: 18px — source node 41:91 */}
+      {built && result && <div style="height: 18px;"></div>}
+
+      {/* "The result" section — renders only when prop is present */}
+      {result && (
+        <div>
+          {/* Section label: Fraunces Italic 16px accent — source node 41:92
+              Label text comes from resultLabel prop (default: "The result") — per-card override. */}
+          <p class="wl-accent-outcome" style="color: var(--color-wl-accent); margin: 0;">{resultLabel}</p>
+          {/* gap label→body: 3px — source node 41:93 */}
+          <div style="height: 3px;"></div>
+          {/* Body: .wl-text-body — source node 41:94 */}
+          <p class="wl-text-body" style="color: var(--color-wl-sub); margin: 0;">{result}</p>
+        </div>
+      )}
+    </div>
+    )}
+  </details>
+</article>
+
+{/* CSS: border switches line → accent when open (D-08 style-state coupling).
+    Toggle label text swap via CSS: "Read the story" hidden when open, "Hide" shown when open.
+    Placed here as a component-scoped <style> block for this interaction-CSS only — the
+    ::details-content animation is in global.css for ProjectCard + FAQItem sharing. */}
+<style>
+  /* Closed state border: 1px solid var(--color-wl-line) — source node 41:45 */
+  .wl-project-card-details {
+    border: 1px solid var(--color-wl-line);
+  }
+
+  /* Open state border: 1px solid var(--color-wl-accent) — source node 41:95 */
+  .wl-project-card-details[open] {
+    border: 1px solid var(--color-wl-accent);
+  }
+
+  /* Body padding: 26px top / 29px bottom / 27px sides — source node 41:7.
+     Stylesheet-owned (not inline) so the [open] override below can apply (WR-03). */
+  .wl-project-card-body {
+    padding: 26px 27px 29px 27px;
+  }
+
+  /* Open state: expanded panel owns the card bottom padding; the toggle→divider gap
+     is the panel's 21px spacer alone (node 41:81), not 29px + 21px = 50px (WR-03).
+     Scoped to .wl-has-story (WR-06): when no story props exist, no panel renders,
+     so the body must keep its 29px bottom padding even when open. */
+  .wl-project-card-details.wl-has-story[open] .wl-project-card-body {
+    padding-bottom: 0;
+  }
+
+  /* Toggle label text swap — zero JS.
+     "Read the story" shown closed, "Hide" shown open (source nodes 41:27 / 41:77).
+     Default hiding of the open-state label lives HERE (not inline) so the
+     [open] reveal rule below can win — inline styles are unoverridable (CR-01). */
+  .wl-toggle-label-open {
+    display: none;
+  }
+  .wl-project-card-details[open] .wl-toggle-label {
+    display: none;
+  }
+  .wl-project-card-details[open] .wl-toggle-label-open {
+    display: inline;
+  }
+</style>

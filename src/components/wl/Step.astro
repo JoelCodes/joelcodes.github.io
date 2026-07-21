@@ -1,0 +1,88 @@
+---
+/**
+ * Step — COMP-02 Step primitive
+ *
+ * How-it-works step card: big Fraunces numeral in accent-soft, title, body.
+ * li-compatible: does NOT emit its own list element. Use inside an ordered list: ol > li > Step.
+ *
+ * All geometry sourced from 35-FIGMA-EXTRACTION.md §Fresh MCP Extraction (2026-07-15),
+ * node 40:39.
+ *
+ * Extraction values:
+ *   Numeral:       Fraunces Regular 38px, var(--color-wl-accent-soft) (#5AA9A5)
+ *                  line-height: 1 — a bare numeral, NOT a circle (supersedes prior "number circle" guesses)
+ *                  38px is a local Figma-extracted size (35-FIGMA-EXTRACTION.md local values)
+ *   Stack:         numeral · 11px · title (.wl-heading-h3 Fraunces 21px ink) · 8px · body (.wl-text-body HG 16px/1.6 sub)
+ *   Reference width: 352px (fluid in use)
+ *
+ * Contrast note (from check-contrast.mjs and extraction):
+ *   accent-soft #5AA9A5 on paper = 2.63:1 — below the 3:1 large-text floor.
+ *   The numeral is DECORATIVE by structure (aria-hidden="true" inside list items;
+ *   list semantics and the `number` prop carry step order semantically).
+ *   Pair recorded as DECORATIVE in check-contrast.mjs with justification.
+ *   FIDELITY-GATE: surface for Joel — remedy (if wanted) is a Figma decision.
+ *
+ * Props:
+ *   number:  number  — step numeral (aria-hidden decorative, order from list context)
+ *   title?:  string  — step title (.wl-heading-h3)
+ *   class?:  string  — passthrough
+ *
+ * Slots:
+ *   default — body prose (.wl-text-body / wl-sub)
+ *
+ * A11y notes:
+ *   - Numeral is aria-hidden="true" — it is decorative order-marking
+ *   - The component does NOT emit a list element; parent provides list semantics
+ *   - Use as: ordered-list > li > Step (parent wraps steps in an ordered list)
+ *   - Headings-outline contract (WR-09): the title renders as a <p> — step titles
+ *     deliberately stay OUT of the page outline (list semantics carry structure;
+ *     visual weight only via .wl-heading-h3). ServiceCard, by contrast, renders a
+ *     real heading (headingLevel prop).
+ *
+ * Zero old-token references (D-03). No <script> tag.
+ */
+
+interface Props {
+  number: number;
+  title?: string;
+  class?: string;
+}
+
+const { number, title, class: className = '' } = Astro.props;
+---
+
+<div class:list={[className]}>
+  {/* Decorative numeral: Fraunces Regular 38px, accent-soft, aria-hidden */}
+  {/* 38px is a local Figma-extracted size — not part of the Phase 33 ramp */}
+  {/* accent-soft (#5AA9A5) = 2.63:1 on paper — DECORATIVE by structure (aria-hidden + ol semantics) */}
+  <span
+    aria-hidden="true"
+    style={[
+      'font-family: var(--font-wl-heading);',
+      'font-size: 38px;',
+      'font-weight: 400;',
+      'line-height: 1;',
+      'font-style: normal;',
+      'font-variation-settings: "SOFT" 0, "WONK" 1;',
+      'color: var(--color-wl-accent-soft);',
+      'display: block;',
+    ].join(' ')}
+  >
+    {number}
+  </span>
+
+  {/* 11px gap between numeral and title */}
+  <div style="height: 11px;"></div>
+
+  {/* Title: .wl-heading-h3 — Fraunces 21px ink */}
+  {title && (
+    <p class="wl-heading-h3" style="color: var(--color-wl-ink); margin: 0 0 8px 0;">
+      {title}
+    </p>
+  )}
+
+  {/* Body: .wl-text-body — HG 16px/1.6 sub */}
+  <div class="wl-text-body" style="color: var(--color-wl-sub);">
+    <slot />
+  </div>
+</div>

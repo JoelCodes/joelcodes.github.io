@@ -1,0 +1,348 @@
+---
+/**
+ * Showcase page — Phase 38, Plan 01
+ *
+ * Dev-gated: redirects to / in production (D-01/D-02 — placeholder data not for prod).
+ * Composites ProjectCard from getCollection('projects'), split by section.
+ *
+ * Frame 12:3 geometry from 38-EXTRACTION.md. All values carry source node ids.
+ * Dark treatment derived per D-04 (no dark showcase frame exists — landing dark
+ * recipe applied per UI-SPEC §Showcase dark recipe table).
+ *
+ * Sections:
+ *   PageHero   (27:20) — eyebrow + h1 + lead; gradient #E6F1F1→#D2E7E7 light
+ *   ClientWork (27:28) — 4 cards; paper bg; Eyebrow + h2 37px + italic sub
+ *   Craft      (31:2)  — 2 cards; gradient #EFF7F6→#E6F1F1 light
+ *   CtaBand    (31:90) — CTAButton solid + ghost; gradient #E6F1F1→#D2E7E7 light
+ *
+ * Ramp mismatches (flagged for gate, built as local styles per Phase 36 precedent):
+ *   h1: 64px (no ramp match — .wl-heading-h1-interior = 61px; .wl-display-hero = 76px) — 27:25
+ *   Section h2: 37px (no ramp match — .wl-heading-h2 = 50px) — 27:33, 31:7
+ *   CTA h2: 42px (no ramp match — between section h2 and display ramp) — 31:95
+ *
+ * COPY GAP logged:
+ *   §6.4 "Your Project Here" — "Book a call" detail label (I52:650;41:92) has no body
+ *   text. Entry carries no `result` field; card renders without that section. Gate decision.
+ *
+ * Derived-value decisions (for gate batch):
+ *   Dark sub-line literal #6B8B90 (27:35) has no dark counterpart in D-04 recipe.
+ *   Using #8FB4B2 (landing precedent for small literals on dark surfaces) as derived value.
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import ProjectCard from '../components/wl/ProjectCard.astro';
+import Eyebrow from '../components/wl/Eyebrow.astro';
+import CTAButton from '../components/wl/CTAButton.astro';
+import { BOOKING_URL, CONTACT_EMAIL } from '../lib/constants';
+
+// Dev-gate guard — D-01/D-02: placeholder project data must never ship in prod.
+// Pattern from src/pages/blog/index.astro lines 8-10.
+if (import.meta.env.PROD) {
+  return Astro.redirect('/');
+}
+
+const projects = await getCollection('projects');
+const clientWork = projects.filter((p) => p.data.section === 'client-work');
+const craftExperiments = projects.filter((p) => p.data.section === 'craft-experiments');
+---
+
+<BaseLayout
+  title="Showcase | Joel Shinness Solutions"
+  description="Software and projects built by Joel Shinness — client work and craft experiments."
+>
+
+  {/* ── PageHero (27:20) ───────────────────────────────────────────────────────
+      Height: 352 @1440 / 319 @768 / 314 @390 (source: 27:20 metadata).
+      Background (light): linear-gradient(to bottom, #E6F1F1, #D2E7E7) — source 27:20 fill.
+      Background (dark, derived D-04): linear-gradient(to bottom, #123640, #0C2228).
+      Padding: pt-88px pb-72px (frame-verbatim — NOT landing 112px) — source 27:20.
+      Gutters: 24/32/160/400px matching landing values (confirmed in §8 breakpoints).
+  ── */}
+  <section
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#E6F1F1,#D2E7E7)] dark:[background:linear-gradient(to_bottom,#123640,#0C2228)]"
+    style="padding-top: 88px; padding-bottom: 72px;"
+  >
+    <div style="max-width: 1120px; margin: 0 auto;">
+
+      {/* Eyebrow: "SHOWCASE" — Eyebrow instance, on-light — source node 50:745 */}
+      <Eyebrow>SHOWCASE</Eyebrow>
+
+      {/* gap eyebrow → h1: 21px — source node 27:24 spacer */}
+      <div style="height: 21px;"></div>
+
+      {/* h1: "Things I've built." — source node 27:25.
+          Style: Fraunces Regular 64px / lh 1.06 / ink / SOFT 0 / WONK 1.
+          RAMP MISMATCH: no .wl-* class at 64px (.wl-heading-h1-interior = 61px;
+          .wl-display-hero = 76px). Built as local style per Phase 36 ProjectCard precedent.
+          Flagged for gate — Joel to decide if 61px ramp wins or 64px frame wins. */}
+      <h1
+        style={[
+          /* Fraunces Regular 64px / 1.06 / ink — source node 27:25 */
+          'font-family: var(--font-wl-heading);',
+          'font-size: 64px;',
+          'font-weight: 400;',
+          'line-height: 1.06;',
+          'font-style: normal;',
+          'font-variation-settings: "SOFT" 0, "WONK" 1;',
+          'color: var(--color-wl-ink);',
+          'margin: 0;',
+        ].join(' ')}
+      >
+        Things I've built.
+      </h1>
+
+      {/* gap h1 → lead: 18px — source node 27:26 spacer */}
+      <div style="height: 18px;"></div>
+
+      {/* Lead: source node 27:27. Style: .wl-text-lead (HG Regular 21px/1.6/sub) exact match.
+          Width 700px per frame — constrained via max-width. */}
+      <p
+        class="wl-text-lead"
+        style="color: var(--color-wl-sub); margin: 0; max-width: 700px;"
+      >
+        A few problems I've solved — described by what they did for the people who used them. Click any project to read the story.
+      </p>
+    </div>
+  </section>
+
+  {/* ── Client Work (27:28) ──────────────────────────────────────────────────
+      Background (light): #F6FBFA = var(--color-wl-paper) — source 27:28 fill.
+      Background (dark): flips via token (--color-wl-paper → #0C2228 in dark mode).
+      Padding: py-88px (NOT landing 112px — frame-verbatim) — source 27:28.
+      Grid: 2-col @768+ (1-col @390), gap 26px both axes — source 29:3.
+  ── */}
+  <section
+    style="background: var(--color-wl-paper); padding-top: 88px; padding-bottom: 88px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px]"
+  >
+    <div style="max-width: 1120px; margin: 0 auto;">
+
+      {/* Eyebrow: "CLIENT WORK" — source node 50:748 */}
+      <Eyebrow>CLIENT WORK</Eyebrow>
+
+      {/* gap eyebrow → h2: 21px — source node 27:32 spacer */}
+      <div style="height: 21px;"></div>
+
+      {/* Section h2: "Software people rely on." — source node 27:33.
+          Style: Fraunces Regular 37px / 1.06 / ink (h=39 ✓).
+          RAMP MISMATCH: no .wl-* class at 37px (.wl-heading-h2 = 50px). Local style per
+          Phase 36 precedent, flagged for gate. */}
+      <h2
+        style={[
+          /* Fraunces Regular 37px / 1.06 / ink — source node 27:33 */
+          'font-family: var(--font-wl-heading);',
+          'font-size: 37px;',
+          'font-weight: 400;',
+          'line-height: 1.06;',
+          'font-style: normal;',
+          'font-variation-settings: "SOFT" 0, "WONK" 1;',
+          'color: var(--color-wl-ink);',
+          'margin: 0;',
+        ].join(' ')}
+      >
+        Software people rely on.
+      </h2>
+
+      {/* gap h2 → sub: 12px — source node 27:34 spacer */}
+      <div style="height: 12px;"></div>
+
+      {/* Sub-line (dev-note treatment): HG Italic 14px / 1.6 — source node 27:35.
+          Width 600px. Figma literal #6B8B90 → Rule 1 fixed to #597880 (4.544:1 AA pass) in 38-03.
+          Dark: #8FB4B2 derived (no Figma dark value — 38-01-SUMMARY decision).
+          Color applied via class only (not inline style) so dark: class can override (specificity). */}
+      <p
+        style="font-family: var(--font-wl-body); font-size: 14px; font-style: italic; font-weight: 400; line-height: 1.6; margin: 0; max-width: 600px;"
+        class="[color:#597880] dark:[color:#8FB4B2]"
+      >
+        Placeholder content — swap in your real specifics, numbers, and any you'd rather feature.
+      </p>
+
+      {/* gap sub → grid: 42px — source node 29:2 spacer */}
+      <div style="height: 42px;"></div>
+
+      {/* Card grid: 2-col @768+, 1-col @390. Gap 26px both axes — source 29:3 / 29:4 / 30:2.
+          Breakpoint: sm (640px) covers 768 close enough given card widths; md safer but
+          sm keeps parity with landing's sm breakpoint for gutters. Use sm:grid-cols-2. */}
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2"
+        style="gap: 26px;"
+      >
+        {clientWork.map((project) => (
+          <ProjectCard
+            headingLevel={3}
+            eyebrow={project.data.eyebrow}
+            title={project.data.title}
+            outcome={project.data.outcome}
+            summary={project.data.summary}
+            tags={project.data.tags}
+            problem={project.data.problem}
+            built={project.data.built}
+            result={project.data.result}
+            thumbLabel={project.data.thumbLabel}
+            problemLabel={project.data.problemLabel}
+            builtLabel={project.data.builtLabel}
+            resultLabel={project.data.resultLabel}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ── Craft & Experiments (31:2) ────────────────────────────────────────────
+      Background (light): linear-gradient(to bottom, #EFF7F6, #E6F1F1) — source 31:2 fill.
+      Background (dark, derived D-04): linear-gradient(to bottom, #10303A, #0E2B33)
+        — landing "sea-glass subtle" pair per UI-SPEC recipe / index.astro #services.
+      Padding: py-88px (frame-verbatim) — source 31:2.
+      Row: 2-col @768+, 1-col @390. Gap 26px — source 31:11.
+  ── */}
+  <section
+    style="padding-top: 88px; padding-bottom: 88px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#EFF7F6,#E6F1F1)] dark:[background:linear-gradient(to_bottom,#10303A,#0E2B33)]"
+  >
+    <div style="max-width: 1120px; margin: 0 auto;">
+
+      {/* Eyebrow: "CRAFT & EXPERIMENTS" — source node 50:751 */}
+      <Eyebrow>CRAFT & EXPERIMENTS</Eyebrow>
+
+      {/* gap eyebrow → h2: 21px — source node 31:6 spacer */}
+      <div style="height: 21px;"></div>
+
+      {/* Section h2: "What I make when no one's paying me." — source node 31:7.
+          Style: Fraunces Regular 37px / 1.06 / ink (same as Client Work h2 — source 31:7).
+          RAMP MISMATCH: same 37px local-style protocol as Client Work h2. */}
+      <h2
+        style={[
+          /* Fraunces Regular 37px / 1.06 / ink — source node 31:7 */
+          'font-family: var(--font-wl-heading);',
+          'font-size: 37px;',
+          'font-weight: 400;',
+          'line-height: 1.06;',
+          'font-style: normal;',
+          'font-variation-settings: "SOFT" 0, "WONK" 1;',
+          'color: var(--color-wl-ink);',
+          'margin: 0;',
+        ].join(' ')}
+      >
+        What I make when no one's paying me.
+      </h2>
+
+      {/* gap h2 → sub: 12px — source node 31:8 spacer */}
+      <div style="height: 12px;"></div>
+
+      {/* Sub: .wl-text-lead (HG Regular 21px / 1.6 / sub) — source node 31:9.
+          NOTE: Craft sub uses .wl-text-lead (21px regular), not italic-14 like Client Work. */}
+      <p
+        class="wl-text-lead"
+        style="color: var(--color-wl-sub); margin: 0; max-width: 700px;"
+      >
+        The same puzzle-solving instinct, pointed at art. It's where I keep my hands sharp — and a decent hint at how I'll think about your project.
+      </p>
+
+      {/* gap sub → row: 42px — source node 31:10 spacer */}
+      <div style="height: 42px;"></div>
+
+      {/* Craft row: 2-col @768+, 1-col @390. Gap 26px — source 31:11. */}
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2"
+        style="gap: 26px;"
+      >
+        {craftExperiments.map((project) => (
+          <ProjectCard
+            headingLevel={3}
+            eyebrow={project.data.eyebrow}
+            title={project.data.title}
+            outcome={project.data.outcome}
+            summary={project.data.summary}
+            tags={project.data.tags}
+            problem={project.data.problem}
+            built={project.data.built}
+            result={project.data.result}
+            thumbLabel={project.data.thumbLabel}
+            problemLabel={project.data.problemLabel}
+            builtLabel={project.data.builtLabel}
+            resultLabel={project.data.resultLabel}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ── CTA Band (31:90) ─────────────────────────────────────────────────────
+      Background (light): linear-gradient(to bottom, #E6F1F1, #D2E7E7) — same as PageHero (31:90 fill).
+      Background (dark, derived D-04): linear-gradient(to bottom, #123640, #0C2228).
+      Padding: py-88px (frame-verbatim) — source 31:90.
+      Layout: column flex, items-center / text-center (centered band — 31:90).
+      h2: 42px — RAMP MISMATCH, local style per protocol — source 31:95.
+      Buttons: solid "Book a call" + ghost "Email me" — source 31:99 (50:558, 50:563).
+  ── */}
+  <section
+    style="padding-top: 88px; padding-bottom: 88px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#E6F1F1,#D2E7E7)] dark:[background:linear-gradient(to_bottom,#123640,#0C2228)]"
+  >
+    <div
+      style="max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center;"
+    >
+
+      {/* Eyebrow: "GET IN TOUCH" — source node 50:754 */}
+      <Eyebrow>GET IN TOUCH</Eyebrow>
+
+      {/* gap eyebrow → h2: 21px — source node 31:94 spacer */}
+      <div style="height: 21px;"></div>
+
+      {/* CTA h2: "Want something like this for your business?" — source node 31:95.
+          Style: Fraunces Regular 42px / 1.06 / ink / centered.
+          RAMP MISMATCH: no .wl-* class at 42px. Local style per Phase 36 precedent.
+          Flagged for gate — between .wl-heading-h2 (50px) and section h2 (37px). */}
+      <h2
+        style={[
+          /* Fraunces Regular 42px / 1.06 / ink / centered — source node 31:95 */
+          'font-family: var(--font-wl-heading);',
+          'font-size: 42px;',
+          'font-weight: 400;',
+          'line-height: 1.06;',
+          'font-style: normal;',
+          'font-variation-settings: "SOFT" 0, "WONK" 1;',
+          'color: var(--color-wl-ink);',
+          'margin: 0;',
+        ].join(' ')}
+      >
+        Want something like this for your business?
+      </h2>
+
+      {/* gap h2 → sub: 15px — source node 31:96 spacer */}
+      <div style="height: 15px;"></div>
+
+      {/* Sub: .wl-text-lead (HG Regular 21px / 1.6 / sub) / centered — source node 31:97 */}
+      <p
+        class="wl-text-lead"
+        style="color: var(--color-wl-sub); margin: 0; max-width: 660px;"
+      >
+        Tell me what you're trying to do. If I can help, I'll tell you how and what it'd take.
+      </p>
+
+      {/* gap sub → buttons: 32px — source node 31:98 spacer */}
+      <div style="height: 32px;"></div>
+
+      {/* Buttons row: gap 16px — source node 31:99.
+          Button 1: solid "Book a call" + calendar icon → BOOKING_URL (IA-03, landing precedent).
+          Button 2: ghost "Email me" + mail icon → mailto:CONTACT_EMAIL (D-07 precedent).
+          Source: 50:558 (solid), 50:563 (ghost). */}
+      <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: center;">
+        <CTAButton
+          href={BOOKING_URL}
+          variant="solid"
+          icon="calendar"
+          target="_blank"
+          rel="noopener"
+        >
+          Book a call
+        </CTAButton>
+        <CTAButton href={`mailto:${CONTACT_EMAIL}`} variant="ghost" icon="mail">
+          Email me
+        </CTAButton>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { settleAnimations } from './helpers';
 
 /**
  * Accessibility test suite using axe-core to detect WCAG 2.2 AA violations.
@@ -12,15 +13,8 @@ test.describe('Page Accessibility Tests', () => {
   test('Homepage should not have accessibility violations', async ({ page }) => {
     await page.goto('/');
 
-    const results = await new AxeBuilder({ page })
-      .withTags(wcagTags)
-      .analyze();
+    await settleAnimations(page);
 
-    expect(results.violations).toEqual([]);
-  });
-
-  test('Projects page should not have accessibility violations', async ({ page }) => {
-    await page.goto('/projects');
 
     const results = await new AxeBuilder({ page })
       .withTags(wcagTags)
@@ -32,15 +26,8 @@ test.describe('Page Accessibility Tests', () => {
   test('Blog page should not have accessibility violations', async ({ page }) => {
     await page.goto('/blog');
 
-    const results = await new AxeBuilder({ page })
-      .withTags(wcagTags)
-      .analyze();
+    await settleAnimations(page);
 
-    expect(results.violations).toEqual([]);
-  });
-
-  test('About page should not have accessibility violations', async ({ page }) => {
-    await page.goto('/about');
 
     const results = await new AxeBuilder({ page })
       .withTags(wcagTags)
@@ -48,4 +35,9 @@ test.describe('Page Accessibility Tests', () => {
 
     expect(results.violations).toEqual([]);
   });
+
+  // WR-05: the former "/about" test was removed — no /about route has ever existed
+  // (About is a homepage component, not a page). page.goto('/about') does not fail
+  // on 404, so axe was silently scanning the dev-server 404 page and passing.
+  // If an About page ships later, add a test that asserts response.ok() first.
 });

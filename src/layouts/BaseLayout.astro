@@ -1,8 +1,18 @@
 ---
 import '../styles/global.css';
-import Header from '../components/layout/Header.astro';
-import Footer from '../components/layout/Footer.astro';
+import SiteHeader from '../components/layout/SiteHeader.astro';
+import SiteFooter from '../components/layout/SiteFooter.astro';
 import SEO from '../components/SEO.astro';
+
+// Self-hosted variable font preloads — ?url lets Vite resolve to hashed /_astro/ asset (FOUND-02 / 33-05)
+// Filenames verified from node_modules/@fontsource-variable/*/files/ at install time
+import frauncesWoff2 from '@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2?url';
+import frauncesItalicWoff2 from '@fontsource-variable/fraunces/files/fraunces-latin-wght-italic.woff2?url';
+import hankenWoff2 from '@fontsource-variable/hanken-grotesk/files/hanken-grotesk-latin-wght-normal.woff2?url';
+// Roboto Mono (self-hosted @font-face lives in global.css) is intentionally NOT preloaded:
+// it is used only in blog prose code blocks — rare, below-the-fold, and blog is dev-only —
+// so a site-wide preload would waste bandwidth and trigger "preloaded but unused" warnings on
+// every brand page. It loads on demand when a code block renders. (38-BLOG-EXTRACTION §6.1)
 
 interface Props {
   title: string;
@@ -27,6 +37,11 @@ const { title, description = 'Web apps, automation, and AI development for small
     <!-- Additional head content via slot -->
     <slot name="head" />
 
+    <!-- Self-hosted variable font preloads — served from hashed /_astro/ assets (FOUND-02 / 33-05) -->
+    <link rel="preload" as="font" type="font/woff2" href={frauncesWoff2} crossorigin="anonymous" />
+    <link rel="preload" as="font" type="font/woff2" href={frauncesItalicWoff2} crossorigin="anonymous" />
+    <link rel="preload" as="font" type="font/woff2" href={hankenWoff2} crossorigin="anonymous" />
+
     <!-- Google Fonts - preconnect for initial connection, dns-prefetch as fallback -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -47,21 +62,26 @@ const { title, description = 'Web apps, automation, and AI development for small
       <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:opsz,wght@9..40,100..900&display=swap" rel="stylesheet" />
     </noscript>
 
-    <!-- Dark mode script - runs before body renders to prevent FOUC -->
+    <!-- CRITICAL: must remain in <head>, before <body> — prevents dark-mode FOUC.
+         System-only per D-05/D-06. Clears stale localStorage.theme from v1.x/v2.x toggle. -->
     <script is:inline>
-      document.documentElement.classList.toggle(
-        "dark",
-        localStorage.theme === "dark" ||
-          (!("theme" in localStorage) &&
-           window.matchMedia("(prefers-color-scheme: dark)").matches)
-      );
+      try {
+        if ('theme' in localStorage) {
+          delete localStorage.theme;
+        }
+      } catch (e) {
+        /* storage blocked (private mode / cookie settings) — dark mode must still work */
+      }
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('dark');
+      }
     </script>
   </head>
-  <body class="font-body bg-bg-light dark:bg-bg-dark text-text-light dark:text-text-dark min-h-screen flex flex-col">
-    <Header />
+  <body class="bg-wl-paper text-wl-ink min-h-screen flex flex-col">
+    <SiteHeader />
     <main class="flex-grow">
       <slot />
     </main>
-    <Footer />
+    <SiteFooter />
   </body>
 </html>

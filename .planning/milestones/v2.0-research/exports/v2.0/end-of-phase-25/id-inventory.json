@@ -1,0 +1,269 @@
+{
+  "schema_version": "1.0",
+  "phase": "25-section-compound-components",
+  "milestone": "v2.0 Prep Crito Design File",
+  "captured_at": "2026-06-03",
+  "captured_by": "Plan 25-03 Task 4 close",
+  "predecessor": ".planning/research/exports/v2.0/end-of-phase-24/id-inventory.json",
+  "successor": ".planning/research/exports/v2.0/end-of-phase-26/id-inventory.json (to be written)",
+  "active_editor": "/Users/joel/Desktop/Claude-Demos/joel-shinness-website/design/Crito.pen",
+  "pencil_schema_version": "2.13",
+
+  "library_parents": {
+    "_Tokens & Foundations": {
+      "id": "RpGbe",
+      "phase_shipped": 23,
+      "x": -15642.732433950103,
+      "y": -14191.553859422791
+    },
+    "_Components / Primitives": {
+      "id": "avgor",
+      "phase_shipped": 24,
+      "x": -15642.732433950103,
+      "y": -11711.553859422791,
+      "note": "Repositioned None (unchanged anchor in Phase 25)"
+    },
+    "_Components / Sections": {
+      "id": "g9oRa5",
+      "phase_shipped": 24,
+      "populated_in_phase": 25,
+      "x": -14122.732433950103,
+      "y": -11711.553859422791,
+      "height": "fit_content",
+      "note": "Repositioned in Plan 25-03 close to be horizontal sibling of avgor + height fit_content to accommodate Phase 25 content; Phase 24 D-37 deferral note YilSu deleted (Phase 25 populated)"
+    },
+    "_Components / Compounds": {
+      "id": "t67DU6",
+      "phase_shipped": 24,
+      "populated_in_phase": 25,
+      "x": -12602.732433950103,
+      "y": -11711.553859422791,
+      "height": "fit_content",
+      "note": "Repositioned in Plan 25-03 close to be horizontal sibling of g9oRa5 + height fit_content; Phase 24 D-37 deferral note XxZps deleted (Phase 25 populated)"
+    }
+  },
+
+  "primitives_phase_24": {
+    "Button": {
+      "Default": {
+        "id": "M7eUr",
+        "reusable": true,
+        "slots": {
+          "iconLeading": "AvKtA",
+          "label": "ATJK9",
+          "iconTrailing": "V4Dx4i"
+        }
+      },
+      "Default_Hover": {
+        "id": "YJhRv",
+        "reusable": false,
+        "note": "Non-reusable variant reference per Phase 24 D-22 forward set"
+      },
+      "Default_Focus": {
+        "id": "gQa2R",
+        "reusable": false
+      }
+    },
+    "Input": {
+      "Default": {
+        "id": "nwJk7",
+        "reusable": true,
+        "slots": {
+          "label": "oCeJP",
+          "control": "bhkR3",
+          "placeholder": "dbEyb",
+          "helper": "xmhXv",
+          "errorSlot": "uawpJ"
+        }
+      },
+      "Focus": {
+        "id": "TnODC",
+        "reusable": false
+      },
+      "Error": {
+        "id": "qPSVW",
+        "reusable": false
+      }
+    },
+    "Badge": {
+      "id": "j0FxQZ",
+      "reusable": true,
+      "slots": {
+        "label": "xSve5"
+      }
+    },
+    "Icon": {
+      "size_16": "EQaMf",
+      "size_20": "yRvGb",
+      "size_24": "u7NmaS",
+      "size_32": "dpO5Y"
+    }
+  },
+
+  "phase_25_additions": {
+    "Primitive_Button_Secondary": {
+      "id": "hIWuC",
+      "reusable": true,
+      "shipped_in_plan": "25-01 Task 1",
+      "rationale": "D-43 / OPEN-24-11 resolution. Pencil 2.13 has no variant-axis property on Frame — PREFERRED/FALLBACK converged to sibling-component approach.",
+      "source_evidence": "Crito Hero mkw8g 'Discover More' (with Open Question 3 navy override per OPEN-25-01)",
+      "slots": {
+        "iconLeading": "KQuMh",
+        "label": "UbwMv",
+        "iconTrailing": "q7FOY"
+      },
+      "open_flags_referenced": ["OPEN-25-01"]
+    },
+
+    "Primitive_Icon_glyphs_substack": {
+      "id": "AzmgQ",
+      "reusable": true,
+      "shipped_in_plan": "25-02 Task 2",
+      "pattern": "Pattern B atomic-glyph (per D-46)",
+      "source_evidence": "simpleicons.org Substack canonical SVG path, verified 2026-06-01",
+      "children": {
+        "substack_path": "MSKR6"
+      },
+      "open_flags_referenced": ["OPEN-24-13 RESOLVED"]
+    },
+
+    "Section_Header": {
+      "id": "G0wNOc",
+      "reusable": true,
+      "shipped_in_plan": "25-01 Tasks 2-4",
+      "source_evidence": "Crito Home Page Menu bar ULZiU (audit-derived)",
+      "children": {
+        "logo-slot": "adoph",
+        "logo placeholder (Crito wordmark)": "wtJpF",
+        "nav-links": "wvv1T",
+        "nav-links text children": ["mUBnQ", "Q85gzd", "R6QDSe", "K7auH8", "uueLx", "C0p596"],
+        "cta-row": "yVNDw",
+        "Primary CTA (ref M7eUr)": "ciMov",
+        "arrow-right icon (at path ciMov/V4Dx4i)": "I9F0r"
+      },
+      "sibling_note": "hkh26",
+      "open_flags_resolved": ["OPEN-24-06", "OPEN-24-11"],
+      "open_flags_seeded": ["OPEN-25-01", "OPEN-25-02", "OPEN-25-03"]
+    },
+
+    "Section_Footer": {
+      "id": "Xs0Hs",
+      "reusable": true,
+      "shipped_in_plan": "25-02 Tasks 3-4",
+      "source_evidence": "Crito Home Page Footer Y1ldm (audit-derived; 3 link columns per actual structure)",
+      "children": {
+        "main-row": "BWuAY",
+        "brand-column": "EbI44",
+        "logo-slot": "kkO4M",
+        "logo placeholder (Crito wordmark)": "NOFXt",
+        "tagline": "uubl4",
+        "social-row": "B9gNb",
+        "Instagram icon (Pattern A lucide)": "p3BnkK",
+        "Substack ref (Pattern B)": "ISnSD",
+        "link-columns container": "NO9J5",
+        "Useful Links column": "g6CF2",
+        "Help & Support column": "TNZRz",
+        "Resources column": "w5CqFq",
+        "copyright-row": "l4jp3",
+        "copyright text": "Vdkgq"
+      },
+      "sibling_note": "x48zh",
+      "open_flags_resolved": ["OPEN-24-13"],
+      "open_flags_seeded": ["OPEN-25-04", "OPEN-25-05", "OPEN-25-06"]
+    },
+
+    "Compound_Card": {
+      "id": "t40xct",
+      "reusable": true,
+      "shipped_in_plan": "25-03 Tasks 3-4",
+      "source_evidence": "RASTER-DERIVED per D-49 — design/images/image-import-12.jpg (Service + Project cards) + image-import-14.jpg (Blog cards)",
+      "secondary_reference": "src/components/ui/Card.astro (structure-only per Pitfall 2)",
+      "comp_07_compliance": "Single component with 4 slots — NOT multi-variant matrix",
+      "slots": {
+        "image-slot": "FGdti",
+        "image-slot placeholder label": "DHc77",
+        "title-slot": "vGH3A",
+        "title placeholder": "kI3bc",
+        "body-slot": "oTSwn",
+        "body placeholder": "ASA0X",
+        "footer-actions-slot": "eNqxd",
+        "Read More CTA (ref M7eUr)": "k20bt",
+        "arrow-right icon (at path k20bt/V4Dx4i)": "iVYxT"
+      },
+      "footer_actions_slot_suggestion": ["M7eUr", "hIWuC"],
+      "sibling_note": "iypPb",
+      "open_flags_seeded": ["OPEN-25-07"]
+    }
+  },
+
+  "validation_outcomes": {
+    "VAL-25-01": "PASS (Section/Header under g9oRa5 reusable:true)",
+    "VAL-25-02": "PASS (Section/Footer under g9oRa5 reusable:true)",
+    "VAL-25-03": "PASS (Compound/Card under t67DU6 single reusable, not multi-variant)",
+    "VAL-25-04": "PASS (Card has exactly 4 slots per D-51)",
+    "VAL-25-05": "PASS (All 4 Card slots enabled:true with placeholder content per D-53)",
+    "VAL-25-06": "PASS (Card slot declaration: typed slot suggestion on footer-actions-slot + sibling Pencil note per D-52 belt-and-suspenders)",
+    "VAL-25-07": "N/A — superseded by B1 user gate strict source-wins (Section/Header ships 1 CTA per Crito Menu bar source; original D-42 2-CTA intent re-homed to Phase 31 Hero per OPEN-25-03)",
+    "VAL-25-08": "PASS (Header CTA iconTrailing populated with lucide arrow-right per D-44 — resolves OPEN-24-06 by actual production use)",
+    "VAL-25-09": "PASS (Footer instances Icon for Instagram Pattern A + Substack Pattern B per D-45/D-46)",
+    "VAL-25-10": "PASS (Substack SVG path provenance attestation — simpleicons canonical verified 2026-06-01; Pencil normalized H/V/L to lowercase preserving geometry)",
+    "VAL-25-11": "PASS (Secondary Button variant present with source-evidenced values from mkw8g + Open Q3 navy override)",
+    "VAL-25-12": "PASS (auto-layout, no absolute-positioned children across Section/Header, Section/Footer, Compound/Card)",
+    "VAL-25-13": "PASS (zero raw-value leaks — every literal in Phase 25 nodes has a corresponding row in PEN-INVENTORY Variant Evidence Phase-25-plan-01/02/03 additions)",
+    "VAL-25-14": "PASS (pre-flight active-editor before every mutation — ~12-15 calls across Plans 25-01/02/03 with 0 mismatch incidents)",
+    "VAL-25-15": "PASS at document level (snapshot_layout(maxDepth:0, problemsOnly:true) returns 'No layout problems.' after each plan close); per-frame text-clipping false-positives documented per Phase 24 quirk carry-forward",
+    "VAL-25-16": "PASS (PEN-INVENTORY Variant Evidence Phase 24 table extended with 38 Phase-25 late-addition rows: 12 Plan 25-01 + 17 Plan 25-02 + 9 Plan 25-03)",
+    "VAL-25-17": "PASS (NEW PEN-INVENTORY § Compound Source Inference (Phase 25) section with 5 raster-citation rows for Card per D-49 + D-56)",
+    "VAL-25-18": "PASS (PEN-INVENTORY § Open Flags — Phase 25 OPEN-25-NN section with 7 rows total: 01-03 from Plan 25-01, 04-06 from Plan 25-02, 07 from Plan 25-03)",
+    "VAL-25-19": "PASS (OPEN-24-06 RESOLVED with Plan 25-01 Task 3 citation)",
+    "VAL-25-20": "PASS (OPEN-24-11 RESOLVED with Plan 25-01 Task 1 citation)",
+    "VAL-25-21": "PASS (OPEN-24-13 RESOLVED with Plan 25-02 Tasks 1-3 citation)",
+    "VAL-25-22": "PASS (this id-inventory.json file)",
+    "VAL-25-23": "PASS (user visual checkpoint approved at: Plan 25-01 Task 1 Secondary Button, Plan 25-01 Task 3 populated Header, Plan 25-02 Task 3 populated Footer, Plan 25-03 Task 3 populated Card with horizontal library frame layout)"
+  },
+
+  "phase_24_baseline_drift_verification": {
+    "expected_baseline_ids_unmutated": [
+      "MIXGf", "QdwxP", "kicJ8", "ujMLJ", "VleVl", "cl8tt", "w1m3x", "DzqTm", "cYlRH", "Y2isa", "WDGxc", "1nLS3", "Jmdw0", "maDc3", "IKAu3", "RpGbe", "M7eUr", "YJhRv", "gQa2R", "AvKtA", "V4Dx4i", "ATJK9", "nwJk7", "j0FxQZ", "EQaMf", "yRvGb", "u7NmaS", "dpO5Y"
+    ],
+    "mutations_in_phase_25": {
+      "g9oRa5_parent_properties": "x, y, height changed (repositioning + fit_content); children array grew (Section/Header + Section/Footer + 2 sibling notes); intentional",
+      "t67DU6_parent_properties": "x, y, height changed (repositioning + fit_content); children array grew (Compound/Card + 1 sibling note); intentional",
+      "avgor_children": "grew with Secondary Button hIWuC and Substack glyph AzmgQ; avgor's own properties unchanged",
+      "YilSu_XxZps_deletions": "Phase 24 D-37 deferral notes deleted in Plan 25-03 close — Phase 25 populates both Sections + Compounds so notes are stale"
+    }
+  },
+
+  "snapshot_layout_compliance": {
+    "document_level": "PASS — 'No layout problems.' at end of every plan close",
+    "per_frame_quirk": "Text-clipping false-positives expected per Phase 24 24-05-SUMMARY carry-forward — Pencil flags text inside button frames as clipped even when get_screenshot confirms correct rendering"
+  },
+
+  "open_flag_summary": {
+    "resolved_in_phase_25": ["OPEN-24-06", "OPEN-24-11", "OPEN-24-13"],
+    "seeded_in_phase_25": ["OPEN-25-01", "OPEN-25-02", "OPEN-25-03", "OPEN-25-04", "OPEN-25-05", "OPEN-25-06", "OPEN-25-07"],
+    "outstanding_carry_forward_to_phase_26plus": ["OPEN-24-01", "OPEN-24-02", "OPEN-24-03", "OPEN-24-04", "OPEN-24-05", "OPEN-24-07", "OPEN-24-08", "OPEN-24-09", "OPEN-24-10", "OPEN-24-12", "OPEN-25-01 through OPEN-25-07"]
+  },
+
+  "token_surface_count": {
+    "phase_23_baseline": 95,
+    "phase_24_additions": 0,
+    "phase_25_additions": 0,
+    "current_total": 95,
+    "note": "Zero token extensions across Phase 25. Phase 23's 95-token surface intact. Any new tokens would require D-33 audit-trail row in Token Extensions table."
+  },
+
+  "files_modified_summary_phase_25": [
+    "design/Crito.pen — 6 new components added (Primitive/Button/Secondary, Primitive/Icon/glyphs/substack, Section/Header, Section/Footer, Compound/Card) + 3 sibling notes + 2 D-37 deferral notes deleted + 3 library parent frames repositioned & resized",
+    ".planning/research/PEN-INVENTORY.md — extended with 38 Phase-25 Variant Evidence rows; NEW Compound Source Inference (Phase 25) section with 5 rows; NEW Glyphs Shipped (Phase 25) sub-section under Icon Glyphs with 2 rows; OPEN-24-06/11/13 marked RESOLVED; NEW Open Flags Phase 25 section with 7 rows",
+    ".planning/research/exports/v2.0/end-of-phase-25/id-inventory.json (THIS FILE) — structural snapshot per OPEN-23-01 substitution pattern",
+    ".planning/research/exports/v2.0/end-of-phase-25/README.md — schema documentation + Phase 26 read instructions",
+    ".planning/ROADMAP.md — Phase 25 plan checkboxes all marked complete; Progress table Phase 25 row marked complete",
+    ".planning/STATE.md — Phase 25 → completed; next action Phase 26",
+    ".planning/phases/25-section-compound-components/25-01-SUMMARY.md, 25-02-SUMMARY.md, 25-03-SUMMARY.md — final SUMMARY files per plan"
+  ],
+
+  "phase_25_close_status": "COMPLETE. All 3 plans (Section/Header + Section/Footer + Compound/Card) shipped with sibling notes, audit-trail extensions, and OPEN flag resolutions per Phase 24 precedent. Phase 25 closure mirrors Phase 24's Plan 24-05 close sweep + archival discipline.",
+
+  "next_phase": "Phase 26: FAQ + 404 Reconstruction (per ROADMAP)"
+}

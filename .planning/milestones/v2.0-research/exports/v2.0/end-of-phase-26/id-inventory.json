@@ -1,0 +1,349 @@
+{
+  "schema_version": "1.0",
+  "phase": "26-faq-404-reconstruction-calibration-workflow-established",
+  "milestone": "v2.0 Prep Crito Design File",
+  "captured_at": "2026-06-07",
+  "captured_by": "Plan 26-03 Task 3 close",
+  "predecessor": ".planning/research/exports/v2.0/end-of-phase-25/id-inventory.json",
+  "successor": ".planning/research/exports/v2.0/end-of-phase-27/id-inventory.json (to be written)",
+  "active_editor": "/Users/joel/Desktop/Claude-Demos/joel-shinness-website/design/Crito.pen",
+  "pencil_schema_version": "2.13",
+
+  "library_parents": {
+    "_Tokens & Foundations": {
+      "id": "RpGbe",
+      "phase_shipped": 23,
+      "x": -15642.732433950103,
+      "y": -10911.553859422791,
+      "note": "Unchanged in Phase 26"
+    },
+    "_Components / Primitives": {
+      "id": "avgor",
+      "phase_shipped": 24,
+      "x": -15642.732433950103,
+      "y": -11711.553859422791,
+      "note": "Unchanged in Phase 26"
+    },
+    "_Components / Sections": {
+      "id": "g9oRa5",
+      "phase_shipped": 24,
+      "populated_in_phase": 25,
+      "extended_in_phase": 26,
+      "x": -14122.732433950103,
+      "y": -11711.553859422791,
+      "height": "fit_content",
+      "note": "Phase 26 plan 26-00 added Section/CTA + Section/NavBack + 2 sibling notes; total reusable children now 4 (Header, Footer, CTA, NavBack)"
+    },
+    "_Components / Compounds": {
+      "id": "t67DU6",
+      "phase_shipped": 24,
+      "populated_in_phase": 25,
+      "x": -12602.732433950103,
+      "y": -11711.553859422791,
+      "height": "fit_content",
+      "note": "Unchanged in Phase 26"
+    }
+  },
+
+  "primitives_phase_24": {
+    "Button": {
+      "Default": {
+        "id": "M7eUr",
+        "reusable": true,
+        "slots": {
+          "iconLeading": "AvKtA",
+          "label": "ATJK9",
+          "iconTrailing": "V4Dx4i"
+        }
+      },
+      "Default_Hover": {"id": "YJhRv", "reusable": false},
+      "Default_Focus": {"id": "gQa2R", "reusable": false}
+    },
+    "Input": {
+      "Default": {
+        "id": "nwJk7",
+        "reusable": true,
+        "slots": {
+          "label": "oCeJP",
+          "control": "bhkR3",
+          "placeholder": "dbEyb",
+          "helper": "xmhXv",
+          "errorSlot": "uawpJ"
+        }
+      },
+      "Focus": {"id": "TnODC", "reusable": false},
+      "Error": {"id": "qPSVW", "reusable": false}
+    },
+    "Badge": {
+      "id": "j0FxQZ",
+      "reusable": true,
+      "slots": {"label": "xSve5"}
+    },
+    "Icon": {
+      "size_16": "EQaMf",
+      "size_20": "yRvGb",
+      "size_24": "u7NmaS",
+      "size_32": "dpO5Y"
+    }
+  },
+
+  "phase_25_additions": {
+    "Primitive_Button_Secondary": {
+      "id": "hIWuC",
+      "reusable": true,
+      "shipped_in_plan": "25-01 Task 1"
+    },
+    "Primitive_Icon_glyphs_substack": {
+      "id": "AzmgQ",
+      "reusable": true,
+      "shipped_in_plan": "25-02 Task 2"
+    },
+    "Section_Header": {
+      "id": "G0wNOc",
+      "reusable": true,
+      "shipped_in_plan": "25-01 Tasks 2-4"
+    },
+    "Section_Footer": {
+      "id": "Xs0Hs",
+      "reusable": true,
+      "shipped_in_plan": "25-02 Tasks 3-4"
+    },
+    "Compound_Card": {
+      "id": "t40xct",
+      "reusable": true,
+      "shipped_in_plan": "25-03 Tasks 3-4"
+    }
+  },
+
+  "phase_26_additions": {
+    "Section_CTA": {
+      "id": "Hs5rc",
+      "reusable": true,
+      "shipped_in_plan": "26-00 Task 3",
+      "rationale": "D-78 — general-purpose CTA section component for FAQ, Homepage, and any other page that wants a stacked headline + body + actions composition",
+      "slots": {
+        "headline-slot": "QT4yJ",
+        "headline-slot text default": "U1DQb",
+        "body-slot": "Ay7WY",
+        "body-slot text default": "mlSq0",
+        "actions-slot": "munqN",
+        "actions-slot Default Button ref": "bhkiN"
+      },
+      "sibling_note": "D8owaR",
+      "actions_slot_typed_suggestion": ["M7eUr", "hIWuC"]
+    },
+
+    "Section_NavBack": {
+      "id": "N1jo3i",
+      "reusable": true,
+      "shipped_in_plan": "26-00 Task 4",
+      "rationale": "D-79 — narrow-purpose 'find your way back' section component for 404; explicitly NOT generalized to Blog/Projects related-content shapes (Pitfall O5/O6)",
+      "slots": {
+        "heading-slot": "gIXNO",
+        "heading-slot text default": "GTpO3",
+        "links-slot": "xCp6W",
+        "links-slot text children": ["ISpPb", "cz8Dm", "L8pGWB", "XH2fs"],
+        "links-slot text labels": ["Home", "Blog", "Projects", "Contact"]
+      },
+      "sibling_note": "dUURV"
+    },
+
+    "FAQ_page_frame": {
+      "id": "b7Hgy",
+      "name": "FAQ",
+      "reusable": false,
+      "page_frame": true,
+      "scope": "joel-only-no-crito-ref",
+      "joel_page_map": "/faq",
+      "shipped_in_plan": "26-01",
+      "position": {"x": 16327.27, "y": -4111.55},
+      "dimensions": {"width": 1440, "height": "fit_content"},
+      "children": {
+        "Section/Header (FAQ instance)": "MpVz3",
+        "page-intro frame": "I4QJas",
+        "page-intro title": "WGdgb",
+        "page-intro body": "ZguDg",
+        "qa-list frame": "FswuE",
+        "qa-item-1": "eDbs7",
+        "qa-item-1 Q text": "lQhL5",
+        "qa-item-1 A text": "r16PLy",
+        "qa-item-2": "XI1HR",
+        "qa-item-2 Q text": "s2XJP",
+        "qa-item-2 A text": "h8hoa",
+        "qa-item-3": "H0nfx",
+        "qa-item-3 Q text": "vysqV",
+        "qa-item-3 A text": "oKRJQ",
+        "qa-item-4": "hfqaE",
+        "qa-item-4 Q text": "zWJFi",
+        "qa-item-4 A text": "oYSZ4",
+        "qa-item-5": "YThyr",
+        "qa-item-5 Q text": "a1obh",
+        "qa-item-5 A text": "uFB4N",
+        "Section/CTA (FAQ instance)": "NQNB3",
+        "Section/Footer (FAQ instance)": "MmDy2"
+      },
+      "fidelity_per_section_per_d83": {
+        "Section/Header instance": "EXACT",
+        "page-intro": "APPROXIMATE",
+        "qa-list": "EXACT",
+        "Section/CTA instance": "STUB",
+        "Section/Footer instance": "EXACT"
+      },
+      "user_calibration_outcome": "APPROVE (Plan 26-01 Task 6)"
+    },
+
+    "page_404_page_frame": {
+      "id": "csXky",
+      "name": "404",
+      "reusable": false,
+      "page_frame": true,
+      "scope": "joel-only-no-crito-ref",
+      "joel_page_map": "/404",
+      "shipped_in_plan": "26-02",
+      "position": {"x": 17847.27, "y": -4111.55},
+      "dimensions": {"width": 1440, "height": "fit_content"},
+      "placement_anchor": "FindEmptySpace(nodeId: b7Hgy) — page-frame-row anchor pattern",
+      "children": {
+        "Section/Header (404 instance)": "pZReo",
+        "message-section frame": "SruDH",
+        "message-section headline": "t9wUlR",
+        "message-section body": "WWABs",
+        "Section/NavBack (404 instance)": "XJtoN",
+        "Section/Footer (404 instance)": "UPHLK"
+      },
+      "navback_descendants_override": "NONE (Plan 26-00 defaults match 404 needs)",
+      "fidelity_per_section_per_d83": {
+        "Section/Header instance": "EXACT",
+        "message-section": "LAYOUT=EXACT / TEXT=STUB",
+        "Section/NavBack instance": "EXACT",
+        "Section/Footer instance": "EXACT"
+      },
+      "user_calibration_outcome": "APPROVE (Plan 26-02 Task 5; visually verified in Pencil editor due to OPEN-26-02 Tier-2 fallback)",
+      "page_11_status": "INERT (joel-only-no-crito-ref scope — no Crito raster exists to remove)"
+    }
+  },
+
+  "tokens_added_phase_26": {
+    "primitives": ["type-primitive-size-32"],
+    "semantic_aliases": [
+      "type-semantic-heading-2-family",
+      "type-semantic-heading-2-size",
+      "type-semantic-heading-2-weight",
+      "type-semantic-heading-2-lh"
+    ],
+    "rationale_per_d72": "Plan 26-00 Task 1 — user gate Option A — interpolation default per RESEARCH § Focus 3 (.fig unreadable). Plus Jakarta Sans 32 / 700 / lh 1.4 chosen by interpolating between heading-1 (48) and body (16).",
+    "open_flag_seeded": "OPEN-26-01 (interpolation-default; consumer phase 28 Blog post hierarchy)",
+    "provisional_flags_dropped": [
+      "type-semantic-prose-paragraph-family (per D-71, dropped at Plan 26-01 Task 6 user APPROVE — FAQ first-page-consumer)",
+      "type-semantic-prose-paragraph-size",
+      "type-semantic-prose-paragraph-weight",
+      "type-semantic-prose-paragraph-lh"
+    ]
+  },
+
+  "validation_outcomes": {
+    "VAL-26-01": "PASS (Phase 26 plan 26-00 — Section/CTA shipped to g9oRa5 with 3 slots + sibling note D8owaR per D-78)",
+    "VAL-26-02": "PASS (Phase 26 plan 26-00 — Section/NavBack shipped to g9oRa5 with 2 slots + sibling note dUURV per D-79; narrow-scope rationale documented for Pitfall O5/O6 prevention)",
+    "VAL-26-03": "PASS (Phase 26 plan 26-00 — type-semantic-heading-2-{family,size,weight,lh} + type-primitive-size-32 shipped; token surface 95 → 100; OPEN-26-01 seeded per D-72)",
+    "VAL-26-04": "PASS (Phase 26 plan 26-01 — FAQ page frame b7Hgy shipped at document root with 5 vertical children; pre-section calibration APPROVED at Plan 26-01 Task 6; per-section fidelity labels Header EXACT / page-intro APPROXIMATE / qa-list EXACT / CTA STUB / Footer EXACT recorded per D-83)",
+    "VAL-26-05": "PASS (Phase 26 plan 26-01 — 5 Q+A pairs shipped verbatim from src/pages/faq.astro lines 11-32 with apostrophes preserved; first real consumer of type-semantic-heading-2-* token family per D-72)",
+    "VAL-26-06": "PASS (Phase 26 plan 26-01 — type-semantic-prose-paragraph-* provisional flag DROPPED at Task 6 user APPROVE per D-71)",
+    "VAL-26-07": "PASS (Phase 26 plan 26-02 — 404 page frame csXky shipped at document root with 4 vertical children; placement via FindEmptySpace nodeId-anchor pattern in page-frame row; pre-section calibration APPROVED at Plan 26-02 Task 5 with Tier-2 OPEN-26-02 fallback)",
+    "VAL-26-08": "PASS (Phase 26 plan 26-02 — message-section LAYOUT=EXACT / TEXT=STUB per D-83 + D-81; Section/NavBack pure-ref instance with no descendants override because Plan 26-00 defaults match 404 needs)",
+    "VAL-26-09": "PASS (Phase 26 plan 26-02 — PAGE-11 INERT note documented in PEN-INVENTORY Frames Inventory for both joel-only-no-crito-ref reconstructed rows FAQ + 404 per RESEARCH § Focus 5)",
+    "VAL-26-10": "PASS (Phase 26 plan 26-03 — CALIBRATION-PROTOCOL.md written with 308 lines covering all 10 required sections per D-66 + D-67 + D-68; branch matrix codified from Plan 26-01/02 actuals)",
+    "VAL-26-11": "PASS (Phase 26 plan 26-03 — PEN-INVENTORY '## Calibration Protocol' anchor section added per D-69 cross-referencing CALIBRATION-PROTOCOL.md)",
+    "VAL-26-12": "PASS (this id-inventory.json file — end-of-phase-26 structural snapshot per OPEN-23-01 substitution pattern; Phase 27 baseline)",
+    "VAL-26-13": "PASS (snapshot_layout document-level returned 'No layout problems.' at end of every Plan 26-01 + 26-02 close; per-frame text-clipping false-positives documented per Phase 24/25 carry-forward, NOT real clipping)",
+    "VAL-26-14": "PASS (pre-flight active-editor (D-87) before every mutating call across Plans 26-00 / 26-01 / 26-02 / 26-03 with 0 mismatch incidents)",
+    "VAL-26-15": "PASS (PEN-INVENTORY Frames Inventory extended with FAQ + 404 rows; Variant Evidence Phase 26 sub-section extended with 37 rows total — 17 from 26-00 + 12 from 26-01 + 8 from 26-02; Token Extensions Phase 26 section populated)",
+    "VAL-26-16": "PASS (Open Flags Phase 26 section populated with OPEN-26-01 + OPEN-26-02; OPEN-23-10/-23-11 marked PARTIALLY RESOLVED / PHASE 26 DECLINED per D-70/D-73)",
+    "VAL-26-17": "PASS (user calibration outcomes: Plan 26-01 FAQ APPROVED at Task 6; Plan 26-02 404 APPROVED at Task 5 with Tier-2 visual verification in Pencil editor)"
+  },
+
+  "phase_25_baseline_drift_verification": {
+    "expected_baseline_ids_unmutated": [
+      "MIXGf", "QdwxP", "kicJ8", "ujMLJ", "VleVl", "cl8tt", "w1m3x", "DzqTm", "cYlRH", "Y2isa",
+      "WDGxc", "1nLS3", "Jmdw0", "maDc3", "IKAu3",
+      "RpGbe", "avgor", "t67DU6",
+      "M7eUr", "YJhRv", "gQa2R", "AvKtA", "V4Dx4i", "ATJK9",
+      "nwJk7", "j0FxQZ",
+      "EQaMf", "yRvGb", "u7NmaS", "dpO5Y",
+      "hIWuC", "AzmgQ",
+      "G0wNOc", "Xs0Hs", "t40xct"
+    ],
+    "mutations_in_phase_26": {
+      "g9oRa5_children_grew": "+2 reusable components (Hs5rc Section/CTA + N1jo3i Section/NavBack) + 2 sibling notes (D8owaR + dUURV); g9oRa5 own position + width unchanged; height grew (fit_content)",
+      "document_root_grew": "+2 top-level page frames at page-frame row y = -4111.55 (FAQ b7Hgy at x = 16327.27 and 404 csXky at x = 17847.27); total top-level node count 19 → 21",
+      "token_surface_grew": "95 → 100 (5 new tokens per phase_26_additions.tokens_added_phase_26 above)",
+      "intentional_state": "All mutations are intentional, documented per Variant Evidence Phase 26 (37 rows total: 17 plan 26-00 + 12 plan 26-01 + 8 plan 26-02), and approved at user calibration gates."
+    }
+  },
+
+  "snapshot_layout_compliance": {
+    "document_level": "PASS — 'No layout problems.' at end of every plan close (26-00, 26-01, 26-02)",
+    "per_frame_quirk": "Text-clipping false-positives carried forward from Phase 24/25 — multi-line text in fit_content auto-layout frames sometimes flagged 'partially clipped' or 'fully clipped' even though batch_get + visual rendering confirm correct layout. NOT real clipping; NO mitigation applied; documented per Plan 26-01 Task 5 + Plan 26-02 Task 4 SUMMARY files."
+  },
+
+  "open_flag_summary": {
+    "seeded_in_phase_26": ["OPEN-26-01", "OPEN-26-02"],
+    "phase_23_status_changes_in_phase_26": [
+      "OPEN-23-10 PARTIALLY RESOLVED (Plan 26-00 D-72) — heading-2 family shipped; heading-3/-4/-5/-6 remain OPEN re-pointed to Phase 28",
+      "OPEN-23-11 PHASE 26 DECLINED (D-70 + D-73) — prose-link / prose-list / prose-inline-code re-pointed to Phase 28 (Blog reconstruction); FAQ + 404 do not depict these prose roles"
+    ],
+    "phase_23_provisional_flags_dropped_in_phase_26": [
+      "type-semantic-prose-paragraph-family (Plan 26-01 Task 6 user APPROVE per D-71)",
+      "type-semantic-prose-paragraph-size",
+      "type-semantic-prose-paragraph-weight",
+      "type-semantic-prose-paragraph-lh"
+    ],
+    "outstanding_carry_forward_to_phase_27plus": [
+      "OPEN-24-01", "OPEN-24-02", "OPEN-24-03", "OPEN-24-04", "OPEN-24-05", "OPEN-24-07", "OPEN-24-08", "OPEN-24-09", "OPEN-24-10", "OPEN-24-12",
+      "OPEN-25-01", "OPEN-25-02", "OPEN-25-03", "OPEN-25-04", "OPEN-25-05", "OPEN-25-06", "OPEN-25-07",
+      "OPEN-26-01", "OPEN-26-02"
+    ]
+  },
+
+  "token_surface_count": {
+    "phase_23_baseline": 95,
+    "phase_24_additions": 0,
+    "phase_25_additions": 0,
+    "phase_26_additions": 5,
+    "current_total": 100,
+    "note": "Phase 26 Plan 26-00 added 1 primitive (type-primitive-size-32) + 4 semantic aliases (type-semantic-heading-2-{family,size,weight,lh}). First token-surface extension since Phase 23 baseline. Plan 26-00 SUMMARY Token Extensions (Phase 26) table audit-trails each addition."
+  },
+
+  "calibration_protocol_established": {
+    "location": ".planning/research/CALIBRATION-PROTOCOL.md",
+    "established_by": "Plan 26-03 Task 1",
+    "anchor_in_pen_inventory": ".planning/research/PEN-INVENTORY.md § Calibration Protocol (Plan 26-03 Task 2 — 1-2 sentence anchor per D-69)",
+    "inherited_by": ["Phase 27", "Phase 28", "Phase 29", "Phase 30", "Phase 31"],
+    "branch_matrix": {
+      "crito-source-present": "VALID-02 = side-by-side; PAGE-11 ACTIVE; sections use raster-or-frame source",
+      "joel-only-no-crito-ref": "VALID-02 = token-usage check against _Tokens & Foundations RpGbe; PAGE-11 INERT; sections derived from token surface + Joel content needs"
+    },
+    "consumer_map": {
+      "Phase 26": "FAQ joel-only + 404 joel-only — BOTH joel-only branch (Plans 26-01 + 26-02 — shipped)",
+      "Phase 27": "Thank-you joel-only + Contact crito-source (cl8tt flat-raster sub-case)",
+      "Phase 28": "Blog index + Blog post crito-source + Blog tag-page joel-only",
+      "Phase 29": "Projects index joel-only + Project detail joel-only",
+      "Phase 30": "Design system joel-only",
+      "Phase 31": "Homepage crito-source (ujMLJ editable)"
+    }
+  },
+
+  "files_modified_summary_phase_26": [
+    "design/Crito.pen — Phase 26 plan 26-00: 5 tokens added via set_variables; 2 reusable section components (Section/CTA Hs5rc + Section/NavBack N1jo3i) + 2 sibling notes (D8owaR + dUURV) added inside g9oRa5. Plan 26-01: FAQ page frame b7Hgy at document root with 5 children (Section/Header ref + page-intro + qa-list with 5 Q+A pairs + Section/CTA ref + Section/Footer ref). Plan 26-02: 404 page frame csXky at document root with 4 children (Section/Header ref + message-section + Section/NavBack ref + Section/Footer ref).",
+    ".planning/research/PEN-INVENTORY.md — Frames Inventory: FAQ + 404 rows added; PAGE-11 INERT note added; Calibration Protocol anchor added. Token Extensions Phase 26 section + 5 token rows. Variant Evidence Phase 26 section + 37 rows total (17 plan 26-00 + 12 plan 26-01 + 8 plan 26-02). Open Flags Phase 26 section + OPEN-26-01 + OPEN-26-02. OPEN-23-10/-23-11 marked PARTIALLY RESOLVED / PHASE 26 DECLINED. Provisional flag dropped from type-semantic-prose-paragraph-* rows per D-71.",
+    ".planning/research/CALIBRATION-PROTOCOL.md (NEW) — 308 lines codifying joel-only + crito-source branch matrix per Plan 26-03 Task 1; established by Phase 26, inherited by Phases 27-31.",
+    ".planning/research/exports/v2.0/end-of-phase-26/id-inventory.json (THIS FILE) — structural snapshot per OPEN-23-01 substitution pattern.",
+    ".planning/research/exports/v2.0/end-of-phase-26/README.md (sibling) — schema documentation + Phase 27 read instructions.",
+    ".planning/ROADMAP.md — Phase 26 plan checkboxes all marked complete; Phase 26 status updated.",
+    ".planning/STATE.md — Phase 26 → next phase pointer.",
+    ".planning/phases/26-faq-404-reconstruction-calibration-workflow-established/26-00-SUMMARY.md + 26-01-SUMMARY.md + 26-02-SUMMARY.md + 26-03-SUMMARY.md — final SUMMARY files per plan."
+  ],
+
+  "phase_26_close_status": "COMPLETE. All 4 plans (foundation tokens + Section/CTA + Section/NavBack [Plan 26-00] + FAQ page reconstruction [Plan 26-01] + 404 page reconstruction [Plan 26-02] + CALIBRATION-PROTOCOL.md [Plan 26-03]) shipped with calibration spot-check approvals at Plans 26-01 + 26-02 user gates. Phase 26 closure follows the Phase 25 close pattern. The per-section calibration workflow is now durable and inherited by Phases 27-31.",
+
+  "next_phase": "Phase 27: Thank-you + Contact reconstruction (per ROADMAP — Thank-you joel-only, Contact crito-source flat-raster sub-case)"
+}

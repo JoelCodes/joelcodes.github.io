@@ -2,6 +2,9 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
+  // tests/build/ holds plain-node build-output assertions (npm run test:build),
+  // not Playwright specs — importing them at collection time exits the runner.
+  testIgnore: 'tests/build/**',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,

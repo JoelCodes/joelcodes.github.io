@@ -1,0 +1,109 @@
+---
+import WaveMark from '../WaveMark.astro';
+import { BOOKING_URL, CONTACT_EMAIL } from '../../lib/constants';
+const currentYear = new Date().getFullYear();
+const isDev = import.meta.env.DEV;
+---
+
+<!-- Wavelength site footer — always-dark #0D2A31, zero client JS, wl-footer-* locals (Plan 34-04 / CHROME-03) -->
+<footer style="background-color: var(--wl-footer-bg);">
+  <div
+    class="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-[160px]"
+    style="padding-top: 45px; padding-bottom: 29px;"
+  >
+
+    <!-- Top row: brand-left / foot-links-right; stacks on mobile -->
+    <div class="flex flex-col sm:flex-row sm:justify-between gap-8 sm:gap-0">
+
+      <!-- Left column: brand lockup + tagline + supporting line -->
+      <div class="flex flex-col gap-2">
+        <!-- Brand lockup: mark (on-ink light) + wordmark (on-ink light) -->
+        <a
+          href="/"
+          aria-label="Joel Shinness Solutions — home"
+          class="flex items-center gap-[10px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--wl-footer-wordmark-color)]"
+        >
+          <!-- Circle-badge mark: always-dark footer surface (Figma node 42:77) -->
+          <WaveMark size={30} badge />
+          <span class="wl-wordmark" style="color: var(--wl-footer-wordmark-color);">Joel Shinness Solutions</span>
+        </a>
+
+        <!-- Tagline — Fraunces italic (verbatim Figma copy, period included) -->
+        <p class="wl-footer-tagline" style="color: var(--wl-footer-tagline-color);">On your wavelength.</p>
+
+        <!-- Supporting line (verbatim Figma copy, em dash) -->
+        <p class="wl-footer-body" style="color: var(--wl-footer-text-secondary);">Solutions for small businesses — web, automations, and AI that save you time and money.</p>
+      </div>
+
+      <!-- Right column: foot-links nav (five links per 34-FIGMA-EXTRACTION.md node 42:65) -->
+      <nav aria-label="Footer navigation" class="flex flex-row flex-wrap gap-[22px] items-start">
+        <a
+          href="/#services"
+          class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--wl-footer-wordmark-color)]"
+          style="color: var(--wl-footer-text-link);"
+        >Services</a>
+        {isDev && (
+          <a
+            href="/showcase"
+            class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--wl-footer-wordmark-color)]"
+            style="color: var(--wl-footer-text-link);"
+          >Showcase</a>
+        )}
+        <a
+          href="/#about"
+          class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--wl-footer-wordmark-color)]"
+          style="color: var(--wl-footer-text-link);"
+        >About</a>
+        <!-- Opens Calendly in new tab (CONTEXT D-06); rel=noopener prevents reverse tabnabbing (threat model) -->
+        <a
+          href={BOOKING_URL}
+          target="_blank"
+          rel="noopener"
+          class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--wl-footer-wordmark-color)]"
+          style="color: var(--wl-footer-text-link);"
+        >Book a call</a>
+        <a
+          href={`mailto:${CONTACT_EMAIL}`}
+          class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--wl-footer-wordmark-color)]"
+          style="color: var(--wl-footer-text-link);"
+        >Email</a>
+        {isDev && (
+          <a
+            href="/blog"
+            class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--wl-footer-wordmark-color)]"
+            style="color: var(--wl-footer-text-muted);"
+          >Blog</a>
+        )}
+      </nav>
+
+    </div>
+
+    <!-- Divider: 27px spacer above, 1px rule rgba(255,255,255,0.09), 24px spacer below (node 42:65) -->
+    <hr style="border: none; border-top: 1px solid var(--wl-footer-divider); margin: 27px 0 24px;" />
+
+    <!-- Bottom row: copyright (left) + email · GitHub (right) — Figma node 42:74 -->
+    <div class="flex flex-col sm:flex-row sm:justify-between gap-[22px]">
+      <!-- Copyright: dynamic year only, no boilerplate attributions (D-10) -->
+      <p class="wl-footer-link" style="color: var(--wl-footer-text-muted);">
+        &copy; {currentYear} Joel Shinness
+      </p>
+
+      <p>
+        <a
+          href={`mailto:${CONTACT_EMAIL}`}
+          class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--wl-footer-wordmark-color)]"
+          style="color: var(--wl-footer-text-link);"
+        >{CONTACT_EMAIL}</a><!--
+        --><span aria-hidden="true" style="color: var(--wl-footer-text-link);"> · </span><!--
+        --><a
+          href="https://github.com/JoelCodes"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="wl-footer-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--wl-footer-wordmark-color)]"
+          style="color: var(--wl-footer-text-link);"
+        >GitHub</a>
+      </p>
+    </div>
+
+  </div>
+</footer>

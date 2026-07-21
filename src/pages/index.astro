@@ -1,16 +1,893 @@
 ---
+/**
+ * Landing page — Phase 37, Plans 03-04
+ *
+ * Assembles all nine Figma landing sections from the wl/ component library.
+ * All copy is verbatim from Figma 12:2 (light canonical, D-10).
+ * Dark treatment from 117:103 (colors only, D-10).
+ *
+ * Sections in this file (37-03):
+ *   1. Hero         — h1, FrequencyWave, CTAButton solid + ghost
+ *   2. Who          — checkmark list
+ *   3. Three-ways   — id="services", 3× ServiceCard
+ *   4. How-it-works — 5× Step, kicker line
+ *   5. Automations  — 4× flow row, kicker line
+ *   6. Proof        — lead + credentials line
+ *
+ * Sections appended by 37-04: About (#about), Agencies, Final CTA.
+ */
+
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/Hero.astro';
-import Services from '../components/Services.astro';
-import Process from '../components/Process.astro';
-import About from '../components/About.astro';
-import ContactSection from '../components/homepage/ContactSection.astro';
+import { BOOKING_URL, CONTACT_EMAIL } from '../lib/constants';
+import CTAButton from '../components/wl/CTAButton.astro';
+import Eyebrow from '../components/wl/Eyebrow.astro';
+import ServiceCard from '../components/wl/ServiceCard.astro';
+import Step from '../components/wl/Step.astro';
+import FrequencyWave from '../components/wl/FrequencyWave.astro';
 ---
 
-<BaseLayout title="Joel Shinness | Custom Software for Small Business">
-  <Hero />
-  <Services />
-  <Process />
-  <About />
-  <ContactSection />
+<BaseLayout title="Joel Shinness Solutions | Custom Software for Small Business">
+
+  {/* ── Section 1: Hero ─────────────────────────────────────────────────────
+      Background: vertical gradient #E6F1F1 → #D2E7E7 (sea-glass gradient).
+      Dark: vertical gradient #123640 → #0C2228.
+      Fixed 840px height, content vertically centered.
+      FrequencyWave: absolutely positioned behind content (node 13:21).
+      Horizontal padding: px-[160px] @1440, px-[400px] @1920, px-[32px] @768, px-[24px] @390.
+      Source: 37-EXTRACTION.md §Section 1 Hero.
+  ── */}
+  <section
+    style={[
+      'position: relative;',
+      'min-height: 840px;',
+      'overflow: hidden;',
+      'display: flex;',
+      'align-items: center;',
+      /* CR-01: background moved to class so dark: can override (inline beats class specificity). */
+      /* WR-02: min-height preserves 840px design while allowing growth on zoom/reflow (WCAG 1.4.4/1.4.10). */
+    ].join(' ')}
+    class="[background:linear-gradient(to_bottom,#E6F1F1,#D2E7E7)] dark:[background:linear-gradient(to_bottom,#123640,#0C2228)]"
+  >
+    {/* FrequencyWave: node 13:21 — left: -115px; top: -100px; w: 1670px; h: 1044px.
+        absolutely positioned decorative background behind content.
+        On-screen web equivalent: absolute with extracted pixel geometry. */}
+    <FrequencyWave class="absolute pointer-events-none" style="left: -115px; top: -100px; width: 1670px; height: 1044px;" />
+
+    {/* Hero content: centered, above the wave layer */}
+    <div
+      class="relative z-10 w-full px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px]"
+      style="max-width: none;"
+    >
+      {/* Eyebrow: "SOLUTIONS FOR SMALL BUSINESSES" (49:164) — gap 21px to h1 */}
+      <Eyebrow>SOLUTIONS FOR SMALL BUSINESSES</Eyebrow>
+
+      <div style="height: 21px;"></div>
+
+      {/* h1: two lines. Line 1 static, line 2 mixed ink + accent italic + typing rotor + cursor bar.
+          Source: 13:31 (line 1), 13:32 (line 2 rotor container), 13:33/13:34/13:35.
+          #hero-rotor cycles five phrases via a typing/deleting effect (see <script> at end of file).
+          Accessible name is fixed by the sr-only span so SR reads a complete sentence and never the
+          per-keystroke churn; the rotor + cursor are aria-hidden and JS-driven.
+          prefers-reduced-motion and no-JS both fall back to the static "time saved" seen in Figma. */}
+      <h1
+        class="wl-display-hero"
+        style="color: var(--color-wl-ink); margin: 0;"
+      >
+        It's not just software.<br />
+        <span>It's </span><span class="sr-only">time saved.</span><span
+          id="hero-rotor"
+          aria-hidden="true"
+          style="font-style: italic; color: var(--color-wl-accent);"
+        >time saved</span><span
+          id="hero-cursor"
+          class="hero-cursor"
+          aria-hidden="true"
+          style={[
+            'display: inline-block;',
+            'width: 2.5px;',
+            'height: 0.85em;',
+            'background: var(--color-wl-accent);',
+            'vertical-align: middle;',
+            'margin-left: 4px;',
+          ].join(' ')}
+        ></span>
+      </h1>
+
+      <div style="height: 26px;"></div>
+
+      {/* Lead paragraph: node 13:37 (width 640 in Figma) */}
+      <p
+        class="wl-text-lead"
+        style="color: var(--color-wl-sub); margin: 0; max-width: 640px;"
+      >
+        I build websites, automations, and practical AI that do real work for your business — give you back hours, cut costs, and show you what's actually going on. All my services are sized to your business: scoped to fix the problem, priced to pay for itself fast. You tell me what's eating your week — I'll get you your week back.
+      </p>
+
+      <div style="height: 38px;"></div>
+
+      {/* CTAs: Book a call (solid + calendar) + Email me (ghost + mail). Gap 16px between.
+          D-06: Calendly opens in new tab with rel="noopener". D-07: email via mailto. */}
+      <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center;">
+        <CTAButton
+          href={BOOKING_URL}
+          variant="solid"
+          icon="calendar"
+          target="_blank"
+          rel="noopener"
+        >
+          Book a call
+        </CTAButton>
+        <CTAButton href={`mailto:${CONTACT_EMAIL}`} variant="ghost" icon="mail">
+          Email me
+        </CTAButton>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Section 2: Who ──────────────────────────────────────────────────────
+      Background: #F6FBFA (--wl-paper; dark flips via token).
+      py-[112px] all breakpoints; standard gutters.
+      Source: 37-EXTRACTION.md §Section 2 Who.
+  ── */}
+  <section
+    style="background: var(--color-wl-paper); padding-top: 112px; padding-bottom: 112px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px]"
+  >
+    <div style="max-width: 1120px; margin: 0 auto;">
+      {/* Eyebrow: "WHO IT'S FOR" (49:167) */}
+      <Eyebrow>WHO IT'S FOR</Eyebrow>
+
+      <div style="height: 21px;"></div>
+
+      {/* h2: node 14:7, width 700 in Figma */}
+      <h2
+        class="wl-heading-h2"
+        style="color: var(--color-wl-ink); margin: 0; max-width: 700px;"
+      >
+        You've got a business to run. The software should run itself.
+      </h2>
+
+      <div style="height: 18px;"></div>
+
+      {/* Lead: node 14:9, width 700 */}
+      <p
+        class="wl-text-lead"
+        style="color: var(--color-wl-sub); margin: 0; max-width: 700px;"
+      >
+        You know your business better than any consultant ever will — what you haven't had is time to build its tools. If any of these sound familiar, we should talk:
+      </p>
+
+      <div style="height: 32px;"></div>
+
+      {/* Checkmark list: node 14:11. Column gap 14px between items.
+          Row = 22px check icon + 13px gap + HG 17px var(--sub).
+          Check icon: viewBox "0 0 22 22", stroke #0E7078 (accent), path M18.3333 5.5L8.25 15.5833L3.66667 11.
+          Note: Figma 390 frame shows nowrap overflow — building with wrapping text (pre-approved deviation). */}
+      <ul role="list" style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px;">
+        {[
+          "You're tired of duct-taping spreadsheets and manual steps together.",
+          "Your website is out of date, or quietly working against you.",
+          "An agency quoted you enterprise prices for a small-business need.",
+          "You want one reliable person, not a revolving team.",
+        ].map((item) => (
+          <li style="display: flex; align-items: flex-start; gap: 13px;">
+            {/* Check icon: node 14:13, 22px, accent stroke */}
+            <svg
+              aria-hidden="true"
+              width="22"
+              height="22"
+              viewBox="0 0 22 22"
+              fill="none"
+              stroke="var(--color-wl-accent)"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              xmlns="http://www.w3.org/2000/svg"
+              style="flex-shrink: 0; margin-top: 1px;"
+            >
+              <path d="M18.3333 5.5L8.25 15.5833L3.66667 11" />
+            </svg>
+            <span
+              style={[
+                'font-family: var(--font-wl-body);',
+                'font-size: 17px;',
+                'line-height: normal;',
+                'color: var(--color-wl-sub);',
+              ].join(' ')}
+            >
+              {item}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  {/* ── Section 3: Three-ways / Services ────────────────────────────────────
+      id="services" — nav scroll target (/#services). scroll-margin-top: 64px via global.css.
+      Background: vertical gradient #EFF7F6 → #E6F1F1. Top stop #EFF7F6 is a new literal (not a token).
+      Dark: vertical gradient #10303A → #0E2B33 (custom dark literals).
+      py-[112px] all breakpoints.
+      Card grid: 3 equal columns, gap 22px at 1440/1920; stacked vertically gap 22px at 768/390.
+      Source: 37-EXTRACTION.md §Section 3 Three-ways.
+  ── */}
+  <section
+    id="services"
+    style="padding-top: 112px; padding-bottom: 112px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#EFF7F6,#E6F1F1)] dark:[background:linear-gradient(to_bottom,#10303A,#0E2B33)]"
+  >
+    <div style="max-width: 1120px; margin: 0 auto;">
+      {/* Eyebrow: "WHAT I BUILD" (49:170) */}
+      <Eyebrow>WHAT I BUILD</Eyebrow>
+
+      <div style="height: 21px;"></div>
+
+      {/* h2: node 14:33 */}
+      <h2 class="wl-heading-h2" style="color: var(--color-wl-ink); margin: 0;">
+        Three ways I help.
+      </h2>
+
+      <div style="height: 18px;"></div>
+
+      {/* Lead: node 14:35, width 700 */}
+      <p
+        class="wl-text-lead"
+        style="color: var(--color-wl-sub); margin: 0; max-width: 700px;"
+      >
+        Named the way you'd ask for them — described by what they do for your business.
+      </p>
+
+      <div style="height: 42px;"></div>
+
+      {/* Card grid: 3 columns at ≥1024, stacked below. Gap 22px. */}
+      <div
+        class="grid grid-cols-1 lg:grid-cols-3"
+        style="gap: 22px;"
+      >
+        {/* Card 1: Web (default variant) — node 14:38
+            kicker (benefit): "Win more customers" / title: "Web" */}
+        <ServiceCard
+          variant="default"
+          benefit="Win more customers"
+          title="Web"
+          body="From the site that earns their trust to the custom tools that run your day — booking, tracking, dashboards, portals — fast, modern, perfect on a phone, and built around how you actually work."
+          headingLevel={3}
+        >
+          <Fragment slot="icon">
+            {/* Web icon: node 14:40, viewBox 0 0 22 22, accent stroke */}
+            <svg
+              aria-hidden="true"
+              width="22"
+              height="22"
+              viewBox="0 0 22 22"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M17.4167 3.66667H4.58333C3.57081 3.66667 2.75 4.48748 2.75 5.5V14.6667C2.75 15.6792 3.57081 16.5 4.58333 16.5H17.4167C18.4292 16.5 19.25 15.6792 19.25 14.6667V5.5C19.25 4.48748 18.4292 3.66667 17.4167 3.66667Z" />
+              <path d="M2.75 7.33333H19.25M6.41667 18.3333H15.5833" />
+            </svg>
+          </Fragment>
+        </ServiceCard>
+
+        {/* Card 2: Automations (default variant) — node 14:49
+            benefit: "Get hours back, every week" / title: "Automations" */}
+        <ServiceCard
+          variant="default"
+          benefit="Get hours back, every week"
+          title="Automations"
+          body="The tools you already use, wired together so data moves itself — no copy-pasting between apps, no forgotten follow-ups, no busywork."
+          headingLevel={3}
+        >
+          <Fragment slot="icon">
+            {/* Automations icon: node 14:66, viewBox 0 0 22 22, accent stroke */}
+            <svg
+              aria-hidden="true"
+              width="22"
+              height="22"
+              viewBox="0 0 22 22"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M4.58333 7.33333C5.59586 7.33333 6.41667 6.51252 6.41667 5.5C6.41667 4.48748 5.59586 3.66667 4.58333 3.66667C3.57081 3.66667 2.75 4.48748 2.75 5.5C2.75 6.51252 3.57081 7.33333 4.58333 7.33333Z" />
+              <path d="M4.58333 18.3333C5.59586 18.3333 6.41667 17.5125 6.41667 16.5C6.41667 15.4875 5.59586 14.6667 4.58333 14.6667C3.57081 14.6667 2.75 15.4875 2.75 16.5C2.75 17.5125 3.57081 18.3333 4.58333 18.3333Z" />
+              <path d="M17.4167 12.8333C18.4292 12.8333 19.25 12.0125 19.25 11C19.25 9.98748 18.4292 9.16667 17.4167 9.16667C16.4041 9.16667 15.5833 9.98748 15.5833 11C15.5833 12.0125 16.4041 12.8333 17.4167 12.8333Z" />
+              <path d="M6.41667 5.5H10.0833C11.0558 5.5 11.9884 5.88631 12.6761 6.57394C13.3637 7.26158 13.75 8.19421 13.75 9.16667M6.41667 16.5H10.0833C11.0558 16.5 11.9884 16.1137 12.6761 15.4261C13.3637 14.7384 13.75 13.8058 13.75 12.8333" />
+            </svg>
+          </Fragment>
+        </ServiceCard>
+
+        {/* Card 3: AI (highlight variant) — node 14:62
+            kicker pill: "ALL THE HELP, NONE OF THE HYPE" (14:63)
+            benefit: "The judgment work, handled" / title: "AI"
+            Pill alignment: centered per canonical 1440 (divergence logged — D-10 batch). */}
+        <ServiceCard
+          variant="highlight"
+          kicker="ALL THE HELP, NONE OF THE HYPE"
+          benefit="The judgment work, handled"
+          title="AI"
+          body="Straight answers on where AI actually pays off in your business — and where it doesn't. Then I put it to work inside your workflow: reading, sorting, drafting, summarizing the stuff that used to need a person."
+          headingLevel={3}
+        >
+          <Fragment slot="icon">
+            {/* AI icon: node 61:615, viewBox 0 0 22 22, accent stroke */}
+            <svg
+              aria-hidden="true"
+              width="22"
+              height="22"
+              viewBox="0 0 22 22"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M11 2.75L12.742 7.883L17.875 9.625L12.742 11.367L11 16.5L9.258 11.367L4.125 9.625L9.258 7.883L11 2.75Z" />
+              <path d="M17.417 3.208V5.958M16.042 4.583H18.792" />
+            </svg>
+          </Fragment>
+        </ServiceCard>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Section 4: How-it-works ──────────────────────────────────────────────
+      Background: #F6FBFA (--wl-paper; dark flips via token).
+      py-[112px] all breakpoints.
+      5 equal columns at 1440/1920, stacked at 768/390. Gap 26px.
+      h2 → steps gap 45px (no lead para for this section).
+      Kicker line: Fraunces Italic 20px INK (not accent — extraction confirmed), gap 29px above.
+      Source: 37-EXTRACTION.md §Section 4 How-it-works.
+  ── */}
+  <section
+    style="background: var(--color-wl-paper); padding-top: 112px; padding-bottom: 112px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px]"
+  >
+    <div style="max-width: 1120px; margin: 0 auto;">
+      {/* Eyebrow: "HOW IT WORKS" (49:173) */}
+      <Eyebrow>HOW IT WORKS</Eyebrow>
+
+      <div style="height: 21px;"></div>
+
+      {/* h2: node 15:7. h2→steps gap 45px (no lead). */}
+      <h2 class="wl-heading-h2" style="color: var(--color-wl-ink); margin: 0;">
+        What working together actually looks like.
+      </h2>
+
+      <div style="height: 45px;"></div>
+
+      {/* Steps: 5 columns at lg, stacked below. Gap 26px.
+          Step component wraps inside li; parent provides ol semantics. */}
+      <ol
+        role="list"
+        class="grid grid-cols-1 lg:grid-cols-5"
+        style="gap: 26px; list-style: none; margin: 0; padding: 0;"
+      >
+        <li>
+          <Step number={1} title="Discovery call">
+            We talk about what's top of mind — the problems costing you time and money right now.
+          </Step>
+        </li>
+        <li>
+          <Step number={2} title="Design meeting">
+            We talk solutions. I bring options; you pick what fits how you actually work.
+          </Step>
+        </li>
+        <li>
+          <Step number={3} title="Proposal & pricing">
+            You'll know what it costs before I start building — a clear scope, a real number, and the reasoning behind both. You decide with the full picture.
+          </Step>
+        </li>
+        <li>
+          <Step number={4} title="Development">
+            Built in short cycles and shown to you working the whole way — not a slideshow, the real thing. You react, I adjust, we repeat until it does the job right.
+          </Step>
+        </li>
+        <li>
+          <Step number={5} title="Support mode">
+            It's live and earning its keep. Need a change? You've got a person, not a ticket queue.
+          </Step>
+        </li>
+      </ol>
+
+      {/* Kicker line: node 61:613. Fraunces Italic 20px, color INK (not accent).
+          Gap 29px above. This is the ink-colored variant — not .wl-accent-kicker (which is accent-colored).
+          Local inline override for ink color per extraction. */}
+      <div style="height: 29px;"></div>
+      <p
+        style={[
+          'font-family: var(--font-wl-heading);',
+          'font-size: 20px;',
+          'font-style: italic;',
+          'line-height: normal;',
+          'font-weight: 400;',
+          'font-variation-settings: "SOFT" 0, "WONK" 1;',
+          'color: var(--color-wl-ink);',
+          'margin: 0;',
+        ].join(' ')}
+      >
+        And every conversation along the way carries a standing question: is there a new way I can make your life easier?
+      </p>
+    </div>
+  </section>
+
+  {/* ── Section 5: Automations ───────────────────────────────────────────────
+      Background: vertical gradient #E6F1F1 → #DCEDEC. Bottom stop #DCEDEC is a new literal.
+      Dark: vertical gradient #0E2B33 → #0D262E.
+      py-[112px] all breakpoints.
+      Flow list: full-width rows, column gap 16px.
+      Flow row: white card (--wl-card-bg), border wl-line, radius 14, px 24/py 18.
+      Horizontal flex at 1440: trigger (flex-1) → arrow (24px) → result (flex-1).
+      Vertical stack at 768/390 with 90°-rotated arrow.
+      Kicker: Fraunces Italic 20px INK, gap 29px above.
+      Source: 37-EXTRACTION.md §Section 5 Automations.
+  ── */}
+  <section
+    style="padding-top: 112px; padding-bottom: 112px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#E6F1F1,#DCEDEC)] dark:[background:linear-gradient(to_bottom,#0E2B33,#0D262E)]"
+  >
+    <div style="max-width: 1120px; margin: 0 auto;">
+      {/* Eyebrow: "WHAT THAT LOOKS LIKE" (49:176) */}
+      <Eyebrow>WHAT THAT LOOKS LIKE</Eyebrow>
+
+      <div style="height: 21px;"></div>
+
+      {/* h2: node 15:33, width 800 */}
+      <h2
+        class="wl-heading-h2"
+        style="color: var(--color-wl-ink); margin: 0; max-width: 800px;"
+      >
+        If you do it by hand every week, it can probably do itself.
+      </h2>
+
+      <div style="height: 18px;"></div>
+
+      {/* Lead: node 15:35, width 700 */}
+      <p
+        class="wl-text-lead"
+        style="color: var(--color-wl-sub); margin: 0; max-width: 700px;"
+      >
+        The highest-value, least-glamorous work I do — quietly saving you time and money. A few real examples:
+      </p>
+
+      <div style="height: 42px;"></div>
+
+      {/* Flow list: 4 rows, column gap 16px */}
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        {[
+          { trigger: "A new enquiry comes in",   result: "Logged, sorted, and pinged to your phone — no lead slips through." },
+          { trigger: "A customer books online",  result: "Calendar updated, confirmation sent, reminder scheduled — zero manual steps." },
+          { trigger: "Month-end rolls around",   result: "Your numbers pulled into one clean summary — hours back, and a clearer picture of the business." },
+          { trigger: "An invoice gets paid",     result: "Recorded, receipt sent, next step triggered — your books stay current on their own." },
+        ].map(({ trigger, result }) => (
+          <div
+            style={[
+              /* Flow row card: white card bg (--wl-card-bg), border wl-line, radius 14, px 24/py 18 */
+              'background: var(--wl-card-bg);',
+              'border: 1px solid var(--color-wl-line);',
+              'border-radius: 14px;',
+              'padding: 18px 24px;',
+            ].join(' ')}
+          >
+            {/* Horizontal layout at md+, vertical stack at sm */}
+            <div class="flex flex-col sm:flex-row sm:items-center sm:gap-[19px]">
+              {/* Trigger: HG Regular 16px lh 1.6, sub color, flex-1 */}
+              <span
+                class="wl-text-body"
+                style="color: var(--color-wl-sub); flex: 1;"
+              >
+                {trigger}
+              </span>
+
+              {/* Arrow icon: 24px, accent stroke. Rotated 90° (pointing down) at sm/mobile. */}
+              <svg
+                aria-hidden="true"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="var(--color-wl-accent)"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                xmlns="http://www.w3.org/2000/svg"
+                class="rotate-90 sm:rotate-0 my-[8px] sm:my-0 flex-shrink-0"
+              >
+                <path d="M5 12H19M13 18L19 12L13 6" />
+              </svg>
+
+              {/* Result: HG SemiBold 16px lh 1.6, ink color, flex-1 */}
+              <span
+                class="wl-text-body"
+                style="color: var(--color-wl-ink); font-weight: 600; flex: 1;"
+              >
+                {result}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Kicker: node 15:59. Fraunces Italic 20px, INK color. Gap 29px above. */}
+      <div style="height: 29px;"></div>
+      <p
+        style={[
+          'font-family: var(--font-wl-heading);',
+          'font-size: 20px;',
+          'font-style: italic;',
+          'line-height: normal;',
+          'font-weight: 400;',
+          'font-variation-settings: "SOFT" 0, "WONK" 1;',
+          'color: var(--color-wl-ink);',
+          'margin: 0;',
+        ].join(' ')}
+      >
+        Tell me the thing you dread doing every week. That's usually the first one to solve.
+      </p>
+    </div>
+  </section>
+
+  {/* ── Section 6: Proof ────────────────────────────────────────────────────
+      Background: #F6FBFA (--wl-paper; dark flips via token).
+      py-[112px] all breakpoints.
+      No stats, no testimonials, no Badge/Callout — extraction confirmed prose only.
+      Credentials line: 15px, SemiBold prefix (ink) + Regular companies (#4C6A70 light / #8FB4B2 dark).
+      Gap: lead → credentials 32px, span gap 4px within line.
+      Source: 37-EXTRACTION.md §Section 6 Proof.
+  ── */}
+  <section
+    style="background: var(--color-wl-paper); padding-top: 112px; padding-bottom: 112px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px]"
+  >
+    <div style="max-width: 1120px; margin: 0 auto;">
+      {/* Eyebrow: "WHY TRUST ME WITH IT" (49:179) */}
+      <Eyebrow>WHY TRUST ME WITH IT</Eyebrow>
+
+      <div style="height: 21px;"></div>
+
+      {/* h2: node 16:7 */}
+      <h2 class="wl-heading-h2" style="color: var(--color-wl-ink); margin: 0;">
+        I build solutions people rely on.
+      </h2>
+
+      <div style="height: 18px;"></div>
+
+      {/* Lead: node 16:9, width 700, HG 21px lh 1.6 sub */}
+      <p
+        class="wl-text-lead"
+        style="color: var(--color-wl-sub); margin: 0; max-width: 700px;"
+      >
+        My career has been building things people depend on every day — from a chat-safety system protecting players in a live online game, to design systems used by international brands. I bring that same care to a five-page website or a one-off automation: built properly, tested rigorously, and ready for anything. And none of it is a black box: you'll understand what we've built together, and how it'll make running your business that much easier.
+      </p>
+
+      {/* Gap 32px between lead and credentials line */}
+      <div style="height: 32px;"></div>
+
+      {/* Credentials line: node 16:11. 15px lh normal.
+          Span 1 (16:12): HG SemiBold, ink color.
+          Span 2 (16:13): HG Regular, #4C6A70 light / #8FB4B2 dark — new literals, no token.
+          Gap between spans: 4px.
+          Note: #4C6A70 on #F6FBFA = 2.82:1 (fails AA) — same hex as the breadcrumb literal.
+          However extraction confirmed this as the Figma value for this element at this size (15px regular).
+          At 15px/regular this is a WCAG AA failure on paper. This is flagged to Joel at the fidelity gate.
+          The Phase 37 contrast script adds this pair with textUse: true so the failure surfaces. */}
+      <p
+        style="margin: 0; line-height: normal; display: flex; gap: 4px; flex-wrap: wrap; align-items: baseline;"
+      >
+        <span
+          style={[
+            'font-family: var(--font-wl-body);',
+            'font-size: 15px;',
+            'font-weight: 600;',
+            'color: var(--color-wl-ink);',
+          ].join(' ')}
+        >
+          Previously built software at
+        </span>
+        <span
+          style={[
+            'font-family: var(--font-wl-body);',
+            'font-size: 15px;',
+            'font-weight: 400;',
+            /* Light: #4C6A70, Dark: #8FB4B2 — via CSS custom property (dark: class cannot
+               override inline style color; --wl-proof-companies-color flips in .dark block). */
+            'color: var(--wl-proof-companies-color);',
+          ].join(' ')}
+        >
+          EA · Unity · lululemon · thatgamecompany.
+        </span>
+      </p>
+    </div>
+  </section>
+
+  {/* ── Section 7: About ───────────────────────────────────────────────────
+      anchor #about — nav scroll target. scroll-margin-top: 64px via global.css.
+      Background: vertical gradient #EFF7F6 → #E6F1F1 (same pair as Make / Three-ways).
+      Dark: vertical gradient #10303A → #0E2B33 (same as Make dark).
+      py-[112px] all breakpoints.
+      Layout: 2 columns at 1440/1920 — text (flex-1) + portrait 440×550, gap 48, items-center.
+             Portrait below text at 768 (340×425) and 390 (300×375).
+      About photo: NO (extraction confirmed no photo asset). Build portrait placeholder as designed:
+        frame 16:25 "portrait", radius 20px, gradient light rgb(205,230,229)→rgb(169,210,210),
+        dark rgb(21,58,68)→rgb(14,43,51); label "PORTRAIT" HG Regular 13px tracking 1.82px.
+      Source: 37-EXTRACTION.md §Section 7 About.
+  ── */}
+  <section
+    id="about"
+    style="padding-top: 112px; padding-bottom: 112px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#EFF7F6,#E6F1F1)] dark:[background:linear-gradient(to_bottom,#10303A,#0E2B33)]"
+  >
+    <div style="max-width: 1120px; margin: 0 auto;">
+      {/* Two-column layout: text + portrait at 1440/1920; stacked at 768/390.
+          Gap 48px, items-center in the two-col layout. */}
+      <div class="flex flex-col lg:flex-row lg:items-center lg:gap-[48px]">
+        {/* Text column */}
+        <div class="flex-1">
+          {/* Eyebrow: "WHO YOU'D WORK WITH" (49:182) */}
+          <Eyebrow>WHO YOU'D WORK WITH</Eyebrow>
+
+          <div style="height: 21px;"></div>
+
+          {/* h2: node 16:20 */}
+          <h2 class="wl-heading-h2" style="color: var(--color-wl-ink); margin: 0;">
+            Hi, I'm Joel.
+          </h2>
+
+          <div style="height: 18px;"></div>
+
+          {/* Para 1: node 16:22, .wl-text-lead 21px sub */}
+          <p
+            class="wl-text-lead"
+            style="color: var(--color-wl-sub); margin: 0;"
+          >
+            I'm a developer and designer who likes making complicated things feel simple. I've built for big companies and small ones, and the hard part is rarely the code — it's understanding what someone actually needs and getting it done without drama.
+          </p>
+
+          {/* Gap 19px between paragraphs */}
+          <div style="height: 19px;"></div>
+
+          {/* Para 2: node 16:24, .wl-text-body 16px sub */}
+          <p
+            class="wl-text-body"
+            style="color: var(--color-wl-sub); margin: 0;"
+          >
+            Away from the keyboard I'm usually solving some other kind of puzzle — I play a stack of string instruments, and I make digital and CNC art. Same instinct, different medium: I like figuring out how things work and building something good with it. That's the enthusiasm you get on your project, too.
+          </p>
+        </div>
+
+        {/* Portrait placeholder: node 16:25 "portrait".
+            440×550 at 1440/1920 (right column); 340×425 at 768; 300×375 at 390.
+            Radius 20px; gradient bg light/dark; centered label "PORTRAIT".
+            Source: 37-EXTRACTION.md "About photo present: NO" — placeholder as designed.
+            Note: no photo asset exists in Figma; swapping in a real photo is a future task.
+            Background uses Tailwind arbitrary utility classes (NOT inline style) so that
+            the dark: variant can override (inline style beats class specificity — Rule 1 pattern). */}
+        <div
+          class={[
+            'mt-[42px] lg:mt-0 mx-auto lg:mx-0 flex-shrink-0',
+            'flex items-center justify-center',
+            /* Width/height responsive: 300×375 @390, 340×425 @768, 440×550 @1440 */
+            'w-[300px] h-[375px] sm:w-[340px] sm:h-[425px] lg:w-[440px] lg:h-[550px]',
+            'rounded-[20px]',
+            /* Light gradient: rgb(205,230,229)→rgb(169,210,210) per node 16:25.
+               Dark gradient: rgb(21,58,68)→rgb(14,43,51) per node 117:249.
+               Class-based (no inline bg style) so dark: can override correctly. */
+            '[background:linear-gradient(128.66deg,rgb(205,230,229)_0%,rgb(169,210,210)_71.429%)]',
+            'dark:[background:linear-gradient(128.66deg,rgb(21,58,68)_0%,rgb(14,43,51)_71.429%)]',
+          ].join(' ')}
+          style="border: 1px solid var(--color-wl-line);"
+          aria-hidden="true"
+        >
+          {/* PORTRAIT label: node 16:26, HG Regular 13px, tracking 1.82px.
+              Color: --wl-portrait-label-color (flips in .dark: #5B8A8A light / #8FB4B2 dark). */}
+          <span
+            style={[
+              'font-family: var(--font-wl-body);',
+              'font-size: 13px;',
+              'font-weight: 400;',
+              'letter-spacing: 1.82px;',
+              'text-transform: uppercase;',
+              'color: var(--wl-portrait-label-color);',
+            ].join(' ')}
+          >
+            PORTRAIT
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Section 8: Agencies ─────────────────────────────────────────────────
+      ALWAYS-DARK ink-background section. Non-flippable footer-precedent literals.
+      Background: #12333B (light frame) / #16343C (dark frame) — both literal, slightly lighter in dark.
+      py-[112px] all breakpoints.
+      Layout: horizontal flex gap 32px at 1440/1920: text column (flex-1) + ghost-on-dark CTA right.
+              CTA drops below text at 768/390.
+      Components: Eyebrow on-dark (accent-soft #5AA9A5), CTAButton ghost-on-dark.
+      CTA destination: mailto per D-07 (no link in Figma — wired to CONTACT_EMAIL; see 37-COPY-GAPS.md #2).
+      Source: 37-EXTRACTION.md §Section 8 Agencies (ALWAYS-DARK).
+  ── */}
+  <section
+    style="padding-top: 112px; padding-bottom: 112px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:#12333B] dark:[background:#16343C]"
+  >
+    <div style="max-width: 1120px; margin: 0 auto;">
+      {/* Horizontal flex at 1440/1920: text (flex-1) + CTA right; stacked at 768/390 */}
+      <div class="flex flex-col lg:flex-row lg:items-center lg:gap-[32px]">
+        {/* Text column */}
+        <div class="flex-1">
+          {/* Eyebrow on-dark: accent-soft #5AA9A5 (dash + text) — always-dark surface.
+              Uses Eyebrow on-dark variant. Source: 49:185, Eyebrow 39:38. */}
+          <Eyebrow onDark>FOR AGENCIES</Eyebrow>
+
+          {/* Gap 21px eyebrow → h2 */}
+          <div style="height: 21px;"></div>
+
+          {/* h2: node 17:8, Fraunces 50 #EAF6F3 (on-ink literal), gap 15 to body */}
+          <h2
+            class="wl-heading-h2"
+            style="color: #EAF6F3; margin: 0;"
+          >
+            Need reliable overflow dev?
+          </h2>
+
+          {/* Gap 15px h2 → body (extraction: h2→lead gap is 15px for Agencies) */}
+          <div style="height: 15px;"></div>
+
+          {/* Body: node 17:10, HG 17px lh 1.6 #A9C9C7, width 620 */}
+          <p
+            style={[
+              'font-family: var(--font-wl-body);',
+              'font-size: 17px;',
+              'line-height: 1.6;',
+              'color: #A9C9C7;',
+              'margin: 0;',
+              'max-width: 620px;',
+            ].join(' ')}
+          >
+            An extra pair of experienced hands — React, TypeScript, Next.js, and the messy integration and API work most people would rather not touch. Dependable, low-drama, and easy to brief.
+          </p>
+        </div>
+
+        {/* CTA: ghost-on-dark, node I49:162;39:26.
+            Label: "Let's talk overflow →" (arrow is part of label text, no icon prop).
+            Destination: mailto per D-07 (extraction gap #2 — no Figma link target). */}
+        <div class="mt-[32px] lg:mt-0 flex-shrink-0">
+          <CTAButton
+            href={`mailto:${CONTACT_EMAIL}`}
+            variant="ghost-on-dark"
+          >
+            Let's talk overflow →
+          </CTAButton>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Section 9: Final CTA ────────────────────────────────────────────────
+      Background: vertical gradient #E6F1F1 → #D2E7E7 (same pair as Hero).
+      Dark: vertical gradient #123640 → #0C2228 (same as Hero dark).
+      py-[112px] all breakpoints.
+      Layout: column, center-aligned (only centered section). Lead width 660, centered.
+      Components: Eyebrow, CTAButton solid + ghost (identical to Hero CTAs).
+      Gaps: eyebrow→h2 21, h2→lead 18, lead→btns 35, btns gap 16.
+      Source: 37-EXTRACTION.md §Section 9 Final CTA.
+  ── */}
+  <section
+    style="padding-top: 112px; padding-bottom: 112px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#E6F1F1,#D2E7E7)] dark:[background:linear-gradient(to_bottom,#123640,#0C2228)]"
+  >
+    <div
+      style="max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center;"
+    >
+      {/* Eyebrow: "GET IN TOUCH" (49:188) */}
+      <Eyebrow>GET IN TOUCH</Eyebrow>
+
+      <div style="height: 21px;"></div>
+
+      {/* h2: node 17:18, centered */}
+      <h2 class="wl-heading-h2" style="color: var(--color-wl-ink); margin: 0;">
+        Have something in mind?
+      </h2>
+
+      <div style="height: 18px;"></div>
+
+      {/* Lead: node 17:20, width 660, centered */}
+      <p
+        class="wl-text-lead"
+        style="color: var(--color-wl-sub); margin: 0; max-width: 660px;"
+      >
+        Tell me what you're trying to do. If there's a solution that saves you time or money, I'll tell you what it'd take. If there isn't, I'll tell you that too.
+      </p>
+
+      <div style="height: 35px;"></div>
+
+      {/* CTAs: Book a call (solid + calendar) + Email me (ghost + mail). Gap 16px.
+          D-06: Calendly opens in new tab with rel="noopener".
+          D-07: email via mailto. ASVS L1: every _blank link carries rel="noopener". */}
+      <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: center;">
+        <CTAButton
+          href={BOOKING_URL}
+          variant="solid"
+          icon="calendar"
+          target="_blank"
+          rel="noopener"
+        >
+          Book a call
+        </CTAButton>
+        <CTAButton href={`mailto:${CONTACT_EMAIL}`} variant="ghost" icon="mail">
+          Email me
+        </CTAButton>
+      </div>
+    </div>
+  </section>
+
 </BaseLayout>
+
+{/* Hero rotor: blink the cursor while idle, hold it steady while typing/deleting.
+    Reduced motion disables the blink (JS also bails, leaving static "time saved"). */}
+<style>
+  .hero-cursor { animation: hero-blink 1s step-end infinite; }
+  .hero-cursor.is-typing { animation: none; opacity: 1; }
+  @keyframes hero-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-cursor { animation: none; opacity: 1; }
+  }
+</style>
+
+<script>
+  // Typing rotor for the hero line. Vanilla, no deps. Starts from the static
+  // "time saved" already in the DOM, so no-JS and reduced-motion keep that word.
+  const rotor = document.getElementById('hero-rotor');
+  const cursor = document.getElementById('hero-cursor');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (rotor && cursor && !reduce) {
+    const WORDS = ['time saved', 'money saved', 'happier customers', 'sharper insight', 'fewer headaches'];
+    const TYPE_MS = 75;   // per-char while typing
+    const DEL_MS = 40;    // per-char while deleting (quicker, per spec)
+    const HOLD_MS = 1800; // pause on a fully-typed word
+    const NEXT_MS = 500;  // pause on empty before the next word
+
+    let wi = 0;                    // current word index (0 = "time saved", already shown)
+    let ci = WORDS[0].length;      // chars currently rendered
+    let deleting = false;
+
+    const steady = (on) => cursor.classList.toggle('is-typing', on);
+
+    const step = () => {
+      const word = WORDS[wi];
+      if (!deleting) {
+        if (ci < word.length) {
+          rotor.textContent = word.slice(0, ++ci);
+          steady(true);
+          setTimeout(step, TYPE_MS);
+        } else {
+          steady(false);                                   // blink while holding
+          setTimeout(() => { deleting = true; step(); }, HOLD_MS);
+        }
+      } else {
+        if (ci > 0) {
+          rotor.textContent = word.slice(0, --ci);
+          steady(true);
+          setTimeout(step, DEL_MS);
+        } else {
+          deleting = false;
+          wi = (wi + 1) % WORDS.length;
+          steady(false);                                   // blink on the gap
+          setTimeout(step, NEXT_MS);
+        }
+      }
+    };
+
+    step();
+  }
+</script>

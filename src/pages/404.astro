@@ -1,0 +1,70 @@
+---
+/**
+ * 404 Not Found page — Phase 39, Plan 02
+ *
+ * Branded not-found page using Wavelength tokens and BaseLayout chrome.
+ * Copy locked verbatim by D-05 — do NOT alter the h1, lead, or CTA text.
+ *
+ * Design notes:
+ *   - No PROD redirect — 404 must stay publicly reachable (D-05, CONTEXT).
+ *   - No slot="head" noindex — 404 pages are not dev-hidden; they need no robots meta (RESEARCH RQ-4).
+ *   - Gradient background in class (not style) per Phase 38 Rule 1 / Pitfall 3.
+ *   - FrequencyWave included (D-06 discretion): a 640px text column at full viewport height
+ *     feels sparse without a background texture; wave placed absolutely behind content.
+ *   - Built to dist/404.html by Astro's zero-config 404.astro convention (RESEARCH RQ-4).
+ *   - HTTP 404 status served by npm run preview on unmatched URLs.
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTAButton from '../components/wl/CTAButton.astro';
+import FrequencyWave from '../components/wl/FrequencyWave.astro';
+---
+
+<BaseLayout
+  title="Page Not Found | Joel Shinness Solutions"
+  description="This page has moved or doesn't exist."
+>
+
+  {/* ── 404 Section ─────────────────────────────────────────────────────────────
+      Background: gradient #E6F1F1→#D2E7E7 (light) / #123640→#0C2228 (dark).
+      Gradient in class per Phase 38 Rule 1 — never inline style (Pitfall 3).
+      FrequencyWave: absolutely positioned decorative background (D-06 resolution: include).
+      Vertical padding: 112px top + bottom per UI-SPEC 404 layout recipe.
+      Content: 640px max-width centered column with verbatim locked copy (D-05).
+  ── */}
+  <section
+    style="position: relative; overflow: hidden; padding-top: 112px; padding-bottom: 112px;"
+    class="px-[24px] sm:px-[32px] lg:px-[160px] min-[1920px]:px-[400px] [background:linear-gradient(to_bottom,#E6F1F1,#D2E7E7)] dark:[background:linear-gradient(to_bottom,#123640,#0C2228)]"
+  >
+
+    {/* FrequencyWave: decorative background layer — same placement as landing hero (index.astro line 54).
+        aria-hidden is built into FrequencyWave; pointer-events-none prevents interaction. */}
+    <FrequencyWave class="absolute pointer-events-none" style="left: -115px; top: -100px; width: 1670px; height: 1044px;" />
+
+    {/* Content column: 640px max-width, centered, above the wave layer */}
+    <div
+      class="relative z-10"
+      style="max-width: 640px; margin: 0 auto; text-align: center;"
+    >
+
+      {/* h1 — locked copy (D-05): "Page not found". wl-heading-h1-interior = 61px Fraunces. */}
+      <h1 class="wl-heading-h1-interior" style="color: var(--color-wl-ink); margin: 0;">
+        Page not found
+      </h1>
+
+      <div style="height: 24px;"></div>
+
+      {/* Lead paragraph — locked copy (D-05): verbatim, do not reword. */}
+      <p class="wl-text-lead" style="color: var(--color-wl-sub); margin: 0;">
+        This page has moved or doesn't exist. Head back to the homepage to find what you're looking for.
+      </p>
+
+      <div style="height: 40px;"></div>
+
+      {/* CTA — internal link; no target or rel needed (same-origin). Focus ring built into CTAButton. */}
+      <CTAButton href="/" variant="solid">Back to home</CTAButton>
+
+    </div>
+  </section>
+
+</BaseLayout>

@@ -1,0 +1,32 @@
+{
+  "captured": "2026-05-31",
+  "phase": "23",
+  "purpose": "End-of-phase structural snapshot — pair to baseline-23/id-inventory.json for VAL-23-05 zero-mutation diff. Verified post-write that every existing Crito frame's direct-child id set matches the pre-phase baseline exactly.",
+  "source": "design/Crito.pen via mcp__pencil__batch_get readDepth=2",
+  "diff_verdict": "PASS — all 15 baseline Crito frames retain identical direct-child id sets. One NEW top-level frame added: _Tokens & Foundations (RpGbe). 95 variables added to the document-level variables map (39 primitive + 56 semantic).",
+  "top_level_count": 16,
+  "top_level_frames": [
+    { "id": "MIXGf", "name": "View More", "type": "frame", "width": 3230, "height": 1200, "direct_child_ids": ["tzlLM", "2aaZb"], "matches_baseline": true },
+    { "id": "QdwxP", "name": "About Me", "type": "frame", "width": 1400, "height": 3392, "direct_child_ids": ["0I2s6", "QRY7O", "6kSNQ", "b1VZE", "f1QWb", "HcrUD", "wK0ZL", "qp2pQ", "XNm67"], "matches_baseline": true },
+    { "id": "kicJ8", "name": "Information", "type": "frame", "width": 4890, "height": null, "direct_child_ids": ["tgHOV"], "matches_baseline": true },
+    { "id": "ujMLJ", "name": "Home Page", "type": "frame", "width": 1600, "height": 8043, "direct_child_ids": ["sHon5", "Y1ldm", "6gRu1", "35XXR", "DzW46", "9sik7", "sxhcf", "XH3uk", "lUyFD", "Wx9kx"], "matches_baseline": true },
+    { "id": "VleVl", "name": "Free Design Sample", "type": "frame", "width": 5200, "height": null, "direct_child_ids": ["lJ6pk"], "matches_baseline": true },
+    { "id": "cl8tt", "name": "09_Contact", "type": "frame", "width": 1920, "height": 2846, "direct_child_ids": [], "matches_baseline": true },
+    { "id": "w1m3x", "name": "08_Blog Details", "type": "frame", "width": 1920, "height": 4486, "direct_child_ids": [], "matches_baseline": true },
+    { "id": "DzqTm", "name": "07_Blog", "type": "frame", "width": 1920, "height": 3871, "direct_child_ids": [], "matches_baseline": true },
+    { "id": "cYlRH", "name": "06_Service Details", "type": "frame", "width": 1920, "height": 3960, "direct_child_ids": [], "matches_baseline": true },
+    { "id": "Y2isa", "name": "05_Service", "type": "frame", "width": 1920, "height": 4589, "direct_child_ids": [], "matches_baseline": true },
+    { "id": "WDGxc", "name": "04_About", "type": "frame", "width": 1920, "height": 5440, "direct_child_ids": [], "matches_baseline": true },
+    { "id": "1nLS3", "name": "03_SaaS Agency", "type": "frame", "width": 1920, "height": 8497, "direct_child_ids": [], "matches_baseline": true },
+    { "id": "Jmdw0", "name": "02_Creative Agency", "type": "frame", "width": 1920, "height": 10054, "direct_child_ids": [], "matches_baseline": true },
+    { "id": "maDc3", "name": "01_ Business Consulting", "type": "frame", "width": 1920, "height": 9778, "direct_child_ids": [], "matches_baseline": true },
+    { "id": "IKAu3", "name": "FULL DESIGN PREVIEW", "type": "frame", "width": 19680, "height": null, "direct_child_ids": ["zPnR4"], "matches_baseline": true },
+    { "id": "RpGbe", "name": "_Tokens & Foundations", "type": "frame", "width": 1440, "height": null, "direct_child_ids": ["p98elZ", "rKNfR", "QusOy", "yyLpk", "CEGKp", "z0Bpe"], "matches_baseline": "NEW (added by plan 23-05)", "section_names": ["Header", "1. Colors", "2. Typography", "3. Spacing Scale", "4. Radius", "5. Dark Mode — Deferred per D-01 / TOKEN-07"] }
+  ],
+  "variables_count": {
+    "primitives": 39,
+    "semantic_aliases": 56,
+    "total": 95
+  },
+  "incident_summary": "Plan 23-05 initial execution attempted via Pencil's batch_design but Pencil's active editor silently switched mid-phase to a different project's .pen file (/Users/joel/Desktop/Projects/tonnetz-layout/.planning/designs/phase-4/phase-4-highlight-and-toggle.pen). User manually switched Pencil's active editor back to design/Crito.pen and executor re-ran the reference frame build with literal hex/font values (OPEN-23-13 — batch_design rejects $<var> references). The 39 primitives from plan 23-03 had already landed on disk in Crito.pen at the time of the editor switch. The 56 semantic aliases were in Pencil's in-memory state for the wrong file at the moment of plan 23-05 attempt 1; after the user restored the editor focus to Crito.pen, get_variables({}) returned all 95 variables correctly — confirming the semantic aliases had been persisted to Crito.pen's variable surface before the editor switch (only the reference frame build was lost). See OPEN-23-14 for full incident documentation."
+}

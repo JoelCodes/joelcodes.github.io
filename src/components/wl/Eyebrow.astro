@@ -1,0 +1,52 @@
+---
+/**
+ * Eyebrow — COMP-02 Eyebrow primitive
+ *
+ * Section label with a 34px dash and uppercase tracking text.
+ * Source: 35-FIGMA-EXTRACTION.md §Fresh MCP Extraction, Eyebrow 39:41.
+ *
+ * On-light (39:36): dash + text in var(--color-wl-accent) (#0E7078 light / #4FB3B8 dark — flippable).
+ *   Contrast: #0E7078 on #F6FBFA = 5.57:1 AA PASS (see check-contrast.mjs "accent on paper").
+ *   Flippable token safe on page-level surfaces.
+ *
+ * On-dark (39:40): dash + text in #5AA9A5 LITERAL — non-flippable (D-10).
+ *   Source: Figma dark mockup 117:103 / Figma description "accent-soft (agencies strip)".
+ *   MUST NOT use var(--color-wl-accent) which flips to #4FB3B8 in dark mode — may
+ *   produce unstable appearance on always-dark ink surfaces (threat T-02, D-10).
+ *   #5AA9A5 on #12333B ink = 4.9:1 (AA PASS — see check-contrast.mjs "eyebrow on-dark
+ *   text on ink surface (39:40)"; margin over 4.5 is 0.4, not the previously claimed 5.42).
+ *
+ * Layout: flex row, gap 13px, items-center (Figma: "gap: 13px").
+ * Dash: 34px × 1px inline block, same color as text, aria-hidden.
+ * Text: .wl-label-eyebrow (13px / 600 / Hanken Grotesk / 0.22em tracking).
+ */
+
+interface Props {
+  onDark?: boolean;
+  class?: string;
+}
+
+const { onDark = false, class: className = '' } = Astro.props;
+---
+
+<p
+  class:list={[
+    'flex items-center gap-[13px]',
+    'wl-label-eyebrow',
+    /* on-light: flippable accent token (#0E7078 / #4FB3B8) — safe on page-level surfaces */
+    !onDark && 'text-wl-accent',
+    className
+  ]}
+  style={onDark
+    /* on-dark: non-flippable literal #5AA9A5 from Figma 117:103 (D-10)
+       #5AA9A5 on #12333B ink surface = 4.9:1 (AA PASS — check-contrast.mjs) */
+    ? 'color: #5AA9A5;'
+    : undefined}
+>
+  {/* Dash: 34px × 1px, aria-hidden, same color as text (inherited currentColor) */}
+  <span
+    aria-hidden="true"
+    style="display: inline-block; width: 34px; height: 1px; background: currentColor; flex-shrink: 0;"
+  ></span>
+  <slot />
+</p>

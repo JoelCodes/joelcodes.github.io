@@ -4,8 +4,6 @@
  *
  * Usage:
  * <SEO title="Page Title" description="Page description" />
- *
- * Note: Replace og-image.svg with a real JPG (1200x630) for best social media compatibility.
  */
 
 interface Props {
@@ -32,8 +30,8 @@ const fullTitle = `${title} | ${SITE_NAME}`;
 // Use provided canonical or derive from current URL
 const canonicalUrl = canonical || new URL(Astro.url.pathname, SITE_URL).href;
 
-// OpenGraph image (update to .jpg for better compatibility when you have a real image)
-const ogImage = `${SITE_URL}/og-image.svg`;
+// OpenGraph image (1200x630 PNG exported from the Figma brand file)
+const ogImage = `${SITE_URL}/og-image.png`;
 
 // JSON-LD Person structured data
 const personSchema = {
