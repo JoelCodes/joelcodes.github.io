@@ -40,11 +40,11 @@
 
 ### IA & URLs
 
-- [ ] **IA-01**: Redirects: `/projects` + `/projects/[slug]` → `/showcase`; `/faq` → `/`; `/thank-you` removed (form dropped)
+- [x] **IA-01**: Redirects: `/projects` + `/projects/[slug]` → `/showcase`; `/faq` → `/`; `/thank-you` removed (form dropped)
 - [ ] **IA-02**: Dev-hidden mechanism: `noindex` prop on SEO.astro + sitemap `filter()` excluding dev-hidden URLs; verified in the production build output
 - [x] **IA-03**: All Book-a-call CTAs wired to a single `BOOKING_URL` constant (Calendly placeholder); Email CTAs use `mailto:` to Joel's address
 - [x] **IA-04**: Anchor nav behaves correctly: active states, smooth scroll with header offset, cross-page `/#services` links work from Showcase/blog
-- [ ] **IA-05**: Contact form + n8n webhook flow removed (design has no form); no dead form code remains
+- [x] **IA-05**: Contact form + n8n webhook flow removed (design has no form); no dead form code remains
 
 ### Content
 
@@ -110,8 +110,8 @@
 | PAGE-04 | Phase 39 | Pending |
 | PAGE-05 | Phase 39 | Pending |
 | IA-02 | Phase 39 | Pending |
-| IA-01 | Phase 40 | Pending |
-| IA-05 | Phase 40 | Pending |
+| IA-01 | Phase 40 | Complete |
+| IA-05 | Phase 40 | Complete |
 | CLEAN-01 | Phase 41 | Pending |
 | CLEAN-02 | Phase 41 | Pending |
 | CLEAN-03 | Phase 41 | Pending |
