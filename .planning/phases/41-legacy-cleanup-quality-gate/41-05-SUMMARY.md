@@ -3,7 +3,7 @@ phase: 41-legacy-cleanup-quality-gate
 plan: "05"
 subsystem: quality-gate
 tags: [fidelity, screenshots, playwright, qual-03, human-gate]
-status: awaiting-human-approval
+status: complete
 
 dependency_graph:
   requires: ["41-01", "41-02", "41-03", "41-04"]
@@ -53,7 +53,7 @@ metrics:
 
 All PNGs non-empty; script committed at `58aa010`.
 
-**Task 2 (awaiting approval):** QUAL-03 human-verify checkpoint — HALTED per D-03 and the hard gate contract. The milestone-shipped marker is NOT set. Execution returned control to Joel for visual sign-off.
+**Task 2 (complete):** QUAL-03 human-verify checkpoint — Joel reviewed Landing (light + dark) and Showcase (closed + expanded) against Figma frames and gave explicit "approved" on 2026-07-21. Milestone-shipped marker set: STATE.md + ROADMAP.md updated, `v3.0` tagged in git.
 
 ## Deviations from Plan
 
@@ -64,13 +64,15 @@ None — plan executed exactly as written. Task 2 is a blocking checkpoint retur
 - [x] `scripts/41-fidelity-screenshots.mjs` exists
 - [x] 4 rendered PNGs in `.planning/phases/41-legacy-cleanup-quality-gate/fidelity/` — all non-empty
 - [x] Execution HALTED at checkpoint — not self-approved
-- [ ] QUAL-03 gate: awaiting Joel's explicit "approved"
-- [ ] Milestone-shipped marker: NOT set (downstream of Joel's approval)
+- [x] QUAL-03 gate: Joel gave explicit "approved" 2026-07-21
+- [x] Milestone-shipped marker: SET (STATE.md + ROADMAP.md updated, `v3.0` tagged)
 
 ## Next Phase Readiness
 
-**Blocked on:** Joel's explicit QUAL-03 approval ("approved" signal).
+**Unblocked:** Joel approved QUAL-03 on 2026-07-21. v3.0 milestone shipped.
 
-After approval:
-- Mark v3.0 milestone shipped in STATE.md / ROADMAP.md
-- Tag `v3.0` in git
+Done:
+- [x] Marked v3.0 milestone shipped in STATE.md / ROADMAP.md
+- [x] Tagged `v3.0` in git
+
+Next: `/gsd:complete-milestone` — archive v3.0 phases and open the next cycle.

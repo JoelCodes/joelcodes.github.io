@@ -8,7 +8,7 @@
 - ✅ **v1.3 Design System & Navigation Cleanup** — Phases 17-22 (shipped 2026-02-11)
 - ❌ **v1.4 Design Overhaul** — Abandoned 2026-05-31 (no code shipped; phase numbers 23-30 returned to pool)
 - ❌ **v2.0 Prep Crito Design File** — Phases 23-32, all executed; Abandoned 2026-07-14 (direction pivot — output never consumed)
-- 🚧 **v3.0 Wavelength Rebrand** — Phases 33-41 (active)
+- ✅ **v3.0 Wavelength Rebrand** — Phases 33-41 (shipped 2026-07-21)
 
 ## Phases
 
@@ -70,7 +70,7 @@ See `.planning/MILESTONES.md` "v2.0 Prep Crito Design File (Abandoned)" for deta
 
 </details>
 
-### 🚧 v3.0 Wavelength Rebrand (Phases 33-41, Active)
+### ✅ v3.0 Wavelength Rebrand (Phases 33-41, Shipped 2026-07-21)
 
 **Milestone goal:** Rebuild the site in place to the "Joel Shinness Solutions" Figma brand — sea-cool palette, Fraunces + Hanken Grotesk, waveform mark, new Landing/Showcase IA with light + dark themes — replacing the neobrutalist design entirely while keeping the Astro/Tailwind infrastructure, CI, SEO plumbing, and blog content.
 
@@ -409,7 +409,7 @@ Plans:
 | 38 | v3.0 | 6/6 | Complete    | 2026-07-19 |
 | 39 | v3.0 | 5/5 | Complete    | 2026-07-20 |
 | 40 | v3.0 | 2/2 | Complete    | 2026-07-21 |
-| 41 | v3.0 | 0/5 | Planned | — |
+| 41 | v3.0 | 5/5 | Complete    | 2026-07-21 |
 
 ---
 *Roadmap initialized: 2026-01-26 for v1.0*

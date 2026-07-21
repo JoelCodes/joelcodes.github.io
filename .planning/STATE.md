@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v3.0
 milestone_name: Wavelength Rebrand
-status: awaiting-human-approval
-stopped_at: QUAL-03 checkpoint — 41-05 Task 1 complete; halted at human-verify gate for Joel's visual sign-off
-last_updated: "2026-07-21T07:02:00Z"
-last_activity: 2026-07-21 -- Executed 41-05 Task 1 (fidelity screenshots captured); HALTED at QUAL-03 human gate
+status: milestone-shipped
+stopped_at: v3.0 shipped — QUAL-03 approved by Joel 2026-07-21; all 9 phases complete
+last_updated: "2026-07-21T11:15:00Z"
+last_activity: 2026-07-21 -- Joel approved QUAL-03 fidelity gate; v3.0 marked shipped, tagged v3.0
 progress:
   total_phases: 9
-  completed_phases: 8
+  completed_phases: 9
   total_plans: 45
-  completed_plans: 40
-  percent: 89
+  completed_plans: 45
+  percent: 100
 ---
 
 # Project State
@@ -25,15 +25,15 @@ See: .planning/PROJECT.md (updated 2026-07-14)
 
 ## Current Position
 
-Phase: 41 (legacy-cleanup-quality-gate) — EXECUTING
-Plan: 4 of 5 COMPLETE (41-01, 41-02, 41-03, 41-04 done); 41-05 Task 1 done, Task 2 awaiting Joel approval
-Status: HALTED at QUAL-03 human gate (awaiting Joel visual sign-off)
-Last activity: 2026-07-21 -- 41-05 fidelity screenshots captured; QUAL-03 gate blocking
+Phase: 41 (legacy-cleanup-quality-gate) — COMPLETE
+Plan: 5 of 5 COMPLETE (41-05 QUAL-03 approved by Joel 2026-07-21)
+Status: v3.0 MILESTONE SHIPPED — all 9 phases complete, tagged v3.0
+Last activity: 2026-07-21 -- Joel approved QUAL-03; milestone marked shipped
 
 ```
-v3.0 Progress: [██████████████████████████████████████░ ] 5/9 phases (97%, 32/33 plans)
-               33 ██ 34 ██ 35 ██ 36 ██ 37 ██ 38█░ 39░░ 40░░ 41░░
-               (38-01..05 ✓ — blog foundations done, Plan 06 blog page restyles remains)
+v3.0 Progress: [████████████████████████████████████████] 9/9 phases (100%, 45/45 plans)
+               33 ██ 34 ██ 35 ██ 36 ██ 37 ██ 38 ██ 39 ██ 40 ██ 41 ██
+               SHIPPED — next: /gsd:complete-milestone to archive
 ```
 
 ## Phase Index
@@ -45,10 +45,10 @@ v3.0 Progress: [█████████████████████�
 | 35 | UI Primitives | COMP-01–02 | Complete |
 | 36 | Content Components + Expandable Cards | COMP-03–05, CONT-01 | Complete |
 | 37 | Landing Page | PAGE-01, CONT-02, IA-03–04 | Complete |
-| 38 | Showcase + Blog Restyle | PAGE-02, PAGE-06 | Pending |
-| 39 | Utility Pages + Dev-Hidden Pages | PAGE-03–05, IA-02 | Pending |
-| 40 | URL Strategy + IA Cleanup | IA-01, IA-05 | Pending |
-| 41 | Legacy Cleanup + Quality Gate | CLEAN-01–03, QUAL-01–03 | Pending |
+| 38 | Showcase + Blog Restyle | PAGE-02, PAGE-06 | Complete |
+| 39 | Utility Pages + Dev-Hidden Pages | PAGE-03–05, IA-02 | Complete |
+| 40 | URL Strategy + IA Cleanup | IA-01, IA-05 | Complete |
+| 41 | Legacy Cleanup + Quality Gate | CLEAN-01–03, QUAL-01–03 | Complete |
 
 ## Milestone History
 
@@ -145,13 +145,16 @@ See `.planning/MILESTONES.md` for full milestone details.
 - **Phase 41-04 2026-07-20**: QUAL-01 green — axe-core 20/20 tests pass, zero violations, all pages (landing, showcase, blog index+post, 404, services/web, areas/abbotsford) in both light and dark themes. One WR-05 incomplete gradient-bg contrast check logged (not a violation).
 - **Phase 41-04 2026-07-20**: QUAL-02 Lighthouse URL set landed: lighthouserc.json + lighthouserc-mobile.json now test exactly / and /404. Stale /blog/im-pivoting/ removed. CI will score these on next push to main.
 
+- **Phase 41-05 QUAL-03 gate 2026-07-21**: Joel approved the milestone-close fidelity comparison (Landing light/dark 12:2/117:103, Showcase 12:3 closed/expanded at 1440px). This is the formal v3.0 ship approval — milestone marked shipped, tagged `v3.0`. Post-approval, the landing hero gained a JS typing rotor (commit 1a8b290), a deliberate Figma deviation logged for any future fidelity pass.
+
 ### Blockers/Concerns
 
 None currently.
 
 ## Session Continuity
 
-Last session: 2026-07-21T07:02:00Z
-Stopped at: 41-05 QUAL-03 human-verify checkpoint — Task 1 (fidelity screenshots) complete and committed at 58aa010; halted for Joel's visual sign-off
+Last session: 2026-07-21T11:15:00Z
+Stopped at: v3.0 SHIPPED — Joel approved QUAL-03 fidelity gate 2026-07-21; 41-05 closed, milestone marked shipped in STATE.md + ROADMAP.md, tagged v3.0 in git
 Resume file: None
-Next action: Joel approves QUAL-03 ("approved") → continuation agent marks v3.0 milestone shipped (STATE.md + ROADMAP.md) and tags v3.0 in git
+Next action: /gsd:complete-milestone — archive v3.0 phases and prepare for the next milestone cycle
+Post-ship note: landing hero gained a JS typing rotor (commit 1a8b290) — a deliberate deviation from Figma (frames showed static "time saved"); QUAL-03 screenshots predate it but capture the identical static first frame.
