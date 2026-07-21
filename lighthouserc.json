@@ -1,5 +1,5 @@
 {
-  "_comment": "URL list: landing + one real blog post. /showcase/ activates in Phase 38 when that route is built.",
+  "_comment": "URL list: real prod pages only. landing (/) + 404. All other routes (showcase, blog, services/*, areas/*) redirect to / in prod via PROD guard (D-06).",
   "ci": {
     "collect": {
       "numberOfRuns": 3,
@@ -9,7 +9,7 @@
       "staticDistDir": "./dist",
       "url": [
         "http://localhost/",
-        "http://localhost/blog/im-pivoting/"
+        "http://localhost/404"
       ]
     },
     "assert": {

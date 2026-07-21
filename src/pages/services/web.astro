@@ -20,8 +20,8 @@
  *   5. Paired      — Eyebrow, h2, 2× LinkCard
  *   6. Final CTA   — Eyebrow, h2, lead, CTAs, serving line
  *
- * CRITICAL: this page does NOT redirect out of production (D-02, Strategy A) —
- * it ships to the prod build and is hidden only via noindex + sitemap filter.
+ * Dev-gate guard — D-06 (amended 2026-07-20): prod redirect added; page is dev-only
+ * matching showcase/blog pattern. Previously Strategy A (noindex-only); now Strategy B.
  */
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
@@ -33,6 +33,11 @@ import FAQItem from '../../components/wl/FAQItem.astro';
 import LinkCard from '../../components/wl/LinkCard.astro';
 import Breadcrumb from '../../components/wl/Breadcrumb.astro';
 import FrequencyWave from '../../components/wl/FrequencyWave.astro';
+
+// Dev-gate guard — D-06: services/web is dev-only, must never ship content in prod.
+if (import.meta.env.PROD) {
+  return Astro.redirect('/');
+}
 ---
 
 <BaseLayout
