@@ -63,17 +63,24 @@ import FrequencyWave from '../components/wl/FrequencyWave.astro';
 
       <div style="height: 21px;"></div>
 
-      {/* h1: two lines. Line 1 static, line 2 mixed ink + accent italic + cursor bar.
+      {/* h1: two lines. Line 1 static, line 2 mixed ink + accent italic + typing rotor + cursor bar.
           Source: 13:31 (line 1), 13:32 (line 2 rotor container), 13:33/13:34/13:35.
-          Extraction gap: rotor-line animated behavior — building static per light frame.
-          "time saved" is the sole word shown in all five Figma frames; no alternate words exist.
-          [EXTRACTION GAP: rotor-line animated behavior resolved to static build — see 37-EXTRACTION.md] */}
+          #hero-rotor cycles five phrases via a typing/deleting effect (see <script> at end of file).
+          Accessible name is fixed by the sr-only span so SR reads a complete sentence and never the
+          per-keystroke churn; the rotor + cursor are aria-hidden and JS-driven.
+          prefers-reduced-motion and no-JS both fall back to the static "time saved" seen in Figma. */}
       <h1
         class="wl-display-hero"
         style="color: var(--color-wl-ink); margin: 0;"
       >
         It's not just software.<br />
-        <span>It's </span><span style="font-style: italic; color: var(--color-wl-accent);">time saved</span><span
+        <span>It's </span><span class="sr-only">time saved.</span><span
+          id="hero-rotor"
+          aria-hidden="true"
+          style="font-style: italic; color: var(--color-wl-accent);"
+        >time saved</span><span
+          id="hero-cursor"
+          class="hero-cursor"
           aria-hidden="true"
           style={[
             'display: inline-block;',
@@ -824,3 +831,63 @@ import FrequencyWave from '../components/wl/FrequencyWave.astro';
   </section>
 
 </BaseLayout>
+
+{/* Hero rotor: blink the cursor while idle, hold it steady while typing/deleting.
+    Reduced motion disables the blink (JS also bails, leaving static "time saved"). */}
+<style>
+  .hero-cursor { animation: hero-blink 1s step-end infinite; }
+  .hero-cursor.is-typing { animation: none; opacity: 1; }
+  @keyframes hero-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-cursor { animation: none; opacity: 1; }
+  }
+</style>
+
+<script>
+  // Typing rotor for the hero line. Vanilla, no deps. Starts from the static
+  // "time saved" already in the DOM, so no-JS and reduced-motion keep that word.
+  const rotor = document.getElementById('hero-rotor');
+  const cursor = document.getElementById('hero-cursor');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (rotor && cursor && !reduce) {
+    const WORDS = ['time saved', 'money saved', 'happier customers', 'sharper insight', 'fewer headaches'];
+    const TYPE_MS = 75;   // per-char while typing
+    const DEL_MS = 40;    // per-char while deleting (quicker, per spec)
+    const HOLD_MS = 1800; // pause on a fully-typed word
+    const NEXT_MS = 500;  // pause on empty before the next word
+
+    let wi = 0;                    // current word index (0 = "time saved", already shown)
+    let ci = WORDS[0].length;      // chars currently rendered
+    let deleting = false;
+
+    const steady = (on) => cursor.classList.toggle('is-typing', on);
+
+    const step = () => {
+      const word = WORDS[wi];
+      if (!deleting) {
+        if (ci < word.length) {
+          rotor.textContent = word.slice(0, ++ci);
+          steady(true);
+          setTimeout(step, TYPE_MS);
+        } else {
+          steady(false);                                   // blink while holding
+          setTimeout(() => { deleting = true; step(); }, HOLD_MS);
+        }
+      } else {
+        if (ci > 0) {
+          rotor.textContent = word.slice(0, --ci);
+          steady(true);
+          setTimeout(step, DEL_MS);
+        } else {
+          deleting = false;
+          wi = (wi + 1) % WORDS.length;
+          steady(false);                                   // blink on the gap
+          setTimeout(step, NEXT_MS);
+        }
+      }
+    };
+
+    step();
+  }
+</script>
