@@ -46,6 +46,9 @@ The **milestone-close** phase for v3.0. Four jobs, all subtractive + verificatio
 - **Exact axe/Lighthouse URL set + commit granularity** for the deletions — planner's discretion, within the SC-defined page list.
 - **Where the Crito archive note lives** (D-05) — README in `design/`, or inline note; planner picks.
 
+### URL Scope / dev-only pages (amended 2026-07-20)
+- **D-06:** **`/services/*` and `/areas/*` are dev-only (prod-excluded), same as `/showcase` and `/blog`.** On `gsd/v3.0-milestone` these pages currently render in prod — they are only sitemap-excluded (astro.config.mjs `filter`), with NO prod redirect. Add the same guard `src/pages/showcase.astro` uses (~lines 41–42: `if (import.meta.env.PROD) return Astro.redirect('/')`) to `src/pages/services/web.astro` and `src/pages/areas/abbotsford.astro`. **Consequence for QUAL-02 (supersedes the RESEARCH URL note):** after this change the ONLY real prod pages are `/` (landing) and `/404`, so the Lighthouse URL set in `lighthouserc.json` + `lighthouserc-mobile.json` MUST be exactly `/` and `/404` (drop the stale `/blog/im-pivoting/`). axe (dev server) still covers all rendered pages (landing, showcase, blog, services, areas) in both themes for QUAL-01.
+
 </decisions>
 
 <canonical_refs>
