@@ -845,7 +845,7 @@ import FrequencyWave from '../components/wl/FrequencyWave.astro';
     let ci = WORDS[0].length;      // chars currently rendered
     let deleting = false;
 
-    const steady = (on) => cursor.classList.toggle('is-typing', on);
+    const steady = (on: boolean) => cursor.classList.toggle('is-typing', on);
 
     const step = () => {
       const word = WORDS[wi];
