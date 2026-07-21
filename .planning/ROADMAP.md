@@ -362,6 +362,15 @@ Plans:
 
 **Requirements:** CLEAN-01, CLEAN-02, CLEAN-03, QUAL-01, QUAL-02, QUAL-03
 
+**Plans:** 5 plans
+
+Plans:
+- [ ] 41-01-PLAN.md — Delete orphaned neobrutalist files (CLEAN-01)
+- [ ] 41-02-PLAN.md — Purge global.css to --wl-* + update BaseLayout body (CLEAN-02)
+- [ ] 41-03-PLAN.md — Rewrite CLAUDE.md + clean design/ dupes (CLEAN-03)
+- [ ] 41-04-PLAN.md — Dev-only guards + Lighthouse URL scope + axe gate (QUAL-01/02)
+- [ ] 41-05-PLAN.md — Post-cleanup fidelity screenshots + Joel sign-off (QUAL-03, human gate)
+
 **Design-fidelity note:** QUAL-03 (visual fidelity gate) has been enforced as in-phase screenshot comparison checkpoints at Phases 34, 35, 36, 37, 38. Phase 41 is the formal milestone-close approval: Joel reviews Landing (light + dark) and Showcase side-by-side with Figma frames and signs off before the milestone is marked shipped.
 
 **Success Criteria:**
@@ -389,7 +398,7 @@ Plans:
 | 38 | v3.0 | 6/6 | Complete    | 2026-07-19 |
 | 39 | v3.0 | 5/5 | Complete    | 2026-07-20 |
 | 40 | v3.0 | 2/2 | Complete    | 2026-07-21 |
-| 41 | v3.0 | — | Pending | — |
+| 41 | v3.0 | 0/5 | Planned | — |
 
 ---
 *Roadmap initialized: 2026-01-26 for v1.0*
