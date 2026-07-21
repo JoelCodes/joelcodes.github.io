@@ -38,6 +38,7 @@ jobs:
         with:
           configPath: './lighthouserc.json'
           uploadArtifacts: true
+          artifactName: lighthouse-results-desktop
           temporaryPublicStorage: true
           runs: 3
 
@@ -46,6 +47,7 @@ jobs:
         with:
           configPath: './lighthouserc-mobile.json'
           uploadArtifacts: true
+          artifactName: lighthouse-results-mobile
           temporaryPublicStorage: true
           runs: 3
 
