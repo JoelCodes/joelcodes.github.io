@@ -17,8 +17,10 @@
  * Sections appended by 37-04: About (#about), Agencies, Final CTA.
  */
 
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { BOOKING_URL, CONTACT_EMAIL } from '../lib/constants';
+import selfie from '../assets/images/selfie.jpg';
 import CTAButton from '../components/wl/CTAButton.astro';
 import Eyebrow from '../components/wl/Eyebrow.astro';
 import ServiceCard from '../components/wl/ServiceCard.astro';
@@ -663,43 +665,25 @@ import FrequencyWave from '../components/wl/FrequencyWave.astro';
           </p>
         </div>
 
-        {/* Portrait placeholder: node 16:25 "portrait".
+        {/* Portrait: node 16:25 "portrait".
             440×550 at 1440/1920 (right column); 340×425 at 768; 300×375 at 390.
-            Radius 20px; gradient bg light/dark; centered label "PORTRAIT".
-            Source: 37-EXTRACTION.md "About photo present: NO" — placeholder as designed.
-            Note: no photo asset exists in Figma; swapping in a real photo is a future task.
-            Background uses Tailwind arbitrary utility classes (NOT inline style) so that
-            the dark: variant can override (inline style beats class specificity — Rule 1 pattern). */}
+            Radius 20px. Real photo (selfie.jpg) swapped in for the former placeholder. */}
         <div
           class={[
-            'mt-[42px] lg:mt-0 mx-auto lg:mx-0 flex-shrink-0',
-            'flex items-center justify-center',
+            'mt-[42px] lg:mt-0 mx-auto lg:mx-0 flex-shrink-0 overflow-hidden',
             /* Width/height responsive: 300×375 @390, 340×425 @768, 440×550 @1440 */
             'w-[300px] h-[375px] sm:w-[340px] sm:h-[425px] lg:w-[440px] lg:h-[550px]',
             'rounded-[20px]',
-            /* Light gradient: rgb(205,230,229)→rgb(169,210,210) per node 16:25.
-               Dark gradient: rgb(21,58,68)→rgb(14,43,51) per node 117:249.
-               Class-based (no inline bg style) so dark: can override correctly. */
-            '[background:linear-gradient(128.66deg,rgb(205,230,229)_0%,rgb(169,210,210)_71.429%)]',
-            'dark:[background:linear-gradient(128.66deg,rgb(21,58,68)_0%,rgb(14,43,51)_71.429%)]',
           ].join(' ')}
           style="border: 1px solid var(--color-wl-line);"
-          aria-hidden="true"
         >
-          {/* PORTRAIT label: node 16:26, HG Regular 13px, tracking 1.82px.
-              Color: --wl-portrait-label-color (flips in .dark: #5B8A8A light / #8FB4B2 dark). */}
-          <span
-            style={[
-              'font-family: var(--font-wl-body);',
-              'font-size: 13px;',
-              'font-weight: 400;',
-              'letter-spacing: 1.82px;',
-              'text-transform: uppercase;',
-              'color: var(--wl-portrait-label-color);',
-            ].join(' ')}
-          >
-            PORTRAIT
-          </span>
+          <Image
+            src={selfie}
+            alt="Joel Shinness"
+            width={880}
+            height={1100}
+            class="w-full h-full object-cover"
+          />
         </div>
       </div>
     </div>
