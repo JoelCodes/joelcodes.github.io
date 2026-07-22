@@ -34,14 +34,16 @@
 
 interface Props {
   class?: string;
+  style?: string;
 }
 
-const { class: className = '' } = Astro.props;
+const { class: className = '', style } = Astro.props;
 ---
 
 <svg
   aria-hidden="true"
   class:list={[className]}
+  style={style}
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 1670 1044"
   fill="none"
