@@ -17,9 +17,11 @@ import hankenWoff2 from '@fontsource-variable/hanken-grotesk/files/hanken-grotes
 interface Props {
   title: string;
   description?: string;
+  /** OpenGraph type — 'article' for blog posts, defaults to 'website' */
+  type?: string;
 }
 
-const { title, description = 'Web apps, automation, and AI development for small businesses' } = Astro.props;
+const { title, description = 'Web apps, automation, and AI development for small businesses', type = 'website' } = Astro.props;
 ---
 
 <!doctype html>
@@ -33,7 +35,7 @@ const { title, description = 'Web apps, automation, and AI development for small
     <meta name="generator" content={Astro.generator} />
 
     <!-- SEO: meta tags, OpenGraph, Twitter Card, JSON-LD -->
-    <SEO title={title} description={description} />
+    <SEO title={title} description={description} type={type} />
 
     <!-- Additional head content via slot -->
     <slot name="head" />
@@ -53,9 +55,14 @@ const { title, description = 'Web apps, automation, and AI development for small
       } catch (e) {
         /* storage blocked (private mode / cookie settings) — dark mode must still work */
       }
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      if (darkQuery.matches) {
         document.documentElement.classList.add('dark');
       }
+      /* Follow mid-session OS theme changes (system-only mode, D-05/D-06) */
+      darkQuery.addEventListener('change', function (e) {
+        document.documentElement.classList.toggle('dark', e.matches);
+      });
     </script>
   </head>
   <body class="bg-wl-paper text-wl-ink min-h-screen flex flex-col">

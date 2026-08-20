@@ -93,7 +93,7 @@ const firstTag = postTags[0] ?? null;
 const SITE_URL = 'https://joelshinness.com';
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description}>
+<BaseLayout title={post.data.title} description={post.data.description} type="article">
   {/* og:image meta: pass featuredImage as OG image for social sharing.
       featuredImage DROPS from the page layout (Joel decision per 38-BLOG-FRAMES.md)
       but is preserved in schema for og:image ONLY (38-BLOG-FRAMES.md: "schema for OG/social meta only").
