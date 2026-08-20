@@ -71,28 +71,40 @@ import FrequencyWave from '../components/wl/FrequencyWave.astro';
           Accessible name is fixed by the sr-only span so SR reads a complete sentence and never the
           per-keystroke churn; the rotor + cursor are aria-hidden and JS-driven.
           prefers-reduced-motion and no-JS both fall back to the static "time saved" seen in Figma. */}
+      {/* Ghost line (grid-stacked, invisible) pins the h1 to the height of the LONGEST
+          rotor phrase, so the typing cycle never reflows content below it — at ≤460px
+          "happier customers" wraps to an extra line and the h1 jumped 134→179px per cycle.
+          Keep the ghost text in sync with the longest entry in WORDS (script at end of file). */}
       <h1
-        class="wl-display-hero"
+        class="wl-display-hero hero-h1"
         style="color: var(--color-wl-ink); margin: 0;"
       >
-        It's not just software.<br />
-        <span>It's </span><span class="sr-only">time saved.</span><span
-          id="hero-rotor"
-          aria-hidden="true"
-          style="font-style: italic; color: var(--color-wl-accent);"
-        >time saved</span><span
-          id="hero-cursor"
-          class="hero-cursor"
-          aria-hidden="true"
-          style={[
-            'display: inline-block;',
-            'width: 2.5px;',
-            'height: 0.85em;',
-            'background: var(--color-wl-accent);',
-            'vertical-align: middle;',
-            'margin-left: 4px;',
-          ].join(' ')}
-        ></span>
+        <span class="hero-line hero-line-ghost" aria-hidden="true">
+          It's not just software.<br />
+          <span>It's </span><span style="font-style: italic;">happier customers</span><span
+            style="display: inline-block; width: 2.5px; height: 0.85em; vertical-align: middle; margin-left: 4px;"
+          ></span>
+        </span>
+        <span class="hero-line">
+          It's not just software.<br />
+          <span>It's </span><span class="sr-only">time saved.</span><span
+            id="hero-rotor"
+            aria-hidden="true"
+            style="font-style: italic; color: var(--color-wl-accent);"
+          >time saved</span><span
+            id="hero-cursor"
+            class="hero-cursor"
+            aria-hidden="true"
+            style={[
+              'display: inline-block;',
+              'width: 2.5px;',
+              'height: 0.85em;',
+              'background: var(--color-wl-accent);',
+              'vertical-align: middle;',
+              'margin-left: 4px;',
+            ].join(' ')}
+          ></span>
+        </span>
       </h1>
 
       <div style="height: 26px;"></div>
@@ -577,10 +589,10 @@ import FrequencyWave from '../components/wl/FrequencyWave.astro';
           Span 1 (16:12): HG SemiBold, ink color.
           Span 2 (16:13): HG Regular, #4C6A70 light / #8FB4B2 dark — new literals, no token.
           Gap between spans: 4px.
-          Note: #4C6A70 on #F6FBFA = 2.82:1 (fails AA) — same hex as the breadcrumb literal.
-          However extraction confirmed this as the Figma value for this element at this size (15px regular).
-          At 15px/regular this is a WCAG AA failure on paper. This is flagged to Joel at the fidelity gate.
-          The Phase 37 contrast script adds this pair with textUse: true so the failure surfaces. */}
+          Contrast: #4C6A70 on #F6FBFA (light paper) ≈ 5.5:1 — AA PASS at 15px regular.
+          (The 2.82:1 figure belongs to the DARK-paper pairing #4C6A70 on #0C2228, which is
+          why the dark value flips to #8FB4B2 via --wl-proof-companies-color — see global.css.)
+          Pair is tracked in the Phase 37 contrast script (textUse: true). */}
       <p
         style="margin: 0; line-height: normal; display: flex; gap: 4px; flex-wrap: wrap; align-items: baseline;"
       >
@@ -819,6 +831,12 @@ import FrequencyWave from '../components/wl/FrequencyWave.astro';
 {/* Hero rotor: blink the cursor while idle, hold it steady while typing/deleting.
     Reduced motion disables the blink (JS also bails, leaving static "time saved"). */}
 <style>
+  /* Grid-stack: ghost and real line share one cell; h1 height = tallest of the two,
+     so short rotor phrases can't shrink the block and bounce the layout below. */
+  .hero-h1 { display: grid; }
+  .hero-h1 > .hero-line { grid-area: 1 / 1; }
+  .hero-line-ghost { visibility: hidden; }
+
   .hero-cursor { animation: hero-blink 1s step-end infinite; }
   .hero-cursor.is-typing { animation: none; opacity: 1; }
   @keyframes hero-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
