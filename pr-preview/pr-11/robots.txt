@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://joelshinness.com/sitemap-index.xml
