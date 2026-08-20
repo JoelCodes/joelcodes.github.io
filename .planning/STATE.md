@@ -125,6 +125,12 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 ### Pending Todos
 
+**Tracked todos (.planning/todos/pending/): 3**
+
+- Add content for AI Consulting (general) — 2026-08-20
+- Add content for web sites and web apps (general) — 2026-08-20
+- Create blog post on how to avoid AI slop (general) — 2026-08-20
+
 **Before deployment (carried from v1.3):**
 
 1. Configure n8n webhook — set PUBLIC_N8N_WEBHOOK_URL environment variable (note: v3.0 removes the form; this env var will be removed from source in Phase 40)
