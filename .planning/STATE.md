@@ -125,6 +125,10 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 ### Pending Todos
 
+**Tracked todos (.planning/todos/pending/): 1**
+
+- Add content for AI Consulting (general) — 2026-08-20
+
 **Before deployment (carried from v1.3):**
 
 1. Configure n8n webhook — set PUBLIC_N8N_WEBHOOK_URL environment variable (note: v3.0 removes the form; this env var will be removed from source in Phase 40)
