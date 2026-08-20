@@ -125,9 +125,10 @@ See `.planning/MILESTONES.md` for full milestone details.
 
 ### Pending Todos
 
-**Tracked todos (.planning/todos/pending/): 1**
+**Tracked todos (.planning/todos/pending/): 2**
 
 - Add content for AI Consulting (general) — 2026-08-20
+- Add content for web sites and web apps (general) — 2026-08-20
 
 **Before deployment (carried from v1.3):**
 
