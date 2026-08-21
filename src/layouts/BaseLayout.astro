@@ -17,9 +17,11 @@ import hankenWoff2 from '@fontsource-variable/hanken-grotesk/files/hanken-grotes
 interface Props {
   title: string;
   description?: string;
+  /** OpenGraph type — 'article' for blog posts, defaults to 'website' */
+  type?: string;
 }
 
-const { title, description = 'Web apps, automation, and AI development for small businesses' } = Astro.props;
+const { title, description = 'Web apps, automation, and AI development for small businesses', type = 'website' } = Astro.props;
 ---
 
 <!doctype html>
@@ -33,7 +35,7 @@ const { title, description = 'Web apps, automation, and AI development for small
     <meta name="generator" content={Astro.generator} />
 
     <!-- SEO: meta tags, OpenGraph, Twitter Card, JSON-LD -->
-    <SEO title={title} description={description} />
+    <SEO title={title} description={description} type={type} />
 
     <!-- Additional head content via slot -->
     <slot name="head" />
@@ -42,26 +44,6 @@ const { title, description = 'Web apps, automation, and AI development for small
     <link rel="preload" as="font" type="font/woff2" href={frauncesWoff2} crossorigin="anonymous" />
     <link rel="preload" as="font" type="font/woff2" href={frauncesItalicWoff2} crossorigin="anonymous" />
     <link rel="preload" as="font" type="font/woff2" href={hankenWoff2} crossorigin="anonymous" />
-
-    <!-- Google Fonts - preconnect for initial connection, dns-prefetch as fallback -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-    <!-- Non-render-blocking font loading with print media swap -->
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:opsz,wght@9..40,100..900&display=swap"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:opsz,wght@9..40,100..900&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media='all'"
-    />
-    <noscript>
-      <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:opsz,wght@9..40,100..900&display=swap" rel="stylesheet" />
-    </noscript>
 
     <!-- CRITICAL: must remain in <head>, before <body> — prevents dark-mode FOUC.
          System-only per D-05/D-06. Clears stale localStorage.theme from v1.x/v2.x toggle. -->
@@ -73,9 +55,14 @@ const { title, description = 'Web apps, automation, and AI development for small
       } catch (e) {
         /* storage blocked (private mode / cookie settings) — dark mode must still work */
       }
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      if (darkQuery.matches) {
         document.documentElement.classList.add('dark');
       }
+      /* Follow mid-session OS theme changes (system-only mode, D-05/D-06) */
+      darkQuery.addEventListener('change', function (e) {
+        document.documentElement.classList.toggle('dark', e.matches);
+      });
     </script>
   </head>
   <body class="bg-wl-paper text-wl-ink min-h-screen flex flex-col">

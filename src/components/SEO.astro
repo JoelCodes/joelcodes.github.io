@@ -22,10 +22,11 @@ const {
 
 // Site configuration
 const SITE_URL = 'https://joelshinness.com';
-const SITE_NAME = 'Joel Shinness';
+const SITE_NAME = 'Joel Shinness Solutions';
 
-// Format title with site name
-const fullTitle = `${title} | ${SITE_NAME}`;
+// Append the brand once; pages that already carry it (e.g. the homepage's
+// brand-first title) pass through unchanged — never "… | Brand | Brand".
+const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
 
 // Use provided canonical or derive from current URL
 const canonicalUrl = canonical || new URL(Astro.url.pathname, SITE_URL).href;
@@ -41,9 +42,7 @@ const personSchema = {
   "url": SITE_URL,
   "jobTitle": "Software Developer",
   "sameAs": [
-    // Add your social media URLs here:
-    // "https://www.linkedin.com/in/joelshinness",
-    // "https://github.com/joelshinness",
+    "https://github.com/JoelCodes",
   ]
 };
 ---
